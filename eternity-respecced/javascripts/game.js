@@ -162,6 +162,11 @@ var player = {
     },
     infDimBuyers: [false, false, false, false, false, false, false, false],
     timeShards: new Decimal(0),
+    eternityChallenges: {
+      done: {},
+      unlocked: null,
+      current: null
+    },
     tickThreshold: new Decimal(1),
     totalTickGained: 0,
     timeDimension1: {
@@ -551,6 +556,14 @@ function onLoad() {
             power: new Decimal(1),
             bought: 0
         }
+    }
+
+    if (player.eternityChallenges === undefined) {
+      player.eternityChallenges = {
+        done: {},
+        unlocked: null,
+        current: null
+      }
     }
 
     if (player.infinityDimension1.baseAmount === undefined) {
@@ -1275,11 +1288,21 @@ function getShiftRequirement(bulk) {
     return { tier: tier, amount: amount };
 }
 
+function galaxyIncrement () {
+  let ret = 60;
+  if (player.currentChallenge === "challenge4") {
+    ret = 90;
+  }
+  ret -= ecCompletions(5);
+  return ret;
+}
+
 function getGalaxyRequirement() {
-    let amount = 80 + (player.galaxies * 60);
+    let amount = 80;
     if (player.currentChallenge == "challenge4") {
-      amount = 99 + (player.galaxies * 90);
+      amount = 99;
     }
+    amount += player.galaxies * galaxyIncrement();
     if (player.infinityUpgrades.includes("resetBoost")) amount -= 9;
     if (player.challenges.includes("postc5")) amount -= 1;
 
@@ -1764,6 +1787,9 @@ function getPower(dim) {
 
 
 function getTimeDimensionProduction(tier) {
+    if (player.eternityChallenges.current === 1 || player.eternityChallenges.current === 10) {
+      return new Decimal(0);
+    }
     var dim = player["timeDimension"+tier]
     var ret = dim.amount.times(getPower(dim))
     // effect of tickspeed, which is not part of power
@@ -2093,6 +2119,7 @@ function softReset(bulk, reallyZero) {
         infinityDimension8: player.infinityDimension8,
         infDimBuyers: player.infDimBuyers,
         timeShards: player.timeShards,
+        eternityChallenges: player.eternityChallenges,
         tickThreshold: player.tickThreshold,
         timeDimension1: player.timeDimension1,
         timeDimension2: player.timeDimension2,
@@ -2528,11 +2555,17 @@ function canBuyDimension(tier) {
     return true;
 }
 
-// This is for buying a dimensions.
-function getDimensionPowerMultiplier(tier) {
+// This is for buying a dimension.
+// tier is ignored
+function getDimensionPowerMultiplier (tier) {
     let dimMult = 2;
 
-    if (player.currentChallenge == "challenge9" || player.currentChallenge == "postc1") dimMult = Math.pow(10/0.30,Math.random())*0.30
+    if (player.currentChallenge == "challenge9" || player.currentChallenge == "postc1") {
+      dimMult = Math.pow(10/0.30,Math.random())*0.30;
+    }
+
+    // This is ec3 reward.
+    dimMult += ecCompletions(3);
 
     if (player.infinityUpgrades.includes('dimMult')) dimMult *= 1.1;
     // Reward for "Is this hell?"
@@ -3399,8 +3432,12 @@ function getTSBenefit (i, num) {
   }
 }
 
-function TSShortenMoney (x) {
+function smartShortenMoney (x) {
   return (typeof x === 'number' && Math.floor(x) === x) ? '' + x : shortenMoney(x);
+}
+
+function smartShortenCosts (x) {
+  return (typeof x === 'number' && Math.floor(x) === x) ? '' + x : shortenCosts(x);
 }
 
 function updateTSDescs () {
@@ -3408,7 +3445,7 @@ function updateTSDescs () {
     let oldBenefit = getTSBenefit(i, player.timestudy.studies[i]);
     let newBenefit  = getTSBenefit(i, player.timestudy.studies[i] + 1);
     let x = isTSMultiplier(i) ? 'x' : '';
-    document.getElementById('ts' + i + 'desc').innerHTML = whatTS[i] + ':<br/>' + TSShortenMoney(oldBenefit) + x + ' -> ' + TSShortenMoney(newBenefit) + x;
+    document.getElementById('ts' + i + 'desc').innerHTML = whatTS[i] + ':<br/>' + smartShortenMoney(oldBenefit) + x + ' -> ' + smartShortenMoney(newBenefit) + x;
   }
 }
 
@@ -3478,6 +3515,173 @@ function getReplMult (num) {
   }
   return Decimal.pow(Math.max(player.replicanti.amount.log(2), 1), exp);
 }
+
+// end of replicanti stuff
+
+// eternity challenge stuff (including startEternityChallenge, not including bonuses and challenge effects scattered around the code)
+
+// notes: the reduced effect in challenge 7 is (natural logarithm^7)
+
+function ecCompletions (x) {
+  return player.eternityChallenges[x] || 0;
+}
+
+let initialECCosts = {
+  1: 2000,
+  2: 300,
+  3: 20000,
+  4: 100000,
+  5: 250,
+  6: 50,
+  7: new Decimal('1e800000'),
+  8: new Decimal('1e5000'),
+  9: new Decimal('1e18000'),
+  10: new Decimal('1e100'),
+  11: new Decimal('1e500000'),
+  12: new Decimal('1e1000'),
+  13: new Decimal('1e2000000')
+}
+
+let incrementECCosts = {
+  1: 2000,
+  2: 50,
+  3: 2000,
+  4: 100000,
+  5: 25,
+  6: 5,
+  7: new Decimal('1e400000'),
+  8: new Decimal('1e1000'),
+  9: new Decimal('1e2000'),
+  10: new Decimal('1e20'),
+  11: new Decimal('1e100000'),
+  12: new Decimal('1e200'),
+  13: new Decimal('1e1000000')
+}
+
+let initialECGoals = {
+  1: new Decimal('1e1500'),
+  2: new Decimal('1e500'),
+  3: new Decimal('1e500'),
+  4: new Decimal('1e2800'),
+  5: new Decimal('1e600'),
+  6: new Decimal('1e700'),
+  7: new Decimal('1e4000'),
+  8: new Decimal('1e1000'),
+  9: new Decimal('1e1500'),
+  10: new Decimal('1e1000'),
+  11: new Decimal('1e500'),
+  12: new Decimal('1e100000'),
+  13: new Decimal('1e700')
+}
+
+let incrementECGoals = {
+  1: new Decimal('1e300'),
+  2: new Decimal('1e100'),
+  3: new Decimal('1e100'),
+  4: new Decimal('1e400'),
+  5: new Decimal('1e100'),
+  6: new Decimal('1e150'),
+  7: new Decimal('1e500'),
+  8: new Decimal('1e200'),
+  9: new Decimal('1e250'),
+  10: new Decimal('1e200'),
+  11: new Decimal('1e200'),
+  12: new Decimal('1e10000'),
+  13: new Decimal('1e300')
+}
+
+function ecCost (x) {
+  if (x <= 6) {
+    return initialECCosts[x] + incrementECCosts[x] * ecCompletions(x);
+  } else {
+    return initialECCosts[x].times(Decimal.pow(incrementECCosts[x], ecCompletions(x)));
+  }
+}
+
+function ecGoal (x) {
+  return initialECGoals[x].times(Decimal.pow(incrementECGoals[x], ecCompletions(x)));
+}
+
+function hasInfiniteTime () {
+  return false;
+}
+
+function infiniteTimeEffect () {
+  if (hasInfiniteTime()) {
+    return player.tickspeed.dividedBy(1000).pow(-1e-5 + c * -2e-6);
+  } else {
+    return 1;
+  }
+}
+
+function ecNumReward (x) {
+  let c = ecCompletions(x);
+  if (x === 1) {
+    return Math.pow(Math.max(player.thisEternity / 10, 1), c);
+  } else if (x === 2) {
+    return player.infinityPower.pow(.001 * c);
+  } else if (x === 3) {
+    return getDimensionPowerMultiplier();
+  } else if (x === 4) {
+    return Math.pow(player.infinitied, c);
+  } else if (x === 5) {
+    return galaxyIncrement();
+  } else if (x === 6) {
+    return c / 5;
+  } else if (x === 7) {
+    return Math.pow(player.money.ln(), c / 5);
+  } else if (x === 8) {
+    return 1 - .01 * c;
+  } else if (x === 9) {
+    return Math.pow(player.infinityPower.ln(), c / 5);
+  } else if (x === 10) {
+    return Decimal.pow(player.infinities, 100 * c);
+  } else if (x === 11) {
+    return 1 + .01 * c;
+  } else if (x === 12) {
+    return 1 + c;
+  } else if (x === 13) {
+    return infiniteTimeEffect();
+  }
+}
+
+function ecDisplayReward (x) {
+  let n = ecNumReward(x);
+  if ([1, 2, 4, 7, 9, 10, 13].includes(x)) {
+    return shortenMoney(n) + 'x';
+  } else if (x === 3) {
+    return (Math.round(n * 10) / 10).toString() + 'x';
+  } else if ([5, 12].includes(x)) {
+    return n.toString();
+  } else if (x === 6) {
+    return (Math.round(n * 10) / 10).toString();
+  } else if ([8, 11].includes(x)) {
+    return 'x^' + shortenMoney(n);
+  }
+}
+
+function initAllECs () {
+  displayAllECRewards();
+  for (let i = 1; i <= 13; i++) {
+    updateECDisplay(i);
+  }
+}
+
+function updateECDisplay (x) {
+  let c = ecCompletions(x);
+  let plural = (c === 1) ? '' : 's';
+  document.getElementById('ec' + x + 'completions').innerHTML = 'Completed ' + c + ' time' + plural + '.';
+  document.getElementById('ec' + x + 'cost').innerHTML = smartShortenCosts(ecCost(x));
+  document.getElementById('ec' + x + 'goal').innerHTML = 'Goal: ' + shortenCosts(ecGoal(x)) + ' infinity points.';
+}
+
+function displayAllECRewards () {
+  for (let i = 1; i <= 13; i++) {
+    document.getElementById('ec' + i + 'reward').innerHTML = ecDisplayReward(i);
+  }
+}
+
+// end of EC stuff
 
 function galaxyModeCrunch () {
   let neededGalaxies = (player.autobuyers[11].priority === 'max') ?
@@ -3851,6 +4055,7 @@ function galaxyReset() {
         infinityDimension8: player.infinityDimension8,
         infDimBuyers: player.infDimBuyers,
         timeShards: player.timeShards,
+        eternityChallenges: player.eternityChallenges,
         tickThreshold: player.tickThreshold,
         timeDimension1: player.timeDimension1,
         timeDimension2: player.timeDimension2,
@@ -4763,6 +4968,7 @@ document.getElementById("bigcrunch").onclick = function () {
         infinityDimension8: player.infinityDimension8,
         infDimBuyers: player.infDimBuyers,
         timeShards: player.timeShards,
+        eternityChallenges: player.eternityChallenges,
         tickThreshold: player.tickThreshold,
         timeDimension1: player.timeDimension1,
         timeDimension2: player.timeDimension2,
@@ -5052,6 +5258,7 @@ function eternity(force) {
             },
             infDimBuyers: player.infDimBuyers,
             timeShards: new Decimal(0),
+            eternityChallenges: player.eternityChallenges,
             tickThreshold: new Decimal(1),
             totalTickGained: 0,
             timeDimension1: player.timeDimension1,
@@ -5281,6 +5488,7 @@ function startChallenge(name, target) {
       infinityDimension8: player.infinityDimension8,
       infDimBuyers: player.infDimBuyers,
       timeShards: player.timeShards,
+      eternityChallenges: player.eternityChallenges,
       timeDimension1: player.timeDimension1,
       timeDimension2: player.timeDimension2,
       timeDimension3: player.timeDimension3,
