@@ -898,6 +898,42 @@
     font-family: Typewriter;
 }
 
+.eternityttbtn {
+    color: #b341e0;
+    background: black;
+    font-weight: bold;
+    font-size: 10px;
+    border: 1px solid #b341e0;
+    width: 230px;
+    height: 120px;
+    transition-duration: 0.2s;
+    cursor: pointer;
+    border-radius: 4px;
+    font-family: Typewriter;
+}
+
+.eternityttbtn:hover {
+    color: #511568;
+    background: white;
+}
+
+.eternityttbtnlocked {
+    color: #181818;
+    background: #5F5F5F;
+    font-weight: bold;
+    font-size: 10px;
+    border: 1px solid #b341e0;
+    width: 230px;
+    height: 120px;
+    transition-duration: 0.2s;
+    border-radius: 4px;
+    font-family: Typewriter;
+}
+
+.eternityttbtnlocked:hover {
+    background: #737373;
+}
+
 .milestonereward {
     width: 250px;
     height: 60px;

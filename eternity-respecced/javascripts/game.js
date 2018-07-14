@@ -1848,9 +1848,9 @@ function updateTimeStudyButtons () {
   for (let i = 1; i <= numTimeStudies; i++) {
     let t = document.getElementById('ts' + i);
     if (player.timestudy.theorem >= player.timestudy.studies[i] + 1 && studyHasBeenUnlocked(i)) {
-      t.className = "eternityupbtn"
+      t.className = "eternityttbtn"
     } else {
-      t.className = "eternityupbtnlocked"
+      t.className = "eternityttbtnlocked"
     }
     let bought = document.getElementById('ts' + i + 'bought');
     bought.innerHTML = player.timestudy.studies[i];
@@ -1952,7 +1952,10 @@ function respecTimeStudies() {
 
 
 
-function getDimensionBoostPower() {
+function getDimensionBoostPower(num) {
+    if (num === undefined) {
+        num = player.timestudy.studies[4];
+    }
     if (player.currentChallenge == "challenge11" || player.currentChallenge == "postc1") return 1;
 
     var ret = 2
@@ -1962,7 +1965,7 @@ function getDimensionBoostPower() {
 
     // Be nice to the player; multiply before adding rather than vice versa.
 
-    ret += player.timestudy.studies[4];
+    ret += num;
 
     if (player.achievements.includes("r101")) ret = ret*1.01
 
@@ -3365,6 +3368,50 @@ function updateInfCosts() {
     document.getElementById("infiMult").innerHTML = "Multiply infinity points from all sources by 2 <br>currently: "+shorten(player.infMult.times(kongIPMult)) +"x<br>Cost: "+shortenCosts(player.infMultCost)+" IP"
 }
 
+function isTSMultiplier (i) {
+  return [1, 3, 5, 6].includes(i);
+}
+
+let whatTS = {
+  1: 'Total sacrifice multiplier',
+  2: 'Current tickspeed upgrades',
+  3: 'Replicanti multiplier',
+  4: 'Multiplier per dimension boost',
+  5: 'Current IP multiplier',
+  6: 'Current IP multiplier'
+}
+
+function getTSBenefit (i, num) {
+  // We want seconds in infinity, not in eternity.
+  let secondsInInfinity = Math.max(player.thisInfinityTime / 10, 1);
+  if (i === 1) {
+    return preTSCalcTotalSacrificeBoost().pow(getTimeStudySacrificePow(num));
+  } else if (i === 2) {
+    return getTotalTickGained(player.timeShards, num);
+  } else if (i === 3) {
+    return getReplMult(num);
+  } else if (i === 4) {
+    return getDimensionBoostPower(num);
+  } else if (i === 5) {
+    return Decimal.pow(Math.max(1e5 / secondsInInfinity, 1), num);
+  } else if (i === 6) {
+    return Decimal.pow(secondsInInfinity, num);
+  }
+}
+
+function TSShortenMoney (x) {
+  return (typeof x === 'number' && Math.floor(x) === x) ? '' + x : shortenMoney(x);
+}
+
+function updateTSDescs () {
+  for (let i = 1; i <= numTimeStudies; i++) {
+    let oldBenefit = getTSBenefit(i, player.timestudy.studies[i]);
+    let newBenefit  = getTSBenefit(i, player.timestudy.studies[i] + 1);
+    let x = isTSMultiplier(i) ? 'x' : '';
+    document.getElementById('ts' + i + 'desc').innerHTML = whatTS[i] + ':<br/>' + TSShortenMoney(oldBenefit) + x + ' -> ' + TSShortenMoney(newBenefit) + x;
+  }
+}
+
 
 
 // Replicanti stuff
@@ -3421,8 +3468,11 @@ function replicantiGalaxy() {
 }
 
 
-function getReplMult () {
-  let exp = 2 + player.timestudy.studies[3] / 2;
+function getReplMult (num) {
+  if (num === undefined) {
+    num = player.timestudy.studies[3];
+  }
+  let exp = 2 + num / 2;
   if (player.achievements.includes('r108')) {
     exp *= 1.09;
   }
@@ -3984,10 +4034,8 @@ function gainedInfinityPoints() {
     if (player.achievements.includes("r103")) {
       ret = Decimal.floor(Decimal.pow(10, player.money.e / 307.8 - 0.75).times(player.infMult.times(kongIPMult)));
     }
-    // We want seconds in infinity, not in eternity.
-    let secondsInInfinity = Math.max(player.thisInfinityTime / 10, 1);
-    ret = ret.times(Decimal.pow(Math.max(1e5 / secondsInInfinity, 1), player.timestudy.studies[5]));
-    ret = ret.times(Decimal.pow(secondsInInfinity, player.timestudy.studies[6]));
+    ret = ret.times(getTSBenefit(5, player.timestudy.studies[5]));
+    ret = ret.times(getTSBenefit(6, player.timestudy.studies[6]));
     return ret
 }
 
@@ -4121,8 +4169,11 @@ function calcTotalSacrificeBoost () {
   return preTSCalcTotalSacrificeBoost().pow(getTimeStudySacrificePow());
 }
 
-function getTimeStudySacrificePow () {
-  return 1 + Math.log(1 + player.timestudy.studies[1] / 10);
+function getTimeStudySacrificePow (num) {
+  if (num === undefined) {
+    num = player.timestudy.studies[1];
+  }
+  return 1 + Math.log(1 + num / 10);
 }
 
 
@@ -5344,24 +5395,27 @@ function updateInfPower() {
     document.getElementById("infPowPerSec").innerHTML = "You are getting " +shortenDimensions(DimensionProduction(1))+" Infinity Power per second."
 }
 
-function get_c () {
-  return Math.pow(4 / 3, 1 / (1 + player.timestudy.studies[2] / 10))
+function get_c (num) {
+  if (num === undefined) {
+    num = player.timestudy.studies[2];
+  }
+  return Math.pow(4 / 3, 1 / (1 + num / 10))
 }
 
-function getTickThreshold (timeshards) {
-  return tickCost(getTotalTickGained(timeshards) + 1)
+function getTickThreshold (timeshards, num) {
+  return tickCost(getTotalTickGained(timeshards, num) + 1)
 }
 
 function tickCost (x) {
   return Decimal.pow(get_c(), x - 1).times(Decimal.pow(1.001, (x - 1) * (x - 2) / 2));
 }
 
-function getTotalTickGained (timeshards) {
+function getTotalTickGained (timeshards, num) {
   if (timeshards.lt(1)) {
     return 0;
   }
   let timeshardLn = timeshards.ln();
-  let c = get_c();
+  let c = get_c(num);
   // we know that ln(1.001) * (x - 1) * x / 2 + ln(c) * x <= timeshardLn
   // so ln(1.001) / 2 * x^2 + (ln(c) - ln(1.001) / 2) * x - timeshardLn <= 0
   let a = Math.log(1.001) / 2;
@@ -5850,6 +5904,7 @@ function startInterval() {
 
         updateInfinityDimensions();
         updateInfPower();
+        updateTSDescs();
         updateTimeDimensions()
         updateTimeShards()
         if (calcPerSec(player.firstAmount, player.firstPow, player.infinityUpgrades.includes("18Mult")).gt(player.money)) {
