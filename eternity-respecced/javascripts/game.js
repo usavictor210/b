@@ -1277,7 +1277,9 @@ function getShiftRequirement(bulk) {
 
 function getGalaxyRequirement() {
     let amount = 80 + (player.galaxies * 60);
-    if (player.currentChallenge == "challenge4") amount = 99 + (player.galaxies * 90)
+    if (player.currentChallenge == "challenge4") {
+      amount = 99 + (player.galaxies * 90);
+    }
     if (player.infinityUpgrades.includes("resetBoost")) amount -= 9;
     if (player.challenges.includes("postc5")) amount -= 1;
 
@@ -1993,7 +1995,7 @@ function hideDims () {
 
 function softReset(bulk, reallyZero) {
     if (bulk < 1 && !reallyZero) bulk = 1
-    player.resets+=bulk;
+    player.resets += bulk;
     if (bulk >= 750) giveAchievement("Costco sells Dimboosts now");
     player = {
         money: new Decimal(10),
@@ -2115,24 +2117,11 @@ function softReset(bulk, reallyZero) {
         eternityBuyer: player.eternityBuyer,
         options: player.options
     };
-    if (player.currentChallenge == "challenge10" || player.currentChallenge == "postc1") {
-        player.thirdCost = new Decimal(100)
-        player.fourthCost = new Decimal(500)
-        player.fifthCost = new Decimal(2500)
-        player.sixthCost = new Decimal(2e4)
-        player.seventhCost = new Decimal(2e5)
-        player.eightCost = new Decimal(4e6)
+    if (player.currentChallenge === "challenge10" || player.currentChallenge == "postc1") {
+      chall10AlterCosts();
     }
-    if (player.currentChallenge == "postc1") player.costMultipliers = [new Decimal(1e3),new Decimal(5e3),new Decimal(1e4),new Decimal(1.2e4),new Decimal(1.8e4),new Decimal(2.6e4),new Decimal(3.2e4),new Decimal(4.2e4)];
-    if (player.resets == 1 && player.currentChallenge == "") {
-        if (player.infinityUpgrades.includes("skipReset2")) player.resets++;
-        if (player.infinityUpgrades.includes("skipReset3")) player.resets++;
-        if (player.infinityUpgrades.includes("skipResetGalaxy")) {
-            player.resets++;
-            if (player.galaxies == 0) player.galaxies = 1
-        }
-    }
-	if (player.currentChallenge == "postc2") {
+    giveInfPurchaseResets();
+	  if (player.currentChallenge == "postc2") {
         player.eightAmount = new Decimal(1);
         player.eightBought = 1;
     }
@@ -2205,7 +2194,7 @@ function getReplicantiGalaxyPower (limit) {
 
 function getTickSpeedMultiplier() {
     if (player.currentChallenge == "postc3") return 1;
-    let totalGalaxies = (player.galaxies + player.replicanti.galaxies * getReplicantiGalaxyPower(player.replicanti.limit)) * getGalaxyMultiplier()
+    let totalGalaxies = (player.galaxies + player.replicanti.galaxies * getReplicantiGalaxyPower(player.replicanti.limit)) * getGalaxyMultiplier();
     let baseMultiplier = 0.9;
     if (totalGalaxies == 0) baseMultiplier = 0.89;
     if (player.currentChallenge == "challenge6" || player.currentChallenge == "postc1") baseMultiplier = 0.93;
@@ -2560,10 +2549,9 @@ function clearDimensions(amount) {
 
 
 function getDimensionCostMultiplier(tier) {
-
-	var multiplier2 = [new Decimal(1e3),new Decimal(5e3),new Decimal(1e4),new Decimal(1.2e4),new Decimal(1.8e4),new Decimal(2.6e4),new Decimal(3.2e4),new Decimal(4.2e4)];
-    if (player.currentChallenge == "challenge10") return multiplier2[tier - 1];
-    else return player.costMultipliers[tier - 1];
+    // For some unfathomable reason there was a special case for challenge 6 here,
+    // but not for postc1. Challenge 6 is now handled just like postc1.
+    return player.costMultipliers[tier - 1];
 }
 
 function onBuyDimension(tier) {
@@ -3703,6 +3691,18 @@ function resetDimPow () {
   player.eightPow = Decimal.pow(getDimensionBoostPower(), player.resets - 7).max(1)
 }
 
+function giveInfPurchaseResets () {
+  if (player.currentChallenge === "") {
+      if (player.infinityUpgrades.includes("skipReset1")) player.resets = Math.max(player.resets, 1);
+      if (player.infinityUpgrades.includes("skipReset2")) player.resets = Math.max(player.resets, 2);
+      if (player.infinityUpgrades.includes("skipReset3")) player.resets = Math.max(player.resets, 3);
+      if (player.infinityUpgrades.includes("skipResetGalaxy")) {
+          player.resets = Math.max(player.resets, 4);
+          player.galaxies = Math.max(player.galaxies, 1);
+      }
+  }
+}
+
 
 function galaxyReset() {
     if (autoS) auto = false;
@@ -3830,28 +3830,17 @@ function galaxyReset() {
     };
 
     if (player.currentChallenge == "challenge10" || player.currentChallenge == "postc1") {
-        player.thirdCost = new Decimal(100)
-        player.fourthCost = new Decimal(500)
-        player.fifthCost = new Decimal(2500)
-        player.sixthCost = new Decimal(2e4)
-        player.seventhCost = new Decimal(2e5)
-        player.eightCost = new Decimal(4e6)
+        chall10AlterCosts();
     }
 
-    if (player.resets == 0 && player.currentChallenge == "") {
-        if (player.infinityUpgrades.includes("skipReset1")) player.resets++;
-        if (player.infinityUpgrades.includes("skipReset2")) player.resets++;
-        if (player.infinityUpgrades.includes("skipReset3")) player.resets++;
-        if (player.infinityUpgrades.includes("skipResetGalaxy")) {
-            player.resets++;
-            if (player.galaxies == 0) player.galaxies = 1
-        }
-    }
+    giveInfPurchaseResets();
+
     if (player.currentChallenge == "postc2") {
         player.eightAmount = new Decimal(1);
         player.eightBought = 1;
         player.resets = 4;
     }
+
     resetDimPow();
 
 
@@ -4753,15 +4742,7 @@ document.getElementById("bigcrunch").onclick = function () {
 
         if (!player.options.retryChallenge) player.currentChallenge = ""
 
-        if (player.resets == 0 && player.currentChallenge == "") {
-            if (player.infinityUpgrades.includes("skipReset1")) player.resets++;
-            if (player.infinityUpgrades.includes("skipReset2")) player.resets++;
-            if (player.infinityUpgrades.includes("skipReset3")) player.resets++;
-            if (player.infinityUpgrades.includes("skipResetGalaxy")) {
-                player.resets++;
-                if (player.galaxies == 0) player.galaxies = 1
-            }
-        }
+        giveInfPurchaseResets();
 
         if (player.replicanti.unl && !player.achievements.includes("r95")) player.replicanti.amount = new Decimal(1);
         player.replicanti.galaxies = 0
@@ -5130,6 +5111,8 @@ function eternity(force) {
         updateEternityUpgrades()
         updateInfCosts()
         playerInfinityUpgradesOnEternity()
+        // give the player resets if they have the upgrade needed
+        giveInfPurchaseResets()
         let epPlural = player.eternityPoints.equals(1) ? '' : 's';
         document.getElementById("eternityPoints2").innerHTML = "You have <span class=\"EPAmount2\">"+shortenDimensions(player.eternityPoints)+"</span> Eternity point" + epPlural + "."
     }
@@ -5139,6 +5122,16 @@ function exitChallenge() {
     document.getElementById(player.currentChallenge).innerHTML = "Start"
     startChallenge("");
     updateChallenges();
+}
+
+function chall10AlterCosts () {
+    player.thirdCost = new Decimal(100)
+    player.fourthCost = new Decimal(500)
+    player.fifthCost = new Decimal(2500)
+    player.sixthCost = new Decimal(2e4)
+    player.seventhCost = new Decimal(2e5)
+    player.eightCost = new Decimal(4e6)
+    player.costMultipliers = [new Decimal(1e3),new Decimal(5e3),new Decimal(1e4),new Decimal(1.2e4),new Decimal(1.8e4),new Decimal(2.6e4),new Decimal(3.2e4),new Decimal(4.2e4)];
 }
 
 function startChallenge(name, target) {
@@ -5263,15 +5256,9 @@ function startChallenge(name, target) {
       eternityBuyer: player.eternityBuyer,
       options: player.options
     };
-	if (player.currentChallenge == "challenge10" || player.currentChallenge == "postc1") {
-        player.thirdCost = new Decimal(100)
-        player.fourthCost = new Decimal(500)
-        player.fifthCost = new Decimal(2500)
-        player.sixthCost = new Decimal(2e4)
-        player.seventhCost = new Decimal(2e5)
-        player.eightCost = new Decimal(4e6)
+	  if (player.currentChallenge === "challenge10" || player.currentChallenge === "postc1") {
+        chall10AlterCosts();
     }
-    if (player.currentChallenge == "postc1") player.costMultipliers = [new Decimal(1e3),new Decimal(5e3),new Decimal(1e4),new Decimal(1.2e4),new Decimal(1.8e4),new Decimal(2.6e4),new Decimal(3.2e4),new Decimal(4.2e4)];
     if (player.currentChallenge == "postc2") {
         player.eightAmount = new Decimal(1);
         player.eightBought = 1;
@@ -5321,18 +5308,8 @@ function startChallenge(name, target) {
   player.tickspeed = player.tickspeed.times(Decimal.pow(getTickSpeedMultiplier(), player.totalTickGained))
   updateTickSpeed();
 
-  if (player.resets == 0 && player.currentChallenge == "") {
-    if (player.infinityUpgrades.includes("skipReset1")) player.resets++;
-    if (player.infinityUpgrades.includes("skipReset2")) player.resets++;
-    if (player.infinityUpgrades.includes("skipReset3")) player.resets++;
-    if (player.infinityUpgrades.includes("skipResetGalaxy")) {
-        player.resets++;
-        if (player.galaxies == 0) player.galaxies = 1
-    }
-
-
-
-}
+  // if we're now out of a challenge this function will do stuff, otherwise it won't
+  giveInfPurchaseResets();
 
 }
 
