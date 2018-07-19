@@ -302,6 +302,33 @@ var player = {
 
 };
 
+function ngplus () {
+  player.infinitied = 1
+  player.eternityChalls.eterc1 = 5
+  player.eternityChalls.eterc2 = 5
+  player.eternityChalls.eterc3 = 5
+  player.eternityChalls.eterc4 = 5
+  player.eternityChalls.eterc5 = 5
+  player.eternityChalls.eterc6 = 5
+  player.eternityChalls.eterc7 = 5
+  player.eternityChalls.eterc8 = 5
+  player.eternityChalls.eterc9 = 5
+  player.eternityChalls.eterc10 = 5
+  player.eternityChalls.eterc11 = 5
+  player.eternityChalls.eterc12 = 5
+  updateChallenges()
+  updateEternityChallenges()
+  console.log(player.achievements);
+  if (!player.achievements.includes('r123')) {
+    giveAchievement("5 more eternities until the update");
+  }
+  if (player.dimensionMultDecrease === 3) {
+    player.dimensionMultDecrease = 3;
+  }
+  if (player.tickSpeedMultDecrease === 2) {
+    player.tickSpeedMultDecrease = 1.65;
+  }
+}
 
 var defaultStart = $.extend(true, {}, player);
 
@@ -1144,6 +1171,9 @@ document.getElementById("postinfi31").onclick = function() {
         player.infinityPoints = player.infinityPoints.minus(player.tickSpeedMultDecreaseCost)
         player.tickSpeedMultDecreaseCost *= 5
         player.tickSpeedMultDecrease--;
+        if (player.tickSpeedMultDecrease === 2) {
+            player.tickSpeedMultDecrease = 1.65;
+        }
         document.getElementById("postinfi31").innerHTML = "Tickspeed cost multiplier increase <br>"+player.tickSpeedMultDecrease+"x -> "+(player.tickSpeedMultDecrease-1)+"x<br>Cost: "+shortenCosts(player.tickSpeedMultDecreaseCost) +" IP"
         if (player.tickSpeedMultDecrease <= 2) document.getElementById("postinfi31").innerHTML = "Tickspeed cost multiplier increase <br>"+player.tickSpeedMultDecrease+"x"
     }
@@ -1170,6 +1200,9 @@ document.getElementById("postinfi42").onclick = function() {
         player.infinityPoints = player.infinityPoints.minus(player.dimensionMultDecreaseCost)
         player.dimensionMultDecreaseCost *= 5000
         player.dimensionMultDecrease--;
+        if (player.dimensionMultDecrease === 3) {
+            player.dimensionMultDecrease = 2;
+        }
         document.getElementById("postinfi42").innerHTML = "Dimension cost multiplier increase <br>"+player.dimensionMultDecrease+"x -> "+(player.dimensionMultDecrease-1)+"x<br>Cost: "+shortenCosts(player.dimensionMultDecreaseCost) +" IP"
         if (player.dimensionMultDecrease <= 3) document.getElementById("postinfi42").innerHTML = "Dimension cost multiplier increase <br>"+player.dimensionMultDecrease.toFixed(1)+"x"
     }
@@ -4359,7 +4392,7 @@ function updateInfPower() {
 function getReplSpeed () {
   let ret = .2;
   if (player.dilation.upgrades.includes(8)) {
-    ret /= 1 + Math.log10(player.dilation.dilatedTime) / 10
+    ret /= 1 + player.dilation.dilatedTime.max(1).log(10) / 10
   }
   return ret + 1;
 }
@@ -4975,7 +5008,7 @@ function gameLoop(diff) {
     if (currentEPmin.gt(EPminpeak) && player.infinityPoints.gte(Number.MAX_VALUE)) EPminpeak = currentEPmin
     document.getElementById("eternitybtn").innerHTML = (player.eternities == 0) ? "Other times await.. I need to become Eternal" : "<b>I need to become Eternal.</b><br>"+"Gain <b>"+shortenDimensions(gainedEternityPoints())+"</b> Eternity points.<br>"+shortenDimensions(currentEPmin)+ " EP/min<br>Peaked at "+shortenDimensions(EPminpeak)+" EP/min"
     if (gainedEternityPoints().gte(1e6)) document.getElementById("eternitybtn").innerHTML = "Gain <b>"+shortenDimensions(gainedEternityPoints())+"</b> Eternity points.<br>"+shortenDimensions(currentEPmin)+ " EP/min<br>Peaked at "+shortenDimensions(EPminpeak)+" EP/min"
-    if (player.dilation.active) document.getElementById("eternitybtn").innerHTML = "Gain <b>"+shortenDimensions(gainedEternityPoints())+"</b> Eternity points.<br>"+"+"+shortenMoney(Math.round(Math.max(Math.pow(Decimal.log10(player.money) / 400, 1.5) * (Math.pow(3, player.dilation.rebuyables[3])) - player.dilation.totalTachyonParticles, 0) * 10)/10) +" Tachyon particles."
+    if (player.dilation.active) document.getElementById("eternitybtn").innerHTML = "Gain <b>"+shortenDimensions(gainedEternityPoints())+"</b> Eternity points.<br>"+"+"+shortenDimensions(Math.max(0, getDilGain() - player.dilation.totalTachyonParticles, 0)) +" Tachyon particles."
     if (player.currentEternityChall !== "") document.getElementById("eternitybtn").textContent = "Other challenges await.. I need to become Eternal"
     updateMoney();
     updateCoinPerSec();

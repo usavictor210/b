@@ -587,12 +587,11 @@ if (player.version < 5) {
   resizeCanvas();
   checkForEndMe();
   updateEternityChallenges();
-  updateDilationUpgradeCosts()
+  updateDilationUpgradeCosts();
   let diff = new Date().getTime() - player.lastUpdate
   if (diff > 1000*1000) {
       simulateTime(diff/1000)
   }
-
 }
 
 function load_cloud_save(saveId, cloudPlayer) {
@@ -633,6 +632,7 @@ function load_game(root) {
 
   if (saves[currentSave]) player = saves[currentSave];
   onLoad();
+  ngplus();
 }
 
 
