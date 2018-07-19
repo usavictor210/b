@@ -1,0 +1,5 @@
+photoshop:
+monospace typewriter,
+1px stroke layer 90% opacity on stroke and text layers,
+#333 color stroke, 10px, sharp
+image: black/white (antimatter is always colored, certain elements may be colored), and 50-40% opacity

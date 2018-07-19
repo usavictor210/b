@@ -1,0 +1,56 @@
+<html>
+<head>
+</head>
+<body>
+  <canvas id="c" width=800 height=800 style="width: 800; height: 800;"></canvas>
+  <script>
+  // This script produces the planned universal harmony achievement image.
+  window.onload = function () {
+    let color = function (x) {
+      let deep = Math.floor(x / 800);
+      let across = x % 800;
+      let u_deep = (deep - 399.5) / 400;
+      let u_across = (across - 399.5) / 400;
+      let dist = Math.sqrt(u_deep ** 2 + u_across ** 2);
+      if (dist > 1) {
+        return -1;
+      }
+      if (dist < .1) {
+        return 3
+      }
+      for (let i = 0; i < 3; i++) {
+        let u_deep_diff = u_deep + [1 / 2, -1 / 4, -1 / 4][i];
+        let u_across_diff = u_across + [0, -Math.sqrt(3) / 4, Math.sqrt(3) / 4][i];
+        let dist = Math.sqrt(u_deep_diff ** 2 + u_across_diff ** 2);
+        if (dist < .1) {
+          return i % 3
+        }
+      }
+      let rad = 3 * (Math.atan2(u_deep, u_across) + Math.PI) / (Math.PI * 2);
+      return Math.floor((rad + 1 - dist ** 2) % 3);
+    }
+    c = document.getElementById("c");
+    context = c.getContext("2d");
+    let data = context.getImageData(0, 0, c.width, c.height);
+    for (let i = 0; i < data.data.length / 4; i++) {
+      for (let j = 0; j < 3; j++) {
+        data.data[4 * i + j] = 0;
+      }
+      let k = color(i);
+      if (0 <= k && k <= 2) {
+        data.data[4 * i + k] = 255;
+      } else if (k === 3) {
+        for (let j = 0; j < 3; j++) {
+          data.data[4 * i + j] = 255;
+        }
+      }
+      data.data[4 * i + 3] = 255;
+    }
+    context.putImageData(data, 0, 0);
+    var img = c.toDataURL("image/png");
+    document.write('<img src="' + img + '"/>');
+    document.write(img);
+  }
+  </script>
+</body>
+</html>

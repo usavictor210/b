@@ -1,0 +1,51 @@
+<html>
+<head>
+</head>
+<body>
+  <canvas id="c" width=600 height=600 style="width: 600; height: 600;"></canvas>
+  <canvas id="c2" width=600 height=600 style="width: 600; height: 600;"></canvas>
+  <img id="i" style="display: none;" src="no_face.jpg"/>
+  <script>
+  // This script produces the planned universal harmony achievement image.
+  window.onload = function () {
+    c = document.getElementById("c");
+    context = c.getContext("2d");
+    let im = document.getElementById("i");
+    context.drawImage(im, 50, 100);
+    let data = context.getImageData(0, 0, c.width, c.height);
+    console.log(data.data.slice(0, 4));
+    for (let i = 634; i < 700; i++) {
+      for (let j = 300; j < 340; j++) {
+        for (let k = 0; k < 4; k++) {
+          data.data[2400 * (i - j + 100) + 4 * (j + 50) + k] = data.data[k];
+        }
+      }
+    }
+    context.putImageData(data, 0, 0);
+    context.fillStyle = "red";
+    context.font = "bold 100px Ariel";
+    context.fillText('NO', 180, 180, 200);
+    context.fillText('IT\'S NOT', 40, 520, 500);
+    c = document.getElementById("c2");
+    context = c.getContext("2d");
+    im = document.getElementById("i");
+    context.drawImage(im, 50, 100);
+    data = context.getImageData(0, 0, c.width, c.height);
+    console.log(data.data.slice(0, 4));
+    for (let i = 634; i < 700; i++) {
+      for (let j = 300; j < 340; j++) {
+        for (let k = 0; k < 4; k++) {
+          data.data[2400 * (i - j + 100) + 4 * (j + 50) + k] = data.data[k];
+        }
+      }
+    }
+    context.putImageData(data, 0, 0);
+    context.fillStyle = "green";
+    context.font = "bold 100px Ariel";
+    context.fillText('YEAH', 100, 180, 400);
+    context.font = "bold 80px Ariel";
+    context.fillText('IT KINDA IS', 20, 505, 500);
+  }
+  </script>
+</body>
+</html>

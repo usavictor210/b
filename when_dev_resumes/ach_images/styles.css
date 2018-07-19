@@ -1,0 +1,10 @@
+@font-face {
+  font-family: Typewriter;
+  src: url('MonospaceTypewriter.ttf');
+ }
+
+ body { font-family: Typewriter;}
+
+ #c {
+   -webkit-text-stroke-width: 1px;
+ }
