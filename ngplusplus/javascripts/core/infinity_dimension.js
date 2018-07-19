@@ -57,7 +57,7 @@ function DimensionProduction(tier) {
       let tick = new Decimal(player.tickspeed)
       if (player.dilation.active) {
         tick = Decimal.pow(10, Math.pow(Math.abs(tick.log10()), 0.75))
-        if (player.dilation.upgrades.includes(9)) {
+        if (player.dilation.upgrades.includes(11)) {
           tick = Decimal.pow(10, Math.pow(Math.abs(tick.log10()), 1.05))
         }
       }
@@ -115,7 +115,7 @@ function DimensionPower(tier) {
 
   if (player.dilation.active) {
     mult = Decimal.pow(10, Math.pow(mult.log10(), 0.75))
-    if (player.dilation.upgrades.includes(9)) {
+    if (player.dilation.upgrades.includes(11)) {
       mult = Decimal.pow(10, Math.pow(mult.log10(), 1.05))
     }
   }

@@ -151,7 +151,7 @@ function canBuyStudy(name) {
   if (name == 181) {
       if (player.eternityChalls.eterc1 !== undefined && player.eternityChalls.eterc2 !== undefined && player.eternityChalls.eterc3 !== undefined && player.timestudy.studies.includes(171)) return true; else return false;
   }
-  if (name == 201) if(player.timestudy.studies.includes(192) && !player.dilation.upgrades.includes(8)) return true; else return false
+  if (name == 201) if(player.timestudy.studies.includes(192) && !player.dilation.upgrades.includes(10)) return true; else return false
   if (name == 211) if(player.timestudy.studies.includes(191)) return true; else return false
   if (name == 212) if(player.timestudy.studies.includes(191)) return true; else return false
   if (name == 213) if(player.timestudy.studies.includes(193)) return true; else return false
@@ -186,7 +186,7 @@ function canBuyStudy(name) {
       break;
 
       case 7:
-      if (player.dilation.upgrades.includes(8)) {
+      if (player.dilation.upgrades.includes(10)) {
         if (player.timestudy.studies.includes(61)) return true; else return false;
       } else if (!player.timestudy.studies.includes(201)) {
           if (player.timestudy.studies.includes(61) && !hasRow(row)) return true; else return false

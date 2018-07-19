@@ -267,6 +267,7 @@ var player = {
             1: 0,
             2: 0,
             3: 0,
+            4: 0
         }
     },
     why: 0,
@@ -514,7 +515,9 @@ function sacrificeConf() {
     player.options.sacrificeConfirmation = !player.options.sacrificeConfirmation
 }
 
-
+function getDilGain () {
+  return Math.pow(Decimal.log10(player.money) / 400, 1.5 + player.dilation.rebuyables[4] * .1) * (Math.pow(3, player.dilation.rebuyables[3]));
+}
 
 
 function updateDimensions() {
@@ -672,8 +675,10 @@ function updateDimensions() {
 
     if (document.getElementById("dilation").style.display == "block") {
         if (player.dilation.active) {
-            if (Math.pow(Decimal.log10(player.money) / 400, 1.5) * (Math.pow(3, player.dilation.rebuyables[3])) - player.dilation.totalTachyonParticles <= 0) {
-                document.getElementById("enabledilation").innerHTML = "Disable dilation.<br>Reach " + shortenMoney(Decimal.pow(10, Math.pow(player.dilation.tachyonParticles * Math.pow(400, 1.5) / Math.pow(3, player.dilation.rebuyables[3]), 2/3))) + " antimatter to gain more Tachyon Particles."
+            let gain = getDilGain()
+            let req = Decimal.pow(10, Math.pow(player.dilation.totalTachyonParticles / (Math.pow(3, player.dilation.rebuyables[3])), 1 / (1.5 + player.dilation.rebuyables[4] * .1)) * 400);
+            if (gain - player.dilation.totalTachyonParticles <= 0) {
+                document.getElementById("enabledilation").innerHTML = "Disable dilation.<br>Reach " + shortenMoney(req) + " antimatter to gain more Tachyon Particles."
             } else {
                 document.getElementById("enabledilation").textContent = "Disable dilation."
             }
@@ -1996,7 +2001,7 @@ function gainedInfinityPoints() {
     if (player.timestudy.studies.includes(143)) ret = ret.times(Decimal.pow(15, Math.log(player.thisInfinityTime+1)*Math.pow(player.thisInfinityTime+1, 0.125)))
     if (player.achievements.includes("r116")) ret = ret.times(Decimal.pow(2, Math.log10(getInfinitied()+1)))
     if (player.achievements.includes("r125")) ret = ret.times(Decimal.pow(2, Math.log(player.thisInfinityTime+1)*Math.pow(player.thisInfinityTime+1, 0.11)))
-    if (player.dilation.upgrades.includes(7)) ret = ret.times(player.dilation.dilatedTime.pow(1000))
+    if (player.dilation.upgrades.includes(9)) ret = ret.times(player.dilation.dilatedTime.pow(1000))
     return ret.floor()
 }
 
@@ -3120,7 +3125,7 @@ function eternity(force, auto) {
         if (player.achievements.includes("r131")) player.infinitiedBank += Math.floor(player.infinitied*0.05)
         if (player.infinitiedBank > 5000000000) giveAchievement("No ethical consumption");
         if (player.dilation.active && (!force || player.infinityPoints.gte(Number.MAX_VALUE))) {
-            let tachyonGain = Math.max(Math.pow(Decimal.log10(player.money) / 400, 1.5) * (Math.pow(3, player.dilation.rebuyables[3])) - player.dilation.totalTachyonParticles, 0)
+            let tachyonGain = Math.max(getDilGain() - player.dilation.totalTachyonParticles, 0)
             player.dilation.totalTachyonParticles = player.dilation.totalTachyonParticles.plus(tachyonGain)
             player.dilation.tachyonParticles = player.dilation.tachyonParticles.plus(tachyonGain)
         }
@@ -3277,7 +3282,7 @@ function eternity(force, auto) {
             timeDimension7: player.timeDimension7,
             timeDimension8: player.timeDimension8,
             eternityPoints: player.eternityPoints,
-            eternities: player.eternities+1,
+            eternities: player.eternities+(player.dilation.upgrades.includes(12) ? Math.floor(Decimal.pow(player.dilation.dilatedTime, .1).toNumber()): 1),
             thisEternity: 0,
             bestEternity: player.bestEternity,
             eternityUpgrades: player.eternityUpgrades,
@@ -4081,7 +4086,7 @@ function startEternityChallenge(name, startgoal, goalIncrease) {
             timeDimension7: player.timeDimension7,
             timeDimension8: player.timeDimension8,
             eternityPoints: player.eternityPoints,
-            eternities: player.eternities+1,
+            eternities: player.eternities+(player.dilation.upgrades.includes(12) ? Math.floor(Decimal.pow(player.dilation.dilatedTime, .1).toNumber()): 1),
             thisEternity: 0,
             bestEternity: player.bestEternity,
             eternityUpgrades: player.eternityUpgrades,
@@ -4270,19 +4275,20 @@ function unlockDilation() {
  *
  */
 
- const DIL_UPG_COSTS = [null, [1e5, 10], [1e6, 100], [1e7, 20],
-                              5e6,        1e9,         5e7,
-                              2e12,        1e10,         1e11,
-                                            1e15]
+ const DIL_UPG_COSTS = [null, [1e5, 10], [1e6, 100], [1e7, 20], [1e8, 1e4],
+                              5e6,        1e9,         5e7, 1e20,
+                              2e12,        1e10,         1e11, 1e25,
+                              1e15]
 
 
 function buyDilationUpgrade(id, costInc) {
-    if (id > 3) { // Not rebuyable
+    if (id > 4) { // Not rebuyable
         if (player.dilation.dilatedTime < DIL_UPG_COSTS[id]) return // Not enough dilated time
         if (player.dilation.upgrades.includes(id)) return // Has the upgrade
         player.dilation.dilatedTime = player.dilation.dilatedTime.minus(DIL_UPG_COSTS[id])
+        // consistency
         player.dilation.upgrades.push(id)
-        if (id == 4) player.dilation.freeGalaxies *= 2 // Double the current galaxies
+        if (id == 5) player.dilation.freeGalaxies *= 2 // Double the current galaxies
     } else { // Is rebuyable
         let upgAmount = player.dilation.rebuyables[id];
         let realCost = new Decimal(DIL_UPG_COSTS[id][0]).times( Decimal.pow(DIL_UPG_COSTS[id][1], (upgAmount)) )
@@ -4303,8 +4309,8 @@ function buyDilationUpgrade(id, costInc) {
 }
 
 function updateDilationUpgradeButtons() {
-    for (var i = 1; i <= 10; i++) {
-        if (i <= 3) {
+    for (var i = 1; i <= 13; i++) {
+        if (i <= 4) {
             document.getElementById("dil"+i).className = ( new Decimal(DIL_UPG_COSTS[i][0]).times(Decimal.pow(DIL_UPG_COSTS[i][1],(player.dilation.rebuyables[i]))).gt(player.dilation.dilatedTime) ) ? "dilationupgrebuyablelocked" : "dilationupgrebuyable";
         } else if (player.dilation.upgrades.includes(i)) {
             document.getElementById("dil"+i).className = "dilationupgbought"
@@ -4312,21 +4318,17 @@ function updateDilationUpgradeButtons() {
             document.getElementById("dil"+i).className = ( DIL_UPG_COSTS[i] > player.dilation.dilatedTime ) ? "dilationupglocked" : "dilationupg";
         }
     }
-    document.getElementById("dil7desc").textContent = "Currently: "+shortenMoney(player.dilation.dilatedTime.pow(1000).max(1))+"x"
-    document.getElementById("dil10desc").textContent = "Currently: "+shortenMoney(Math.floor(player.dilation.tachyonParticles.div(20000).max(1)))+"/s"
+    document.getElementById("dil9desc").textContent = "Currently: "+shortenMoney(player.dilation.dilatedTime.pow(1000).max(1))+"x"
+    document.getElementById("dil13desc").textContent = "Currently: "+shortenMoney(Math.floor(player.dilation.tachyonParticles.div(20000).max(1)))+"/s"
 }
 
 function updateDilationUpgradeCosts() {
-    document.getElementById("dil1cost").textContent = "Cost: " + shortenCosts( new Decimal(DIL_UPG_COSTS[1][0]).times(Decimal.pow(DIL_UPG_COSTS[1][1],(player.dilation.rebuyables[1]))) ) + " dilated time"
-    document.getElementById("dil2cost").textContent = "Cost: " + shortenCosts( new Decimal(DIL_UPG_COSTS[2][0]).times(Decimal.pow(DIL_UPG_COSTS[2][1],(player.dilation.rebuyables[2]))) ) + " dilated time"
-    document.getElementById("dil3cost").textContent = "Cost: " + formatValue(player.options.notation, new Decimal(DIL_UPG_COSTS[3][0]).times(Decimal.pow(DIL_UPG_COSTS[3][1],(player.dilation.rebuyables[3]))), 1, 1) + " dilated time"
-    document.getElementById("dil4cost").textContent = "Cost: " + shortenCosts(DIL_UPG_COSTS[4]) + " dilated time"
-    document.getElementById("dil5cost").textContent = "Cost: " + shortenCosts(DIL_UPG_COSTS[5]) + " dilated time"
-    document.getElementById("dil6cost").textContent = "Cost: " + shortenCosts(DIL_UPG_COSTS[6]) + " dilated time"
-    document.getElementById("dil7cost").textContent = "Cost: " + shortenCosts(DIL_UPG_COSTS[7]) + " dilated time"
-    document.getElementById("dil8cost").textContent = "Cost: " + shortenCosts(DIL_UPG_COSTS[8]) + " dilated time"
-    document.getElementById("dil9cost").textContent = "Cost: " + shortenCosts(DIL_UPG_COSTS[9]) + " dilated time"
-    document.getElementById("dil10cost").textContent = "Cost: " + shortenCosts(DIL_UPG_COSTS[10]) + " dilated time"
+    for (let i = 1; i <= 4; i++) {
+      document.getElementById("dil" + i + "cost").textContent = "Cost: " + formatValue(player.options.notation, new Decimal(DIL_UPG_COSTS[i][0]).times(Decimal.pow(DIL_UPG_COSTS[i][1],(player.dilation.rebuyables[i]))), 1, 1) + " dilated time";
+    }
+    for (let i = 5; i <= 13; i++) {
+      document.getElementById("dil" + i + "cost").textContent = "Cost: " + shortenCosts(DIL_UPG_COSTS[i]) + " dilated time"
+    }
 }
 
 
@@ -4352,6 +4354,14 @@ function updateInfPower() {
     else document.getElementById("infDimMultAmount").textContent = shortenMoney(player.infinityPower.pow(7))
     if (player.currentEternityChall == "eterc7") document.getElementById("infPowPerSec").textContent = "You are getting " +shortenDimensions(DimensionProduction(1))+" Seventh Dimensions per second."
     else document.getElementById("infPowPerSec").textContent = "You are getting " +shortenDimensions(DimensionProduction(1))+" Infinity Power per second."
+}
+
+function getReplSpeed () {
+  let ret = .2;
+  if (player.dilation.upgrades.includes(8)) {
+    ret /= 1 + Math.log10(player.dilation.dilatedTime) / 10
+  }
+  return ret + 1;
 }
 
 function updateTimeShards() {
@@ -4883,14 +4893,17 @@ function gameLoop(diff) {
     if (player.timestudy.studies.includes(133) || player.replicanti.amount.gt(Number.MAX_VALUE)) interval *= 10
     if (player.timestudy.studies.includes(213)) interval /= 20
     if (player.replicanti.amount.lt(Number.MAX_VALUE) && player.achievements.includes("r134")) interval /= 2
-    if (player.replicanti.amount.gt(Number.MAX_VALUE)) interval = Math.max(interval * Math.pow(1.2, (player.replicanti.amount.log10() - 308)/308), interval)
+    if (player.replicanti.amount.gt(Number.MAX_VALUE)) interval = Math.max(interval * Math.pow(getReplSpeed(), (player.replicanti.amount.log10() - 308)/308), interval)
     var est = Math.log(player.replicanti.chance+1) * 1000 / interval
 
     var current = player.replicanti.amount.ln()
 
     if (player.replicanti.unl && (diff > 5 || interval < 50 || player.timestudy.studies.includes(192))) {
         var gained = Decimal.pow(Math.E, current +(diff*est/10))
-        if (player.timestudy.studies.includes(192)) gained = Decimal.pow(Math.E, current +Math.log((diff*est/10) * (Math.log10(1.2)/308)+1) / (Math.log10(1.2)/308))
+        let c = (Math.log10(getReplSpeed())/308);
+        if (player.timestudy.studies.includes(192)) {
+          gained = Decimal.pow(Math.E, current + Math.log((diff*est/10) * c + 1) / c);
+        }
         player.replicanti.amount = Decimal.min(Number.MAX_VALUE, gained)
         if (player.timestudy.studies.includes(192)) player.replicanti.amount = gained
         replicantiTicks = 0
@@ -5019,7 +5032,13 @@ function gameLoop(diff) {
         else document.getElementById("timeMax"+tier).className = "unavailablebtn"
     }
 
-    if (player.dilation.studies.includes(1)) player.dilation.dilatedTime = player.dilation.dilatedTime.plus(player.dilation.tachyonParticles*Math.pow(2, player.dilation.rebuyables[1])*diff/10)
+    if (player.dilation.studies.includes(1)) {
+      let gain = player.dilation.tachyonParticles*Math.pow(2, player.dilation.rebuyables[1])*diff/10;
+      if (player.dilation.upgrades.includes(12)) {
+        gain *= Math.pow(player.eternities, .1);
+      }
+      player.dilation.dilatedTime = player.dilation.dilatedTime.plus(gain);
+    }
 
     if (player.dilation.nextThreshold.lte(player.dilation.dilatedTime)) {
         let thresholdMult = 1.35 + 3.65 * Math.pow(0.8, player.dilation.rebuyables[2])
@@ -5028,7 +5047,7 @@ function gameLoop(diff) {
         // }
         player.dilation.nextThreshold = player.dilation.nextThreshold.times(thresholdMult)
         player.dilation.freeGalaxies += 1
-        if (player.dilation.upgrades.includes(4)) player.dilation.freeGalaxies += 1
+        if (player.dilation.upgrades.includes(5)) player.dilation.freeGalaxies += 1
     }
 
 
@@ -5340,7 +5359,7 @@ function gameLoop(diff) {
     document.getElementById("sacrifice").textContent = "Dimensional Sacrifice ("+formatValue(player.options.notation, calcSacrificeBoost(), 2, 2)+"x)"
     if (isNaN(player.totalmoney)) player.totalmoney = new Decimal(10)
     if (player.timestudy.studies.includes(181)) player.infinityPoints = player.infinityPoints.plus(gainedInfinityPoints().times(diff/1000))
-    if (player.dilation.upgrades.includes(10)) {
+    if (player.dilation.upgrades.includes(13)) {
         player.timestudy.theorem += parseFloat(player.dilation.tachyonParticles.div(20000).times(diff/10).toString())
         if (document.getElementById("timestudies").style.display != "none" && document.getElementById("eternitystore").style.display != "none") {
             if (player.timestudy.theorem>99999) document.getElementById("timetheorems").innerHTML = "You have <span style='display:inline' class=\"TheoremAmount\">"+shortenMoney(player.timestudy.theorem)+"</span> Time "+"Theorems."

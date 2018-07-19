@@ -27,7 +27,7 @@ function getTimeDimensionPower(tier) {
   ret = ret.times(ec10bonus)
   if (player.achievements.includes("r128")) ret = ret.times(Math.max(player.timestudy.studies.length, 1))
 
-  if (player.replicanti.unl && player.replicanti.amount.gt(1) && player.dilation.upgrades.includes(5)) {
+  if (player.replicanti.unl && player.replicanti.amount.gt(1) && player.dilation.upgrades.includes(6)) {
     var replmult = Decimal.pow(Decimal.log2(player.replicanti.amount), 2)
 
     if (player.timestudy.studies.includes(21)) replmult = replmult.plus(Decimal.pow(player.replicanti.amount, 0.032))
@@ -42,7 +42,7 @@ function getTimeDimensionPower(tier) {
 
   if (player.dilation.active) {
     ret = Decimal.pow(10, Math.pow(ret.log10(), 0.75))
-    if (player.dilation.upgrades.includes(9)) {
+    if (player.dilation.upgrades.includes(11)) {
       ret = Decimal.pow(10, Math.pow(ret.log10(), 1.05))
     }
   }
