@@ -303,7 +303,7 @@ var player = {
 };
 
 function ngplus () {
-  player.infinitied = 1
+  player.infinitied = Math.max(player.infinitied, 1);
   player.eternityChalls.eterc1 = 5
   player.eternityChalls.eterc2 = 5
   player.eternityChalls.eterc3 = 5
@@ -323,7 +323,7 @@ function ngplus () {
     giveAchievement("5 more eternities until the update");
   }
   if (player.dimensionMultDecrease === 3) {
-    player.dimensionMultDecrease = 3;
+    player.dimensionMultDecrease = 2;
   }
   if (player.tickSpeedMultDecrease === 2) {
     player.tickSpeedMultDecrease = 1.65;
@@ -552,6 +552,14 @@ function getDilGain () {
 
 function getDilReq () {
   return Decimal.pow(10, Math.pow(player.dilation.totalTachyonParticles / Math.pow(3, player.dilation.rebuyables[3]), 1 / getDilExp()) * 400);
+}
+
+function getDilTimeGainPerSecond () {
+  let gain = player.dilation.tachyonParticles.times(Math.pow(2, player.dilation.rebuyables[1]));
+  if (player.dilation.upgrades.includes(12)) {
+    gain = gain.times(Math.pow(player.eternities, .1));
+  }
+  return gain;
 }
 
 function updateDimensions() {
@@ -1354,6 +1362,7 @@ function upgradeReplicantiGalaxy() {
         if (player.currentEternityChall == "eterc6") player.replicanti.galCost = player.replicanti.galCost.times(Decimal.pow(1e2, player.replicanti.gal)).times(1e2)
         else player.replicanti.galCost = player.replicanti.galCost.times(Decimal.pow(1e5, player.replicanti.gal)).times(1e25)
         if (player.replicanti.gal >= 100) player.replicanti.galCost = player.replicanti.galCost.times(Decimal.pow(1e50, player.replicanti.gal - 95))
+        if (player.replicanti.gal >= 400) player.replicanti.galCost = player.replicanti.galCost.times(Decimal.pow(1e5, Math.floor(Math.pow(1.2, player.replicanti.gal - 395))))
         player.replicanti.gal += 1
         if (player.currentEternityChall == "eterc8") player.eterc8repl-=1
         document.getElementById("eterc8repl").textContent = "You have "+player.eterc8repl+" purchases left."
@@ -4417,7 +4426,7 @@ function updateDilation() {
     if (document.getElementById("dilation").style.display == "block" && document.getElementById("eternitystore").style.display == "block") {
         document.getElementById("tachyonParticleAmount").textContent = shortenMoney(player.dilation.tachyonParticles)
         document.getElementById("dilatedTimeAmount").textContent = shortenMoney(player.dilation.dilatedTime)
-        document.getElementById("dilatedTimePerSecond").textContent = "+" + shortenMoney(player.dilation.tachyonParticles.times(Decimal.pow(2, player.dilation.rebuyables[1]))) + "/s"
+        document.getElementById("dilatedTimePerSecond").textContent = "+" + shortenMoney(getDilTimeGainPerSecond()) + "/s"
         document.getElementById("galaxyThreshold").textContent = shortenMoney(player.dilation.nextThreshold)
         document.getElementById("dilatedGalaxies").textContent = player.dilation.freeGalaxies
     }
@@ -5073,10 +5082,7 @@ function gameLoop(diff) {
     }
 
     if (player.dilation.studies.includes(1)) {
-      let gain = player.dilation.tachyonParticles*Math.pow(2, player.dilation.rebuyables[1])*diff/10;
-      if (player.dilation.upgrades.includes(12)) {
-        gain *= Math.pow(player.eternities, .1);
-      }
+      let gain = getDilTimeGainPerSecond().times(diff / 10);
       player.dilation.dilatedTime = player.dilation.dilatedTime.plus(gain);
     }
 
