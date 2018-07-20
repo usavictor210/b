@@ -542,10 +542,17 @@ function sacrificeConf() {
     player.options.sacrificeConfirmation = !player.options.sacrificeConfirmation
 }
 
-function getDilGain () {
-  return Math.pow(Decimal.log10(player.money) / 400, 1.5 + player.dilation.rebuyables[4] * .25) * (Math.pow(3, player.dilation.rebuyables[3]));
+function getDilExp () {
+  return 1.5 + player.dilation.rebuyables[4] * .25;
 }
 
+function getDilGain () {
+  return Math.pow(Decimal.log10(player.money) / 400, getDilExp()) * (Math.pow(3, player.dilation.rebuyables[3]));
+}
+
+function getDilReq () {
+  return Decimal.pow(10, Math.pow(player.dilation.totalTachyonParticles / Math.pow(3, player.dilation.rebuyables[3]), 1 / getDilExp()) * 400);
+}
 
 function updateDimensions() {
     if (document.getElementById("antimatterdimensions").style.display == "block" && document.getElementById("dimensions").style.display == "block") {
@@ -703,7 +710,7 @@ function updateDimensions() {
     if (document.getElementById("dilation").style.display == "block") {
         if (player.dilation.active) {
             let gain = getDilGain()
-            let req = Decimal.pow(10, Math.pow(player.dilation.totalTachyonParticles / (Math.pow(3, player.dilation.rebuyables[3])), 1 / (1.5 + player.dilation.rebuyables[4] * .1)) * 400);
+            let req = getDilReq();
             if (gain - player.dilation.totalTachyonParticles <= 0) {
                 document.getElementById("enabledilation").innerHTML = "Disable dilation.<br>Reach " + shortenMoney(req) + " antimatter to gain more Tachyon Particles."
             } else {
