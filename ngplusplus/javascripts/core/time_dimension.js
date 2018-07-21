@@ -128,6 +128,9 @@ function buyTimeDimension(tier) {
   if (dim.cost.gte("1e1300")) {
       dim.cost = Decimal.pow(timeDimCostMults[tier]*2.2, dim.bought).times(timeDimStartCosts[tier])
   }
+  if (dim.cost.gte("1e20000")) {
+      dim.cost = Decimal.pow(timeDimCostMults[tier]*2.5, dim.bought).times(timeDimStartCosts[tier])
+  }
   if (tier > 4) {
     dim.cost = Decimal.pow(timeDimCostMults[tier]*100, dim.bought).times(timeDimStartCosts[tier])
   }

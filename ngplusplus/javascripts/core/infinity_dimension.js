@@ -91,7 +91,7 @@ function DimensionPower(tier) {
   }
 
   if (player.timestudy.studies.includes(82)) {
-      mult = mult.times(Decimal.pow(1.0000109,Math.pow(player.resets,2)))
+      mult = mult.times(Decimal.pow(1.0000109,Math.pow(player.resets,2)).min('1e80000'))
   }
 
   if (player.eternityUpgrades.includes(1)) {
