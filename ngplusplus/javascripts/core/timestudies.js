@@ -116,6 +116,8 @@ function buyDilationStudy(name, cost) {
             document.getElementById("dilstudy1").innerHTML = "Unlock time dilation<span>Cost: 5000 Time Theorems"
         }
         if (name === 6) {
+            // take player to meta dimensions
+            showTab('dimensions')
             showDimTab("metadimensions")
             document.getElementById("mdtabbtn").style.display = "inline-block"
         }
