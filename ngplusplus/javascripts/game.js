@@ -272,6 +272,7 @@ var player = {
     },
     meta: {
       antimatter: new Decimal(10),
+      bestAntimatter: new Decimal(10),
       resets: 0,
       '1': {
         amount: new Decimal(0),
@@ -616,10 +617,12 @@ function getDilTimeGainPerSecond () {
 
 function updateMetaDimensions () {
   if (document.getElementById("metadimensions").style.display == "block" && document.getElementById("dimensions").style.display == "block") {
-      var element = document.getElementById("metaAntimatterAmount");
-      element.textContent = shortenMoney(player.meta.antimatter);
+      var element0 = document.getElementById("metaAntimatterAmount");
+      element0.textContent = shortenMoney(player.meta.antimatter);
+      var element1 = document.getElementById("metaAntimatterBest");
+      element1.textContent = shortenMoney(player.meta.bestAntimatter);
       var element2 = document.getElementById("metaAntimatterEffect");
-      element2.textContent = shortenMoney(player.meta.antimatter.pow(8).plus(1));
+      element2.textContent = shortenMoney(player.meta.bestAntimatter.pow(8).plus(1));
       var element3 = document.getElementById("metaAntimatterPerSec");
       element3.textContent = 'You are getting ' + shortenDimensions(getMetaDimensionProductionPerSecond(1)) + ' meta-antimatter per second.';
       for (let tier = 1; tier <= 8; ++tier) {
@@ -4984,6 +4987,7 @@ function gameLoop(diff) {
 
     // meta dimension production stuff
     player.meta.antimatter = player.meta.antimatter.plus(getMetaDimensionProductionPerSecond(1).times(diff/10));
+    player.meta.bestAntimatter = player.meta.bestAntimatter.max(player.meta.antimatter);
     for (let i = 1; i < 8; i++) {
         player.meta[i].amount = player.meta[i].amount.plus(getMetaDimensionProductionPerSecond(i + 1).times(diff/100))
     }

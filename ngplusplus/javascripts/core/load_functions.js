@@ -119,6 +119,7 @@ if (player.infinitied > 0 && !player.challenges.includes("challenge1")) player.c
   if (player.meta[8] === undefined) player.meta[8] = {'amount': new Decimal(0), 'bought': 0, 'tensBought': 0, 'cost': new Decimal(1e24)}
   if (player.meta.resets === undefined) player.meta.resets = 0
   if (player.meta.antimatter === undefined) player.meta.antimatter = new Decimal(10);
+  if (player.meta.bestAntimatter === undefined) player.meta.bestAntimatter = player.meta.antimatter;
   if (player.why === undefined) player.why = 0
   if (player.options.animations === undefined) player.options.animations = {floatingText: true, bigCrunch: true, eternity: true, tachyonParticles: true}
   setTheme(player.options.theme);
@@ -763,6 +764,7 @@ function transformSaveToDecimal() {
   player.timeDimension8.power = new Decimal(player.timeDimension8.power)
 
   player.meta.antimatter = new Decimal(player.meta.antimatter);
+  player.meta.bestAntimatter = new Decimal(player.meta.bestAntimatter);
   for (let i = 1; i <= 8; i++) {
       player.meta[i].amount = new Decimal(player.meta[i].amount);
       player.meta[i].cost = new Decimal(player.meta[i].cost);
