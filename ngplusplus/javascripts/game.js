@@ -649,13 +649,13 @@ function updateMetaDimensions () {
       if (shiftRequirement.tier < 8) {
           document.getElementById("metaResetLabel").textContent = 'Meta-Dimension Shift ('+ player.meta.resets +'): requires ' + shiftRequirement.amount + " " + DISPLAY_NAMES[shiftRequirement.tier] + " Meta Dimensions"
       } else {
-        document.getElementById("metaResetLabel").textContent = 'Meta-Dimension Boost ('+ player.meta.resets +'): requires ' + shiftRequirement.amount + " " + DISPLAY_NAMES[shiftRequirement.tier] + " Meta Dimensions"
+          document.getElementById("metaResetLabel").textContent = 'Meta-Dimension Boost ('+ player.meta.resets +'): requires ' + shiftRequirement.amount + " " + DISPLAY_NAMES[shiftRequirement.tier] + " Meta Dimensions"
       }
 
       if (shiftRequirement.tier < 8) {
-          document.getElementById("metaSoftReset").textContent = "Reset the game for a Boost"
-      } else {
           document.getElementById("metaSoftReset").textContent = "Reset the game for a new Dimension"
+      } else {
+          document.getElementById("metaSoftReset").textContent = "Reset the game for a Boost"
       }
 
       if (player.meta[shiftRequirement.tier].amount.lt(shiftRequirement.amount)) {
