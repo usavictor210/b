@@ -115,6 +115,10 @@ function buyDilationStudy(name, cost) {
             showEternityTab("dilation")
             document.getElementById("dilstudy1").innerHTML = "Unlock time dilation<span>Cost: 5000 Time Theorems"
         }
+        if (name === 6) {
+            showDimTab("metadimensions")
+            document.getElementById("mdtabbtn").style.display = "inline-block"
+        }
         player.dilation.studies.push(name)
         player.timestudy.theorem -= cost
         document.getElementById("dilstudy"+name).className = "dilationupgbought"
@@ -211,7 +215,7 @@ function canBuyStudy(name) {
 
 function canBuyDilationStudy(name) {
     if (name == 1 && ECTimesCompleted("eterc11") >= 5 && ECTimesCompleted("eterc12") >= 5 && player.timestudy.amcost.log10() / 20000 + player.timestudy.ipcost.log10() / 100 + player.timestudy.epcost.log2() >= 13000) return true
-    if (player.dilation.studies.includes(name-1) && player.timestudy.theorem >= parseInt(document.getElementById("dilstudy"+name).textContent.split("Cost: ")[1].replace(/[, ]+/g, ""))) return true
+    if (player.dilation.studies.includes(name-1) && player.timestudy.theorem >= [5000, 1e6, 1e7, 1e8, 1e9, 1e24][(+name) - 1]) return true
     else return false
 }
 
@@ -261,7 +265,7 @@ function updateTimeStudyButtons() {
       }
   }
 
-  for (i=1; i<6; i++) {
+  for (i=1; i<=6; i++) {
     if (player.dilation.studies.includes(i)) document.getElementById("dilstudy"+i).className = "dilationupgbought"
     else if (canBuyDilationStudy(i)) document.getElementById("dilstudy"+i).className = "dilationupg"
     else document.getElementById("dilstudy"+i).className = "timestudylocked"

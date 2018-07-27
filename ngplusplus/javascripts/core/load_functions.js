@@ -108,6 +108,17 @@ if (player.infinitied > 0 && !player.challenges.includes("challenge1")) player.c
   if (player.timeDimension6 === undefined) player.timeDimension6 = {cost: new Decimal("1e2650"), amount: new Decimal(0), power: new Decimal(1), bought: 0 }
   if (player.timeDimension7 === undefined) player.timeDimension7 = {cost: new Decimal("1e3000"), amount: new Decimal(0), power: new Decimal(1), bought: 0 }
   if (player.timeDimension8 === undefined) player.timeDimension8 = {cost: new Decimal("1e3350"), amount: new Decimal(0), power: new Decimal(1), bought: 0 }
+  if (player.meta === undefined) player.meta = {}
+  if (player.meta[1] === undefined) player.meta[1] = {'amount': new Decimal(0), 'bought': 0, 'tensBought': 0, 'cost': new Decimal(10)}
+  if (player.meta[2] === undefined) player.meta[2] = {'amount': new Decimal(0), 'bought': 0, 'tensBought': 0, 'cost': new Decimal(100)}
+  if (player.meta[3] === undefined) player.meta[3] = {'amount': new Decimal(0), 'bought': 0, 'tensBought': 0, 'cost': new Decimal(1e4)}
+  if (player.meta[4] === undefined) player.meta[4] = {'amount': new Decimal(0), 'bought': 0, 'tensBought': 0, 'cost': new Decimal(1e6)}
+  if (player.meta[5] === undefined) player.meta[5] = {'amount': new Decimal(0), 'bought': 0, 'tensBought': 0, 'cost': new Decimal(1e9)}
+  if (player.meta[6] === undefined) player.meta[6] = {'amount': new Decimal(0), 'bought': 0, 'tensBought': 0, 'cost': new Decimal(1e13)}
+  if (player.meta[7] === undefined) player.meta[7] = {'amount': new Decimal(0), 'bought': 0, 'tensBought': 0, 'cost': new Decimal(1e18)}
+  if (player.meta[8] === undefined) player.meta[8] = {'amount': new Decimal(0), 'bought': 0, 'tensBought': 0, 'cost': new Decimal(1e24)}
+  if (player.meta.resets === undefined) player.meta.resets = 0
+  if (player.meta.antimatter === undefined) player.meta.antimatter = new Decimal(10);
   if (player.why === undefined) player.why = 0
   if (player.options.animations === undefined) player.options.animations = {floatingText: true, bigCrunch: true, eternity: true, tachyonParticles: true}
   setTheme(player.options.theme);
@@ -345,6 +356,10 @@ if (player.version < 5) {
       document.getElementById("eternityPoints2").style.display = "none";
       document.getElementById("eternitystorebtn").style.display = "none";
       document.getElementById("tdtabbtn").style.display = "none";
+  }
+
+  if (!player.dilation.studies.includes(6)) {
+      document.getElementById("mdtabbtn").style.display = "none";
   }
 
   if (player.eternityUpgrades === undefined) player.eternityUpgrades = []
@@ -746,6 +761,12 @@ function transformSaveToDecimal() {
   player.timeDimension6.power = new Decimal(player.timeDimension6.power)
   player.timeDimension7.power = new Decimal(player.timeDimension7.power)
   player.timeDimension8.power = new Decimal(player.timeDimension8.power)
+
+  player.meta.antimatter = new Decimal(player.meta.antimatter);
+  for (let i = 1; i <= 8; i++) {
+      player.meta[i].amount = new Decimal(player.meta[i].amount);
+      player.meta[i].cost = new Decimal(player.meta[i].cost);
+  }
   player.timeShards = new Decimal(player.timeShards)
   player.eternityPoints = new Decimal(player.eternityPoints)
   player.tickThreshold = new Decimal(player.tickThreshold)

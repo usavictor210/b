@@ -78,10 +78,12 @@ function getDimensionFinalMultiplier(tier) {
   return multiplier;
 }
 
-
+// unused???
+/*
 function getMoneyPerSecond() {
   return getDimensionFinalMultiplier(1)*Math.floor(player.firstAmount)/player.tickspeed;
 }
+*/
 
 function getDimensionDescription(tier) {
   var name = TIER_NAMES[tier];

@@ -270,6 +270,58 @@ var player = {
             4: 0
         }
     },
+    meta: {
+      antimatter: new Decimal(10),
+      resets: 0,
+      '1': {
+        amount: new Decimal(0),
+        bought: 0,
+        tensBought: 0,
+        cost: new Decimal(10)
+      },
+      '2': {
+        amount: new Decimal(0),
+        bought: 0,
+        tensBought: 0,
+        cost: new Decimal(100)
+      },
+      '3': {
+        amount: new Decimal(0),
+        bought: 0,
+        tensBought: 0,
+        cost: new Decimal(1e4)
+      },
+      '4': {
+        amount: new Decimal(0),
+        bought: 0,
+        tensBought: 0,
+        cost: new Decimal(1e6)
+      },
+      '5': {
+        amount: new Decimal(0),
+        bought: 0,
+        tensBought: 0,
+        cost: new Decimal(1e9)
+      },
+      '6': {
+        amount: new Decimal(0),
+        bought: 0,
+        tensBought: 0,
+        cost: new Decimal(1e13)
+      },
+      '7': {
+        amount: new Decimal(0),
+        bought: 0,
+        tensBought: 0,
+        cost: new Decimal(1e18)
+      },
+      '8': {
+        amount: new Decimal(0),
+        bought: 0,
+        tensBought: 0,
+        cost: new Decimal(1e24)
+      }
+    },
     why: 0,
     options: {
         newsHidden: false,
@@ -562,6 +614,55 @@ function getDilTimeGainPerSecond () {
   return gain;
 }
 
+function updateMetaDimensions () {
+  if (document.getElementById("metadimensions").style.display == "block" && document.getElementById("dimensions").style.display == "block") {
+      var element = document.getElementById("metaAntimatterAmount");
+      element.textContent = shortenMoney(player.meta.antimatter);
+      var element2 = document.getElementById("metaAntimatterEffect");
+      element2.textContent = shortenMoney(player.meta.antimatter.pow(8).plus(1));
+      var element3 = document.getElementById("metaAntimatterPerSec");
+      element3.textContent = 'You are getting ' + shortenDimensions(getMetaDimensionProductionPerSecond(1)) + ' meta-antimatter per second.';
+      for (let tier = 1; tier <= 8; ++tier) {
+          if (!canBuyMetaDimension(tier) && document.getElementById(tier + "MetaRow").style.display !== "table-row") {
+              break;
+          }
+          document.getElementById(tier + "MetaD").childNodes[0].nodeValue = DISPLAY_NAMES[tier] + " Meta Dimension x" + formatValue(player.options.notation, getMetaDimensionMultiplier(tier), 1, 1);
+          document.getElementById("meta" + tier + "Amount").textContent = getMetaDimensionDescription(tier);
+      }
+      for (let tier = 1; tier <= 8; ++tier) {
+          if (!canBuyMetaDimension(tier)) {
+              break;
+          }
+          document.getElementById(tier + "MetaRow").style.display = "table-row";
+          document.getElementById(tier + "MetaRow").style.visibility = "visible";
+      }
+
+      for (let tier = 1; tier <= 8; ++tier) {
+          document.getElementById('meta' + tier).className = canAffordMetaDimension(player.meta[tier].cost) ? 'storebtn' : 'unavailablebtn';
+          document.getElementById('metaMax' + tier).className = canAffordMetaDimension(getMetaMaxCost(tier)) ? 'storebtn' : 'unavailablebtn';
+      }
+
+      var shiftRequirement = getMetaShiftRequirement();
+      if (shiftRequirement.tier < 8) {
+          document.getElementById("metaResetLabel").textContent = 'Meta-Dimension Shift ('+ player.meta.resets +'): requires ' + shiftRequirement.amount + " " + DISPLAY_NAMES[shiftRequirement.tier] + " Meta Dimensions"
+      } else {
+        document.getElementById("metaResetLabel").textContent = 'Meta-Dimension Boost ('+ player.meta.resets +'): requires ' + shiftRequirement.amount + " " + DISPLAY_NAMES[shiftRequirement.tier] + " Meta Dimensions"
+      }
+
+      if (shiftRequirement.tier < 8) {
+          document.getElementById("metaSoftReset").textContent = "Reset the game for a Boost"
+      } else {
+          document.getElementById("metaSoftReset").textContent = "Reset the game for a new Dimension"
+      }
+
+      if (player.meta[shiftRequirement.tier].amount.lt(shiftRequirement.amount)) {
+          document.getElementById("metaSoftReset").className = 'unavailablebtn';
+      } else {
+          document.getElementById("metaSoftReset").className = 'storebtn';
+      }
+  }
+}
+
 function updateDimensions() {
     if (document.getElementById("antimatterdimensions").style.display == "block" && document.getElementById("dimensions").style.display == "block") {
 
@@ -614,6 +715,8 @@ function updateDimensions() {
         else galString +=  " Eighth Dimensions";
         document.getElementById("secondResetLabel").textContent = galString;
     }
+
+    updateMetaDimensions();
 
     if (canBuyTickSpeed() || player.currentEternityChall == "eterc9") {
         var tickmult = getTickSpeedMultiplier()
@@ -759,6 +862,11 @@ function updateCosts() {
     for (var i=1; i<=8; i++) {
 
         document.getElementById("timeMax"+i).textContent = "Cost: " + shortenDimensions(player["timeDimension"+i].cost) + " EP"
+    }
+
+    for (var i=1; i<=8; i++) {
+        document.getElementById('meta' + i).textContent = "Cost: " + shortenCosts(player.meta[i].cost);
+        document.getElementById('metaMax' + i).textContent = "Until 10, Cost: " + shortenCosts(getMetaMaxCost(i));
     }
 }
 
@@ -1781,6 +1889,7 @@ function galaxyReset() {
         dimlife: player.dimlife,
         dead: player.dead,
         dilation: player.dilation,
+        meta: player.meta,
         why: player.why,
         options: player.options
     };
@@ -3011,6 +3120,7 @@ document.getElementById("bigcrunch").onclick = function () {
             dimlife: player.dimlife,
             dead: player.dead,
             dilation: player.dilation,
+            meta: player.meta,
             why: player.why,
             options: player.options
         };
@@ -3382,6 +3492,7 @@ function eternity(force, auto) {
                 upgrades: player.dilation.upgrades,
                 rebuyables: player.dilation.rebuyables
             },
+            meta: player.meta,
             why: player.why,
             options: player.options
         };
@@ -3624,6 +3735,7 @@ function startChallenge(name, target) {
       dimlife: player.dimlife,
       dead: player.dead,
       dilation: player.dilation,
+      meta: player.meta,
       why: player.why,
       options: player.options
     };
@@ -4186,6 +4298,7 @@ function startEternityChallenge(name, startgoal, goalIncrease) {
                 upgrades: player.dilation.upgrades,
                 rebuyables: player.dilation.rebuyables
             },
+            meta: player.meta,
             why: player.why,
             options: player.options
         };
@@ -4868,6 +4981,13 @@ function gameLoop(diff) {
         if (tier <8) player["timeDimension"+tier].amount = player["timeDimension"+tier].amount.plus(getTimeDimensionProduction(tier+1).times(diff/100))
     }
 
+    // meta dimension production stuff
+    player.meta.antimatter = player.meta.antimatter.plus(getMetaDimensionProductionPerSecond(1).times(diff/10));
+    for (let i = 1; i < 8; i++) {
+        player.meta[i].amount = player.meta[i].amount.plus(getMetaDimensionProductionPerSecond(i + 1).times(diff/100))
+    }
+    // end meta dimension production stuff
+
     if (player.infinitied > 0 && player.eternities < 1) {
         document.getElementById("dimTabButtons").style.display = "inline-block"
         document.getElementById("dtabbtn").style.display = "inline-block"
@@ -5026,6 +5146,9 @@ function gameLoop(diff) {
     if (gainedEternityPoints().gte(1e6)) document.getElementById("eternitybtn").innerHTML = "Gain <b>"+shortenDimensions(gainedEternityPoints())+"</b> Eternity points.<br>"+shortenDimensions(currentEPmin)+ " EP/min<br>Peaked at "+shortenDimensions(EPminpeak)+" EP/min"
     if (player.dilation.active) document.getElementById("eternitybtn").innerHTML = "Gain <b>"+shortenDimensions(gainedEternityPoints())+"</b> Eternity points.<br>"+"+"+shortenDimensions(Math.max(0, getDilGain() - player.dilation.totalTachyonParticles)) +" Tachyon particles."
     if (player.currentEternityChall !== "") document.getElementById("eternitybtn").textContent = "Other challenges await.. I need to become Eternal"
+
+    document.getElementById('metaCost').innerHTML = shortenCosts(1e24);
+
     updateMoney();
     updateCoinPerSec();
     updateDimensions()

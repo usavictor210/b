@@ -8,7 +8,8 @@ function getDimensionBoostPower() {
 
   if (player.achievements.includes("r101")) ret = ret*1.01
   if (player.timestudy.studies.includes(83)) ret = Decimal.pow(1.0004, player.totalTickGained).times(ret);
-  if (player.timestudy.studies.includes(231)) ret = Decimal.pow(player.resets, 0.3).times(ret)
+  if (player.timestudy.studies.includes(231)) ret = Decimal.pow(player.resets, 0.3).times(ret);
+  if (player.dilation.studies.includes(6)) ret = player.meta.antimatter.pow(8).plus(1).times(ret);
   return Decimal.fromValue(ret)
 }
 
@@ -149,6 +150,7 @@ function softReset(bulk) {
       dimlife: player.dimlife,
       dead: player.dead,
       dilation: player.dilation,
+      meta: player.meta,
       why: player.why,
       options: player.options
   };
@@ -244,7 +246,7 @@ document.getElementById("softReset").onclick = function () {
   auto = false;
   if (player.infinityUpgrades.includes("bulkBoost")) maxBuyDimBoosts(true);
   else softReset(1)
-  
+
   for (var tier = 1; tier<9; tier++) {
     var name = TIER_NAMES[tier];
     var mult = getDimensionBoostPower().pow(player.resets + 1 - tier)
