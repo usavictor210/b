@@ -91,7 +91,7 @@ var player = {
     dimensionMultDecrease: 10,
     dimensionMultDecreaseCost: 1e8,
     overXGalaxies: 10,
-    version: 10,
+    version: 15,
     infDimensionsUnlocked: [false, false, false, false, false, false, false, false],
     infinityPower: new Decimal(1),
     spreadingCancer: 0,
@@ -371,7 +371,6 @@ function ngplus () {
   player.eternityChalls.eterc12 = 5
   updateChallenges()
   updateEternityChallenges()
-  console.log(player.achievements);
   if (!player.achievements.includes('r123')) {
     giveAchievement("5 more eternities until the update");
   }
@@ -612,6 +611,9 @@ function getDilTimeGainPerSecond () {
   if (player.dilation.upgrades.includes(12)) {
     gain = gain.times(Math.pow(player.eternities, .1));
   }
+  if (player.dilation.upgrades.includes(16)) {
+    gain = gain.times(getDil16Bonus());
+  }
   return gain;
 }
 
@@ -622,7 +624,7 @@ function updateMetaDimensions () {
       var element1 = document.getElementById("metaAntimatterBest");
       element1.textContent = shortenMoney(player.meta.bestAntimatter);
       var element2 = document.getElementById("metaAntimatterEffect");
-      element2.textContent = shortenMoney(player.meta.bestAntimatter.pow(8).plus(1));
+      element2.textContent = shortenMoney(getMetaNormalBoostEffect());
       var element3 = document.getElementById("metaAntimatterPerSec");
       element3.textContent = 'You are getting ' + shortenDimensions(getMetaDimensionProductionPerSecond(1)) + ' meta-antimatter per second.';
       for (let tier = 1; tier <= 8; ++tier) {
@@ -4441,8 +4443,9 @@ function unlockDilation() {
  */
 
  const DIL_UPG_COSTS = [null, [1e5, 10], [1e6, 100], [1e7, 20], [1e8, 1e4],
-                              5e6,        1e9,         5e7, 1e20,
-                              2e12,        1e10,         1e11, 1e25,
+                              5e6,         1e9,          5e7,   1e20,
+                              2e12,        1e10,         1e11,  1e25,
+                              1e50,        1e60,         1e80,  1e100,
                               1e15]
 
 
@@ -4473,8 +4476,10 @@ function buyDilationUpgrade(id, costInc) {
     updateTimeStudyButtons()
 }
 
+let DIL_UPG_NUM = 17;
+
 function updateDilationUpgradeButtons() {
-    for (var i = 1; i <= 13; i++) {
+    for (var i = 1; i <= DIL_UPG_NUM; i++) {
         if (i <= 4) {
             document.getElementById("dil"+i).className = ( new Decimal(DIL_UPG_COSTS[i][0]).times(Decimal.pow(DIL_UPG_COSTS[i][1],(player.dilation.rebuyables[i]))).gt(player.dilation.dilatedTime) ) ? "dilationupgrebuyablelocked" : "dilationupgrebuyable";
         } else if (player.dilation.upgrades.includes(i)) {
@@ -4483,15 +4488,17 @@ function updateDilationUpgradeButtons() {
             document.getElementById("dil"+i).className = ( DIL_UPG_COSTS[i] > player.dilation.dilatedTime ) ? "dilationupglocked" : "dilationupg";
         }
     }
-    document.getElementById("dil9desc").textContent = "Currently: "+shortenMoney(player.dilation.dilatedTime.pow(1000).max(1))+"x"
-    document.getElementById("dil13desc").textContent = "Currently: "+shortenMoney(Math.floor(player.dilation.tachyonParticles.div(20000).max(1)))+"/s"
+    document.getElementById("dil9desc").textContent = "Currently: "+shortenMoney(player.dilation.dilatedTime.pow(1000).max(1)) + 'x';
+    document.getElementById("dil13desc").textContent = "Currently: "+shortenMoney(getDil13Bonus()) + 'x';
+    document.getElementById("dil16desc").textContent = "Currently: "+shortenMoney(getDil16Bonus()) + 'x';
+    document.getElementById("dil17desc").textContent = "Currently: "+shortenMoney(Math.floor(player.dilation.tachyonParticles.div(20000).max(1))) + '/s'
 }
 
 function updateDilationUpgradeCosts() {
     for (let i = 1; i <= 4; i++) {
       document.getElementById("dil" + i + "cost").textContent = "Cost: " + formatValue(player.options.notation, new Decimal(DIL_UPG_COSTS[i][0]).times(Decimal.pow(DIL_UPG_COSTS[i][1],(player.dilation.rebuyables[i]))), 1, 1) + " dilated time";
     }
-    for (let i = 5; i <= 13; i++) {
+    for (let i = 5; i <= DIL_UPG_NUM; i++) {
       document.getElementById("dil" + i + "cost").textContent = "Cost: " + shortenCosts(DIL_UPG_COSTS[i]) + " dilated time"
     }
 }
@@ -4966,7 +4973,10 @@ function gameLoop(diff) {
     player.thisEternity += diff
 
     if (player.eternities > 0) document.getElementById("tdtabbtn").style.display = "inline-block"
-    if (player.dilation.studies.includes(6)) document.getElementById("mdtabbtn").style.display = "inline-block"
+    if (player.dilation.studies.includes(6)) {
+      document.getElementById("mdtabbtn").style.display = "inline-block"
+      document.getElementById("mddilupg").style.display = ""
+    }
 
     for (let tier=1;tier<9;tier++) {
         if (tier != 8 && (player.infDimensionsUnlocked[tier-1] || ECTimesCompleted("eterc7") > 0)) player["infinityDimension"+tier].amount = player["infinityDimension"+tier].amount.plus(DimensionProduction(tier+1).times(diff/100))
@@ -5533,7 +5543,7 @@ function gameLoop(diff) {
     document.getElementById("sacrifice").textContent = "Dimensional Sacrifice ("+formatValue(player.options.notation, calcSacrificeBoost(), 2, 2)+"x)"
     if (isNaN(player.totalmoney)) player.totalmoney = new Decimal(10)
     if (player.timestudy.studies.includes(181)) player.infinityPoints = player.infinityPoints.plus(gainedInfinityPoints().times(diff/1000))
-    if (player.dilation.upgrades.includes(13)) {
+    if (player.dilation.upgrades.includes(17)) {
         player.timestudy.theorem += parseFloat(player.dilation.tachyonParticles.div(20000).times(diff/10).toString())
         if (document.getElementById("timestudies").style.display != "none" && document.getElementById("eternitystore").style.display != "none") {
             if (player.timestudy.theorem>99999) document.getElementById("timetheorems").innerHTML = "You have <span style='display:inline' class=\"TheoremAmount\">"+shortenMoney(player.timestudy.theorem)+"</span> Time "+"Theorems."
@@ -5556,6 +5566,8 @@ function simulateTime(seconds, real) {
     var ticks = seconds * 20;
     var bonusDiff = 0;
     var playerStart = Object.assign({}, player);
+    // since there's an extra level of nesting
+    var startingMetaAntimatter = playerStart.meta.antimatter;
     if (ticks > 1000 && !real) {
         bonusDiff = (ticks - 1000) / 20;
         ticks = 1000;
@@ -5570,6 +5582,7 @@ function simulateTime(seconds, real) {
     if (player.money.gt(playerStart.money)) popupString+= ",<br> your antimatter increased "+shortenMoney(player.money.log10() - (playerStart.money).log10())+" orders of magnitude"
     if (player.infinityPower.gt(playerStart.infinityPower)) popupString+= ",<br> infinity power increased "+shortenMoney(player.infinityPower.log10() - (Decimal.max(playerStart.infinityPower, 1)).log10())+" orders of magnitude"
     if (player.timeShards.gt(playerStart.timeShards)) popupString+= ",<br> time shards increased "+shortenMoney(player.timeShards.log10() - (Decimal.max(playerStart.timeShards, 1)).log10())+" orders of magnitude"
+    if (player.meta.antimatter.gt(startingMetaAntimatter)) popupString+= ",<br> meta-antimatter increased "+shortenMoney(player.meta.antimatter.log10() - (Decimal.max(startingMetaAntimatter, 1)).log10())+" orders of magnitude"
     if (player.infinitied > playerStart.infinitied || player.eternities > playerStart.eternities) popupString+= ","
     else popupString+= "."
     if (player.infinitied > playerStart.infinitied) popupString+= "<br>you infinitied "+(player.infinitied-playerStart.infinitied)+" times."

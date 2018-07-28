@@ -361,6 +361,7 @@ if (player.version < 5) {
 
   if (!player.dilation.studies.includes(6)) {
       document.getElementById("mdtabbtn").style.display = "none";
+      document.getElementById("mddilupg").style.display = "none";
   }
 
   if (player.eternityUpgrades === undefined) player.eternityUpgrades = []
@@ -531,6 +532,15 @@ if (player.version < 5) {
     if (player.achievements.includes("s36")) {
         player.achievements.splice(player.achievements.indexOf("s36"), 1)
         updateAchievements();
+    }
+  }
+
+  if (player.version < 15) {
+    player.version = 15;
+    for (let i = 0; i < player.dilation.upgrades.length; i++) {
+      if (player.dilation.upgrades[i] === 13) {
+        player.dilation.upgrades[i] = 17;
+      }
     }
   }
 

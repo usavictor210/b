@@ -120,6 +120,7 @@ function buyDilationStudy(name, cost) {
             showTab('dimensions')
             showDimTab("metadimensions")
             document.getElementById("mdtabbtn").style.display = "inline-block"
+            document.getElementById("mddilupg").style.display = ""
         }
         player.dilation.studies.push(name)
         player.timestudy.theorem -= cost

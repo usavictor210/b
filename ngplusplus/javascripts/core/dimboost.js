@@ -9,7 +9,7 @@ function getDimensionBoostPower() {
   if (player.achievements.includes("r101")) ret = ret*1.01
   if (player.timestudy.studies.includes(83)) ret = Decimal.pow(1.0004, player.totalTickGained).times(ret);
   if (player.timestudy.studies.includes(231)) ret = Decimal.pow(player.resets, 0.3).times(ret);
-  if (player.dilation.studies.includes(6)) ret = player.meta.bestAntimatter.pow(8).plus(1).times(ret);
+  if (player.dilation.studies.includes(6)) ret = getMetaNormalBoostEffect().times(ret);
   return Decimal.fromValue(ret)
 }
 
