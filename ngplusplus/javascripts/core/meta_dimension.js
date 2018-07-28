@@ -23,7 +23,7 @@ function getDil13Bonus () {
 }
 
 function getDil16Bonus () {
-  return 1 + Math.log10(player.meta.bestAntimatter);
+  return Math.log10(player.meta.bestAntimatter);
 }
 
 function getMetaDimensionMultiplier (tier) {
