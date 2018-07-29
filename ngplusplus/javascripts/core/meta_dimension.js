@@ -4,7 +4,7 @@ function getDilationMetaDimensionMultiplier () {
 
 function getMetaResetPower () {
   if (player.dilation.upgrades.includes(14)) {
-    return 3;
+    return 4;
   } else {
     return 2;
   }
