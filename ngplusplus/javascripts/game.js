@@ -245,6 +245,7 @@ var player = {
     autoTime: 1e300,
     infMultBuyer: false,
     autoCrunchMode: "amount",
+    autoEterMode: "amount",
     respec: false,
     eternityBuyer: {
         limit: new Decimal(0),
@@ -1190,8 +1191,10 @@ function buyEternityUpgrade(name, cost) {
 function buyEPMult() {
     if (player.eternityPoints.gte(player.epmultCost)) {
         player.epmult = player.epmult.times(5)
-        player.eternityBuyer.limit = player.eternityBuyer.limit.times(5)
-        document.getElementById("priority13").value = formatValue("Scientific", player.eternityBuyer.limit, 2, 0);
+        if (player.autoEterMode === 'amount') {
+            player.eternityBuyer.limit = player.eternityBuyer.limit.times(5);
+            document.getElementById("priority13").value = formatValue("Scientific", player.eternityBuyer.limit, 2, 0);
+        }
         player.eternityPoints = player.eternityPoints.minus(player.epmultCost)
         let count = player.epmult.ln()/Math.log(5)
         if (player.epmultCost.gte(new Decimal("1e4000"))) player.epmultCost = Decimal.pow(1000, count + Math.pow(count-1334, 1.2)).times(500)
@@ -1549,6 +1552,22 @@ function toggleCrunchMode() {
     }
 }
 
+function toggleAutoEterMode() {
+    if (player.autoEterMode == "amount") {
+        player.autoEterMode = "time"
+        document.getElementById("toggleautoetermode").textContent = "Auto eternity mode: time"
+        document.getElementById("eterlimittext").textContent = "Seconds between eternities:"
+    } else if (player.autoEterMode == "time"){
+        player.autoEterMode = "relative"
+        document.getElementById("toggleautoetermode").textContent = "Auto eternity mode: X times last eternity"
+        document.getElementById("eterlimittext").textContent = "X times last eternity:"
+    } else {
+        player.autoEterMode = "amount"
+        document.getElementById("toggleautoetermode").textContent = "Auto eternity mode: amount"
+        document.getElementById("eterlimittext").textContent = "Amount of EP to wait until reset:"
+    }
+}
+
 function toggleEternityConf() {
     if (player.options.eternityconfirm) {
         player.options.eternityconfirm = false
@@ -1887,6 +1906,7 @@ function galaxyReset() {
         autoTime: player.autoTime,
         infMultBuyer: player.infMultBuyer,
         autoCrunchMode: player.autoCrunchMode,
+        autoEterMode: player.autoEterMode,
         respec: player.respec,
         eternityBuyer: player.eternityBuyer,
         eterc8ids: player.eterc8ids,
@@ -3118,6 +3138,7 @@ document.getElementById("bigcrunch").onclick = function () {
             autoTime: player.autoTime,
             infMultBuyer: player.infMultBuyer,
             autoCrunchMode: player.autoCrunchMode,
+            autoEterMode: player.autoEterMode,
             respec: player.respec,
             eternityBuyer: player.eternityBuyer,
             eterc8ids: player.eterc8ids,
@@ -3480,6 +3501,7 @@ function eternity(force, auto) {
             autoTime: 1e300,
             infMultBuyer: player.infMultBuyer,
             autoCrunchMode: player.autoCrunchMode,
+            autoEterMode: player.autoEterMode,
             respec: player.respec,
             eternityBuyer: player.eternityBuyer,
             eterc8ids: 50,
@@ -3733,6 +3755,7 @@ function startChallenge(name, target) {
       autoTime: player.autoTime,
       infMultBuyer: player.infMultBuyer,
       autoCrunchMode: player.autoCrunchMode,
+      autoEterMode: player.autoEterMode,
       respec: player.respec,
       eternityBuyer: player.eternityBuyer,
       eterc8ids: player.eterc8ids,
@@ -4286,6 +4309,7 @@ function startEternityChallenge(name, startgoal, goalIncrease) {
             autoTime: 1e300,
             infMultBuyer: player.infMultBuyer,
             autoCrunchMode: player.autoCrunchMode,
+            autoEterMode: player.autoEterMode,
             respec: player.respec,
             eternityBuyer: player.eternityBuyer,
             eterc8ids: 50,
@@ -4688,6 +4712,8 @@ setInterval(function() {
     else document.getElementById("togglecrunchmode").style.display = "none"
     if (player.eternities > 8) document.getElementById("galaxybulk").style.display = "inline-block"
     else document.getElementById("galaxybulk").style.display = "none"
+    if (player.eternities > 99) document.getElementById("toggleautoetermode").style.display = "inline-block"
+    else document.getElementById("toggleautoetermode").style.display = "none"
 
     document.getElementById("replicantichance").className = (player.infinityPoints.gte(player.replicanti.chanceCost) && player.replicanti.chance < 1) ? "storebtn" : "unavailablebtn"
     document.getElementById("replicantiinterval").className = (player.infinityPoints.gte(player.replicanti.intervalCost) && ((player.replicanti.interval !== 50) || player.timestudy.studies.includes(22)) && (player.replicanti.interval !== 1)) ? "storebtn" : "unavailablebtn"
@@ -5683,7 +5709,21 @@ function maxBuyDimBoosts(manual) {
 var timer = 0
 function autoBuyerTick() {
 
-    if (player.eternities >= 100 && player.eternityBuyer.isOn && gainedEternityPoints().gte(player.eternityBuyer.limit)) eternity(false, true)
+    if (player.eternities >= 100 && player.eternityBuyer.isOn) {
+      if (player.autoEterMode === 'amount') {
+        if (player.eternityBuyer.limit.lte(gainedEternityPoints())) {
+          eternity(false, true);
+        }
+      } else if (player.autoEterMode === 'time') {
+        if (player.eternityBuyer.limit.lte(player.thisEternity / 10)) {
+          eternity(false, true);
+        }
+      } else {
+        if (player.eternityBuyer.limit.lte(gainedEternityPoints().div(player.lastTenEternities[0][1].max(1)))) {
+          eternity(false, true);
+        }
+      }
+    }
 
     if (player.autobuyers[11]%1 !== 0) {
     if (player.autobuyers[11].ticks*100 >= player.autobuyers[11].interval && player.money.gte(Number.MAX_VALUE)) {

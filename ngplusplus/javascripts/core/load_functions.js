@@ -69,6 +69,7 @@ if (player.infinitied > 0 && !player.challenges.includes("challenge1")) player.c
   if (player.postChallUnlocked === undefined) player.postChallUnlocked = 0
   if (player.infMultBuyer === undefined) player.infMultBuyer = false
   if (player.autoCrunchMode === undefined) player.autoCrunchMode = "amount"
+  if (player.autoEterMode === undefined) player.autoEterMode = "amount"
   if (player.challengeTarget === undefined) {
       player.challengeTarget = 0
       if (player.currentChallenge != "") player.challengeTarget = Number.MAX_VALUE
@@ -553,6 +554,9 @@ if (player.version < 5) {
   toggleCrunchMode()
   toggleCrunchMode()
   toggleCrunchMode()
+  toggleAutoEterMode()
+  toggleAutoEterMode()
+  toggleAutoEterMode()
 
 
   if (player.options.newsHidden) {
