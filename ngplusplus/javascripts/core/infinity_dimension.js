@@ -68,12 +68,13 @@ function DimensionProduction(tier) {
 }
 
 function eterUpg2Mult () {
-  let cappedEters = Math.min(player.eternities, 100000);
   if (player.achievements.includes('r145')) {
-    cappedEters = player.eternities;
+    return Decimal.pow(player.eternities, Math.min(1e4, Math.pow(player.eternities, .3)));
+  } else {
+    let cappedEters = Math.min(player.eternities, 100000);
+    return Decimal.pow(cappedEters/200 + 1, Math.log(cappedEters*2+1)/Math.log(4)).times(
+        new Decimal((player.eternities-100000)/200 + 1).times(Math.log((player.eternities- 100000)*2+1)/Math.log(4)).max(1))
   }
-  return Decimal.pow(cappedEters/200 + 1, Math.log(cappedEters*2+1)/Math.log(4)).times(
-      new Decimal((player.eternities-100000)/200 + 1).times(Math.log((player.eternities- 100000)*2+1)/Math.log(4)).max(1))
 }
 
 function DimensionPower(tier) {
