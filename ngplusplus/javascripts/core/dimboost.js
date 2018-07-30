@@ -133,6 +133,8 @@ function softReset(bulk) {
       challengeTarget: player.challengeTarget,
       autoSacrifice: player.autoSacrifice,
       replicanti: player.replicanti,
+      timeDimensionAutobuyer: player.timeDimensionAutobuyer,
+      ep5xAutobuyer: player.ep5xAutobuyer,
       timestudy: player.timestudy,
       eternityChalls: player.eternityChalls,
       eternityChallGoal: player.eternityChallGoal,

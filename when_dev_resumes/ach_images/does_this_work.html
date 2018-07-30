@@ -10,60 +10,13 @@
   window.onload = function () {
     c = document.getElementById("c");
     context = c.getContext("2d");
-    let im = document.getElementById("i");
-    context.drawImage(im, 0, 0);
-    context.font = "10px Typewriter";
-    drawStrokedText(context, 'This is a test', 10, 12);
-  }
+    context.font = "12px Typewriter";
+    context.fillStyle = "rgb(0,0,0)";
+    context.fillText("Universal harmony", 5, 12);
 
-  drawStrokedText = function(context, text, x, y) {
-    context.fillStyle = "rgb(205,205,205)";
-    context.fillText(text, x, y);
-    // Ok, this is weird. Figure out and fix maybe later.
-    data = context.getImageData(0, 0, 104, 104);
-    isText = function (x) {
-      return data.data.slice(4 * x, 4 * x + 3).some((x)=>x===205);
-    }
-    a = data.data;
-    for (let i = 0; i < data.data.length / 4; i++) {
-      let [x, y] = [i % 104, Math.floor(i / 104)];
-      if (isText(i)) {
-        console.log('Text!');
-        if (x > 0 && !isText(i - 1)) {
-          for (let k = 0; k < 3; k++) {
-            data.data[4 * (i - 1) + k] = 0;
-          }
-          data.data[4 * (i - 1) + 3] = 255;
-        }
-        if (x < 104 && !isText(i + 1)) {
-          for (let k = 0; k < 3; k++) {
-            data.data[4 * (i + 1) + k] = 0;
-          }
-          data.data[4 * (i + 1) + 3] = 255;
-        }
-        if (y > 0 && !isText(i - 104)) {
-          for (let k = 0; k < 3; k++) {
-            data.data[4 * (i - 104) + k] = 0;
-          }
-          data.data[4 * (i - 104) + 3] = 255;
-        }
-        if (y < 104 && !isText(i + 104)) {
-          for (let k = 0; k < 3; k++) {
-            data.data[4 * (i + 104) + k] = 0;
-          }
-          data.data[4 * (i + 104) + 3] = 255;
-        }
-      }
-    }
-    for (let i = 0; i < data.data.length / 4; i++) {
-      if (isText(i)) {
-        for (let k = 0; k < 3; k++) {
-          data.data[4 * i + k] = 255;
-        }
-      }
-    }
-    context.putImageData(data, 0, 0);
-  };
+    var img = c.toDataURL("image/png");
+    document.write('<img src="'+img+'"/>');
+  }
   </script>
 </body>
 </html>

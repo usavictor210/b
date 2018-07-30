@@ -67,6 +67,15 @@ function DimensionProduction(tier) {
   else return ret.times(DimensionPower(tier))
 }
 
+function eterUpg2Mult () {
+  let cappedEters = Math.min(player.eternities, 100000);
+  if (player.achievements.includes('r145')) {
+    cappedEters = player.eternities;
+  }
+  return Decimal.pow(cappedEters/200 + 1, Math.log(cappedEters*2+1)/Math.log(4)).times(
+      new Decimal((player.eternities-100000)/200 + 1).times(Math.log((player.eternities- 100000)*2+1)/Math.log(4)).max(1))
+}
+
 function DimensionPower(tier) {
   var dim = player["infinityDimension"+tier]
   if (player.currentEternityChall == "eterc11") return new Decimal(1)
@@ -98,7 +107,9 @@ function DimensionPower(tier) {
       mult = mult.times(player.eternityPoints.plus(1))
   }
 
-  if (player.eternityUpgrades.includes(2)) mult = mult.times(Decimal.pow(Math.min(player.eternities, 100000)/200 + 1, Math.log(Math.min(player.eternities, 100000)*2+1)/Math.log(4)).times(new Decimal((player.eternities-100000)/200 + 1).times(Math.log((player.eternities- 100000)*2+1)/Math.log(4)).max(1)))
+  if (player.eternityUpgrades.includes(2)) {
+    mult = mult.times(eterUpg2Mult());
+  }
 
   if (player.eternityUpgrades.includes(3)) mult = mult.times(Decimal.pow(2,300/Math.max(infchallengeTimes, player.achievements.includes("r112") ? 6.1 : 7.5)))
 

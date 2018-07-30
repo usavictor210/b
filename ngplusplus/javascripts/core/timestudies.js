@@ -116,11 +116,12 @@ function buyDilationStudy(name, cost) {
             document.getElementById("dilstudy1").innerHTML = "Unlock time dilation<span>Cost: 5000 Time Theorems"
         }
         if (name === 6) {
-            // take player to meta dimensions
-            showTab('dimensions')
-            showDimTab("metadimensions")
-            document.getElementById("mdtabbtn").style.display = "inline-block"
-            document.getElementById("mddilupg").style.display = ""
+            // take player to meta dimensions and give achievement
+            giveAchievement("I'm so meta");
+            showTab('dimensions');
+            showDimTab("metadimensions");
+            document.getElementById("mdtabbtn").style.display = "inline-block";
+            document.getElementById("mddilupg").style.display = "";
         }
         player.dilation.studies.push(name)
         player.timestudy.theorem -= cost

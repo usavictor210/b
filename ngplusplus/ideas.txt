@@ -1,0 +1,98 @@
+XD update
+
+"If we confuse the testers enough maybe they'll spoil us" - Dan Simon
+
+XD:
+
+When you get infinite meta-antimatter, you can prestige (go exponential) to get XD. The formula for XD from meta-antimatter is the same as that for IP from regular antimatter.
+
+XD on their own aren't that helpful, but they each produce XP, initially at the rate of 0.05 XP per second.
+
+XP boost:
+dilated time and meta dimensions by (xp + 1)
+TD by 2^xp
+ID by 2^(xp^2)
+ND by 2^(xp^3)
+
+There is a cap to XP, at log2(best meta-antimatter).
+
+The "Go exponential" button is probably just to the right of the "Go eternal" button.
+
+Going exponential resets everything eternity does, and also TT, TD, dilation, MD, current meta-antimatter (not best though), and XP.
+
+Going exponential is never forced (that is, it starts broken).
+
+There are three xd upgrades, each cost 10 xd, cost increase 10x:
+get 0.05 more xp per second per xd
+cap is softer
+get 2x xd from going exponential.
+
+thoughts on formula for softer cap (more for me than for anyone else):
+Maybe just take
+c = 64 * (#times bought)
+real beyond cap = c * ln(ln(gain beyond cap / c + 1) + 1).
+I mean who even notices log2 vs ln anyway in this type of situation?
+
+So if gain beyond cap is 1e9 and c is 320 then real beyond cap is 886.
+For 2e9 it's 899.
+
+What happens is the cap starts out seeming softer, but quickly becomes harder again
+as you can almost immediately get to the point where it caps.
+
+Basically xd become a fixed multiplier after 10-20 hours, which I think is OK.
+
+end thoughts
+
+you can't spend all your xd on these upgrades; you have to keep at least one xd at all times after going exponential
+
+Antipichu vortex:
+
+You can sacrifice all your current XP, DT, or meta-antimatter to the antipichu vortex
+
+antipichu vortex power = total XP sac * log2(total DT sac.max(1)) * log2(total MAM sac.max(1))
+
+antipichus = floor(antipichu vortex power^(1 / 8))
+
+antipichu effect: all gal *= 1 + antipichu / 1000
+
+Achievements:
+
+keep TT and tree on XD (get 1e60 TT or something, "Theorem Completeness")
+max TD and 5x EP autobuyer (get 1e6 tickspeed upgrades, "I am speed")
+keep dilation upgrades and TP on going exponential (get inf^0.5 DT, "You're halfway there")
+going exponential autobuyer (go exponential in less than a minute, "Hard takeoff")
+meta-dimension stuff autobuyer (get at least 1e40 multiplier on all meta-dimensions, "I never meta-dimension I didn't like")
+antipichu vortex autosacrifice (get 20 AP, "Pichusuperplayer")
+get ability to bulk buy RG (get 1e1e5 replicanti, "It will never be enough")
+all meta-dimensions are 10% stronger and you start with 100 MA on reset (get MD8, "And still no ninth dimension...")
+all galaxies are 0.1% stronger (get at least 700 of all three types of galaxy, "Universal harmony")
+EP upgrade 2 (the one based on eternities) keeps its original stronger formula (get a trillion eternities, "The cap is a million, not a trillion")
+Meta-dimension boosts are each 1.01x stronger (get 10 meta-dimension boosts, "Meta-boosting to the max")
+other ach (5):
+"I'm so meta" (unlock meta dimensions)
+"What did you just say?" (get between 1ieatass and 1ieatast antimatter, but shown in player's notation)
+"No polynomial growth anymore" (go exponential)
+"Finally I'm out of that channel" (get 1e5 xd)
+"In the grim darkness of the far endgame" (get 1e40000 EP)
+
+there are two rows (with undetermined order):
+
+top:
+I'm so meta
+And still no ninth dimension...
+In the grim darkness of the far endgame
+Meta-boosting to the max
+The cap is a million, not a trillion
+It will never be enough
+I am speed
+Universal harmony
+
+bottom:
+No polynomial growth anymore
+Theorem Completeness
+You're halfway there
+Hard takeoff
+What did you just say?
+Pichusuperplayer
+I never meta-dimension I didn't like
+Finally I'm out of that channel

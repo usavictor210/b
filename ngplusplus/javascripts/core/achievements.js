@@ -103,6 +103,14 @@ const allAchievements = {
   r136 : "I told you already, time is relative",
   r137 : "Now you're thinking with dilation!",
   r138 : "This is what I have to do to get rid of you.",
+  r141 : "I'm so meta",
+  r142 : "And still no ninth dimension...",
+  r143 : "In the grim darkness of the far endgame",
+  r144 : "Meta-boosting to the max",
+  r145 : "The cap is a million, not a trillion",
+  r146 : "It will never be enough",
+  r147 : "I am speed",
+  r148 : "Universal harmony",
   s11 : "The first one's always free",
   s12 : "Just in case",
   s13 : "It pays to have respect",
@@ -209,10 +217,18 @@ function updateAchievements() {
           achNum += 1;
           var name = allAchievements["r"+achNum]
           if (player.achievements.includes("r"+achNum)) {
+            try {
               n++
               document.getElementById(name).className = "achievementunlocked"
+            } catch (e) {
+              throw new Error('No achievement ' + name);
+            }
           } else {
+            try {
               document.getElementById(name).className = "achievementlocked"
+            } catch (e) {
+              throw new Error('No achievement ' + name);
+            }
           }
       }
       if (n == 8) {

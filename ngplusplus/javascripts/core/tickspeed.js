@@ -20,6 +20,7 @@ function getTickSpeedMultiplier() {
       if (player.infinityUpgrades.includes("postGalaxy")) perGalaxy *= 1.5;
       if (player.challenges.includes("postc5")) perGalaxy *= 1.1;
       if (player.achievements.includes("r86")) perGalaxy *= 1.01;
+      if (player.achievements.includes("r148")) perGalaxy *= 1.001;
       if (player.timestudy.studies.includes(212)) perGalaxy *= Math.min(Math.pow(player.timeShards.max(2).log2(), 0.005), 1.1)
 
       return baseMultiplier-(player.galaxies*perGalaxy);

@@ -3,7 +3,11 @@ function getDilationMetaDimensionMultiplier () {
 }
 
 function getMetaResetPower () {
-  return getDil14RealBonus();
+  let ret = getDil14RealBonus();
+  if (player.achievements.includes('r144')) {
+    ret *= 1.01;
+  }
+  return ret;
 }
 
 function getMetaPerTenPower () {
@@ -46,6 +50,10 @@ function getMetaDimensionMultiplier (tier) {
 
   if (player.dilation.upgrades.includes(13)) {
     multiplier = multiplier.times(getDil13Bonus());
+  }
+
+  if (player.achievements.includes('r142')) {
+    multiplier = multiplier.times(1.1);
   }
 
   if (multiplier.lt(1)) multiplier = new Decimal(1);
@@ -114,11 +122,17 @@ function metaBoost () {
         return false;
     }
     player.meta.antimatter = new Decimal(10);
+    if (player.achievements.includes('r142')) {
+      player.meta.antimatter = new Decimal(100);
+    }
     clearMetaDimensions();
     for (let i = 2; i <= 8; i++) {
       document.getElementById(i + "MetaRow").style.display = "none"
     }
     player.meta.resets++;
+    if (player.meta.resets >= 10) {
+      giveAchievement('Meta-boosting to the max');
+    }
     return true;
 }
 
@@ -134,6 +148,9 @@ function metaBuyOneDimension(tier) {
     }
     if (!canAffordMetaDimension(cost)) {
         return false;
+    }
+    if (+tier === 8) {
+        giveAchievement("And still no ninth dimension...");
     }
     player.meta.antimatter = player.meta.antimatter.minus(cost);
     player.meta[tier].amount = player.meta[tier].amount.plus(1);
@@ -157,6 +174,9 @@ function metaBuyManyDimension(tier) {
     }
     if (!canAffordMetaDimension(cost)) {
         return false;
+    }
+    if (+tier === 8) {
+        giveAchievement("And still no ninth dimension...");
     }
     player.meta.antimatter = player.meta.antimatter.minus(cost);
     player.meta[tier].amount = player.meta[tier].amount.plus(10 - player.meta[tier].bought);

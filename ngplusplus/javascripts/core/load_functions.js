@@ -440,6 +440,18 @@ if (player.version < 5) {
       replicantiGalaxyAutoToggle()
   }
 
+  if (player.achievements.includes('r146')) {
+    replicantiGalaxyBulkModeToggle();
+    replicantiGalaxyBulkModeToggle();
+  }
+
+  if (player.achievements.includes('r147')) {
+    timeDimensionAutoToggle();
+    timeDimensionAutoToggle();
+    ep5xAutoToggle();
+    ep5xAutoToggle();
+  }
+
   if (player.eternityChallUnlocked !== 0) document.getElementById("eterc"+player.eternityChallUnlocked+"div").style.display = "inline-block"
 
 
