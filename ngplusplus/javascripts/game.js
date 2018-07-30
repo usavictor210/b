@@ -2318,7 +2318,7 @@ function setAchieveTooltip() {
     onlywar.setAttribute('ach-tooltip', "Reach "+shortenMoney(new Decimal('1e40000'))+" EP.")
     thecap.setAttribute('ach-tooltip', "Get "+formatValue(player.options.notation, 1e12, 0, 0)+" eternities. Reward: Eternity upgrade 2 uses a better formula.")
     neverenough.setAttribute('ach-tooltip', "Reach "+shortenCosts( new Decimal("1e100000"))+" replicanti. Reward: You can buy max replicanti galaxies.")
-    iamspeed.setAttribute('ach-tooltip', "Get "+formatValue(player.options.notation, 1e6, 0, 0)+" tickspeed upgrades. Reward: Autobuyers for max TD and x5 EP.")
+    iamspeed.setAttribute('ach-tooltip', "Get "+formatValue(player.options.notation, 1e6, 0, 0)+" tickspeed upgrades from time dimensions. Reward: Autobuyers for max TD and x5 EP.")
 }
 
 document.getElementById("notation").onclick = function () {
