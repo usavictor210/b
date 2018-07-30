@@ -569,6 +569,7 @@ if (player.version < 5) {
   toggleAutoEterMode()
   toggleAutoEterMode()
   toggleAutoEterMode()
+  toggleAutoEterMode()
 
 
   if (player.options.newsHidden) {

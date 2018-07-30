@@ -17,7 +17,7 @@ function getMetaPerTenPower () {
 function getMetaNormalBoostEffect () {
   let exp = 8;
   if (player.dilation.upgrades.includes(15)) {
-    exp = 10;
+    exp = 12;
   }
   return player.meta.bestAntimatter.pow(exp).plus(1);
 }

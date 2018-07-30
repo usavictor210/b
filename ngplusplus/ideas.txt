@@ -49,11 +49,15 @@ Antipichu vortex:
 
 You can sacrifice all your current XP, DT, or meta-antimatter to the antipichu vortex
 
-antipichu vortex power = total XP sac * log2(total DT sac.max(1)) * log2(total MAM sac.max(1))
+total XP sac
+log2(total DT sac.max(1))
+log2(total MAM sac.max(1))
 
-antipichus = floor(antipichu vortex power^(1 / 8))
+pairwise products give the three types of boson
 
-antipichu effect: all gal *= 1 + antipichu / 1000
+each type of boson boosts one of the three types of galaxy by 1 + bosons / 1000
+
+bosons = floor(product^(1 / 8))
 
 Achievements:
 
@@ -62,7 +66,7 @@ max TD and 5x EP autobuyer (get 1e6 tickspeed upgrades, "I am speed")
 keep dilation upgrades and TP on going exponential (get inf^0.5 DT, "You're halfway there")
 going exponential autobuyer (go exponential in less than a minute, "Hard takeoff")
 meta-dimension stuff autobuyer (get at least 1e40 multiplier on all meta-dimensions, "I never meta-dimension I didn't like")
-antipichu vortex autosacrifice (get 20 AP, "Pichusuperplayer")
+neutron star autosacrifice (get 30 bosons, "may the forces be with you")
 get ability to bulk buy RG (get 1e1e5 replicanti, "It will never be enough")
 all meta-dimensions are 10% stronger and you start with 100 MA on reset (get MD8, "And still no ninth dimension...")
 all galaxies are 0.1% stronger (get at least 700 of all three types of galaxy, "Universal harmony")
@@ -93,6 +97,6 @@ Theorem Completeness
 You're halfway there
 Hard takeoff
 What did you just say?
-Pichusuperplayer
+May the forces be with you.
 I never meta-dimension I didn't like
 Finally I'm out of that channel

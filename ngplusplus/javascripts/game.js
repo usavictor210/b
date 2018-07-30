@@ -676,6 +676,14 @@ let getTotalRGs = function () {
   return extraGals;
 }
 
+function formatInfOrEter (x) {
+  if (x < 1e12) {
+    return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+  } else {
+    return shortenDimensions(x);
+  }
+}
+
 function updateDimensions() {
     if (document.getElementById("antimatterdimensions").style.display == "block" && document.getElementById("dimensions").style.display == "block") {
 
@@ -765,8 +773,8 @@ function updateDimensions() {
             document.getElementById("infinityPoints2").innerHTML = "You have <span class=\"IPAmount2\">"+shortenDimensions(player.infinityPoints)+"</span> Infinity points."
         }
         if (player.infinitied == 1) document.getElementById("infinitied").textContent = "You have infinitied 1 time."
-        else document.getElementById("infinitied").textContent = "You have infinitied " + player.infinitied.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") + " times."
-        if (player.infinitiedBank > 0) document.getElementById("infinitied").textContent = "You have infinitied " + player.infinitied.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") + " times this eternity."
+        else document.getElementById("infinitied").textContent = "You have infinitied " + formatInfOrEter(player.infinitied) + " times."
+        if (player.infinitiedBank > 0) document.getElementById("infinitied").textContent = "You have infinitied " + formatInfOrEter(player.infinitied) + " times this eternity."
 
     }
 
@@ -781,7 +789,7 @@ function updateDimensions() {
             document.getElementById("besteternity").textContent = ""
             document.getElementById("thiseternity").textContent = ""
         } else {
-            document.getElementById("eternitied").textContent = "You have Eternitied " + player.eternities.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") + " times."
+            document.getElementById("eternitied").textContent = "You have Eternitied " + formatInfOrEter(player.eternities) + " times."
             document.getElementById("besteternity").textContent = "You have spent "+timeDisplay(player.thisEternity)+" in this Eternity."
             document.getElementById("thiseternity").textContent = "Your fastest Eternity is in "+timeDisplay(player.bestEternity)+"."
         }
@@ -1602,10 +1610,14 @@ function toggleAutoEterMode() {
         player.autoEterMode = "time"
         document.getElementById("toggleautoetermode").textContent = "Auto eternity mode: time"
         document.getElementById("eterlimittext").textContent = "Seconds between eternities:"
-    } else if (player.autoEterMode == "time"){
+    } else if (player.autoEterMode == "time") {
         player.autoEterMode = "relative"
         document.getElementById("toggleautoetermode").textContent = "Auto eternity mode: X times last eternity"
         document.getElementById("eterlimittext").textContent = "X times last eternity:"
+    } else if (player.autoEterMode == "relative") {
+        player.autoEterMode = "relativebest"
+        document.getElementById("toggleautoetermode").textContent = "Auto eternity mode: X times best of last 10 eternities"
+        document.getElementById("eterlimittext").textContent = "X times best of last 10 eternities:"
     } else {
         player.autoEterMode = "amount"
         document.getElementById("toggleautoetermode").textContent = "Auto eternity mode: amount"
@@ -2311,7 +2323,7 @@ function setAchieveTooltip() {
     layer.setAttribute('ach-tooltip', "Reach "+shortenMoney(Number.MAX_VALUE)+" EP.")
     fkoff.setAttribute('ach-tooltip', "Reach "+shortenCosts(new Decimal("1e22000"))+" IP without any time studies. Reward: Time dimensions are multiplied by the number of studies you have.")
     minaj.setAttribute('ach-tooltip', "Have 180 times more non-bonus replicanti galaxies than normal galaxies. Reward: Replicanti galaxies divide your replicanti by "+shortenMoney(Number.MAX_VALUE)+" instead of resetting them to 1.")
-    infstuff.setAttribute('ach-tooltip', "Reach "+shortenCosts(new Decimal("1e140000"))+" IP without buying IDs or IP multipliers. Reward: You start eternities with all Infinity Challenges unlocked and completed.")
+    infstuff.setAttribute('ach-tooltip', "Reach "+shortenCosts(new Decimal("1e140000"))+" IP without buying IDs or IP multipliers. Reward: You start eternities with all Infinity Challenges unlocked and completed, and your infinity gain is multiplied by dilated time^(1/4).")
     when.setAttribute('ach-tooltip', "Reach "+shortenCosts( new Decimal("1e20000"))+" replicanti. Reward: You gain replicanti 2 times faster under "+shortenMoney(Number.MAX_VALUE)+" replicanti.")
     thinking.setAttribute('ach-tooltip', "Eternity for "+shortenCosts( new Decimal("1e600"))+" EP in 1 minute or less while dilated.")
     thisis.setAttribute('ach-tooltip', "Reach "+shortenCosts(new Decimal('1e20000'))+" IP without any time studies while dilated.")
@@ -3057,6 +3069,9 @@ document.getElementById("bigcrunch").onclick = function () {
         let infGain = 1;
         if (player.thisInfinityTime > 50 && player.achievements.includes("r87")) infGain = 250;
         if (player.timestudy.studies.includes(32)) infGain *= Math.max(player.resets,1);
+        if (player.achievements.includes("r133")) {
+          infGain *= Math.max(1, Math.floor(player.dilation.dilatedTime.pow(.25).toNumber()));
+        }
         if (player.currentEternityChall == "eterc4") {
             infGain = 1
             if (player.infinitied >= 16 - (ECTimesCompleted("eterc4")*4)) {
@@ -4592,7 +4607,12 @@ function updateDilationUpgradeButtons() {
 
 function updateDilationUpgradeCosts() {
     for (let i = 1; i <= 4; i++) {
-      document.getElementById("dil" + i + "cost").textContent = "Cost: " + formatValue(player.options.notation, new Decimal(DIL_UPG_COSTS[i][0]).times(Decimal.pow(DIL_UPG_COSTS[i][1],(player.dilation.rebuyables[i]))), 1, 1) + " dilated time";
+      let cost = new Decimal(DIL_UPG_COSTS[i][0]).times(Decimal.pow(DIL_UPG_COSTS[i][1],(player.dilation.rebuyables[i])));
+      // rounding
+      if (i === 4 && cost.gte(9e99)) {
+        cost = new Decimal(1e100).times(Decimal.pow(1e5, player.dilation.rebuyables[i] - 23));
+      }
+      document.getElementById("dil" + i + "cost").textContent = "Cost: " + formatValue(player.options.notation, cost, 1, 1) + " dilated time";
     }
     for (let i = 5; i <= DIL_UPG_NUM; i++) {
       document.getElementById("dil" + i + "cost").textContent = "Cost: " + shortenCosts(DIL_UPG_COSTS[i]) + " dilated time"
@@ -4926,7 +4946,7 @@ setInterval(function() {
     }
 
     document.getElementById("infinitiedBank").style.display = (player.infinitiedBank > 0) ? "block" : "none"
-    document.getElementById("infinitiedBank").textContent = "You have " + player.infinitiedBank.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") + " banked infinities."
+    document.getElementById("infinitiedBank").textContent = "You have " + formatInfOrEter(player.infinitiedBank) + " banked infinities."
 
     if (infchallengeTimes < 7.5) giveAchievement("Never again")
     if (player.infinityPoints.gte(new Decimal("1e22000")) && player.timestudy.studies.length == 0) giveAchievement("What do I have to do to get rid of you")
@@ -5820,8 +5840,15 @@ function autoBuyerTick() {
         if (player.eternityBuyer.limit.lte(player.thisEternity / 10)) {
           eternity(false, true);
         }
-      } else {
+      } else if (player.autoEterMode === 'relative') {
         if (player.eternityBuyer.limit.lte(gainedEternityPoints().div(player.lastTenEternities[0][1].max(1)))) {
+          eternity(false, true);
+        }
+      } else {
+        let bestLast10 = player.lastTenEternities.reduce(function (a, b) {
+          return a.max(b[1]);
+        }, new Decimal(1));
+        if (player.eternityBuyer.limit.lte(gainedEternityPoints().div(bestLast10))) {
           eternity(false, true);
         }
       }
