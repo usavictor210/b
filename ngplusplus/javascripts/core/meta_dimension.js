@@ -3,11 +3,11 @@ function getDilationMetaDimensionMultiplier () {
 }
 
 function getMetaResetPower () {
-  if (player.dilation.upgrades.includes(14)) {
-    return 4;
-  } else {
-    return 2;
-  }
+  return getDil14RealBonus();
+}
+
+function getMetaPerTenPower () {
+  return getDil14RealBonus();
 }
 
 function getMetaNormalBoostEffect () {
@@ -22,6 +22,18 @@ function getDil13Bonus () {
   return 1 + Math.log10(1 - Math.min(0, player.tickspeed.log(10)));
 }
 
+function getDil14RealBonus() {
+  if (player.dilation.upgrades.includes(14)) {
+    return getDil14Bonus();
+  } else {
+    return 2;
+  }
+}
+
+function getDil14Bonus () {
+  return Math.log(player.dilation.dilatedTime.max(1e10).min(1e100).log(10)) / Math.log(10) + 1;
+}
+
 function getDil16Bonus () {
   return Math.log10(player.meta.bestAntimatter);
 }
@@ -30,7 +42,7 @@ function getMetaDimensionMultiplier (tier) {
   if (player.currentEternityChall === "eterc11") {
     return new Decimal(1);
   }
-  let multiplier = Decimal.pow(2, player.meta[tier].tensBought).times(Decimal.pow(getMetaResetPower(), Math.max(0, player.meta.resets - tier + 1))).times(getDilationMetaDimensionMultiplier());
+  let multiplier = Decimal.pow(getMetaPerTenPower(), player.meta[tier].tensBought).times(Decimal.pow(getMetaResetPower(), Math.max(0, player.meta.resets - tier + 1))).times(getDilationMetaDimensionMultiplier());
 
   if (player.dilation.upgrades.includes(13)) {
     multiplier = multiplier.times(getDil13Bonus());

@@ -4514,6 +4514,7 @@ function updateDilationUpgradeButtons() {
     }
     document.getElementById("dil9desc").textContent = "Currently: "+shortenMoney(player.dilation.dilatedTime.pow(1000).max(1)) + 'x';
     document.getElementById("dil13desc").textContent = "Currently: "+shortenMoney(getDil13Bonus()) + 'x';
+    document.getElementById("dil14desc").textContent = "Currently: "+shortenMoney(getDil14Bonus()) + 'x';
     document.getElementById("dil16desc").textContent = "Currently: "+shortenMoney(getDil16Bonus()) + 'x';
     document.getElementById("dil17desc").textContent = "Currently: "+shortenMoney(Math.floor(player.dilation.tachyonParticles.div(20000).max(1))) + '/s'
 }
