@@ -1,31 +1,30 @@
-XD update
+/*
+quarks update
 
-"If we confuse the testers enough maybe they'll spoil us" - Dan Simon
+quarks:
 
-XD:
+When you get infinite meta-antimatter, you can prestige (go quantum) to get quarks. The formula for quarks from meta-antimatter is the same as that for IP from regular antimatter.
 
-When you get infinite meta-antimatter, you can prestige (go exponential) to get XD. The formula for XD from meta-antimatter is the same as that for IP from regular antimatter.
+quarks on their own aren't that helpful, but they each produce gluons, initially at the rate of 0.05 gluons per second.
 
-XD on their own aren't that helpful, but they each produce XP, initially at the rate of 0.05 XP per second.
+gluons boost:
+dilated time and meta dimensions by (gluons + 1)
+TD by 2^gluons
+ID by 2^(gluons^2)
+ND by 2^(gluons^3)
 
-XP boost:
-dilated time and meta dimensions by (xp + 1)
-TD by 2^xp
-ID by 2^(xp^2)
-ND by 2^(xp^3)
+There is a cap to gluons, at log2(best meta-antimatter).
 
-There is a cap to XP, at log2(best meta-antimatter).
+The "Go quantum" button is probably just to the right of the "Go eternal" button.
 
-The "Go exponential" button is probably just to the right of the "Go eternal" button.
+Going quantum resets everything eternity does, and also TT, TD, dilation, MD, current meta-antimatter (not best though), and gluons.
 
-Going exponential resets everything eternity does, and also TT, TD, dilation, MD, current meta-antimatter (not best though), and XP.
+Going quantum is never forced (that is, it starts broken).
 
-Going exponential is never forced (that is, it starts broken).
-
-There are three xd upgrades, each cost 10 xd, cost increase 10x:
-get 0.05 more xp per second per xd
+There are three quark upgrades, each cost 10 quarks, cost increase 10x:
+get 0.05 more gluons per second per quark
 cap is softer
-get 2x xd from going exponential.
+get 2x quarks from going exponential.
 
 thoughts on formula for softer cap (more for me than for anyone else):
 Maybe just take
@@ -39,17 +38,17 @@ For 2e9 it's 899.
 What happens is the cap starts out seeming softer, but quickly becomes harder again
 as you can almost immediately get to the point where it caps.
 
-Basically xd become a fixed multiplier after 10-20 hours, which I think is OK.
+Basically gluons become a fixed multiplier after 10-20 hours of play with the new update, which I think is OK.
 
 end thoughts
 
-you can't spend all your xd on these upgrades; you have to keep at least one xd at all times after going exponential
+you can't spend all your quarks on these upgrades; you have to keep at least one quark at all times after going exponential.
 
-Antipichu vortex:
+Neutron star:
 
-You can sacrifice all your current XP, DT, or meta-antimatter to the antipichu vortex
+You can sacrifice all your current gluons, DT, or meta-antimatter to the neutron star.
 
-total XP sac
+total gluon sac
 log2(total DT sac.max(1))
 log2(total MAM sac.max(1))
 
@@ -57,26 +56,32 @@ pairwise products give the three types of boson
 
 each type of boson boosts one of the three types of galaxy by 1 + bosons / 1000
 
+gluon * dt = w^+ bosons which boost normal galaxies
+gluon * mam = w^- bosons which boost dilated galaxies
+dt * mam = z^0 bosons which boost replicanti galaxies
+
 bosons = floor(product^(1 / 8))
+*/
 
 Achievements:
 
-keep TT and tree on XD (get 1e60 TT or something, "Theorem Completeness")
+// with rewards (12):
+// keep TT and tree on going quantum (get 1e60 TT or something, "Theorem Completeness")
 max TD and 5x EP autobuyer (get 1e6 tickspeed upgrades, "I am speed")
-keep dilation upgrades and TP on going exponential (get inf^0.5 DT, "You're halfway there")
-going exponential autobuyer (go exponential in less than a minute, "Hard takeoff")
+// keep dilation upgrades and TP on going quantum (get inf^0.5 DT, "You're halfway there")
+// going quantum autobuyer (go quantum in less than a minute, "Planck time")
 meta-dimension stuff autobuyer (get at least 1e40 multiplier on all meta-dimensions, "I never meta-dimension I didn't like")
-neutron star autosacrifice (get 30 bosons, "may the forces be with you")
+// neutron star autosacrifice (get 25 total bosons, "May the forces be with you")
 get ability to bulk buy RG (get 1e1e5 replicanti, "It will never be enough")
 all meta-dimensions are 10% stronger and you start with 100 MA on reset (get MD8, "And still no ninth dimension...")
 all galaxies are 0.1% stronger (get at least 700 of all three types of galaxy, "Universal harmony")
-EP upgrade 2 (the one based on eternities) keeps its original stronger formula (get a trillion eternities, "The cap is a million, not a trillion")
+// EP upgrade 2 (the one based on eternities) gets a stronger formula (get a trillion eternities, "The cap is a million, not a trillion")
 Meta-dimension boosts are each 1.01x stronger (get 10 meta-dimension boosts, "Meta-boosting to the max")
-other ach (5):
+// 118x multiplier on meta-dimensions and dilated time production (get 51930 quarks, "The whole table")
+// other (4):
 "I'm so meta" (unlock meta dimensions)
 "What did you just say?" (get between 1ieatass and 1ieatast antimatter, but shown in player's notation)
-"No polynomial growth anymore" (go exponential)
-"Finally I'm out of that channel" (get 1e5 xd)
+// "Quantum leap" (go quantum)
 "In the grim darkness of the far endgame" (get 1e40000 EP)
 
 there are two rows (with undetermined order):
@@ -92,11 +97,11 @@ I am speed
 Universal harmony
 
 bottom:
-No polynomial growth anymore
+// Quantum leap
 Theorem Completeness
 You're halfway there
-Hard takeoff
+// Planck time
 What did you just say?
-May the forces be with you.
+// May the forces be with you
 I never meta-dimension I didn't like
-Finally I'm out of that channel
+// The whole table

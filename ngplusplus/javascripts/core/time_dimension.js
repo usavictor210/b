@@ -135,7 +135,18 @@ function buyTimeDimension(tier) {
       Math.pow(dim.cost.log(10) / 1000 - 20, 2)));
   }
   if (tier > 4) {
-    dim.cost = Decimal.pow(timeDimCostMults[tier]*100, dim.bought).times(timeDimStartCosts[tier])
+    // as it was before
+    dim.cost = Decimal.pow(timeDimCostMults[tier]*100, dim.bought).times(timeDimStartCosts[tier]);
+    // if you go to true infinity, or even break tickspeed, as is definitely possible, then you win the game. I am done with this game for who knows how long.
+    /*
+    if (dim.cost.gte("1e300000")) {
+        // we do the same thing as with TD 1-4, but 15 times later.
+        // This means that at 1e300000 progress should hit a wall
+        // that the 1e80 dilation upgrade gets us over.
+        dim.cost = dim.cost.times(Decimal.pow(new Decimal('1e1000'),
+        Math.pow(dim.cost.log(10) / 1000 - 300, 2)));
+    }
+    */
   }
   dim.power = dim.power.times(2)
   updateEternityUpgrades()
