@@ -33,13 +33,13 @@ function getTickSpeedMultiplier() {
       if (player.currentChallenge == "challenge6" || player.currentChallenge == "postc1") baseMultiplier = 0.93;
       let perGalaxy = 0.02;
       let galaxies = getGalaxies(false);
-      return baseMultiplier - (player.galaxies*perGalaxy);
+      return new Decimal(baseMultiplier - galaxies * perGalaxy);
   } else {
       let baseMultiplier = 0.8
       if (player.currentChallenge == "challenge6" || player.currentChallenge == "postc1") baseMultiplier = 0.83
       let perGalaxy = 0.965
       let galaxies = getGalaxies(true);
-      return baseMultiplier * (Math.pow(perGalaxy, (galaxies-2)))
+      return Decimal.pow(perGalaxy, (galaxies-2)).times(baseMultiplier)
   }
 }
 

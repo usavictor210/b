@@ -17,7 +17,7 @@ function getMetaPerTenPower () {
 function getMetaNormalBoostEffect () {
   let exp = 8;
   if (player.dilation.upgrades.includes(15)) {
-    exp = 12;
+    exp = 9;
   }
   return player.meta.bestAntimatter.pow(exp).plus(1);
 }
@@ -39,7 +39,7 @@ function getDil14Bonus () {
 }
 
 function getDil16Bonus () {
-  return Math.log10(player.meta.bestAntimatter);
+  return Math.pow(player.meta.bestAntimatter.log10(), .5);
 }
 
 function getMetaDimensionMultiplier (tier) {

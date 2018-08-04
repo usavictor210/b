@@ -324,6 +324,27 @@ var player = {
         cost: new Decimal(1e24)
       }
     },
+    quantum: {
+      times: 0,
+      quarks: new Decimal(0),
+      producedGluons: 0,
+      realGluons: 0,
+      bosons: {
+        'w+': 0,
+        'w-': 0,
+        'z0': 0
+      },
+      neutronstar: {
+        quarks: new Decimal(0),
+        metaAntimatter: new Decimal(0),
+        dilatedTime: new Decimal(0)
+      },
+      rebuyables: {
+        1: 0,
+        2: 0
+      },
+      upgrades: []
+    },
     why: 0,
     options: {
         newsHidden: false,
@@ -665,6 +686,14 @@ function updateMetaDimensions () {
           document.getElementById("metaSoftReset").className = 'unavailablebtn';
       } else {
           document.getElementById("metaSoftReset").className = 'storebtn';
+      }
+      // also quantum stuff since why not
+      if (player.meta.antimatter.gte(Number.MAX_VALUE)) {
+        let qg = quarkGain();
+        document.getElementById('quantumResetLabel').textContent = 'Go quantum: get ' + qg + (qg.eq(1) ? ' quark' : 'quarks');
+        document.getElementById('quantumbuttondiv').style.display = '';
+      } else {
+        document.getElementById('quantumbuttondiv').style.display = 'none';
       }
   }
 }
@@ -1974,6 +2003,7 @@ function galaxyReset() {
         dead: player.dead,
         dilation: player.dilation,
         meta: player.meta,
+        quantum: player.quantum,
         why: player.why,
         options: player.options
     };
@@ -3226,6 +3256,7 @@ document.getElementById("bigcrunch").onclick = function () {
             dead: player.dead,
             dilation: player.dilation,
             meta: player.meta,
+            quantum: player.quantum,
             why: player.why,
             options: player.options
         };
@@ -3602,6 +3633,7 @@ function eternity(force, auto) {
                 rebuyables: player.dilation.rebuyables
             },
             meta: player.meta,
+            quantum: player.quantum,
             why: player.why,
             options: player.options
         };
@@ -3850,6 +3882,7 @@ function startChallenge(name, target) {
       dead: player.dead,
       dilation: player.dilation,
       meta: player.meta,
+      quantum: player.quantum,
       why: player.why,
       options: player.options
     };
@@ -4417,6 +4450,7 @@ function startEternityChallenge(name, startgoal, goalIncrease) {
                 rebuyables: player.dilation.rebuyables
             },
             meta: player.meta,
+            quantum: player.quantum,
             why: player.why,
             options: player.options
         };
@@ -4594,7 +4628,7 @@ let DIL_UPG_NUM = 17;
 function updateDilationUpgradeButtons() {
     for (var i = 1; i <= DIL_UPG_NUM; i++) {
         if (i <= 4) {
-            document.getElementById("dil"+i).className = ( new Decimal(DIL_UPG_COSTS[i][0]).times(Decimal.pow(DIL_UPG_COSTS[i][1],(player.dilation.rebuyables[i]))).gt(player.dilation.dilatedTime) ) ? "dilationupgrebuyablelocked" : "dilationupgrebuyable";
+            document.getElementById("dil"+i).className = getDilRebuyableUpgCost(i).gt(player.dilation.dilatedTime) ? "dilationupgrebuyablelocked" : "dilationupgrebuyable";
         } else if (player.dilation.upgrades.includes(i)) {
             document.getElementById("dil"+i).className = "dilationupgbought"
         } else {
@@ -6064,6 +6098,11 @@ function showDimTab(tabName) {
         } else {
             tab.style.display = 'none';
         }
+    }
+    if (tabName === 'metadimensions') {
+      document.getElementById('progress').style.display = 'none';
+    } else {
+      document.getElementById('progress').style.display = 'block';
     }
 }
 

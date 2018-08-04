@@ -121,6 +121,29 @@ if (player.infinitied > 0 && !player.challenges.includes("challenge1")) player.c
   if (player.meta.resets === undefined) player.meta.resets = 0
   if (player.meta.antimatter === undefined) player.meta.antimatter = new Decimal(10);
   if (player.meta.bestAntimatter === undefined) player.meta.bestAntimatter = player.meta.antimatter;
+  if (player.quantum === undefined) {
+    player.quantum = {
+      times: 0,
+      quarks: new Decimal(0),
+      producedGluons: 0,
+      realGluons: 0,
+      bosons: {
+        'w+': 0,
+        'w-': 0,
+        'z0': 0
+      },
+      neutronstar: {
+        quarks: new Decimal(0),
+        metaAntimatter: new Decimal(0),
+        dilatedTime: new Decimal(0)
+      },
+      rebuyables: {
+        1: 0,
+        2: 0
+      },
+      upgrades: []
+    }
+  }
   if (player.why === undefined) player.why = 0
   if (player.options.animations === undefined) player.options.animations = {floatingText: true, bigCrunch: true, eternity: true, tachyonParticles: true}
   setTheme(player.options.theme);
@@ -795,6 +818,10 @@ function transformSaveToDecimal() {
   for (let i = 1; i <= 8; i++) {
       player.meta[i].amount = new Decimal(player.meta[i].amount);
       player.meta[i].cost = new Decimal(player.meta[i].cost);
+  }
+  player.quantum.quarks = new Decimal(player.quantum.quarks);
+  for (let i in player.quantum.neutronstar) {
+    player.quantum.neutronstar[i] = new Decimal(player.quantum.neutronstar[i]);
   }
   player.timeShards = new Decimal(player.timeShards)
   player.eternityPoints = new Decimal(player.eternityPoints)

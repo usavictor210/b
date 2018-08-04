@@ -154,6 +154,7 @@ function softReset(bulk) {
       dead: player.dead,
       dilation: player.dilation,
       meta: player.meta,
+      quantum: player.quantum,
       why: player.why,
       options: player.options
   };

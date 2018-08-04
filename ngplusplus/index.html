@@ -56,7 +56,6 @@
             <button id="tickSpeedMax" onclick="buyMaxTickSpeed()" style="color:black; visibility: hidden; height: 25px; font-size: 12px" class="storebtn">Buy Max</button>
             <div id="tickSpeedAmount" style="visibility: hidden">Tickspeed: 1000</div>
         </tr>
-        <p></p>
         <div style="position:absolute; left: 0; right: 0; margin-left: auto; margin-right: auto; width: 360px; top: 19px">
             <button id="bigcrunch" style="font-family: Typewriter; font-size: 50px; width: 360px; height: 100px;" class="tabbtn">Big Crunch</button>
         </div>
@@ -514,65 +513,65 @@
                 <table>
                     <tr>
                         <td>
-                            <button class="timestudy" id="dil1" onclick="buyDilationUpgrade(1)">Double time dilation gain.<br><span id="dil1cost">Cost: 1e5 dilated time</span></button>
+                            <button class="dilationupg" id="dil1" onclick="buyDilationUpgrade(1)">Double time dilation gain.<br><span id="dil1cost">Cost: 1e5 dilated time</span></button>
                         </td>
                         <td>
-                            <button class="timestudy" id="dil2" onclick="buyDilationUpgrade(2)">Decrease the galaxy threshold multiplier, but resets free galaxies and dilated time.<br><span id="dil2cost">Cost: 1e6 dilated time</span></button>
+                            <button class="dilationupg" id="dil2" onclick="buyDilationUpgrade(2)">Decrease the galaxy threshold multiplier, but resets free galaxies and dilated time.<br><span id="dil2cost">Cost: 1e6 dilated time</span></button>
                         </td>
                         <td>
-                            <button class="timestudy" id="dil3" onclick="buyDilationUpgrade(3)">Triple the amount of Tachyon Particles gained.<br><span id="dil3cost">Cost: 1e7 dilated time</span></button>
+                            <button class="dilationupg" id="dil3" onclick="buyDilationUpgrade(3)">Triple the amount of Tachyon Particles gained.<br><span id="dil3cost">Cost: 1e7 dilated time</span></button>
                         </td>
                         <td>
-                            <button class="timestudy" id="dil4" onclick="buyDilationUpgrade(4)">Tachyon particle formula is better.<br><span id="dil4cost">Cost: 1e8 dilated time</span></button>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                            <button class="timestudy" id="dil5" onclick="buyDilationUpgrade(5)">Gain twice as many free galaxies.<br><span id="dil5cost">Cost: 5e6 dilated time</span></button>
-                        </td>
-                        <td>
-                            <button class="timestudy" id="dil6" onclick="buyDilationUpgrade(6)">Time Dimensions are affected by replicanti multiplier ^ 0.1.<br><span id="dil6cost">Cost: 1e9 dilated time</span></button>
-                        </td>
-                        <td>
-                            <button class="timestudy" id="dil7" onclick="buyDilationUpgrade(7)">Normal dimensions gain a multiplier based on dilated time, unaffected by time dilation.<br><span id="dil7cost">Cost: 5e7 dilated time</span></button>
-                        </td>
-                        <td>
-                            <button class="timestudy" id="dil8" onclick="buyDilationUpgrade(8)">Replicanti increase quicker based on dilated time.<br><span id="dil8cost">Cost: 1e20 dilated time</span></button>
+                            <button class="dilationupg" id="dil4" onclick="buyDilationUpgrade(4)">Tachyon particle formula is better.<br><span id="dil4cost">Cost: 1e8 dilated time</span></button>
                         </td>
                     </tr>
                     <tr>
                         <td>
-                            <button class="timestudy" id="dil9" onclick="buyDilationUpgrade(9)">Gain a multiplier to IP based on dilated time.<br><span id="dil9desc"></span><br><span id="dil9cost"></span></button>
+                            <button class="dilationupg" id="dil5" onclick="buyDilationUpgrade(5)">Gain twice as many free galaxies.<br><span id="dil5cost">Cost: 5e6 dilated time</span></button>
                         </td>
                         <td>
-                            <button class="timestudy" id="dil10" onclick="buyDilationUpgrade(10)">Pick all the study paths from the first split.<br><span id="dil10cost"></span></button>
+                            <button class="dilationupg" id="dil6" onclick="buyDilationUpgrade(6)">Time Dimensions are affected by replicanti multiplier ^ 0.1.<br><span id="dil6cost">Cost: 1e9 dilated time</span></button>
                         </td>
                         <td>
-                            <button class="timestudy" id="dil11" onclick="buyDilationUpgrade(11)">Reduce the dilation penalty. (^ 1.05 after reduction)<br><span id="dil11cost"></span></button>
+                            <button class="dilationupg" id="dil7" onclick="buyDilationUpgrade(7)">Normal dimensions gain a multiplier based on dilated time, unaffected by time dilation.<br><span id="dil7cost">Cost: 5e7 dilated time</span></button>
                         </td>
                         <td>
-                            <button class="timestudy" id="dil12" onclick="buyDilationUpgrade(12)">Eternities and dilated time power up each other.<br><span id="dil12cost"></span></button>
+                            <button class="dilationupg" id="dil8" onclick="buyDilationUpgrade(8)">Replicanti increase quicker based on dilated time.<br><span id="dil8cost">Cost: 1e20 dilated time</span></button>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <button class="dilationupg" id="dil9" onclick="buyDilationUpgrade(9)">Gain a multiplier to IP based on dilated time.<br><span id="dil9desc"></span><br><span id="dil9cost"></span></button>
+                        </td>
+                        <td>
+                            <button class="dilationupg" id="dil10" onclick="buyDilationUpgrade(10)">Pick all the study paths from the first split.<br><span id="dil10cost"></span></button>
+                        </td>
+                        <td>
+                            <button class="dilationupg" id="dil11" onclick="buyDilationUpgrade(11)">Reduce the dilation penalty. (^ 1.05 after reduction)<br><span id="dil11cost"></span></button>
+                        </td>
+                        <td>
+                            <button class="dilationupg" id="dil12" onclick="buyDilationUpgrade(12)">Eternities and dilated time power up each other (each multiplies production of the other by x^0.1).<br><span id="dil12cost"></span></button>
                         </td>
                     </tr>
                     <tr id="mddilupg">
                         <td>
-                            <button class="timestudy" id="dil13" onclick="buyDilationUpgrade(13)">Gain a multiplier to meta-dimensions based on tickspeed (1 + log(1 + log(x))).<br><span id="dil13desc"></span><br><span id="dil13cost"></span></button>
+                            <button class="dilationupg" id="dil13" onclick="buyDilationUpgrade(13)">Gain a multiplier to meta-dimensions based on tickspeed (1 + log(1 + log(x))).<br><span id="dil13desc"></span><br><span id="dil13cost"></span></button>
                         </td>
                         <td>
-                            <button class="timestudy" id="dil14" onclick="buyDilationUpgrade(14)">Meta-dimension shifts, boosts, and per-ten upgrades are boosted by dilated time.<br><span id="dil14desc"></span><br><span id="dil14cost"></span></button>
+                            <button class="dilationupg" id="dil14" onclick="buyDilationUpgrade(14)">Meta-dimension shifts, boosts, and per-ten upgrades are boosted by dilated time.<br><span id="dil14desc"></span><br><span id="dil14cost"></span></button>
                         </td>
                         <td>
-                            <button class="timestudy" id="dil15" onclick="buyDilationUpgrade(15)">Meta-antimatter effect on dimension boosts is stronger (x^8 to x^12).<br><span id="dil15cost"></span></button>
+                            <button class="dilationupg" id="dil15" onclick="buyDilationUpgrade(15)">Meta-antimatter effect on dimension boosts is stronger (x^8 to x^9).<br><span id="dil15cost"></span></button>
                         </td>
                         <td>
-                            <button class="timestudy" id="dil16" onclick="buyDilationUpgrade(16)">Dilated time production is boosted based on best meta-antimatter (log(x)).<br><span id="dil16desc"></span><br><span id="dil16cost"></span></button>
+                            <button class="dilationupg" id="dil16" onclick="buyDilationUpgrade(16)">Dilated time production is boosted based on best meta-antimatter (log(x)^0.5).<br><span id="dil16desc"></span><br><span id="dil16cost"></span></button>
                         </td>
                     </tr>
                 </table>
                 <table>
                     <tr>
                         <td>
-                            <button class="timestudy" id="dil17" onclick="buyDilationUpgrade(17)">Generate time theorems based on tachyon particles.<br><span id="dil17desc"></span><br><span id="dil17cost"></span></button>
+                            <button class="dilationupg" id="dil17" onclick="buyDilationUpgrade(17)">Generate time theorems based on tachyon particles.<br><span id="dil17desc"></span><br><span id="dil17cost"></span></button>
                         </td>
                     </tr>
                 </table>
@@ -1094,13 +1093,21 @@
                     </tbody>
                 </table>
                 <table style="width: 100%">
-                    <tr style="font-size: 15px">
-                      <td id="metaResetLabel">
-                          Meta-Dimension Shift: requires 20 Fourth Meta Dimensions
-                      </td>
-                      <td>
-                          <button id="metaSoftReset" style="color:black; width: 200px; height: 25px; font-size: 9px" class="storebtn">Reset the game for a new Dimension</button>
-                      </td>
+                  <tr style="font-size: 15px">
+                    <td id="metaResetLabel">
+                        Meta-Dimension Shift: requires 20 Fourth Meta Dimensions
+                    </td>
+                    <td>
+                        <button id="metaSoftReset" style="color:black; width: 200px; height: 25px; font-size: 9px" class="storebtn">Reset the game for a new Dimension</button>
+                    </td>
+                  </tr>
+                  <tr id="quantumbuttondiv" style="font-size: 15px">
+                    <td id="quantumResetLabel">
+                        Go quantum: get something
+                    </td>
+                    <td>
+                        <button id="quantum" style="color:black; width: 200px; height: 25px; font-size: 9px" class="storebtn" onclick="quantum()">Go quantum</button>
+                    </td>
                   </tr>
                 </table>
             </div>
@@ -2920,6 +2927,7 @@
 <script type="text/javascript" src="javascripts/core/infinity_dimension.js"></script>
 <script type="text/javascript" src="javascripts/core/time_dimension.js"></script>
 <script type="text/javascript" src="javascripts/core/meta_dimension.js"></script>
+<script type="text/javascript" src="javascripts/core/quantum.js"></script>
 <script type="text/javascript" src="javascripts/core/dimboost.js"></script>
 <script type="text/javascript" src="javascripts/core/timestudies.js"></script>
 <script type="text/javascript" src="javascripts/core/canvases.js"></script>
