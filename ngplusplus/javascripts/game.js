@@ -4572,8 +4572,7 @@ function buyDilationUpgrade(id, costInc) {
         player.dilation.upgrades.push(id)
         if (id == 5) player.dilation.freeGalaxies *= 2 // Double the current galaxies
     } else { // Is rebuyable
-        let upgAmount = player.dilation.rebuyables[id];
-        let realCost = new Decimal(DIL_UPG_COSTS[id][0]).times( Decimal.pow(DIL_UPG_COSTS[id][1], (upgAmount)) )
+        let realCost = getDilRebuyableUpgCost(id);
         if (player.dilation.dilatedTime.lt(realCost)) return
 
         player.dilation.dilatedTime = player.dilation.dilatedTime.minus(realCost)
@@ -4609,13 +4608,18 @@ function updateDilationUpgradeButtons() {
     document.getElementById("dil17desc").textContent = "Currently: "+shortenMoney(Math.floor(player.dilation.tachyonParticles.div(20000).max(1))) + '/s'
 }
 
+let getDilRebuyableUpgCost = function (i) {
+  let cost = new Decimal(DIL_UPG_COSTS[i][0]).times(Decimal.pow(DIL_UPG_COSTS[i][1],(player.dilation.rebuyables[i])));
+  // rounding
+  if (i === 4 && cost.gte(9e99)) {
+    cost = new Decimal(1e100).times(Decimal.pow(1e5, player.dilation.rebuyables[i] - 23));
+  }
+  return cost;
+}
+
 function updateDilationUpgradeCosts() {
     for (let i = 1; i <= 4; i++) {
-      let cost = new Decimal(DIL_UPG_COSTS[i][0]).times(Decimal.pow(DIL_UPG_COSTS[i][1],(player.dilation.rebuyables[i])));
-      // rounding
-      if (i === 4 && cost.gte(9e99)) {
-        cost = new Decimal(1e100).times(Decimal.pow(1e5, player.dilation.rebuyables[i] - 23));
-      }
+      let cost = getDilRebuyableUpgCost(i);
       document.getElementById("dil" + i + "cost").textContent = "Cost: " + formatValue(player.options.notation, cost, 1, 1) + " dilated time";
     }
     for (let i = 5; i <= DIL_UPG_NUM; i++) {
@@ -5377,14 +5381,18 @@ function gameLoop(diff) {
       player.dilation.dilatedTime = player.dilation.dilatedTime.plus(gain);
     }
 
+    let thresholdMult = 1.35 + 3.65 * Math.pow(0.8, player.dilation.rebuyables[2]);
+
+
+
     if (player.dilation.nextThreshold.lte(player.dilation.dilatedTime)) {
-        let thresholdMult = 1.35 + 3.65 * Math.pow(0.8, player.dilation.rebuyables[2])
         // for (var i = 0; i < player.dilation.rebuyables[2]; i++) {
         //     thresholdMult *= Math.min( 1 - (Math.pow(0.8, i) / 10), 0.999)
         // }
-        player.dilation.nextThreshold = player.dilation.nextThreshold.times(thresholdMult)
-        player.dilation.freeGalaxies += 1
-        if (player.dilation.upgrades.includes(5)) player.dilation.freeGalaxies += 1
+        let newGalaxies = Math.floor(player.dilation.dilatedTime.div(player.dilation.nextThreshold).log(thresholdMult) + 1);
+        player.dilation.nextThreshold = player.dilation.nextThreshold.times(Decimal.pow(thresholdMult, newGalaxies))
+        player.dilation.freeGalaxies += newGalaxies;
+        if (player.dilation.upgrades.includes(5)) player.dilation.freeGalaxies += newGalaxies
         if (canGiveUniversalHarmony()) {
           giveAchievement('Universal harmony');
         }
