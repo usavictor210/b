@@ -57,8 +57,17 @@ function maxTheorems() {
     player.timestudy.epcost = new Decimal(1).times(new Decimal(2).pow(Math.floor(player.eternityPoints.log2() + 1)))
     player.timestudy.theorem += Math.floor(player.eternityPoints.log2() + 1) - EPowned
   }*/
-  // the below line of code *should* be replaced with the above block, but it's not required
-  while (buyWithEP()) continue
+  // If for some reason we can't buy a TT with EP, we definitely can't buy any more with TT.
+  if (buyWithEP()) {
+    var canBuyNumber = Math.floor(player.eternityPoints.log2()) - 1
+    var nextCost = Decimal.pow(2, canBuyNumber).times(2);
+    var costUpTo = nextCost.minus(player.timestudy.epcost);
+    if (nextCost.gt(player.timestudy.epcost)) {
+      player.timestudy.theorem += Math.floor(canBuyNumber + 1 - player.timestudy.epcost.log(2))
+      player.timestudy.epcost = nextCost;
+    }
+  }
+  buyWithEP();
   updateTheoremButtons()
   updateTimeStudyButtons()
   updateEternityUpgrades()

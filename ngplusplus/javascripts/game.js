@@ -2940,8 +2940,10 @@ function updateLastTenRuns() {
     if (ippm<1) tempstring = shorten(ippm*60) + " IP/hour"
     document.getElementById("averagerun").textContent = "Last 10 infinities average time: "+ timeDisplayShort(tempTime)+" Average IP gain: "+shortenDimensions(tempIP)+" IP. "+tempstring
 
-    if (tempBest.gte(1e8)) giveAchievement("Oh hey, you're still here");
-    if (tempBest.gte(1e300)) giveAchievement("MAXIMUM OVERDRIVE");
+    if (tempBest) {
+      if (tempBest.gte(1e8)) giveAchievement("Oh hey, you're still here");
+      if (tempBest.gte(1e300)) giveAchievement("MAXIMUM OVERDRIVE");
+    }
 
     bestRunIppm = tempBest
 }
@@ -3566,7 +3568,8 @@ function eternity(force, auto) {
                 galaxies: 0,
                 galCost: new Decimal(1e170),
                 galaxybuyer: (player.eternities > 1) ? player.replicanti.galaxybuyer : undefined,
-                auto: player.replicanti.auto
+                auto: player.replicanti.auto,
+                bulkmode: player.replicanti.bulkmode
             },
             timeDimensionAutobuyer: player.timeDimensionAutobuyer,
             ep5xAutobuyer: player.ep5xAutobuyer,
@@ -4380,7 +4383,8 @@ function startEternityChallenge(name, startgoal, goalIncrease) {
                 galaxies: 0,
                 galCost: new Decimal(1e170),
                 galaxybuyer: (player.eternities > 1) ? player.replicanti.galaxybuyer : undefined,
-                auto: player.replicanti.auto
+                auto: player.replicanti.auto,
+                bulkmode: player.replicanti.bulkmode
             },
             timeDimensionAutobuyer: player.timeDimensionAutobuyer,
             ep5xAutobuyer: player.ep5xAutobuyer,
@@ -5818,14 +5822,29 @@ function maxBuyGalaxies(manual) {
 }
 
 function maxBuyDimBoosts(manual) {
-    if (player.autobuyers[9].priority > player.resets || player.overXGalaxies <= player.galaxies || getShiftRequirement(0).tier < 8 || manual == true) {
-        var r = 0;
-        while(player[TIER_NAMES[getShiftRequirement(r).tier]+"Amount"] >= getShiftRequirement(r).amount && (player.autobuyers[9].priority > player.resets+r || player.overXGalaxies <= player.galaxies || getShiftRequirement(r).tier < 8 || manual == true)) r+=1;
-
-        if (r >= 750) giveAchievement("Costco sells dimboosts now")
-        if (r > 0) softReset(r)
+	if (player.autobuyers[9].priority >= player.eightBought || player.galaxies >= player.overXGalaxies || getShiftRequirement(0).tier < 8 || manual) {
+		var bought = player[TIER_NAMES[getShiftRequirement(0).tier] + "Bought"]
+    // get shift requirement is 1 different that what you might expect.
+		var r = 1;
+    while (bought >= getShiftRequirement(2 * r - 1).amount) {
+      r *= 2;
     }
-
+    inc = r;
+    while (inc >= 1) {
+      while (bought >= getShiftRequirement(r + inc - 1).amount) {
+        r += inc;
+      }
+      inc /= 2;
+    }
+    if (bought < getShiftRequirement(0).amount) {
+      r = 0;
+    }
+    if (player.galaxies < player.overXGalaxies) {
+      r = Math.min(r, player.autobuyers[9].priority - player.resets);
+    }
+    if (r >= 750) giveAchievement("Costco sells dimboosts now")
+		if (r > 0) softReset(r)
+  }
 }
 
 var timer = 0

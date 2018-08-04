@@ -112,8 +112,36 @@ function updateTimeDimensions() {
 
 var timeDimCostMults = [null, 3, 9, 27, 81, 243, 729, 2187, 6561]
 var timeDimStartCosts = [null, 1, 5, 100, 1000, "1e2350", "1e2650", "1e3000", "1e3350"]
-function buyTimeDimension(tier) {
 
+function timeDimCost(tier, bought) {
+  let cost = Decimal.pow(timeDimCostMults[tier], bought).times(timeDimStartCosts[tier])
+  if (cost.gte(Number.MAX_VALUE)) {
+      cost = Decimal.pow(timeDimCostMults[tier]*1.5, bought).times(timeDimStartCosts[tier])
+  }
+  if (cost.gte("1e1300")) {
+      cost = Decimal.pow(timeDimCostMults[tier]*2.2, bought).times(timeDimStartCosts[tier])
+  }
+  if (cost.gte("1e20000")) {
+      // rather than fixed cost scaling as before, quadratic cost scaling
+      // to avoid exponential growth
+      cost = cost.times(Decimal.pow(new Decimal('1e1000'),
+      Math.pow(cost.log(10) / 1000 - 20, 2)));
+  }
+  if (tier > 4) {
+    // as it was before
+    cost = Decimal.pow(timeDimCostMults[tier]*100, bought).times(timeDimStartCosts[tier]);
+    if (cost.gte("1e300000")) {
+        // we do the same thing as with TD 1-4, but 15 times later.
+        // This means that at 1e300000 progress should hit a wall
+        // that the 1e80 dilation upgrade gets us over.
+        cost = cost.times(Decimal.pow(new Decimal('1e1000'),
+        Math.pow(cost.log(10) / 1000 - 300, 2)));
+    }
+  }
+  return cost;
+}
+
+function buyTimeDimension(tier) {
   var dim = player["timeDimension"+tier]
   if (tier > 4 && !player.dilation.studies.includes(tier-3)) return false
   if (player.eternityPoints.lt(dim.cost)) return false
@@ -121,34 +149,8 @@ function buyTimeDimension(tier) {
   player.eternityPoints = player.eternityPoints.minus(dim.cost)
   dim.amount = dim.amount.plus(1);
   dim.bought += 1
-  dim.cost = Decimal.pow(timeDimCostMults[tier], dim.bought).times(timeDimStartCosts[tier])
-  if (dim.cost.gte(Number.MAX_VALUE)) {
-      dim.cost = Decimal.pow(timeDimCostMults[tier]*1.5, dim.bought).times(timeDimStartCosts[tier])
-  }
-  if (dim.cost.gte("1e1300")) {
-      dim.cost = Decimal.pow(timeDimCostMults[tier]*2.2, dim.bought).times(timeDimStartCosts[tier])
-  }
-  if (dim.cost.gte("1e20000")) {
-      // rather than fixed cost scaling as before, quadratic cost scaling
-      // to avoid exponential growth
-      dim.cost = dim.cost.times(Decimal.pow(new Decimal('1e1000'),
-      Math.pow(dim.cost.log(10) / 1000 - 20, 2)));
-  }
-  if (tier > 4) {
-    // as it was before
-    dim.cost = Decimal.pow(timeDimCostMults[tier]*100, dim.bought).times(timeDimStartCosts[tier]);
-    // if you go to true infinity, or even break tickspeed, as is definitely possible, then you win the game. I am done with this game for who knows how long.
-    /*
-    if (dim.cost.gte("1e300000")) {
-        // we do the same thing as with TD 1-4, but 15 times later.
-        // This means that at 1e300000 progress should hit a wall
-        // that the 1e80 dilation upgrade gets us over.
-        dim.cost = dim.cost.times(Decimal.pow(new Decimal('1e1000'),
-        Math.pow(dim.cost.log(10) / 1000 - 300, 2)));
-    }
-    */
-  }
   dim.power = dim.power.times(2)
+  dim.cost = timeDimCost(tier, dim.bought);
   updateEternityUpgrades()
   return true
 }
@@ -162,5 +164,34 @@ function resetTimeDimensions() {
 }
 
 function buyMaxTimeDimensions() {
-  for(var i=1; i<9; i++) while(buyTimeDimension(i)) continue
+  for(var i=1; i<9; i++) {
+    // strategy: repeatedly buy the maximum power of 2 possible
+    var dim = player["timeDimension"+i];
+    while (true) {
+      let toBuy = .5;
+      while (timeDimCost(i, dim.bought + 2 * toBuy).times(2).lte(player.eternityPoints)) {
+        toBuy *= 2;
+      }
+      if (toBuy === .5) {
+        break;
+      }
+      // now we can safely buy toBuy.
+      let purchase = toBuy;
+      while (purchase > 0) {
+        let cost = timeDimCost(i, dim.bought + purchase - 1);
+        let newEP = player.eternityPoints.minus(cost);
+        if (newEP.eq(player.eternityPoints)) {
+          break;
+        }
+        player.eternityPoints = newEP;
+        purchase--;
+      }
+      dim.amount = dim.amount.plus(toBuy);
+      dim.bought += toBuy;
+      dim.power = dim.power.times(Decimal.pow(2, toBuy))
+      dim.cost = timeDimCost(i, dim.bought);
+    }
+    // if we can buy more than 1 now we definitely clearly could have bought 1.
+    buyTimeDimension(i);
+  }
 }
