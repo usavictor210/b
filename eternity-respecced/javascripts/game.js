@@ -5674,6 +5674,33 @@ function newDimension() {
         }
     }
 }
+
+let savefix = function () {
+  let nan = false;
+  if (Number.isNaN(currentMult)) {
+    nan = true;
+    currentMult = 1;
+  }
+  if (Number.isNaN(mult18)) {
+    nan = true;
+    mult18 = 1;
+  }
+  for (let i in player) {
+    if (player[i] && Number.isNaN(player[i].e)) {
+      nan = true;
+      if (i === 'money') {
+        player[i] = new Decimal(10);
+      } else {
+        player[i] = new Decimal(0);
+      }
+    }
+  }
+  if (nan) {
+    alert('There is a bug in the game and your save was just fixed. If this message shows up, and especially if it shows up multiple times, tell me.')
+  }
+}
+
+
 var blink = true
 setInterval(function() {
     $.getJSON('version.txt', function(data){
@@ -5693,7 +5720,7 @@ setInterval(function() {
 }, 60000)
 
 
-
+setInterval(savefix, 1000);
 
 
 setInterval(function() {
