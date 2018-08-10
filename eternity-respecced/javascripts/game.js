@@ -1235,14 +1235,10 @@ function getDimensionFinalMultiplier(tier) {
     if (player.currentChallenge == "postc6") multiplier = multiplier.dividedBy(player.matter.max(1))
     if (player.currentChallenge == "postc8") multiplier = multiplier.times(postc8Mult)
 
-    if (player.currentChallenge == "postc4" && player.postC4Tier != tier) multiplier = multiplier.pow(0.25)
+    if (player.currentChallenge == "postc4" && player.postC4Tier !== tier) multiplier = multiplier.pow(0.25)
     if (player.challenges.includes("postc4")) multiplier = multiplier.pow(1.05);
 
     return multiplier;
-}
-
-function getMoneyPerSecond() {
-    return getDimensionFinalMultiplier(1)*Math.floor(player.firstAmount)/player.tickspeed;
 }
 
 function getDimensionDescription(tier) {
@@ -5689,7 +5685,12 @@ let savefix = function () {
     if (player[i] && Number.isNaN(player[i].e)) {
       nan = true;
       if (i === 'money') {
-        player[i] = new Decimal(10);
+        player.money = new Decimal(10);
+        if (player.challenges.includes("challenge1")) player.money = new Decimal(100)
+        if (player.achievements.includes("r37")) player.money = new Decimal(1000);
+        if (player.achievements.includes("r54")) player.money = new Decimal(2e5);
+        if (player.achievements.includes("r55")) player.money = new Decimal(1e10);
+        if (player.achievements.includes("r78")) player.money = new Decimal(1e25);
       } else {
         player[i] = new Decimal(0);
       }
