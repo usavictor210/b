@@ -1177,7 +1177,104 @@ function hasInfinityMult(tier) {
     }
 }
 
+showMults = true;
 
+/*
+function bugCheck (tier) {
+    var name = TIER_NAMES[tier];
+
+    if (Number.isNaN(player[name + 'Pow'].e)) {
+      console.log('bug check: dim pow is buggy');
+    }
+    if (Number.isNaN(player.achPow.e)) {
+      console.log('bug check: ach pow is buggy');
+    }
+
+    if (Number.isNaN(kongDimMult)) {
+      console.log('bug check: kong dim mult is buggy');
+    }
+
+    if (Number.isNaN(player.infinityPower.e)) {
+      console.log('bug check: inf pow is buggy');
+    }
+
+    if (Number.isNaN(totalMult)) {
+      console.log('bug check: total mult is buggy');
+    }
+
+    if (Number.isNaN(currentMult)) {
+      console.log('bug check: current mult is buggy');
+    }
+
+    if (Number.isNaN(infinitiedMult)) {
+      console.log('bug check: infinitied mult is buggy');
+    }
+
+    if (Number.isNaN(achievementMult)) {
+      console.log('bug check: achievement mult is buggy');
+    }
+
+    if (Number.isNaN(challengeMult.e)) {
+      console.log('bug check: challenge mult is buggy');
+    }
+
+    if (Number.isNaN(dimMults().e)) {
+      console.log('bug check: inf dim mult is buggy');
+    }
+
+    if (Number.isNaN(unspentBonus.e)) {
+      console.log('bug check: inf unspent bonus is buggy');
+    }
+
+    if (Number.isNaN(timeMult().e)) {
+      console.log('bug check: time mult is buggy');
+    }
+
+    if (Number.isNaN(player.thisInfinityTime)) {
+      console.log('bug check: infinity time is buggy')
+    }
+
+    if (Number.isNaN(player.infinityDimension8.amount.e)) {
+      console.log('bug check: id8 is buggy')
+    }
+
+    if (Number.isNaN(player.money.e)) {
+      console.log('bug check: money is buggy')
+    }
+
+    if (Number.isNaN(player.money.pow(0.00004).plus(1).e)) {
+      console.log('bug check: money is weirdly buggy')
+    }
+
+    if (Number.isNaN(player.postC3Reward.e)) {
+      console.log('bug check: postc3 reward is buggy')
+    }
+
+    if (Number.isNaN(mult18.e)) {
+      console.log('bug check: mult18 is buggy')
+    }
+
+    if (Number.isNaN(postc8Mult.e)) {
+      console.log('bug check: post c8 mult is buggy')
+    }
+
+    let l = [player[name + 'Pow'], player.achPow, kongDimMult, player.infinityPower,
+    totalMult, currentMult, infinitiedMult, achievementMult, challengeMult,
+    dimMults(), unspentBonus, timeMult(), player.thisInfinityTime,
+    player.infinityDimension8.amount, player.money, player.money.pow(0.00004).plus(1),
+    player.postC3Reward, mult18, postc8Mult];
+
+    let r = new Decimal(1);
+
+    for (let i of l) {
+      r = r.times(new Decimal(1).plus(i));
+    }
+
+    if (Number.isNaN(r.e)) {
+      console.log('bug check: something is really weirdly buggy')
+    }
+}
+*/
 
 function getDimensionFinalMultiplier(tier) {
     var name = TIER_NAMES[tier];
@@ -1187,7 +1284,6 @@ function getDimensionFinalMultiplier(tier) {
         if (tier == 4) multiplier = multiplier.pow(1.4)
         if (tier == 2) multiplier = multiplier.pow(1.7)
     }
-
     multiplier = multiplier.times(player.achPow);
 
     multiplier = multiplier.times(kongDimMult)
@@ -1225,8 +1321,6 @@ function getDimensionFinalMultiplier(tier) {
     if (player.achievements.includes("r98")) multiplier = multiplier.times(player.infinityDimension8.amount.max(1));
     if (player.achievements.includes("r84")) multiplier = multiplier.times(player.money.pow(0.00004).plus(1));
     else if (player.achievements.includes("r73")) multiplier = multiplier.times(player.money.pow(0.00002).plus(1));
-
-
    // tt normal dimension multipliers deleted
 
     multiplier = multiplier.times(player.postC3Reward)
@@ -1237,7 +1331,6 @@ function getDimensionFinalMultiplier(tier) {
 
     if (player.currentChallenge == "postc4" && player.postC4Tier !== tier) multiplier = multiplier.pow(0.25)
     if (player.challenges.includes("postc4")) multiplier = multiplier.pow(1.05);
-
     return multiplier;
 }
 
@@ -2175,15 +2268,19 @@ function softReset(bulk, reallyZero) {
 
     player.tickspeed = player.tickspeed.times(Decimal.pow(getTickSpeedMultiplier(), player.totalTickGained))
     updateTickSpeed();
-    if (player.challenges.includes("challenge1")) player.money = new Decimal(100)
-    if (player.achievements.includes("r37")) player.money = new Decimal(1000);
-    if (player.achievements.includes("r54")) player.money = new Decimal(2e5);
-    if (player.achievements.includes("r55")) player.money = new Decimal(1e10);
-    if (player.achievements.includes("r78")) player.money = new Decimal(1e25);
+    updateInitialMoney();
 
     if (player.resets >= 10) {
         giveAchievement("Boosting to the max");
     }
+}
+
+function updateInitialMoney () {
+  if (player.achievements.includes("r21")) player.money = new Decimal(100)
+  if (player.achievements.includes("r37")) player.money = new Decimal(1000);
+  if (player.achievements.includes("r54")) player.money = new Decimal(2e5);
+  if (player.achievements.includes("r55")) player.money = new Decimal(1e10);
+  if (player.achievements.includes("r78")) player.money = new Decimal(1e25);
 }
 
 MoneyFormat = ['K', 'M', 'B', 'T', 'Qd', 'Qt', 'Sx', 'Sp', 'Oc', 'No', 'Dc', 'UDc', 'DDc', 'TDc', 'QdDc', 'QtDc', 'SxDc', 'SpDc', 'ODc', 'NDc', 'Vg', 'UVg', 'DVg', 'TVg', 'QdVg', 'QtVg', 'SxVg', 'SpVg', 'OVg', 'NVg', 'Tg', 'UTg', 'DTg', 'TTg', 'QdTg', 'QtTg', 'SxTg', 'SpTg', 'OTg', 'NTg', 'Qa', 'UQa', 'DQa', 'TQa', 'QdQa', 'QtQa', 'SxQa', 'SpQa', 'OQa', 'NQa', 'Qi', 'UQi', 'DQi', 'TQi', 'QaQi', 'QtQi', 'SxQi', 'SpQi', 'OQi', 'NQi', 'Se', 'USe', 'DSe', 'TSe', 'QaSe', 'QtSe', 'SxSe', 'SpSe', 'OSe', 'NSe', 'St', 'USt', 'DSt', 'TSt', 'QaSt', 'QtSt', 'SxSt', 'SpSt', 'OSt', 'NSt', 'Og', 'UOg', 'DOg', 'TOg', 'QdOg', 'QtOg', 'SxOg', 'SpOg', 'OOg', 'NOg', 'Nn', 'UNn', 'DNn', 'TNn', 'QdNn', 'QtNn', 'SxNn', 'SpNn', 'ONn', 'NNn', 'Ce', 'UCe'];
@@ -2819,50 +2916,6 @@ function buyManyDimensionAutobuyer(tier, bulk) {
 
 
 
-
-
-
-           /*
-            // this part is if cost is less than 1e308
-            if (player[name+"Cost"].times(10).lt(Number.MAX_VALUE)) {
-                var toBuy = Math.ceil((Math.min(308.1, player.money.e-player[name+"Cost"].e) - player[name+"Cost"].e+1) / getDimensionCostMultiplier(tier).e)
-                if (bulk < toBuy) toBuy = bulk
-                player[name+"Amount"] = player[name+"Amount"].plus(10*toBuy)
-                player[name + "Pow"] = player[name + "Pow"].times(Decimal.pow(getDimensionPowerMultiplier(tier), toBuy))
-                player[name + "Cost"] = player[name + "Cost"].times(Decimal.pow(getDimensionCostMultiplier(tier), toBuy-1))
-                player.money = player.money.minus(player[name + "Cost"].times(10))
-                player[name + "Cost"] = player[name + "Cost"].times(getDimensionCostMultiplier(tier))
-                if (toBuy > 0 && player.currentChallenge == "challenge8") clearDimensions(tier-1)
-            }
-
-            // quadratic formula
-            var a = Math.log10(Math.sqrt(player.dimensionMultDecrease))
-            var b = player.costMultipliers[tier-1].dividedBy(Math.sqrt(player.dimensionMultDecrease)).log10()
-            var c = player[name + "Cost"].dividedBy(player.money).log10()
-            var discriminant = Math.pow(b, 2) - (c *a* 4)
-            if (discriminant < 0) return false
-            var buying = Math.floor((Math.sqrt(Math.pow(b, 2) - (c *a *4))-b)/(2 * a))
-            if (buying <= 0) return false
-            //console.log("buying = "+buying)
-            if (bulk < buying) buying = bulk
-            //console.log("CM = "+player.costMultipliers[tier-1].toString() + " Clog = "+player[name + "Cost"].log10())
-            var costAfter = Decimal.pow(10, (new Decimal(player.costMultipliers[tier-1].log10()).times(buying).plus((Math.log10(player.dimensionMultDecrease) * (buying) * (buying) + buying)/2).minus(player[name + "Cost"].log10())))
-            if (costAfter < 1) return false
-            //console.log("costafter = "+costAfter.toString())
-            player[name + "Cost"] = costAfter
-            player.costMultipliers[tier-1] = player.costMultipliers[tier-1].times(Decimal.pow(player.dimensionMultDecrease, buying))
-            //console.log("Player money "+player.money.toString()+" minus "+ costAfter.toString())
-            if (buying !== 0) player.money = player.money.minus(player[name + "Cost"].times(10))
-            player[name+"Amount"] = player[name+"Amount"].plus(10*buying)
-            player[name + "Pow"] = player[name + "Pow"].times(Decimal.pow(getDimensionPowerMultiplier(tier), buying))
-            if (buying > 0 && player.currentChallenge == "challenge8") clearDimensions(tier-1)
-
-            buyManyDimension(tier)
-            */
-
-
-
-
         }
         if ((player.currentChallenge == "challenge12" || player.currentChallenge == "postc1" || player.currentChallenge == "postc6") && player.matter.equals(0)) player.matter = new Decimal(1);
         if (player.currentChallenge == "challenge2" || player.currentChallenge == "postc1") player.chall2Pow = 0;
@@ -3069,50 +3122,6 @@ document.getElementById("maxall").onclick = function () {
             }
             if (player[name + "Cost"].gte(Number.MAX_VALUE)) player.costMultipliers[tier-1] = player.costMultipliers[tier-1].times(Decimal.pow(player.dimensionMultDecrease, buying))
         }
-
-
-
-
-
-
-
-        /*
-            // this part is if cost is less than 1e308
-            if (player[name+"Cost"].times(10).lt(Number.MAX_VALUE)) {
-                var toBuy = Math.ceil((Math.min(308.1, player.money.e-player[name+"Cost"].e) - player[name+"Cost"].e+1) / getDimensionCostMultiplier(tier).e)
-                if (bulk < toBuy) toBuy = bulk
-                player[name+"Amount"] = player[name+"Amount"].plus(10*toBuy)
-                player[name + "Pow"] = player[name + "Pow"].times(Decimal.pow(getDimensionPowerMultiplier(tier), toBuy))
-                player[name + "Cost"] = player[name + "Cost"].times(Decimal.pow(getDimensionCostMultiplier(tier), toBuy-1))
-                player.money = player.money.minus(player[name + "Cost"].times(10))
-                player[name + "Cost"] = player[name + "Cost"].times(getDimensionCostMultiplier(tier))
-                if (toBuy > 0 && player.currentChallenge == "challenge8") clearDimensions(tier-1)
-            }
-
-            // quadratic formula
-            var a = Math.log10(Math.sqrt(player.dimensionMultDecrease))
-            var b = player.costMultipliers[tier-1].dividedBy(Math.sqrt(player.dimensionMultDecrease)).log10()
-            var c = player[name + "Cost"].dividedBy(player.money).log10()
-            var discriminant = Math.pow(b, 2) - (c *a* 4)
-            if (discriminant < 0) return false
-            var buying = Math.floor((Math.sqrt(Math.pow(b, 2) - (c *a *4))-b)/(2 * a))
-            if (buying <= 0) return false
-            //console.log("buying = "+buying)
-            if (bulk < buying) buying = bulk
-            //console.log("CM = "+player.costMultipliers[tier-1].toString() + " Clog = "+player[name + "Cost"].log10())
-            var costAfter = Decimal.pow(10, (new Decimal(player.costMultipliers[tier-1].log10()).times(buying).plus((Math.log10(player.dimensionMultDecrease) * (buying) * (buying) + buying)/2).minus(player[name + "Cost"].log10())))
-            if (costAfter < 1) return false
-            //console.log("costafter = "+costAfter.toString())
-            player[name + "Cost"] = costAfter
-            player.costMultipliers[tier-1] = player.costMultipliers[tier-1].times(Decimal.pow(player.dimensionMultDecrease, buying))
-            //console.log("Player money "+player.money.toString()+" minus "+ costAfter.toString())
-            if (buying !== 0) player.money = player.money.minus(player[name + "Cost"].times(10))
-            player[name+"Amount"] = player[name+"Amount"].plus(10*buying)
-            player[name + "Pow"] = player[name + "Pow"].times(Decimal.pow(getDimensionPowerMultiplier(tier), buying))
-            if (buying > 0 && player.currentChallenge == "challenge8") clearDimensions(tier-1)
-
-            buyManyDimension(tier)
-            */
 
 
 
@@ -4113,11 +4122,7 @@ function galaxyReset() {
     if (player.galaxies >= 50) giveAchievement("YOU CAN GET 50 GALAXIES!??")
     if (player.galaxies >= 2) giveAchievement("Double Galaxy");
     if (player.galaxies >= 1) giveAchievement("You got past The Big Wall");
-    if (player.challenges.includes("challenge1")) player.money = new Decimal(100)
-    if (player.achievements.includes("r37")) player.money = new Decimal(1000);
-    if (player.achievements.includes("r54")) player.money = new Decimal(2e5);
-    if (player.achievements.includes("r55")) player.money = new Decimal(1e10);
-    if (player.achievements.includes("r78")) player.money = new Decimal(1e25);
+    updateInitialMoney();
     player.tickspeed = player.tickspeed.times(Decimal.pow(getTickSpeedMultiplier(), player.totalTickGained))
     updateTickSpeed()
     if (player.achievements.includes("r66")) player.tickspeed = player.tickspeed.times(0.98);
@@ -5035,11 +5040,7 @@ document.getElementById("bigcrunch").onclick = function () {
 
 
         updateAutobuyers();
-        if (player.challenges.includes("challenge1")) player.money = new Decimal(100)
-        if (player.achievements.includes("r37")) player.money = new Decimal(1000);
-        if (player.achievements.includes("r54")) player.money = new Decimal(2e5);
-        if (player.achievements.includes("r55")) player.money = new Decimal(1e10);
-        if (player.achievements.includes("r78")) player.money = new Decimal(1e25);
+        updateInitialMoney();
         if (player.challenges.length >= 2 && !player.achievements.includes("r47")) giveAchievement("Daredevil");
         if (player.challenges.length == 12 && !player.achievements.includes("r48")) giveAchievement("AntiChallenged");
         resetInfDimensions();
@@ -5330,10 +5331,7 @@ function eternity(force) {
         }
         updateAutobuyers();
         updateReplicantiGalaxyPowerControl();
-        if (player.achievements.includes("r37")) player.money = new Decimal(1000);
-        if (player.achievements.includes("r54")) player.money = new Decimal(2e5);
-        if (player.achievements.includes("r55")) player.money = new Decimal(1e10);
-        if (player.achievements.includes("r78")) player.money = new Decimal(1e25);
+        updateInitialMoney();
         if (player.achievements.includes("r85")) player.infMult = player.infMult.times(4);
         if (player.achievements.includes("r93")) player.infMult = player.infMult.times(4);
         if (player.achievements.includes("r104")) player.infinityPoints = new Decimal(2e25);
@@ -5672,31 +5670,35 @@ function newDimension() {
 }
 
 let savefix = function () {
+  let oldPlayer = {};
+  for (let i in player) {
+    oldPlayer[i] = player[i];
+  }
   let nan = false;
   if (Number.isNaN(currentMult)) {
     nan = true;
+    console.log('currentMult is buggy');
     currentMult = 1;
   }
   if (Number.isNaN(mult18)) {
     nan = true;
+    console.log('mult18 is buggy');
     mult18 = 1;
   }
   for (let i in player) {
     if (player[i] && Number.isNaN(player[i].e)) {
       nan = true;
+      console.log(i + ' is buggy');
       if (i === 'money') {
         player.money = new Decimal(10);
-        if (player.challenges.includes("challenge1")) player.money = new Decimal(100)
-        if (player.achievements.includes("r37")) player.money = new Decimal(1000);
-        if (player.achievements.includes("r54")) player.money = new Decimal(2e5);
-        if (player.achievements.includes("r55")) player.money = new Decimal(1e10);
-        if (player.achievements.includes("r78")) player.money = new Decimal(1e25);
+        updateInitialMoney();
       } else {
         player[i] = new Decimal(0);
       }
     }
   }
   if (nan) {
+    showMults = false
     alert('There is a bug in the game and your save was just fixed. If this message shows up, and especially if it shows up multiple times, tell me.')
   }
 }
@@ -6731,36 +6733,6 @@ var cheatCodeNewsArray = [
   "16: You get one thousandth of a partial point per k point per second. You have been getting partial points in this way for about 30 years, and before that you had no partial points."
 ]
 
-/*var initpos = c.width;
-ctx.textBaseline = 'top';
-var newsTextValue = Decimal.round(Decimal.random() * (newsArray.length - 1))
-var newsText = newsArray[newsTextValue];
-setInterval(function () {
-    //document.getElementById("news").innerHTML = newsArray[Decimal.round(Decimal.random() * (newsArray.length - 1))];
-    ctx.clearRect(0, 0, c.width, c.height);
-    ctx.font = "24px Typewriter";
-    ctx.fillText(newsText, initpos, 30);
-    initpos -= 6;
-
-    if (player.fourthAmount != 0 && !newsArray.includes(conditionalNewsArray[2])) newsArray.push(conditionalNewsArray[2])
-    if (player.resets != 0 && !newsArray.includes(conditionalNewsArray[3])) newsArray.push(conditionalNewsArray[3])
-    if (player.achievements.includes(Object.keys(allAchievements).find(function(key){ return allAchievements[key] === "Antimatter Apocalypse") && !newsArray.includes(conditionalNewsArray[4])) newsArray.push(conditionalNewsArray[4])
-
-    var next = newsArray[Math.round(Math.random() * (newsArray.length - 1))]
-    if (player.money >= 1e306) next = conditionalNewsArray[0]
-    if (player.money == Infinity) next = conditionalNewsArray[1]
-    if (initpos < (newsText.length * 32 * -1)) {
-        initpos = c.width;
-        newsTextValue = Math.round(Math.random() * (newsArray.length - 1))
-        newsText = newsArray[newsTextValue];
-        if (!player.options.newsHidden) {
-  			if (conditionalNewsArray.includes(newsText) && !player.newsArray.includes(newsText)) player.newsArray.push(newsText);
-            else if (!conditionalNewsArray.includes(newsText) && !player.newsArray.includes(newsTextValue)) player.newsArray.push(newsTextValue);
-  			if (player.newsArray.length>=50 && !player.achievements.includes(Object.keys(allAchievements).find(function(key){ return allAchievements[key] === "Fake News")) giveAchievement("Fake News")
-        }
-    }
-}, 1000 / 30);*/
-
 var s = document.getElementById('news');
 document.addEventListener("visibilitychange", function() {if (!document.hidden) {scrollNextMessage();}}, false);
 var scrollTimeouts = [];
@@ -7336,7 +7308,17 @@ setInterval(function () {
 
 setInterval(function () {
     if (playFabId != -1 && player.options.cloud) playFabSaveCheck();
-}, 1000*60*5)
+}, 1000*60*5);
+
+var totalMult = 1
+var currentMult = 1
+var infinitiedMult = 1
+var achievementMult = 1
+var challengeMult = 1
+var unspentBonus = 1
+var postc8Mult = new Decimal(0)
+var mult18 = 1
+
 updateCosts();
 //updateInterval();
 updateDimensions();
@@ -7440,18 +7422,8 @@ window.addEventListener('keydown', function (event) {
     }
   }, false);
 
-
-
-
 init();
-var totalMult = 1
-var currentMult = 1
-var infinitiedMult = 1
-var achievementMult = 1
-var challengeMult = 1
-var unspentBonus = 1
-var postc8Mult = new Decimal(0)
-var mult18 = 1
+
 setInterval( function() {
     totalMult = Math.pow(player.totalmoney.e+1, 0.5)
     currentMult = Math.pow(player.money.e+1, 0.5)
