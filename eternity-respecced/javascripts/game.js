@@ -3668,7 +3668,7 @@ function ecNumReward (x) {
   if (x === 1) {
     return Math.pow(Math.max(player.thisEternity / 10, 1), 2 * c / 5);
   } else if (x === 2) {
-    return player.infinityPower.pow(.001 * c);
+    return player.infinityPower.max(1).pow(.001 * c);
   } else if (x === 3) {
     return getDimensionPowerMultiplier();
   } else if (x === 4) {
@@ -3678,13 +3678,13 @@ function ecNumReward (x) {
   } else if (x === 6) {
     return c / 5;
   } else if (x === 7) {
-    return Math.pow(player.money.ln(), 2 * c / 5);
+    return Math.pow(Math.max(player.money.ln(), 1), 2 * c / 5);
   } else if (x === 8) {
     return 1 - .01 * c;
   } else if (x === 9) {
-    return Math.pow(player.infinityPower.ln(), 2 * c / 5);
+    return Math.pow(Math.max(player.infinityPower.ln(), 1), 2 * c / 5);
   } else if (x === 10) {
-    return Decimal.pow(player.infinitied, 1000 * c);
+    return Decimal.pow(Math.max(player.infinitied, 1), 1000 * c);
   } else if (x === 11) {
     return 1 + .01 * c;
   } else if (x === 12) {
