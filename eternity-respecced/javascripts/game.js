@@ -1329,8 +1329,18 @@ function getDimensionFinalMultiplier(tier) {
     if (player.currentChallenge == "postc6") multiplier = multiplier.dividedBy(player.matter.max(1))
     if (player.currentChallenge == "postc8") multiplier = multiplier.times(postc8Mult)
 
+    // EC7 reward handled nd (1/3)
+    multiplier = multiplier.times(ecNumReward(7));
+
+    // EC10 reward handled
+    multiplier = multiplier.times(ecNumReward(10));
+
+    // easter eff (er, egg)
+    multiplier = multiplier.times(Decimal.pow(2, Decimal.pow(2, Math.max(Math.pow(Math.max(lastFstreak - 5, 1), .4), 0)).minus(2)))
+
     if (player.currentChallenge == "postc4" && player.postC4Tier !== tier) multiplier = multiplier.pow(0.25)
     if (player.challenges.includes("postc4")) multiplier = multiplier.pow(1.05);
+
     return multiplier;
 }
 
@@ -1386,6 +1396,7 @@ function galaxyIncrement () {
   if (player.currentChallenge === "challenge4") {
     ret = 90;
   }
+  // EC5 reward handled
   ret -= ecCompletions(5);
   return ret;
 }
@@ -1738,6 +1749,15 @@ function DimensionPower(tier) {
       mult = mult.times(player.timeShards.div(1e12).plus(1));
     }
 
+    // EC2 reward handled
+    mult = mult.times(ecNumReward(2));
+
+    // EC4 reward handled
+    mult = mult.times(ecNumReward(4));
+
+    // EC7 reward handled id (2/3)
+    mult = mult.times(ecNumReward(7));
+
     return mult;
 }
 
@@ -1794,6 +1814,11 @@ function resetInfDimensions() {
 
 }
 
+let getInfCostMult = function (tier) {
+  // EC8 reward handled 1/4
+  return Math.pow(infCostMults[tier], ecNumReward(8));
+}
+
 
 var infCostMults = [null, 1e3, 1e6, 1e8, 1e10, 1e15, 1e20, 1e25, 1e30]
 var infPowerMults = [null, 50, 30, 10, 5, 5, 5, 5, 5]
@@ -1805,11 +1830,9 @@ function buyManyInfinityDimension(tier) {
 
     player.infinityPoints = player.infinityPoints.minus(dim.cost)
     dim.amount = dim.amount.plus(10);
-    dim.cost = Decimal.round(dim.cost.times(infCostMults[tier]))
+    dim.cost = Decimal.round(dim.cost.times(getInfCostMult(tier)))
     dim.power = dim.power.times(infPowerMults[tier])
     dim.baseAmount += 10
-
-
 }
 
 function buyMaxInfDims(tier) {
@@ -1818,10 +1841,10 @@ function buyMaxInfDims(tier) {
     if (player.infinityPoints.lt(dim.cost)) return false
     if (!player.infDimensionsUnlocked[tier-1]) return false
 
-    var toBuy = Math.ceil((player.infinityPoints.e - dim.cost.e) / Math.log10(infCostMults[tier]))
-    dim.cost = dim.cost.times(Decimal.pow(infCostMults[tier], toBuy-1))
+    var toBuy = Math.ceil((player.infinityPoints.e - dim.cost.e) / Math.log10(getInfCostMult(tier)))
+    dim.cost = dim.cost.times(Decimal.pow(getInfCostMult(tier), toBuy-1))
     player.infinityPoints = player.infinityPoints.minus(dim.cost)
-    dim.cost = dim.cost.times(infCostMults[tier])
+    dim.cost = dim.cost.times(getInfCostMult(tier))
     dim.amount = dim.amount.plus(10*toBuy);
     dim.power = dim.power.times(Decimal.pow(infPowerMults[tier], toBuy))
     dim.baseAmount += 10*toBuy
@@ -1875,6 +1898,8 @@ function getPower(dim) {
   if (player.achievements.includes('r105')) {
     ret *= Math.pow(player.eightAmount.toNumber(), 1 / 8);
   }
+  // EC1 reward handled
+  ret *= ecNumReward(1);
   return ret;
 }
 
@@ -1887,17 +1912,13 @@ function getTimeDimensionProduction(tier) {
     var ret = dim.amount.times(getPower(dim))
     // effect of tickspeed, which is not part of power
     // (see, for example, normal dimensions)
-    // what would happen if we had kept infinite time
-    /*
-    if (player.achievements.includes('r105')) {
-      // changed code here to be more analogous to code for infinity dimensions
-      // being affected by tickspeed
-      ret = ret.dividedBy(player.tickspeed.dividedBy(1000).pow(1e-5));
+    // this will work when we add infinite time
+    // EC13 reward handled
+    if (hasInfiniteTime()) {
+      ret = ret.times(infiniteTimeEffect())
     }
-    */
-    return ret
+    return ret;
 }
-
 
 function getTimeDimensionRateOfChange(tier) {
     let toGain = getTimeDimensionProduction(tier+1)
@@ -2087,6 +2108,9 @@ function getDimensionBoostPower(num) {
     ret += num;
 
     if (player.achievements.includes("r101")) ret = ret*1.01
+
+    // EC11 reward handled
+    ret = Math.pow(ret, ecNumReward(11));
 
     return ret
 }
@@ -2661,7 +2685,7 @@ function getDimensionPowerMultiplier (tier) {
       dimMult = Math.pow(10/0.30,Math.random())*0.30;
     }
 
-    // This is ec3 reward.
+    // EC3 reward handled
     dimMult += ecCompletions(3);
 
     if (player.infinityUpgrades.includes('dimMult')) dimMult *= 1.1;
@@ -3231,6 +3255,10 @@ function timeMult() {
     if (player.infinityUpgrades.includes("timeMult")) mult = mult.times(Math.pow(player.totalTimePlayed / 1200, 0.15));
     if (player.infinityUpgrades.includes("timeMult2")) mult = mult.times(Decimal.max(Math.pow(player.thisInfinityTime / 2400, 0.25), 1));
     if (player.achievements.includes("r35")) mult = mult.times(Math.pow(player.totalTimePlayed / (600*60*48), 0.05));
+    // EC7 reward handled td (3/3)
+    mult = mult.times(ecNumReward(7));
+    // EC9 reward handled
+    mult = mult.times(ecNumReward(9));
     return mult;
 }
 
@@ -3375,7 +3403,11 @@ let getReplicantiIntervalBonus = function (amount) {
 }
 
 let getReplicantiInterval = function (amount) {
-  return player.replicanti.interval / getReplicantiIntervalBonus(amount);
+  let ret = player.replicanti.interval;
+  ret = ret / getReplicantiIntervalBonus(amount);
+  // EC12 reward handled
+  ret = ret / ecNumReward(12);
+  return ret;
 }
 
 let getNewReplicantiInterval = function () {
@@ -3475,7 +3507,8 @@ function unlockReplicantis() {
 function upgradeReplicantiChance() {
     if (player.infinityPoints.gte(player.replicanti.chanceCost) && player.replicanti.chance < 1) {
         player.infinityPoints = player.infinityPoints.minus(player.replicanti.chanceCost)
-        player.replicanti.chanceCost = player.replicanti.chanceCost.times(1e15)
+        // EC8 reward handled 2/4
+        player.replicanti.chanceCost = player.replicanti.chanceCost.times(Math.pow(1e15, ecNumReward(8)))
         player.replicanti.chance += 0.01
         updateInfCosts()
     }
@@ -3486,7 +3519,8 @@ function upgradeReplicantiChance() {
 function upgradeReplicantiInterval() {
     if (player.infinityPoints.gte(player.replicanti.intervalCost) && (player.replicanti.interval !== 1)) {
         player.infinityPoints = player.infinityPoints.minus(player.replicanti.intervalCost)
-        player.replicanti.intervalCost = player.replicanti.intervalCost.times(1e10)
+        // EC8 reward handled 3/4
+        player.replicanti.intervalCost = player.replicanti.intervalCost.times(Math.pow(1e10, ecNumReward(8)))
         player.replicanti.interval *= 0.9
         if (player.replicanti.interval < 1) player.replicanti.interval = 1
         updateInfCosts()
@@ -3496,7 +3530,8 @@ function upgradeReplicantiInterval() {
 function upgradeReplicantiGalaxy() {
     if (player.infinityPoints.gte(player.replicanti.galCost)) {
         player.infinityPoints = player.infinityPoints.minus(player.replicanti.galCost)
-        player.replicanti.galCost = player.replicanti.galCost.times(Decimal.pow(1e5, player.replicanti.gal)).times(1e25)
+        // EC8 reward handled 4/4
+        player.replicanti.galCost = player.replicanti.galCost.times(Decimal.pow(1e5, player.replicanti.gal).pow(ecNumReward(8))).times(1e25)
         player.replicanti.gal += 1
         updateInfCosts()
     }
@@ -3611,6 +3646,11 @@ function ecGoal (x) {
   return initialECGoals[x].times(Decimal.pow(incrementECGoals[x], ecCompletions(x)));
 }
 
+function ec6KeptReplicantiGalaxies () {
+  // EC6 reward handled
+  return Math.floor(player.replicanti.galaxies * ecNumReward(6));
+}
+
 function hasInfiniteTime () {
   return false;
 }
@@ -3626,25 +3666,25 @@ function infiniteTimeEffect () {
 function ecNumReward (x) {
   let c = ecCompletions(x);
   if (x === 1) {
-    return Math.pow(Math.max(player.thisEternity / 10, 1), c);
+    return Math.pow(Math.max(player.thisEternity / 10, 1), 2 * c / 5);
   } else if (x === 2) {
     return player.infinityPower.pow(.001 * c);
   } else if (x === 3) {
     return getDimensionPowerMultiplier();
   } else if (x === 4) {
-    return Math.pow(player.infinitied, c);
+    return Math.pow(Math.max(player.infinitied, 1), 2 * c);
   } else if (x === 5) {
     return galaxyIncrement();
   } else if (x === 6) {
     return c / 5;
   } else if (x === 7) {
-    return Math.pow(player.money.ln(), c / 5);
+    return Math.pow(player.money.ln(), 2 * c / 5);
   } else if (x === 8) {
     return 1 - .01 * c;
   } else if (x === 9) {
-    return Math.pow(player.infinityPower.ln(), c / 5);
+    return Math.pow(player.infinityPower.ln(), 2 * c / 5);
   } else if (x === 10) {
-    return Decimal.pow(player.infinities, 100 * c);
+    return Decimal.pow(player.infinitied, 1000 * c);
   } else if (x === 11) {
     return 1 + .01 * c;
   } else if (x === 12) {
@@ -5007,7 +5047,7 @@ document.getElementById("bigcrunch").onclick = function () {
         giveInfPurchaseResets();
 
         if (player.replicanti.unl && !player.achievements.includes("r95")) player.replicanti.amount = new Decimal(1);
-        player.replicanti.galaxies = 0
+        player.replicanti.galaxies = ec6KeptReplicantiGalaxies();
 
         resetDimPow();
 
@@ -5523,7 +5563,7 @@ function startChallenge(name, target) {
     }
 
     if (player.replicanti.unl) player.replicanti.amount = new Decimal(1);
-    player.replicanti.galaxies = 0
+    player.replicanti.galaxies = ec6KeptReplicantiGalaxies();
 
     IPminpeak = new Decimal(0);
     IPpeak = new Decimal(0);
@@ -5692,8 +5732,20 @@ let savefix = function () {
       if (i === 'money') {
         player.money = new Decimal(10);
         updateInitialMoney();
+      } else if (i === 'tickspeed') {
+        player.tickspeed = new Decimal(1000);
       } else {
         player[i] = new Decimal(0);
+      }
+    }
+    if (player.tickspeed.eq(0)) {
+      player.tickspeed = new Decimal(1000);
+    }
+    for (let j in player[i]) {
+      if (player[i][j] && Number.isNaN(player[i][j].e)) {
+        nan = true;
+        console.log(i + '.' + j + ' is buggy');
+        player[i][j] = new Decimal(0);
       }
     }
   }
@@ -6015,7 +6067,6 @@ function startInterval() {
 
         if (player.money.gte("9.9999e9999")) giveAchievement("This achievement doesn't exist")
         if (player.money.gte("1e35000")) giveAchievement("I got a few to spare")
-
         player.infinityPower = player.infinityPower.plus(DimensionProduction(1).times(diff/10))
 
         if (player.infinityPower.gt(1)) giveAchievement("A new beginning.");
@@ -7318,6 +7369,8 @@ var challengeMult = 1
 var unspentBonus = 1
 var postc8Mult = new Decimal(0)
 var mult18 = 1
+var lastF = Date.now()
+var lastFstreak = 0;
 
 updateCosts();
 //updateInterval();
@@ -7417,6 +7470,13 @@ window.addEventListener('keydown', function (event) {
       break;
 
       case 70: // F
+      let diff = Date.now() - lastF;
+      if (Math.abs(diff - 0xfff) < 1000) {
+        lastFstreak++;
+      } else {
+        lastFstreak = 0;
+      }
+      lastF = Date.now();
       $.notify("Paying respects", "info")
       break;
     }
