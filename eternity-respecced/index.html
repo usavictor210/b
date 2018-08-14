@@ -587,7 +587,7 @@
             </div>
             <div id="infinitydimensions" class="dimtab">
                 <div>
-                    <p>You have <span id="infPowAmount" style="font-size:35px; color: black">0</span> infinity power. translated to <span id="infDimMultAmount" style="font-size:35px; color: black">0</span>x multiplier on all dimensions</p>
+                    <p>You have <span id="infPowAmount" style="font-size:35px; color: black">0</span> infinity power. translated to <span id="infDimMultAmount" style="font-size:35px; color: black">0</span>x multiplier on all <span id="infDimMultDimType">normal</span> dimensions</p>
                 </div>
 
                 <div id="infPowPerSec">You are getting 0 antimatter per second.</div>
@@ -705,6 +705,7 @@
                                 </td>
                             </tr>
                 </table>
+                <div id="eterc8ids" style="display: none;">You have <span id="eterc8idsleft">50</span> infinity dimension purchases left.</div>
                 <button id="toggleallinfdims"style="width:140px; height: 30px; font-size: 12px; visibility: hidden" onclick="toggleAllInfDims()" class="storebtn">Toggle all ON/OFF</button>
             </div>
             <div id="timedimensions" class="dimtab">
@@ -1391,7 +1392,7 @@
                     <tr>
                         <td>
                             <div class= "challengediv">
-                                <span style="font-size: 110%">There's normal matter which rises. If it exceeds your antimatter, it will (soft) reset.</span>
+                                <span style="font-size: 110%">There's an exponentially increasing normal matter. If it exceeds your antimatter, the game will (soft) reset.</span>
                                 <br>
                                 <br>
 
@@ -1495,7 +1496,7 @@
                         </td>
                         <td>
                             <div class="infchallengediv" id="postc6div" style="height: 140px; display: none">
-                                <span>There's an exponentially rising matter that divides the multiplier on all of your dimensions.</span>
+                                <span>There's an exponentially increasing matter that divides the multiplier on all of your dimensions.</span>
                                 <br>
                                 <br>
                                 <div class="outer">
@@ -1510,7 +1511,7 @@
                     <tr>
                             <td>
                                 <div class="infchallengediv" id="postc7div" style="height: 140px; display: none">
-                                    <span>You can't get antimatter Galaxies, but dimensional boost multiplier 2.5x -> 10x</span>
+                                    <span>You can't get Antimatter Galaxies, but dimensional boost multiplier 2.5x -> 10x</span>
                                     <br>
                                     <br>
                                     <div class="outer">
@@ -1523,7 +1524,7 @@
                             </td>
                             <td>
                                 <div class="infchallengediv" id="postc8div" style="height: 140px; display: none">
-                                    <span>Your production is at 100% after purchasing anything, after that it rapidly drops down.</span>
+                                    <span>Your production is at 100% after purchasing anything, but after that it rapidly drops down.</span>
                                     <br>
                                     <br>
                                     <div class="outer">
@@ -1715,7 +1716,7 @@
                                 <button class="challengesbtn" onclick="attemptEterChallUnlock(7)">Unlock</button>
                               </div>
                               <div id="eterc7unlocked" style="display: none;">
-                                <span>There's an exponentially increasing dark matter that divides the multipliers on normal, infinity, and time dimensions.</span>
+                                <span>There's a superexponentially increasing dark matter that divides the multipliers on normal, infinity, and time dimensions.</span>
                                 <br>
                                 <br>
                                 <div class="outer">
@@ -2400,6 +2401,7 @@
             <br>
             <button class="storebtn" id="replicantiunlock" onclick="unlockReplicantis()" style="width:200px; height: 80px">Unlock Replicantis<br>Cost: 1e140 IP</button>
             <div id="replicantidiv" style="display: none">
+                <div id="eterc8repl" style="display: none;">You have <span id="eterc8replleft">50</span> replicanti purchases left.</div>
                 <p style="font-size: 15px">You have <span id="replicantiamount" style="font-size:23px; color: black">0</span> replicanti. Translated to <span id="replicantimult" style="font-size:23px; color: black">0</span>x multiplier on all infinity dimensions</p>
                 <br>
                 <button class="storebtn" id="replicantichance" onclick="upgradeReplicantiChance()" style="width:180px; height: 50px; font-size: 10px">Replicate chance: 1%<br>+1% Costs: 1e6969 IP</button>

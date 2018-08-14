@@ -76,6 +76,10 @@ var player = {
     chall3Pow: new Decimal(0.01),
     matter: new Decimal(0),
     darkMatter: new Decimal(1),
+    ec8PurchasesMade: {
+      ids: 0,
+      repl: 0
+    },
     chall11Pow: new Decimal(1),
     partInfinityPoint: 0,
     partInfinitied: 0,
@@ -733,6 +737,9 @@ function onLoad() {
     if (player.darkMatter === undefined) {
       player.darkMatter = new Decimal(1);
     }
+    if (player.ec8PurchasesMade === undefined) {
+      player.ec8PurchasesMade = {ids: 0, repl: 0};
+    }
     if (!(player.replicanti.amount instanceof Decimal)) {
       player.replicanti.amount = new Decimal(player.replicanti.amount);
     }
@@ -827,6 +834,7 @@ function onLoad() {
     setMatterDisplay();
     setQuickResetDisplay();
     setDarkMatterDisplay();
+    ec8UpdateAll();
 
 
     if (player.break == true) document.getElementById("break").innerHTML = "FIX INFINITY"
@@ -1178,7 +1186,9 @@ function updateMoney() {
 
 function updateCoinPerSec() {
     var element = document.getElementById("coinsPerSec");
-    if (player.currentChallenge == "challenge3" || player.currentChallenge == "postc1") {
+    if (player.eternityChallenges.current === 13) {
+      element.innerHTML = 'You are getting ' + shortenDimensions(new Decimal(1).dividedBy(player.tickspeed.dividedBy(1000))) + ' antimatter per second.';
+    } else if (player.currentChallenge == "challenge3" || player.currentChallenge == "postc1") {
       element.innerHTML = 'You are getting ' + shortenDimensions(getDimensionProductionPerSecond(1).times(player.chall3Pow)) + ' antimatter per second.';
     } else if (player.currentChallenge == "challenge7") {
       element.innerHTML = 'You are getting ' + (shortenDimensions(getDimensionProductionPerSecond(1).plus(getDimensionProductionPerSecond(2)))) + ' antimatter per second.';
@@ -1302,6 +1312,13 @@ function getInfinityPowerNDMultiplier() {
   return player.infinityPower.pow(7).max(1);
 }
 
+function getInfinityPowerTDMultiplier() {
+  if (player.eternityChallenges.current !== 9) {
+    return new Decimal(1);
+  }
+  return Decimal.pow(Math.max(player.infinityPower.ln(), 1), 7);
+}
+
 function getDimensionFinalMultiplier(tier) {
     if ((player.eternityChallenges.current === 3 && tier > 4) || player.eternityChallenges.current === 13) {
       return new Decimal(0);
@@ -1368,6 +1385,11 @@ function getDimensionFinalMultiplier(tier) {
 
     // EC7 reward handled nd (1/3)
     multiplier = multiplier.times(ecNumReward(7));
+
+    // EC10 in-challenge compensation handled
+    if (player.eternityChallenges.current === 10) {
+      multiplier = multiplier.times(Decimal.pow(Math.max(player.infinitied, 1), 10000));
+    }
 
     // EC10 reward handled
     multiplier = multiplier.times(ecNumReward(10));
@@ -1658,7 +1680,6 @@ function updateCosts() {
 
 
     for (var i=1; i<=8; i++) {
-
         document.getElementById("infMax"+i).innerHTML = "Cost: " + shortenCosts(player["infinityDimension"+i].cost) + " IP"
     }
 
@@ -1775,6 +1796,9 @@ function DimensionPower(tier) {
     if (player.eternityChallenges.current === 2 || player.eternityChallenges.current === 10) {
       return new Decimal(0);
     }
+    if (player.eternityChallenges.current === 11) {
+      return new Decimal(1);
+    }
     var dim = player["infinityDimension"+tier]
     var mult = dim.power.times(infDimPow)
     if (player.achievements.includes("r94") && tier == 1) mult = mult.times(2);
@@ -1881,29 +1905,40 @@ var infPowerMults = [null, 50, 30, 10, 5, 5, 5, 5, 5]
 function buyManyInfinityDimension(tier) {
 
     var dim = player["infinityDimension"+tier]
-    if (player.infinityPoints.lt(dim.cost)) return false
-    if (!player.infDimensionsUnlocked[tier-1]) return false
+
+    if (!canBuyInfDim(tier, dim)) return false;
 
     player.infinityPoints = player.infinityPoints.minus(dim.cost)
     dim.amount = dim.amount.plus(10);
     dim.cost = Decimal.round(dim.cost.times(getInfCostMult(tier)))
     dim.power = dim.power.times(infPowerMults[tier])
     dim.baseAmount += 10
+    player.ec8PurchasesMade.ids++;
+    ec8Update('ids');
+}
+
+function canBuyInfDim (tier, dim) {
+    return player.infinityPoints.gte(dim.cost) && player.infDimensionsUnlocked[tier-1] && !ec8noMorePurchases('ids');
 }
 
 function buyMaxInfDims(tier) {
     var dim = player["infinityDimension"+tier]
 
-    if (player.infinityPoints.lt(dim.cost)) return false
-    if (!player.infDimensionsUnlocked[tier-1]) return false
+    if (!canBuyInfDim(tier, dim)) return false;
 
     var toBuy = Math.ceil((player.infinityPoints.e - dim.cost.e) / Math.log10(getInfCostMult(tier)))
+    if (player.eternityChallenges.current === 8) {
+        toBuy = Math.min(toBuy, 50 - player.ec8PurchasesMade.ids);
+    }
     dim.cost = dim.cost.times(Decimal.pow(getInfCostMult(tier), toBuy-1))
     player.infinityPoints = player.infinityPoints.minus(dim.cost)
     dim.cost = dim.cost.times(getInfCostMult(tier))
     dim.amount = dim.amount.plus(10*toBuy);
     dim.power = dim.power.times(Decimal.pow(infPowerMults[tier], toBuy))
     dim.baseAmount += 10*toBuy
+
+    player.ec8PurchasesMade.ids += toBuy;
+    ec8Update('ids');
 }
 
 function switchAutoInf(tier) {
@@ -1950,6 +1985,9 @@ function getPower(dim) {
   if (player.eternityChallenges.current === 1 || player.eternityChallenges.current === 10) {
     return new Decimal(0);
   }
+  if (player.eternityChallenges.current === 11) {
+    return new Decimal(1);
+  }
   var ret = dim.power;
   if (player.achievements.includes('r102')) {
     ret *= ret.times(1 + Math.log(player.eternities) / Math.log(100));
@@ -1966,6 +2004,8 @@ function getPower(dim) {
 
   // EC7 reward handled td (3/3)
   ret = ret.times(ecNumReward(7));
+  // EC9 bonus handled
+  ret = ret.times(getInfinityPowerTDMultiplier());
   // EC9 reward handled
   ret = ret.times(ecNumReward(9));
 
@@ -2273,6 +2313,7 @@ function softReset(bulk, reallyZero) {
         chall3Pow: new Decimal(0.01),
         matter: new Decimal(0),
         darkMatter: player.darkMatter,
+        ec8PurchasesMade: player.ec8PurchasesMade,
         chall11Pow: new Decimal(1),
         partInfinityPoint: player.partInfinityPoint,
         partInfinitied: player.partInfinitied,
@@ -3497,9 +3538,9 @@ function updateInfCosts() {
     document.getElementById("replicantireset").innerHTML = "Reset replicanti amount, but get a free galaxy<br>"+player.replicanti.galaxies + " replicated galaxies created."
 
 
-    document.getElementById("replicantichance").className = (player.infinityPoints.gte(player.replicanti.chanceCost) && player.replicanti.chance < 1) ? "storebtn" : "unavailablebtn"
-    document.getElementById("replicantiinterval").className = (player.infinityPoints.gte(player.replicanti.intervalCost) && (player.replicanti.interval !== 1)) ? "storebtn" : "unavailablebtn"
-    document.getElementById("replicantimax").className = (player.infinityPoints.gte(player.replicanti.galCost)) ? "storebtn" : "unavailablebtn"
+    document.getElementById("replicantichance").className = canGetReplChance() ? "storebtn" : "unavailablebtn"
+    document.getElementById("replicantiinterval").className = canGetReplInterval() ? "storebtn" : "unavailablebtn"
+    document.getElementById("replicantimax").className = canGetReplGal() ? "storebtn" : "unavailablebtn"
     document.getElementById("replicantireset").className = (player.replicanti.galaxies < player.replicanti.gal && player.replicanti.amount.gte(player.replicanti.limit)) ? "storebtn" : "unavailablebtn"
     document.getElementById("replicantiunlock").className = (player.infinityPoints.gte(1e140)) ? "storebtn" : "unavailablebtn"
 
@@ -3569,26 +3610,42 @@ function unlockReplicantis() {
     }
 }
 
+function canGetReplChance () {
+  return player.replicanti.unl && player.infinityPoints.gte(player.replicanti.chanceCost) && player.replicanti.chance < 1 && !ec8noMorePurchases('repl');
+}
+
+function canGetReplInterval () {
+  return player.replicanti.unl && player.infinityPoints.gte(player.replicanti.intervalCost) && player.replicanti.interval > 1 && !ec8noMorePurchases('repl');
+}
+
+function canGetReplGal () {
+  return player.replicanti.unl && player.infinityPoints.gte(player.replicanti.galCost) && !ec8noMorePurchases('repl');
+}
+
 function upgradeReplicantiChance() {
-    if (player.infinityPoints.gte(player.replicanti.chanceCost) && player.replicanti.chance < 1) {
+    if (canGetReplChance()) {
         player.infinityPoints = player.infinityPoints.minus(player.replicanti.chanceCost)
         // EC8 reward handled 2/4
         player.replicanti.chanceCost = player.replicanti.chanceCost.times(Math.pow(1e15, ecNumReward(8)))
         player.replicanti.chance += 0.01
         updateInfCosts()
+        player.ec8PurchasesMade.repl++;
+        ec8Update('repl');
     }
 }
 
 
 
 function upgradeReplicantiInterval() {
-    if (player.infinityPoints.gte(player.replicanti.intervalCost) && (player.replicanti.interval !== 1)) {
+    if (canGetReplInterval()) {
         player.infinityPoints = player.infinityPoints.minus(player.replicanti.intervalCost)
         // EC8 reward handled 3/4
         player.replicanti.intervalCost = player.replicanti.intervalCost.times(Math.pow(1e10, ecNumReward(8)))
         player.replicanti.interval *= 0.9
         if (player.replicanti.interval < 1) player.replicanti.interval = 1
         updateInfCosts()
+        player.ec8PurchasesMade.repl++;
+        ec8Update('repl');
     }
 }
 
@@ -3609,12 +3666,14 @@ function getReplicantiGalaxyCostIncrease () {
 }
 
 function upgradeReplicantiGalaxy() {
-    if (player.infinityPoints.gte(player.replicanti.galCost)) {
+    if (canGetReplGal()) {
         player.infinityPoints = player.infinityPoints.minus(player.replicanti.galCost)
         // EC8 reward handled 4/4
         player.replicanti.galCost = player.replicanti.galCost.times(getReplicantiGalaxyCostIncrease());
         player.replicanti.gal += 1
         updateInfCosts()
+        player.ec8PurchasesMade.repl++;
+        ec8Update('repl');
     }
 }
 
@@ -3757,6 +3816,24 @@ function ec6KeptReplicantiGalaxies () {
   return Math.floor(player.replicanti.galaxies * ecNumReward(6));
 }
 
+function ec8UpdateAll() {
+  ec8Update('ids');
+  ec8Update('repl');
+}
+
+function ec8Update (x) {
+  if (player.eternityChallenges.current === 8) {
+    document.getElementById('eterc8' + x).style.display = 'block';
+    document.getElementById('eterc8' + x + 'left').textContent = 50 - player.ec8PurchasesMade[x];
+  } else {
+    document.getElementById('eterc8' + x).style.display = 'none';
+  }
+}
+
+function ec8noMorePurchases (x) {
+  return player.eternityChallenges.current === 8 && player.ec8PurchasesMade[x] === 50;
+}
+
 function hasInfiniteTime () {
   return false;
 }
@@ -3788,7 +3865,7 @@ function ecNumReward (x) {
   } else if (x === 8) {
     return 1 - .01 * c;
   } else if (x === 9) {
-    return Math.pow(Math.max(player.infinityPower.ln(), 1), 2 * c / 5);
+    return Decimal.pow(Math.max(player.infinityPower.ln(), 1), 2 * c / 5);
   } else if (x === 10) {
     return Decimal.pow(Math.max(player.infinitied, 1), 1000 * c);
   } else if (x === 11) {
@@ -4186,6 +4263,7 @@ function galaxyReset() {
         chall3Pow: new Decimal(0.01),
         matter: new Decimal(0),
         darkMatter: player.darkMatter,
+        ec8PurchasesMade: player.ec8PurchasesMade,
         chall11Pow: new Decimal(1),
         partInfinityPoint: player.partInfinityPoint,
         partInfinitied: player.partInfinitied,
@@ -4795,7 +4873,7 @@ function updatePriorities() {
     var infvalue = document.getElementById("priority12").value
     if (infvalue.slice(0, 3) === 'max' && player.autoCrunchMode === 'replicanti') {
       infvalue = 'max';
-    } else if (infvalue.slice(0, 3) === 'inf' || '' + infvalue === undefined || Number.isNaN(new Decimal(infvalue).mantissa)) {
+    } else if (infvalue.slice(0, 3) === 'max' || infvalue.slice(0, 3) === 'inf' || '' + infvalue === undefined || Number.isNaN(new Decimal(infvalue).mantissa)) {
       infvalue = new Decimal(Infinity);
     } else {
       infvalue = new Decimal(infvalue);
@@ -5099,6 +5177,7 @@ document.getElementById("bigcrunch").onclick = function () {
         newsArray: player.newsArray,
         matter: new Decimal(0),
         darkMatter: player.darkMatter,
+        ec8PurchasesMade: player.ec8PurchasesMade,
         chall11Pow: new Decimal(1),
         partInfinityPoint: player.partInfinityPoint,
         partInfinitied: player.partInfinitied,
@@ -5219,15 +5298,15 @@ document.getElementById("bigcrunch").onclick = function () {
         }
 
         if (player.eternities >= 40 && player.replicanti.auto[0]) {
-            while (player.infinityPoints.gte(player.replicanti.chanceCost) && player.replicanti.chance < 1) upgradeReplicantiChance()
+            while (canGetReplChance()) upgradeReplicantiChance()
         }
 
         if (player.eternities >= 60 && player.replicanti.auto[1]) {
-            while (player.infinityPoints.gte(player.replicanti.intervalCost) && (player.replicanti.interval > 1)) upgradeReplicantiInterval()
+            while (canGetReplInterval()) upgradeReplicantiInterval()
         }
 
         if (player.eternities >= 80 && player.replicanti.auto[2]) {
-            while (player.infinityPoints.gte(player.replicanti.galCost)) upgradeReplicantiGalaxy()
+            while (canGetReplGal()) upgradeReplicantiGalaxy()
         }
 
         if (player.eternityChallenges.current === 4) {
@@ -5344,6 +5423,10 @@ function eternity(force) {
             newsArray: player.newsArray,
             matter: new Decimal(0),
             darkMatter: new Decimal(1),
+            ec8PurchasesMade: {
+              ids: 0,
+              repl: 0
+            },
             chall11Pow: new Decimal(1),
             challengeTimes: player.challengeTimes,
             infchallengeTimes: player.infchallengeTimes,
@@ -5485,6 +5568,7 @@ function eternity(force) {
         setMatterDisplay();
         setQuickResetDisplay();
         setDarkMatterDisplay();
+        ec8UpdateAll();
         if (player.infinitied >= 1 && !player.challenges.includes("challenge1")) player.challenges.push("challenge1");
         var autobuyers = document.getElementsByClassName('autoBuyerDiv')
         if (player.eternities < 2) {
@@ -5619,6 +5703,7 @@ function startChallenge(name, target) {
       chall3Pow: new Decimal(0.01),
       matter: new Decimal(0),
       darkMatter: player.darkMatter,
+      ec8PurchasesMade: player.ec8PurchasesMade,
       newsArray: player.newsArray,
       chall11Pow: new Decimal(1),
       partInfinityPoint: player.partInfinityPoint,
@@ -5760,7 +5845,13 @@ document.getElementById("quickReset").onclick = function () {
 
 function updateInfPower() {
     document.getElementById("infPowAmount").innerHTML = shortenMoney(player.infinityPower)
-    document.getElementById("infDimMultAmount").innerHTML = shortenMoney(getInfinityPowerNDMultiplier())
+    if (player.eternityChallenges.current !== 9) {
+        document.getElementById("infDimMultAmount").innerHTML = shortenMoney(getInfinityPowerNDMultiplier())
+        document.getElementById("infDimMultDimType").innerHTML = 'normal'
+    } else {
+        document.getElementById("infDimMultAmount").innerHTML = shortenMoney(getInfinityPowerTDMultiplier())
+        document.getElementById("infDimMultDimType").innerHTML = 'time'
+    }
     document.getElementById("infPowPerSec").innerHTML = "You are getting " +shortenDimensions(DimensionProduction(1))+" Infinity Power per second."
 }
 
@@ -5989,9 +6080,9 @@ setInterval(function() {
     if (player.eternities > 4) document.getElementById("togglecrunchmode").style.display = "inline-block"
     if (player.eternities > 8) document.getElementById("galaxybulk").style.display = "inline-block"
 
-    document.getElementById("replicantichance").className = (player.infinityPoints.gte(player.replicanti.chanceCost) && player.replicanti.chance < 1) ? "storebtn" : "unavailablebtn"
-    document.getElementById("replicantiinterval").className = (player.infinityPoints.gte(player.replicanti.intervalCost) && (player.replicanti.interval !== 1)) ? "storebtn" : "unavailablebtn"
-    document.getElementById("replicantimax").className = (player.infinityPoints.gte(player.replicanti.galCost)) ? "storebtn" : "unavailablebtn"
+    document.getElementById("replicantichance").className = canGetReplChance() ? "storebtn" : "unavailablebtn"
+    document.getElementById("replicantiinterval").className = canGetReplInterval() ? "storebtn" : "unavailablebtn"
+    document.getElementById("replicantimax").className = canGetReplGal() ? "storebtn" : "unavailablebtn"
     document.getElementById("replicantireset").className = (player.replicanti.galaxies < player.replicanti.gal && player.replicanti.amount.gte(player.replicanti.limit)) ? "storebtn" : "unavailablebtn"
     document.getElementById("replicantiunlock").className = (player.infinityPoints.gte(1e140)) ? "storebtn" : "unavailablebtn"
     updateTheoremButtons()
@@ -6028,15 +6119,15 @@ setInterval(function() {
     }
 
     if (player.eternities >= 40 && player.replicanti.auto[0]) {
-        while (player.infinityPoints.gte(player.replicanti.chanceCost) && player.replicanti.chance < 1) upgradeReplicantiChance()
+        while (canGetReplChance()) upgradeReplicantiChance()
     }
 
     if (player.eternities >= 60 && player.replicanti.auto[1]) {
-        while (player.infinityPoints.gte(player.replicanti.intervalCost) && (player.replicanti.interval > 1)) upgradeReplicantiInterval()
+        while (canGetReplInterval()) upgradeReplicantiInterval()
     }
 
     if (player.eternities >= 80 && player.replicanti.auto[2]) {
-        while (player.infinityPoints.gte(player.replicanti.galCost)) upgradeReplicantiGalaxy()
+        while (canGetReplGal()) upgradeReplicantiGalaxy()
     }
 
 
@@ -6098,7 +6189,7 @@ function startInterval() {
         if (player.bestInfinityTime < -10) player.bestInfinityTime = Infinity
         if (diff > player.autoTime && !player.break) player.infinityPoints = player.infinityPoints.plus(player.autoIP.times(diff -player.autoTime))
         player.matter = player.matter.times(Decimal.pow((1.03 + player.resets/200 + player.galaxies/100), diff));
-        player.darkMatter = player.darkMatter.times(Decimal.pow((1 + 3e-6 + player.resets/2e6 + player.galaxies/1e6), diff));
+        player.darkMatter = player.darkMatter.times(Decimal.pow((1 + 3e-6 + player.resets/2e6 + player.galaxies/1e6 + player.thisEternity/1e8), diff));
         if (player.matter.gt(player.money) && (player.currentChallenge == "challenge12" || player.currentChallenge == "postc1")) {
             if (player.resets > 0) player.resets--;
             softReset(0);
@@ -6156,18 +6247,24 @@ function startInterval() {
             }
         }
 
-            if (player.money.lte(Number.MAX_VALUE) || (player.break && player.currentChallenge == "") || (player.currentChallenge != "" && player.money.lte(player.challengeTarget))) {
-        if (player.currentChallenge == "challenge3" || player.currentChallenge == "postc1") {
-            player.money = player.money.plus(getDimensionProductionPerSecond(1).times(diff/10).times(player.chall3Pow));
-            player.totalmoney = player.totalmoney.plus(getDimensionProductionPerSecond(1).times(diff/10).times(player.chall3Pow));
-        } else {
-            player.money = player.money.plus(getDimensionProductionPerSecond(1).times(diff/10));
-            player.totalmoney = player.totalmoney.plus(getDimensionProductionPerSecond(1).times(diff/10));
-        }
-        if (player.currentChallenge == "challenge7") {
-            player.money = player.money.plus(getDimensionProductionPerSecond(2).times(diff/10));
-            player.totalmoney = player.totalmoney.plus(getDimensionProductionPerSecond(2).times(diff/10))
-        }
+        if (player.money.lte(Number.MAX_VALUE) || (player.break && player.currentChallenge == "") || (player.currentChallenge != "" && player.money.lte(player.challengeTarget))) {
+            if (player.currentChallenge == "challenge3" || player.currentChallenge == "postc1") {
+                player.money = player.money.plus(getDimensionProductionPerSecond(1).times(diff/10).times(player.chall3Pow));
+                player.totalmoney = player.totalmoney.plus(getDimensionProductionPerSecond(1).times(diff/10).times(player.chall3Pow));
+            } else {
+                player.money = player.money.plus(getDimensionProductionPerSecond(1).times(diff/10));
+                player.totalmoney = player.totalmoney.plus(getDimensionProductionPerSecond(1).times(diff/10));
+            }
+            if (player.currentChallenge == "challenge7") {
+                player.money = player.money.plus(getDimensionProductionPerSecond(2).times(diff/10));
+                player.totalmoney = player.totalmoney.plus(getDimensionProductionPerSecond(2).times(diff/10))
+            }
+            if (player.eternityChallenges.current === 13) {
+                let gain = new Decimal(1).dividedBy(player.tickspeed.dividedBy(1000)).times(diff/10);
+                player.money = player.money.plus(gain);
+                player.totalmoney = player.totalmoney.plus(gain);
+                player.infinityPoints = player.infinityPoints.plus(Decimal.floor(gain));
+            }
         }
 
         document.getElementById("dimTabButtons").style.display = "none"
@@ -6357,7 +6454,8 @@ function startInterval() {
         }
 
         for (var tier = 1; tier < 9; tier++) {
-            if (player.infinityPoints.gte(player["infinityDimension"+tier].cost)) document.getElementById("infMax"+tier).className = "storebtn"
+            let dim = player["infinityDimension"+tier];
+            if (canBuyInfDim(tier, dim)) document.getElementById("infMax"+tier).className = "storebtn"
             else document.getElementById("infMax"+tier).className = "unavailablebtn"
         }
 
