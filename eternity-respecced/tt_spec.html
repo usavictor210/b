@@ -1,0 +1,159 @@
+<html>
+<head>
+<title>TT helper</title>
+</head>
+<body>
+  <div>Exponent of IP</div>
+  <textarea id="ip"></textarea>
+  <div>Timeshards</div>
+  <textarea id="timeshards"></textarea>
+  <div>Time theorems</div>
+  <textarea id="tt"></textarea>
+  <div>Replicanti galaxy power</div>
+  <textarea id="galpower"></textarea>
+  <div>Seconds in infinity</div>
+  <textarea id="seconds"></textarea>
+  <br/>
+  <button id="button">Calculate!</button>
+  <div>Optimal spec:</div>
+  <div id="output"></div>
+<script>
+let getGalaxies = function (x) {
+  return Math.floor((getEighths(x) - 10) / 60);
+}
+
+let getBoosts = function (x) {
+  return 5 + Math.floor((getEighths(x) - 10) / 15);
+}
+
+let eighthMemo = {};
+
+let getEighths = function (x) {
+  if (x in eighthMemo) {
+    return eighthMemo[x];
+  }
+  let am = getAM(x);
+  let gotten = 0;
+  let cost = 24;
+  let inc = 15;
+  let inf = Math.log10(2) * 1024;
+  while (am >= cost && cost <= 1e9) {
+    gotten += 10;
+    cost += inc;
+    if (cost > inf) {
+      inc += Math.log10(3);
+    }
+  }
+  eighthMemo[x] = gotten;
+  return gotten;
+}
+
+let getAM = function (x) {
+  // seems about right
+  return x * 205;
+}
+
+let getBaseSac = function (x) {
+  // yes, I know, not exactly 7 / 8 but this is an approximation.
+  return getAM(x) * .012 * (7 / 8);
+}
+
+function get_c (st) {
+  return Math.pow(4 / 3, 1 / (1 + st / 10))
+}
+
+function getTotalTickGained (timeshards, st) {
+  if (timeshards < 1) {
+    return 0;
+  }
+  let timeshardLn = Math.log(timeshards);
+  let c = get_c(st);
+  // we know that ln(1.001) * (x - 1) * x / 2 + ln(c) * x <= timeshardLn
+  // so ln(1.001) / 2 * x^2 + (ln(c) - ln(1.001) / 2) * x - timeshardLn <= 0
+  let a = Math.log(1.001) / 2;
+  let b = Math.log(c) - a;
+  let solution = (-b + Math.sqrt(Math.pow(b, 2) + 4 * a * timeshardLn)) / (2 * a);
+  let realSolution = Math.floor(solution) + 1
+  return realSolution;
+}
+
+let getRG = function (x) {
+  let c = 170;
+  let n = 0;
+  while (c <= x && n < 1000) {
+    c += 5 * (n + 5);
+    n += 1;
+  }
+  return n;
+}
+
+let getTickPower = function (x) {
+  return Math.log10(1 / 0.965) * (getGalaxies(x) + getRG(x)) * 3.3
+}
+
+let getTSPower = [null, null, null, null, null, null];
+
+getTSPower[0] = function (x, sh, s, galPower, st) {
+  return getBaseSac(x) * Math.log(1 + st / 10) / 8;
+}
+
+getTSPower[1] = function (x, sh, s, galPower, st) {
+  return getTickPower(x) * (getTotalTickGained(sh, st) - getTotalTickGained(sh, 0));
+}
+
+getTSPower[2] = function (x, sh, s, galPower, st) {
+  return Math.log10(2 ** (galPower * 5)) * 56 * st;
+}
+
+getTSPower[3] = function (x, sh, s, galPower, st) {
+  return getBoosts(x) * Math.log10(1 + st / 4);
+}
+
+// I think infinity power and infinity points are fairly close, usually.
+getTSPower[4] = function (x, sh, s, galPower, st) {
+  return (5 - Math.log(s) / Math.log(10)) * 1.1 * 56 * st;
+}
+
+getTSPower[5] = function (x, sh, s, galPower, st) {
+  return Math.log(s) / Math.log(10) * 1.1 * 56 * st;
+}
+
+function f(ip, timeshards, tt, galPower, secondsInInfinity) {
+
+let ttOpen = 4;
+
+if (tt > 60) {
+  ttOpen += 2;
+}
+
+let table = {0: {}};
+
+for (let i = 1; i <= ttOpen; i++) {
+  table[i] = {};
+  for (let j = 0; j <= tt; j++) {
+    for (let k = 0; k <= j; k++) {
+      let leftover = j - k;
+      let purchases = Math.floor((Math.sqrt(leftover * 8 + 1) - 1) / 2);
+      let prev = (table[i - 1][k] || ['', 0]);
+      let newBonus = prev[1] + getTSPower[i - 1](ip, timeshards, secondsInInfinity, galPower, purchases);
+      if (!table[i][j] || newBonus > table[i][j][1]) {
+        table[i][j] = [prev[0] + '/' + purchases, newBonus];
+      }
+    }
+  }
+}
+
+return table[ttOpen][tt][0].slice(1) + ': ' + table[ttOpen][tt][1].toFixed(2);
+}
+
+document.getElementById('button').onclick = function () {
+  document.getElementById('output').innerHTML = f(
+    +document.getElementById('ip').value,
+    +document.getElementById('timeshards').value,
+    +document.getElementById('tt').value,
+    +document.getElementById('galpower').value,
+    +document.getElementById('seconds').value)
+}
+</script>
+</body>
+</html>
