@@ -1990,7 +1990,7 @@ function getPower(dim) {
   }
   var ret = dim.power;
   if (player.achievements.includes('r102')) {
-    ret *= ret.times(1 + Math.log(player.eternities) / Math.log(100));
+    ret = ret.times(1 + Math.log(player.eternities) / Math.log(100));
   }
   if (player.achievements.includes('r105')) {
     ret = ret.times(Math.max(Math.pow(player.eightAmount.toNumber(), 1 / 8), 1));
