@@ -3517,11 +3517,15 @@ let getReplicantiInterval = function (amount) {
 }
 
 let getNewReplicantiInterval = function () {
-  return Math.max(player.replicanti.interval * .9, 1) / getReplicantiIntervalBonus();
+  let newInterval = player.replicanti.interval * .9;
+  if (!player.achievements.includes('r106')) {
+    newInterval = Math.max(newInterval, 1);
+  }
+  return newInterval / getReplicantiIntervalBonus();
 }
 
 function updateReplicantiInterval (places) {
-  if (player.replicanti.interval !== 1) {
+  if (player.replicanti.interval !== 1 || player.achievements.includes('r106')) {
     document.getElementById("replicantiinterval").innerHTML = "Interval: "+getReplicantiInterval().toFixed(places)+"ms<br>-> "+getNewReplicantiInterval().toFixed(places)+" Costs: "+shortenCosts(player.replicanti.intervalCost)+" IP";
   } else {
     document.getElementById("replicantiinterval").innerHTML = "Interval: "+getReplicantiInterval().toFixed(places)+"ms";
@@ -3530,7 +3534,7 @@ function updateReplicantiInterval (places) {
 
 function updateInfCosts() {
     var places = Math.floor(Math.log10(getReplicantiInterval()/1000)) * (-1);
-    if (player.replicanti.chance < 1) document.getElementById("replicantichance").innerHTML = "Replicate chance: "+Math.round(player.replicanti.chance*100)+"%<br>+"+1+"% Costs: "+shortenCosts(player.replicanti.chanceCost)+" IP"
+    if (player.replicanti.chance < 1 || player.achievements.includes('r106')) document.getElementById("replicantichance").innerHTML = "Replicate chance: "+Math.round(player.replicanti.chance*100)+"%<br>+"+1+"% Costs: "+shortenCosts(player.replicanti.chanceCost)+" IP"
     else document.getElementById("replicantichance").innerHTML = "Replicate chance: "+Math.round(player.replicanti.chance*100)+"%"
     updateReplicantiInterval(places);
     document.getElementById("replicantimax").innerHTML = "Max Replicanti galaxies: "+player.replicanti.gal+"<br>+1 Costs: "+shortenCosts(player.replicanti.galCost)+" IP"
@@ -3611,11 +3615,11 @@ function unlockReplicantis() {
 }
 
 function canGetReplChance () {
-  return player.replicanti.unl && player.infinityPoints.gte(player.replicanti.chanceCost) && player.replicanti.chance < 1 && !ec8noMorePurchases('repl');
+  return player.replicanti.unl && player.infinityPoints.gte(player.replicanti.chanceCost) && (player.replicanti.chance < 1 || player.achievements.includes('r106')) && !ec8noMorePurchases('repl');
 }
 
 function canGetReplInterval () {
-  return player.replicanti.unl && player.infinityPoints.gte(player.replicanti.intervalCost) && player.replicanti.interval > 1 && !ec8noMorePurchases('repl');
+  return player.replicanti.unl && player.infinityPoints.gte(player.replicanti.intervalCost) && (player.replicanti.interval > 1 || player.achievements.includes('r106')) && !ec8noMorePurchases('repl');
 }
 
 function canGetReplGal () {
@@ -3640,9 +3644,9 @@ function upgradeReplicantiInterval() {
     if (canGetReplInterval()) {
         player.infinityPoints = player.infinityPoints.minus(player.replicanti.intervalCost)
         // EC8 reward handled 3/4
-        player.replicanti.intervalCost = player.replicanti.intervalCost.times(Math.pow(1e10, ecNumReward(8)))
+        player.replicanti.intervalCost = player.replicanti.intervalCost.times(Decimal.pow(1e10, ecNumReward(8) * Math.max(Math.pow(player.replicanti.interval, -3), 1)))
         player.replicanti.interval *= 0.9
-        if (player.replicanti.interval < 1) player.replicanti.interval = 1
+        if (player.replicanti.interval < 1 && !player.achievements.includes('r106')) player.replicanti.interval = 1
         updateInfCosts()
         player.ec8PurchasesMade.repl++;
         ec8Update('repl');
@@ -6378,8 +6382,7 @@ function startInterval() {
         }
         if (player.replicanti.galaxies >= 10 && player.thisInfinityTime < 150) {
           giveAchievement("The swarm");
-          window.a = window.a || [];
-          window.a.push([player.replicanti.galaxies, player.thisInfinityTime]);
+          updateInfCosts();
         }
 
         if (player.replicanti.galaxybuyer && player.replicanti.amount.gte(player.replicanti.limit)) {
