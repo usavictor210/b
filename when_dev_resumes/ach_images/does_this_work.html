@@ -4,7 +4,6 @@
 </head>
 <body>
   <canvas id="c" width=104 height=104></canvas>
-  <img id="other" src="69.png"/>
   <img id="i" style="display: none;" src="file2.png"/>
   <script>
   window.onload = function () {
@@ -12,7 +11,9 @@
     context = c.getContext("2d");
     context.font = "12px Typewriter";
     context.fillStyle = "rgb(0,0,0)";
-    context.fillText("Universal harmony", 5, 12);
+    context.fillText("?? dimensions and", 5, 12);
+    context.fillText("none of them", 15, 24);
+    context.fillText("ninth...", 30, 36)
 
     var img = c.toDataURL("image/png");
     document.write('<img src="'+img+'"/>');

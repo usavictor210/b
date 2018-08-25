@@ -197,7 +197,7 @@ name: Yo dawg, I heard you liked infinities...
 goal: Have all your past 10 infinities be at least 1.79e308 times higher IP than the previous one. Reward: Your antimatter doesn't reset on dimension boost or galaxy.
 name: Infinite time
 goal: Get 308 tickspeed upgrades. Reward: Time dimensions are very slightly affected by tickspeed.
-name: Do you really need a guide for that?
+name: Do you really need a guide for this?
 goal: Eternity with at most 10 infinities. Reward: Multiplier to IP based on infinities.
 name: You're a mistake
 goal: Fail an Eternity challenge. Reward: A fading sense of accomplishment.

@@ -2595,7 +2595,7 @@ const allAchievements = {
   r17 : "Not a luck related achievement",
   r18 : "90 degrees to infinity",
   r21 : "To infinity!",
-  r22 : "Don't you dare to sleep",
+  r22 : "Don't you dare sleep",
   r23 : "The 9th Dimension is a lie",
   r24 : "Antimatter Apocalypse",
   r25 : "Boosting to the max",
@@ -2653,7 +2653,7 @@ const allAchievements = {
   r91 : "Ludicrous Speed",
   r92 : "I brake for nobody",
   r93 : "MAXIMUM OVERDRIVE",
-  r94 : "Minute of infinity",
+  r94 : "4.33 minutes of Infinity",
   r95 : "Is this safe?",
   r96 : "Time is relative",
   r97 : "Yes. This is hell.",
@@ -2664,7 +2664,7 @@ const allAchievements = {
   r104 : "That wasn't an eternity",
   r105 : "8 nobody got time for that",
   r106 : "The swarm",
-  r107 : "Do you really need a guide for this?",
+  r107 : "1e(1 million) is a lot",
   r108 : "We could afford 9",
 };
 // to retrieve by value: Object.keys(allAchievements).find(key => allAchievements[key] === "L4D: Left 4 Dimensions");
@@ -4624,18 +4624,48 @@ function setAchieveTooltip() {
     var sanic = document.getElementById("Supersanic")
     var forgotAchieve = document.getElementById("I forgot to nerf that")
     var potato = document.getElementById("Faster than a potato")
+    var potato2 = document.getElementById("Faster than a squared potato")
     var dimensional = document.getElementById("Multidimensional")
     var IPBelongs = document.getElementById("All your IP are belong to us")
     var reference = document.getElementById("Yet another infinity reference")
+    var aMillion = document.getElementById("1 million is a lot")
+    let blink = document.getElementById("Blink of an eye")
+    let spare = document.getElementById("I got a few to spare")
+    let speed = document.getElementById("Ludicrous Speed")
+    let speed2 = document.getElementById("I brake for nobody")
+    let overdrive = document.getElementById("MAXIMUM OVERDRIVE")
+    let minute = document.getElementById("4.33 minutes of Infinity")
+    let aLot = document.getElementById("1e(1 million) is a lot")
+    let infiniteIP = document.getElementById("Can you get infinite IP?")
+    let over9000 = document.getElementById("IT'S OVER 9000")
+    let dawg = document.getElementById("Yo dawg, I heard you liked infinities...")
+    let layer = document.getElementById("But I wanted another prestige layer...")
+    let fkoff = document.getElementById("What do I have to do to get rid of you")
+    let infstuff = document.getElementById("I never liked this infinity stuff anyway")
 
     apocAchieve.setAttribute('ach-tooltip', "Get over " + formatValue(player.options.notation, 1e80, 0, 0) + " antimatter");
     noPointAchieve.setAttribute('ach-tooltip', "Buy a single First Dimension when you have over " + formatValue(player.options.notation, 1e150, 0, 0) + " of them. Reward: First Dimensions are 10% stronger");
-    forgotAchieve.setAttribute('ach-tooltip', "Get any Dimension multiplier over " + formatValue(player.options.notation, 1e31, 0, 0)) + ". Reward: First Dimensions are 5% stronger";
     sanic.setAttribute('ach-tooltip', "Have antimatter/sec exceed your current antimatter above " + formatValue(player.options.notation, 1e63, 0, 0));
+    forgotAchieve.setAttribute('ach-tooltip', "Get any Dimension multiplier over " + formatValue(player.options.notation, 1e31, 0, 0)) + ". Reward: First Dimensions are 5% stronger";
     potato.setAttribute('ach-tooltip', "Get more than " + formatValue(player.options.notation, 1e26, 0, 0) + " ticks per second. Reward: Reduces starting tick interval by 2%");
+    potato2.setAttribute('ach-tooltip', "Get more than " + formatValue(player.options.notation, 1e52, 0, 0) + " ticks per second. Reward: Reduces starting tick interval by another 2%");
     dimensional.setAttribute('ach-tooltip', "Reach " + formatValue(player.options.notation, 1e12, 0, 0) + " of all dimensions except 8th");
     IPBelongs.setAttribute('ach-tooltip', "Big Crunch for "+shortenCosts(1e150)+" IP. Reward: Additional 4x multiplier to IP")
     reference.setAttribute('ach-tooltip', "Get a x"+shortenDimensions(Number.MAX_VALUE)+" multiplier in a single sacrifice. Reward: Sacrifice is slightly stronger.")
+    aMillion.setAttribute('ach-tooltip', "Reach "+shortenCosts(1e6)+" infinity power.");
+    blink.setAttribute('ach-tooltip', "Get to Infinity in under 200 milliseconds. Reward: Start with " + formatValue(player.options.notation, 1e25, 0, 0) + " antimatter and all dimensions are stronger in first 300ms of Infinity.");
+    spare.setAttribute('ach-tooltip', "Reach " +formatValue(player.options.notation, new Decimal("1e35000"), 0, 0)+" antimatter. Reward: Dimensions are more powerful the more unspent antimatter you have.");
+    speed.setAttribute('ach-tooltip', "Big Crunch for "+shortenCosts(1e200)+" IP in 2 seconds or less. Reward: All dimensions are significantly stronger in first 5 seconds of infinity.")
+    speed2.setAttribute('ach-tooltip', "Big Crunch for "+shortenCosts(1e250)+" IP in 20 seconds or less. Reward: All dimensions are significantly stronger in first 60 seconds of infinity.")
+    overdrive.setAttribute('ach-tooltip', "Big Crunch with " + shortenCosts(1e300) + " IP/min. Reward: Additional 4x multiplier to IP.")
+    minute.setAttribute('ach-tooltip', "Reach " + shortenCosts(1e260) + " infinity power. Reward: Double infinity power gain.")
+    aLot.setAttribute('ach-tooltip', "Reach " + shortenCosts(new Decimal('1e1000000')) + " replicanti. Reward: Replicanti increase faster the more you have.")
+    infiniteIP.setAttribute('ach-tooltip', "Reach "+shortenCosts(new Decimal("1e30008"))+" IP.")
+    over9000.setAttribute('ach-tooltip', "Get a total sacrifice multiplier of "+shortenCosts(new Decimal("1e9000"))+". Reward: Sacrifice doesn't reset your dimensions.")
+    dawg.setAttribute('ach-tooltip', "Have all your past 10 infinities be at least "+shortenMoney(Number.MAX_VALUE)+" times higher IP than the previous one. Reward: Your antimatter doesn't reset on dimension boost or galaxy.")
+    layer.setAttribute('ach-tooltip', "Reach "+shortenMoney(Number.MAX_VALUE)+" EP. Reward: Time dimensions get a multiplier based on EP.")
+    fkoff.setAttribute('ach-tooltip', "Reach "+shortenCosts(new Decimal("1e22000"))+" IP without any time studies. Reward: Time dimensions are multiplied by the total number of studies you have.")
+    infstuff.setAttribute('ach-tooltip', "Reach "+shortenCosts(new Decimal("1e140000"))+" IP without buying IDs or IP multipliers.")
 }
 
 document.getElementById("notation").onclick = function () {
@@ -6343,7 +6373,7 @@ function getReplicantiETA (amount) {
 function startInterval() {
     setInterval(function () {
         var thisUpdate = new Date().getTime();
-        if (thisUpdate - player.lastUpdate >= 21600000) giveAchievement("Don't you dare to sleep")
+        if (thisUpdate - player.lastUpdate >= 21600000) giveAchievement("Don't you dare sleep")
         var diff = Math.min(thisUpdate - player.lastUpdate, 21600000);
         if (player.options.offlineProgressDisabled) {
           diff = Math.min(diff, 1000);
@@ -6470,7 +6500,7 @@ function startInterval() {
 
         if (player.infinityPower.gt(1)) giveAchievement("A new beginning.");
         if (player.infinityPower.gt(1e6)) giveAchievement("1 million is a lot"); //TBD
-        if (player.infinityPower.gt(1e260)) giveAchievement("Minute of infinity"); //TBD
+        if (player.infinityPower.gt(1e260)) giveAchievement("4.33 minutes of Infinity"); //TBD
 
         player.timeShards = player.timeShards.plus(getTimeDimensionProduction(1).times(diff/10))
 
@@ -6525,7 +6555,7 @@ function startInterval() {
         player.replicanti.amount = player.replicanti.amount.times(Decimal.pow(2, doublings)).min(player.replicanti.limit)
 
         if (player.replicanti.amount.gte(Decimal.pow(10, 1e6))) {
-          giveAchievement("Do you really need a guide for this?");
+          giveAchievement("1e(1 million) is a lot");
         }
 
 
