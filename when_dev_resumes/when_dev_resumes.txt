@@ -139,29 +139,33 @@ Of course, there should be intergalactic milestones. Those needed:
 
 4: Unlock autobuyer for x5 EP.
 
-5: Keep your banked infinities.
+5: More eternity autobuyer options (just like current infinity autobuyer).
 
-6: Keep 10% of your eternities.
+6: Keep your banked infinities.
 
-7: Start with all time studies unlocked.
+8: Keep 10% of your eternities.
 
-8: Unlock autobuyer for TT.
+10: Start with all time studies unlocked.
 
-9: More eternity autobuyer options (just like current infinity autobuyer).
+12: Unlock antimatter autobuyer for TT.
 
-10: You keep your TT and TS on intergalaxy.
+16: Unlock IP autobuyer for TT.
 
-11: Unlock autobuyer for First Time Dimension.
+20: Unlock EP autobuyer for TT.
 
-12: Unlock autobuyer for Second Time Dimension.
+25: Unlock autobuyer for First Time Dimension.
 
-13: Unlock autobuyer for Third Time Dimension.
+30: Unlock autobuyer for Second Time Dimension.
 
-14: Unlock autobuyer for Fourth Time Dimension.
+35: Unlock autobuyer for Third Time Dimension.
 
-15: You start with all infinity dimensions unlocked and all infinity challenges unlocked and completed.
+40: Unlock autobuyer for Fourth Time Dimension.
 
-16: Unlock autobuyer for intergalaxies.
+50: You keep your TT and TS on intergalaxy.
+
+75: You start with all infinity dimensions unlocked and all infinity challenges unlocked and completed.
+
+100: Unlock autobuyer for intergalaxies.
 
 Farming intergalaxies is not desired in this version.
 intergalaxies don't do anything but give milestones and show up as a statistic.
@@ -226,34 +230,28 @@ goal: Reach 1e308 EP. Reward: Time dimensions get a multiplier based on EP.
 name: What do I have to do to get rid of you
 goal: Reach 1e22000 IP without any time studies. Reward: Time dimensions are multiplied by the total number of studies you have.
 Row 13:
-name: Unique snowflakes
-goal: Have 1000 galaxies without having any replicanti galaxies.
 name: I never liked this infinity stuff anyway
 goal: Reach 1e140,000 IP without buying IDs or IP multipliers.
+name: Unique snowflakes
+goal: Have 1000 galaxies without having any replicanti galaxies. Reward: Normal galaxies are 0.1% stronger.
 name: 5 more eternities until the update
 goal: Complete all the eternity challenges 5 times.
+name: Definitely not safe
+goal: Get replicanti interval below 0.001 ms. Reward: You can buy more than 1 replicanti galaxy at a time.
+picture: something definitely not safe.
 name: The void
 goal: Go intergalactic.
 picture: nothing. Seems appropriate. Just the text "The void"
-name: Theorems are the same everywhere
-goal: Go intergalactic 10 times.
-picture: a^2 + b^2 = c^2, but written properly and with a labeled right triangle. Create image in Latex.
-Created (indeed, several options).
 name: Universal harmony
 goal: Have the same number (at least 100) of normal galaxies, replicanti galaxies, and intergalactic galaxies.
 picture: A three-fold ying-yang symbol I create. Created, and turned (I think) into image format (or at least doing so should be easy).
+reward: All galaxies are 0.1% stronger.
 name: 24 dimensions and none of them ninth...
 goal: Buy the fourth galactic dimension.
 image: Some type of classification of the dimensions, like the physics classification of particles.
-Six columns:
-n1 n5 i1 i5 t1 g1
-n2 n6 i2 i6 t2 g2
-n3 n7 i3 i7 t3 g3
-n4 n8 i4 i8 t4 g4
-each in a little rounded box and in green (nd), brown (id), purple (td), and orange (gd) respectively
 Created, NOT TURNED INTO IMAGE FORMAT (but that should be easy)
 name: This is what I have to do to get rid of you.
-goal: Complete IC3 in EC11.
+goal: Complete IC3 in EC11. Reward: IC3 multiplier per tickspeed upgrade is multiplied by 1.1.
 
 (formula for "I wish I had gotten 7 eternities": 7^(tiers completed))
 (formula for "Do you really need a guide for that?": x + 1)
@@ -261,6 +259,13 @@ goal: Complete IC3 in EC11.
 (formula for "Like feasting on a behind": x^sqrt(x))
 (what is this for 25 million? 1e36989, apparently. That's not too much.)
 (formula for "But I wanted another prestige layer": log2(x))
+
+Six columns:
+n1 n5 i1 i5 t1 g1
+n2 n6 i2 i6 t2 g2
+n3 n7 i3 i7 t3 g3
+n4 n8 i4 i8 t4 g4
+each in a little rounded box and in green (nd), brown (id), purple (td), and orange (gd) respectively
 
 Is "This is what I have to do to get rid of you." really possible? Make sure to keep testing until it is.
 It appears like it might not be, since time dimensions don't produce infinity dimensions,
