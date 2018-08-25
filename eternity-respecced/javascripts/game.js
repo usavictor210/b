@@ -387,7 +387,7 @@ function setTheme(name) {
         document.getElementById("theme").innerHTML="Current theme: " + name;
     }
 
-    if (name === undefined) return;
+    if (name === undefined || name === 'Normal') return;
 
     var head = document.head;
     var link = document.createElement('link');
@@ -1706,43 +1706,62 @@ function updateTickSpeed() {
 
 
 function updateChallenges() {
-    try {
-        var buttons = Array.from(document.getElementsByClassName('onchallengebtn'))
-        for (var i=0; i < buttons.length; i++) {
-            buttons[i].className = "challengesbtn";
-            buttons[i].innerHTML = "Start"
-        }
-
-        var buttonss = Array.from(document.getElementsByClassName('completedchallengesbtn'))
-        for (var i=0; i < buttonss.length; i++) {
-            buttonss[i].className = "challengesbtn";
-            buttonss[i].innerHTML = "Start"
-        }
-
-
-        for (var i=0; i < player.challenges.length; i++) {
-            document.getElementById(player.challenges[i]).className = "completedchallengesbtn";
-            document.getElementById(player.challenges[i]).innerHTML = "Completed"
-        }
-
-        if (player.currentChallenge != "") {
-            document.getElementById(player.currentChallenge).className = "onchallengebtn"
-            document.getElementById(player.currentChallenge).innerHTML = "Running"
-        }
-
-        for (var i=1; i <= player.postChallUnlocked; i++) document.getElementById("postc"+i+"div").style.display = "inline-block"
-
-
-
-    } catch (err) {
-        console.log(err)
-        updateChallenges()
-
+    var buttons = Array.from(document.getElementsByClassName('onchallengebtn'))
+    for (var i=0; i < buttons.length; i++) {
+        buttons[i].className = "challengesbtn";
+        buttons[i].innerHTML = "Start"
     }
 
+    var buttonss = Array.from(document.getElementsByClassName('completedchallengesbtn'))
+    for (var i=0; i < buttonss.length; i++) {
+        buttonss[i].className = "challengesbtn";
+        buttonss[i].innerHTML = "Start"
+    }
 
+    for (var i=0; i < player.challenges.length; i++) {
+        document.getElementById(player.challenges[i]).className = "completedchallengesbtn";
+        document.getElementById(player.challenges[i]).innerHTML = "Completed"
+    }
 
+    if (player.currentChallenge != "") {
+        document.getElementById(player.currentChallenge).className = "onchallengebtn"
+        document.getElementById(player.currentChallenge).innerHTML = "Running"
+    }
 
+    for (var i = 1; i <= player.postChallUnlocked; i++) {
+        document.getElementById("postc"+i+"div").style.display = "inline-block"
+    }
+    for (var i = player.postChallUnlocked + 1; i <= 8; i++) {
+        document.getElementById("postc"+i+"div").style.display = "none"
+    }
+
+    // Show the normal challenges tab (and the challenges tab overall) if and only if infinity tab is shown.
+    if (player.infinities > 0 || player.eternities > 0) {
+        document.getElementById('challengessubtabbtn').style.display = 'inline-block';
+        document.getElementById('challengesbtn').style.display = 'inline-block';
+        document.getElementById('challengetimesbtn').style.display = 'inline-block';
+    } else {
+        document.getElementById('challengessubtabbtn').style.display = 'none';
+        document.getElementById('challengesbtn').style.display = 'none';
+        document.getElementById('challengetimesbtn').style.display = 'none';
+    }
+    // Show the infinity challenges tab if and only if you've reached at least one IC.
+    if (player.postChallUnlocked > 0) {
+        document.getElementById('infchallengessubtabbtn').style.display = 'inline-block';
+        document.getElementById('infchallengesbtn').style.display = 'inline-block';
+    } else {
+        document.getElementById('infchallengessubtabbtn').style.display = 'none';
+        document.getElementById('infchallengesbtn').style.display = 'none';
+        if (document.getElementById('breakchallenges').style.display === 'block') {
+            showChallengesTab('challenges');
+        }
+    }
+    // Show the eternity challenges tab if and only if you've eternitied.
+    if (player.eternities > 0) {
+        document.getElementById('eterchallengessubtabbtn').style.display = 'inline-block';
+    } else {
+        document.getElementById('eterchallengessubtabbtn').style.display = 'none';
+    }
 }
 
 
@@ -6076,7 +6095,9 @@ setInterval(function() {
     }
     infDimPow = temp
 
-    if (player.money.gte(new Decimal("1e2000"))) document.getElementById("challTabButtons").style.display = "table"
+    if (player.postChallUnlocked > 0 || player.eternities > 0) {
+      document.getElementById("challTabButtons").style.display = "table"
+    }
 
     document.getElementById("kongip").innerHTML = "Double your IP gain from all sources (additive). Forever. Currently: x"+kongIPMult+", next: "+(kongIPMult==1? 2: kongIPMult+2)+"x"
     document.getElementById("kongdim").innerHTML = "Double all your dimension multipliers (dimensions 1-8) (multiplicative). Forever. Currently: x"+kongDimMult+", next: "+(kongDimMult*2)+"x"
@@ -6493,8 +6514,9 @@ function startInterval() {
             document.getElementById("tickSpeedMax").className = 'unavailablebtn';
         }
 
-        if (player.infinityPoints.gt(0) || player.eternities !== 0) {
+        if (player.infinitied > 0 || player.eternities > 0) {
             document.getElementById("infinitybtn").style.display = "block";
+            document.getElementById("challengesbtn").style.display = "block";
             if (player.infinityPoints.gte(1)) document.getElementById("infi11").className = "infinistorebtn1"
             else document.getElementById("infi11").className = "infinistorebtnlocked"
             if (player.infinityPoints.gte(1)) document.getElementById("infi21").className = "infinistorebtn2"
@@ -6566,27 +6588,6 @@ function startInterval() {
 
             if (player.infinityPoints.gte(player.offlineProdCost)) document.getElementById("offlineProd").className = "infinistorebtn1"
             else document.getElementById("offlineProd").className = "infinistorebtnlocked"
-
-        }
-        if (player.infinityPoints.equals(0)){
-            document.getElementById("infi11").className = "infinistorebtnlocked"
-            document.getElementById("infi12").className = "infinistorebtnlocked"
-            document.getElementById("infi13").className = "infinistorebtnlocked"
-            document.getElementById("infi14").className = "infinistorebtnlocked"
-            document.getElementById("infi21").className = "infinistorebtnlocked"
-            document.getElementById("infi22").className = "infinistorebtnlocked"
-            document.getElementById("infi23").className = "infinistorebtnlocked"
-            document.getElementById("infi24").className = "infinistorebtnlocked"
-            document.getElementById("infi31").className = "infinistorebtnlocked"
-            document.getElementById("infi32").className = "infinistorebtnlocked"
-            document.getElementById("infi33").className = "infinistorebtnlocked"
-            document.getElementById("infi34").className = "infinistorebtnlocked"
-            document.getElementById("infi41").className = "infinistorebtnlocked"
-            document.getElementById("infi42").className = "infinistorebtnlocked"
-            document.getElementById("infi43").className = "infinistorebtnlocked"
-            document.getElementById("infi44").className = "infinistorebtnlocked"
-            document.getElementById("infiMult").className = "infinistorebtnlocked"
-
         }
 
         if (player.autobuyers[11]%1 === 0 || player.autobuyers[11].interval>100) document.getElementById("break").className = "infinistorebtnlocked"
@@ -6636,8 +6637,7 @@ function startInterval() {
             document.getElementById("optionsbtn").style.display = "inline-block";
             document.getElementById("statisticsbtn").style.display = "inline-block";
             document.getElementById("achievementsbtn").style.display = "inline-block";
-            // challenges aren't available until you infinity, even if you've eternitied
-            if (player.infinitied > 0) {
+            if (player.infinitied > 0 || player.eternities > 0) {
                 document.getElementById("infinitybtn").style.display = "inline-block";
                 document.getElementById("challengesbtn").style.display = "inline-block";
             }
@@ -6698,8 +6698,6 @@ function startInterval() {
             document.getElementById("progressbar").innerHTML = Decimal.min(Decimal.log10(player.infinityPoints.plus(1)) / Decimal.log10(Number.MAX_VALUE)  * 100, 100).toFixed(2) + "%"
             document.getElementById("progress").setAttribute('ach-tooltip',"Percentage to Eternity")
         }
-
-        if (player.eternities > 0) document.getElementById("infinitybtn").style.display = "inline-block";
 
         var scale1 = [2.82e-45,1e-42,7.23e-30,5e-21,9e-17,6.2e-11,5e-8,3.555e-6,7.5e-4,1,2.5e3,2.6006e6,3.3e8,5e12,4.5e17,1.08e21,1.53e24,1.41e27,5e32,8e36,1.7e45,1.7e48,3.3e55,3.3e61,5e68,1e73,3.4e80,1e113,Number.MAX_VALUE];
         var scale2 = [" protons."," nucleuses."," Hydrogen atoms."," viruses."," red blood cells."," grains of sand."," grains of rice."," teaspoons."," wine bottles."," fridge-freezers."," Olympic-sized swimming pools."," Great Pyramids of Giza."," Great Walls of China."," large asteroids.",
