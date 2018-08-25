@@ -1,6 +1,6 @@
 body {
     background-image: url('../images/dark-bg.png');
-    background-position: center; 
+    background-position: center;
 }
 
 button {
@@ -108,6 +108,11 @@ input {
     background: #43A047 !important;
     box-shadow: none;
     border: 3px solid #388E3C;
+}
+
+.lockedchallengesbtn {
+    background: #23292a !important;
+    border-color: #B84B5F !important;
 }
 
 .autobuyerbtn {

@@ -794,6 +794,7 @@ function onLoad() {
     updateTickSpeed();
     updateAchPow();
     updateChallenges();
+    initAllECs();
     updateCheckBoxes();
     toggleChallengeRetry()
     toggleChallengeRetry()
@@ -936,7 +937,7 @@ function save_game() {
 function transformSaveToDecimal() {
 
     player.infinityPoints = new Decimal(player.infinityPoints)
-    document.getElementById("eternitybtn").style.display = (player.infinityPoints.gte(Number.MAX_VALUE) || player.eternities > 0) ? "inline-block" : "none"
+    document.getElementById("eternitybtn").style.display = player.infinityPoints.gte(currentEternityRequirement()) ? "inline-block" : "none"
 
     player.money = new Decimal(player.money)
     player.tickSpeedCost = new Decimal(player.tickSpeedCost)
@@ -1655,6 +1656,9 @@ function updateDimensions() {
     document.getElementById("eter1").innerHTML = "Infinity Dimension multiplier based on unspent EP (x+1)<br>Currently: "+shortenMoney(player.eternityPoints.plus(1))+"x<br>Cost: 5 EP";
     document.getElementById("eter2").innerHTML = "Infinity Dimension multiplier based on eternities (x^log4(2x))<br>Currently: "+shortenMoney(Decimal.pow(player.eternities, Math.log(player.eternities*2)/Math.log(4)))+"x<br>Cost: 10 EP";
     document.getElementById("eter3").innerHTML = "Infinity Dimension multiplier based on timeshards (x/"+formatValue(player.options.notation, 1e12, 0, 0)+"+1)<br>Currently: "+shortenMoney(player.timeShards.div(1e12).plus(1))+"x<br>Cost: "+shortenCosts(1e4)+" EP"
+
+    displayAllECRewards();
+    checkAllECUnlockStatuses();
 }
 
 function updateCosts() {
@@ -1708,12 +1712,14 @@ function updateTickSpeed() {
 function updateChallenges() {
     var buttons = Array.from(document.getElementsByClassName('onchallengebtn'))
     for (var i=0; i < buttons.length; i++) {
+        if (buttons[i].id.includes('eter')) continue;
         buttons[i].className = "challengesbtn";
         buttons[i].innerHTML = "Start"
     }
 
     var buttonss = Array.from(document.getElementsByClassName('completedchallengesbtn'))
     for (var i=0; i < buttonss.length; i++) {
+        if (buttonss[i].id.includes('eter')) continue;
         buttonss[i].className = "challengesbtn";
         buttonss[i].innerHTML = "Start"
     }
@@ -2212,6 +2218,12 @@ function respecTimeStudies() {
       player.timestudy.theorem += (bought * (bought + 1)) / 2;
       player.timestudy.studies[i] = 0;
     }
+  }
+  if (player.eternityChallenges.unlocked) {
+    let u = player.eternityChallenges.unlocked;
+    player.timestudy.theorem += ecTTCosts[u];
+    player.eternityChallenges.unlocked = null;
+    updateECDisplay(u);
   }
   updateTheoremButtons();
   updateTimeStudyButtons();
@@ -3730,7 +3742,7 @@ function getReplMult (num) {
 // notes: the reduced effect in challenge 7 is (natural logarithm^7)
 
 function ecCompletions (x) {
-  return player.eternityChallenges[x] || 0;
+  return player.eternityChallenges.done[x] || 0;
 }
 
 let initialECCosts = {
@@ -3828,7 +3840,7 @@ function checkForEternityChallengeFailure () {
     }
   }
   if (player.eternityChallenges.current === 12) {
-    if (playaer.thisEternity > ec12TimeLimit()) {
+    if (player.thisEternity > ec12TimeLimit()) {
       failEternityChallenge();
     }
   }
@@ -3915,8 +3927,68 @@ function ecDisplayReward (x) {
   }
 }
 
+function currentEternityRequirement () {
+  if (player.eternityChallenges.current === null) {
+    return Number.MAX_VALUE;
+  } else {
+    return ecGoal(player.eternityChallenges.current);
+  }
+}
+
+let ecTTCosts = [null, 30, 40, 50, 60, 80, 100,
+  120, 150, 200, 240, 300, 400, 500];
+
+let ecReqProps = {
+  1: function () {return player.eternities},
+  2: function () {return player.totalTickGained},
+  3: function () {return player.eightAmount},
+  4: function () {return player.infinitied},
+  5: function () {return player.galaxies},
+  6: function () {return player.replicanti.galaxies},
+  7: function () {return player.money},
+  8: function () {return player.infinityPoints},
+  9: function () {return player.infinityPower},
+  10: function () {return player.eternityPoints},
+  11: function () {return getDimensionFinalMultiplier(1)},
+  12: function () {return player.timeshards},
+  13: function () {return player.tickspeed.pow(-1)},
+}
+
+function canUnlockEterChall (x) {
+  return player.eternityChallenges.unlocked === null &&
+  player.timestudy.theorem >= ecTTCosts[x] &&
+  Decimal.gte(ecReqProps[x](), ecCost(x))
+}
+
+function attemptEterChallUnlock (x) {
+  if (canUnlockEterChall(x)) {
+    player.timestudy.theorem -= ecTTCosts[x];
+    player.eternityChallenges.unlocked = x;
+    updateECDisplay(x);
+    return true;
+  } else {
+    return false;
+  }
+}
+
+function startEternityChallenge (x) {
+  if (player.eternityChallenges.unlocked === x) {
+    player.eternityChallenges.current = x;
+    eternity(true, true);
+  }
+}
+
+function failEternityChallenge (x) {
+  if (player.eternityChallenges.unlocked === x) {
+    alert('You failed your current eternity challenge, you will now exit it.');
+    player.eternityChallenges.current = x;
+    eternity(true, false);
+  }
+}
+
 function initAllECs () {
   displayAllECRewards();
+  checkAllECUnlockStatuses();
   for (let i = 1; i <= 13; i++) {
     updateECDisplay(i);
   }
@@ -3935,11 +4007,48 @@ function updateECDisplay (x) {
   if (x === 12) {
     document.getElementById('ec' + x + 'constraint').innerHTML = (ec12TimeLimit() / 10).toFixed(2);
   }
+  // show the cost no matter what
+  document.getElementById('eterc' + x + 'costdiv').style.display = 'block';
+  // locked vs unlocked
+  if (player.eternityChallenges.unlocked === x) {
+    document.getElementById('eterc' + x).style.display = 'inline-block';
+    document.getElementById('eterc' + x + 'conditionsdiv').style.display = 'block';
+    document.getElementById('eterc' + x + 'goaldiv').style.display = 'block';
+    document.getElementById('eterc' + x + 'unlockbtn').style.display = 'none';
+  } else {
+    document.getElementById('eterc' + x).style.display = 'none';
+    document.getElementById('eterc' + x + 'conditionsdiv').style.display = 'none';
+    document.getElementById('eterc' + x + 'goaldiv').style.display = 'none';
+    document.getElementById('eterc' + x + 'unlockbtn').style.display = 'inline-block';
+  }
+  // start vs running vs completed
+  if (player.eternityChallenges.current === x) {
+    document.getElementById('eterc' + x).className = 'onchallengebtn'
+    document.getElementById('eterc' + x).innerHTML = 'Running';
+  } else if (ecCompletions(x) === 5) {
+    document.getElementById('eterc' + x).className = 'completedchallengesbtn'
+    document.getElementById('eterc' + x).innerHTML = 'Completed';
+  } else {
+    document.getElementById('eterc' + x).className = 'challengesbtn'
+    document.getElementById('eterc' + x).innerHTML = 'Start';
+  }
 }
 
 function displayAllECRewards () {
   for (let i = 1; i <= 13; i++) {
     document.getElementById('ec' + i + 'reward').innerHTML = ecDisplayReward(i);
+  }
+}
+
+function checkAllECUnlockStatuses () {
+  for (let i = 1; i <= 13; i++) {
+    if (canUnlockEterChall(i)) {
+      document.getElementById('eterc' + i + 'unlockbtn').className = 'challengesbtn'
+      document.getElementById('eterc' + i + 'unlockbtn').innerHTML = 'Unlock';
+    } else {
+      document.getElementById('eterc' + i + 'unlockbtn').className = 'lockedchallengesbtn'
+      document.getElementById('eterc' + i + 'unlockbtn').innerHTML = 'Locked';
+    }
   }
 }
 
@@ -5369,12 +5478,12 @@ function respecToggle() {
     }
 }
 
-function eternity(force) {
-    if ((player.infinityPoints.gte(Number.MAX_VALUE) &&
+function eternity(force, enteringChallenge) {
+    if (force || (player.infinityPoints.gte(currentEternityRequirement()) &&
     (!player.options.eternityconfirm ||
       confirm("Eternity will reset everything except achievements " +
       "and challenge records. You will also gain an Eternity point " +
-      "and unlock various upgrades."))) || force === true) {
+      "and unlock various upgrades.")))) {
         if (!force) {
           if (player.thisEternity < player.bestEternity) {
               player.bestEternity = player.thisEternity
@@ -5396,6 +5505,21 @@ function eternity(force) {
             if (!player.challenges[i].includes("post") && player.eternities > 1) temp.push(player.challenges[i])
         }
         player.challenges = temp
+
+        if (player.eternityChallenges.current) {
+          updateECDisplay(player.eternityChallenges.current);
+        }
+        if (!enteringChallenge) {
+          let c = player.eternityChallenges.current;
+          if (c) {
+            if (!force) {
+              // The player actually reached eternity in a challenge. Good for the player, I guess.
+              player.eternityChallenges.done[c] = Math.min(ecCompletions(c) + 1, 5);
+            }
+            player.eternityChallenges.current = null;
+            updateECDisplay(c);
+          }
+        }
         player = {
             money: new Decimal(10),
             tickSpeedCost: new Decimal(1000),
@@ -5590,8 +5714,10 @@ function eternity(force) {
         };
         if (player.respec) respecTimeStudies()
         player.respec = false
-        giveAchievement("Time is relative")
-        if (player.eternities >= 100) giveAchievement("This mile took an Eternity");
+        if (!force) {
+          giveAchievement("Time is relative")
+          if (player.eternities >= 100) giveAchievement("This mile took an Eternity");
+        }
         if (player.replicanti.unl) player.replicanti.amount = new Decimal(1);
         player.replicanti.galaxies = 0
         document.getElementById("respec").className = "storebtn"
@@ -5647,7 +5773,7 @@ function eternity(force) {
         document.getElementById("infinityPoints2").innerHTML = "You have <span class=\"IPAmount2\">"+shortenDimensions(player.infinityPoints)+"</span> Infinity point" + ipPlural + "."
         if (player.eternities < 2) document.getElementById("break").innerHTML = "BREAK INFINITY"
         document.getElementById("replicantireset").innerHTML = "Reset replicanti amount, but get a free galaxy<br>"+player.replicanti.galaxies + " replicated galaxies created."
-        document.getElementById("eternitybtn").style.display = player.infinityPoints.gte(Number.MAX_VALUE) ? "inline-block" : "none"
+        document.getElementById("eternitybtn").style.display = player.infinityPoints.gte(currentEternityRequirement()) ? "inline-block" : "none"
         document.getElementById("eternityPoints2").style.display = "inline-block"
         document.getElementById("eternitystorebtn").style.display = "inline-block"
         document.getElementById("infiMult").innerHTML = "Multiply infinity points from all sources by 2 <br>currently: "+shorten(player.infMult.times(kongIPMult)) +"x<br>Cost: "+shortenCosts(player.infMultCost)+" IP"
@@ -5662,9 +5788,14 @@ function eternity(force) {
 }
 
 function exitChallenge() {
+  if (player.currentChallenge) {
     document.getElementById(player.currentChallenge).innerHTML = "Start"
     startChallenge("");
     updateChallenges();
+  } else if (player.eternityChallenges.current) {
+    // as if we failed
+    eternity(true, false);
+  }
 }
 
 function chall10AlterCosts () {
@@ -6104,7 +6235,7 @@ setInterval(function() {
     let epPlural = player.eternityPoints.equals(1) ? '' : 's';
     document.getElementById("eternityPoints2").innerHTML = "You have <span class=\"EPAmount2\">"+shortenDimensions(player.eternityPoints)+"</span> Eternity point" + epPlural + "."
 
-    document.getElementById("eternitybtn").style.display = player.infinityPoints.gte(Number.MAX_VALUE) ? "inline-block" : "none"
+    document.getElementById("eternitybtn").style.display = player.infinityPoints.gte(currentEternityRequirement()) ? "inline-block" : "none"
 
 
     if (player.eternities !== 0) {
@@ -6436,15 +6567,18 @@ function startInterval() {
         updateReplicantiInterval(places);
 
         var currentEPmin = gainedEternityPoints().dividedBy(player.thisEternity/600);
-        if (currentEPmin.gt(EPminpeak) && player.infinityPoints.gte(Number.MAX_VALUE)) {
+        if (currentEPmin.gt(EPminpeak) && player.infinityPoints.gte(currentEternityRequirement())) {
           EPminpeak = currentEPmin;
         }
         let eterButtonStart = (player.eternities === 0) ? "<b>Other times await.. I need to become Eternal</b><br/>" : "<b>I need to become Eternal.</b><br/>";
         if (gainedEternityPoints().gte(1e3)) {
           eterButtonStart = '';
         }
+        if (player.eternityChallenges.current) {
+          eterButtonStart = '<b>Other challenges await.. I need to become Eternal</b><br/>';
+        }
         let eterButtonEnd = "<br>" + shortenDimensions(currentEPmin) + " EP/min<br>Peaked at " + shortenDimensions(EPminpeak) + " EP/min";
-        if (player.eternities === 0) {
+        if (player.eternities === 0 || player.eternityChallenges.current) {
           eterButtonEnd = '';
         }
         let epPlural = gainedEternityPoints().eq(1) ? '' : 's';
@@ -6694,9 +6828,13 @@ function startInterval() {
             document.getElementById("progressbar").innerHTML = Decimal.min(player.money.e / getNewInfReq().e * 100, 100).toFixed(2) + "%"
             document.getElementById("progress").setAttribute('ach-tooltip',"Percentage to next dimension unlock")
         } else {
-            document.getElementById("progressbar").style.width = Decimal.min(Decimal.log10(player.infinityPoints.plus(1)) / Decimal.log10(Number.MAX_VALUE)  * 100, 100).toFixed(2) + "%"
-            document.getElementById("progressbar").innerHTML = Decimal.min(Decimal.log10(player.infinityPoints.plus(1)) / Decimal.log10(Number.MAX_VALUE)  * 100, 100).toFixed(2) + "%"
-            document.getElementById("progress").setAttribute('ach-tooltip',"Percentage to Eternity")
+            document.getElementById("progressbar").style.width = Decimal.min(Decimal.log10(player.infinityPoints.plus(1)) / Decimal.log10(currentEternityRequirement())  * 100, 100).toFixed(2) + "%"
+            document.getElementById("progressbar").innerHTML = Decimal.min(Decimal.log10(player.infinityPoints.plus(1)) / Decimal.log10(currentEternityRequirement())  * 100, 100).toFixed(2) + "%"
+            if (player.eternityChallenges.current === null) {
+              document.getElementById("progress").setAttribute('ach-tooltip',"Percentage to Eternity")
+            } else {
+              document.getElementById("progress").setAttribute('ach-tooltip',"Percentage to Eternity Challenge completion")
+            }
         }
 
         var scale1 = [2.82e-45,1e-42,7.23e-30,5e-21,9e-17,6.2e-11,5e-8,3.555e-6,7.5e-4,1,2.5e3,2.6006e6,3.3e8,5e12,4.5e17,1.08e21,1.53e24,1.41e27,5e32,8e36,1.7e45,1.7e48,3.3e55,3.3e61,5e68,1e73,3.4e80,1e113,Number.MAX_VALUE];

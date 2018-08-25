@@ -1438,8 +1438,6 @@
             </div>
             <div id="eterchallenges" class="challengeTab">
                 <div>Complete Eternity Challenges again for a bigger reward, maximum of 5 times.</div>
-                <div>(These were mostly just taken from Antimatter Dimensions without change.)</div>
-                <div>Do not try doing these yet. The balance is so that if EC1-1 were implemented you could do it, but this is all cosmetic right now.</div>
                 <table class="table" style="margin: 0 auto">
                     <tr>
                         <td>
@@ -1448,23 +1446,19 @@
                                 <br/>
                                 <span id="ec1completions">Completed x times.</span>
                                 <br/>
-                                <div id="eterc1locked">
+                                <div id="eterc1costdiv">
                                   <span>Requires <span id="ec1cost">y</span> eternities.</span>
                                   <br/>
                                   <span>Costs 30 time theorems.</span>
-                                  <br/>
-                                  <button class="challengesbtn" onclick="attemptEterChallUnlock(1)">Unlock</button>
                                 </div>
-                                <div id="eterc1unlocked" style="display: none;">
+                                <button id="eterc1unlockbtn" class="challengesbtn" onclick="attemptEterChallUnlock(1)">Unlock</button>
+                                <div id="eterc1conditionsdiv" style="display: none;">
                                   <span>Time dimensions are disabled.</span>
-                                  <br>
-                                  <br>
-                                  <div class="outer">
-                                      <button id="eterc1" class="challengesbtn" onclick="startEternityChallenge(1)">Start</button>
-                                      <br>
-                                      <span id="ec1goal">Goal: z</span><br>
-                                      <span>Reward: Time dimensions get a multiplier based on time in eternity. Currently <span id="ec1reward">reward</span>.</span>
-                                  </div>
+                                </div>
+                                <button id="eterc1" class="challengesbtn" onclick="startEternityChallenge(1)">Start</button>
+                                <div id="eterc1goaldiv" style="display: none;">
+                                  <span id="ec1goal">Goal: z</span><br>
+                                  <span>Reward: Time dimensions get a multiplier based on time in eternity. Currently <span id="ec1reward">reward</span>.</span>
                                 </div>
                             </div>
                         </td>
@@ -1474,23 +1468,20 @@
                               <br/>
                               <span id="ec2completions">Completed x times.</span>
                               <br/>
-                              <div id="eterc2locked">
+                              <div id="eterc2costdiv">
                                 <span>Requires <span id="ec2cost">y</span> tickspeed upgrades from time dimensions.</span>
                                 <br/>
                                 <span>Costs 40 time theorems.</span>
-                                <br/>
-                                <button class="challengesbtn" onclick="attemptEterChallUnlock(2)">Unlock</button>
                               </div>
-                              <div id="eterc2unlocked" style="display: none;">
+                              <button id="eterc2unlockbtn" class="challengesbtn" onclick="attemptEterChallUnlock(2)">Unlock</button>
+                              <div id="eterc2conditionsdiv" style="display: none;">
                                 <span>Infinity dimensions are disabled.</span>
-                                <br>
-                                <br>
-                                <div class="outer">
-                                    <button id="eterc2" class="challengesbtn" onclick="startEternityChallenge(2)">Start</button>
-                                    <br>
-                                    <span id="ec2goal">Goal: z</span><br>
-                                    <span>Reward: All infinity dimensions are affected by infinity power with reduced effect. Currently <span id="ec2reward">reward</span>.</span>
-                                </div>
+                              </div>
+                              <button id="eterc2" class="challengesbtn" onclick="startEternityChallenge(2)">Start</button>
+                              <div id="eterc2goaldiv" style="display: none;">
+                                <span id="ec2goal">Goal: z</span><br>
+                                <span>Reward: All infinity dimensions are affected by infinity power with reduced effect. Currently <span id="ec2reward">reward</span>.</span>
+                              </div>
                             </div>
                         </td>
                     </tr>
@@ -1501,23 +1492,20 @@
                               <br/>
                               <span id="ec3completions">Completed x times.</span>
                               <br/>
-                              <div id="eterc3locked">
+                              <div id="eterc3costdiv">
                                 <span>Requires <span id="ec3cost">y</span> eighth dimensions.</span>
                                 <br/>
                                 <span>Costs 50 time theorems.</span>
-                                <br/>
-                                <button class="challengesbtn" onclick="attemptEterChallUnlock(3)">Unlock</button>
                               </div>
-                              <div id="eterc3unlocked" style="display: none;">
+                              <button id="eterc3unlockbtn" class="challengesbtn" onclick="attemptEterChallUnlock(3)">Unlock</button>
+                              <div id="eterc3conditionsdiv" style="display: none;">
                                 <span>Dimensions 5-8 don't produce anything. Dimensional sacrifice is disabled.</span>
-                                <br>
-                                <br>
-                                <div class="outer">
-                                    <button id="eterc3" class="challengesbtn" onclick="startEternityChallenge(3)">Start</button>
-                                    <br>
-                                    <span id="ec3goal">Goal: z</span><br>
-                                    <span>Reward: Increase the multiplier for buying 10 dimensions. Currently <span id="ec3reward">reward</span>.</span>
-                                </div>
+                              </div>
+                              <button id="eterc3" class="challengesbtn" onclick="startEternityChallenge(3)">Start</button>
+                              <div id="eterc3goaldiv" style="display: none;">
+                                <span id="ec3goal">Goal: z</span><br>
+                                <span>Reward: Increase the multiplier for buying 10 dimensions. Currently <span id="ec3reward">reward</span>.</span>
+                              </div>
                             </div>
                         </td>
                         <td>
@@ -1526,23 +1514,20 @@
                               <br/>
                               <span id="ec4completions">Completed x times.</span>
                               <br/>
-                              <div id="eterc4locked">
+                              <div id="eterc4costdiv">
                                 <span>Requires <span id="ec4cost">y</span> infinities.</span>
                                 <br/>
                                 <span>Costs 60 time theorems.</span>
-                                <br/>
-                                <button class="challengesbtn" onclick="attemptEterChallUnlock(4)">Unlock</button>
                               </div>
-                              <div id="eterc4unlocked" style="display: none;">
+                              <button id="eterc4unlockbtn" class="challengesbtn" onclick="attemptEterChallUnlock(4)">Unlock</button>
+                              <div id="eterc4conditionsdiv" style="display: none;">
                                 <span>All generators and multipliers of infinitied stat are disabled.</span>
-                                <br>
-                                <br>
-                                <div class="outer">
-                                    <button id="eterc4" class="challengesbtn" onclick="startEternityChallenge(4)">Start</button>
-                                    <br>
-                                    <span id="ec4goal">Goal: z</span> with at most <span id="ec4constraint">w</span> infinities.<br>
-                                    <span>Reward: All infinity dimensions get multiplier based on infinities. Currently <span id="ec4reward">reward</span>.</span>
-                                </div>
+                              </div>
+                              <button id="eterc4" class="challengesbtn" onclick="startEternityChallenge(4)">Start</button>
+                              <div id="eterc4goaldiv" style="display: none;">
+                                <span id="ec4goal">Goal: z</span> with at most <span id="ec4constraint">w</span> infinities.<br>
+                                <span>Reward: All infinity dimensions get multiplier based on infinities. Currently <span id="ec4reward">reward</span>.</span>
+                              </div>
                             </div>
                         </td>
                     </tr>
@@ -1553,24 +1538,20 @@
                               <br/>
                               <span id="ec5completions">Completed x times.</span>
                               <br/>
-                              <div id="eterc5locked">
+                              <div id="eterc5costdiv">
                                 <span>Requires <span id="ec5cost">y</span> galaxies.</span>
                                 <br/>
                                 <span>Costs 80 time theorems.</span>
-                                <br/>
-                                <button class="challengesbtn" onclick="attemptEterChallUnlock(5)">Unlock</button>
                               </div>
-                              <div id="eterc5unlocked" style="display: none;">
+                              <button id="eterc5unlockbtn" class="challengesbtn" onclick="attemptEterChallUnlock(5)">Unlock</button>
+                              <div id="eterc5conditionsdiv" style="display: none;">
                                 <span>Galaxy costs are quadratic in eighth dimensions, rather than linear.</span>
-                                <br>
-                                <br>
-                                <div class="outer">
-                                    <button id="eterc5" class="challengesbtn" onclick="startEternityChallenge(5)">Start</button>
-                                    <br>
-                                    <span id="ec5goal">Goal: z</span><br>
-                                    <span>Reward: Galaxy cost increase per galaxy purchase is reduced by 1. Currently <span id="ec5reward">reward</span>.</span>
-                                </div>
-                            </div>
+                              </div>
+                              <button id="eterc5" class="challengesbtn" onclick="startEternityChallenge(5)">Start</button>
+                              <div id="eterc5goaldiv" style="display: none;">
+                                <span id="ec5goal">Goal: z</span><br>
+                                <span>Reward: Galaxy cost increase per galaxy purchase is reduced by 1. Currently <span id="ec5reward">reward</span>.</span>
+                              </div>
                         </td>
                         <td>
                             <div class="eterchallengediv" id="eterc6div" style="height: 140px;">
@@ -1578,23 +1559,20 @@
                               <br/>
                               <span id="ec6completions">Completed x times.</span>
                               <br/>
-                              <div id="eterc6locked">
+                              <div id="eterc6costdiv">
                                 <span>Requires <span id="ec6cost">y</span> replicanti galaxies.</span>
                                 <br/>
                                 <span>Costs 100 time theorems.</span>
-                                <br/>
-                                <button class="challengesbtn" onclick="attemptEterChallUnlock(6)">Unlock</button>
                               </div>
-                              <div id="eterc6unlocked" style="display: none;">
+                              <button id="eterc6unlockbtn" class="challengesbtn" onclick="attemptEterChallUnlock(6)">Unlock</button>
+                              <div id="eterc6conditionsdiv" style="display: none;">
                                 <span>You can't get normal galaxies, but the max replicanti galaxy upgrade cost is massively decreased.</span>
-                                <br>
-                                <br>
-                                <div class="outer">
-                                    <button id="eterc6" class="challengesbtn" onclick="startEternityChallenge(6)">Start</button>
-                                    <br>
-                                    <span id="ec6goal">Goal: z</span><br>
-                                    <span>Reward: You keep a fraction of replicanti galaxies on infinity (rounded down). Currently <span id="ec6reward">reward</span>.</span>
-                                </div>
+                              </div>
+                              <button id="eterc6" class="challengesbtn" onclick="startEternityChallenge(6)">Start</button>
+                              <div id="eterc6goaldiv" style="display: none;">
+                                <span id="ec6goal">Goal: z</span><br>
+                                <span>Reward: You keep a fraction of replicanti galaxies on infinity (rounded down). Currently <span id="ec6reward">reward</span>.</span>
+                              </div>
                             </div>
                         </td>
                     </tr>
@@ -1605,23 +1583,20 @@
                               <br/>
                               <span id="ec7completions">Completed x times.</span>
                               <br/>
-                              <div id="eterc7locked">
+                              <div id="eterc7costdiv">
                                 <span>Requires <span id="ec7cost">y</span> antimatter.</span>
                                 <br/>
                                 <span>Costs 120 time theorems.</span>
-                                <br/>
-                                <button class="challengesbtn" onclick="attemptEterChallUnlock(7)">Unlock</button>
                               </div>
-                              <div id="eterc7unlocked" style="display: none;">
+                              <button id="eterc7unlockbtn" class="challengesbtn" onclick="attemptEterChallUnlock(7)">Unlock</button>
+                              <div id="eterc7conditionsdiv" style="display: none;">
                                 <span>There's a superexponentially increasing dark matter that divides the multipliers on normal, infinity, and time dimensions.</span>
-                                <br>
-                                <br>
-                                <div class="outer">
-                                    <button id="eterc7" class="challengesbtn" onclick="startEternityChallenge(7)">Start</button>
-                                    <br>
-                                    <span id="ec7goal">Goal: z</span><br>
-                                    <span>Reward: Multiplier on normal, infinity, and time dimensions based on antimatter. Currently <span id="ec7reward">reward</span>.</span>
-                                </div>
+                              </div>
+                              <button id="eterc7" class="challengesbtn" onclick="startEternityChallenge(7)">Start</button>
+                              <div id="eterc7goaldiv" style="display: none;">
+                                <span id="ec7goal">Goal: z</span><br>
+                                <span>Reward: Multiplier on normal, infinity, and time dimensions based on antimatter. Currently <span id="ec7reward">reward</span>.</span>
+                              </div>
                             </div>
                         </td>
                         <td>
@@ -1630,23 +1605,20 @@
                               <br/>
                               <span id="ec8completions">Completed x times.</span>
                               <br/>
-                              <div id="eterc8locked">
+                              <div id="eterc8costdiv">
                                 <span>Requires <span id="ec8cost">y</span> infinity points.</span>
                                 <br/>
                                 <span>Costs 150 time theorems.</span>
-                                <br/>
-                                <button class="challengesbtn" onclick="attemptEterChallUnlock(8)">Unlock</button>
                               </div>
-                              <div id="eterc8unlocked" style="display: none;">
+                              <button id="eterc8unlockbtn" class="challengesbtn" onclick="attemptEterChallUnlock(8)">Unlock</button>
+                              <div id="eterc8conditionsdiv" style="display: none;">
                                 <span>You can only upgrade infinity dimensions and replicanti 50 times each.</span>
-                                <br>
-                                <br>
-                                <div class="outer">
-                                    <button id="eterc8" class="challengesbtn" onclick="startEternityChallenge(8)">Start</button>
-                                    <br>
-                                    <span id="ec8goal">Goal: z</span><br>
-                                    <span>Reward: Infinity dimensions and replicanti upgrade cost increases are decreased. Currently <span id="ec8reward">reward</span>.</span>
-                                </div>
+                              </div>
+                              <button id="eterc8" class="challengesbtn" onclick="startEternityChallenge(8)">Start</button>
+                              <div id="eterc8goaldiv" style="display: none;">
+                                <span id="ec8goal">Goal: z</span><br>
+                                <span>Reward: Infinity dimensions and replicanti upgrade cost increases are decreased. Currently <span id="ec8reward">reward</span>.</span>
+                              </div>
                             </div>
                         </td>
                     </tr>
@@ -1657,23 +1629,20 @@
                               <br/>
                               <span id="ec9completions">Completed x times.</span>
                               <br/>
-                              <div id="eterc9locked">
+                              <div id="eterc9costdiv">
                                 <span>Requires <span id="ec9cost">y</span> infinity power.</span>
                                 <br/>
                                 <span>Costs 200 time theorems.</span>
-                                <br/>
-                                <button class="challengesbtn" onclick="attemptEterChallUnlock(9)">Unlock</button>
                               </div>
-                              <div id="eterc9unlocked" style="display: none;">
+                              <button id="eterc9unlockbtn" class="challengesbtn" onclick="attemptEterChallUnlock(9)">Unlock</button>
+                              <div id="eterc9conditionsdiv" style="display: none;">
                                 <span>Infinity power doesn't affect normal dimensions. Instead it affects time dimensions with reduced effect.</span>
-                                <br>
-                                <br>
-                                <div class="outer">
-                                    <button id="eterc9" class="challengesbtn" onclick="startEternityChallenge(9)">Start</button>
-                                    <br>
-                                    <span id="ec9goal">Goal: z</span><br>
-                                    <span>Reward: Infinity power affects time dimensions. Currently <span id="ec9reward">reward</span>.</span>
-                                </div>
+                              </div>
+                              <button id="eterc9" class="challengesbtn" onclick="startEternityChallenge(9)">Start</button>
+                              <div id="eterc9goaldiv" style="display: none;">
+                                <span id="ec9goal">Goal: z</span><br>
+                                <span>Reward: Infinity power affects time dimensions. Currently <span id="ec9reward">reward</span>.</span>
+                              </div>
                             </div>
                         </td>
                         <td>
@@ -1682,23 +1651,20 @@
                               <br/>
                               <span id="ec10completions">Completed x times.</span>
                               <br/>
-                              <div id="eterc10locked">
+                              <div id="eterc10costdiv">
                                 <span>Requires <span id="ec10cost">y</span> eternity points.</span>
                                 <br/>
                                 <span>Costs 240 time theorems.</span>
-                                <br/>
-                                <button class="challengesbtn" onclick="attemptEterChallUnlock(10)">Unlock</button>
                               </div>
-                              <div id="eterc10unlocked" style="display: none;">
+                              <button id="eterc10unlockbtn" class="challengesbtn" onclick="attemptEterChallUnlock(10)">Unlock</button>
+                              <div id="eterc10conditionsdiv" style="display: none;">
                                 <span>Time and infinity dimensions are disabled, but normal dimensions are multiplied by infinities^10000.</span>
-                                <br>
-                                <br>
-                                <div class="outer">
-                                    <button id="eterc10" class="challengesbtn" onclick="startEternityChallenge(10)">Start</button>
-                                    <br>
-                                    <span id="ec10goal">Goal: z</span><br>
-                                    <span>Reward: Normal dimensions gain multiplier based on infinities. Currently <span id="ec10reward">reward<span>.</span>
-                                </div>
+                              </div>
+                              <button id="eterc10" class="challengesbtn" onclick="startEternityChallenge(10)">Start</button>
+                              <div id="eterc10goaldiv" style="display: none;">
+                                <span id="ec10goal">Goal: z</span><br>
+                                <span>Reward: Normal dimensions gain multiplier based on infinities. Currently <span id="ec10reward">reward<span>.</span>
+                              </div>
                             </div>
                         </td>
                     </tr>
@@ -1709,23 +1675,20 @@
                               <br/>
                               <span id="ec11completions">Completed x times.</span>
                               <br/>
-                              <div id="eterc11locked">
+                              <div id="eterc11costdiv">
                                 <span>Requires <span id="ec11cost">y</span> first dimension multiplier.</span>
                                 <br/>
                                 <span>Costs 300 time theorems.</span>
-                                <br/>
-                                <button class="challengesbtn" onclick="attemptEterChallUnlock(11)">Unlock</button>
                               </div>
-                              <div id="eterc11unlocked" style="display: none;">
+                              <button id="eterc11unlockbtn" class="challengesbtn" onclick="attemptEterChallUnlock(11)">Unlock</button>
+                              <div id="eterc11conditionsdiv" style="display: none;">
                                 <span>The only dimension multipliers are from dimension boosts and infinity power on normal dimensions.</span>
-                                <br>
-                                <br>
-                                <div class="outer">
-                                    <button id="eterc11" class="challengesbtn" onclick="startEternityChallenge(11)">Start</button>
-                                    <br>
-                                    <span id="ec11goal">Goal: z</span><br>
-                                    <span>Reward: Dimension boosts and infinity power affect normal dimensions more. Currently <span id="ec11reward">reward</span>.</span>
-                                </div>
+                              </div>
+                              <button id="eterc11" class="challengesbtn" onclick="startEternityChallenge(11)">Start</button>
+                              <div id="eterc11goaldiv" style="display: none;">
+                                <span id="ec11goal">Goal: z</span><br>
+                                <span>Reward: Dimension boosts and infinity power affect normal dimensions more. Currently <span id="ec11reward">reward</span>.</span>
+                              </div>
                             </div>
                         </td>
                         <td>
@@ -1734,23 +1697,20 @@
                               <br/>
                               <span id="ec12completions">Completed x times.</span>
                               <br/>
-                              <div id="eterc12locked">
+                              <div id="eterc12costdiv">
                                 <span>Requires <span id="ec12cost">y</span> timeshards.</span>
                                 <br/>
                                 <span>Costs 400 time theorems.</span>
-                                <br/>
-                                <button class="challengesbtn" onclick="attemptEterChallUnlock(12)">Unlock</button>
                               </div>
-                              <div id="eterc12unlocked" style="display: none;">
+                              <button id="eterc12unlockbtn" class="challengesbtn" onclick="attemptEterChallUnlock(12)">Unlock</button>
+                              <div id="eterc12conditionsdiv" style="display: none;">
                                 <span>The game runs 1000x slower.</span>
-                                <br>
-                                <br>
-                                <div class="outer">
-                                    <button id="eterc12" class="challengesbtn" onclick="startEternityChallenge(12)">Start</button>
-                                    <br>
-                                    <span id="ec12goal">Goal: z</span> in less than <span id="ec12constraint">w</span> seconds.<br>
-                                    <span>Reward: Replicanti grow faster. Currently <span id="ec12reward">reward</span> times original speed.</span>
-                                </div>
+                              </div>
+                              <button id="eterc12" class="challengesbtn" onclick="startEternityChallenge(12)">Start</button>
+                              <div id="eterc12goaldiv" style="display: none;">
+                                <span id="ec12goal">Goal: z</span> in less than <span id="ec12constraint">w</span> seconds.<br>
+                                <span>Reward: Replicanti grow faster. Currently <span id="ec12reward">reward</span> times original speed.</span>
+                              </div>
                             </div>
                         </td>
                     </tr>
@@ -1763,23 +1723,20 @@
                               <br/>
                               <span id="ec13completions">Completed x times.</span>
                               <br/>
-                              <div id="eterc13locked">
+                              <div id="eterc13costdiv">
                                 <span>Requires <span id="ec13cost">y</span> ticks per second.</span>
                                 <br/>
                                 <span>Costs 500 time theorems.</span>
-                                <br/>
-                                <button class="challengesbtn" onclick="attemptEterChallUnlock(13)">Unlock</button>
                               </div>
-                              <div id="eterc13unlocked" style="display: none;">
+                              <button id="eterc13unlockbtn" class="challengesbtn" onclick="attemptEterChallUnlock(13)">Unlock</button>
+                              <div id="eterc13conditionsdiv" style="display: none;">
                                 <span>Normal dimensions don't produce anything, but you get one antimatter and one infinity point per tick.</span>
-                                <br>
-                                <br>
-                                <div class="outer">
-                                    <button id="eterc13" class="challengesbtn" onclick="startEternityChallenge(13)">Start</button>
-                                    <br>
-                                    <span id="ec13goal">Goal: z</span><br>
-                                    <span>Reward: Infinite Time is slightly stronger. Tickspeed effect on time dimensions is <span id="ec13reward">reward</span>.</span>
-                                </div>
+                              </div>
+                              <button id="eterc13" class="challengesbtn" onclick="startEternityChallenge(13)">Start</button>
+                              <div id="eterc13goaldiv" style="display: none;">
+                                <span id="ec13goal">Goal: z</span><br>
+                                <span>Reward: Infinite Time is slightly stronger. Tickspeed effect on time dimensions is <span id="ec13reward">reward</span>.</span>
+                              </div>
                             </div>
                         </td>
                       </tr>
