@@ -737,6 +737,14 @@ function onLoad() {
             newLimit: new Decimal(Number.MAX_VALUE)
         }
     }
+    if (player.replicanti.galaxybuyer !== undefined && typeof player.replicanti.galaxybuyer !== 'object') {
+      player.replicanti.galaxybuyer = {
+          on: false,
+          bulk: 1,
+          wait: 0,
+          lastTick: Date.now()
+      }
+    }
     if (player.darkMatter === undefined) {
       player.darkMatter = new Decimal(1);
     }
@@ -1764,7 +1772,7 @@ function updateChallenges() {
     }
 
     // Show the normal challenges tab (and the challenges tab overall) if and only if infinity tab is shown.
-    if (getInfinities() > 0 || player.eternities > 0) {
+    if (player.infinitied > 0 || player.eternities > 0) {
         document.getElementById('challengessubtabbtn').style.display = 'inline-block';
         document.getElementById('challengesbtn').style.display = 'inline-block';
         document.getElementById('challengetimesbtn').style.display = 'inline-block';
@@ -2638,7 +2646,7 @@ function timeDisplayShort(time) {
 const allAchievements = {
   r11 : "You gotta start somewhere",
   r12 : "100 antimatter is a lot",
-  r13  : "Half life 3 confirmed",
+  r13 : "Half life 3 confirmed",
   r14 : "L4D: Left 4 Dimensions",
   r15 : "5 Dimension Antimatter Punch",
   r16 : "We couldn't afford 9",
@@ -3692,9 +3700,9 @@ function getTSBenefit (i, num) {
   } else if (i === 6) {
     return Decimal.pow(secondsInInfinity, num);
   } else if (i === 7) {
-    return i;
+    return num;
   } else if (i === 8) {
-    return i;
+    return num;
   }
 }
 
@@ -3808,8 +3816,8 @@ function getCurrentReplicantiGalaxyGain () {
 
 function replicantiGalaxy() {
     if (player.replicanti.amount.gte(player.replicanti.limit) && player.replicanti.galaxies < player.replicanti.gal) {
-        player.replicanti.amount = new Decimal(1)
         player.replicanti.galaxies += getCurrentReplicantiGalaxyGain();
+        player.replicanti.amount = new Decimal(1)
         player.galaxies -= 1
         galaxyReset()
         updateInfCosts()
@@ -5110,25 +5118,11 @@ function updateAutobuyers() {
 
     player.autoSacrifice.isOn = document.getElementById("13ison").checked
     player.eternityBuyer.isOn = document.getElementById("eternityison").checked
-    player.replicanti.galaxybuyer.on = document.getElementById("replgalaxyison").checked
+    if (player.replicanti.galaxybuyer) {
+        player.replicanti.galaxybuyer.on = document.getElementById("replgalaxyison").checked
+    }
     priorityOrder();
 }
-
-
-/*function loadAutoBuyers() {
-    for (var i=0; i<12; i++) {
-        if (player.autobuyers[i]%1 !== 0 ) {
-            switch(i) {
-                case 8: player.autobuyers[i].target = "buyTickSpeed()";
-                case 9: player.autobuyers[i].target = "document.getElementById('softReset').click";
-                case 10: player.autobuyers[i].target = "document.getElementById('secondSoftReset').click";
-                case 11: player.autobuyers[i].target = "document.getElementById('bigcrunch').click";
-                default: player.autobuyers[i].target = "buyOneDimension(" + i+1 + ")";
-            }
-        }
-    }
-
-}*/
 
 
 function autoBuyerArray() {
@@ -5205,8 +5199,10 @@ function updatePriorities() {
     if (!player.achievements.includes('r134') || isNaN(replWait)) {
       replWait = 0;
     }
-    player.replicanti.galaxybuyer.bulk = replBulk;
-    player.replicanti.galaxybuyer.wait = replWait;
+    if (player.replicanti.galaxybuyer) {
+        player.replicanti.galaxybuyer.bulk = replBulk;
+        player.replicanti.galaxybuyer.wait = replWait;
+    }
     var eterValue = new Decimal(document.getElementById("priority13").value)
     if (!isNaN(eterValue)) player.eternityBuyer.limit = eterValue
 
@@ -5941,7 +5937,7 @@ function eternity(force, enteringChallenge) {
             document.getElementById("replicantidiv").style.display="none"
             document.getElementById("replicantiunlock").style.display="inline-block"
         }
-        if (player.eternities > 2 && player.replicanti.galaxybuyer === undefined) {
+        if (player.eternities > 2 && player.replicanti.galaxybuyer === undefined || typeof player.replicanti.galaxybuyer !== 'object') {
           player.replicanti.galaxybuyer = {
               on: false,
               bulk: 1,
@@ -6740,7 +6736,7 @@ function startInterval() {
         if (player.replicanti.galaxybuyer && player.replicanti.galaxybuyer.on &&
           player.replicanti.amount.gte(player.replicanti.limit) &&
           getCurrentReplicantiGalaxyGain() >= player.replicanti.galaxybuyer.bulk &&
-          Date.now() - player.replicanti.galaxybuyer.lastTick >= player.replicanti.galaxyBuyer.wait * 1000) {
+          Date.now() - player.replicanti.galaxybuyer.lastTick >= player.replicanti.galaxybuyer.wait * 1000) {
             replicantiGalaxy();
             player.replicanti.galaxybuyer.lastTick = Date.now();
         }
@@ -7102,7 +7098,7 @@ function startInterval() {
         if (player.money.gte(getNewInfReq())) document.getElementById("newDimensionButton").className = "newdim"
         else document.getElementById("newDimensionButton").className = "newdimlocked"
 
-        while (player.eternities > 24 && getNewInfReq().lt(player.money)) newDimension()
+        while (player.eternities > 24 && !player.infDimensionsUnlocked[7] && getNewInfReq().lt(player.money)) newDimension()
 
         document.getElementById("newDimensionButton").innerHTML = "Get " + shortenCosts(getNewInfReq()) + " antimatter to unlock a new Dimension."
 
@@ -7326,7 +7322,7 @@ var conditionalNewsArray = ["Our universe is falling apart. We are all evacuatin
 "Should we call antimatter Matter now? There seems to be more of it."]
 
 var cheatCodeNewsArray = [
-  "-2: All kinds of points are less than 1e100. If not, you or I made a mistake."
+  "-2: All kinds of points are less than 1e100. If not, you or I made a mistake.",
   "-1: I initially understood letter notation incorrectly, but I don't want to fix it, so I'm instead putting in this disclaimer. For the purposes of these messages about points, all numbers in letter notation are 1000 times what they are in the regular game (so 1a is a million, not a thousand).",
   "0: The numbered messages about the sixteen different types of points can give a cheat code when considered correctly.",
   "1: Your alternative points are your exponential points or your logarithmic points, whichever is greater.",
