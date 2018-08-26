@@ -782,6 +782,7 @@
             <div id="eternitied">You have eternitied x times.</div>
             <div id="thiseternity">You have spent x in this eternity</div>
             <div id="besteternity">Your fastest eternity is in x.</div>
+            <div id="bankedInfinities">You have x banked infinities.</div>
             <div id="infinitied">You have infinitied x times.</div>
             <div id="bestInfinity">Your fastest infinity is in x.</div>
             <div id="thisInfinity">You have spent x in this Infinity.</div>
@@ -1156,7 +1157,7 @@
                             <div id="Like feasting on a behind" class="achievement achievementlocked" style="background-image: url(images/85.png)" ach-tooltip="Eternity without buying dimensions 1-8. Reward: Strong multiplier to dimensions 1-8 based on eternities."><br></div>
                         </td>
                         <td>
-                            <div id="Popular music" class="achievement achievementlocked" style="background-image: url(images/86.png)" ach-tooltip="Have 180 times more replicanti galaxies than normal galaxies. Reward: Replicanti can increase beyond the amount needed for a replicanti galaxy."><br></div>
+                            <div id="Popular music" class="achievement achievementlocked" style="background-image: url(images/86.png)" ach-tooltip="Have at least 180 times as many replicanti galaxies as normal galaxies (with at least 1 of each). Reward: Replicanti can increase beyond the amount needed for a replicanti galaxy."><br></div>
                         </td>
                         <td>
                             <div id="But I wanted another prestige layer..." class="achievement achievementlocked" style="background-image: url(images/87.png)" ach-tooltip="Reach 1.79e308 EP. Reward: Time dimensions get a multiplier based on EP."><br></div>
@@ -1904,14 +1905,34 @@
                 <button class="storebtn" id="togglebulk" style="font-size: 100%; width: 150px; height: 50px;margin: 3px" onclick="toggleBulk()">Disable bulk buy                     </button>
                 <button class="storebtn" id="togglecrunchmode" style="font-size: 100%; width: 150px; height: 50px;margin: 3px; display: none" onclick="toggleCrunchMode()">Auto crunch mode: amount</button>
                 <br>
-                <div class="autoBuyerDiv" id="autoBuyerEter">
-                    <div>Automatic Eternity</div>
-                    <div><span>Amount of EP to wait until reset:</span>
-                    <input type="text" onchange="updatePriorities()" id="priority13"></input></div>
-                    <br>
-                    <span style="font-size: 80%">Is active</span>
-                    <input type="checkbox" onchange="updateAutobuyers()"  id="eternityison"></input>
-                </div>
+                <tr>
+                        <td>
+                            <div class="autoBuyerDiv" id="autoBuyerReplicantiGalaxies">
+                                <div>Automatic Replicanti Galaxies</div>
+                                <div id="replgalaxybulk" style="display: none">
+                                    <span>Bulk size:</span>
+                                    <input type="text" onchange="updatePriorities()" id="bulkreplgalaxy"></input>
+                                    <span style="font-size: 80%">Buy replicanti galaxies every X seconds (0 to always buy):</span>
+                                    <input type="text" onchange="updatePriorities()" id="waitreplgalaxy"></input>
+                                </div>
+                                <br>
+                                <span style="font-size: 80%">Is active</span>
+                                <input type="checkbox" onchange="updateAutobuyers()"   id="replgalaxyison"></input>
+                            </div>
+                        </td>
+                        <td>
+                              <div class="autoBuyerDiv" id="autoBuyerEter">
+                                  <div>Automatic Eternity</div>
+                                  <div><span>Amount of EP to wait until reset:</span>
+                                  <input type="text" onchange="updatePriorities()" id="priority13"></input></div>
+                                  <br>
+                                  <span style="font-size: 80%">Is active</span>
+                                  <input type="checkbox" onchange="updateAutobuyers()"  id="eternityison"></input>
+                              </div>
+                        </td>
+                        <td>
+                        </td>
+                </tr>
                 <tr>
                         <td>
                             <div class="autoBuyerDiv" id="autoBuyerDimBoost" style="font-size: 11px;">
@@ -2233,7 +2254,7 @@
                     </tr>
                     <tr>
                         <td>
-                            <button id="postinfi13" class="infinistorebtn1" onclick="buyInfinityUpgrade('infinitiedGeneration',20e6)">You passively generate Infinitied stat based on your fastest infinity.<br>1 every <br>Cost: 20 M IP</button>
+                            <button id="postinfi13" class="infinistorebtn1" onclick="buyInfinityUpgrade('infinitiedGeneration',20e6)">You passively generate infinitied stat based on your fastest infinity.<br>1 every <br>Cost: 20 M IP</button>
                         </td>
                         <td>
                             <button id="postinfi23" class="infinistorebtn1" onclick="buyInfinityUpgrade('bulkBoost',5e9)">Option to bulk buy Dimension Boosts <br>Cost: </button>
@@ -2278,8 +2299,6 @@
                 <p id="replicantiapprox"></p>
                 <br/>
                 <button class="storebtn" id="replicantireset" onclick="replicantiGalaxy()" style="width: 200px; height: 70px; font-size: 12px">Reset replicanti amount, but get a free galaxy</button>
-                <br/>
-                <button class="storebtn" id="replicantiresettoggle" onclick="replicantiGalaxyAutoToggle()" style="width: 150px; height: 30px; font-size: 12px; display: none">Auto galaxy OFF</button>
                 <br/>
                 <div id="replicantigalaxypowerdiv" style="display: none;">
                   <p>For next eternity:</p>
