@@ -7,7 +7,6 @@
     <link rel="icon" type="image/png" href="icon.png">
     <meta name="Antimatter Dimensions" content="A game about huge numbers and watching them go up." />
     <h1 id="hiddenheader" style="display: none">Antimatter Dimensions</h1>
-    <script type="text/javascript" src='https://cdn1.kongregate.com/javascripts/kongregate_api.js'></script>
     <script type="text/javascript" src="javascripts/jquery-3.2.1.min.js"></script>
     <script type="text/javascript" src="javascripts/notify.js"></script>
     <link rel="stylesheet" type="text/css" href="stylesheets/styles.css?2">
@@ -70,27 +69,11 @@
             <button id="infinitybtn" style="font-family: Typewriter; font-size: 20px; display: none" class="infinitybtn">Infinity</button>
             <button id="eternitystorebtn" style="font-family: Typewriter; font-size: 20px; display: none" class="eternitytabbtn">Eternity</button>
             <button id="cheatbtn" style="font-family: Typewriter; font-size: 20px; display: none" class="tabbtn">Cheat</button>
-            <button id="shopbtn" style="font-family: Typewriter; font-size: 20px" class="tabbtn">Shop</button>
         </div>
         <div id="emptiness" class="tab" style="font-size: 150%">
             <br> The world has collapsed on itself due to excess of antimatter.
             <br>
             <br>
-        </div>
-        <div id="shop" class="tab" style="font-size: 15px" >
-            <div align="center">
-                <br>
-                <span id="kongip"> Double your IP gain from all sources. Forever. </span><br>
-                <button class="greedbtn" onclick="purchaseIP()">50 Kreds</button>
-                <br><br><br>
-                <span id="kongdim"> Double all your dimension multipliers (dimensions 1-8). Forever. </span><br>
-                <button class="greedbtn" onclick="purchaseDimMult()">30 Kreds</button>
-                <br><br><br>
-                <span>Get 6 hours worth of offline production. (Doesn't work for autobuyers)</span><br>
-                <button class="greedbtn" onclick="purchaseTimeSkip()">10 Kreds</button>
-                <br><br><br>
-                <span style="font-size: 12px"><b>Disclaimer: These are not required to progress in the game, they are just to help and support the developer.</b></span>
-            </div>
         </div>
         <div id="cheat" class="tab" style="font-size: 15px" >
             <div align="center">
@@ -169,6 +152,16 @@
                         </td>
                         <td>
                             <button id="ts6" class="eternityttbtn" onclick="buyTimeStudy(6)">Increasing multiplier to IP (seconds in infinity)<br/>Bought: <span id="ts6bought">x</span><br/>Cost: <span id="ts6cost">x</span> TT<br/><span id='ts6desc'></span></button>
+                        </td>
+                    </tr>
+                </table>
+                <table class="table" style="margin: 0 auto;">
+                    <tr id="tsrow4">
+                        <td>
+                            <button id="ts7" class="eternityttbtn" onclick="buyTimeStudy(5)">You get 1% more of your IP on crunch every seconds<br/>Bought: <span id="ts7bought">x</span><br/>Cost: <span id="ts7cost">x</span> TT<br/><span id='ts7desc'></span></button>
+                        </td>
+                        <td>
+                            <button id="ts8" class="eternityttbtn" onclick="buyTimeStudy(6)">1% more of your infinities are kept on eternity<br/>Bought: <span id="ts8bought">x</span><br/>Cost: <span id="ts8cost">x</span> TT<br/><span id='ts8desc'></span></button>
                         </td>
                     </tr>
                 </table>
@@ -1096,7 +1089,7 @@
                     </tr>
                     <tr id="achRow10">
                         <td>
-                            <div id="Costco sells dimboosts now" class="achievement achievementlocked" style="background-image: url(images/65.png)" ach-tooltip="Bulk 750 soft resets at once. Reward: Soft resets are 1% more powerful (to normal dims)."><br></div>
+                            <div id="Costco sells dimboosts now" class="achievement achievementlocked" style="background-image: url(images/65.png)" ach-tooltip="Bulk 750 soft resets at once. Reward: Soft resets are cheaper based on EP."><br></div>
                         </td>
                         <td>
                             <div id="This mile took an Eternity" class="achievement achievementlocked" style="background-image: url(images/66.png)" ach-tooltip="Get all eternity milestones. Reward: Gain a small bonus to time dimensions based on eternities."><br></div>
@@ -1122,7 +1115,7 @@
                     </tr>
                     <tr id="achRow11">
                         <td>
-                            <div id="Yo dawg, I heard you liked infinities..." class="achievement achievementlocked" style="background-image: url(images/73.png)" ach-tooltip="Have all your past 10 infinities be at least 1.79e308 times higher IP than the previous one. Reward: Your antimatter doesn't reset on dimension boost or galaxy."><br></div>
+                            <div id="Yo dawg, I heard you liked infinities..." class="achievement achievementlocked" style="background-image: url(images/73.png)" ach-tooltip="Have each infinity be at least 1.79e308 times higher IP than the previous one within your past 10 infinities. Reward: Your antimatter doesn't reset on dimension boost or galaxy."><br></div>
                         </td>
                         <td>
                             <div id="Infinite time" class="achievement achievementlocked" style="background-image: url(images/74.png)" ach-tooltip="Get 308 tickspeed upgrades. Reward: Time dimensions are very slightly affected by tickspeed."><br></div>

@@ -255,7 +255,7 @@ goal: Complete IC3 in EC11. Reward: IC3 multiplier per tickspeed upgrade is mult
 
 (formula for "I wish I had gotten 7 eternities": 7^(tiers completed))
 (formula for "Do you really need a guide for that?": x + 1)
-(formula for "Do I really need to infinity": (x + 1)^2)
+(formula for "Do I really need to infinity": another x + 1)
 (formula for "Like feasting on a behind": x^sqrt(x))
 (what is this for 25 million? 1e36989, apparently. That's not too much.)
 (formula for "But I wanted another prestige layer": log2(x))
