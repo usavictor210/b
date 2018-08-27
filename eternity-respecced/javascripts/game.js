@@ -4133,14 +4133,17 @@ function updateECDisplay (x) {
   // locked vs unlocked
   if (player.eternityChallenges.unlocked === x) {
     document.getElementById('eterc' + x).style.display = 'inline-block';
-    document.getElementById('eterc' + x + 'conditionsdiv').style.display = 'block';
-    document.getElementById('eterc' + x + 'goaldiv').style.display = 'block';
     document.getElementById('eterc' + x + 'unlockbtn').style.display = 'none';
   } else {
     document.getElementById('eterc' + x).style.display = 'none';
+    document.getElementById('eterc' + x + 'unlockbtn').style.display = 'inline-block';
+  }
+  if (player.eternityChallenges.unlocked === x || ecCompletions(x) > 0) {
+    document.getElementById('eterc' + x + 'conditionsdiv').style.display = 'block';
+    document.getElementById('eterc' + x + 'goaldiv').style.display = 'block';
+  } else {
     document.getElementById('eterc' + x + 'conditionsdiv').style.display = 'none';
     document.getElementById('eterc' + x + 'goaldiv').style.display = 'none';
-    document.getElementById('eterc' + x + 'unlockbtn').style.display = 'inline-block';
   }
   // start vs running vs completed
   if (player.eternityChallenges.current === x) {
@@ -7064,10 +7067,12 @@ function startInterval() {
             }
             if (id >= 7 && id < 11) document.getElementById("infoScale").innerHTML = "If every antimatter were a planck volume, you would have enough to fill " + formatValue(player.options.notation, player.money * 4.22419e-105 / scale1[id], 2, 1) + scale2[id];
             else document.getElementById("infoScale").innerHTML = "If every antimatter were a planck volume, you would have enough to make " + formatValue(player.options.notation, player.money.times(4.22419e-105).dividedBy(scale1[id]), 2, 1) + scale2[id];
-        } else { //does this part work correctly? i doubt it does
-            if (player.money.times(1e-54) < 2.82e-45) document.getElementById("infoScale").innerHTML = "If every antimatter were " + formatValue(player.options.notation,2.82e-45 / 1e-54 / player.money, 2, 1) + " attometers cubed, you would have enough to make a proton.";
-            else if (player.money * 1e-63 < 2.82e-45) document.getElementById("infoScale").innerHTML = "If every antimatter were " + formatValue(player.options.notation,2.82e-45 / 1e-63 / player.money, 2, 1) + " zeptometers cubed, you would have enough to make a proton.";
-            else if (player.money * 1e-72 < 2.82e-45) document.getElementById("infoScale").innerHTML = "If every antimatter were " + formatValue(player.options.notation,2.82e-45 / 1e-72 / player.money, 2, 1) + " yoctometers cubed, you would have enough to make a proton.";
+        } else {
+            //does this part work correctly? i doubt it does - hevipelle
+            //you and me both - dan-simon
+            if (player.money.times(1e-54).lt(2.82e-45)) document.getElementById("infoScale").innerHTML = "If every antimatter were " + formatValue(player.options.notation,2.82e-45 / 1e-54 / player.money, 2, 1) + " attometers cubed, you would have enough to make a proton.";
+            else if (player.money.times(1e-63).lt(2.82e-45)) document.getElementById("infoScale").innerHTML = "If every antimatter were " + formatValue(player.options.notation,2.82e-45 / 1e-63 / player.money, 2, 1) + " zeptometers cubed, you would have enough to make a proton.";
+            else if (player.money.times(1e-72).lt(2.82e-45)) document.getElementById("infoScale").innerHTML = "If every antimatter were " + formatValue(player.options.notation,2.82e-45 / 1e-72 / player.money, 2, 1) + " yoctometers cubed, you would have enough to make a proton.";
             else document.getElementById("infoScale").innerHTML = "If every antimatter were " + formatValue(player.options.notation,2.82e-45 / 4.22419e-105 / player.money, 2, 1) + " planck volumes, you would have enough to make a proton.";
         }
 
