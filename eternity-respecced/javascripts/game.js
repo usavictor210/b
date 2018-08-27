@@ -238,7 +238,6 @@ var player = {
         sacrificeConfirmation: true,
         retryChallenge: false,
         bulkOn: true,
-        cloud: true,
         hotkeys: true,
         theme: undefined,
         eternityconfirm: true,
@@ -451,7 +450,6 @@ function onLoad() {
     if (player.options.sacrificeConfirmation === undefined) player.options.sacrificeConfirmation = true;
     if (player.options.retryChallenge === undefined) player.options.retryChallenge = false;
     if (player.options.bulkOn === undefined) player.options.bulkOn = true
-    if (player.options.cloud === undefined) player.options.cloud = true
     if (player.options.hotkeys === undefined) player.options.hotkeys = true
     if (player.options.eternityconfirm === undefined) player.options.eternityconfirm = true
     if (player.achievements === undefined) player.achievements = [];
@@ -815,8 +813,6 @@ function onLoad() {
     toggleChallengeRetry()
     toggleBulk()
     toggleBulk()
-    toggleCloud()
-    toggleCloud()
     respecToggle()
     respecToggle()
     toggleEternityConf()
@@ -7632,16 +7628,6 @@ function farmEter (seconds) {
 }
 
 // end cheats
-
-function toggleCloud() {
-    if (player.options.cloud) {
-        player.options.cloud = false
-        document.getElementById("cloud").innerHTML = "Automatic cloud saving/loading OFF"
-    } else {
-        player.options.cloud = true
-        document.getElementById("cloud").innerHTML = "Automatic cloud saving/loading ON"
-    }
-}
 
 
 setInterval(function () {
