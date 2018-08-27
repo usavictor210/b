@@ -9,6 +9,8 @@
   <textarea id="timeshards"></textarea>
   <div>Time theorems</div>
   <textarea id="tt"></textarea>
+  <div>Time studies unlocked</div>
+  <textarea id="ts"></textarea>
   <div>Replicanti galaxy power</div>
   <textarea id="galpower"></textarea>
   <div>Seconds in infinity</div>
@@ -118,13 +120,7 @@ getTSPower[5] = function (x, sh, s, galPower, st) {
   return Math.log(s) / Math.log(10) * 1.1 * 56 * st;
 }
 
-function f(ip, timeshards, tt, galPower, secondsInInfinity) {
-
-let ttOpen = 4;
-
-if (tt > 60) {
-  ttOpen += 2;
-}
+function f(ip, timeshards, tt, ttOpen, galPower, secondsInInfinity) {
 
 let table = {0: {}};
 
@@ -151,6 +147,7 @@ document.getElementById('button').onclick = function () {
     +document.getElementById('ip').value,
     +document.getElementById('timeshards').value,
     +document.getElementById('tt').value,
+    +document.getElementById('ts').value,
     +document.getElementById('galpower').value,
     +document.getElementById('seconds').value)
 }

@@ -2257,11 +2257,11 @@ function respecTimeStudies() {
       player.timestudy.studies[i] = 0;
     }
   }
-  if (player.eternityChallenges.unlocked) {
-    let u = player.eternityChallenges.unlocked;
-    player.timestudy.theorem += ecTTCosts[u];
+  let ecUnlocked = player.eternityChallenges.unlocked
+  if (ecUnlocked && !player.eternityChallenges.current) {
+    player.timestudy.theorem += ecTTCosts[ecUnlocked];
     player.eternityChallenges.unlocked = null;
-    updateECDisplay(u);
+    updateECDisplay(ecUnlocked);
   }
   updateTheoremButtons();
   updateTimeStudyButtons();
@@ -3894,7 +3894,7 @@ let incrementECCosts = {
 }
 
 let initialECGoals = {
-  1: new Decimal('1e1500'),
+  1: new Decimal('1e1400'),
   2: new Decimal('1e500'),
   3: new Decimal('1e500'),
   4: new Decimal('1e2800'),
@@ -3910,7 +3910,7 @@ let initialECGoals = {
 }
 
 let incrementECGoals = {
-  1: new Decimal('1e300'),
+  1: new Decimal('1e200'),
   2: new Decimal('1e100'),
   3: new Decimal('1e100'),
   4: new Decimal('1e400'),
@@ -4084,6 +4084,8 @@ function attemptEterChallUnlock (x) {
   if (canUnlockEterChall(x)) {
     player.timestudy.theorem -= ecTTCosts[x];
     player.eternityChallenges.unlocked = x;
+    updateTheoremButtons()
+    updateTimeStudyButtons()
     updateECDisplay(x);
     return true;
   } else {
@@ -5687,16 +5689,17 @@ function eternity(force, enteringChallenge) {
         if (player.eternityChallenges.current) {
           updateECDisplay(player.eternityChallenges.current);
         }
+
+        let ec = player.eternityChallenges.current;
         if (!enteringChallenge) {
-          let c = player.eternityChallenges.current;
-          if (c) {
+          if (ec) {
             if (!force) {
               // The player actually reached eternity in a challenge. Good for the player, I guess.
-              player.eternityChallenges.done[c] = Math.min(ecCompletions(c) + 1, 5);
+              player.eternityChallenges.done[ec] = Math.min(ecCompletions(ec) + 1, 5);
               updateTotalTiersDone();
             }
             player.eternityChallenges.current = null;
-            updateECDisplay(c);
+            updateECDisplay(ec);
           }
         }
         player = {
@@ -5892,7 +5895,7 @@ function eternity(force, enteringChallenge) {
             eternityBuyer: player.eternityBuyer,
             options: player.options
         };
-        if (player.respec) respecTimeStudies()
+        if (player.respec) respecTimeStudies(ec)
         player.respec = false
         if (!force) {
           giveAchievement("Time is relative")
