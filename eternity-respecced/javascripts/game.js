@@ -3449,7 +3449,7 @@ function buyEPMult() {
 
 function updateAchPow() {
     var amount = 0;
-    for (let i = 1; i <= 10; i++) {
+    for (let i = 1; i <= 13; i++) {
       let rowCompleted = true;
       for (let j = 1; j <= 8; j++) {
         if (!player.achievements.includes(("r" + i) + j)) {
@@ -3804,6 +3804,14 @@ function upgradeReplicantiGalaxy() {
     }
 }
 
+function getReplicantiGalaxyBuyerBulk () {
+    let ret = player.replicanti.galaxybuyer.bulk;
+    if (ret === 'max') {
+        ret = player.replicanti.gal - player.replicanti.galaxies
+    }
+    return ret;
+}
+
 function getCurrentReplicantiGalaxyGain () {
     let bulkGain = Math.floor(player.replicanti.amount.ln() / (player.replicanti.limit.ln() * 5));
     if (!player.achievements.includes('r134')) {
@@ -3986,7 +3994,10 @@ function hasInfiniteTime () {
   return player.achievements.includes("r112");
 }
 
-function infiniteTimeEffect () {
+function infiniteTimeEffect (c) {
+  if (c === undefined) {
+    c = ecCompletions(13);
+  }
   if (hasInfiniteTime()) {
     return player.tickspeed.dividedBy(1000).pow(-1e-5 + c * -2e-6);
   } else {
@@ -4021,7 +4032,7 @@ function ecNumReward (x) {
   } else if (x === 12) {
     return 1 + c;
   } else if (x === 13) {
-    return infiniteTimeEffect();
+    return infiniteTimeEffect(c);
   }
 }
 
@@ -4784,7 +4795,7 @@ function setAchieveTooltip() {
     aLot.setAttribute('ach-tooltip', "Reach " + shortenCosts(new Decimal('1e1000000')) + " replicanti. Reward: Replicanti increase faster the more you have.")
     infiniteIP.setAttribute('ach-tooltip', "Reach "+shortenCosts(new Decimal("1e30008"))+" IP.")
     over9000.setAttribute('ach-tooltip', "Get a total sacrifice multiplier of "+shortenCosts(new Decimal("1e9000"))+". Reward: Sacrifice doesn't reset your dimensions.")
-    dawg.setAttribute('ach-tooltip', "Have all your past 10 infinities be at least "+shortenMoney(Number.MAX_VALUE)+" times higher IP than the previous one. Reward: Your antimatter doesn't reset on dimension boost or galaxy.")
+    dawg.setAttribute('ach-tooltip', "Have each infinity be at least "+shortenMoney(Number.MAX_VALUE)+" times higher IP than the previous one within your past 10 infinities. Reward: Your antimatter doesn't reset on dimension boost or galaxy.")
     layer.setAttribute('ach-tooltip', "Reach "+shortenMoney(Number.MAX_VALUE)+" EP. Reward: Time dimensions get a multiplier based on EP.")
     fkoff.setAttribute('ach-tooltip', "Reach "+shortenCosts(new Decimal("1e22000"))+" IP without any time studies. Reward: Time dimensions are multiplied by the total number of studies you have.")
     infstuff.setAttribute('ach-tooltip', "Reach "+shortenCosts(new Decimal("1e140000"))+" IP without buying IDs or IP multipliers.")
@@ -5733,7 +5744,7 @@ function eternity(force, enteringChallenge) {
             infinityUpgrades: player.infinityUpgrades,
             infinityPoints: new Decimal(0),
             infinitied: 0,
-            bankedInfinities: player.bankedInfinities + Math.floor(player.infinitied * getTSBenefit(8, player.timestudy.studies[8])),
+            bankedInfinities: player.bankedInfinities + Math.floor(player.infinitied * getTSBenefit(8, player.timestudy.studies[8]) / 100),
             totalTimePlayed: player.totalTimePlayed,
             bestInfinityTime: 9999999999,
             thisInfinityTime: 0,
@@ -6735,7 +6746,7 @@ function startInterval() {
 
         if (player.replicanti.galaxybuyer && player.replicanti.galaxybuyer.on &&
           player.replicanti.amount.gte(player.replicanti.limit) &&
-          getCurrentReplicantiGalaxyGain() >= player.replicanti.galaxybuyer.bulk &&
+          getCurrentReplicantiGalaxyGain() >= getReplicantiGalaxyBuyerBulk() &&
           Date.now() - player.replicanti.galaxybuyer.lastTick >= player.replicanti.galaxybuyer.wait * 1000) {
             replicantiGalaxy();
             player.replicanti.galaxybuyer.lastTick = Date.now();
@@ -6757,7 +6768,7 @@ function startInterval() {
 
         if (player.achievements.includes('r134') && player.achievements.includes('r126') && player.replicanti.amount.gte(player.replicanti.limit)) {
             let currentGalGain = getCurrentReplicantiGalaxyGain();
-            let maxGalGain = player.replicanti.galaxies - player.replicanti.gal;
+            let maxGalGain = player.replicanti.gal - player.replicanti.galaxies;
             let newGalGain = Math.min(currentGalGain + 1, maxGalGain);
             let estimate = getReplicantiETA(player.replicanti.amount, player.replicanti.limit.pow(newGalGain * 5));
             let galGainDisplay = (newGalGain === maxGalGain) ? 'maximum' : newGalGain;
