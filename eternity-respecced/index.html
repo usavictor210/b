@@ -171,13 +171,24 @@
                 <table class="table" style="margin: 0 auto">
                     <tr>
                         <td>
-                            <button id="eter1" class="eternityupbtn" onclick="buyEternityUpgrade(1, 5)">Infinity Dimensions multiplier based on unspent EP (x+1)<br>Currently: x<br>Cost: 5 EP</button>
+                            <button id="eter1" class="eternityupbtn" onclick="buyEternityUpgrade(1, 5)">Infinity Dimension multiplier based on unspent EP (x+1)<br>Currently: x<br>Cost: 5 EP</button>
                         </td>
                         <td>
-                            <button id="eter2" class="eternityupbtn" onclick="buyEternityUpgrade(2, 10)">"Infinity Dimension multiplier based on eternities (x^log4(2x))<br>Currently: x<br>Cost: 10 EP</button>
+                            <button id="eter2" class="eternityupbtn" onclick="buyEternityUpgrade(2, 10)">Infinity Dimension multiplier based on eternities (x^log4(2x))<br>Currently: x<br>Cost: 10 EP</button>
                         </td>
                         <td>
-                            <button id="eter3" class="eternityupbtn" onclick="buyEternityUpgrade(3, 1e4)">"Infinity Dimension multiplier based on timeshards (x^log4(2x))<br>Currently: x<br>Cost: 10 EP</button>
+                            <button id="eter3" class="eternityupbtn" onclick="buyEternityUpgrade(3, 1e4)">Infinity Dimension multiplier based on timeshards (x^log4(2x))<br>Currently: x<br>Cost: x EP</button>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <button id="eter4" class="eternityupbtn" onclick="buyEternityUpgrade(4, 1e6)">Eternity production is boosted by unspent EP (1+floor(log10(EP)/6))<br>Currently: x<br>Cost: x EP</button>
+                        </td>
+                        <td>
+                            <button id="eter5" class="eternityupbtn" onclick="buyEternityUpgrade(5, 1e9)">Timeshard production is boosted by eternities (1+eternities)<br>Currently: x<br>Cost: x EP</button>
+                        </td>
+                        <td>
+                            <button id="eter6" class="eternityupbtn" onclick="buyEternityUpgrade(6, 1e12)">EP production is boosted by timeshards (1+log10(timeshards)^0.5)<br>Currently: x<br>Cost: x EP</button>
                         </td>
                     </tr>
                 </table>

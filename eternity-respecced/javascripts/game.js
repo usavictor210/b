@@ -1682,6 +1682,9 @@ function updateDimensions() {
     document.getElementById("eter1").innerHTML = "Infinity Dimension multiplier based on unspent EP (x+1)<br>Currently: "+shortenMoney(player.eternityPoints.plus(1))+"x<br>Cost: 5 EP";
     document.getElementById("eter2").innerHTML = "Infinity Dimension multiplier based on eternities (x^log4(2x))<br>Currently: "+shortenMoney(Decimal.pow(player.eternities, Math.log(player.eternities*2)/Math.log(4)))+"x<br>Cost: 10 EP";
     document.getElementById("eter3").innerHTML = "Infinity Dimension multiplier based on timeshards (x/"+formatValue(player.options.notation, 1e12, 0, 0)+"+1)<br>Currently: "+shortenMoney(player.timeShards.div(1e12).plus(1))+"x<br>Cost: "+shortenCosts(1e4)+" EP"
+    document.getElementById("eter4").innerHTML = "Eternity production is boosted by unspent EP (1+floor(log10(EP)/4))<br>Currently: "+(1 + Math.floor(player.eternityPoints.max(1).log(10) / 4))+"x<br>Cost: "+shortenCosts(1e6)+" EP";
+    document.getElementById("eter5").innerHTML = "Timeshard production is boosted by eternities (1+eternities)<br>Currently: "+shortenMoney(1 + player.eternities)+"x<br>Cost: "+shortenCosts(1e9)+" EP";
+    document.getElementById("eter6").innerHTML = "EP production is boosted by timeshards (1+log10(timeshards)^0.3)<br>Currently: "+shortenMoney(1 + Math.pow(Math.max(player.timeShards.log(10), 0), 0.3))+"x<br>Cost: "+shortenCosts(1e12)+" EP"
 
     displayAllECRewards();
     checkAllECUnlockStatuses();
@@ -2043,6 +2046,9 @@ function getPower(dim) {
     return new Decimal(1);
   }
   var ret = dim.power;
+  if (player.eternityUpgrades.includes(5)) {
+    ret = ret.times(1 + player.eternities);
+  }
   if (player.achievements.includes('r117')) {
     ret = ret.times(1 + Math.pow(Math.log(player.eternities), 1.5) / Math.log(100));
   } else if (player.achievements.includes('r102')) {
@@ -3424,6 +3430,9 @@ function updateEternityUpgrades() {
     document.getElementById("eter1").className = (player.eternityUpgrades.includes(1)) ? "eternityupbtnbought" : (player.eternityPoints.gte(5)) ? "eternityupbtn" : "eternityupbtnlocked";
     document.getElementById("eter2").className = (player.eternityUpgrades.includes(2)) ? "eternityupbtnbought" : (player.eternityPoints.gte(10)) ? "eternityupbtn" : "eternityupbtnlocked";
     document.getElementById("eter3").className = (player.eternityUpgrades.includes(3)) ? "eternityupbtnbought" : (player.eternityPoints.gte(1e4)) ? "eternityupbtn" : "eternityupbtnlocked";
+    document.getElementById("eter4").className = (player.eternityUpgrades.includes(4)) ? "eternityupbtnbought" : (player.eternityPoints.gte(1e6)) ? "eternityupbtn" : "eternityupbtnlocked";
+    document.getElementById("eter5").className = (player.eternityUpgrades.includes(5)) ? "eternityupbtnbought" : (player.eternityPoints.gte(1e9)) ? "eternityupbtn" : "eternityupbtnlocked";
+    document.getElementById("eter6").className = (player.eternityUpgrades.includes(6)) ? "eternityupbtnbought" : (player.eternityPoints.gte(1e12)) ? "eternityupbtn" : "eternityupbtnlocked";
 }
 
 
@@ -4076,7 +4085,7 @@ let ecReqProps = {
   9: function () {return player.infinityPower},
   10: function () {return player.eternityPoints},
   11: function () {return getDimensionFinalMultiplier(1)},
-  12: function () {return player.timeshards},
+  12: function () {return player.timeShards},
   13: function () {return player.tickspeed.pow(-1)},
 }
 
@@ -4754,7 +4763,11 @@ function gainedInfinityPoints() {
 }
 
 function gainedEternityPoints() {
-    return Decimal.floor(Decimal.pow(5, player.infinityPoints.e/308 -0.7).times(player.epmult))
+    let ret = Decimal.floor(Decimal.pow(5, player.infinityPoints.e/308 -0.7).times(player.epmult));
+    if (player.eternityUpgrades.includes(6)) {
+      ret = ret.times(1 + Math.pow(Math.max(player.timeShards.log(10), 0), 0.3));
+    }
+    return ret;
 }
 
 
@@ -5658,6 +5671,14 @@ function respecToggle() {
     }
 }
 
+function getEternityGain () {
+  if (player.eternityUpgrades.includes(4)) {
+    return 1 + Math.floor(player.eternityPoints.max(1).log(10) / 4);
+  } else {
+    return 1;
+  }
+}
+
 function eternity(force, enteringChallenge) {
     if (force || (player.infinityPoints.gte(currentEternityRequirement()) &&
     (!player.options.eternityconfirm ||
@@ -5683,7 +5704,7 @@ function eternity(force, enteringChallenge) {
         }
         if (force) {
           // to compensate
-          player.eternities -= 1;
+          player.eternities -= getEternityGain();
         }
         temp = []
 
@@ -5863,7 +5884,7 @@ function eternity(force, enteringChallenge) {
             timeDimension3: player.timeDimension3,
             timeDimension4: player.timeDimension4,
             eternityPoints: player.eternityPoints,
-            eternities: player.eternities+1,
+            eternities: player.eternities + getEternityGain(),
             thisEternity: 0,
             bestEternity: player.bestEternity,
             eternityUpgrades: player.eternityUpgrades,
@@ -7632,11 +7653,11 @@ function farmEter (seconds) {
   let lastEter = player.lastTenEternities[0];
   let secondsPerEter = lastEter[0] / 10;
   let EPPerEter = lastEter[1];
-  let eternitiesPerEter = 1;
+  let eternitiesPerEter = getEternityGain();
   let numEters = Math.floor(seconds / secondsPerEter);
   if (skipTime(secondsPerEter * numEters)) {
     player.eternityPoints = player.eternityPoints.plus(EPPerEter.times(numEters));
-    player.eternities = player.eternities + eternitiesPerEter * numEters;
+    player.eternities += eternitiesPerEter * numEters;
     setTimeout(function () {eternity(true)}, 1000);
   }
 }
