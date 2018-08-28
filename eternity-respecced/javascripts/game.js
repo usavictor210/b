@@ -1132,7 +1132,9 @@ function getAbbreviation(e) {
     }
 }
 
-
+function addCommas (x) {
+  return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+}
 
 function formatValue(notation, value, places, placesUnder1000) {
 
@@ -1146,7 +1148,7 @@ function formatValue(notation, value, places, placesUnder1000) {
             var matissa = value / Math.pow(10, Math.floor(Math.log10(value)));
             var power = Math.floor(Math.log10(value));
         }
-        if (power > 100000  && player.options.commas) pow = power.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+        if (power > 100000  && player.options.commas) pow = addCommas(power);
         else pow = power
         if ((notation === "Standard")) {
             if (power <= 303) return (matissa * Decimal.pow(10, power % 3)).toFixed(places) + " " + FormatList[(power - (power % 3)) / 3];
@@ -1172,11 +1174,11 @@ function formatValue(notation, value, places, placesUnder1000) {
 
 
         }else if (notation === "Logarithm") {
-            if (power > 100000  && player.options.commas) return "e"+Decimal.log10(value).toFixed(places).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+            if (power > 100000  && player.options.commas) return "e"+addCommas(Decimal.log10(value).toFixed(places));
             else return "e"+Decimal.log10(value).toFixed(places)
 
         } else {
-            if (power > 100000  && player.options.commas) power = power.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".");
+            if (power > 100000  && player.options.commas) power = addCommas(power.toString());
             return ((matissa).toFixed(places) + "e" + power);
         }
     } else if (value < 1000) {
@@ -1632,15 +1634,15 @@ function updateDimensions() {
         document.getElementById("infinityPoints2").innerHTML = "You have <span class=\"IPAmount2\">"+shortenDimensions(player.infinityPoints)+"</span> Infinity point" + ipPlural + ".";
         let infPlural = getInfinitied() === 1 ? '' : 's';
         if (player.eternities > 0) {
-            document.getElementById("infinitied").innerHTML = "You have infinitied " + player.infinitied + " time" + infPlural + " this eternity.";
+            document.getElementById("infinitied").innerHTML = "You have infinitied " + addCommas(player.infinitied) + " time" + infPlural + " this eternity.";
         } else {
-            document.getElementById("infinitied").innerHTML = "You have infinitied " + player.infinitied + " time" + infPlural + ".";
+            document.getElementById("infinitied").innerHTML = "You have infinitied " + addCommas(player.infinitied) + " time" + infPlural + ".";
         }
     }
     if (player.bankedInfinities === 0) {
         document.getElementById("bankedInfinities").innerHTML = ""
     } else {
-        document.getElementById("bankedInfinities").innerHTML = "You have " + player.bankedInfinities + " banked infinities.";
+        document.getElementById("bankedInfinities").innerHTML = "You have " + addCommas(player.bankedInfinities) + " banked infinities.";
     }
 
     if (player.eternities == 0) {
@@ -1648,7 +1650,7 @@ function updateDimensions() {
         document.getElementById("besteternity").innerHTML = ""
         document.getElementById("thiseternity").innerHTML = ""
     } else {
-        document.getElementById("eternitied").innerHTML = "You have Eternitied "+player.eternities+" times.";
+        document.getElementById("eternitied").innerHTML = "You have eternitied "+addCommas(player.eternities)+" times.";
         document.getElementById("besteternity").innerHTML = "You have spent "+timeDisplay(player.thisEternity)+" in this Eternity.";
         document.getElementById("thiseternity").innerHTML = "Your fastest Eternity is in "+timeDisplay(player.bestEternity)+".";
     }
@@ -3718,11 +3720,11 @@ function getTSBenefit (i, num) {
 }
 
 function smartShortenMoney (x) {
-  return (typeof x === 'number' && Math.floor(x) === x) ? '' + x : shortenMoney(x);
+  return (typeof x === 'number' && Math.floor(x) === x) ? addCommas(x) : shortenMoney(x);
 }
 
 function smartShortenCosts (x) {
-  return (typeof x === 'number' && Math.floor(x) === x) ? '' + x : shortenCosts(x);
+  return (typeof x === 'number' && Math.floor(x) === x) ? addCommas(x) : shortenCosts(x);
 }
 
 function updateTSDescs () {
@@ -4815,7 +4817,7 @@ function setAchieveTooltip() {
     aLot.setAttribute('ach-tooltip', "Reach " + shortenCosts(new Decimal('1e1000000')) + " replicanti. Reward: Replicanti increase faster the more you have.")
     infiniteIP.setAttribute('ach-tooltip', "Reach "+shortenCosts(new Decimal("1e30008"))+" IP.")
     over9000.setAttribute('ach-tooltip', "Get a total sacrifice multiplier of "+shortenCosts(new Decimal("1e9000"))+". Reward: Sacrifice doesn't reset your dimensions.")
-    dawg.setAttribute('ach-tooltip', "Have each infinity be at least "+shortenMoney(Number.MAX_VALUE)+" times higher IP than the previous one within your past 10 infinities. Reward: Your antimatter doesn't reset on dimension boost or galaxy.")
+    dawg.setAttribute('ach-tooltip', "Have each infinity be at least "+shortenMoney(Number.MAX_VALUE)+" times higher IP than the previous one within your past 10 infinities. Reward: Your antimatter doesn't reset on dimension boost or galaxy, and your infinity gain is boosted by your unspent IP.")
     layer.setAttribute('ach-tooltip', "Reach "+shortenMoney(Number.MAX_VALUE)+" EP. Reward: Time dimensions get a multiplier based on EP.")
     fkoff.setAttribute('ach-tooltip', "Reach "+shortenCosts(new Decimal("1e22000"))+" IP without any time studies. Reward: Time dimensions are multiplied by the total number of studies you have.")
     infstuff.setAttribute('ach-tooltip', "Reach "+shortenCosts(new Decimal("1e140000"))+" IP without buying IDs or IP multipliers.")
@@ -5449,10 +5451,6 @@ document.getElementById("bigcrunch").onclick = function () {
             }
             if (n == 9) giveAchievement("Yo dawg, I heard you liked infinities...")
         }
-        // 249 in addition to the normal 1
-        if (player.thisInfinityTime > 50 && player.achievements.includes("r87") && infinityMultAndGenEnabled()) {
-          player.infinitied += 249;
-        }
         if (autoS && auto) {
           if (gainedInfinityPoints().dividedBy(player.thisInfinityTime).gt(player.autoIP)) player.autoIP = gainedInfinityPoints().dividedBy(player.thisInfinityTime);
           if (player.thisInfinityTime<player.autoTime) player.autoTime = player.thisInfinityTime;
@@ -5502,7 +5500,7 @@ document.getElementById("bigcrunch").onclick = function () {
         currentChallenge: player.currentChallenge,
         infinityUpgrades: player.infinityUpgrades,
         infinityPoints: player.infinityPoints,
-        infinitied: player.infinitied + 1,
+        infinitied: player.infinitied + getInfinitiedGain(player.thisInfinityTime),
         bankedInfinities: player.bankedInfinities,
         totalTimePlayed: player.totalTimePlayed,
         bestInfinityTime: Math.min(player.bestInfinityTime, player.thisInfinityTime),
@@ -5669,6 +5667,20 @@ function respecToggle() {
         player.respec = true
         document.getElementById("respec").className = "timestudybought"
     }
+}
+
+function getInfinitiedGain (time) {
+  if (time === undefined || time === null) {
+    throw new Error('Undefined time in infinity');
+  }
+  ret = 1;
+  if (time > 50 && player.achievements.includes("r87") && infinityMultAndGenEnabled()) {
+    ret *= 250;
+  }
+  if (player.achievements.includes("r111")) {
+    ret *= Math.floor(1 + player.infinityPoints.max(1).log(Number.MAX_VALUE));
+  }
+  return ret;
 }
 
 function getEternityGain () {
@@ -7637,7 +7649,7 @@ function farmInf (seconds) {
   let lastInf = player.lastTenRuns[0];
   let secondsPerRun = lastInf[0] / 10;
   let IPPerRun = lastInf[1];
-  let infinitiesPerRun = (secondsPerRun > 5 && player.achievements.includes('r87') && infinityMultAndGenEnabled()) ? 250 : 1;
+  let infinitiesPerRun = getInfinitiedGain(lastInf[0])
   let numRuns = Math.floor(seconds / secondsPerRun);
   if (skipTime(secondsPerRun * numRuns)) {
     player.infinityPoints = player.infinityPoints.plus(IPPerRun.times(numRuns));
