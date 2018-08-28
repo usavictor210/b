@@ -1791,8 +1791,10 @@ function updateChallenges() {
     // Show the eternity challenges tab if and only if you've eternitied.
     if (player.eternities > 0) {
         document.getElementById('eterchallengessubtabbtn').style.display = 'inline-block';
+        document.getElementById('eclock').style.display = 'inline-block';
     } else {
         document.getElementById('eterchallengessubtabbtn').style.display = 'none';
+        document.getElementById('eclock').style.display = 'none';
     }
 }
 
@@ -2250,6 +2252,7 @@ function buyTimeStudy(num) {
 }
 
 function respecTimeStudies() {
+  // Respec can be done after challenge unlock, I don't care.
   for (let i = 0; i < player.timestudy.studies.length; i++) {
     let bought = player.timestudy.studies[i];
     if (bought !== null) {
@@ -2257,6 +2260,9 @@ function respecTimeStudies() {
       player.timestudy.studies[i] = 0;
     }
   }
+}
+
+function lockEternityChallenge () {
   let ecUnlocked = player.eternityChallenges.unlocked
   if (ecUnlocked && !player.eternityChallenges.current) {
     player.timestudy.theorem += ecTTCosts[ecUnlocked];
@@ -5895,7 +5901,7 @@ function eternity(force, enteringChallenge) {
             eternityBuyer: player.eternityBuyer,
             options: player.options
         };
-        if (player.respec) respecTimeStudies(ec)
+        if (player.respec) respecTimeStudies()
         player.respec = false
         if (!force) {
           giveAchievement("Time is relative")
