@@ -2040,7 +2040,8 @@ var infDimPow = 1
 
 //time dimensions
 
-function getPower(dim) {
+function getPower(tier) {
+  let dim = player["timeDimension" + tier];
   if (player.eternityChallenges.current === 1 || player.eternityChallenges.current === 10) {
     return new Decimal(0);
   }
@@ -2048,7 +2049,7 @@ function getPower(dim) {
     return new Decimal(1);
   }
   var ret = dim.power;
-  if (player.eternityUpgrades.includes(5)) {
+  if (player.eternityUpgrades.includes(5) && tier === 1) {
     ret = ret.times(1 + player.eternities);
   }
   if (player.achievements.includes('r117')) {
@@ -2087,7 +2088,7 @@ function getPower(dim) {
 
 function getTimeDimensionProduction(tier) {
     var dim = player["timeDimension"+tier]
-    var ret = dim.amount.times(getPower(dim))
+    var ret = dim.amount.times(getPower(tier))
     // effect of tickspeed, which is not part of power
     // (see, for example, normal dimensions)
     // this will work when we add infinite time
@@ -2119,7 +2120,7 @@ function getTimeDimensionDescription(tier) {
 
 function updateTimeDimensions() {
     for (let tier = 1; tier <= 4; ++tier) {
-        document.getElementById("timeD"+tier).innerHTML = DISPLAY_NAMES[tier] + " Dimension x" + shortenMoney(getPower(player["timeDimension" + tier]));
+        document.getElementById("timeD"+tier).innerHTML = DISPLAY_NAMES[tier] + " Dimension x" + shortenMoney(getPower(tier));
         document.getElementById("timeAmount"+tier).innerHTML = getTimeDimensionDescription(tier);
     }
 }
@@ -2268,6 +2269,8 @@ function respecTimeStudies() {
       player.timestudy.studies[i] = 0;
     }
   }
+  updateTheoremButtons();
+  updateTimeStudyButtons();
 }
 
 function lockEternityChallenge () {
@@ -3883,7 +3886,7 @@ let initialECCosts = {
   2: 300,
   3: 20000,
   4: 100000,
-  5: 250,
+  5: 400,
   6: 50,
   7: new Decimal('1e800000'),
   8: new Decimal('1e5000'),
@@ -3899,7 +3902,7 @@ let incrementECCosts = {
   2: 50,
   3: 2000,
   4: 100000,
-  5: 25,
+  5: 50,
   6: 5,
   7: new Decimal('1e400000'),
   8: new Decimal('1e1000'),
@@ -5252,6 +5255,7 @@ function updateCheckBoxes() {
     if (player.autoSacrifice.isOn) document.getElementById("13ison").checked = "true"
     else document.getElementById("13ison").checked = ""
     document.getElementById("eternityison").checked = player.eternityBuyer.isOn;
+    document.getElementById("replgalaxyison").checked = player.replicanti.galaxybuyer.on;
 }
 
 
