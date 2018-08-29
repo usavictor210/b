@@ -1316,14 +1316,14 @@ function bugCheck (tier) {
 */
 
 function getInfinityPowerNDMultiplier() {
-  if (player.eternityChallenges.current === 9) {
+  if (player.eternityChallenges.current === 2) {
     return new Decimal(1);
   }
   return player.infinityPower.pow(7).max(1);
 }
 
 function getInfinityPowerTDMultiplier() {
-  if (player.eternityChallenges.current !== 9) {
+  if (player.eternityChallenges.current !== 2) {
     return new Decimal(1);
   }
   return Decimal.pow(Math.max(player.infinityPower.ln(), 1), 7);
@@ -1851,7 +1851,7 @@ function DimensionProduction(tier) {
 }
 
 function DimensionPower(tier) {
-    if (player.eternityChallenges.current === 2 || player.eternityChallenges.current === 10) {
+    if (player.eternityChallenges.current === 9 || player.eternityChallenges.current === 10) {
       return new Decimal(0);
     }
     if (player.eternityChallenges.current === 11) {
@@ -1885,14 +1885,14 @@ function DimensionPower(tier) {
         mult = mult.dividedBy(player.darkMatter);
     }
 
-    // EC2 reward handled
-    mult = mult.times(ecNumReward(2));
-
     // EC4 reward handled
     mult = mult.times(ecNumReward(4));
 
     // EC7 reward handled id (2/3)
     mult = mult.times(ecNumReward(7));
+
+    // EC9 reward handled
+    mult = mult.times(ecNumReward(9));
 
     // why not for ID too
     if (mult.lt(1)) {mult = new Decimal(1)}
@@ -2073,12 +2073,13 @@ function getPower(tier) {
       ret = ret.dividedBy(player.darkMatter);
   }
 
+  // EC2 bonus handled
+  ret = ret.times(getInfinityPowerTDMultiplier());
+  // EC2 reward handled
+  ret = ret.times(ecNumReward(2));
+
   // EC7 reward handled td (3/3)
   ret = ret.times(ecNumReward(7));
-  // EC9 bonus handled
-  ret = ret.times(getInfinityPowerTDMultiplier());
-  // EC9 reward handled
-  ret = ret.times(ecNumReward(9));
 
   // and for TD
   if (ret.lt(1)) {ret = new Decimal(1)}
@@ -3883,7 +3884,7 @@ function updateTotalTiersDone () {
 
 let initialECCosts = {
   1: 2000,
-  2: 300,
+  2: 250,
   3: 20000,
   4: 100000,
   5: 400,
@@ -3915,8 +3916,8 @@ let incrementECCosts = {
 
 let initialECGoals = {
   1: new Decimal('1e1400'),
-  2: new Decimal('1e500'),
-  3: new Decimal('1e500'),
+  2: new Decimal('1e350'),
+  3: new Decimal('1e350'),
   4: new Decimal('1e2800'),
   5: new Decimal('1e600'),
   6: new Decimal('1e700'),
@@ -3931,8 +3932,8 @@ let initialECGoals = {
 
 let incrementECGoals = {
   1: new Decimal('1e200'),
-  2: new Decimal('1e100'),
-  3: new Decimal('1e100'),
+  2: new Decimal('1e50'),
+  3: new Decimal('1e50'),
   4: new Decimal('1e400'),
   5: new Decimal('1e100'),
   6: new Decimal('1e150'),
@@ -4026,7 +4027,7 @@ function ecNumReward (x) {
   if (x === 1) {
     return Math.pow(Math.max(player.thisEternity / 10, 1), 2 * c / 5);
   } else if (x === 2) {
-    return player.infinityPower.max(1).pow(.001 * c);
+    return Decimal.pow(Math.max(player.infinityPower.ln(), 1), 2 * c / 5);
   } else if (x === 3) {
     return getDimensionPowerMultiplier();
   } else if (x === 4) {
@@ -4040,7 +4041,7 @@ function ecNumReward (x) {
   } else if (x === 8) {
     return 1 - .01 * c;
   } else if (x === 9) {
-    return Decimal.pow(Math.max(player.infinityPower.ln(), 1), 2 * c / 5);
+    return player.infinityPower.max(1).pow(.001 * c);
   } else if (x === 10) {
     return Decimal.pow(Math.max(getInfinitied(), 1), 1000 * c);
   } else if (x === 11) {
@@ -6247,7 +6248,7 @@ document.getElementById("quickReset").onclick = function () {
 
 function updateInfPower() {
     document.getElementById("infPowAmount").innerHTML = shortenMoney(player.infinityPower)
-    if (player.eternityChallenges.current !== 9) {
+    if (player.eternityChallenges.current !== 2) {
         document.getElementById("infDimMultAmount").innerHTML = shortenMoney(getInfinityPowerNDMultiplier())
         document.getElementById("infDimMultDimType").innerHTML = 'normal'
     } else {
