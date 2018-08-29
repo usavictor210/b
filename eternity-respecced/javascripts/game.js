@@ -1330,7 +1330,7 @@ function getInfinityPowerTDMultiplier() {
 }
 
 function getDimensionFinalMultiplier(tier) {
-    if ((player.eternityChallenges.current === 3 && tier > 6) || player.eternityChallenges.current === 13) {
+    if ((player.eternityChallenges.current === 3 && tier > 4) || player.eternityChallenges.current === 13) {
       return new Decimal(0);
     }
     if (player.eternityChallenges.current === 11) {
@@ -2496,11 +2496,11 @@ function softReset(bulk, reallyZero) {
 }
 
 function updateInitialMoney () {
-  if (player.achievements.includes("r21")) player.money = new Decimal(100)
-  if (player.achievements.includes("r37")) player.money = new Decimal(1000);
-  if (player.achievements.includes("r54")) player.money = new Decimal(2e5);
-  if (player.achievements.includes("r55")) player.money = new Decimal(1e10);
-  if (player.achievements.includes("r78")) player.money = new Decimal(1e25);
+  if (player.achievements.includes("r21")) player.money = player.money.max(100);
+  if (player.achievements.includes("r37")) player.money = player.money.max(1000);
+  if (player.achievements.includes("r54")) player.money = player.money.max(2e5);
+  if (player.achievements.includes("r55")) player.money = player.money.max(1e10);
+  if (player.achievements.includes("r78")) player.money = player.money.max(1e25);
 }
 
 MoneyFormat = ['K', 'M', 'B', 'T', 'Qd', 'Qt', 'Sx', 'Sp', 'Oc', 'No', 'Dc', 'UDc', 'DDc', 'TDc', 'QdDc', 'QtDc', 'SxDc', 'SpDc', 'ODc', 'NDc', 'Vg', 'UVg', 'DVg', 'TVg', 'QdVg', 'QtVg', 'SxVg', 'SpVg', 'OVg', 'NVg', 'Tg', 'UTg', 'DTg', 'TTg', 'QdTg', 'QtTg', 'SxTg', 'SpTg', 'OTg', 'NTg', 'Qa', 'UQa', 'DQa', 'TQa', 'QdQa', 'QtQa', 'SxQa', 'SpQa', 'OQa', 'NQa', 'Qi', 'UQi', 'DQi', 'TQi', 'QaQi', 'QtQi', 'SxQi', 'SpQi', 'OQi', 'NQi', 'Se', 'USe', 'DSe', 'TSe', 'QaSe', 'QtSe', 'SxSe', 'SpSe', 'OSe', 'NSe', 'St', 'USt', 'DSt', 'TSt', 'QaSt', 'QtSt', 'SxSt', 'SpSt', 'OSt', 'NSt', 'Og', 'UOg', 'DOg', 'TOg', 'QdOg', 'QtOg', 'SxOg', 'SpOg', 'OOg', 'NOg', 'Nn', 'UNn', 'DNn', 'TNn', 'QdNn', 'QtNn', 'SxNn', 'SpNn', 'ONn', 'NNn', 'Ce', 'UCe'];
@@ -3638,11 +3638,22 @@ let getReplicantiIntervalBonus = function (amount) {
   }
 }
 
+function getReplicantiSpeedup (amount) {
+  if (amount === undefined) {
+    amount = player.replicanti.amount;
+  }
+  // start with no speedup
+  let ret = 1;
+  // do we need both these functions? I am not sure.
+  ret *= getReplicantiIntervalBonus(amount);
+  // EC12 reward handled
+  ret *= ecNumReward(12);
+  return ret;
+}
+
 let getReplicantiInterval = function (amount) {
   let ret = player.replicanti.interval;
-  ret /= getReplicantiIntervalBonus(amount);
-  // EC12 reward handled
-  ret /= ecNumReward(12);
+  ret /= getReplicantiSpeedup(amount);
   return ret;
 }
 
@@ -3651,8 +3662,8 @@ let getNewReplicantiInterval = function () {
   if (!player.achievements.includes('r106')) {
     ret = Math.max(ret, 1);
   }
-  // EC12 reward handled again
-  ret /= ecNumReward(12);
+  // same as above function
+  ret /= getReplicantiSpeedup();
   return ret;
 }
 
@@ -3887,8 +3898,8 @@ function updateTotalTiersDone () {
 let initialECCosts = {
   1: 2000,
   2: 250,
-  3: 20000,
-  4: 1000000,
+  3: 28000,
+  4: 2000000,
   5: 400,
   6: 50,
   7: new Decimal('1e1600000'),
@@ -3903,7 +3914,7 @@ let initialECCosts = {
 let incrementECCosts = {
   1: 2000,
   2: 50,
-  3: 2000,
+  3: 4000,
   4: 500000,
   5: 50,
   6: 5,
@@ -3919,7 +3930,7 @@ let incrementECCosts = {
 let initialECGoals = {
   1: new Decimal('1e1200'),
   2: new Decimal('1e350'),
-  3: new Decimal('1e350'),
+  3: new Decimal('1e700'),
   4: new Decimal('1e3200'),
   5: new Decimal('1e400'),
   6: new Decimal('1e500'),
@@ -3935,7 +3946,7 @@ let initialECGoals = {
 let incrementECGoals = {
   1: new Decimal('1e200'),
   2: new Decimal('1e50'),
-  3: new Decimal('1e50'),
+  3: new Decimal('1e100'),
   4: new Decimal('1e400'),
   5: new Decimal('1e100'),
   6: new Decimal('1e150'),
@@ -4252,7 +4263,7 @@ function toggleCrunchMode() {
     } else if (player.autoCrunchMode == "time") {
         player.autoCrunchMode = "relative"
         document.getElementById("togglecrunchmode").innerHTML = "Auto crunch mode: X times last crunch"
-        document.getElementById("limittext").innerHTML = "X times since last crunch:"
+        document.getElementById("limittext").innerHTML = "X times last crunch:"
         document.getElementById("maxReplicantiCrunchSwitchDiv").style.display = 'none';
     } else if (player.autoCrunchMode == "relative") {
         player.autoCrunchMode = "replicanti"
@@ -5440,6 +5451,7 @@ document.getElementById("bigcrunch").onclick = function () {
         }
         if (player.challenges.length > 12) giveAchievement("Infinitely Challenging");
         if (player.challenges.length == 20) giveAchievement("Anti-antichallenged");
+        let infinityGain = getInfinitiedGain(player.thisInfinityTime);
         if (!player.break || player.currentChallenge != "") {
             var add = getIPMult();
             player.infinityPoints = player.infinityPoints.plus(add);
@@ -5508,7 +5520,7 @@ document.getElementById("bigcrunch").onclick = function () {
         currentChallenge: player.currentChallenge,
         infinityUpgrades: player.infinityUpgrades,
         infinityPoints: player.infinityPoints,
-        infinitied: player.infinitied + getInfinitiedGain(player.thisInfinityTime),
+        infinitied: player.infinitied + infinityGain,
         bankedInfinities: player.bankedInfinities,
         totalTimePlayed: player.totalTimePlayed,
         bestInfinityTime: Math.min(player.bestInfinityTime, player.thisInfinityTime),
@@ -5715,8 +5727,8 @@ function eternity(force, enteringChallenge) {
           if (player.boughtDims.every((i) => i === 1)) giveAchievement("You're already dead.");
           if (player.boughtDims.length === 0) giveAchievement("Like feasting on a behind");
           // don't count banked here
-          if (player.infinitied < 10) giveAchievement("Do you really need a guide for this?");
-          if (player.infinitied < 1) giveAchievement("Do I really need to infinity?");
+          if (player.infinitied <= 10) giveAchievement("Do you really need a guide for this?");
+          if (player.infinitied <= 1) giveAchievement("Do I really need to infinity?");
           // This .toFixed(0) is, it seems, just what is done in display.
           if (player.replicanti.amount.toFixed(0) === '9') giveAchievement("We could afford 9");
           player.eternityPoints = player.eternityPoints.plus(gainedEternityPoints())
@@ -7817,7 +7829,7 @@ setInterval( function() {
     achievementMult = Math.max(Math.pow((player.achievements.length-30), 3)/40,1)
     challengeMult = Decimal.max(10*3000/worstChallengeTime, 1)
     unspentBonus = player.infinityPoints.dividedBy(2).pow(1.5).plus(1)
-    mult18 = getDimensionFinalMultiplier(1).times(getDimensionFinalMultiplier(8)).pow(0.02)
+    mult18 = getDimensionFinalMultiplier(1).max(1).times(getDimensionFinalMultiplier(8).max(1)).pow(0.02)
 }, 500)
 
 
