@@ -3888,7 +3888,7 @@ let initialECCosts = {
   1: 2000,
   2: 250,
   3: 20000,
-  4: 100000,
+  4: 1000000,
   5: 400,
   6: 50,
   7: new Decimal('1e1600000'),
@@ -3904,7 +3904,7 @@ let incrementECCosts = {
   1: 2000,
   2: 50,
   3: 2000,
-  4: 100000,
+  4: 500000,
   5: 50,
   6: 5,
   7: new Decimal('1e400000'),
@@ -3920,7 +3920,7 @@ let initialECGoals = {
   1: new Decimal('1e1200'),
   2: new Decimal('1e350'),
   3: new Decimal('1e350'),
-  4: new Decimal('1e2400'),
+  4: new Decimal('1e3200'),
   5: new Decimal('1e400'),
   6: new Decimal('1e500'),
   7: new Decimal('1e4000'),
@@ -6581,8 +6581,9 @@ function getReplicantiETA (amount, limit) {
     return (limit.log(2) - amount.log(2)) * growthTime;
   }
   let preInf;
-  if (amount.lt(Number.MAX_VALUE)) {
-    preInf = (Math.log2(Number.MAX_VALUE) - amount.log(2)) * growthTime;
+  let infAmount = Decimal.min(limit, Number.MAX_VALUE);
+  if (amount.lt(infAmount)) {
+    preInf = (infAmount.log(2) - amount.log(2)) * growthTime;
   } else {
     preInf = 0;
   }
