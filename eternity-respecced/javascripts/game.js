@@ -1326,11 +1326,11 @@ function getInfinityPowerTDMultiplier() {
   if (player.eternityChallenges.current !== 2) {
     return new Decimal(1);
   }
-  return Decimal.pow(Math.max(player.infinityPower.ln(), 1), 7);
+  return Decimal.pow(Math.max(player.infinityPower.ln(), 1), 9);
 }
 
 function getDimensionFinalMultiplier(tier) {
-    if ((player.eternityChallenges.current === 3 && tier > 4) || player.eternityChallenges.current === 13) {
+    if ((player.eternityChallenges.current === 3 && tier > 6) || player.eternityChallenges.current === 13) {
       return new Decimal(0);
     }
     if (player.eternityChallenges.current === 11) {
@@ -3647,11 +3647,13 @@ let getReplicantiInterval = function (amount) {
 }
 
 let getNewReplicantiInterval = function () {
-  let newInterval = player.replicanti.interval * .9;
+  let ret = player.replicanti.interval * .9;
   if (!player.achievements.includes('r106')) {
-    newInterval = Math.max(newInterval, 1);
+    ret = Math.max(newInterval, 1);
   }
-  return newInterval / getReplicantiIntervalBonus();
+  // EC12 reward handled again
+  ret /= ecNumReward(12);
+  return ret;
 }
 
 function updateReplicantiInterval (places) {
@@ -3915,12 +3917,12 @@ let incrementECCosts = {
 }
 
 let initialECGoals = {
-  1: new Decimal('1e1400'),
+  1: new Decimal('1e1200'),
   2: new Decimal('1e350'),
   3: new Decimal('1e350'),
-  4: new Decimal('1e2800'),
-  5: new Decimal('1e600'),
-  6: new Decimal('1e700'),
+  4: new Decimal('1e2400'),
+  5: new Decimal('1e400'),
+  6: new Decimal('1e500'),
   7: new Decimal('1e4000'),
   8: new Decimal('1e1000'),
   9: new Decimal('1e1500'),
@@ -5740,8 +5742,10 @@ function eternity(force, enteringChallenge) {
           if (ec) {
             if (!force) {
               // The player actually reached eternity in a challenge. Good for the player, I guess.
+              // However, we can't let them access the next tier too early, so we need to lock the challenge again.
               player.eternityChallenges.done[ec] = Math.min(ecCompletions(ec) + 1, 5);
               updateTotalTiersDone();
+              lockEternityChallenge();
             }
             player.eternityChallenges.current = null;
             updateECDisplay(ec);
