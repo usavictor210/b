@@ -5268,6 +5268,7 @@ function toggleAutoBuyers() {
     }
     player.autoSacrifice.isOn = !bool
     player.eternityBuyer.isOn = !bool
+    player.replicanti.galaxybuyer.on = !bool
     updateCheckBoxes()
     updateAutobuyers()
 }
