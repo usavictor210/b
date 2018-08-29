@@ -3649,7 +3649,7 @@ let getReplicantiInterval = function (amount) {
 let getNewReplicantiInterval = function () {
   let ret = player.replicanti.interval * .9;
   if (!player.achievements.includes('r106')) {
-    ret = Math.max(newInterval, 1);
+    ret = Math.max(ret, 1);
   }
   // EC12 reward handled again
   ret /= ecNumReward(12);
@@ -5258,7 +5258,7 @@ function updateCheckBoxes() {
     if (player.autoSacrifice.isOn) document.getElementById("13ison").checked = "true"
     else document.getElementById("13ison").checked = ""
     document.getElementById("eternityison").checked = player.eternityBuyer.isOn;
-    document.getElementById("replgalaxyison").checked = player.replicanti.galaxybuyer.on;
+    document.getElementById("replgalaxyison").checked = player.replicanti.galaxybuyer && player.replicanti.galaxybuyer.on;
 }
 
 
