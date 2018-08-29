@@ -3891,8 +3891,8 @@ let initialECCosts = {
   4: 100000,
   5: 400,
   6: 50,
-  7: new Decimal('1e800000'),
-  8: new Decimal('1e5000'),
+  7: new Decimal('1e1600000'),
+  8: new Decimal('1e8000'),
   9: new Decimal('1e18000'),
   10: new Decimal('1e100'),
   11: new Decimal('1e500000'),
@@ -5745,9 +5745,12 @@ function eternity(force, enteringChallenge) {
               // However, we can't let them access the next tier too early, so we need to lock the challenge again.
               player.eternityChallenges.done[ec] = Math.min(ecCompletions(ec) + 1, 5);
               updateTotalTiersDone();
-              lockEternityChallenge();
             }
             player.eternityChallenges.current = null;
+            if (!force) {
+              // We can only lock the challenge when the player is not in it.
+              lockEternityChallenge();
+            }
             updateECDisplay(ec);
           }
         }
