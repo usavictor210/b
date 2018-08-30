@@ -96,6 +96,8 @@
                 <br>
                 <button class="storebtn" style="color:black; height: 35px; font-size: 10px; width: 225px" onclick="farmEter(3600)">Farm eternities for an hour.</button>
                 <br>
+                <button class="storebtn" style="color:black; height: 35px; font-size: 10px; width: 225px" onclick="autoPlay()">Autoplay an eternity for some amount of time.</button>
+                <br>
             </div>
         </div>
         <div id="eternitystore" class="tab" style="font-size: 15px; width: 60%; margin: 0 auto; display: none" align="center">
@@ -107,9 +109,18 @@
                 </tr>
             </table>
             <div class="eternitytab" id="timestudies" style="font-size: 15px">
-                <div><button class="storebtn" onclick="respecToggle()" id="respec" style="width:150px; height: 40px; font-size: 10px; margin: auto">Respec time studies on next Eternity</button>
-                </div>
                 <table class="table" style="margin: 0 auto;">
+                  <tr>
+                      <td>
+                        <button class="storebtn" onclick="exportSpec()" id="exportspec" style="width:170px; height: 40px; font-size: 10px; margin: auto">Export time study spec</button>
+                      </td>
+                      <td>
+                        <button class="storebtn" onclick="respecToggle()" id="respec" style="width:170px; height: 40px; font-size: 10px; margin: auto">Respec time studies on next Eternity</button>
+                      </td>
+                      <td>
+                        <button class="storebtn" onclick="importSpec()" id="importspec" style="width:170px; height: 40px; font-size: 10px; margin: auto">Import time study spec</button>
+                      </td>
+                  </tr>
                   <tr>
                       <td>
                         <button class="timetheorembtn" onclick="buyWithAntimatter()" id="theoremam">Buy Time Theorems <br>Cost: 1e20000 antimatter</button>
@@ -118,7 +129,18 @@
                         <button class="timetheorembtn" onclick="buyWithIP()" id="theoremip">Buy Time Theorems <br>Cost: 1 IP</button>
                       </td>
                       <td>
-                        <button class="timetheorembtnlocked" onclick="buyWithEP()" id="theoremep">Buy Time Theorems <br>Cost: 1 EP</button>
+                        <button class="timetheorembtn" onclick="buyWithEP()" id="theoremep">Buy Time Theorems <br>Cost: 1 EP</button>
+                      </td>
+                  </tr>
+                  <tr>
+                      <td>
+                        <button class="timetheorembtn" onclick="buyMaxWithAntimatter()" style="height: 35px;" id="theoremammax">Buy max Time Theorems with antimatter</button>
+                      </td>
+                      <td>
+                        <button class="timetheorembtn" onclick="buyMaxWithIP()" style="height: 35px;" id="theoremipmax">Buy max Time Theorems with IP</button>
+                      </td>
+                      <td>
+                        <button class="timetheorembtn" onclick="buyMaxWithEP()" style="height: 35px;" id="theoremepmax">Buy max Time Theorems with EP</button>
                       </td>
                   </tr>
                 </table>
@@ -128,7 +150,7 @@
                 <table class="table" style="margin: 0 auto;">
                     <tr id="tsrow1">
                         <td>
-                            <button id="ts1" class="eternityttbtn" onclick="buyTimeStudy(1)">Sacrifice is stronger (10% first time, total effect logarithmic in times bought)<br/>Bought: <span id="ts1bought">x</span><br/>Cost: <span id="ts1cost">x</span> TT<br/><span id='ts1desc'></span></button>
+                            <button id="ts1" class="eternityttbtn" onclick="buyTimeStudy(1)">Sacrifice is stronger (roughly 15% first time, total effect double-logarithmic in times bought)<br/>Bought: <span id="ts1bought">x</span><br/>Cost: <span id="ts1cost">x</span> TT<br/><span id='ts1desc'></span></button>
                         </td>
                         <td>
                             <button id="ts2" class="eternityttbtn" onclick="buyTimeStudy(2)">You get 10% more tickspeed upgrades from time dimensions (not considering multiplier increase)<br/>Bought: <span id="ts2bought">x</span><br/>Cost: <span id="ts2cost">x</span> TT<br/><span id='ts2desc'></span></button>
@@ -760,7 +782,6 @@
 
 
             </table>
-            <div style="display: none;"><textarea id="exportOutput" style="color:black; width: 200px; height: 55px;"></textarea></div>
 
             <div style="text-align:center">
                 <a href="howto.html">How to play  </a> |
@@ -1583,7 +1604,7 @@
                               <button id="eterc3" class="challengesbtn" onclick="startEternityChallenge(3)">Start</button>
                               <div id="eterc3goaldiv" style="display: none;">
                                 <span id="ec3goal">Goal: z</span><br>
-                                <span>Reward: Increase the multiplier for buying 10 dimensions. Currently <span id="ec3reward">reward</span>.</span>
+                                <span>Reward: There's an extra multiplier for buying 10 dimensions based on eternities. Currently <span id="ec3reward">reward</span>.</span>
                               </div>
                             </div>
                         </td>
@@ -1674,7 +1695,7 @@
                               <button id="eterc7" class="challengesbtn" onclick="startEternityChallenge(7)">Start</button>
                               <div id="eterc7goaldiv" style="display: none;">
                                 <span id="ec7goal">Goal: z</span><br>
-                                <span>Reward: Multiplier on normal, infinity, and time dimensions based on antimatter. Currently <span id="ec7reward">reward</span>.</span>
+                                <span>Reward: There's a multiplier on normal, infinity, and time dimensions based on antimatter. Currently <span id="ec7reward">reward</span>.</span>
                               </div>
                             </div>
                         </td>
@@ -2322,6 +2343,7 @@
         <div id="updatePopup">The last test.</div>
         <button class="storebtn" style="font-size: 15px" onclick="closeToolTip()" style="display: inline">Okay</button>
     </div>
+    <div style="display: none;"><textarea id="exportOutput" style="color:black; width: 200px; height: 55px;"></textarea></div>
 </body>
 
 

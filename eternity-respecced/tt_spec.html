@@ -96,7 +96,7 @@ let getTickPower = function (x) {
 let getTSPower = [null, null, null, null, null, null];
 
 getTSPower[0] = function (x, sh, s, galPower, st) {
-  return getBaseSac(x) * Math.log(1 + st / 10) / 8;
+  return getBaseSac(x) * Math.log(1 + Math.log(1 + st / 5)) / 8;
 }
 
 getTSPower[1] = function (x, sh, s, galPower, st) {

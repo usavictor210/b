@@ -2188,6 +2188,9 @@ function buyWithAntimatter() {
         player.timestudy.theorem += 1
         updateTheoremButtons()
         updateTimeStudyButtons()
+        return true;
+    } else {
+        return false;
     }
 }
 
@@ -2198,6 +2201,9 @@ function buyWithIP() {
         player.timestudy.theorem += 1
         updateTheoremButtons()
         updateTimeStudyButtons()
+        return true;
+    } else {
+        return false;
     }
 }
 
@@ -2210,7 +2216,7 @@ function buyWithEP() {
     }
     if (!tdBought) {
         alert('You need to buy a time dimension before you can purchase time theorems with Eternity Points.');
-        return;
+        return false;
     }
     if (player.eternityPoints.gte(player.timestudy.epcost)) {
         player.eternityPoints = player.eternityPoints.minus(player.timestudy.epcost)
@@ -2218,7 +2224,22 @@ function buyWithEP() {
         player.timestudy.theorem += 1
         updateTheoremButtons()
         updateTimeStudyButtons()
+        return true;
+    } else {
+        return false;
     }
+}
+
+function buyMaxWithAntimatter () {
+    while (buyWithAntimatter()) continue;
+}
+
+function buyMaxWithIP () {
+    while (buyWithIP()) continue;
+}
+
+function buyMaxWithEP () {
+    while (buyWithEP()) continue;
 }
 
 function getTotalTT () {
@@ -2233,6 +2254,9 @@ function updateTheoremButtons() {
     document.getElementById("theoremam").className = player.money.gte(player.timestudy.amcost) ? "timetheorembtn" : "timetheorembtnlocked"
     document.getElementById("theoremip").className = player.infinityPoints.gte(player.timestudy.ipcost) ? "timetheorembtn" : "timetheorembtnlocked"
     document.getElementById("theoremep").className = player.eternityPoints.gte(player.timestudy.epcost) ? "timetheorembtn" : "timetheorembtnlocked"
+    document.getElementById("theoremammax").className = player.money.gte(player.timestudy.amcost) ? "timetheorembtn" : "timetheorembtnlocked"
+    document.getElementById("theoremipmax").className = player.infinityPoints.gte(player.timestudy.ipcost) ? "timetheorembtn" : "timetheorembtnlocked"
+    document.getElementById("theoremepmax").className = player.eternityPoints.gte(player.timestudy.epcost) ? "timetheorembtn" : "timetheorembtnlocked"
     document.getElementById("theoremep").innerHTML = "Buy Time Theorems <br>Cost: "+shortenCosts(player.timestudy.epcost)+" EP"
     document.getElementById("theoremip").innerHTML = "Buy Time Theorems <br>Cost: "+shortenCosts(player.timestudy.ipcost)+" IP"
     document.getElementById("theoremam").innerHTML = "Buy Time Theorems <br>Cost: "+shortenCosts(player.timestudy.amcost)
@@ -2258,6 +2282,30 @@ function buyTimeStudy(num) {
       player.timestudy.theorem -= player.timestudy.studies[num];
       updateTheoremButtons()
       updateTimeStudyButtons()
+      return true;
+  } else {
+      return false;
+  }
+}
+
+function exportSpec() {
+  let l = [];
+  for (let i = 1; i <= numTimeStudies; i++) {
+    if (studyHasBeenUnlocked(i)) {
+      l.push(player.timestudy.studies[i]);
+    }
+  }
+  let s = l.join('/');
+  copyToClipboard(s);
+}
+
+function importSpec () {
+  let s = prompt('Enter your spec');
+  let l = s.split('/');
+  for (let i = 1; i <= l.length; i++) {
+    for (let j = 0; j < +l[i - 1]; j++) {
+      if (!buyTimeStudy(i)) break;
+    }
   }
 }
 
@@ -2918,8 +2966,8 @@ function getDimensionPowerMultiplier (tier) {
       dimMult = Math.pow(10/0.30,Math.random())*0.30;
     }
 
-    // EC3 reward handled
-    dimMult += ecCompletions(3);
+    // EC3 reward handled (made far stronger)
+    dimMult *= getEC3RewardDimensionPowerMultiplier();
 
     if (player.infinityUpgrades.includes('dimMult')) dimMult *= 1.1;
     // Reward for "Is this hell?"
@@ -3898,7 +3946,7 @@ function updateTotalTiersDone () {
 let initialECCosts = {
   1: 2000,
   2: 250,
-  3: 28000,
+  3: 20000,
   4: 2000000,
   5: 400,
   6: 50,
@@ -3930,9 +3978,9 @@ let incrementECCosts = {
 let initialECGoals = {
   1: new Decimal('1e1200'),
   2: new Decimal('1e350'),
-  3: new Decimal('1e700'),
-  4: new Decimal('1e3200'),
-  5: new Decimal('1e400'),
+  3: new Decimal('1e750'),
+  4: new Decimal('1e10000'),
+  5: new Decimal('1e3000'),
   6: new Decimal('1e500'),
   7: new Decimal('1e4000'),
   8: new Decimal('1e1000'),
@@ -3947,8 +3995,8 @@ let incrementECGoals = {
   1: new Decimal('1e200'),
   2: new Decimal('1e50'),
   3: new Decimal('1e100'),
-  4: new Decimal('1e400'),
-  5: new Decimal('1e100'),
+  4: new Decimal('1e1000'),
+  5: new Decimal('1e300'),
   6: new Decimal('1e150'),
   7: new Decimal('1e500'),
   8: new Decimal('1e200'),
@@ -3997,6 +4045,10 @@ function checkForEternityChallengeFailure () {
   }
 }
 
+function getEC3RewardDimensionPowerMultiplier () {
+  return Math.pow(1 + player.eternities / 2e4, ecCompletions(3))
+}
+
 function ec6KeptReplicantiGalaxies () {
   // EC6 reward handled
   return Math.floor(player.replicanti.galaxies * ecNumReward(6));
@@ -4042,9 +4094,9 @@ function ecNumReward (x) {
   } else if (x === 2) {
     return Decimal.pow(Math.max(player.infinityPower.ln(), 1), 2 * c / 5);
   } else if (x === 3) {
-    return getDimensionPowerMultiplier();
+    return getEC3RewardDimensionPowerMultiplier();
   } else if (x === 4) {
-    return Math.pow(Math.max(getInfinitied(), 1), 2 * c);
+    return Math.pow(Math.max(getInfinitied(), 1), 4 * c);
   } else if (x === 5) {
     return galaxyIncrement();
   } else if (x === 6) {
@@ -4657,28 +4709,32 @@ function galaxyReset() {
 
 };
 
+function copyToClipboard (x) {
+  let output = document.getElementById('exportOutput');
+  let parent = output.parentElement;
+
+  parent.style.display = "";
+  output.value = x;
+
+  output.onblur = function() {
+      parent.style.display = "none";
+  }
+
+  output.focus();
+  output.select();
+
+  try {
+      if (document.execCommand('copy')) {
+          $.notify("exported to clipboard", "info");
+          output.blur();
+      }
+  } catch(ex) {
+      // well, we tried.
+  }
+}
+
 document.getElementById("exportbtn").onclick = function () {
-    let output = document.getElementById('exportOutput');
-    let parent = output.parentElement;
-
-    parent.style.display = "";
-    output.value = btoa(JSON.stringify(player, function(k, v) { return (v === Infinity) ? "Infinity" : v; }));
-
-    output.onblur = function() {
-        parent.style.display = "none";
-    }
-
-    output.focus();
-    output.select();
-
-    try {
-        if (document.execCommand('copy')) {
-            $.notify("exported to clipboard", "info");
-            output.blur();
-        }
-    } catch(ex) {
-        // well, we tried.
-    }
+    copyToClipboard(btoa(JSON.stringify(player, function(k, v) { return (v === Infinity) ? "Infinity" : v; })));
 };
 
 
@@ -4949,7 +5005,7 @@ function getTimeStudySacrificePow (num) {
   if (num === undefined) {
     num = player.timestudy.studies[1];
   }
-  return 1 + Math.log(1 + num / 10);
+  return 1 + Math.log(1 + Math.log(1 + num / 5))
 }
 
 
@@ -5697,7 +5753,7 @@ function getInfinitiedGain (time) {
   if (time > 50 && player.achievements.includes("r87") && infinityMultAndGenEnabled()) {
     ret *= 250;
   }
-  if (player.achievements.includes("r111")) {
+  if (player.achievements.includes("r111") && infinityMultAndGenEnabled()) {
     ret *= Math.floor(1 + player.infinityPoints.max(1).log(Number.MAX_VALUE));
   }
   return ret;
@@ -7649,7 +7705,7 @@ function init() {
 function skipTime (seconds) {
   if (seconds <= 21600) {
     player.lastUpdate -= seconds * 1000;
-    return true;
+    return seconds;
   } else {
     alert('Skipped too far!');
     return false;
@@ -7657,17 +7713,20 @@ function skipTime (seconds) {
 }
 
 function skipOneRG () {
-  if (skipTime(getReplicantiETA() / 10)) {
+  let time = getReplicantiETA() / 10;
+  if (skipTime(time)) {
     player.replicanti.amount = player.replicanti.limit;
+    return time;
   }
 }
 
 function skipRG () {
-  let time = getReplicantiETA() + (player.replicanti.gal - player.replicanti.galaxies) * getReplicantiETA(new Decimal(1));
-  if (skipTime(time / 10)) {
+  let time = (getReplicantiETA() + (player.replicanti.gal - player.replicanti.galaxies) * getReplicantiETA(new Decimal(1))) / 10;
+  if (skipTime(time)) {
     player.replicanti.amount = player.replicanti.limit;
     player.replicanti.galaxies = player.replicanti.gal;
     updateInfCosts();
+    return time;
   }
 }
 
@@ -7684,6 +7743,7 @@ function farmInf (seconds) {
       checkForEternityChallengeFailure();
     }
     setTimeout(function () {startChallenge('')}, 1000);
+    return secondsPerRun * numRuns;
   }
 }
 
@@ -7697,7 +7757,55 @@ function farmEter (seconds) {
     player.eternityPoints = player.eternityPoints.plus(EPPerEter.times(numEters));
     player.eternities += eternitiesPerEter * numEters;
     setTimeout(function () {eternity(true)}, 1000);
+    return secondsPerEter * numEters;
   }
+}
+
+function autoPlay () {
+  let seconds = (+prompt('How many seconds would you like to autoplay for?')) || 10;
+  let timeAutoplayed = 0;
+  let timeSinceLastAction = 0;
+  let last = Date.now() / 1000;
+  let lastIP = new Decimal(0);
+  let needReplicantiGalaxies = false;
+  let checkForTheBigCrunch = function () {
+    let g = gainedInfinityPoints();
+    if (timeSinceLastAction > 15 && g.gte(IPpeak)) {
+      document.getElementById('bigcrunch').onclick();
+      timeSinceLastAction = 0;
+      if (g < lastIP.times(1e10)) {
+        needReplicantiGalaxies = true;
+      }
+      lastIP = g;
+    }
+  }
+  let exitAuto = function () {
+    alert('Done autoplaying!');
+    clearInterval(intervalNumber);
+  }
+  let intervalNumber = setInterval(function () {
+    increment = Date.now() / 1000 - last;
+    timeAutoplayed += increment;
+    timeSinceLastAction += increment;
+    last = Date.now() / 1000;
+    if (timeAutoplayed > seconds) {
+      exitAuto();
+    }
+    if (!needReplicantiGalaxies) {
+      checkForTheBigCrunch();
+    } else {
+      if (player.replicanti.galaxies !== player.replicanti.gal) {
+        let s = skipRG();
+        if (!s) {
+          exitAuto();
+        }
+        timeAutoplayed += s;
+        timeSinceLastAction = 0;
+      } else {
+        checkForTheBigCrunch()
+      }
+    }
+  }, 1000);
 }
 
 // end cheats
