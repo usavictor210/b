@@ -3978,7 +3978,7 @@ let incrementECCosts = {
 let initialECGoals = {
   1: new Decimal('1e1200'),
   2: new Decimal('1e350'),
-  3: new Decimal('1e750'),
+  3: new Decimal('1e700'),
   4: new Decimal('1e10000'),
   5: new Decimal('1e3000'),
   6: new Decimal('1e500'),
@@ -3994,7 +3994,7 @@ let initialECGoals = {
 let incrementECGoals = {
   1: new Decimal('1e200'),
   2: new Decimal('1e50'),
-  3: new Decimal('1e100'),
+  3: new Decimal('1e200'),
   4: new Decimal('1e1000'),
   5: new Decimal('1e300'),
   6: new Decimal('1e150'),
