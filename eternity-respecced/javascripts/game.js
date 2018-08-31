@@ -3833,9 +3833,9 @@ let initialECCosts = {
   2: 250,
   3: 20000,
   4: 2000000,
-  5: 400,
-  6: 80
+  5: 400
   /*
+  6: 80,
   7: new Decimal('1e1600000'),
   8: new Decimal('1e8000'),
   9: new Decimal('1e18000'),
@@ -3851,9 +3851,9 @@ let incrementECCosts = {
   2: 50,
   3: 4000,
   4: 500000,
-  5: 100,
-  6: 20
+  5: 100
   /*
+  6: 20,
   7: new Decimal('1e400000'),
   8: new Decimal('1e1000'),
   9: new Decimal('1e2000'),
@@ -3869,9 +3869,9 @@ let initialECGoals = {
   2: new Decimal('1e350'),
   3: new Decimal('1e700'),
   4: new Decimal('1e10000'),
-  5: new Decimal('1e3600'),
-  6: new Decimal('1e500')
+  5: new Decimal('1e3600')
   /*
+  6: new Decimal('1e500')
   7: new Decimal('1e4000'),
   8: new Decimal('1e1000'),
   9: new Decimal('1e1500'),
@@ -3887,9 +3887,9 @@ let incrementECGoals = {
   2: new Decimal('1e50'),
   3: new Decimal('1e200'),
   4: new Decimal('1e1000'),
-  5: new Decimal('1e1200'),
-  6: new Decimal('1e150')
+  5: new Decimal('1e1200')
   /*
+  6: new Decimal('1e150'),
   7: new Decimal('1e500'),
   8: new Decimal('1e200'),
   9: new Decimal('1e250'),
@@ -4035,9 +4035,9 @@ let ecReqProps = {
   2: function () {return player.totalTickGained},
   3: function () {return player.eightAmount},
   4: function () {return getInfinitied()},
-  5: function () {return player.galaxies},
-  6: function () {return player.replicanti.galaxies}
+  5: function () {return player.galaxies}
   /*
+  6: function () {return player.replicanti.galaxies},
   7: function () {return player.money},
   8: function () {return player.infinityPoints},
   9: function () {return player.infinityPower},
@@ -4086,8 +4086,8 @@ function failEternityChallenge (x) {
 function initAllECs () {
   displayAllECRewards();
   checkAllECUnlockStatuses();
-  // change 4 back to 13
-  for (let i = 1; i <= 6; i++) {
+  // change 5 back to 13
+  for (let i = 1; i <= 5; i++) {
     updateECDisplay(i);
   }
 }
@@ -4136,14 +4136,15 @@ function updateECDisplay (x) {
 }
 
 function displayAllECRewards () {
-  // change 4 back to 13
-  for (let i = 1; i <= 6; i++) {
+  // change 5 back to 13
+  for (let i = 1; i <= 5; i++) {
     document.getElementById('ec' + i + 'reward').innerHTML = ecDisplayReward(i);
   }
 }
 
 function checkAllECUnlockStatuses () {
-  for (let i = 1; i <= 6; i++) {
+  // change 5 back to 13
+  for (let i = 1; i <= 5; i++) {
     if (canUnlockEterChall(i)) {
       document.getElementById('eterc' + i + 'unlockbtn').className = 'challengesbtn'
       document.getElementById('eterc' + i + 'unlockbtn').innerHTML = 'Unlock';
@@ -7123,7 +7124,7 @@ function startInterval() {
         document.getElementById("chall3Pow").innerHTML = shorten(player.chall3Pow*100) + "%"
 
 
-        if (player.infDimensionsUnlocked.includes(false) && player.break) {
+        if (player.infDimensionsUnlocked.includes(false) && player.break && player.infinityPoints.lt(currentEternityRequirement())) {
             document.getElementById("newDimensionButton").style.display = "inline-block"
         } else document.getElementById("newDimensionButton").style.display = "none"
 
