@@ -1378,7 +1378,7 @@ function getDimensionFinalMultiplier(tier) {
     if (player.achievements.includes("r98")) multiplier = multiplier.times(player.infinityDimension8.amount.max(1));
     if (player.achievements.includes("r84")) multiplier = multiplier.times(player.money.pow(0.00004).plus(1));
     else if (player.achievements.includes("r73")) multiplier = multiplier.times(player.money.pow(0.00002).plus(1));
-    if (player.achievements.includes("r125")) multiplier = multiplier.times(Decimal.pow(player.eternities + 1, Math.pow(player.eternities + 1, 0.5)));
+    if (player.achievements.includes("r125")) multiplier = multiplier.times(Decimal.pow(player.eternities + 1, Math.pow(player.eternities + 1, 1 / 3)));
    // tt normal dimension multipliers deleted
 
     multiplier = multiplier.times(player.postC3Reward)
@@ -3949,7 +3949,8 @@ let initialECCosts = {
   3: 20000,
   4: 2000000,
   5: 400,
-  6: 50,
+  6: 60
+  /*
   7: new Decimal('1e1600000'),
   8: new Decimal('1e8000'),
   9: new Decimal('1e18000'),
@@ -3957,6 +3958,7 @@ let initialECCosts = {
   11: new Decimal('1e500000'),
   12: new Decimal('1e1000'),
   13: new Decimal('1e2000000')
+  */
 }
 
 let incrementECCosts = {
@@ -3964,8 +3966,9 @@ let incrementECCosts = {
   2: 50,
   3: 4000,
   4: 500000,
-  5: 50,
-  6: 5,
+  5: 100,
+  6: 10
+  /*
   7: new Decimal('1e400000'),
   8: new Decimal('1e1000'),
   9: new Decimal('1e2000'),
@@ -3973,6 +3976,7 @@ let incrementECCosts = {
   11: new Decimal('1e100000'),
   12: new Decimal('1e200'),
   13: new Decimal('1e1000000')
+  */
 }
 
 let initialECGoals = {
@@ -3980,8 +3984,9 @@ let initialECGoals = {
   2: new Decimal('1e350'),
   3: new Decimal('1e700'),
   4: new Decimal('1e10000'),
-  5: new Decimal('1e3000'),
-  6: new Decimal('1e500'),
+  5: new Decimal('1e3600'),
+  6: new Decimal('1e500')
+  /*
   7: new Decimal('1e4000'),
   8: new Decimal('1e1000'),
   9: new Decimal('1e1500'),
@@ -3989,6 +3994,7 @@ let initialECGoals = {
   11: new Decimal('1e500'),
   12: new Decimal('1e100000'),
   13: new Decimal('1e700')
+  */
 }
 
 let incrementECGoals = {
@@ -3996,8 +4002,9 @@ let incrementECGoals = {
   2: new Decimal('1e50'),
   3: new Decimal('1e200'),
   4: new Decimal('1e1000'),
-  5: new Decimal('1e300'),
-  6: new Decimal('1e150'),
+  5: new Decimal('1e900'),
+  6: new Decimal('1e150')
+  /*
   7: new Decimal('1e500'),
   8: new Decimal('1e200'),
   9: new Decimal('1e250'),
@@ -4005,6 +4012,7 @@ let incrementECGoals = {
   11: new Decimal('1e200'),
   12: new Decimal('1e10000'),
   13: new Decimal('1e300')
+  */
 }
 
 function ecCost (x) {
@@ -4046,12 +4054,7 @@ function checkForEternityChallengeFailure () {
 }
 
 function getEC3RewardDimensionPowerMultiplier () {
-  return Math.pow(1 + player.eternities / 2e4, ecCompletions(3))
-}
-
-function ec6KeptReplicantiGalaxies () {
-  // EC6 reward handled
-  return Math.floor(player.replicanti.galaxies * ecNumReward(6));
+  return Math.pow(1 + player.eternities / 1e5, ecCompletions(3))
 }
 
 function ec8UpdateAll() {
@@ -4096,11 +4099,11 @@ function ecNumReward (x) {
   } else if (x === 3) {
     return getEC3RewardDimensionPowerMultiplier();
   } else if (x === 4) {
-    return Math.pow(Math.max(getInfinitied(), 1), 4 * c);
+    return Math.pow(Math.max(getInfinitied(), 1), 2 * c);
   } else if (x === 5) {
     return galaxyIncrement();
   } else if (x === 6) {
-    return c / 5;
+    return Math.pow(Math.max(player.replicanti.galaxies, 1), c);
   } else if (x === 7) {
     return Math.pow(Math.max(player.money.ln(), 1), 2 * c / 5);
   } else if (x === 8) {
@@ -4120,14 +4123,12 @@ function ecNumReward (x) {
 
 function ecDisplayReward (x) {
   let n = ecNumReward(x);
-  if ([1, 2, 4, 7, 9, 10, 13].includes(x)) {
+  if ([1, 2, 4, 6, 7, 9, 10, 13].includes(x)) {
     return shortenMoney(n) + 'x';
   } else if (x === 3) {
     return (Math.round(n * 10) / 10).toString() + 'x';
   } else if ([5, 12].includes(x)) {
     return n.toString();
-  } else if (x === 6) {
-    return (Math.round(n * 10) / 10).toString();
   } else if ([8, 11].includes(x)) {
     return 'x^' + shortenMoney(n);
   }
@@ -4150,14 +4151,16 @@ let ecReqProps = {
   3: function () {return player.eightAmount},
   4: function () {return getInfinitied()},
   5: function () {return player.galaxies},
-  6: function () {return player.replicanti.galaxies},
+  6: function () {return player.replicanti.galaxies}
+  /*
   7: function () {return player.money},
   8: function () {return player.infinityPoints},
   9: function () {return player.infinityPower},
   10: function () {return player.eternityPoints},
   11: function () {return getDimensionFinalMultiplier(1)},
   12: function () {return player.timeShards},
-  13: function () {return player.tickspeed.pow(-1)},
+  13: function () {return player.tickspeed.pow(-1)}
+  */
 }
 
 function canUnlockEterChall (x) {
@@ -4198,7 +4201,8 @@ function failEternityChallenge (x) {
 function initAllECs () {
   displayAllECRewards();
   checkAllECUnlockStatuses();
-  for (let i = 1; i <= 13; i++) {
+  // change 4 back to 13
+  for (let i = 1; i <= 6; i++) {
     updateECDisplay(i);
   }
 }
@@ -4247,13 +4251,14 @@ function updateECDisplay (x) {
 }
 
 function displayAllECRewards () {
-  for (let i = 1; i <= 13; i++) {
+  // change 4 back to 13
+  for (let i = 1; i <= 6; i++) {
     document.getElementById('ec' + i + 'reward').innerHTML = ecDisplayReward(i);
   }
 }
 
 function checkAllECUnlockStatuses () {
-  for (let i = 1; i <= 13; i++) {
+  for (let i = 1; i <= 6; i++) {
     if (canUnlockEterChall(i)) {
       document.getElementById('eterc' + i + 'unlockbtn').className = 'challengesbtn'
       document.getElementById('eterc' + i + 'unlockbtn').innerHTML = 'Unlock';
@@ -5663,7 +5668,7 @@ document.getElementById("bigcrunch").onclick = function () {
         giveInfPurchaseResets();
 
         if (player.replicanti.unl && !player.achievements.includes("r95")) player.replicanti.amount = new Decimal(1);
-        player.replicanti.galaxies = ec6KeptReplicantiGalaxies();
+        player.replicanti.galaxies = 0;
 
         resetDimPow();
 
@@ -6254,7 +6259,7 @@ function startChallenge(name, target) {
     }
 
     if (player.replicanti.unl) player.replicanti.amount = new Decimal(1);
-    player.replicanti.galaxies = ec6KeptReplicantiGalaxies();
+    player.replicanti.galaxies = 0;
 
     IPminpeak = new Decimal(0);
     IPpeak = new Decimal(0);
