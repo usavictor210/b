@@ -212,9 +212,19 @@
                         <td>
                             <button id="eter6" class="eternityupbtn" onclick="buyEternityUpgrade(6, 1e12)">EP production is boosted by timeshards (1+log10(timeshards)^0.5)<br>Currently: x<br>Cost: x EP</button>
                         </td>
+                    </tr><tr>
+                        <td>
+                            <div class="eternityupbtnbought" style="opacity: 0"></div>
+                        </td>
+                        <td>
+                            <button id="epmult" class="eternityupbtn" onclick="buyEPMult()">You gain 5 times more EP<p>Cost: 500 EP</button>
+                        </td>
+                        <td>
+                            <div class="eternityupbtnbought" style="opacity: 0"></div>
+                        </td>
                     </tr>
                 </table>
-                <button id="epmult" class="eternityupbtn" onclick="buyEPMult()">You gain 5 times more EP<p>Cost: 500 EP</button>
+                <div><button class="storebtn" onclick="buyMaxEPMult()" style="height: 25px; width: 190px; font-size:10px; margin-top: -3px;">Max EP mult</button></div>
             </div>
             <div class="eternitytab" id="milestones">
               <table class="table" align="center" style="margin: auto" id="milestones">
@@ -694,6 +704,7 @@
                         </div>
 
                         <div id="timeShardsPerSec">You are getting 0 Timeshards per second.</div>
+                        <button id="maxTimeDimensions" class="storebtn" style="font-size: 12px" onclick="buyMaxTimeDimensions()">Max all</Button>
                         <table class="table" >
                             <tr style="font-size: 17px" id="timeRow1">
                                 <td id="timeD1" width="43%">
@@ -1190,7 +1201,7 @@
                             <div id="But I wanted another prestige layer..." class="achievement achievementlocked" style="background-image: url(images/87.png)" ach-tooltip="Reach 1.79e308 EP. Reward: Time dimensions get a multiplier based on EP."><br></div>
                         </td>
                         <td>
-                            <div id="What do I have to do to get rid of you" class="achievement achievementlocked" style="background-image: url(images/88.png)" ach-tooltip="=Reach 1e22000 IP without any time studies. Reward: Time dimensions are multiplied by the total number of studies you have."><br></div>
+                            <div id="What do I have to do to get rid of you" class="achievement achievementlocked" style="background-image: url(images/88.png)" ach-tooltip="=Reach 1e22000 IP without any time studies. Reward: Time dimensions are multiplied by the total number of time theorems you have."><br></div>
                         </td>
                     </tr>
                     <tr id="achRow13">
@@ -1198,7 +1209,7 @@
                             <div id="5 more eternities until the update" class="achievement achievementlocked" style="background-image: url(images/89.png)" ach-tooltip="Complete all the eternity challenges 5 times."><br></div>
                         </td>
                         <td>
-                            <div id="Unique snowflakes" class="achievement achievementlocked" style="background-image: url(images/90.png)" ach-tooltip="Have 1000 galaxies without having any replicanti galaxies. Reward: Normal galaxies are 0.1% stronger."><br></div>
+                            <div id="Unique snowflakes" class="achievement achievementlocked" style="background-image: url(images/90.png)" ach-tooltip="Have 2000 galaxies without having any replicanti galaxies. Reward: Normal galaxies are 0.2% stronger."><br></div>
                         </td>
                         <td>
                             <div id="I never liked this infinity stuff anyway" class="achievement achievementlocked" style="background-image: url(images/91.png)" ach-tooltip="Reach 1e140,000 IP without buying IDs or IP multipliers."><br></div>
@@ -1650,7 +1661,7 @@
                               <button id="eterc5" class="challengesbtn" onclick="startEternityChallenge(5)">Start</button>
                               <div id="eterc5goaldiv" style="display: none;">
                                 <span id="ec5goal">Goal: z</span><br>
-                                <span>Reward: Galaxy cost increase per galaxy purchase is reduced by 1. Currently <span id="ec5reward">reward</span>.</span>
+                                <span>Reward: Tickspeed upgrades are stronger based on galaxies. Currently <span id="ec5reward">reward</span>.</span>
                               </div>
                         </td>
                         <td>
@@ -2356,7 +2367,6 @@
 <script type="text/javascript" src="javascripts/breakinfinity.js"></script>
 <script type="text/javascript" src="javascripts/game.js?82"></script>
 <script type="text/javascript" src="javascripts/sha512.js"></script>
-<script type="text/javascript" src="javascripts/dimcostlookuptable.js"></script>
 <script type="text/javascript" src="javascripts/eter_player.js"></script>
 <script type="text/javascript" src="javascripts/lz-string.js"></script>
 

@@ -5,7 +5,7 @@
 <body>
   <div>Exponent of IP</div>
   <textarea id="ip"></textarea>
-  <div>Timeshards</div>
+  <div>Exponent of timeshards</div>
   <textarea id="timeshards"></textarea>
   <div>Time theorems</div>
   <textarea id="tt"></textarea>
@@ -68,7 +68,7 @@ function getTotalTickGained (timeshards, st) {
   if (timeshards < 1) {
     return 0;
   }
-  let timeshardLn = Math.log(timeshards);
+  let timeshardLn = timeshards * Math.log(10);
   let c = get_c(st);
   // we know that ln(1.001) * (x - 1) * x / 2 + ln(c) * x <= timeshardLn
   // so ln(1.001) / 2 * x^2 + (ln(c) - ln(1.001) / 2) * x - timeshardLn <= 0
