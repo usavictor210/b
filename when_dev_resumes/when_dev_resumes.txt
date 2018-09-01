@@ -228,7 +228,7 @@ goal: Have 180 times more replicanti galaxies than normal galaxies. Reward: Repl
 name: But I wanted another prestige layer...
 goal: Reach 1e308 EP. Reward: Time dimensions get a multiplier based on EP.
 name: What do I have to do to get rid of you
-goal: Reach 1e22000 IP without any time studies. Reward: Time dimensions are multiplied by the total number of studies you have.
+goal: Reach 1e66600 IP without any time studies. Reward: Time dimensions are multiplied by the total number of studies you have.
 Row 13:
 name: I never liked this infinity stuff anyway
 goal: Reach 1e140,000 IP without buying IDs or IP multipliers.

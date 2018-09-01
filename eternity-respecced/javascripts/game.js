@@ -1858,6 +1858,7 @@ function DimensionPower(tier) {
     var dim = player["infinityDimension"+tier]
     var mult = dim.power.times(infDimPow)
     if (player.achievements.includes("r94") && tier == 1) mult = mult.times(2);
+    if (player.achievements.includes("r114")) mult = mult.times(Decimal.pow(10, ecCompletions(4) + 1))
     if (player.achievements.includes("r115")) mult = mult.times(Decimal.pow(7, player.eternityChallenges.totalTiersDone))
     if (player.replicanti.unl) {
         // ts 3 is replicanti multiplier
@@ -2057,6 +2058,9 @@ function getPower(tier) {
   }
   if (player.achievements.includes('r105')) {
     ret = ret.times(Math.max(Math.pow(player.eightAmount.toNumber(), 1 / 8), 1));
+  }
+  if (player.achievements.includes("r114")) {
+    ret = ret.times(Decimal.pow(2, ecCompletions(4) + 1));
   }
   if (player.achievements.includes('r127')) {
     ret = ret.times(player.eternityPoints.max(2).log(2))
@@ -2676,8 +2680,7 @@ function timeDisplayShort(time) {
     if (time <= 600) return (time/10).toFixed(2) + " seconds"
     time = Decimal.floor(time / 10)
     return preformat(Decimal.floor((time) / 3600)) + ":" + preformat(Decimal.floor((time % 3600) / 60)) + ":" + preformat(Decimal.floor(time % 60))
-
-    }
+}
 
 const allAchievements = {
   r11 : "You gotta start somewhere",
@@ -4783,7 +4786,7 @@ function setAchieveTooltip() {
     over9000.setAttribute('ach-tooltip', "Get a total sacrifice multiplier of "+shortenCosts(new Decimal("1e9000"))+". Reward: Sacrifice doesn't reset your dimensions.")
     dawg.setAttribute('ach-tooltip', "Have each infinity be at least "+shortenMoney(Number.MAX_VALUE)+" times higher IP than the previous one within your past 10 infinities. Reward: Your antimatter doesn't reset on dimension boost or galaxy, and your infinity gain is boosted by your unspent IP.")
     layer.setAttribute('ach-tooltip', "Reach "+shortenMoney(Number.MAX_VALUE)+" EP. Reward: Time dimensions get a multiplier based on EP.")
-    fkoff.setAttribute('ach-tooltip', "Reach "+shortenCosts(new Decimal("1e22000"))+" IP without any time studies. Reward: Time dimensions are multiplied by the total number of time theorems you have.")
+    fkoff.setAttribute('ach-tooltip', "Reach "+shortenCosts(new Decimal("1e66600"))+" IP without any time studies. Reward: Time dimensions are multiplied by the total number of time theorems you have.")
     infstuff.setAttribute('ach-tooltip', "Reach "+shortenCosts(new Decimal("1e140000"))+" IP without buying IDs or IP multipliers.")
 }
 
@@ -6612,7 +6615,7 @@ function startInterval() {
 
         if (player.infinityPoints.gte('9.99999e999')) giveAchievement("This achievement doesn't exist II");
         if (player.infinityPoints.gte('1e30008')) giveAchievement("Can you get infinite IP?");
-        if (player.infinityPoints.gte(new Decimal("1e22000")) && player.timestudy.studies.every((i) => i === null || i === 0)) giveAchievement("What do I have to do to get rid of you")
+        if (player.infinityPoints.gte(new Decimal("1e66600")) && player.timestudy.studies.every((i) => i === null || i === 0)) giveAchievement("What do I have to do to get rid of you")
 
         if (infinityMultAndGenEnabled()) {
             if (player.infinityUpgrades.includes("infinitiedGeneration")) player.partInfinitied += diff / player.bestInfinityTime;

@@ -1,0 +1,21 @@
+Work harder: Go intergalactic without eternity upgrades. Reward: Eternity upgrades multipliers are x^1.1.
+Something: Go intergalactic in a minute.
+No fifth TD here!: Get a million time theorems.
+
+ID = 56ND
+TD = 8ID
+GD = super-strong
+
+Boost based on tickspeed multiplier decrease: x^0.02
+Boost based on GP: x + 1
+Boost based on intergalactics: x^log4(2x)
+Boost based on unspent GT: x^log4(2x)
+
+Boost effects as given are on TD.
+Effect on ID = effect on TD^10.
+Effect on ND = effect on TD^1000.
+Effect on GD = 1 + ln(effect on TD).
+
+These things should have fairly large cost increases, I think.
+What about being like TT, but the cost increment increasing each time they're bought?
+That sounds good.
