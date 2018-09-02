@@ -9,7 +9,7 @@ GD = super-strong
 Boost based on tickspeed multiplier decrease: x^0.02
 Boost based on GP: x + 1
 Boost based on intergalactics: x^log4(2x)
-Boost based on unspent GT: x^log4(2x)
+Boost based on unspent GT: x^(x^0.5)
 
 Boost effects as given are on TD.
 Effect on ID = effect on TD^10.

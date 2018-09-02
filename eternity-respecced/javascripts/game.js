@@ -3110,8 +3110,8 @@ function buyManyDimension(tier) {
 }
 
 function buyManyDimensionAuto(tier, bulk) {
-    var name = TIER_NAMES[tier];
     let x = bulk;
+    var name = TIER_NAMES[tier];
     if (player.currentChallenge == "challenge10" || player.currentChallenge == "postc1" || player.currentChallenge == "postc5" || player.currentChallenge == "challenge5") {
       while (buyManyDimension(tier) && x > 0) {
         x--;
@@ -3150,6 +3150,7 @@ function buyManyDimensionAuto(tier, bulk) {
       Decimal.pow(player.dimensionMultDecrease, (solution - 1) * (solution - 2) / 2)));
     player.costMultipliers[tier-1] = player.costMultipliers[tier-1].times(Decimal.pow(player.dimensionMultDecrease, solution - 1));
     player[name + 'Amount'] = player[name + 'Amount'].plus(10 * solution);
+    player[name + 'Pow']  = player[name + 'Pow'].times(Decimal.pow(getDimensionPowerMultiplier(tier), solution));
     player.money = player.money.minus(player[name + 'Cost'].times(10))
     player[name + 'Cost'] = player[name + 'Cost'].times(getDimensionCostMultiplier(tier));
     player.costMultipliers[tier-1] = player.costMultipliers[tier-1].times(player.dimensionMultDecrease);
@@ -6377,8 +6378,8 @@ setInterval(function() {
 function setInfAndEterPointDisplay () {
   if (player.infinitied == 0 && player.eternities === 0) document.getElementById("infinityPoints2").style.display = "none"
   else document.getElementById("infinityPoints2").style.display = "inline-block"
-  if (player.eternities == 0) document.getElementById("infinityPoints2").style.display = "none"
-  else document.getElementById("infinityPoints2").style.display = "inline-block"
+  if (player.eternities == 0) document.getElementById("eternityPoints2").style.display = "none"
+  else document.getElementById("eternityPoints2").style.display = "inline-block"
 }
 
 var nextAt = [new Decimal("1e2000"), new Decimal("1e5000"), new Decimal("1e12000"), new Decimal("1e14000"), new Decimal("1e18000"), new Decimal("1e20000"), new Decimal("1e23000"), new Decimal("1e28000")]
