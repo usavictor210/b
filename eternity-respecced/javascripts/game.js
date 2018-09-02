@@ -2543,7 +2543,7 @@ function softReset(bulk, reallyZero) {
       hideDims();
     }
 
-    player.tickspeed = player.tickspeed.times(Decimal.pow(getTickSpeedMultiplier(), player.totalTickGained))
+    giveBoostFromTickSpeedUpgrades(player.totalTickGained)
     updateTickSpeed();
     updateInitialMoney();
 
@@ -2628,6 +2628,20 @@ function getPostC3Multiplier () {
   return ret;
 }
 
+function getPostC3Multiplier () {
+  if (!player.challenges.includes("postc3") && player.currentChallenge !== "postc3") return 1;
+  let ret = 1.05+(player.galaxies*0.005);
+  if (player.achievements.includes('r138')) {
+    ret *= 1.1;
+  }
+  return ret;
+}
+
+function giveBoostFromTickSpeedUpgrades (n) {
+  player.tickspeed = player.tickspeed.times(Decimal.pow(getTickSpeedMultiplier(), n));
+  player.postC3Reward = player.postC3Reward.times(Decimal.pow(getPostC3Multiplier(), n));
+}
+
 function buyTickSpeed() {
     if (!canBuyTickSpeed()) {
         return false;
@@ -2642,8 +2656,7 @@ function buyTickSpeed() {
     else multiplySameCosts(player.tickSpeedCost)
     if (player.tickSpeedCost.gte(Number.MAX_VALUE)) player.tickspeedMultiplier = player.tickspeedMultiplier.times(player.tickSpeedMultDecrease);
     if (player.currentChallenge == "challenge2" || player.currentChallenge == "postc1") player.chall2Pow = 0
-    player.tickspeed = player.tickspeed.times(getTickSpeedMultiplier());
-    if (player.challenges.includes("postc3") || player.currentChallenge == "postc3") player.postC3Reward = player.postC3Reward.times(getPostC3Multiplier())
+    giveBoostFromTickSpeedUpgrades(1);
     postc8Mult = new Decimal(1)
     return true;
 }
@@ -3189,7 +3202,7 @@ function buyMaxTickSpeed() {
     player.tickSpeedCost = player.tickSpeedCost.times(player.tickspeedMultiplier.pow(solution - 1).times(
       Decimal.pow(player.tickSpeedMultDecrease, (solution - 1) * (solution - 2) / 2)));
     player.tickspeedMultiplier = player.tickspeedMultiplier.times(Decimal.pow(player.tickSpeedMultDecrease, solution - 1));
-    player.tickspeed = player.tickspeed.times(Decimal.pow(getTickSpeedMultiplier(), solution));
+    giveBoostFromTickSpeedUpgrades(solution)
     player.money = player.money.minus(player.tickSpeedCost)
     player.tickSpeedCost = player.tickSpeedCost.times(player.tickspeedMultiplier);
     player.tickspeedMultiplier = player.tickspeedMultiplier.times(player.tickSpeedMultDecrease);
@@ -4597,7 +4610,7 @@ function galaxyReset() {
     if (player.replicanti.galaxies >= player.galaxies * 180 && player.galaxies > 0) giveAchievement("Popular music")
     if (player.galaxies >= 2000 && player.replicanti.galaxies === 0) giveAchievement("Unique snowflakes")
     updateInitialMoney();
-    player.tickspeed = player.tickspeed.times(Decimal.pow(getTickSpeedMultiplier(), player.totalTickGained))
+    giveBoostFromTickSpeedUpgrades(player.totalTickGained);
     updateTickSpeed()
     if (player.achievements.includes("r66")) player.tickspeed = player.tickspeed.times(0.98);
 
@@ -5590,7 +5603,7 @@ document.getElementById("bigcrunch").onclick = function () {
         if (player.challenges.length >= 2 && !player.achievements.includes("r47")) giveAchievement("Daredevil");
         if (player.challenges.length == 12 && !player.achievements.includes("r48")) giveAchievement("AntiChallenged");
         resetInfDimensions();
-        player.tickspeed = player.tickspeed.times(Decimal.pow(getTickSpeedMultiplier(), player.totalTickGained))
+        giveBoostFromTickSpeedUpgrades(player.totalTickGained);
         updateTickSpeed();
         if (player.challenges.length == 20) giveAchievement("Anti-antichallenged");
         IPminpeak = new Decimal(0);
@@ -6181,7 +6194,7 @@ function startChallenge(name, target) {
     document.getElementById("replicantireset").innerHTML = "Reset replicanti amount, but get a free galaxy<br>"+player.replicanti.galaxies + " replicated galaxies created."
 
     resetInfDimensions();
-    player.tickspeed = player.tickspeed.times(Decimal.pow(getTickSpeedMultiplier(), player.totalTickGained))
+    giveBoostFromTickSpeedUpgrades(player.totalTickGained);
     updateTickSpeed();
 
     // if we're now out of a challenge this function will do stuff, otherwise it won't
@@ -6706,7 +6719,7 @@ function startInterval() {
         let newTotalTickGained = getTotalTickGained(player.timeShards);
         let newTickGained = newTotalTickGained - player.totalTickGained;
         player.totalTickGained = newTotalTickGained
-        player.tickspeed = player.tickspeed.times(Decimal.pow(getTickSpeedMultiplier(), newTickGained))
+        giveBoostFromTickSpeedUpgrades(newTickGained)
         if (player.totalTickGained >= 308) giveAchievement("Infinite time");
         document.getElementById("totaltickgained").innerHTML = "You've gained "+shortenDimensions(player.totalTickGained)+" tickspeed upgrades."
         updateTickSpeed();
