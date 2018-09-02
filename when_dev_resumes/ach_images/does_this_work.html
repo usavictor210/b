@@ -3,17 +3,16 @@
   <link rel="stylesheet" type="text/css" href="styles.css">
 </head>
 <body>
-  <canvas id="c" width=104 height=104></canvas>
-  <img id="i" style="display: none;" src="file2.png"/>
+  <canvas id="c" width="498" height="498"></canvas>
+  <img id="i" style="display: none;" src="im_a_mistake.png"/>
   <script>
   window.onload = function () {
     c = document.getElementById("c");
     context = c.getContext("2d");
-    context.font = "12px Typewriter";
-    context.fillStyle = "rgb(0,0,0)";
-    context.fillText("?? dimensions and", 5, 12);
-    context.fillText("none of them", 15, 24);
-    context.fillText("ninth...", 30, 36)
+    context.drawImage(document.getElementById("i"), 0, 0)
+    context.font = "48px Typewriter";
+    context.fillStyle = "rgb(255,255,255)";
+    context.fillText("I'm a mistake", 27, 12);
 
     var img = c.toDataURL("image/png");
     document.write('<img src="'+img+'"/>');

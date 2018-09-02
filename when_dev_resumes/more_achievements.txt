@@ -1,6 +1,14 @@
-Work harder: Go intergalactic without eternity upgrades. Reward: Eternity upgrades multipliers are x^1.1.
-Something: Go intergalactic in a minute.
-No fifth TD here!: Get a million time theorems.
+Perma-non-dilation: Get 13000 TT.
+This is what...: As suggested. Reward: Time dimensions are multiplied by your total galactic theorems.
+
+In the grim darkness of the far endgame: Get 1e40000 EP.
+Work harder: Go intergalactic without eternity upgrades. Reward: Eternity upgrade multipliers are x^1.1.
+A newer beginning: Begin generation of blackhole power.
+I'm a mistake: Complete a blackhole challenge. Reward: Double blackhole power gain for each eternity challenge completed, and you can complete each eternity challenge 6 times, rather than 5.
+Superluminal travel: Go intergalactic in under a minute. Reward: You start with 2e25 EP.
+Yeah you definitely bend time: Get 9e999 tickspeed decrease per upgrade.
+No XD!: Get 10 trillion banked infinities. Reward: Blackhole power affects infinity gain.
+I want it all: Have at least one of each galactic study at a single time.
 
 ID = 56ND
 TD = 8ID
@@ -19,3 +27,8 @@ Effect on GD = 1 + ln(effect on TD).
 These things should have fairly large cost increases, I think.
 What about being like TT, but the cost increment increasing each time they're bought?
 That sounds good.
+
+Infinity power boosts GD: log(power)^(blackhole percentage / 5).
+Same formula for antimatter boosting GD.
+Replicanti galaxies are a huge part of the game, so the amount to which they are powered up is 1/10 usual powerup.
+Also, galactic dimension multipliers are powered in the same way, so that it's not overwhelming.

@@ -1200,9 +1200,7 @@ function updateMoney() {
 
 function updateCoinPerSec() {
     var element = document.getElementById("coinsPerSec");
-    if (player.eternityChallenges.current === 13) {
-      element.innerHTML = 'You are getting ' + shortenDimensions(new Decimal(1).dividedBy(player.tickspeed.dividedBy(1000))) + ' antimatter per second.';
-    } else if (player.currentChallenge == "challenge3" || player.currentChallenge == "postc1") {
+    if (player.currentChallenge == "challenge3" || player.currentChallenge == "postc1") {
       element.innerHTML = 'You are getting ' + shortenDimensions(getDimensionProductionPerSecond(1).times(player.chall3Pow)) + ' antimatter per second.';
     } else if (player.currentChallenge == "challenge7") {
       element.innerHTML = 'You are getting ' + (shortenDimensions(getDimensionProductionPerSecond(1).plus(getDimensionProductionPerSecond(2)))) + ' antimatter per second.';
@@ -1330,11 +1328,8 @@ function getInfinityPowerTDMultiplier() {
 }
 
 function getDimensionFinalMultiplier(tier) {
-    if ((player.eternityChallenges.current === 3 && tier > 4) || player.eternityChallenges.current === 13) {
+    if (player.eternityChallenges.current === 3 && tier > 4) {
       return new Decimal(0);
-    }
-    if (player.eternityChallenges.current === 11) {
-      return getDimensionBoostMultiplierOn(tier).times(getInfinityPowerNDMultiplier());
     }
     var name = TIER_NAMES[tier];
 
@@ -1852,9 +1847,6 @@ function DimensionPower(tier) {
     if (player.eternityChallenges.current === 9 || player.eternityChallenges.current === 10) {
       return new Decimal(0);
     }
-    if (player.eternityChallenges.current === 11) {
-      return new Decimal(1);
-    }
     var dim = player["infinityDimension"+tier]
     var mult = dim.power.times(infDimPow)
     if (player.achievements.includes("r94") && tier == 1) mult = mult.times(2);
@@ -2044,9 +2036,6 @@ function getPower(tier) {
   if (player.eternityChallenges.current === 1 || player.eternityChallenges.current === 10) {
     return new Decimal(0);
   }
-  if (player.eternityChallenges.current === 11) {
-    return new Decimal(1);
-  }
   var ret = dim.power;
   if (player.eternityUpgrades.includes(5) && tier === 1) {
     ret = ret.times(1 + player.eternities);
@@ -2067,6 +2056,9 @@ function getPower(tier) {
   }
   if (player.achievements.includes('r128')) {
     ret = ret.times(Math.max(getTotalTT(), 1))
+  }
+  if (player.achievements.includes('r138')) {
+    ret = ret.times(Math.max(getTotalGT(), 1))
   }
   // EC1 reward handled
   ret = ret.times(ecNumReward(1));
@@ -2253,6 +2245,11 @@ function buyMaxWithEP () {
 
 function getTotalTT () {
   return Math.round(player.timestudy.amcost.log(10) / 20000 + player.timestudy.ipcost.log(10) / 100 + player.timestudy.epcost.log(2) - 1);
+}
+
+// TODO fix
+function getTotalGT () {
+  return Math.round(player.galacticstudy.amcost.log(10) / 20000 + player.galacticstudy.ipcost.log(10) / 100 + player.galacticstudy.epcost.log(2) - 1);;
 }
 
 let nextStudiesAt = [60, 1000];
@@ -2621,20 +2618,8 @@ function getTickSpeedMultiplier() {
 }
 
 function getPostC3Multiplier () {
-  let ret = 1.05+(player.galaxies*0.005);
-  if (player.achievements.includes('r138')) {
-    ret *= 1.1;
-  }
-  return ret;
-}
-
-function getPostC3Multiplier () {
   if (!player.challenges.includes("postc3") && player.currentChallenge !== "postc3") return 1;
-  let ret = 1.05+(player.galaxies*0.005);
-  if (player.achievements.includes('r138')) {
-    ret *= 1.1;
-  }
-  return ret;
+  return 1.05+(player.galaxies*0.005);
 }
 
 function giveBoostFromTickSpeedUpgrades (n) {
@@ -2792,13 +2777,13 @@ const allAchievements = {
   r126 : "Popular music",
   r127 : "But I wanted another prestige layer...",
   r128 : "What do I have to do to get rid of you",
-  r131 : "5 more eternities until the update",
+  r131 : "Perma-non-dilation",
   r132 : "Unique snowflakes",
   r133 : "I never liked this infinity stuff anyway",
   r134 : "Definitely not safe",
   r135 : "The void",
   r136 : "Universal harmony",
-  r137 : "?? dimensions and none of them ninth...",
+  r137 : "24 dimensions and none of them ninth...",
   r138 : "This is what I have to do to get rid of you."
 };
 // to retrieve by value: Object.keys(allAchievements).find(key => allAchievements[key] === "L4D: Left 4 Dimensions");
@@ -3948,11 +3933,6 @@ function checkForEternityChallengeFailure () {
       failEternityChallenge(4);
     }
   }
-  if (player.eternityChallenges.current === 12) {
-    if (player.thisEternity > ec12TimeLimit()) {
-      failEternityChallenge(12);
-    }
-  }
 }
 
 function getEC3RewardDimensionPowerMultiplier () {
@@ -3981,12 +3961,9 @@ function hasInfiniteTime () {
   return player.achievements.includes("r112");
 }
 
-function infiniteTimeEffect (c) {
-  if (c === undefined) {
-    c = ecCompletions(13);
-  }
+function infiniteTimeEffect () {
   if (hasInfiniteTime()) {
-    return player.tickspeed.dividedBy(1000).pow(-1e-5 + c * -2e-6);
+    return player.tickspeed.dividedBy(1000).pow(-1e-5);
   } else {
     return 1;
   }
@@ -4004,35 +3981,15 @@ function ecNumReward (x) {
     return Math.pow(Math.max(getInfinitied(), 1), 2 * c);
   } else if (x === 5) {
     return Math.pow(Math.max(player.galaxies, 1), c / 10);
-  } else if (x === 6) {
-    return Math.pow(Math.max(player.replicanti.galaxies, 1), c);
-  } else if (x === 7) {
-    return Math.pow(Math.max(player.money.ln(), 1), 2 * c / 5);
-  } else if (x === 8) {
-    return 1 - .01 * c;
-  } else if (x === 9) {
-    return player.infinityPower.max(1).pow(.001 * c);
-  } else if (x === 10) {
-    return Decimal.pow(Math.max(getInfinitied(), 1), 1000 * c);
-  } else if (x === 11) {
-    return 1 + .01 * c;
-  } else if (x === 12) {
-    return 1 + c;
-  } else if (x === 13) {
-    return infiniteTimeEffect(c);
   }
 }
 
 function ecDisplayReward (x) {
   let n = ecNumReward(x);
-  if ([1, 2, 4, 5, 6, 7, 9, 10, 13].includes(x)) {
+  if ([1, 2, 4, 5].includes(x)) {
     return shortenMoney(n) + 'x';
   } else if (x === 3) {
     return (Math.round(n * 10) / 10).toString() + 'x';
-  } else if (x === 12) {
-    return n.toString();
-  } else if ([8, 11].includes(x)) {
-    return 'x^' + shortenMoney(n);
   }
 }
 
@@ -4112,15 +4069,12 @@ function initAllECs () {
 function updateECDisplay (x) {
   let c = ecCompletions(x);
   let plural = (c === 1) ? '' : 's';
-  let period = (x === 4 || x === 12) ? '' : '.';
+  let period = (x === 4) ? '' : '.';
   document.getElementById('ec' + x + 'completions').innerHTML = 'Completed ' + c + ' time' + plural + '.';
   document.getElementById('ec' + x + 'cost').innerHTML = smartShortenCosts(ecCost(x));
   document.getElementById('ec' + x + 'goal').innerHTML = 'Goal: ' + shortenCosts(ecGoal(x)) + ' infinity points' + period;
   if (x === 4) {
     document.getElementById('ec' + x + 'constraint').innerHTML = ec4InfinitiedLimit();
-  }
-  if (x === 12) {
-    document.getElementById('ec' + x + 'constraint').innerHTML = (ec12TimeLimit() / 10).toFixed(2);
   }
   // show the cost no matter what
   document.getElementById('eterc' + x + 'costdiv').style.display = 'block';
@@ -5404,7 +5358,6 @@ document.getElementById("bigcrunch").onclick = function () {
         if (player.currentChallenge == "challenge11" && player.thisInfinityTime <= 1800) giveAchievement("Gift from the Gods")
         if (player.currentChallenge == "challenge5" && player.thisInfinityTime <= 1800) giveAchievement("Is this hell?")
         if (player.currentChallenge == "challenge3" && player.thisInfinityTime <= 100) giveAchievement("You did this again just for the achievement right?");
-        if (player.currentChallenge == "postc3" && player.eternityChallenges.current === 11) giveAchievement("This is what I have to do to get rid of you.")
         if (player.firstAmount == 1 && player.resets == 0 && player.galaxies == 0 && player.currentChallenge == "challenge12") giveAchievement("ERROR 909: Dimension not found")
         if (player.currentChallenge != "" && player.challengeTimes[challNumber-2] > player.thisInfinityTime) player.challengeTimes[challNumber-2] = player.thisInfinityTime
         if (player.currentChallenge.includes("post") && player.infchallengeTimes[challNumber-1] > player.thisInfinityTime) player.infchallengeTimes[challNumber-1] = player.thisInfinityTime
@@ -5638,8 +5591,6 @@ document.getElementById("bigcrunch").onclick = function () {
   updateChallenges();
   updateChallengeTimes()
   updateLastTenRuns()
-
-
 }
 
 
@@ -6592,9 +6543,6 @@ function startInterval() {
           diff = 0;
         }
         diff /= 100;
-        if (player.eternityChallenges.current === 12) {
-          diff /= 1000;
-        }
         if (diff < 0) diff = 1;
         if (player.thisInfinityTime < -10) player.thisInfinityTime = Infinity
         if (player.bestInfinityTime < -10) player.bestInfinityTime = Infinity
@@ -6672,12 +6620,6 @@ function startInterval() {
                 player.money = player.money.plus(getDimensionProductionPerSecond(2).times(diff/10));
                 player.totalmoney = player.totalmoney.plus(getDimensionProductionPerSecond(2).times(diff/10))
             }
-            if (player.eternityChallenges.current === 13) {
-                let gain = new Decimal(1).dividedBy(player.tickspeed.dividedBy(1000)).times(diff/10);
-                player.money = player.money.plus(gain);
-                player.totalmoney = player.totalmoney.plus(gain);
-                player.infinityPoints = player.infinityPoints.plus(Decimal.floor(gain));
-            }
         }
 
         document.getElementById("dimTabButtons").style.display = "none"
@@ -6685,10 +6627,6 @@ function startInterval() {
         player.totalTimePlayed += diff
         player.thisInfinityTime += diff
         player.thisEternity += diff
-        // We're adding time in the eternity.
-        if (player.eternityChallenges.current === 12) {
-          checkForEternityChallengeFailure();
-        }
 
         if (player.eternities > 0) document.getElementById("tdtabbtn").style.display = "inline-block"
 
