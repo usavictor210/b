@@ -215,6 +215,13 @@ var player = {
         gal: 0,
         galaxies: 0,
         galCost: new Decimal(1e170),
+        galaxybuyer: {
+            unl: false,
+            on: false,
+            bulk: 1,
+            wait: 0,
+            lastTick: Date.now()
+        },
         auto: [false, false, false],
         limit: new Decimal(Number.MAX_VALUE),
         newLimit: new Decimal(Number.MAX_VALUE)
@@ -737,6 +744,16 @@ function onLoad() {
     }
     if (player.replicanti.galaxybuyer !== undefined && typeof player.replicanti.galaxybuyer !== 'object') {
       player.replicanti.galaxybuyer = {
+          unl: true,
+          on: false,
+          bulk: 1,
+          wait: 0,
+          lastTick: Date.now()
+      }
+    }
+    if (player.replicanti.galaxybuyer === undefined) {
+      player.replicanti.galaxybuyer = {
+          unl: false,
           on: false,
           bulk: 1,
           wait: 0,
@@ -856,12 +873,8 @@ function onLoad() {
 
     if (player.infinitied == 0) document.getElementById("infinityPoints2").style.display = "none"
 
-
-
-    if (player.replicanti.galaxybuyer !== undefined) {
-        replicantiGalaxyAutoToggle()
-        replicantiGalaxyAutoToggle()
-    }
+    replicantiGalaxyAutoToggle()
+    replicantiGalaxyAutoToggle()
 
 
 
@@ -3144,7 +3157,7 @@ function buyManyDimensionAuto(tier, bulk) {
 
     // sometimes stuff changes when we buy a dimension, never that much though
     if (buyManyDimension(tier) && x > 0) {
-      x--;
+        x--;
     }
 
     // so we have a quadratic
@@ -3159,6 +3172,9 @@ function buyManyDimensionAuto(tier, bulk) {
     let c = c1 - d1;
     let solution = Math.floor((-b + Math.sqrt(Math.pow(b, 2) - 4 * a * c)) / (2 * a)) + 1;
     solution = Math.min(x, solution);
+    if (solution === 0) {
+        return x !== bulk;
+    }
     player[name + 'Cost'] = player[name + 'Cost'].times(getDimensionCostMultiplier(tier).pow(solution - 1).times(
       Decimal.pow(player.dimensionMultDecrease, (solution - 1) * (solution - 2) / 2)));
     player.costMultipliers[tier-1] = player.costMultipliers[tier-1].times(Decimal.pow(player.dimensionMultDecrease, solution - 1));
@@ -3199,6 +3215,9 @@ function buyMaxTickSpeed() {
     let b = b1 - a1 / 2;
     let c = c1 - d1;
     let solution = Math.floor((-b + Math.sqrt(Math.pow(b, 2) - 4 * a * c)) / (2 * a)) + 1;
+    if (solution === 0) {
+        return bought;
+    }
     player.tickSpeedCost = player.tickSpeedCost.times(player.tickspeedMultiplier.pow(solution - 1).times(
       Decimal.pow(player.tickSpeedMultDecrease, (solution - 1) * (solution - 2) / 2)));
     player.tickspeedMultiplier = player.tickspeedMultiplier.times(Decimal.pow(player.tickSpeedMultDecrease, solution - 1));
@@ -4195,7 +4214,6 @@ function updateMilestones() {
 }
 
 function replicantiGalaxyAutoToggle() {
-    if (!player.replicanti.galaxybuyer) return;
     if (player.replicanti.galaxybuyer.on) {
         player.replicanti.galaxybuyer.on = false
     } else {
@@ -4987,6 +5005,8 @@ function updateAutobuyers() {
     autoSacrifice.interval = 100
     autoSacrifice.priority = 5
 
+    autoBuyerInf.priority = new Decimal(1)
+
     autoBuyerDim1.tier = 1
     autoBuyerDim2.tier = 2
     autoBuyerDim3.tier = 3
@@ -5132,9 +5152,7 @@ function updateAutobuyers() {
 
     player.autoSacrifice.isOn = document.getElementById("13ison").checked
     player.eternityBuyer.isOn = document.getElementById("eternityison").checked
-    if (player.replicanti.galaxybuyer) {
-        player.replicanti.galaxybuyer.on = document.getElementById("replgalaxyison").checked
-    }
+    player.replicanti.galaxybuyer.on = document.getElementById("replgalaxyison").checked
     priorityOrder();
 }
 
@@ -5213,10 +5231,8 @@ function updatePriorities() {
     if (!player.achievements.includes('r134') || isNaN(replWait)) {
       replWait = 0;
     }
-    if (player.replicanti.galaxybuyer) {
-        player.replicanti.galaxybuyer.bulk = replBulk;
-        player.replicanti.galaxybuyer.wait = replWait;
-    }
+    player.replicanti.galaxybuyer.bulk = replBulk;
+    player.replicanti.galaxybuyer.wait = replWait;
     var eterValue = new Decimal(document.getElementById("priority13").value)
     if (!isNaN(eterValue)) player.eternityBuyer.limit = eterValue
 
@@ -5233,7 +5249,7 @@ function updateCheckBoxes() {
     if (player.autoSacrifice.isOn) document.getElementById("13ison").checked = "true"
     else document.getElementById("13ison").checked = ""
     document.getElementById("eternityison").checked = player.eternityBuyer.isOn;
-    document.getElementById("replgalaxyison").checked = player.replicanti.galaxybuyer && player.replicanti.galaxybuyer.on;
+    document.getElementById("replgalaxyison").checked = player.replicanti.galaxybuyer.on;
 }
 
 
@@ -5908,7 +5924,7 @@ function eternity(force, enteringChallenge) {
                 gal: 0,
                 galaxies: 0,
                 galCost: getInitialReplicantiGalaxyCost(),
-                galaxybuyer: (player.eternities > 1) ? player.replicanti.galaxybuyer : undefined,
+                galaxybuyer: player.replicanti.galaxybuyer,
                 auto: player.replicanti.auto,
                 // we're eternitying, so maybe change this?
                 limit: player.replicanti.newLimit,
@@ -5978,8 +5994,9 @@ function eternity(force, enteringChallenge) {
             document.getElementById("replicantidiv").style.display="none"
             document.getElementById("replicantiunlock").style.display="inline-block"
         }
-        if (player.eternities > 2 && player.replicanti.galaxybuyer === undefined || typeof player.replicanti.galaxybuyer !== 'object') {
+        if (player.eternities > 2 && !player.replicanti.galaxybuyer.unl) {
           player.replicanti.galaxybuyer = {
+              unl: true,
               on: false,
               bulk: 1,
               wait: 0,
@@ -6781,7 +6798,7 @@ function startInterval() {
           updateInfCosts();
         }
 
-        if (player.replicanti.galaxybuyer && player.replicanti.galaxybuyer.on &&
+        if (player.replicanti.galaxybuyer.unl && player.replicanti.galaxybuyer.on &&
           player.replicanti.amount.gte(player.replicanti.limit) &&
           getCurrentReplicantiGalaxyGain() >= getReplicantiGalaxyBuyerBulk() &&
           Date.now() - player.replicanti.galaxybuyer.lastTick >= player.replicanti.galaxybuyer.wait * 1000) {
