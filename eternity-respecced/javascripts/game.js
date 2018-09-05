@@ -3017,6 +3017,9 @@ function onBuyDimension(tier) {
     postc8Mult = new Decimal(1)
 
 
+    if (!player.boughtDims.includes(tier)) {
+      player.boughtDims.push(tier);
+    }
 }
 
 function buyOneDimension(tier) {
@@ -3056,9 +3059,6 @@ function buyOneDimension(tier) {
 
     player[name + 'Amount'] = player[name + 'Amount'].plus(1);
     player[name + 'Bought']++;
-    if (!player.boughtDims.includes(tier)) {
-      player.boughtDims.push(tier);
-    }
 
     if (player[name + 'Bought'] === 10) {
         player[name + 'Bought'] = 0;
@@ -3116,13 +3116,7 @@ function buyManyDimension(tier) {
 
     player[name + 'Amount'] = player[name + 'Amount'].plus(10 - player[name + 'Bought']);
     player[name + 'Bought'] = 0;
-    if (!player.boughtDims.includes(tier)) {
-      player.boughtDims.push(tier);
-    }
     player[name + 'Pow'] = player[name + 'Pow'].times(getDimensionPowerMultiplier(tier));
-    if (!player.boughtDims.includes(tier)) {
-      player.boughtDims.push(tier);
-    }
     if (player.currentChallenge != "challenge5" && player.currentChallenge != "postc5" ) player[name + 'Cost'] = player[name + 'Cost'].times((getDimensionCostMultiplier(tier)));
     else if (player.currentChallenge == "postc5") multiplyPC5Costs(player[name + 'Cost'], tier)
     else multiplySameCosts(player[name + 'Cost']);
@@ -3155,11 +3149,6 @@ function buyManyDimensionAuto(tier, bulk) {
         return x !== bulk;
     }
 
-    // sometimes stuff changes when we buy a dimension, never that much though
-    if (buyManyDimension(tier) && x > 0) {
-        x--;
-    }
-
     // so we have a quadratic
     let a1 = Math.log(player.dimensionMultDecrease);
     let b1 = getDimensionCostMultiplier(tier).ln();
@@ -3183,6 +3172,9 @@ function buyManyDimensionAuto(tier, bulk) {
     player.money = player.money.minus(player[name + 'Cost'].times(10))
     player[name + 'Cost'] = player[name + 'Cost'].times(getDimensionCostMultiplier(tier));
     player.costMultipliers[tier-1] = player.costMultipliers[tier-1].times(player.dimensionMultDecrease);
+
+    // this is all that we need to do when we buy a dimension
+    onBuyDimension(tier);
     return true;
 }
 
