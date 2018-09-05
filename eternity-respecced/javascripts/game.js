@@ -3161,7 +3161,7 @@ function buyManyDimensionAuto(tier, bulk) {
     let c = c1 - d1;
     let solution = Math.floor((-b + Math.sqrt(Math.pow(b, 2) - 4 * a * c)) / (2 * a)) + 1;
     solution = Math.min(x, solution);
-    if (solution === 0) {
+    if (solution <= 0) {
         return x !== bulk;
     }
     player[name + 'Cost'] = player[name + 'Cost'].times(getDimensionCostMultiplier(tier).pow(solution - 1).times(
@@ -3207,7 +3207,7 @@ function buyMaxTickSpeed() {
     let b = b1 - a1 / 2;
     let c = c1 - d1;
     let solution = Math.floor((-b + Math.sqrt(Math.pow(b, 2) - 4 * a * c)) / (2 * a)) + 1;
-    if (solution === 0) {
+    if (solution <= 0) {
         return bought;
     }
     player.tickSpeedCost = player.tickSpeedCost.times(player.tickspeedMultiplier.pow(solution - 1).times(
