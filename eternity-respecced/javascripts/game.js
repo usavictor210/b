@@ -1354,7 +1354,7 @@ function getDimensionFinalMultiplier(tier) {
     let multiplier = new Decimal(player[name + 'Pow']);
     if (player.currentChallenge == "challenge7") {
         if (tier == 4) multiplier = multiplier.pow(1.4)
-        if (tier == 2) multiplier = multiplier.pow(1.7)
+        if (tier == 2) multiplier = multiplier.pow(1.6)
     }
     multiplier = multiplier.times(player.achPow);
 
@@ -1869,7 +1869,8 @@ function DimensionPower(tier) {
       return new Decimal(1);
     }
     var dim = player["infinityDimension"+tier]
-    var mult = dim.power.times(infDimPow)
+    var mult = dim.power;
+    if (player.challenges.includes("postc1") mult = mult.times(infDimPow);
     if (player.achievements.includes("r94") && tier == 1) mult = mult.times(2);
     if (player.achievements.includes("r114")) mult = mult.times(Decimal.pow(10, ecCompletions(4) + 1))
     if (player.achievements.includes("r115")) mult = mult.times(Decimal.pow(7, player.eternityChallenges.totalTiersDone))
@@ -6216,8 +6217,8 @@ function startChallenge(name, target) {
 function getDimensionProductionPerSecond(tier) {
     let ret = Decimal.floor(player[TIER_NAMES[tier] + 'Amount']).times(getDimensionFinalMultiplier(tier)).times(1000).dividedBy(player.tickspeed)
     if (player.currentChallenge == "challenge7") {
-        if (tier == 4) ret = player[TIER_NAMES[tier] + 'Amount'].floor().pow(1.3).times(getDimensionFinalMultiplier(tier)).dividedBy(player.tickspeed.dividedBy(1000))
-        else if (tier == 2) ret = player[TIER_NAMES[tier] + 'Amount'].floor().pow(1.5).times(getDimensionFinalMultiplier(tier)).dividedBy(player.tickspeed.dividedBy(1000))
+        if (tier == 4) ret = player[TIER_NAMES[tier] + 'Amount'].floor().pow(1.4).times(getDimensionFinalMultiplier(tier)).dividedBy(player.tickspeed.dividedBy(1000))
+        else if (tier == 2) ret = player[TIER_NAMES[tier] + 'Amount'].floor().pow(1.6).times(getDimensionFinalMultiplier(tier)).dividedBy(player.tickspeed.dividedBy(1000))
     }
     if (player.currentChallenge == "challenge2" || player.currentChallenge == "postc1") ret = ret.times(player.chall2Pow)
     return ret;
