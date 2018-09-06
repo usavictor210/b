@@ -1882,7 +1882,7 @@ function DimensionPower(tier) {
     */
     var dim = player["infinityDimension"+tier]
     var mult = dim.power;
-    if (player.challenges.includes("postc1") mult = mult.times(infDimPow);
+    if (player.challenges.includes("postc1")) mult = mult.times(infDimPow);
     if (player.achievements.includes("r94") && tier == 1) mult = mult.times(2);
     if (player.achievements.includes("r114")) mult = mult.times(Decimal.pow(10, ecCompletions(4) + 1))
     if (player.achievements.includes("r115")) mult = mult.times(Decimal.pow(7, player.eternityChallenges.totalTiersDone))
@@ -2831,7 +2831,7 @@ const allAchievements = {
   r134 : "Definitely not safe",
   r135 : "The void",
   r136 : "Universal harmony",
-  r137 : "?? dimensions and none of them ninth...",
+  r137 : "24 dimensions and none of them ninth...",
   r138 : "This is what I have to do to get rid of you."
 };
 // to retrieve by value: Object.keys(allAchievements).find(key => allAchievements[key] === "L4D: Left 4 Dimensions");
@@ -3765,7 +3765,7 @@ function canGetReplGal () {
 function upgradeReplicantiChance() {
     if (canGetReplChance()) {
         player.infinityPoints = player.infinityPoints.minus(player.replicanti.chanceCost)
-        player.replicanti.chanceCost = player.replicanti.chanceCost.times(1e15))
+        player.replicanti.chanceCost = player.replicanti.chanceCost.times(1e15)
         player.replicanti.chance += 0.01
         updateInfCosts()
         player.ec8PurchasesMade.repl++;
@@ -3870,7 +3870,7 @@ function updateTotalTiersDone () {
     res += player.eternityChallenges.done[i];
   }
   player.eternityChallenges.totalTiersDone = res;
-  if (res === 65) {
+  if (res === 40) {
     giveAchievement("5 more eternities until the update")
   }
 }
@@ -4041,7 +4041,7 @@ function ecNumReward (x) {
   } else if (x === 5) {
     return Math.pow(Math.max(player.galaxies, 1), c / 10);
   } else if (x === 6) {
-    return Decimal.pow(10, c * Math.cbrt(player.replicanti.log(10)));
+    return Decimal.pow(10, c * Math.cbrt(player.replicanti.amount.max(1).log(10)));
   } else if (x === 7) {
     return Math.pow(Math.max(player.money.ln(), 1), 2 * c / 5);
   } else if (x === 8) {
@@ -4820,8 +4820,9 @@ function setAchieveTooltip() {
     let over9000 = document.getElementById("IT'S OVER 9000")
     let dawg = document.getElementById("Yo dawg, I heard you liked infinities...")
     let layer = document.getElementById("But I wanted another prestige layer...")
-    let fkoff = document.getElementById("What do I have to do to get rid of you")
     let infstuff = document.getElementById("I never liked this infinity stuff anyway")
+    let fkoff = document.getElementById("What do I have to do to get rid of you")
+    let goaway = document.getElementById("This is what I have to do to get rid of you.")
 
     apocAchieve.setAttribute('ach-tooltip', "Get over " + formatValue(player.options.notation, 1e80, 0, 0) + " antimatter");
     noPointAchieve.setAttribute('ach-tooltip', "Buy a single First Dimension when you have over " + formatValue(player.options.notation, 1e150, 0, 0) + " of them. Reward: First Dimensions are 10% stronger");
@@ -4844,8 +4845,9 @@ function setAchieveTooltip() {
     over9000.setAttribute('ach-tooltip', "Get a total sacrifice multiplier of "+shortenCosts(new Decimal("1e9000"))+". Reward: Sacrifice doesn't reset your dimensions.")
     dawg.setAttribute('ach-tooltip', "Have each infinity be at least "+shortenMoney(Number.MAX_VALUE)+" times higher IP than the previous one within your past 10 infinities. Reward: Your antimatter doesn't reset on dimension boost or galaxy, and your infinity gain is boosted by your unspent IP.")
     layer.setAttribute('ach-tooltip', "Reach "+shortenMoney(Number.MAX_VALUE)+" EP. Reward: Time dimensions get a multiplier based on EP.")
-    fkoff.setAttribute('ach-tooltip', "Reach "+shortenCosts(new Decimal("1e66600"))+" IP without any time studies. Reward: Time dimensions are multiplied by the total number of time theorems you have.")
     infstuff.setAttribute('ach-tooltip', "Reach "+shortenCosts(new Decimal("1e140000"))+" IP without buying IDs or IP multipliers.")
+    fkoff.setAttribute('ach-tooltip', "Reach "+shortenCosts(new Decimal("1e66600"))+" IP without any time studies. Reward: Time dimensions are multiplied by the total number of time theorems you have.")
+    goaway.setAttribute('ach-tooltip', "Reach "+shortenCosts(new Decimal("1e66600"))+" IP without any time studies, galactic studies, or eternity challenge completions. Reward: Time dimensions are multiplied by the total number of galactic theorems you have.")
 }
 
 document.getElementById("notation").onclick = function () {
@@ -5446,7 +5448,6 @@ document.getElementById("bigcrunch").onclick = function () {
         if (player.currentChallenge == "challenge11" && player.thisInfinityTime <= 1800) giveAchievement("Gift from the Gods")
         if (player.currentChallenge == "challenge5" && player.thisInfinityTime <= 1800) giveAchievement("Is this hell?")
         if (player.currentChallenge == "challenge3" && player.thisInfinityTime <= 100) giveAchievement("You did this again just for the achievement right?");
-        // if (player.currentChallenge == "postc3" && player.eternityChallenges.current === 11) giveAchievement("This is what I have to do to get rid of you.")
         if (player.firstAmount == 1 && player.resets == 0 && player.galaxies == 0 && player.currentChallenge == "challenge12") giveAchievement("ERROR 909: Dimension not found")
         if (player.currentChallenge != "" && player.challengeTimes[challNumber-2] > player.thisInfinityTime) player.challengeTimes[challNumber-2] = player.thisInfinityTime
         if (player.currentChallenge.includes("post") && player.infchallengeTimes[challNumber-1] > player.thisInfinityTime) player.infchallengeTimes[challNumber-1] = player.thisInfinityTime
@@ -6645,9 +6646,9 @@ function startInterval() {
         if (player.bestInfinityTime < -10) player.bestInfinityTime = Infinity
         if (diff > player.autoTime && !player.break) player.infinityPoints = player.infinityPoints.plus(player.autoIP.times(diff -player.autoTime))
         player.matter = player.matter.times(Decimal.pow((1.03 + player.resets/200 + player.galaxies/100), diff));
-        // Make dark matter grow really quickly and annoy the player a lot. And by a lot I mean a lot.
-        // After 1000 seconds dark matter should be growing by a significant amount every second.
-        player.darkMatter = player.darkMatter.times(Decimal.pow((1 + 3e-6 + (player.resets/2e8 + player.galaxies/1e8) * player.thisEternity), diff));
+        // Make dark matter actually something the player might care about, doubling roughly every second. Severe on timeshards, not that bad on ND,
+        // but in the sweet spot on ID.
+        player.darkMatter = player.darkMatter.times(Decimal.pow(1.1, diff));
         if (player.matter.gt(player.money) && (player.currentChallenge == "challenge12" || player.currentChallenge == "postc1")) {
             if (player.resets > 0) player.resets--;
             softReset(0);
