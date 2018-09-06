@@ -1741,7 +1741,7 @@ function updateCosts() {
 
     for (var i=1; i<=4; i++) {
 
-        document.getElementById("timeMax"+i).innerHTML = "Cost: " + shortenCosts(player["timeDimension"+i].cost) + " EP"
+        document.getElementById("timeMax"+i).innerHTML = "Cost: " + shortenDimensions(player["timeDimension"+i].cost) + " EP"
     }
 }
 
@@ -2297,7 +2297,7 @@ function updateTheoremButtons() {
     document.getElementById("theoremammax").className = player.money.gte(player.timestudy.amcost) ? "timetheorembtn" : "timetheorembtnlocked"
     document.getElementById("theoremipmax").className = player.infinityPoints.gte(player.timestudy.ipcost) ? "timetheorembtn" : "timetheorembtnlocked"
     document.getElementById("theoremepmax").className = player.eternityPoints.gte(player.timestudy.epcost) ? "timetheorembtn" : "timetheorembtnlocked"
-    document.getElementById("theoremep").innerHTML = "Buy Time Theorems <br>Cost: "+shortenCosts(player.timestudy.epcost)+" EP"
+    document.getElementById("theoremep").innerHTML = "Buy Time Theorems <br>Cost: "+shortenDimensions(player.timestudy.epcost)+" EP"
     document.getElementById("theoremip").innerHTML = "Buy Time Theorems <br>Cost: "+shortenCosts(player.timestudy.ipcost)+" IP"
     document.getElementById("theoremam").innerHTML = "Buy Time Theorems <br>Cost: "+shortenCosts(player.timestudy.amcost)
     document.getElementById("timetheorems").innerHTML = "You have <span style='display:inline' class=\"TheoremAmount\">"+player.timestudy.theorem+"</span> unspent Time "+ (player.timestudy.theorem == 1 ? "Theorem." : "Theorems.")
@@ -4962,12 +4962,12 @@ function getTimeStudySacrificePow (num) {
   return 1 + Math.log(1 + Math.log(1 + num / 5))
 }
 
+function canSacrifice () {
+    return player.eightAmount.gt(0) && player.resets >= 5 && player.eternityChallenges.current !== 3;
+}
 
 function sacrifice() {
-    if (player.eightAmount.eq(0)) return false;
-    if (player.resets < 5) return false;
-    if (player.eternityChallenges.current === 3) return false;
-
+    if (!canSacrifice()) return false;
     player.eightPow = player.eightPow.times(calcSacrificeBoost())
     player.sacrificed = player.sacrificed.plus(player.firstAmount);
     if (player.currentChallenge != "challenge11") {
@@ -7034,18 +7034,18 @@ function startInterval() {
         else document.getElementById("break").className = "infinistorebtn2"
 
 
-        if (player.resets > 4) {
+        if (canSacrifice() || player.infinitied > 0 || player.eternities > 0) {
             document.getElementById("confirmation").style.display = "inline-block";
             document.getElementById("sacrifice").style.display = "inline-block";
         } else {
             document.getElementById("confirmation").style.display = "none";
             document.getElementById("sacrifice").style.display = "none";
         }
-
-        if (player.infinitied > 0) document.getElementById("sacrifice").style.display = "inline-block";
-
-        if (player.eightAmount > 0 && player.resets > 4) document.getElementById("sacrifice").className = "storebtn"
-        else document.getElementById("sacrifice").className = "unavailablebtn"
+        if (canSacrifice()) {
+            document.getElementById("sacrifice").className = "storebtn";
+        } else {
+            document.getElementById("sacrifice").className = "unavailablebtn";
+        }
 
         if (player.autobuyers[11]%1 !== 0 && player.autobuyers[11].interval == 100) {
             document.getElementById("postinftable").style.display = "inline-block"
