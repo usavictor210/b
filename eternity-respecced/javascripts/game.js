@@ -760,6 +760,9 @@ function onLoad() {
           lastTick: Date.now()
       }
     }
+    if (player.replicanti.galaxybuyer.unl === undefined) {
+      player.replicanti.galaxybuyer.unl = player.eternities > 2;
+    }
     if (player.darkMatter === undefined) {
       player.darkMatter = new Decimal(1);
     }
@@ -5741,14 +5744,12 @@ function eternity(force, enteringChallenge) {
           player.eternityPoints = player.eternityPoints.plus(gainedEternityPoints())
           addEternityTime(player.thisEternity, gainedEternityPoints())
         }
-        if (force) {
-          // to compensate
-          player.eternities -= getEternityGain();
-        }
-        temp = []
+        let temp = [];
 
-        for (var i=0; i<player.challenges.length; i++) {
-            if (!player.challenges[i].includes("post") && player.eternities > 1) temp.push(player.challenges[i])
+        if (player.eternities > 1) {
+          for (var i=1; i<=12; i++) {
+            temp.push('challenge' + i)
+          }
         }
         player.challenges = temp
 
@@ -5772,6 +5773,11 @@ function eternity(force, enteringChallenge) {
             }
             updateECDisplay(ec);
           }
+        }
+
+        if (force) {
+          // to compensate, as late as possible
+          player.eternities -= getEternityGain();
         }
         player = {
             money: new Decimal(10),
@@ -6152,7 +6158,7 @@ function startChallenge(name, target) {
       dimensionMultDecrease: player.dimensionMultDecrease,
       dimensionMultDecreaseCost: player.dimensionMultDecreaseCost,
       version: player.version,
-      postChallUnlocked: 0,
+      postChallUnlocked: player.postChallUnlocked,
       postC4Tier: 1,
       postC3Reward: new Decimal(1),
       overXGalaxies: player.overXGalaxies,
