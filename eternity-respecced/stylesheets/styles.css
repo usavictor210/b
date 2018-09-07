@@ -887,7 +887,7 @@
     font-weight: bold;
     font-size: 10px;
     border: 1px solid #b341e0;
-    width: 190px;
+    width: 210px;
     height: 100px;
     transition-duration: 0.2s;
     cursor: pointer;
@@ -906,7 +906,7 @@
     font-weight: bold;
     font-size: 10px;
     border: 1px solid #b341e0;
-    width: 190px;
+    width: 210px;
     height: 100px;
     transition-duration: 0.2s;
     border-radius: 4px;
@@ -923,7 +923,7 @@
     font-weight: bold;
     font-size: 10px;
     border: 1px solid #b341e0;
-    width: 190px;
+    width: 210px;
     height: 100px;
     transition-duration: 0.2s;
     border-radius: 4px;
@@ -937,11 +937,16 @@
     font-size: 10px;
     border: 1px solid #b341e0;
     width: 230px;
-    height: 120px;
+    height: 130px;
     transition-duration: 0.2s;
     cursor: pointer;
     border-radius: 4px;
     font-family: Typewriter;
+}
+
+.eternityttbtn > .btnspan {
+    display: block;
+    height: 100%;
 }
 
 .eternityttbtn:hover {
@@ -956,10 +961,15 @@
     font-size: 10px;
     border: 1px solid #b341e0;
     width: 230px;
-    height: 120px;
+    height: 130px;
     transition-duration: 0.2s;
     border-radius: 4px;
     font-family: Typewriter;
+}
+
+.eternityttbtnlocked > .btnspan {
+    display: block;
+    height: 100%;
 }
 
 .eternityttbtnlocked:hover {

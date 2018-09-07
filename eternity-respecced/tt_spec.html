@@ -126,12 +126,16 @@ let table = {0: {}};
 
 for (let i = 1; i <= ttOpen; i++) {
   table[i] = {};
+  cache = {};
   for (let j = 0; j <= tt; j++) {
     for (let k = 0; k <= j; k++) {
       let leftover = j - k;
       let purchases = Math.floor((Math.sqrt(leftover * 8 + 1) - 1) / 2);
       let prev = (table[i - 1][k] || ['', 0]);
-      let newBonus = prev[1] + getTSPower[i - 1](ip, timeshards, secondsInInfinity, galPower, purchases);
+      if (cache[purchases] === undefined) {
+        cache[purchases] = getTSPower[i - 1](ip, timeshards, secondsInInfinity, galPower, purchases)
+      }
+      let newBonus = prev[1] + cache[purchases];
       if (!table[i][j] || newBonus > table[i][j][1]) {
         table[i][j] = [prev[0] + '/' + purchases, newBonus];
       }

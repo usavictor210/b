@@ -150,40 +150,40 @@
                 <table class="table" style="margin: 0 auto;">
                     <tr id="tsrow1">
                         <td>
-                            <button id="ts1" class="eternityttbtn" onclick="buyTimeStudy(1)">Sacrifice is stronger (roughly 15% first time, total effect double-logarithmic in times bought)<br/>Bought: <span id="ts1bought">x</span><br/>Cost: <span id="ts1cost">x</span> TT<br/><span id='ts1desc'></span></button>
+                            <button id="ts1" class="eternityttbtn" onclick="buyTimeStudy(1)"><span class="btnspan">Sacrifice is stronger (roughly 15% first time, total effect double-logarithmic in times bought)<br/>Bought: <span id="ts1bought">x</span><br/>Cost: <span id="ts1cost">x</span> TT<br/><span id='ts1desc'></span></span></button>
                         </td>
                         <td>
-                            <button id="ts2" class="eternityttbtn" onclick="buyTimeStudy(2)">You get 10% more tickspeed upgrades from time dimensions (not considering multiplier increase)<br/>Bought: <span id="ts2bought">x</span><br/>Cost: <span id="ts2cost">x</span> TT<br/><span id='ts2desc'></span></button>
+                            <button id="ts2" class="eternityttbtn" onclick="buyTimeStudy(2)"><span class="btnspan">You get 10% more tickspeed upgrades from time dimensions (not considering multiplier increase)<br/>Bought: <span id="ts2bought">x</span><br/>Cost: <span id="ts2cost">x</span> TT<br/><span id='ts2desc'></span></span></button>
                         </td>
                     </tr>
                 </table>
                 <table class="table" style="margin: 0 auto;">
                     <tr id="tsrow2">
                         <td>
-                            <button id="ts3" class="eternityttbtn" onclick="buyTimeStudy(3)">Replicanti multiplier to ID is 25% stronger<br/>Bought: <span id="ts3bought">x</span><br/>Cost: <span id="ts3cost">x</span> TT<br/><span id='ts3desc'></span></button>
+                            <button id="ts3" class="eternityttbtn" onclick="buyTimeStudy(3)"><span class="btnspan">Replicanti multiplier to ID is 25% stronger<br/>Bought: <span id="ts3bought">x</span><br/>Cost: <span id="ts3cost">x</span> TT<br/><span id='ts3desc'></span></span></button>
                         </td>
                         <td>
-                            <button id="ts4" class="eternityttbtn" onclick="buyTimeStudy(4)">Dimension boost multiplier is incremented<br/>Bought: <span id="ts4bought">x</span><br/>Cost: <span id="ts4cost">x</span> TT<br/><span id='ts4desc'></span></button>
+                            <button id="ts4" class="eternityttbtn" onclick="buyTimeStudy(4)"><span class="btnspan">Dimension boost multiplier is incremented<br/>Bought: <span id="ts4bought">x</span><br/>Cost: <span id="ts4cost">x</span> TT<br/><span id='ts4desc'></span></span></button>
                         </td>
                     </tr>
                 </table>
                 <table class="table" style="margin: 0 auto;">
                     <tr id="tsrow3">
                         <td>
-                            <button id="ts5" class="eternityttbtn" onclick="buyTimeStudy(5)">Decreasing multiplier to IP (1e5 / seconds in infinity)<br/>Bought: <span id="ts5bought">x</span><br/>Cost: <span id="ts5cost">x</span> TT<br/><span id='ts5desc'></span></button>
+                            <button id="ts5" class="eternityttbtn" onclick="buyTimeStudy(5)"><span class="btnspan">Decreasing multiplier to IP (1e5 / seconds in infinity)<br/>Bought: <span id="ts5bought">x</span><br/>Cost: <span id="ts5cost">x</span> TT<br/><span id='ts5desc'></span></span></button>
                         </td>
                         <td>
-                            <button id="ts6" class="eternityttbtn" onclick="buyTimeStudy(6)">Increasing multiplier to IP (seconds in infinity)<br/>Bought: <span id="ts6bought">x</span><br/>Cost: <span id="ts6cost">x</span> TT<br/><span id='ts6desc'></span></button>
+                            <button id="ts6" class="eternityttbtn" onclick="buyTimeStudy(6)"><span class="btnspan">Increasing multiplier to IP (seconds in infinity)<br/>Bought: <span id="ts6bought">x</span><br/>Cost: <span id="ts6cost">x</span> TT<br/><span id='ts6desc'></span></span></button>
                         </td>
                     </tr>
                 </table>
                 <table class="table" style="margin: 0 auto;">
                     <tr id="tsrow4">
                         <td>
-                            <button id="ts7" class="eternityttbtn" onclick="buyTimeStudy(7)">You get 1% more of your IP on crunch every second<br/>Bought: <span id="ts7bought">x</span><br/>Cost: <span id="ts7cost">x</span> TT<br/><span id='ts7desc'></span></button>
+                            <button id="ts7" class="eternityttbtn" onclick="buyTimeStudy(7)"><span class="btnspan">You get 1% more of your IP on crunch every second<br/>Bought: <span id="ts7bought">x</span><br/>Cost: <span id="ts7cost">x</span> TT<br/><span id='ts7desc'></span></span></button>
                         </td>
                         <td>
-                            <button id="ts8" class="eternityttbtn" onclick="buyTimeStudy(8)">1% more of your infinities are kept on eternity<br/>Bought: <span id="ts8bought">x</span><br/>Cost: <span id="ts8cost">x</span> TT<br/><span id='ts8desc'></span></button>
+                            <button id="ts8" class="eternityttbtn" onclick="buyTimeStudy(8)"><span class="btnspan">1% more of your infinities are kept on eternity<br/>Bought: <span id="ts8bought">x</span><br/>Cost: <span id="ts8cost">x</span> TT<br/><span id='ts8desc'></span></span></button>
                         </td>
                     </tr>
                 </table>
@@ -212,7 +212,19 @@
                         <td>
                             <button id="eter6" class="eternityupbtn" onclick="buyEternityUpgrade(6, 1e12)">EP production is boosted by timeshards (1+log10(timeshards)^0.5)<br>Currently: x<br>Cost: x EP</button>
                         </td>
-                    </tr><tr>
+                    </tr>
+                    <tr id="eterrow3" style="display: none;">
+                        <td>
+                            <button id="eter7" class="eternityupbtn" onclick="buyEternityUpgrade(7, new Decimal('1e1000'))">Infinity power exponent is boosted by infinities<br>(7 + min(.1, log10(log10(x / 2e7 + 9)) / 2))<br>Currently: x<br>Cost: x EP</button>
+                        </td>
+                        <td>
+                            <button id="eter8" class="eternityupbtn" onclick="buyEternityUpgrade(8, new Decimal('1e1500'))">Tickspeed upgrades from time dimensions are boosted by eternities<br>(1 + min(.1, log10(log10(x / 2e7 + 9)) / 2))<br>Currently: x<br>Cost: x EP</button>
+                        </td>
+                        <td>
+                            <button id="eter9" class="eternityupbtn" onclick="buyEternityUpgrade(9, new Decimal('1e2000'))">Infinity and eternity production is boosted by infinities plus eternities<br>(1 + 10 * log10(log10(x / 2e7 + 9)))<br>Currently: x<br>Cost: x EP</button>
+                        </td>
+                    </tr>
+                    <tr>
                         <td>
                             <div class="eternityupbtnbought" style="opacity: 0"></div>
                         </td>
@@ -1206,7 +1218,7 @@
                     </tr>
                     <tr id="achRow13">
                         <td>
-                            <div id="5 more eternities until the update" class="achievement achievementlocked" style="background-image: url(images/89.png)" ach-tooltip="Complete all the eternity challenges 5 times."><br></div>
+                            <div id="I decided to grind" class="achievement achievementlocked" style="background-image: url(images/89.png)" ach-tooltip="Get at least 20 million of both infinities and eternities. Reward: Unlock a third eternity upgrade row."><br></div>
                         </td>
                         <td>
                             <div id="Unique snowflakes" class="achievement achievementlocked" style="background-image: url(images/90.png)" ach-tooltip="Have 2000 galaxies without having any replicanti galaxies. Reward: Normal galaxies are 0.2% stronger."><br></div>
@@ -1642,6 +1654,8 @@
                             </div>
                         </td>
                     </tr>
+                </table>
+                <table class="table" style="margin: 0 auto">
                     <tr>
                         <td>
                             <div class="eterchallengediv" id="eterc5div" style="height: 140px;">
@@ -1664,6 +1678,7 @@
                                 <span>Reward: Tickspeed upgrades are stronger based on galaxies. Currently <span id="ec5reward">reward</span>.</span>
                               </div>
                         </td>
+                    <!--
                         <td>
                             <div class="eterchallengediv" id="eterc6div" style="height: 140px;">
                               <span>Eternity Challenge 6</span>
@@ -1733,7 +1748,6 @@
                             </div>
                         </td>
                     </tr>
-                  <!---
                     <tr>
                         <td>
                             <div class="eterchallengediv" id="eterc9div" style="height: 140px;">
