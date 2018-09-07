@@ -397,7 +397,7 @@
     cursor: pointer;
     position: absolute;
     left: 78%;
-    width: 215px;
+    width: 225px;
     height: 70px;
     font-family: Typewriter;
     font-size: 11px
@@ -425,10 +425,10 @@
 }
 
 .IP {
-    left:81.5%;
+    left:79%;
     position: absolute;
     font-size: 12px;
-    width: 150px;
+    width: 200px;
 }
 
 .IPAmount2 {
@@ -436,10 +436,10 @@
 }
 
 .EP {
-    right:81.5%;
+    right:79%;
     position: absolute;
     font-size: 12px;
-    width: 150px;
+    width: 200px;
 }
 
 .EPAmount2 {
@@ -453,7 +453,7 @@
     cursor: pointer;
     position: absolute;
     right: 78%;
-    width: 215px;
+    width: 225px;
     height: 60px;
     font-family: Typewriter;
     color: black;
@@ -477,7 +477,7 @@
     cursor: pointer;
     position: absolute;
     right: 78%;
-    width: 215px;
+    width: 225px;
     height: 60px;
     cursor: pointer;
 
@@ -500,7 +500,7 @@
     cursor: pointer;
     position: absolute;
     right: 78%;
-    width: 215px;
+    width: 225px;
     height: 70px;
     font-family: Typewriter;
     color: #b341e0;

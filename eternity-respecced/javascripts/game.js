@@ -3884,8 +3884,8 @@ let initialECCosts = {
   3: 20000,
   4: 2000000,
   5: 400,
-  6: 200,
-  7: new Decimal('1e30000000'),
+  6: 150,
+  7: new Decimal('1e20000000'),
   8: new Decimal('1e100000')
   /*
   9: new Decimal('1e18000'),
@@ -4067,18 +4067,7 @@ function ecNumReward (x) {
 
 function ecDisplayReward (x) {
   let n = ecNumReward(x);
-  // 9, 10, 13
-  if ([1, 2, 4, 5, 6, 7, 8].includes(x)) {
-    return shortenMoney(n) + 'x';
-  } else if (x === 3) {
-    return (Math.round(n * 10) / 10).toString() + 'x';
-  }
-  /* else if (x === 12) {
-    return n.toString();
-  } else if (x === 11) {
-    return 'x^' + shortenMoney(n);
-  }
-  */
+  return shortenMoney(n) + 'x';
 }
 
 function currentEternityRequirement () {
@@ -6811,8 +6800,10 @@ function startInterval() {
         if (currentIPmin.gt(IPminpeak)) IPminpeak = currentIPmin;
         var currentIP = gainedInfinityPoints();
         if (currentIP.gt(IPpeak)) IPpeak = currentIP;
-        document.getElementById("postInfinityButton").innerHTML = "<b>Big Crunch for "+shortenDimensions(gainedInfinityPoints())+" Infinity Points</b><br>"+shortenDimensions(currentIPmin) + " IP/min"+
-                                                                    "<br>Peaked at "+shortenDimensions(IPminpeak)+" IP/min";
+        let main = "<b>Big Crunch for "+shortenDimensions(gainedInfinityPoints())+" Infinity Points</b>"
+        let extra = "<br>"+shortenDimensions(currentIPmin) + " IP/min<br>Peaked at "+shortenDimensions(IPminpeak)+" IP/min";
+        if (gainedInfinityPoints().lt(new Decimal('1e100000'))) main += extra;
+        document.getElementById("postInfinityButton").innerHTML = main;
 
         // very quick, very dirty
         replicantiTicks += diff * 100;
@@ -7259,7 +7250,6 @@ function maxBuyDimBoosts() {
 
 var timer = 0
 function autoBuyerTick() {
-
     if (player.eternities >= 100 && player.eternityBuyer.isOn && gainedEternityPoints().gte(player.eternityBuyer.limit)) eternity()
 
     if (player.autobuyers[11]%1 !== 0) {
@@ -7353,11 +7343,11 @@ function autoBuyerTick() {
 
 setInterval(function() {
     timer += 0.05
-    if (!player.infinityUpgrades.includes("autobuyerUpgrade")) autoBuyerTick()
+    if (!player.infinityUpgrades.includes("autoBuyerUpgrade")) autoBuyerTick()
 }, 100)
 
 setInterval(function() {
-    if (player.infinityUpgrades.includes("autobuyerUpgrade")) autoBuyerTick()
+    if (player.infinityUpgrades.includes("autoBuyerUpgrade")) autoBuyerTick()
 }, 50)
 
 var newsArray = ["You just made your 1,000,000,000,000,000 antimatter. This one tastes like chicken", "Nerf the galaxies please.", "9th Dimension is a lie.",
