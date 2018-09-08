@@ -79,13 +79,19 @@ function getTotalTickGained (timeshards, st) {
   return realSolution;
 }
 
+let RGMemo = {};
+
 let getRG = function (x) {
+  if (x in RGMemo) {
+    return RGMemo[x];
+  }
   let c = 170;
   let n = 0;
   while (c <= x && n < 1000) {
     c += 5 * (n + 5);
     n += 1;
   }
+  RGMemo[x] = n;
   return n;
 }
 
@@ -128,9 +134,12 @@ for (let i = 1; i <= ttOpen; i++) {
   table[i] = {};
   cache = {};
   for (let j = 0; j <= tt; j++) {
-    for (let k = 0; k <= j; k++) {
-      let leftover = j - k;
-      let purchases = Math.floor((Math.sqrt(leftover * 8 + 1) - 1) / 2);
+    for (let purchases = 0; true; purchases++) {
+      let spent = purchases * (purchases + 1) / 2;
+      if (spent > j) {
+        break;
+      }
+      let k = j - spent;
       let prev = (table[i - 1][k] || ['', 0]);
       if (cache[purchases] === undefined) {
         cache[purchases] = getTSPower[i - 1](ip, timeshards, secondsInInfinity, galPower, purchases)
@@ -143,7 +152,13 @@ for (let i = 1; i <= ttOpen; i++) {
   }
 }
 
-return table[ttOpen][tt][0].slice(1) + ': ' + table[ttOpen][tt][1].toFixed(2);
+let best = [-1, -1];
+
+for (let i in table[ttOpen]) {
+  if (table[ttOpen][i][1] > best[1]) best = table[ttOpen][i];
+}
+
+return best[0].slice(1) + ': ' + best[1].toFixed(2);
 }
 
 document.getElementById('button').onclick = function () {

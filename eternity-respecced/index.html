@@ -215,13 +215,13 @@
                     </tr>
                     <tr id="eterrow3" style="display: none;">
                         <td>
-                            <button id="eter7" class="eternityupbtn" onclick="buyEternityUpgrade(7, new Decimal('1e1000'))">Infinity power exponent is boosted by infinities<br>(7 + min(.1, log10(log10(x / 2e7 + 9)) / 2))<br>Currently: x<br>Cost: x EP</button>
+                            <button id="eter7" class="eternityupbtn" onclick="buyEternityUpgrade(7, new Decimal('1e1000'))">Infinity power exponent is boosted by infinities<br>(7 + min(0.1, log10(log10(x / 2e7 + 9)) / 2))<br>Currently: x<br>Cost: x EP</button>
                         </td>
                         <td>
-                            <button id="eter8" class="eternityupbtn" onclick="buyEternityUpgrade(8, new Decimal('1e1500'))">Tickspeed upgrades from time dimensions are boosted by eternities<br>(1 + min(.1, log10(log10(x / 2e7 + 9)) / 2))<br>Currently: x<br>Cost: x EP</button>
+                            <button id="eter8" class="eternityupbtn" onclick="buyEternityUpgrade(8, new Decimal('1e1500'))">Tickspeed upgrades from time dimensions are boosted by eternities<br>(1 + min(0.1, log10(log10(x / 2e7 + 9)) / 2))<br>Currently: x<br>Cost: x EP</button>
                         </td>
                         <td>
-                            <button id="eter9" class="eternityupbtn" onclick="buyEternityUpgrade(9, new Decimal('1e2000'))">Infinity and eternity production is boosted by infinities plus eternities<br>(1 + 10 * log10(log10(x / 2e7 + 9)))<br>Currently: x<br>Cost: x EP</button>
+                            <button id="eter9" class="eternityupbtn" onclick="buyEternityUpgrade(9, new Decimal('1e2000'))">Infinity and eternity production is boosted by infinities plus eternities<br>(floor((x / 2e7)^0.5))<br>Currently: x<br>Cost: x EP</button>
                         </td>
                     </tr>
                     <tr>
@@ -1224,7 +1224,7 @@
                             <div id="Unique snowflakes" class="achievement achievementlocked" style="background-image: url(images/90.png)" ach-tooltip="Have 2000 galaxies without having any replicanti galaxies. Reward: Normal galaxies are 0.2% stronger."><br></div>
                         </td>
                         <td>
-                            <div id="I never liked this infinity stuff anyway" class="achievement achievementlocked" style="background-image: url(images/91.png)" ach-tooltip="Reach 1e140,000 IP without buying IDs or IP multipliers."><br></div>
+                            <div id="I never liked this infinity stuff anyway" class="achievement achievementlocked" style="background-image: url(images/91.png)" ach-tooltip="Reach 1e14000 IP without buying IDs or IP 2x multipliers. Reward: Multiplier to IP based on infinity power."><br></div>
                         </td>
                         <td>
                             <div id="Definitely not safe" class="achievement achievementlocked" style="background-image: url(images/92.png)" ach-tooltip="Get replicanti interval below 0.001 ms. Reward: You can buy more than 1 replicanti galaxy at a time, but more replicanti galaxies require more replicanti."><br></div>

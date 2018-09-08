@@ -1611,7 +1611,7 @@ function updateDimensions() {
         var tickmult = getTickSpeedMultiplier();
         var tickmult = getTickSpeedMultiplier()
         if (tickmult < 1e-9) {
-          document.getElementById("tickLabel").textContent = "Divide the tick interval by " + shortenDimensions(1 / tickmult) + '.'
+          document.getElementById("tickLabel").textContent = "Divide the tick interval by " + shortenDimensions(tickmult.pow(-1)) + '.'
         } else {
           var places = 0;
           if (tickmult < 0.2) places = Math.floor(Math.log10(Math.round(1/tickmult)));
@@ -1720,9 +1720,9 @@ function updateDimensions() {
     document.getElementById("eter4").innerHTML = "Eternity production is boosted by unspent EP (1+floor(log10(EP)/4))<br>Currently: "+(1 + Math.floor(player.eternityPoints.max(1).log(10) / 4))+"x<br>Cost: "+shortenCosts(1e6)+" EP";
     document.getElementById("eter5").innerHTML = "Timeshard production is boosted by eternities (1+eternities)<br>Currently: "+shortenMoney(1 + player.eternities)+"x<br>Cost: "+shortenCosts(1e9)+" EP";
     document.getElementById("eter6").innerHTML = "EP production is boosted by timeshards (1+log10(timeshards)^0.3)<br>Currently: "+shortenMoney(1 + Math.pow(Math.max(player.timeShards.log(10), 0), 0.3))+"x<br>Cost: "+shortenCosts(1e12)+" EP"
-    document.getElementById("eter7").innerHTML = "Infinity power exponent is boosted by infinities<br>(7 + min(.1, log10(log10(x / "+formatValue(player.options.notation, 2e7, 0, 0)+" + 9)) / 2))<br>Currently: x^"+shorten(eter7Upg())+"<br>Cost: "+shortenCosts(new Decimal('1e1000'))+" EP"
-    document.getElementById("eter8").innerHTML = "Tickspeed upgrades from time dimensions are boosted by eternities<br>(1 + min(.1, log10(log10(x / "+formatValue(player.options.notation, 2e7, 0, 0)+" + 9)) / 2))<br>Currently: "+shorten(eter8Upg())+"x<br>Cost: "+shortenCosts(new Decimal('1e1500'))+" EP"
-    document.getElementById("eter9").innerHTML = "Infinity and eternity production is boosted by infinities plus eternities<br>(1+floor(10 * log10(log10(x / "+formatValue(player.options.notation, 2e7, 0, 0)+" + 9))))<br>Currently: "+shortenCosts(eter9Upg())+"x<br>Cost: "+shortenCosts(new Decimal('1e2000'))+" EP"
+    document.getElementById("eter7").innerHTML = "Infinity power exponent is boosted by infinities<br>(7 + min(0.1, log10(log10(x / "+formatValue(player.options.notation, 2e7, 0, 0)+" + 9)) / 2))<br>Currently: x^"+shorten(eter7Upg())+"<br>Cost: "+shortenCosts(new Decimal('1e1000'))+" EP"
+    document.getElementById("eter8").innerHTML = "Tickspeed upgrades from time dimensions are boosted by eternities<br>(1 + min(0.1, log10(log10(x / "+formatValue(player.options.notation, 2e7, 0, 0)+" + 9)) / 2))<br>Currently: "+shorten(eter8Upg())+"x<br>Cost: "+shortenCosts(new Decimal('1e1500'))+" EP"
+    document.getElementById("eter9").innerHTML = "Infinity and eternity production is boosted by infinities plus eternities<br>(floor((x / "+formatValue(player.options.notation, 2e7, 0, 0)+")^0.5))<br>Currently: "+shortenCosts(eter9Upg())+"x<br>Cost: "+shortenCosts(new Decimal('1e2000'))+" EP"
 
     displayAllECRewards();
     checkAllECUnlockStatuses();
@@ -3902,9 +3902,6 @@ function updateTotalTiersDone () {
     res += player.eternityChallenges.done[i];
   }
   player.eternityChallenges.totalTiersDone = res;
-  if (res === 40) {
-    giveAchievement("5 more eternities until the update")
-  }
 }
 
 let initialECCosts = {
@@ -4809,6 +4806,9 @@ function gainedInfinityPoints() {
     } else if (player.achievements.includes("r113")) {
       ret = ret.times(getInfinitied() + 1);
     }
+    if (player.achievements.includes("r133")) {
+      ret = ret.times(Math.max(player.infinityPower.ln(), 1))
+    }
     ret = ret.times(getTSBenefit(5, player.timestudy.studies[5]));
     ret = ret.times(getTSBenefit(6, player.timestudy.studies[6]));
     return ret
@@ -4870,7 +4870,7 @@ function setAchieveTooltip() {
     over9000.setAttribute('ach-tooltip', "Get a total sacrifice multiplier of "+shortenCosts(new Decimal("1e9000"))+". Reward: Sacrifice doesn't reset your dimensions.")
     dawg.setAttribute('ach-tooltip', "Have each infinity be at least "+shortenMoney(Number.MAX_VALUE)+" times higher IP than the previous one within your past 10 infinities. Reward: Your antimatter doesn't reset on dimension boost or galaxy, and your infinity gain is boosted by your unspent IP.")
     layer.setAttribute('ach-tooltip', "Reach "+shortenMoney(Number.MAX_VALUE)+" EP. Reward: Time dimensions get a multiplier based on EP.")
-    infstuff.setAttribute('ach-tooltip', "Reach "+shortenCosts(new Decimal("1e140000"))+" IP without buying IDs or IP multipliers.")
+    infstuff.setAttribute('ach-tooltip', "Reach "+shortenCosts(new Decimal("1e14000"))+" IP without buying IDs or IP multipliers.  Reward: Multiplier to IP based on infinity power.")
     fkoff.setAttribute('ach-tooltip', "Reach "+shortenCosts(new Decimal("1e66600"))+" IP without any time studies. Reward: Time dimensions are multiplied by the total number of time theorems you have.")
     goaway.setAttribute('ach-tooltip', "Reach "+shortenCosts(new Decimal("1e66600"))+" IP without any time studies, galactic studies, or eternity challenge completions. Reward: Time dimensions are multiplied by the total number of galactic theorems you have.")
 }
@@ -5722,15 +5722,15 @@ function respecToggle() {
 }
 
 function eter7Upg () {
-  return 7 + Math.min(.1, Math.log10(Math.log10(getInfinitied() / 2e7 + 9)) / 2);
+  return 7 + Math.min(0.1, Math.log10(Math.log10(Math.max(getInfinitied() / 2e7, 1) + 9)) / 2);
 }
 
 function eter8Upg () {
-  return 1 + Math.min(.1, Math.log10(Math.log10(player.eternities / 2e7 + 9)) / 2);
+  return 1 + Math.min(0.1, Math.log10(Math.log10(Math.max(player.eternities / 2e7, 1) + 9)) / 2);
 }
 
 function eter9Upg () {
-  return 1 + Math.floor(10 * Math.log10(Math.log10((getInfinitied() + player.eternities) / 2e7 + 9)));
+  return Math.floor(Math.pow(Math.max((getInfinitied() + player.eternities) / 2e7, 1), 0.5));
 }
 
 function getInfinitiedGain (time) {
@@ -6293,7 +6293,7 @@ function startChallenge(name, target) {
     document.getElementById("replicantireset").innerHTML = "Reset replicanti amount, but get a free galaxy<br>"+player.replicanti.galaxies + " replicated galaxies created."
 
     resetInfDimensions();
-    giveBoostFromTDTickspeedUpgrades(player.totalTickGained);
+    giveBoostFromTDTickSpeedUpgrades(player.totalTickGained);
     updateTickSpeed();
 
     // if we're now out of a challenge this function will do stuff, otherwise it won't
@@ -6512,7 +6512,7 @@ setInterval(function() {
         player.infinityDimension7.baseAmount == 0 &&
         player.infinityDimension8.baseAmount == 0 &&
         player.infMultCost.equals(10) &&
-        player.infinityPoints.gte(new Decimal("1e140000"))) {
+        player.infinityPoints.gte(new Decimal("1e14000"))) {
         giveAchievement("I never liked this infinity stuff anyway")
     }
 
