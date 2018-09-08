@@ -2026,7 +2026,7 @@ function makePurchase (currency, initial, increase, max) {
   let simulatedCurrency = currency.plus(alreadyBought);
   // for safety
   let amount = 1 + Math.floor(simulatedCurrency.plus(.001).div(
-    extraFactor.plus(1)).div(initial).log(increase));
+    extraFactor.plus(1)).div(initial).log(10) / new Decimal(increase).log(10));
   if (max !== undefined) {
       amount = Math.min(amount, max);
   }
@@ -3567,7 +3567,7 @@ function buyMaxEPMult() {
     let purchase = makePurchase(player.eternityPoints, player.epmultCost, 50)
     player.epmult = player.epmult.times(Decimal.pow(5, purchase.amount));
     player.eternityPoints = player.eternityPoints.minus(purchase.cost);
-    updateEPMultStuff;
+    updateEPMultStuff();
 }
 
 
