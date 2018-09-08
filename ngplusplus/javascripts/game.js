@@ -677,9 +677,9 @@ function updateMetaDimensions () {
       }
 
       if (shiftRequirement.tier < 8) {
-          document.getElementById("metaSoftReset").textContent = "Reset the game for a new Dimension"
+          document.getElementById("metaSoftReset").textContent = "Reset meta-dimensions for a new Dimension"
       } else {
-          document.getElementById("metaSoftReset").textContent = "Reset the game for a Boost"
+          document.getElementById("metaSoftReset").textContent = "Reset meta-dimension for a Boost"
       }
 
       if (player.meta[shiftRequirement.tier].amount.lt(shiftRequirement.amount)) {

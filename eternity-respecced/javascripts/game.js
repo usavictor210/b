@@ -6462,23 +6462,7 @@ let savefix = function () {
 }
 
 
-var blink = true
-setInterval(function() {
-    $.getJSON('version.txt', function(data){
-        //data is actual content of version.txt, so
-        //do whatever you need with it
-        //I'd compare it with last result and if it's different
-        //show the message received and nag for attention
-        //like this:
-        if (data.version > player.version) {
-            player.version = data.version
-            document.getElementById("update").style.display = "block"
-            document.getElementById("updatePopup").innerHTML = data.message
-            //or some more resilient method
-            //like forced news bar with message running over and over
-        }
-    })
-}, 60000)
+var blink = true;
 
 
 setInterval(savefix, 1000);
