@@ -2752,7 +2752,7 @@ function getTickSpeedMultiplier() {
     let linearGalaxies = Math.min(totalGalaxies, 5);
     baseMultiplier -= linearGalaxies * 0.02;
     totalGalaxies -= linearGalaxies;
-    let ret = new Decimal(baseMultiplier * Math.pow(0.965, totalGalaxies));
+    let ret = Decimal.pow(0.965, totalGalaxies).times(baseMultiplier);
     // EC5 reward handled
     ret = ret.div(ecNumReward(5));
     return ret;
