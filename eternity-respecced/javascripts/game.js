@@ -2743,6 +2743,11 @@ function getNormalGalaxyMultiplier () {
   }
 }
 
+function postIntergalacticNerf (ret) {
+    let exp = Math.min(1, Math.max(0.9, 26 / 25 + ret.log(Number.MAX_VALUE) / 25));
+    return ret.pow(exp);
+}
+
 function getTickSpeedMultiplier() {
     if (player.currentChallenge == "postc3") return 1;
     let totalGalaxies = (player.galaxies * getNormalGalaxyMultiplier() + player.replicanti.galaxies * getReplicantiGalaxyPower(player.replicanti.limit)) * getGalaxyMultiplier();
@@ -2755,6 +2760,7 @@ function getTickSpeedMultiplier() {
     let ret = Decimal.pow(0.965, totalGalaxies).times(baseMultiplier);
     // EC5 reward handled
     ret = ret.div(ecNumReward(5));
+    ret = postIntergalacticNerf(ret);
     return ret;
 }
 
