@@ -1643,7 +1643,7 @@ function updateDimensions() {
     }
     document.getElementById("secondResetLabel").innerHTML = 'Antimatter Galaxies (' + galCount + '): requires ' + getGalaxyRequirement() + ' ' + dimType + ' Dimensions';
     document.getElementById("totalmoney").innerHTML = 'You have made a total of ' + shortenMoney(player.totalmoney) + ' antimatter.';
-    document.getElementById("totalresets").innerHTML = 'You have done ' + player.resets + ' soft resets.';
+    document.getElementById("totalresets").innerHTML = 'You have done ' + player.resets + ' Dimension Shifts/Boosts.';
     document.getElementById("galaxies").innerHTML = 'You have ' + Math.round(player.galaxies) + ' Antimatter Galaxies.';
     document.getElementById("totalTime").innerHTML = "You have played for " + timeDisplay(player.totalTimePlayed) + ".";
 
@@ -1655,8 +1655,8 @@ function updateDimensions() {
         document.getElementById("bestInfinity").innerHTML = "Your fastest Infinity is in " + timeDisplay(player.bestInfinityTime) + "."
         document.getElementById("thisInfinity").innerHTML = "You have spent " + timeDisplay(player.thisInfinityTime) + " in this Infinity."
         let ipPlural = player.infinityPoints.equals(1) ? '' : 's';
-        document.getElementById("infinityPoints1").innerHTML = "You have <span class=\"IPAmount1\">"+shortenDimensions(player.infinityPoints)+"</span> Infinity point" + ipPlural + ".";
-        document.getElementById("infinityPoints2").innerHTML = "You have <span class=\"IPAmount2\">"+shortenDimensions(player.infinityPoints)+"</span> Infinity point" + ipPlural + ".";
+        document.getElementById("infinityPoints1").innerHTML = "You have <span class=\"IPAmount1\">"+shortenDimensions(player.infinityPoints)+"</span> Infinity Point" + ipPlural + ".";
+        document.getElementById("infinityPoints2").innerHTML = "You have <span class=\"IPAmount2\">"+shortenDimensions(player.infinityPoints)+"</span> Infinity Point" + ipPlural + ".";
         let infPlural = getInfinitied() === 1 ? '' : 's';
         if (player.eternities > 0) {
             document.getElementById("infinitied").innerHTML = "You have infinitied " + addCommas(player.infinitied) + " time" + infPlural + " this eternity.";
@@ -4334,7 +4334,7 @@ function updateECDisplay (x) {
   let period = (x === 4) ? '' : '.';
   document.getElementById('ec' + x + 'completions').innerHTML = 'Completed ' + c + ' time' + plural + '.';
   document.getElementById('ec' + x + 'cost').innerHTML = smartShortenCosts(ecCost(x));
-  document.getElementById('ec' + x + 'goal').innerHTML = 'Goal: ' + shortenCosts(ecGoal(x)) + ' infinity points' + period;
+  document.getElementById('ec' + x + 'goal').innerHTML = 'Goal: ' + shortenCosts(ecGoal(x)) + ' Infinity Points' + period;
   if (x === 4) {
     document.getElementById('ec' + x + 'constraint').innerHTML = ec4InfinitiedLimit();
   }
@@ -5341,13 +5341,37 @@ function updateAutobuyers() {
 
 
     for (var i=0; i<8; i++) {
-        if (player.autobuyers[i]%1 !== 0) document.getElementById("autoBuyer"+(i+1)).style.display = "inline-block"
+        if (player.autobuyers[i]%1 !== 0) {
+            document.getElementById("autoBuyer"+(i+1)).style.display = "inline-block"
+        } else {
+            document.getElementById("autoBuyer"+(i+1)).style.display = "none"
+        }
     }
-    if (player.autobuyers[8]%1 !== 0) document.getElementById("autoBuyerTickSpeed").style.display = "inline-block"
-    if (player.autobuyers[9]%1 !== 0) document.getElementById("autoBuyerDimBoost").style.display = "inline-block"
-    if (player.autobuyers[10]%1 !== 0) document.getElementById("autoBuyerGalaxies").style.display = "inline-block"
-    if (player.autobuyers[11]%1 !== 0) document.getElementById("autoBuyerInf").style.display = "inline-block"
-    if (player.autoSacrifice%1 !== 0) document.getElementById("autoBuyerSac").style.display = "inline-block"
+    if (player.autobuyers[8]%1 !== 0) {
+        document.getElementById("autoBuyerTickSpeed").style.display = "inline-block"
+    } else {
+        document.getElementById("autoBuyerTickSpeed").style.display = "none"
+    }
+    if (player.autobuyers[9]%1 !== 0) {
+        document.getElementById("autoBuyerDimBoost").style.display = "inline-block"
+    } else {
+        document.getElementById("autoBuyerDimBoost").style.display = "none"
+    }
+    if (player.autobuyers[10]%1 !== 0) {
+        document.getElementById("autoBuyerGalaxies").style.display = "inline-block"
+    } else {
+        document.getElementById("autoBuyerGalaxies").style.display = "none"
+    }
+    if (player.autobuyers[11]%1 !== 0) {
+        document.getElementById("autoBuyerInf").style.display = "inline-block"
+    } else {
+        document.getElementById("autoBuyerInf").style.display = "none"
+    }
+    if (player.autoSacrifice%1 !== 0) {
+        document.getElementById("autoBuyerSac").style.display = "inline-block"
+    } else {
+        document.getElementById("autoBuyerSac").style.display = "none"
+    }
 
     for (var i=1; i<=12; i++) {
         player.autobuyers[i-1].isOn = document.getElementById(i + "ison").checked;
@@ -5499,6 +5523,8 @@ function toggleHotkeys() {
 
 
 function updateChallengeTimes() {
+    // make sure that our total challenge time variables are up to date
+    checkForEndMe();
     document.getElementById("challengetime2").innerHTML = "Challenge  " + 2 + " time record " + timeDisplayShort(player.challengeTimes[0])
     document.getElementById("challengetime3").innerHTML = "Challenge  " + 3 + " time record " + timeDisplayShort(player.challengeTimes[1])
     document.getElementById("challengetime4").innerHTML = "Challenge  " + 4 + " time record " + timeDisplayShort(player.challengeTimes[6])
@@ -5510,10 +5536,12 @@ function updateChallengeTimes() {
     document.getElementById("challengetime10").innerHTML = "Challenge " + 10 + " time record " + timeDisplayShort(player.challengeTimes[2])
     document.getElementById("challengetime11").innerHTML = "Challenge " + 11 + " time record " + timeDisplayShort(player.challengeTimes[10])
     document.getElementById("challengetime12").innerHTML = "Challenge " + 12 + " time record " + timeDisplayShort(player.challengeTimes[5])
+    document.getElementById("challengetimetotal").innerHTML = "Sum of challenge time records " + timeDisplayShort(challengeTimes)
 
     for (var i=0; i<8; i++) {
         document.getElementById("infchallengetime"+(i+1)).innerHTML = "Infinity Challenge " + (i+1) + " time record " + timeDisplayShort(player.infchallengeTimes[i])
     }
+    document.getElementById("infchallengetimetotal").innerHTML = "Sum of infinity challenge time records " + timeDisplayShort(infchallengeTimes)
     updateWorstChallengeTime();
 }
 
@@ -5590,6 +5618,8 @@ function addTime(time, ip) {
     player.lastTenRuns[0] = [time, ip]
 }
 
+var challengeTimes = 999999999
+
 var infchallengeTimes = 999999999
 
 function checkForEndMe() {
@@ -5597,6 +5627,7 @@ function checkForEndMe() {
     for (var i=0; i<11; i++) {
         temp += player.challengeTimes[i]
     }
+    challengeTimes = temp
     if (temp <= 1800) giveAchievement("Not-so-challenging")
     if (temp <= 50) giveAchievement("End me")
     var temp2 = 0
@@ -5913,7 +5944,7 @@ function eternity(force, enteringChallenge) {
     if (force || (player.infinityPoints.gte(currentEternityRequirement()) &&
     (!player.options.eternityconfirm ||
       confirm("Eternity will reset everything except achievements " +
-      "and challenge records. You will also gain an Eternity point " +
+      "and challenge records. You will also gain an Eternity Point " +
       "and unlock various upgrades.")))) {
         if (!force) {
           if (player.thisEternity < player.bestEternity) {
@@ -6222,8 +6253,8 @@ function eternity(force, enteringChallenge) {
           }
         }
         let ipPlural = player.infinityPoints.equals(1) ? '' : 's';
-        document.getElementById("infinityPoints1").innerHTML = "You have <span class=\"IPAmount1\">"+shortenDimensions(player.infinityPoints)+"</span> Infinity point" + ipPlural + "."
-        document.getElementById("infinityPoints2").innerHTML = "You have <span class=\"IPAmount2\">"+shortenDimensions(player.infinityPoints)+"</span> Infinity point" + ipPlural + "."
+        document.getElementById("infinityPoints1").innerHTML = "You have <span class=\"IPAmount1\">"+shortenDimensions(player.infinityPoints)+"</span> Infinity Point" + ipPlural + "."
+        document.getElementById("infinityPoints2").innerHTML = "You have <span class=\"IPAmount2\">"+shortenDimensions(player.infinityPoints)+"</span> Infinity Point" + ipPlural + "."
         if (player.eternities < 2) document.getElementById("break").innerHTML = "BREAK INFINITY"
         document.getElementById("replicantireset").innerHTML = "Reset replicanti amount, but get a free galaxy<br>"+player.replicanti.galaxies + " replicated galaxies created."
         document.getElementById("eternitybtn").style.display = player.infinityPoints.gte(currentEternityRequirement()) ? "inline-block" : "none"
@@ -6236,7 +6267,7 @@ function eternity(force, enteringChallenge) {
         // give the player resets if they have the upgrade needed
         giveInfPurchaseResets()
         let epPlural = player.eternityPoints.equals(1) ? '' : 's';
-        document.getElementById("eternityPoints2").innerHTML = "You have <span class=\"EPAmount2\">"+shortenDimensions(player.eternityPoints)+"</span> Eternity point" + epPlural + "."
+        document.getElementById("eternityPoints2").innerHTML = "You have <span class=\"EPAmount2\">"+shortenDimensions(player.eternityPoints)+"</span> Eternity Point" + epPlural + "."
     }
 }
 
@@ -6694,7 +6725,7 @@ setInterval(function() {
     }
 
     let epPlural = player.eternityPoints.equals(1) ? '' : 's';
-    document.getElementById("eternityPoints2").innerHTML = "You have <span class=\"EPAmount2\">"+shortenDimensions(player.eternityPoints)+"</span> Eternity point" + epPlural + "."
+    document.getElementById("eternityPoints2").innerHTML = "You have <span class=\"EPAmount2\">"+shortenDimensions(player.eternityPoints)+"</span> Eternity Point" + epPlural + "."
 
     document.getElementById("eternitybtn").style.display = player.infinityPoints.gte(currentEternityRequirement()) ? "inline-block" : "none"
 
@@ -7062,7 +7093,7 @@ function startInterval() {
           eterButtonEnd = '';
         }
         let epPlural = gainedEternityPoints().eq(1) ? '' : 's';
-        document.getElementById("eternitybtn").innerHTML = eterButtonStart + "<b>Gain " + shortenDimensions(gainedEternityPoints()) + " Eternity point" + epPlural + ".</b>" + eterButtonEnd;
+        document.getElementById("eternitybtn").innerHTML = eterButtonStart + "<b>Gain " + shortenDimensions(gainedEternityPoints()) + " Eternity Point" + epPlural + ".</b>" + eterButtonEnd;
 
         updateMoney();
         updateCoinPerSec();
@@ -7070,11 +7101,11 @@ function startInterval() {
         // here we add infinitypoints2 and eternitypoints2
         if (player.infinitied > 0 || player.eternities > 0) {
           let ipPlural = player.infinityPoints.equals(1) ? '' : 's';
-          document.getElementById("infinityPoints2").innerHTML = "You have <span class=\"IPAmount2\">"+shortenDimensions(player.infinityPoints)+"</span> Infinity point" + ipPlural + ".";
+          document.getElementById("infinityPoints2").innerHTML = "You have <span class=\"IPAmount2\">"+shortenDimensions(player.infinityPoints)+"</span> Infinity Point" + ipPlural + ".";
         }
         if (player.eternities > 0) {
           let epPlural = player.eternityPoints.equals(1) ? '' : 's';
-          document.getElementById("eternityPoints2").innerHTML = "You have <span class=\"EPAmount2\">"+shortenDimensions(player.eternityPoints)+"</span> Eternity point" + epPlural + ".";
+          document.getElementById("eternityPoints2").innerHTML = "You have <span class=\"EPAmount2\">"+shortenDimensions(player.eternityPoints)+"</span> Eternity Point" + epPlural + ".";
         }
 
         updateInfinityDimensions();
