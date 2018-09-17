@@ -790,12 +790,13 @@
                 </tr>
                 <tr>
                     <td><div><button id="hotkeys" onclick="toggleHotkeys()" class="storebtn" style="color:black; width: 200px; height: 55px; font-size:120%">Disable hotkeys</button></div></td>
-                    <td><div><button id="reset" class="storebtn" style="color:black; width: 200px; height: 55px; font-size: 20px">RESET THE GAME</button></div></td>
-                    <td><div><button id="eternityconf" onclick="toggleEternityConf()" class="storebtn" style="color:black; width: 200px; height: 55px; font-size:120%; display: none">Eternity confimation ON</button></div></td>
+                    <td><div><button id="intergalaxyconf" onclick="toggleEternityConf()" class="storebtn" style="color:black; width: 200px; height: 55px; font-size:120%; display: none">Eternity confimation ON</button></div></td>
+                    <td><div><button id="intergalaxyconf" onclick="toggleIntergalaxyConf()" class="storebtn" style="color:black; width: 200px; height: 55px; font-size:120%; display: none">Intergalaxy confimation ON</button></div></td>
                 </tr>
                 <tr>
-
-
+                    <td></td>
+                    <td><div><button id="reset" class="storebtn" style="color:black; width: 200px; height: 55px; font-size: 20px">RESET THE GAME</button></div></td>
+                    <td></td>
                 </tr>
                 <tr>
 
@@ -823,6 +824,7 @@
                 <td><button class="secondarytabbtn" onclick="showStatsTab('infchallengetimes')" id="infchallengesbtn" style="display:none">InfChallenge records</button><td>
                 <td><button class="secondarytabbtn" onclick="showStatsTab('lasttenruns')" id="pastinfs" style="display:none">Past Infinities</button><td>
                 <td><button class="secondarytabbtn" onclick="showStatsTab('lastteneternities')" id="pasteternities" >Past Eternities</button><td>
+                  <td><button class="secondarytabbtn" onclick="showStatsTab('lasttenintergalaxies')" id="pastintergalaxies" >Past Eternities</button><td>
             </tr>
             <div id="stats" class="statstab">
             <br>
@@ -898,8 +900,22 @@
                     <br>
                     <div id="averageEternityRun"></div>
                     <br>
-
-                </div>
+            </div>
+            <div id="lasttenintergalaxies" class="statstab">
+                    <div id="intergalaxyrun1"></div>
+                    <div id="intergalaxyrun2"></div>
+                    <div id="intergalaxyrun3"></div>
+                    <div id="intergalaxyrun4"></div>
+                    <div id="intergalaxyrun5"></div>
+                    <div id="intergalaxyrun6"></div>
+                    <div id="intergalaxyrun7"></div>
+                    <div id="intergalaxyrun8"></div>
+                    <div id="intergalaxyrun9"></div>
+                    <div id="intergalaxyrun10"></div>
+                    <br>
+                    <div id="averageIntergalaxyRun"></div>
+                    <br>
+            </div>
         </div>
 
         <div id="achievements" class="tab">
