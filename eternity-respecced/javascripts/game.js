@@ -168,7 +168,8 @@ var player = {
       done: {},
       unlocked: null,
       current: null,
-      totalTiersDone: 0
+      totalTiersDone: 0,
+      everDone: {}
     },
     tickThreshold: new Decimal(1),
     totalTickGained: 0,
@@ -263,7 +264,11 @@ var player = {
             power: new Decimal(1),
             bought: 0
         },
-        galacticDimensionUpgrades: [0, 0, 0],
+        // x2, more gal, xlog10(gal), better formula
+        galacticDimensionUpgrades: [0, 0, 0, 0],
+        galacticDimensionUpgradeCosts: [new Decimal(1e4), new Decimal(1e5), new Decimal(1e7), new Decimal(1e9)],
+        galacticDimensionUpgradeCostMults: [new Decimal(1e4), new Decimal(1e5), new Decimal(1e7), new Decimal(1e9)],
+        galaxies: 0,
         antigalaxies: 0,
         galacticstudy: {
           studies: {
@@ -281,6 +286,20 @@ var player = {
             isOn: false
         }
     },
+    peaks: {
+      ip: {
+        perMin: new Decimal(0),
+        total: new Decimal(0)
+      },
+      ep: {
+        perMin: new Decimal(0),
+        total: new Decimal(0)
+      },
+      gp: {
+        perMin: new Decimal(0),
+        total: new Decimal(0)
+      }
+    }
     options: {
         newsHidden: false,
         notation: "Standard",
@@ -678,7 +697,10 @@ function onLoad() {
                 power: new Decimal(1),
                 bought: 0
             },
-            galacticDimensionUpgrades: [0, 0, 0],
+            galacticDimensionUpgrades: [0, 0, 0, 0],
+            galacticDimensionUpgradeCosts: [new Decimal(1e4), new Decimal(1e5), new Decimal(1e7), new Decimal(1e9)],
+            galacticDimensionUpgradeCostMults: [new Decimal(1e4), new Decimal(1e5), new Decimal(1e7), new Decimal(1e9)],
+            galaxies: 0,
             antigalaxies: 0,
             galacticstudy: {
               studies: {
@@ -698,13 +720,35 @@ function onLoad() {
         }
     }
 
+    if (player.peaks === undefined) {
+        player.peaks = {
+          ip: {
+            perMin: new Decimal(0),
+            total: new Decimal(0)
+          },
+          ep: {
+            perMin: new Decimal(0),
+            total: new Decimal(0)
+          },
+          gp: {
+            perMin: new Decimal(0),
+            total: new Decimal(0)
+          }
+        }
+    }
+
     if (player.eternityChallenges === undefined) {
       player.eternityChallenges = {
         done: {},
         unlocked: null,
         current: null,
-        totalTiersDone: 0
+        totalTiersDone: 0,
+        everDone: {}
       }
+    }
+
+    if (player.eternityChallenges.everDone === undefined) {
+      player.eternityChallenges.everDone = {};
     }
 
     if (player.eternityChallenges.totalTiersDone === undefined) {
@@ -2775,6 +2819,7 @@ function softReset(bulk, reallyZero) {
         respec: player.respec,
         eternityBuyer: player.eternityBuyer,
         intergalactic: player.intergalactic,
+        peaks: player.peaks,
         options: player.options
     };
     if (player.currentChallenge === "challenge10" || player.currentChallenge == "postc1") {
@@ -4927,6 +4972,7 @@ function galaxyReset() {
         respec: player.respec,
         eternityBuyer: player.eternityBuyer,
         intergalactic: player.intergalactic,
+        peaks: player.peaks,
         options: player.options
     };
 
@@ -5985,6 +6031,14 @@ document.getElementById("bigcrunch").onclick = function () {
         respec: player.respec,
         eternityBuyer: player.eternityBuyer,
         intergalactic: player.intergalactic,
+        peaks: {
+          ip: {
+            perMin: new Decimal(0),
+            total: new Decimal(0)
+          },
+          ep: player.peaks.ep,
+          gp: player.peaks.gp
+        },
         options: player.options
         };
 
@@ -6028,8 +6082,6 @@ document.getElementById("bigcrunch").onclick = function () {
         giveBoostFromTDTickSpeedUpgrades(player.totalTickGained);
         updateTickSpeed();
         if (player.challenges.length == 20) giveAchievement("Anti-antichallenged");
-        IPminpeak = new Decimal(0);
-        IPpeak = new Decimal(0);
         updateInfCosts()
 
         if (player.eternities > 10) {
@@ -6159,6 +6211,8 @@ function eternity(force, enteringChallenge) {
               // The player actually reached eternity in a challenge. Good for the player, I guess.
               // However, we can't let them access the next tier too early, so we need to lock the challenge again.
               player.eternityChallenges.done[ec] = Math.min(ecCompletions(ec) + 1, 5);
+              player.eternityChallenges.everDone[ec] = Math.max(
+                player.eternityChallenges.everDone[ec], player.eternityChallenges.done[ec]);
               updateTotalTiersDone();
             }
             player.eternityChallenges.current = null;
@@ -6365,6 +6419,17 @@ function eternity(force, enteringChallenge) {
             respec: player.respec,
             eternityBuyer: player.eternityBuyer,
             intergalactic: player.intergalactic,
+            peaks: {
+              ip: {
+                perMin: new Decimal(0),
+                total: new Decimal(0)
+              },
+              ep: {
+                perMin: new Decimal(0),
+                total: new Decimal(0)
+              },
+              gp: player.peaks.gp
+            },
             options: player.options
         };
         if (player.respec) respecTimeStudies()
@@ -6413,9 +6478,6 @@ function eternity(force, enteringChallenge) {
         updateLastTenIntergalaxies()
         var infchalls = Array.from(document.getElementsByClassName('infchallengediv'))
         for (var i = 0; i< infchalls.length; i++) infchalls[i].style.display = "none"
-        IPminpeak = new Decimal(0)
-        IPpeak = new Decimal(0);
-        EPminpeak = new Decimal(0);
         updateMilestones()
         resetTimeDimensions()
         if (player.eternities < 20) player.autobuyers[9].bulk = 1
@@ -6631,7 +6693,8 @@ function intergalaxy(force) {
                 done: {},
                 unlocked: null,
                 current: null,
-                totalTiersDone: 0
+                totalTiersDone: 0,
+                everDone: player.eternityChallenges.everDone
             },
             tickThreshold: new Decimal(1),
             totalTickGained: 0,
@@ -6716,11 +6779,28 @@ function intergalaxy(force) {
                 galacticDimension3: player.intergalactic.galacticDimension3,
                 galacticDimension4: player.intergalactic.galacticDimension4,
                 galacticDimensionUpgrades: player.intergalactic.galacticDimensionUpgrades,
+                galacticDimensionUpgradeCosts: player.intergalactic.galacticDimensionUpgradeCosts,
+                galacticDimensionUpgradeCostMults: player.intergalactic.galacticDimensionUpgradeCostMults,
+                galaxies: 0,
                 antigalaxies: player.intergalactic.antigalaxies,
                 galacticstudy: player.intergalactic.galacticStudy,
                 thisIntergalaxy: 0,
                 bestIntergalaxy: player.intergalactic.bestIntergalaxy,
                 intergalaxyBuyer: player.intergalactic.intergalaxyBuyer
+            },
+            peaks: {
+              ip: {
+                perMin: new Decimal(0),
+                total: new Decimal(0)
+              },
+              ep: {
+                perMin: new Decimal(0),
+                total: new Decimal(0)
+              },
+              gp: {
+                perMin: new Decimal(0),
+                total: new Decimal(0)
+              }
             },
             options: player.options
         };
@@ -6766,20 +6846,18 @@ function intergalaxy(force) {
         updateLastTenIntergalaxies()
         var infchalls = Array.from(document.getElementsByClassName('infchallengediv'))
         for (var i = 0; i< infchalls.length; i++) infchalls[i].style.display = "none"
-        IPminpeak = new Decimal(0)
-        IPpeak = new Decimal(0);
-        EPminpeak = new Decimal(0);
-        // to maybe do at some point: this is where we are in converting this function. What new peaks are needed is not yet clear
-        // (probably at least 2, maybe refactoring of the existing ones)
+        // added some more peaks
+        // this means eternity milestones
         updateMilestones()
         resetTimeDimensions()
-        if (player.eternities < 20) player.autobuyers[9].bulk = 1
+        // add reset galactic dimensions here at some point
+        if (!hasEternityMilestones) player.autobuyers[9].bulk = 1
         document.getElementById("bulkDimboost").value = player.autobuyers[9].bulk
-        if (player.eternities < 50) {
+        if (!hasEternityMilestones) {
             document.getElementById("replicantidiv").style.display="none"
             document.getElementById("replicantiunlock").style.display="inline-block"
         }
-        if (player.eternities > 2 && !player.replicanti.galaxybuyer.unl) {
+        if (hasEternityMilestones && !player.replicanti.galaxybuyer.unl) {
           player.replicanti.galaxybuyer = {
               unl: true,
               on: false,
@@ -6791,7 +6869,7 @@ function intergalaxy(force) {
         let ipPlural = player.infinityPoints.equals(1) ? '' : 's';
         document.getElementById("infinityPoints1").innerHTML = "You have <span class=\"IPAmount1\">"+shortenDimensions(player.infinityPoints)+"</span> Infinity Point" + ipPlural + "."
         document.getElementById("infinityPoints2").innerHTML = "You have <span class=\"IPAmount2\">"+shortenDimensions(player.infinityPoints)+"</span> Infinity Point" + ipPlural + "."
-        if (player.eternities < 2) document.getElementById("break").innerHTML = "BREAK INFINITY"
+        if (!hasEternityMilestones) document.getElementById("break").innerHTML = "BREAK INFINITY"
         document.getElementById("replicantireset").innerHTML = "Reset replicanti amount, but get a free galaxy<br>"+player.replicanti.galaxies + " replicated galaxies created."
         document.getElementById("eternitybtn").style.display = player.infinityPoints.gte(currentEternityRequirement()) ? "inline-block" : "none"
         document.getElementById("eternityPoints2").style.display = "inline-block"
@@ -6962,6 +7040,14 @@ function startChallenge(name, target) {
       respec: player.respec,
       eternityBuyer: player.eternityBuyer,
       intergalactic: player.intergalactic,
+      peaks: {
+        ip: {
+          perMin: new Decimal(0),
+          total: new Decimal(0)
+        },
+        ep: player.peaks.ep,
+        gp: player.peaks.gp
+      },
       options: player.options
     };
 	  if (player.currentChallenge === "challenge10" || player.currentChallenge === "postc1") {
@@ -6975,9 +7061,6 @@ function startChallenge(name, target) {
 
     if (player.replicanti.unl) player.replicanti.amount = new Decimal(1);
     player.replicanti.galaxies = 0;
-
-    IPminpeak = new Decimal(0);
-    IPpeak = new Decimal(0);
     if (player.currentChallenge.includes("post")) player.break = true
     if (player.achievements.includes("r36")) player.tickspeed = player.tickspeed.times(0.98);
     if (player.achievements.includes("r45")) player.tickspeed = player.tickspeed.times(0.98);
@@ -7343,9 +7426,6 @@ setInterval(function() {
 
 
 var postC2Count = 0;
-var IPminpeak = new Decimal(0);
-var IPpeak = new Decimal(0);
-var EPminpeak = new Decimal(0);
 var replicantiTicks = 0
 
 function getReplicantiETA (amount, limit) {
@@ -7377,6 +7457,16 @@ function getReplicantiETA (amount, limit) {
     postInf = 0;
   }
   return preInf + postInf;
+}
+
+function getPerMin (amount, time) {
+  return amount.dividedBy(time/600);
+}
+
+function updatePeaks (object, amount, time) {
+  if (amount.gt(object.total)) object.total = amount;
+  let perMin = getPerMin(amount, time);
+  if (perMin.gt(object.perMin)) object.perMin = perMin;
 }
 
 function startInterval() {
@@ -7534,10 +7624,11 @@ function startInterval() {
         if (player.eternities == 0) {
             document.getElementById("eternityPoints2").style.display = "none"
             document.getElementById("eternitystorebtn").style.display = "none"
-          }
+        }
 
+        let canInfinity = player.money.gte(Number.MAX_VALUE) && (!player.break || (player.currentChallenge != "" && player.money.gte(player.challengeTarget)));
 
-        if (player.money.gte(Number.MAX_VALUE) && (!player.break || (player.currentChallenge != "" && player.money.gte(player.challengeTarget)))) {
+        if (canInfinity) {
             document.getElementById("bigcrunch").style.display = 'inline-block';
             if ((player.currentChallenge == "" || player.options.retryChallenge) && (player.bestInfinityTime <= 600 || player.break)) {}
             else showTab('emptiness');
@@ -7558,12 +7649,12 @@ function startInterval() {
           document.getElementById("IPPeakDiv").style.display = "none";
         }
 
-        var currentIPmin = gainedInfinityPoints().dividedBy(player.thisInfinityTime/600)
-        if (currentIPmin.gt(IPminpeak)) IPminpeak = currentIPmin;
-        var currentIP = gainedInfinityPoints();
-        if (currentIP.gt(IPpeak)) IPpeak = currentIP;
+        if (canInfinity) {
+          updatePeaks(player.peaks.ip, gainedInfinityPoints(), player.thisInfinityTime);
+        }
+
         let main = "<b>Big Crunch for "+shortenDimensions(gainedInfinityPoints())+" Infinity Points</b>"
-        let extra = "<br>"+shortenDimensions(currentIPmin) + " IP/min<br>Peaked at "+shortenDimensions(IPminpeak)+" IP/min";
+        let extra = "<br>"+shortenDimensions(getPerMin(gainedInfinityPoints(), player.thisInfinityTime)) + " IP/min<br>Peaked at "+shortenDimensions(player.peaks.ip.perMin)+" IP/min";
         if (gainedInfinityPoints().lt(new Decimal('1e100000'))) main += extra;
         document.getElementById("postInfinityButton").innerHTML = main;
 
@@ -7622,10 +7713,10 @@ function startInterval() {
         var places = Math.floor(Math.log10(getReplicantiInterval()/1000)) * (-1);
         updateReplicantiInterval(places);
 
-        var currentEPmin = gainedEternityPoints().dividedBy(player.thisEternity/600);
-        if (currentEPmin.gt(EPminpeak) && player.infinityPoints.gte(currentEternityRequirement())) {
-          EPminpeak = currentEPmin;
+        if (player.infinityPoints.gte(currentEternityRequirement())) {
+          updatePeaks(player.peaks.ep, gainedEternityPoints(), player.thisEternity);
         }
+
         let eterButtonStart = (player.eternities === 0) ? "<b>Other times await.. I need to become Eternal</b><br/>" : "<b>I need to become Eternal.</b><br/>";
         if (gainedEternityPoints().gte(1e3)) {
           eterButtonStart = '';
@@ -7633,7 +7724,7 @@ function startInterval() {
         if (player.eternityChallenges.current) {
           eterButtonStart = '<b>Other challenges await.. I need to become Eternal</b><br/>';
         }
-        let eterButtonEnd = "<br>" + shortenDimensions(currentEPmin) + " EP/min<br>Peaked at " + shortenDimensions(EPminpeak) + " EP/min";
+        let eterButtonEnd = "<br>" + shortenDimensions(getPerMin(gainedEternityPoints(), player.thisEternity)) + " EP/min<br>Peaked at " + shortenDimensions(player.peaks.ep.perMin) + " EP/min";
         if (player.eternities === 0 || player.eternityChallenges.current) {
           eterButtonEnd = '';
         }
@@ -8007,7 +8098,7 @@ function autoBuyerTick() {
 
     if (player.autobuyers[11]%1 !== 0) {
     if (player.autobuyers[11].ticks*100 >= player.autobuyers[11].interval && player.money.gte(Number.MAX_VALUE)) {
-        if (player.autobuyers[11].isOn && (!player.autobuyers[11].requireIPPeak || gainedInfinityPoints().gte(IPpeak))) {
+        if (player.autobuyers[11].isOn && (!player.autobuyers[11].requireIPPeak || gainedInfinityPoints().gte(player.peaks.ip.total))) {
             if (player.autoCrunchMode === "amount") {
                 if (!player.break || player.currentChallenge != "" || player.autobuyers[11].priority.lt(gainedInfinityPoints())) {
                     autoS = false;
@@ -8485,7 +8576,7 @@ function autoPlay () {
   let needReplicantiGalaxies = false;
   let checkForTheBigCrunch = function () {
     let g = gainedInfinityPoints();
-    if (timeSinceLastAction > 15 && g.gte(IPpeak)) {
+    if (timeSinceLastAction > 15 && g.gte(player.peaks.ip.total)) {
       document.getElementById('bigcrunch').onclick();
       timeSinceLastAction = 0;
       if (g < lastIP.times(1e10)) {
