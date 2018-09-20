@@ -763,6 +763,77 @@
                             </tr>
                         </table>
             </div>
+            <div id="galacticdimensions" class="dimtab">
+                    <div>
+                        <p id="totalgalaxiesgained">You've gained 0 tickspeed upgrades.</p>
+                            <p>You have <span id="galacticPowerAmount" style="font-size:35px; color: black">0</span> intergalactic galaxies. Next intergalactic galaxy at <span id="galaxyThreshold" style="font-size:35px; color: black">0</span></p>
+                        </div>
+
+                        <div id="galacticPowerPerSec">You are getting 0 Galactic Power per second.</div>
+                        <div>Note: You can only get the below galactic dimension upgrades when you have no galactic studies.<div>
+                        <table class="table" style="margin: 0 auto">
+                            <tr>
+                                <td>
+                                    <button id="galdim1" class="galacticupbtn" onclick="buyGalacticUpgrade(1)">Double all galactic dimension multipliers<br>Currently: x -> x<br>Cost: x galactic power</button>
+                                </td>
+                                <td>
+                                    <button id="galdim2" class="galacticupbtn" onclick="buyGalacticUpgrade(2)">Decrease intergalactic galaxy cost multiplier<br>Currently: x -> x<br>Cost: x galactic power</button>
+                                </td>
+                                <td>
+                                    <button id="galdim3" class="galacticupbtn" onclick="buyGalacticUpgrade(3)">Multiply all galactic dimensions based on intergalactic galaxies<br>Currently: x -> x<br>Cost: x galactic power</button>
+                                </td>
+                                <td>
+                                    <button id="galdim4" class="galacticupbtn" onclick="buyGalacticUpgrade(4)">Increase GP formula base based on intergalactic galaxies<br>Currently: x -> x<br>Cost: x galactic power</button>
+                                </td>
+                            </tr>
+                        </table>
+                        <button id="maxGalacticDimensions" class="storebtn" style="font-size: 12px" onclick="buyMaxGalacticDimensions()">Max all</Button>
+                        <table class="table" >
+                            <tr style="font-size: 17px" id="galacticRow1">
+                                <td id="galacticD1" width="43%">
+                                    First Galactic Dimension x1
+                                </td>
+                                <td>
+                                    <div id="galacticAmount1">0 (0)</div>
+                                </td>
+                                <td align="right" width="10%">
+                                    <button id="galacticMax1" style="color:black; width:195px; height:30px" class="storebtn" align="right" onclick="buyGalacticDimension(1)">Cost: 10</button>
+                                </td>
+                            </tr>
+                            <tr id="galacticRow2" style="font-size: 17px">
+                                <td id="galacticD2">
+                                    Second Galactic Dimension x1
+                                </td>
+                                <td>
+                                    <div id="galacticAmount2" align="left">0 (0)</div>
+                                <td>
+                                    <button id="galacticMax2" style="color:black; width:195px; height:30px" class="storebtn" onclick="buyGalacticDimension(2)">Cost: 10</button>
+                                </td>
+                            </tr>
+                            <tr id="galacticRow3" style="font-size: 17px">
+                                <td id="galacticD3">
+                                    Third Galactic Dimension x1
+                                </td>
+                                <td>
+                                    <div id="galacticAmount3" align="left">0 (0)</div>
+                                </td>
+                                <td>
+                                    <button id="galacticMax3" style="color:black; width:195px; height:30px" class="storebtn" onclick="buyGalacticDimension(3)">Cost: 10</button>
+                                </td>
+                            </tr>
+                            <tr id="galacticRow4" style="font-size: 17px">
+                                <td id="galacticD4">
+                                    Fourth Galactic Dimension x1
+                                </td>
+                                <td>
+                                    <div id="galacticAmount4" align="left">0 (0)</div>
+                                </td>
+                                <td>
+                                    <button id="galacticMax4" style="color:black; width:195px; height:30px" class="storebtn" onclick="buyGalacticDimension(4)">Cost: 10</button>
+                                </td>
+                            </tr>
+                        </table>
+            </div>
             <div id="progress" ach-tooltip="Percentage until Infinity">
                 <div id="progressbar"></div>
             </div>
@@ -790,7 +861,7 @@
                 </tr>
                 <tr>
                     <td><div><button id="hotkeys" onclick="toggleHotkeys()" class="storebtn" style="color:black; width: 200px; height: 55px; font-size:120%">Disable hotkeys</button></div></td>
-                    <td><div><button id="intergalaxyconf" onclick="toggleEternityConf()" class="storebtn" style="color:black; width: 200px; height: 55px; font-size:120%; display: none">Eternity confimation ON</button></div></td>
+                    <td><div><button id="eternityconf" onclick="toggleEternityConf()" class="storebtn" style="color:black; width: 200px; height: 55px; font-size:120%; display: none">Eternity confimation ON</button></div></td>
                     <td><div><button id="intergalaxyconf" onclick="toggleIntergalaxyConf()" class="storebtn" style="color:black; width: 200px; height: 55px; font-size:120%; display: none">Intergalaxy confimation ON</button></div></td>
                 </tr>
                 <tr>
