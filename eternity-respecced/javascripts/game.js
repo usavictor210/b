@@ -1379,6 +1379,16 @@ function updateMoney() {
     */
 }
 
+function getAntimatterPerSecond() {
+    if (player.currentChallenge == "challenge3" || player.currentChallenge == "postc1") {
+      return getDimensionProductionPerSecond(1).times(player.chall3Pow));
+    } else if (player.currentChallenge == "challenge7") {
+      return getDimensionProductionPerSecond(1).plus(getDimensionProductionPerSecond(2));
+    } else {
+      return getDimensionProductionPerSecond(1);
+    }
+}
+
 function updateCoinPerSec() {
     var element = document.getElementById("coinsPerSec");
     /*
@@ -1386,13 +1396,7 @@ function updateCoinPerSec() {
       element.innerHTML = 'You are getting ' + shortenDimensions(new Decimal(1).dividedBy(player.tickspeed.dividedBy(1000))) + ' antimatter per second.';
     } else
     */
-    if (player.currentChallenge == "challenge3" || player.currentChallenge == "postc1") {
-      element.innerHTML = 'You are getting ' + shortenDimensions(getDimensionProductionPerSecond(1).times(player.chall3Pow)) + ' antimatter per second.';
-    } else if (player.currentChallenge == "challenge7") {
-      element.innerHTML = 'You are getting ' + (shortenDimensions(getDimensionProductionPerSecond(1).plus(getDimensionProductionPerSecond(2)))) + ' antimatter per second.';
-    } else {
-      element.innerHTML = 'You are getting ' + shortenDimensions(getDimensionProductionPerSecond(1)) + ' antimatter per second.';
-    }
+    element.innerHTML = 'You are getting ' + shortenDimensions(getAntimatterPerSecond()) + ' antimatter per second.';
 }
 
 function hasInfinityMult(tier) {
@@ -1692,39 +1696,6 @@ function getGalaxyRequirement() {
 
     return amount;
 }
-
-function getETA(cost) {
-    var a = 100;
-    if (player.money.gte(cost)) return 0
-    while (ETACalc(a).lt(cost)) {
-        a *= 10;
-        if (a > 1e20) return Infinity;
-    }
-    var b = a / 10;
-    var q = ETACalc((a+b)/2);
-    while (q.gt(cost.times(1.0001)) || q.lt(cost.dividedBy(1.0001))) {
-        console.log("q = "+q)
-        console.log("a = "+a)
-        console.log("b = "+b)
-        if (q.lt(cost)) a = (a+b)/2;
-        else b = (a+b)/2;
-        q = ETACalc((a+b)/2);
-    }
-    return (a+b)/2;
-}
-
-function ETACalc(t) {
-    var value = player.money.plus(getDimensionProductionPerSecond(1).times(t));
-    var div = 1;
-    for (let tier = 2; tier <= 8; ++tier) {
-        var name = TIER_NAMES[tier-1]
-        div *= tier;
-        value = value.plus(getDimensionProductionPerSecond(tier).times(getDimensionProductionPerSecond(tier-1)).times(Decimal.pow(t,tier)).dividedBy(Decimal.max(player[name+"Amount"].times(div).times(10), 1))) ;
-    }
-    return value
-}
-
-
 
 var worstChallengeTime = 1
 
@@ -2058,6 +2029,7 @@ function DimensionPower(tier) {
     var dim = player["infinityDimension"+tier]
     var mult = dim.power;
     if (player.challenges.includes("postc1")) mult = mult.times(infDimPow);
+    if (player.achievements.includes("r75")) mult = mult.times(player.achPow);
     if (player.achievements.includes("r94") && tier == 1) mult = mult.times(2);
     if (player.achievements.includes("r114")) mult = mult.times(Decimal.pow(10, ecCompletions(4) + 1))
     if (player.achievements.includes("r115")) mult = mult.times(Decimal.pow(7, player.eternityChallenges.totalTiersDone))
@@ -7639,17 +7611,8 @@ function startInterval() {
         }
 
         if (player.money.lte(Number.MAX_VALUE) || (player.break && player.currentChallenge == "") || (player.currentChallenge != "" && player.money.lte(player.challengeTarget))) {
-            if (player.currentChallenge == "challenge3" || player.currentChallenge == "postc1") {
-                player.money = player.money.plus(getDimensionProductionPerSecond(1).times(diff/10).times(player.chall3Pow));
-                player.totalmoney = player.totalmoney.plus(getDimensionProductionPerSecond(1).times(diff/10).times(player.chall3Pow));
-            } else {
-                player.money = player.money.plus(getDimensionProductionPerSecond(1).times(diff/10));
-                player.totalmoney = player.totalmoney.plus(getDimensionProductionPerSecond(1).times(diff/10));
-            }
-            if (player.currentChallenge == "challenge7") {
-                player.money = player.money.plus(getDimensionProductionPerSecond(2).times(diff/10));
-                player.totalmoney = player.totalmoney.plus(getDimensionProductionPerSecond(2).times(diff/10))
-            }
+            player.money = player.money.plus(getAntimatterPerSecond().times(diff/10));
+            player.totalmoney = player.totalmoney.plus(getAntimatterPerSecond().times(diff/10));
             if (player.eternityChallenges.current === 13) {
                 let gain = new Decimal(1).dividedBy(player.tickspeed.dividedBy(1000)).times(diff/10);
                 player.money = player.money.plus(gain);
