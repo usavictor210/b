@@ -658,15 +658,15 @@ function onLoad() {
         }
     }
 
-    if (player.timeDimBuyers ==== undefined) {
+    if (player.timeDimBuyers === undefined) {
         player.timeDimBuyers = [false, false, false, false];
     }
 
-    if (player.eterMultBuyer ==== undefined) {
+    if (player.eterMultBuyer === undefined) {
         player.eterMultBuyer = false;
     }
 
-    if (player.autoEterMode ==== undefined) {
+    if (player.autoEterMode === undefined) {
         player.autoEterMode = 'amount';
     }
 
@@ -1162,27 +1162,6 @@ function transformSaveToDecimal() {
     player.tickspeedMultiplier = new Decimal(player.tickspeedMultiplier)
     player.matter = new Decimal(player.matter)
     player.infinityPower = new Decimal(player.infinityPower)
-    player.infinityDimension1.amount = new Decimal(player.infinityDimension1.amount)
-    player.infinityDimension2.amount = new Decimal(player.infinityDimension2.amount)
-    player.infinityDimension3.amount = new Decimal(player.infinityDimension3.amount)
-    player.infinityDimension4.amount = new Decimal(player.infinityDimension4.amount)
-    player.infinityDimension5.amount = new Decimal(player.infinityDimension5.amount)
-    player.infinityDimension6.amount = new Decimal(player.infinityDimension6.amount)
-    player.infinityDimension7.amount = new Decimal(player.infinityDimension7.amount)
-    player.infinityDimension8.amount = new Decimal(player.infinityDimension8.amount)
-
-    player.timeDimension1.amount = new Decimal(player.timeDimension1.amount)
-    player.timeDimension2.amount = new Decimal(player.timeDimension2.amount)
-    player.timeDimension3.amount = new Decimal(player.timeDimension3.amount)
-    player.timeDimension4.amount = new Decimal(player.timeDimension4.amount)
-    player.timeDimension1.amount = new Decimal(player.timeDimension1.amount)
-    player.timeDimension2.cost = new Decimal(player.timeDimension2.cost)
-    player.timeDimension3.cost = new Decimal(player.timeDimension3.cost)
-    player.timeDimension4.cost = new Decimal(player.timeDimension4.cost)
-    player.timeDimension1.power = new Decimal(player.timeDimension1.power)
-    player.timeDimension2.power = new Decimal(player.timeDimension2.power)
-    player.timeDimension3.power = new Decimal(player.timeDimension3.power)
-    player.timeDimension4.power = new Decimal(player.timeDimension4.power)
     player.timeShards = new Decimal(player.timeShards)
     player.epmult = new Decimal(player.epmult)
     player.eternityPoints = new Decimal(player.eternityPoints)
@@ -1206,8 +1185,21 @@ function transformSaveToDecimal() {
     player.replicanti.newLimit = new Decimal(player.replicanti.newLimit)
 
     for (var i=1; i<=8; i++) {
+        player["infinityDimension"+i].amount = new Decimal(player["infinityDimension"+i].amount)
         player["infinityDimension"+i].cost = new Decimal(player["infinityDimension"+i].cost)
         player["infinityDimension"+i].power = new Decimal(player["infinityDimension"+i].power)
+    }
+
+    for (var i=1; i<=4; i++) {
+        player["timeDimension"+i].amount = new Decimal(player["timeDimension"+i].amount)
+        player["timeDimension"+i].cost = new Decimal(player["timeDimension"+i].cost)
+        player["timeDimension"+i].power = new Decimal(player["timeDimension"+i].power)
+    }
+
+    for (var i=1; i<=4; i++) {
+        player.intergalactic["galacticDimension"+i].amount = new Decimal(player.intergalactic["galacticDimension"+i].amount)
+        player.intergalactic["galacticDimension"+i].cost = new Decimal(player.intergalactic["galacticDimension"+i].cost)
+        player.intergalactic["galacticDimension"+i].power = new Decimal(player.intergalactic["galacticDimension"+i].power)
     }
 
     player.infMultCost = new Decimal(player.infMultCost)
@@ -1224,6 +1216,83 @@ function transformSaveToDecimal() {
 
     player.epmultCost = new Decimal(player.epmultCost);
     player.eternityBuyer.limit = new Decimal(player.eternityBuyer.limit);
+
+    player.intergalactic.points = new Decimal(player.intergalactic.points);
+
+    player.intergalactic.galacticPower = new Decimal(player.intergalactic.galacticPower);
+
+    for (let i = 0; i < 4; i++) {
+        player.intergalactic.galacticDimensionUpgradeCosts[i] = new Decimal(player.intergalactic.galacticDimensionUpgradeCosts[i]);
+        player.intergalactic.galacticDimensionUpgradeCostMults[i] = new Decimal(player.intergalactic.galacticDimensionUpgradeCostMults[i]);
+    }
+
+    for (let i = 0; i < 2; i++) {
+        player.intergalactic.galacticstudy.upgradeCosts[i] = new Decimal(player.intergalactic.galacticstudy.upgradeCosts[i]);
+        player.intergalactic.galacticstudy.upgradeCostMults[i] = new Decimal(player.intergalactic.galacticstudy.upgradeCostMults[i]);
+    }
+
+    player.intergalaxyBuyer.limit = new Decimal(player.intergalaxyBuyer.limit);
+
+    intergalactic: {
+        points: new Decimal(0),
+        intergalaxies: 0,
+        galacticPower: new Decimal(0),
+        galacticDimension1: {
+            cost: new Decimal(1),
+            amount: new Decimal(0),
+            power: new Decimal(1),
+            bought: 0
+        },
+        galacticDimension2: {
+            cost: new Decimal(100),
+            amount: new Decimal(0),
+            power: new Decimal(1),
+            bought: 0
+        },
+        galacticDimension3: {
+            cost: new Decimal(1e4),
+            amount: new Decimal(0),
+            power: new Decimal(1),
+            bought: 0
+        },
+        galacticDimension4: {
+            cost: new Decimal(1e6),
+            amount: new Decimal(0),
+            power: new Decimal(1),
+            bought: 0
+        },
+        // x2, more gal, xlog10(gal), better formula
+        galacticDimensionUpgrades: [0, 0, 0, 0],
+        galacticDimensionUpgradeCosts: [new Decimal(1e4), new Decimal(1e5), new Decimal(1e7), new Decimal(1e9)],
+        galacticDimensionUpgradeCostMults: [new Decimal(1e4), new Decimal(1e5), new Decimal(1e7), new Decimal(1e9)],
+        galaxies: 0,
+        antigalaxies: 0,
+        galacticstudy: {
+          studies: {
+            '11': 0, '21': 0, '31': 0, '41': 0,
+            '12': 0, '22': 0, '32': 0, '42': 0,
+            '13': 0, '23': 0, '33': 0, '43': 0,
+            '14': 0, '24': 0, '34': 0, '44': 0
+          },
+          theorems: 0,
+          upgrades: [0, 0],
+          upgradeCosts: [new Decimal(10), new Decimal(10)],
+          upgradeCostMults: [new Decimal(10), new Decimal(10)]
+        },
+        thisIntergalaxy: 0,
+        bestIntergalaxy: 9999999999,
+        intergalaxyBuyer: {
+            limit: new Decimal(0),
+            isOn: false
+        }
+    },
+
+    player.peaks.ip.perMin = new Decimal(player.peaks.ip.perMin);
+    player.peaks.ip.total = new Decimal(player.peaks.ip.total);
+    player.peaks.ep.perMin = new Decimal(player.peaks.ep.perMin);
+    player.peaks.ep.total = new Decimal(player.peaks.ep.total);
+    player.peaks.gp.perMin = new Decimal(player.peaks.gp.perMin);
+    player.peaks.gp.total = new Decimal(player.peaks.gp.total);
 
     player.chall11Pow = new Decimal(player.chall11Pow)
 }
@@ -1381,7 +1450,7 @@ function updateMoney() {
 
 function getAntimatterPerSecond() {
     if (player.currentChallenge == "challenge3" || player.currentChallenge == "postc1") {
-      return getDimensionProductionPerSecond(1).times(player.chall3Pow));
+      return getDimensionProductionPerSecond(1).times(player.chall3Pow);
     } else if (player.currentChallenge == "challenge7") {
       return getDimensionProductionPerSecond(1).plus(getDimensionProductionPerSecond(2));
     } else {
@@ -6576,7 +6645,7 @@ function gainedIntergalacticPoints() {
 }
 
 function intergalaxy(force) {
-    if (force || (getTickSpeedMultiplier().pow(-1).gte(Number.MAX_VALUE)) &&
+    if (force || (getTickSpeedMultiplier().pow(-1).gte(Number.MAX_VALUE) &&
     (!player.options.intergalaxyconfirm ||
       confirm("Going intergalactic will reset everything except achievements " +
       "and challenge records. You will also gain an Intergalactic Point " +

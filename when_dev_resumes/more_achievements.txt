@@ -19,7 +19,7 @@ In the grim darkness of the far endgame: Get 1e40000 EP.
 A trillion is a lot: Get 1e12 eternities. Reward: Eternity Upgrade 2 is much stronger.
 Yeah you definitely bend time: Get 1e1000 tickspeed decrease per upgrade. Reward: Tickspeed decrease per upgrade is stronger based on tickspeed.
 24 dimensions and none of them ninth...: Buy the fourth galactic dimension. Reward: Each fourth galactic dimension gives a 1.1x multiplier to all galactic dimensions.
-Superluminal: Go extragalactic in 1 minute.
+Superluminal: Go extragalactic in 1 minute. Reward: Start intergalaxies with 1e25 EP.
 Universal harmony: Have the same number (at least 100) of normal galaxies, replicanti galaxies, and intergalactic galaxies. Reward: All galaxies are 0.1% stronger.
 
 (A trillion is a lot: EU2 becomes x^log4(2x)^2.5)
