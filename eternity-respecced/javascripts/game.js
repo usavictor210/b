@@ -3072,7 +3072,7 @@ const allAchievements = {
   r17 : "Not a luck related achievement",
   r18 : "90 degrees to infinity",
   r21 : "To infinity!",
-  r22 : "Don't you dare sleep",
+  r22 : "Fake News",
   r23 : "The 9th Dimension is a lie",
   r24 : "Antimatter Apocalypse",
   r25 : "Boosting to the max",
@@ -3083,11 +3083,11 @@ const allAchievements = {
   r32 : "The Gods are pleased",
   r33 : "That's a lot of infinites",
   r34 : "You didn't need it anyway",
-  r35 : "One for each dimension",
+  r35 : "Don't you dare sleep",
   r36 : "Claustrophobic",
   r37 : "That's fast!",
   r38 : "I don't believe in Gods",
-  r41 : "Fake News",
+  r41 : "Spreading Cancer",
   r42 : "Supersanic",
   r43 : "Zero Deaths",
   r44 : "Over in 30 seconds",
@@ -3116,7 +3116,7 @@ const allAchievements = {
   r73 : "This achievement doesn't exist",
   r74 : "End me",
   r75 : "NEW DIMENSIONS???",
-  r76 : "Spreading Cancer",
+  r76 : "One for each dimension",
   r77 : "How the antitables have turned",
   r78 : "Blink of an eye",
   r81 : "Hevipelle did nothing wrong",
@@ -3828,7 +3828,7 @@ function timeMult() {
     var mult = new Decimal(1)
     if (player.infinityUpgrades.includes("timeMult")) mult = mult.times(Math.pow(player.totalTimePlayed / 1200, 0.15));
     if (player.infinityUpgrades.includes("timeMult2")) mult = mult.times(Decimal.max(Math.pow(player.thisInfinityTime / 2400, 0.25), 1));
-    if (player.achievements.includes("r35")) mult = mult.times(Math.pow(player.totalTimePlayed / (600*60*48), 0.05));
+    if (player.achievements.includes("r76")) mult = mult.times(Math.pow(player.totalTimePlayed / (600*60*48), 0.05));
     return mult;
 }
 
@@ -7133,11 +7133,7 @@ function startChallenge(name, target) {
 
     showTab('dimensions');
     updateChallenges();
-    if (player.challenges.includes("challenge1")) player.money = new Decimal(100)
-    if (player.achievements.includes("r37")) player.money = new Decimal(1000);
-    if (player.achievements.includes("r54")) player.money = new Decimal(2e5);
-    if (player.achievements.includes("r55")) player.money = new Decimal(1e10);
-    if (player.achievements.includes("r78")) player.money = new Decimal(1e25);
+    updateInitialMoney();
     showTab("dimensions")
 
     if (getInfinitied() >= 10) giveAchievement("That's a lot of infinites");
@@ -7163,14 +7159,6 @@ function getDimensionProductionPerSecond(tier) {
     }
     if (player.currentChallenge == "challenge2" || player.currentChallenge == "postc1") ret = ret.times(player.chall2Pow)
     return ret;
-}
-
-
-
-
-function calcPerSec(amount, pow, hasMult) {
-    if (!hasMult) return Decimal.floor(amount).times(pow).times(player.achPow).times(timeMult()).times(player.chall2Pow).dividedBy(player.tickspeed.dividedBy(1000));
-    else return Decimal.floor(amount).times(pow).times(player.achPow).times(dimMults()).times(timeMult()).times(player.chall2Pow).dividedBy(player.tickspeed.dividedBy(1000));
 }
 
 document.getElementById("quickReset").onclick = function () {
@@ -7796,13 +7784,15 @@ function startInterval() {
         updateTSDescs();
         updateTimeDimensions()
         updateTimeShards()
-        if (calcPerSec(player.firstAmount, player.firstPow, player.infinityUpgrades.includes("18Mult")).gt(player.money)) {
-        if(player.money.gt(Math.pow(10,63)) && !player.achievements.includes("r42")) giveAchievement("Supersanic");
-        Marathon++;
-
-        if (Marathon >= 300 && !player.achievements.includes("r44")) giveAchievement("Over in 30 seconds");
+        if (getAntimatterPerSecond().gt(player.money)) {
+          if (player.money.gt(Math.pow(10,63)) && !player.achievements.includes("r42")) {
+            giveAchievement("Supersanic");
+          }
+          Marathon += diff;
+          if (Marathon >= 300 && !player.achievements.includes("r44")) giveAchievement("Over in 30 seconds");
         } else {
-        Marathon = 0; }
+          Marathon = 0;
+        }
 
         for (let tier = 1; tier <= 8; ++tier) {
             var name = TIER_NAMES[tier];
