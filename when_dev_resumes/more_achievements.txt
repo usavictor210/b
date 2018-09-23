@@ -1,7 +1,7 @@
 What actually goes here:
 Can you get infinite TT?: Get 30008 TT.
 I am speed: Get 1e2000 EP in an at-most 20-second eternity.
-This thing all things devours: Get 1.79e308 ticks per second without buying any dimensions in the current eternity.
+This thing all things devours: Get 1e10000 ticks per second without buying any dimensions in the current eternity.
 The void: Go intergalactic.
 
 5 more eternities until the update: Complete 50 unique eternity challenge tiers. Reward: Eternity challenge rewards are 5% stronger.

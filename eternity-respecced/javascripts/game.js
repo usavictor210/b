@@ -482,8 +482,6 @@ document.getElementById("theme").onclick = function () {
         player.options.theme = "Metro";
     } else if (player.options.theme === "Metro") {
         player.options.theme = "Dark";
-        Chart.defaults.global.defaultFontColor = '#888';
-        normalDimChart.data.datasets[0].borderColor = '#888'
     } else if (player.options.theme === "Dark") {
         player.options.theme = "Dark Metro";
     } else if (player.options.theme === "Dark Metro") {
@@ -1231,61 +1229,7 @@ function transformSaveToDecimal() {
         player.intergalactic.galacticstudy.upgradeCostMults[i] = new Decimal(player.intergalactic.galacticstudy.upgradeCostMults[i]);
     }
 
-    player.intergalaxyBuyer.limit = new Decimal(player.intergalaxyBuyer.limit);
-
-    intergalactic: {
-        points: new Decimal(0),
-        intergalaxies: 0,
-        galacticPower: new Decimal(0),
-        galacticDimension1: {
-            cost: new Decimal(1),
-            amount: new Decimal(0),
-            power: new Decimal(1),
-            bought: 0
-        },
-        galacticDimension2: {
-            cost: new Decimal(100),
-            amount: new Decimal(0),
-            power: new Decimal(1),
-            bought: 0
-        },
-        galacticDimension3: {
-            cost: new Decimal(1e4),
-            amount: new Decimal(0),
-            power: new Decimal(1),
-            bought: 0
-        },
-        galacticDimension4: {
-            cost: new Decimal(1e6),
-            amount: new Decimal(0),
-            power: new Decimal(1),
-            bought: 0
-        },
-        // x2, more gal, xlog10(gal), better formula
-        galacticDimensionUpgrades: [0, 0, 0, 0],
-        galacticDimensionUpgradeCosts: [new Decimal(1e4), new Decimal(1e5), new Decimal(1e7), new Decimal(1e9)],
-        galacticDimensionUpgradeCostMults: [new Decimal(1e4), new Decimal(1e5), new Decimal(1e7), new Decimal(1e9)],
-        galaxies: 0,
-        antigalaxies: 0,
-        galacticstudy: {
-          studies: {
-            '11': 0, '21': 0, '31': 0, '41': 0,
-            '12': 0, '22': 0, '32': 0, '42': 0,
-            '13': 0, '23': 0, '33': 0, '43': 0,
-            '14': 0, '24': 0, '34': 0, '44': 0
-          },
-          theorems: 0,
-          upgrades: [0, 0],
-          upgradeCosts: [new Decimal(10), new Decimal(10)],
-          upgradeCostMults: [new Decimal(10), new Decimal(10)]
-        },
-        thisIntergalaxy: 0,
-        bestIntergalaxy: 9999999999,
-        intergalaxyBuyer: {
-            limit: new Decimal(0),
-            isOn: false
-        }
-    },
+    player.intergalactic.intergalaxyBuyer.limit = new Decimal(player.intergalactic.intergalaxyBuyer.limit);
 
     player.peaks.ip.perMin = new Decimal(player.peaks.ip.perMin);
     player.peaks.ip.total = new Decimal(player.peaks.ip.total);
