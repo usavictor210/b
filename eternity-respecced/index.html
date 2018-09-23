@@ -204,7 +204,7 @@
                     </tr>
                     <tr>
                         <td>
-                            <button id="eter4" class="eternityupbtn" onclick="buyEternityUpgrade(4, 1e6)">Eternity production is boosted by unspent EP (1+floor(log10(EP)/6))<br>Currently: x<br>Cost: x EP</button>
+                            <button id="eter4" class="eternityupbtn" onclick="buyEternityUpgrade(4, 1e6)">Eternity production is boosted by unspent EP (floor(1+log10(EP)/4))<br>Currently: x<br>Cost: x EP</button>
                         </td>
                         <td>
                             <button id="eter5" class="eternityupbtn" onclick="buyEternityUpgrade(5, 1e9)">Timeshard production is boosted by eternities (1+eternities)<br>Currently: x<br>Cost: x EP</button>
@@ -1082,7 +1082,7 @@
                         <div id="Zero Deaths" class="achievement achievementlocked" style="background-image: url(images/27.png)" ach-tooltip="Get to Infinity without Dimension shifts, boosts or galaxies. Reward: Dimensions 1-4 are 25% stronger"><br></div>
                     </td>
                     <td>
-                        <div id="Over in 30 seconds" class="achievement achievementlocked" style="background-image: url(images/28.png)" ach-tooltip="Have antimatter/sec exceed your current antimatter for 30 consecutive seconds"><br></div>
+                        <div id="Over in 30 seconds" class="achievement achievementlocked" style="background-image: url(images/28.png)" ach-tooltip="Have antimatter/sec exceed your current antimatter for 30 consecutive seconds."><br></div>
                     </td>
                     <td>
                         <div id="Faster than a potato" class="achievement achievementlocked" style="background-image: url(images/29.png)" ach-tooltip="Get more than 1e26 ticks per second. Reward: Reduces starting tick interval by 2%"><br></div>
@@ -1229,7 +1229,7 @@
                     </tr>
                     <tr id="achRow10">
                         <td>
-                            <div id="Costco sells dimboosts now" class="achievement achievementlocked" style="background-image: url(images/65.png)" ach-tooltip="Bulk 750 dimension boosts at once. Reward: Dimension boosts are cheaper based on EP."><br></div>
+                            <div id="Costco sells dimboosts now" class="achievement achievementlocked" style="background-image: url(images/65.png)" ach-tooltip="Bulk buy 750 dimension boosts at once. Reward: Dimension boosts are cheaper based on EP."><br></div>
                         </td>
                         <td>
                             <div id="This mile took an eternity" class="achievement achievementlocked" style="background-image: url(images/66.png)" ach-tooltip="Get all eternity milestones. Reward: Gain a small bonus to time dimensions based on eternities."><br></div>
@@ -2461,10 +2461,6 @@
     </div>
     <div style="display: none;"><textarea id="exportOutput" style="color:black; width: 200px; height: 55px;"></textarea></div>
 </body>
-
-
-
-<script type="text/javascript"src="PlayFab/PlayFabClientApi.js"></script>
 <script type="text/javascript" src="javascripts/autobuyer.js"></script>
 <!-- script type="text/javascript" src="javascripts/decimal.js"></script> -->
 <script type="text/javascript" src="javascripts/breakinfinity.js"></script>

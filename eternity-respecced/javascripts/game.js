@@ -1848,7 +1848,7 @@ function updateDimensions() {
     document.getElementById("eter1").innerHTML = "Infinity Dimension multiplier based on unspent EP (x+1)<br>Currently: "+shortenMoney(player.eternityPoints.plus(1))+"x<br>Cost: 5 EP";
     document.getElementById("eter2").innerHTML = "Infinity Dimension multiplier based on eternities (x^log4(2x))<br>Currently: "+shortenMoney(Decimal.pow(player.eternities, Math.log(player.eternities*2)/Math.log(4)))+"x<br>Cost: 10 EP";
     document.getElementById("eter3").innerHTML = "Infinity Dimension multiplier based on timeshards (x/"+formatValue(player.options.notation, 1e12, 0, 0)+"+1)<br>Currently: "+shortenMoney(player.timeShards.div(1e12).plus(1))+"x<br>Cost: "+shortenCosts(1e4)+" EP"
-    document.getElementById("eter4").innerHTML = "Eternity production is boosted by unspent EP (1+floor(log10(EP)/4))<br>Currently: "+(1 + Math.floor(player.eternityPoints.max(1).log(10) / 4))+"x<br>Cost: "+shortenCosts(1e6)+" EP";
+    document.getElementById("eter4").innerHTML = "Eternity production is boosted by unspent EP (floor(1+log10(EP)/4))<br>Currently: "+(Math.floor(1 + player.eternityPoints.max(1).log(10) / 4))+"x<br>Cost: "+shortenCosts(1e6)+" EP";
     document.getElementById("eter5").innerHTML = "Timeshard production is boosted by eternities (1+eternities)<br>Currently: "+shortenMoney(1 + player.eternities)+"x<br>Cost: "+shortenCosts(1e9)+" EP";
     document.getElementById("eter6").innerHTML = "EP production is boosted by timeshards (1+log10(timeshards)^0.3)<br>Currently: "+shortenMoney(1 + Math.pow(Math.max(player.timeShards.log(10), 0), 0.3))+"x<br>Cost: "+shortenCosts(1e12)+" EP"
     document.getElementById("eter7").innerHTML = "Infinity power exponent is boosted by infinities<br>(7 + min(0.1, log10(log10(x / "+formatValue(player.options.notation, 2e7, 0, 0)+" + 9)) / 2))<br>Currently: x^"+shorten(eter7Upg())+"<br>Cost: "+shortenCosts(new Decimal('1e1000'))+" EP"
@@ -6184,15 +6184,15 @@ function respecToggle() {
 }
 
 function eter7Upg () {
-  return 7 + Math.min(0.1, Math.log10(Math.log10(Math.max(getInfinitied() / 2e7, 1) + 9)) / 2);
+  return 7 + Math.max(0, Math.min(0.1, Math.log10(Math.log10(Math.max(getInfinitied() / 2e7, 1) + 9)) / 2));
 }
 
 function eter8Upg () {
-  return 1 + Math.min(0.1, Math.log10(Math.log10(Math.max(player.eternities / 2e7, 1) + 9)) / 2);
+  return 1 + Math.max(0, Math.min(0.1, Math.log10(Math.log10(Math.max(player.eternities / 2e7, 1) + 9)) / 2));
 }
 
 function eter9Upg () {
-  return Math.floor(Math.pow(Math.max((getInfinitied() + player.eternities) / 2e7, 1), 0.5));
+  return Math.max(1, Math.floor(Math.pow(Math.max((getInfinitied() + player.eternities) / 2e7, 1), 0.5)));
 }
 
 function getInfinitiedGain (time) {

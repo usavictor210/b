@@ -1,6 +1,29 @@
-Work harder: Go intergalactic without eternity upgrades. Reward: Eternity upgrades multipliers are x^1.1.
-Something: Go intergalactic in a minute.
-No fifth TD here!: Get a million time theorems.
+What actually goes here:
+Can you get infinite TT?: Get 30008 TT.
+I am speed: Get 1e2000 EP in an at-most 20-second eternity.
+This thing all things devours: Get 1.79e308 ticks per second without buying any dimensions in the current eternity.
+The void: Go intergalactic.
+
+5 more eternities until the update: Complete 50 unique eternity challenge tiers. Reward: Eternity challenge rewards are 5% stronger.
+Eternal relationship: Have timeshards/sec exceed your current timeshards for 30 consecutive seconds. Reward: Eternity challenge 1 reward is 30% stronger.
+We can still afford 9: Go intergalactic with exactly 9 replicanti galaxies. Reward: Replicanti galaxies are 0.9% stronger.
+Slower than a potato^-1000: Get fewer than 1e-26000 ticks per second. Reward: Antigalaxies are 20% weaker.
+YOU CAN GET -50 GALAXIES??!: Go intergalactic having had at least 50 antigalaxies for the whole intergalaxy. Reward: Tickspeed is halved by each antigalaxy.
+I forgot to make it Decimal: Get 2^2074 tickspeed decrease per upgrade. Reward: Tickspeed decrease per upgrade is doubled.
+Costco sells replicanti galaxies now: Bulk buy 750 replicanti galaxies at once. Reward: The formula for bulk replicanti galaxies is much better.
+This is what I have to do to get rid of you.: Reach 1e66600 IP without any time studies, galactic studies, or eternity challenge completions. Reward: Time dimensions are multiplied by the total number of galactic theorems you have.
+
+The supervoid: Go intergalactic in Eternity Challenge 5.
+Work harder!: Go intergalactic without buying eternity upgrades. Reward: The first two rows of eternity upgrades are 10% stronger.
+In the grim darkness of the far endgame: Get 1e40000 EP.
+A trillion is a lot: Get 1e12 eternities. Reward: Eternity Upgrade 2 is much stronger.
+Yeah you definitely bend time: Get 1e1000 tickspeed decrease per upgrade. Reward: Tickspeed decrease per upgrade is stronger based on tickspeed.
+24 dimensions and none of them ninth...: Buy the fourth galactic dimension. Reward: Each fourth galactic dimension gives a 1.1x multiplier to all galactic dimensions.
+Superluminal: Go extragalactic in 1 minute.
+Universal harmony: Have the same number (at least 100) of normal galaxies, replicanti galaxies, and intergalactic galaxies. Reward: All galaxies are 0.1% stronger.
+
+(A trillion is a lot: EU2 becomes x^log4(2x)^2.5)
+(Yeah you definitely bend time: max(1, -log10(tickspeed))^0.2)
 
 ID = 56ND
 TD = 8ID
