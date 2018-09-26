@@ -6554,6 +6554,9 @@ function eternity(force, enteringChallenge) {
         if (player.eternities < 50) {
             document.getElementById("replicantidiv").style.display="none"
             document.getElementById("replicantiunlock").style.display="inline-block"
+        } else {
+            document.getElementById("replicantidiv").style.display="inline-block"
+            document.getElementById("replicantiunlock").style.display="none"
         }
         if (player.eternities > 2 && !player.replicanti.galaxybuyer.unl) {
           player.replicanti.galaxybuyer = {
@@ -6925,6 +6928,9 @@ function intergalaxy(force) {
         if (!hasEternityMilestones) {
             document.getElementById("replicantidiv").style.display="none"
             document.getElementById("replicantiunlock").style.display="inline-block"
+        } else {
+            document.getElementById("replicantidiv").style.display="inline-block"
+            document.getElementById("replicantiunlock").style.display="none"
         }
         if (hasEternityMilestones && !player.replicanti.galaxybuyer.unl) {
           player.replicanti.galaxybuyer = {
