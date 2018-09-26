@@ -2466,6 +2466,8 @@ function resetGalacticDimensions() {
     }
 }
 
+// Time studies
+
 let numTimeStudies = 8;
 
 function studyHasBeenUnlocked (num) {
@@ -2498,8 +2500,6 @@ function updateTimeStudyButtons () {
     cost.innerHTML = player.timestudy.studies[i] + 1;
   }
 }
-
-// Time studies
 
 function buyWithAntimatter() {
     if (player.money.gte(player.timestudy.amcost)) {
@@ -2710,7 +2710,234 @@ function lockEternityChallenge () {
   updateTimeStudyButtons();
 }
 
+// Galactic studies. Wow there's a lot of stuff.
 
+let galacticStudyTableSize = 4;
+
+function getGalacticStudyCost (i) {
+  let ret = 1;
+  for (let j = 1; j <= galacticStudyTableSize; j++) {
+    ret += player.intergalactic.galacticstudy.studies[j + i[1]];
+    ret += player.intergalactic.galacticstudy.studies[i[0] + j];
+  }
+  return ret;
+}
+
+// They should never disappear. Galactic studies tab should be like time studies tab.
+function updateGalacticStudyButtons () {
+  for (let i in player.intergalactic.galacticstudy.studies) {
+    let t = document.getElementById('gs' + i);
+    if (player.intergalactic.galacticstudy.theorems >= getGalacticStudyCost(i) && studyHasBeenUnlocked(i)) {
+      t.className = "eternityttbtn"
+    } else {
+      t.className = "eternityttbtnlocked"
+    }
+    let bought = document.getElementById('ts' + i + 'bought');
+    bought.innerHTML = player.timestudy.studies[i];
+    let cost = document.getElementById('ts' + i + 'cost');
+    cost.innerHTML = player.timestudy.studies[i] + 1;
+  }
+}
+
+function buyWithAntimatter() {
+    if (player.money.gte(player.timestudy.amcost)) {
+        player.money = player.money.minus(player.timestudy.amcost)
+        player.timestudy.amcost = player.timestudy.amcost.times(new Decimal('1e20000'))
+        player.timestudy.theorem += 1
+        updateTheoremButtons()
+        updateTimeStudyButtons()
+        return true;
+    } else {
+        return false;
+    }
+}
+
+function buyWithIP() {
+    if (player.infinityPoints.gte(player.timestudy.ipcost)) {
+        player.infinityPoints = player.infinityPoints.minus(player.timestudy.ipcost)
+        player.timestudy.ipcost = player.timestudy.ipcost.times(1e100)
+        player.timestudy.theorem += 1
+        updateTheoremButtons()
+        updateTimeStudyButtons()
+        return true;
+    } else {
+        return false;
+    }
+}
+
+function checkEPTTPurchaseAbility () {
+  let tdBought = false;
+  for (let i = 1; i <= 4; i++) {
+      if (player['timeDimension' + i].bought > 0) {
+          tdBought = true;
+      }
+  }
+  if (!tdBought) {
+      alert('You need to buy a time dimension before you can purchase time theorems with Eternity Points.');
+      return false;
+  } else {
+      return true;
+  }
+}
+
+function buyWithEP() {
+    if (!checkEPTTPurchaseAbility()) {
+        return false;
+    }
+    if (player.eternityPoints.gte(player.timestudy.epcost)) {
+        player.eternityPoints = player.eternityPoints.minus(player.timestudy.epcost)
+        player.timestudy.epcost = player.timestudy.epcost.times(2)
+        player.timestudy.theorem += 1
+        updateTheoremButtons()
+        updateTimeStudyButtons()
+        return true;
+    } else {
+        return false;
+    }
+}
+
+function buyMaxWithAntimatter () {
+    let buy = makePurchase(player.money, player.timestudy.amcost, new Decimal('1e20000'));
+    if (buy.amount > 0) {
+        player.money = player.money.minus(buy.cost);
+        player.timestudy.amcost = player.timestudy.amcost.times(Decimal.pow(new Decimal('1e20000'), buy.amount));
+        player.timestudy.theorem += buy.amount;
+        updateTheoremButtons()
+        updateTimeStudyButtons()
+        return true;
+    } else {
+        return false;
+    }
+}
+
+function buyMaxWithIP () {
+    let buy = makePurchase(player.infinityPoints, player.timestudy.ipcost, 1e100);
+    if (buy.amount > 0) {
+        player.infinityPoints = player.infinityPoints.minus(buy.cost);
+        player.timestudy.ipcost = player.timestudy.ipcost.times(Decimal.pow(1e100, buy.amount));
+        player.timestudy.theorem += buy.amount;
+        updateTheoremButtons()
+        updateTimeStudyButtons()
+        return true;
+    } else {
+        return false;
+    }
+}
+
+function buyMaxWithEP () {
+    if (!checkEPTTPurchaseAbility()) {
+        return false;
+    }
+    let buy = makePurchase(player.eternityPoints, player.timestudy.epcost, 2);
+    if (buy.amount > 0) {
+        player.eternityPoints = player.eternityPoints.minus(buy.cost);
+        player.timestudy.epcost = player.timestudy.epcost.times(Decimal.pow(2, buy.amount));
+        player.timestudy.theorem += buy.amount;
+        updateTheoremButtons()
+        updateTimeStudyButtons()
+        return true;
+    } else {
+        return false;
+    }
+}
+
+function getTotalTT () {
+  return Math.round(player.timestudy.amcost.log(10) / 20000 + player.timestudy.ipcost.log(10) / 100 + player.timestudy.epcost.log(2) - 1);
+}
+
+let nextStudiesAt = [60, 1000];
+
+let studyRowLevels = {1: 0, 2: 0, 3: 1, 4: 2}
+
+function updateTheoremButtons() {
+    document.getElementById("theoremam").className = player.money.gte(player.timestudy.amcost) ? "timetheorembtn" : "timetheorembtnlocked"
+    document.getElementById("theoremip").className = player.infinityPoints.gte(player.timestudy.ipcost) ? "timetheorembtn" : "timetheorembtnlocked"
+    document.getElementById("theoremep").className = player.eternityPoints.gte(player.timestudy.epcost) ? "timetheorembtn" : "timetheorembtnlocked"
+    document.getElementById("theoremammax").className = player.money.gte(player.timestudy.amcost) ? "timetheorembtn" : "timetheorembtnlocked"
+    document.getElementById("theoremipmax").className = player.infinityPoints.gte(player.timestudy.ipcost) ? "timetheorembtn" : "timetheorembtnlocked"
+    document.getElementById("theoremepmax").className = player.eternityPoints.gte(player.timestudy.epcost) ? "timetheorembtn" : "timetheorembtnlocked"
+    document.getElementById("theoremep").innerHTML = "Buy Time Theorems <br>Cost: "+shortenDimensions(player.timestudy.epcost)+" EP"
+    document.getElementById("theoremip").innerHTML = "Buy Time Theorems <br>Cost: "+shortenCosts(player.timestudy.ipcost)+" IP"
+    document.getElementById("theoremam").innerHTML = "Buy Time Theorems <br>Cost: "+shortenCosts(player.timestudy.amcost)
+    document.getElementById("timetheorems").innerHTML = "You have <span style='display:inline' class=\"TheoremAmount\">"+player.timestudy.theorem+"</span> unspent Time "+ (player.timestudy.theorem == 1 ? "Theorem." : "Theorems.")
+    document.getElementById("totaltimetheorems").innerHTML = "You have <span style='display:inline' class=\"TheoremAmount\">"+getTotalTT()+"</span> total Time "+ (getTotalTT() == 1 ? "Theorem." : "Theorems.")
+    if (nextStudiesAt[player.timestudy.studyGroupsUnlocked] === undefined) {
+        document.getElementById("nextstudy").innerHTML = "You've unlocked all the time studies.";
+    }
+    else {
+        document.getElementById("nextstudy").innerHTML = "Next time studies unlock at " + nextStudiesAt[player.timestudy.studyGroupsUnlocked] + " total Time Theorems.";
+        if (getTotalTT() >= nextStudiesAt[player.timestudy.studyGroupsUnlocked]) {
+            player.timestudy.studyGroupsUnlocked += 1
+            if (player.timestudy.studyGroupsUnlocked === nextStudiesAt.length) {
+                giveAchievement('Now actually go study')
+            }
+        }
+    }
+}
+
+function buyTimeStudy(num) {
+  if (player.timestudy.theorem >= 1 + player.timestudy.studies[num] && studyHasBeenUnlocked(num)) {
+      player.timestudy.studies[num] += 1;
+      player.timestudy.theorem -= player.timestudy.studies[num];
+      updateTheoremButtons()
+      updateTimeStudyButtons()
+      return true;
+  } else {
+      return false;
+  }
+}
+
+function buyManyTimeStudy(num, x) {
+  if (studyHasBeenUnlocked(num)) {
+      let already = player.timestudy.studies[num];
+      let totalTT = player.timestudy.theorem + already * (already + 1) / 2;
+      let total = Math.floor((Math.sqrt(totalTT * 8 + 1 + .001) - 1) / 2);
+      let newAmount = Math.min(x, total - already);
+      let newCost = newAmount * (newAmount + 2 * already + 1) / 2
+      player.timestudy.studies[num] += newAmount;
+      player.timestudy.theorem -= newCost;
+      updateTheoremButtons()
+      updateTimeStudyButtons()
+      return true;
+  } else {
+      return false;
+  }
+}
+
+function exportSpec() {
+  let l = [];
+  for (let i = 1; i <= numTimeStudies; i++) {
+    if (studyHasBeenUnlocked(i)) {
+      l.push(player.timestudy.studies[i]);
+    }
+  }
+  let s = l.join('/');
+  copyToClipboard(s);
+}
+
+function importSpec () {
+  let s = prompt('Enter your spec');
+  let l = s.split('/');
+  for (let i = 1; i <= l.length; i++) {
+    let amount = +l[i - 1];
+    buyManyTimeStudy(i, amount);
+  }
+}
+
+function respecTimeStudies() {
+  // Respec can be done after challenge unlock, I don't care.
+  for (let i = 0; i < player.timestudy.studies.length; i++) {
+    let bought = player.timestudy.studies[i];
+    if (bought !== null) {
+      player.timestudy.theorem += (bought * (bought + 1)) / 2;
+      player.timestudy.studies[i] = 0;
+    }
+  }
+  updateTheoremButtons();
+  updateTimeStudyButtons();
+}
+
+// Soft reset (or dimboost).
 
 function getDimensionBoostPower(num) {
     if (num === undefined) {
@@ -6863,7 +7090,7 @@ function intergalaxy(force) {
                 galacticDimensionUpgradeCostMults: player.intergalactic.galacticDimensionUpgradeCostMults,
                 galaxies: 0,
                 antigalaxies: player.intergalactic.antigalaxies,
-                galacticstudy: player.intergalactic.galacticStudy,
+                galacticstudy: player.intergalactic.galacticstudy,
                 thisIntergalaxy: 0,
                 bestIntergalaxy: player.intergalactic.bestIntergalaxy,
                 intergalaxyBuyer: player.intergalactic.intergalaxyBuyer
