@@ -1248,8 +1248,9 @@ function loadAutoBuyerSettings() {
         else if (i == 8 && player.autobuyers[i].target !== 10) document.getElementById("toggleBtnTickSpeed").innerHTML = "Buys singles"
         else if (player.autobuyers[i].target > 10) document.getElementById("toggleBtn" + (i+1)).innerHTML = "Buys until 10"
         else document.getElementById("toggleBtn" + (i+1)).innerHTML = "Buys singles"
-
     }
+
+    document.getElementById("buyTickspeedWhenMultIncreases").checked = player.autobuyers[8].buyTickspeedWhenMultIncreases;
     document.getElementById("priority10").value = player.autobuyers[9].priority
     document.getElementById("priority11").value = player.autobuyers[10].priority
     document.getElementById("priority12").value = player.autobuyers[11].priority
@@ -1753,7 +1754,6 @@ function updateDimensions() {
 
     if (canBuyTickSpeed()) {
         var tickmult = getTickSpeedMultiplier();
-        var tickmult = getTickSpeedMultiplier()
         if (tickmult < 1e-9) {
           document.getElementById("tickLabel").textContent = "Divide the tick interval by " + shortenDimensions(tickmult.pow(-1)) + '.'
         } else {
@@ -2985,11 +2985,13 @@ function postIntergalacticNerf (ret) {
 }
 
 function getTickSpeedMultiplier() {
-    if (player.currentChallenge == "postc3") return 1;
+    if (player.currentChallenge == "postc3") return new Decimal(1);
     let totalGalaxies = (player.galaxies * getNormalGalaxyMultiplier() + player.replicanti.galaxies * getReplicantiGalaxyPower(player.replicanti.limit) + player.intergalactic.galaxies - player.intergalactic.antigalaxies) * getGalaxyMultiplier();
     let baseMultiplier = 0.9;
-    if (totalGalaxies == 0) baseMultiplier = 0.89;
-    if (player.currentChallenge == "challenge6" || player.currentChallenge == "postc1") baseMultiplier = 0.93;
+    // Be nice: give the extra 1% as long as the number of galaxies is at most 0.
+    if (totalGalaxies <= 0) baseMultiplier = 0.89;
+    // So 7% with 0 galaxies, 10% with 1 galaxy, 14% with two galaxies. That seems right.
+    if (player.currentChallenge == "challenge6" || player.currentChallenge == "postc1") baseMultiplier += 0.04;
     let linearGalaxies = Math.min(totalGalaxies, 5);
     baseMultiplier -= linearGalaxies * 0.02;
     totalGalaxies -= linearGalaxies;
@@ -5439,7 +5441,8 @@ function updateAutobuyers() {
     var autoBuyerDim8 = new Autobuyer (8)
     var autoBuyerDimBoost = new Autobuyer (9)
     var autoBuyerGalaxy = new Autobuyer (document.getElementById("secondSoftReset"))
-    var autoBuyerTickspeed = new Autobuyer (document.getElementById("tickSpeed"))
+    // The tickspeed autobuyer target code is weird.
+    var autoBuyerTickspeed = new Autobuyer (1)
     var autoBuyerInf = new Autobuyer (document.getElementById("bigcrunch"))
     var autoSacrifice = new Autobuyer(13)
 
@@ -5456,6 +5459,10 @@ function updateAutobuyers() {
     autoBuyerGalaxy.interval = 300000
     autoBuyerTickspeed.interval = 10000
     autoBuyerInf.interval = 300000
+
+    // should we do this? or should we default to not buying tickspeed
+    // when the multiplier would increase?
+    autobuyerTickspeed.buyTickspeedWhenMultIncreases = true;
 
     autoSacrifice.interval = 100
     autoSacrifice.priority = 5
@@ -5668,6 +5675,7 @@ function updatePriorities() {
     for (var x=0 ; x < autoBuyerArray().length; x++) {
         if (x < 9) autoBuyerArray()[x].priority = parseInt(document.getElementById("priority" + (x+1)).value)
     }
+    player.autobuyers[8].buyTickspeedWhenMultIncreases = document.getElementById('buyTickspeedWhenMultIncreases').checked;
     player.autobuyers[9].priority = parseInt(document.getElementById("priority10").value)
     player.autobuyers[10].priority = parseInt(document.getElementById("priority11").value)
     var infvalue = document.getElementById("priority12").value
@@ -7703,6 +7711,12 @@ function startInterval() {
           document.getElementById("IPPeakDiv").style.display = "none";
         }
 
+        if (player.intergalactic.intergalaxies > 0) {
+            document.getElementById('tickspeedinc').style.display = "inline";
+        } else {
+            document.getElementById('tickspeedinc').style.display = "none";
+        }
+
         if (canInfinity) {
           updatePeaks(player.peaks.ip, gainedInfinityPoints(), player.thisInfinityTime);
         }
@@ -8220,7 +8234,7 @@ function autoBuyerTick() {
     for (var i=0; i<priority.length; i++) {
         if (priority[i].ticks*100 >= priority[i].interval || priority[i].interval == 100) {
             if ((priority[i].isOn && canBuyDimension(priority[i].tier)) ) {
-                if (priority[i] == player.autobuyers[8] ) {
+                if (priority[i] == player.autobuyers[8] && (player.autobuyers[8].buyTickspeedWhenMultIncreases || getTickSpeedMultiplier().lte(1))) {
                     if (priority[i].target == 10) buyMaxTickSpeed()
                     else buyTickSpeed()
                 } else {
