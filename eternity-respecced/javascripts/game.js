@@ -1860,14 +1860,19 @@ function updateDimensions() {
 
     document.getElementById("eter1").innerHTML = "Infinity Dimension multiplier based on unspent EP (x+1)<br>Currently: "+shortenMoney(player.eternityPoints.plus(1))+"x<br>Cost: 5 EP";
     document.getElementById("eter2").innerHTML = "Infinity Dimension multiplier based on eternities (x^log4(2x))<br>Currently: "+shortenMoney(Decimal.pow(player.eternities, Math.log(player.eternities*2)/Math.log(4)))+"x<br>Cost: 10 EP";
-    document.getElementById("eter3").innerHTML = "Infinity Dimension multiplier based on timeshards (x/"+formatValue(player.options.notation, 1e12, 0, 0)+"+1)<br>Currently: "+shortenMoney(player.timeShards.div(1e12).plus(1))+"x<br>Cost: "+shortenCosts(1e4)+" EP"
+    document.getElementById("eter3").innerHTML = "Infinity Dimension multiplier based on timeshards (x/"+shotenCosts(player.options.notation, 1e12)+"+1)<br>Currently: "+shortenMoney(player.timeShards.div(1e12).plus(1))+"x<br>Cost: "+shortenCosts(1e4)+" EP"
     document.getElementById("eter4").innerHTML = "Eternity production is boosted by unspent EP (floor(1+log10(EP)/4))<br>Currently: "+(Math.floor(1 + player.eternityPoints.max(1).log(10) / 4))+"x<br>Cost: "+shortenCosts(1e6)+" EP";
     document.getElementById("eter5").innerHTML = "Timeshard production is boosted by eternities (1+eternities)<br>Currently: "+shortenMoney(1 + player.eternities)+"x<br>Cost: "+shortenCosts(1e9)+" EP";
     document.getElementById("eter6").innerHTML = "EP production is boosted by timeshards (1+log10(timeshards)^0.3)<br>Currently: "+shortenMoney(1 + Math.pow(Math.max(player.timeShards.log(10), 0), 0.3))+"x<br>Cost: "+shortenCosts(1e12)+" EP"
-    document.getElementById("eter7").innerHTML = "Infinity power exponent is boosted by infinities<br>(7 + min(0.1, log10(log10(x / "+formatValue(player.options.notation, 2e7, 0, 0)+" + 9)) / 2))<br>Currently: x^"+shorten(eter7Upg())+"<br>Cost: "+shortenCosts(new Decimal('1e1000'))+" EP"
-    document.getElementById("eter8").innerHTML = "Tickspeed upgrades from time dimensions are boosted by eternities<br>(1 + min(0.1, log10(log10(x / "+formatValue(player.options.notation, 2e7, 0, 0)+" + 9)) / 2))<br>Currently: "+shorten(eter8Upg())+"x<br>Cost: "+shortenCosts(new Decimal('1e1500'))+" EP"
-    document.getElementById("eter9").innerHTML = "Infinity and eternity production is boosted by infinities plus eternities<br>(floor((x / "+formatValue(player.options.notation, 2e7, 0, 0)+")^0.5))<br>Currently: "+shortenCosts(eter9Upg())+"x<br>Cost: "+shortenCosts(new Decimal('1e2000'))+" EP"
+    document.getElementById("eter7").innerHTML = "Infinity power exponent is boosted by infinities<br>(7 + min(0.1, log10(log10(x / "+shortenCosts(2e7)+" + 9)) / 2))<br>Currently: x^"+shorten(eter7Upg())+"<br>Cost: "+shortenCosts(new Decimal('1e1000'))+" EP"
+    document.getElementById("eter8").innerHTML = "Tickspeed upgrades from time dimensions are boosted by eternities<br>(1 + min(0.1, log10(log10(x / "+shortenCosts(2e7)+" + 9)) / 2))<br>Currently: "+shorten(eter8Upg())+"x<br>Cost: "+shortenCosts(new Decimal('1e1500'))+" EP"
+    document.getElementById("eter9").innerHTML = "Infinity and eternity production is boosted by infinities plus eternities<br>(floor((x / "+shortenCosts(2e7)+")^0.5))<br>Currently: "+shortenCosts(eter9Upg())+"x<br>Cost: "+shortenCosts(new Decimal('1e2000'))+" EP"
 
+    updateGalacticUpgrades();
+    document.getElementById("galdimupg1").innerHTML = "Double all galactic dimension multipliers<br>Cost: "+shortenCosts(player.intergalactic.galacticDimensionUpgradeCosts[0])+" galactic power";
+    document.getElementById("galdimupg2").innerHTML = "Decrease intergalactic galaxy cost multiplier<br>Intergalactic galaxies: "+getTotalIntergalacticGalaxiesGained()+" -> "+getTotalIntergalacticGalaxiesGained(1)+"<br>Cost: "+shortenCosts(player.intergalactic.galacticDimensionUpgradeCosts[1])+" galactic power";
+    document.getElementById("galdimupg3").innerHTML = "Multiply all galactic dimensions based on intergalactic galaxies<br>Additional multiplier: "+shorten(multiplierPerGalacticUpgrade3())+"<br>Cost: "+shortenCosts(player.intergalactic.galacticDimensionUpgradeCosts[2])+" galactic power"
+    document.getElementById("galdimupg4").innerHTML = "Increase GP formula base based on intergalactic galaxies<br>Currently: "+shorten(getIntergalacticPointBase())+" -> "+shorten(getIntergalacticPointBase(1))+"<br>Cost: "+shortenCosts(player.intergalactic.galacticDimensionUpgradeCosts[3])+" galactic power";
     displayAllECRewards();
     checkAllECUnlockStatuses();
 }
@@ -2390,11 +2395,39 @@ function resetTimeDimensions() {
 
 // galactic dimensions
 
+// small subsection devoted to galactic Upgrades
+
+function canBuyGalacticUpgrade(name) {
+    let cost = player.intergalactic.galacticDimensionUpgradeCosts[name - 1];
+    return player.intergalactic.galacticPower.gte(cost) && !hasGalacticStudies();
+}
+
+function buyGalacticUpgrade(name) {
+    if (canBuyGalacticUpgrade(name)) {
+        let cost = player.intergalactic.galacticDimensionUpgradeCosts[name - 1];
+        player.intergalactic.galacticPower = player.intergalactic.galacticPower.minus(cost);
+        player.intergalactic.galacticDimensionUpgrades[name - 1]++;
+        player.intergalactic.galacticDimensionUpgradeCosts[name - 1] = cost.times(player.intergalactic.galacticDimensionUpgradeCostMults[name - 1]);
+    }
+}
+
+function updateGalacticUpgrades () {
+    for (let i = 1; i <= 4; i++) {
+        document.getElementById("galdimupg" + i).className = canBuyGalacticUpgrade(i) ? "galacticupbtn" : "galacticupbtnlocked";
+    }
+}
+
+// end galactic upgrades
+
+function multiplierPerGalacticUpgrade3 () {
+    return Math.sqrt(player.intergalactic.galaxies.log(2));
+}
+
 function getGalacticDimensionPower(tier) {
   let dim = player.intergalactic["galacticDimension" + tier];
   let ret = dim.power;
   ret = ret.times(Decimal.pow(2, player.intergalactic.galacticDimensionUpgrades[0]));
-  ret = ret.times(Decimal.pow(player.intergalactic.galaxies.log(2), player.intergalactic.galacticDimensionUpgrades[2] / 2));
+  ret = ret.times(Decimal.pow(multiplierPerGalacticUpgrade3(), player.intergalactic.galacticDimensionUpgrades[2]));
   if (ret.lt(1)) {ret = new Decimal(1)}
   return ret;
 }
@@ -6821,8 +6854,16 @@ function eternity(force, enteringChallenge) {
     }
 }
 
+function getIntergalacticPointBase (x) {
+    if (x === undefined) {
+      x = 0;
+    }
+    x += player.intergalactic.galacticDimensionUpgrades[3];
+    return 256 + x * player.intergalactic.galaxies / 16
+}
+
 function gainedIntergalacticPoints() {
-    let base = 256 + player.intergalactic.galacticDimensionUpgrades[3] * player.intergalactic.galaxies / 16;
+    let base = getIntergalacticPointBase();
     return Decimal.floor(Decimal.pow(base, getTickSpeedMultiplier().pow(-1).e/308 - 1));
 }
 
@@ -7441,6 +7482,8 @@ function getIPMult () {
   return ret;
 }
 
+// timeshard stuff
+
 function get_c (num) {
   if (num === undefined) {
     num = player.timestudy.studies[2];
@@ -7477,6 +7520,38 @@ function updateTimeShards() {
     document.getElementById("timeShardsPerSec").innerHTML = "You are getting "+shortenDimensions(getTimeDimensionProduction(1))+" Timeshards per second."
 }
 
+// some more galactic dimension stuff
+
+function getIntergalacticGalaxyThreshold (num) {
+  return intergalacticGalaxyCost(getTotalIntergalacticGalaxiesGained(num) + 1, num)
+}
+
+function getIntergalacticGalaxyCostBase (num) {
+  if (num === undefined) {
+      num = 0;
+  }
+  num += player.intergalactic.galacticDimensionUpgrades[1];
+  return Math.pow(2, 1 / Math.log2(4 + num));
+}
+
+function intergalacticGalaxyCost (x, num) {
+  let base = getIntergalacticGalaxyCostBase(num);
+  return Decimal.pow(base, x - 1);
+}
+
+function getTotalIntergalacticGalaxiesGained (num) {
+  if (player.intergalactic.galacticPower.lt(1)) {
+      return 0;
+  }
+  let base = getIntergalacticGalaxyCostBase(num);
+  return Math.floor(player.intergalactic.galacticPower.log(base) + 1);
+}
+
+function updateIntergalacticGalaxies() {
+    document.getElementById("galacticPowerAmount").innerHTML = shortenMoney(player.intergalactic.galacticPower)
+    document.getElementById("galaxyThreshold").innerHTML = shortenMoney(getIntergalacticGalaxyThreshold())
+    document.getElementById("galacticPowerPerSec").innerHTML = "You are getting "+shortenDimensions(getGalacticDimensionProduction(1))+" Galactic Power per second."
+}
 
 function getNewInfReq() {
     if (!player.infDimensionsUnlocked[0]) return new Decimal("1e1100")
