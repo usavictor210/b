@@ -91,7 +91,7 @@ var player = {
     dimensionMultDecrease: 10,
     dimensionMultDecreaseCost: 1e8,
     overXGalaxies: 10,
-    version: 7,
+    version: 9,
     infDimensionsUnlocked: [false, false, false, false, false, false, false, false],
     infinityPower: new Decimal(1),
     spreadingCancer: 0,
@@ -856,6 +856,11 @@ function onLoad() {
     if (player.version < 7) {
         player.infMultCost = player.infMultCost.dividedBy(10)
         player.version = 7
+    }
+
+    if (player.version < 9) {
+        alert("Development probably won't continue (at least for a while), see final_notes.md (https://github.com/dan-simon/b/blob/master/eternity-respecced/final_notes.md) for more.");
+        player.version = 9;
     }
 
     setMatterDisplay();
