@@ -309,6 +309,8 @@ var player = {
         notation: "Standard",
         //Standard = normal prefixed numbers, Scientific = standard form, Engineering = powers of 3.
         scientific: false,
+        customNotation: '',
+        customNotationName: 'Empty',
         challConf: false,
         sacrificeConfirmation: true,
         retryChallenge: false,
@@ -529,6 +531,8 @@ function onLoad() {
     if (player.options.hotkeys === undefined) player.options.hotkeys = true
     if (player.options.eternityconfirm === undefined) player.options.eternityconfirm = true
     if (player.options.intergalaxyconfirm === undefined) player.options.intergalaxyconfirm = true
+    if (player.options.customNotation === undefined) player.options.customNotation = '';
+    if (player.options.customNotationName === undefined) player.options.customNotationName = 'Custom';
     if (player.achievements === undefined) player.achievements = [];
     if (player.sacrificed === undefined) player.sacrificed = new Decimal(0);
     if (player.infinityUpgrades === undefined) player.infinityUpgrades = [];
@@ -1092,10 +1096,7 @@ function onLoad() {
     updateEternityUpgrades()
     loadInfAutoBuyers()
     checkForEndMe()
-
-
-
-
+    setCustomNotation();
 }
 
 
@@ -1331,7 +1332,7 @@ function addCommas (x) {
 
 function letters (x, l) {
   x = Math.floor(x / 3);
-  s = [];
+  let s = [];
   while (x > 0) {
     let v = x % l.length;
     s.push(l[(v + l.length - 1) % l.length]);
@@ -1350,6 +1351,18 @@ function mysterious (value) {
       value = new Decimal(4 / (1 - value + Math.floor(value)));
   }
   return r;
+}
+
+function setCustomNotation () {
+   document.getElementById("notation").innerHTML = 'Notation: ' + player.options.customNotationName;
+   x = eval(player.options.customNotation);
+   if (typeof x === 'function') {
+       customNotationFunction = x;
+  }
+}
+
+function customNotationFunction () {
+  return '';
 }
 
 function formatValue(notation, value, places, placesUnder1000) {
@@ -1388,6 +1401,8 @@ function formatValue(notation, value, places, placesUnder1000) {
             else return "e"+Decimal.log10(value).toFixed(places)
         } else if (notation === 'Mysterious') {
             return mysterious(value);
+        } else if (notation === 'Custom') {
+            return customNotationFunction(value, places);
         } else {
             if (power > 100000  && player.options.commas) power = addCommas(power.toString());
             return ((matissa).toFixed(places) + "e" + power);
@@ -5462,11 +5477,17 @@ document.getElementById("importbtn").onclick = function () {
             load_custom_game();
             return;
         }
-        player = save_data;
-        save_game();
-        load_game();
-        updateChallenges()
-        transformSaveToDecimal()
+        if ('notation' in save_data) {
+            player.options.customNotation = save_data['notation'];
+            player.options.customNotationName = save_data['name'];
+            setCustomNotation();
+        } else {
+            player = save_data;
+            save_game();
+            load_game();
+            updateChallenges()
+            transformSaveToDecimal()
+        }
     }
 };
 
@@ -5591,6 +5612,9 @@ document.getElementById("notation").onclick = function () {
         player.options.notation = "Mysterious";
         document.getElementById("notation").innerHTML = ("Notation: Mysterious")
     } else if (player.options.notation === "Mysterious") {
+        player.options.notation = "Custom";
+        document.getElementById("notation").innerHTML = ("Notation: " + player.options.customNotationName);
+    } else if (player.options.notation === "Custom") {
         player.options.notation = "Scientific";
         document.getElementById("notation").innerHTML = ("Notation: Scientific")
     } else if (player.options.notation === "Scientific") {
