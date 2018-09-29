@@ -268,6 +268,7 @@ var player = {
         galacticDimensionUpgrades: [0, 0, 0, 0],
         galacticDimensionUpgradeCosts: [new Decimal(1e4), new Decimal(1e5), new Decimal(1e7), new Decimal(1e9)],
         galacticDimensionUpgradeCostMults: [new Decimal(1e4), new Decimal(1e5), new Decimal(1e7), new Decimal(1e9)],
+        totalGalacticDimensionUpgrades: 0,
         galaxies: 0,
         antigalaxies: 0,
         galacticstudy: {
@@ -702,6 +703,7 @@ function onLoad() {
             galacticDimensionUpgrades: [0, 0, 0, 0],
             galacticDimensionUpgradeCosts: [new Decimal(1e4), new Decimal(1e5), new Decimal(1e7), new Decimal(1e9)],
             galacticDimensionUpgradeCostMults: [new Decimal(1e4), new Decimal(1e5), new Decimal(1e7), new Decimal(1e9)],
+            totalGalacticDimensionUpgrades: 0,
             galaxies: 0,
             antigalaxies: 0,
             galacticstudy: {
@@ -2424,6 +2426,7 @@ function buyGalacticUpgrade(name) {
         player.intergalactic.galacticPower = player.intergalactic.galacticPower.minus(cost);
         player.intergalactic.galacticDimensionUpgrades[name - 1]++;
         player.intergalactic.galacticDimensionUpgradeCosts[name - 1] = cost.times(player.intergalactic.galacticDimensionUpgradeCostMults[name - 1]);
+        player.intergalactic.totalGalacticDimensionUpgrades++;
     }
 }
 
@@ -2444,6 +2447,7 @@ function getGalacticDimensionPower(tier) {
   let ret = dim.power;
   ret = ret.times(Decimal.pow(2, player.intergalactic.galacticDimensionUpgrades[0]));
   ret = ret.times(Decimal.pow(multiplierPerGalacticUpgrade3(), player.intergalactic.galacticDimensionUpgrades[2]));
+  ret = ret.times(Decimal.pow(1.05, player.intergalactic.totalGalacticDimensionUpgrades));
   if (ret.lt(1)) {ret = new Decimal(1)}
   return ret;
 }
@@ -7174,6 +7178,7 @@ function intergalaxy(force) {
                 galacticDimensionUpgrades: player.intergalactic.galacticDimensionUpgrades,
                 galacticDimensionUpgradeCosts: player.intergalactic.galacticDimensionUpgradeCosts,
                 galacticDimensionUpgradeCostMults: player.intergalactic.galacticDimensionUpgradeCostMults,
+                totalGalacticDimensionUpgrades: player.intergalactic.totalGalacticDimensionUpgrades,
                 galaxies: 0,
                 antigalaxies: player.intergalactic.antigalaxies,
                 galacticstudy: player.intergalactic.galacticstudy,
@@ -7576,7 +7581,7 @@ function getIntergalacticGalaxyCostBase (num) {
       num = 0;
   }
   num += player.intergalactic.galacticDimensionUpgrades[1];
-  return Math.pow(2, 1 / Math.log2(4 + num));
+  return Math.pow(2, 1 / 16 + (1 / Math.log2(4 + num)) * 7 / 8);
 }
 
 function intergalacticGalaxyCost (x, num) {
