@@ -279,6 +279,7 @@ var player = {
             '14': 0, '24': 0, '34': 0, '44': 0
           },
           theorems: 0,
+          bulk: 1,
           upgrades: [0, 0],
           upgradeCosts: [new Decimal(10), new Decimal(10)],
           upgradeCostMults: [new Decimal(10), new Decimal(10)]
@@ -718,6 +719,7 @@ function onLoad() {
                 '14': 0, '24': 0, '34': 0, '44': 0
               },
               theorems: 0,
+              bulk: 1,
               upgrades: [0, 0],
               upgradeCosts: [new Decimal(10), new Decimal(10)],
               upgradeCostMults: [new Decimal(10), new Decimal(10)]
@@ -1081,6 +1083,7 @@ function onLoad() {
     if (!player.options.hotkeys) document.getElementById("hotkeys").innerHTML = "Enable hotkeys"
     updateAutobuyers();
     updateReplicantiGalaxyPowerControl();
+    updateAntigalaxyBulk();
     setAchieveTooltip();
     updatePriorities()
     updateTheoremButtons()
@@ -1354,15 +1357,15 @@ function mysterious (value) {
 }
 
 function setCustomNotation () {
-   document.getElementById("notation").innerHTML = 'Notation: ' + player.options.customNotationName;
-   x = eval(player.options.customNotation);
-   if (typeof x === 'function') {
-       customNotationFunction = x;
-  }
+    document.getElementById("notation").innerHTML = 'Notation: ' + player.options.customNotationName;
+    x = eval(player.options.customNotation);
+    if (typeof x === 'function') {
+        customNotationFunction = x;
+    }
 }
 
 function customNotationFunction () {
-  return '';
+    return '';
 }
 
 function formatValue(notation, value, places, placesUnder1000) {
@@ -2689,8 +2692,8 @@ function updateTheoremButtons() {
     document.getElementById("theoremep").innerHTML = "Buy Time Theorems <br>Cost: "+shortenDimensions(player.timestudy.epcost)+" EP"
     document.getElementById("theoremip").innerHTML = "Buy Time Theorems <br>Cost: "+shortenCosts(player.timestudy.ipcost)+" IP"
     document.getElementById("theoremam").innerHTML = "Buy Time Theorems <br>Cost: "+shortenCosts(player.timestudy.amcost)
-    document.getElementById("timetheorems").innerHTML = "You have <span style='display:inline' class=\"TheoremAmount\">"+player.timestudy.theorem+"</span> unspent Time "+ (player.timestudy.theorem == 1 ? "Theorem." : "Theorems.")
-    document.getElementById("totaltimetheorems").innerHTML = "You have <span style='display:inline' class=\"TheoremAmount\">"+getTotalTT()+"</span> total Time "+ (getTotalTT() == 1 ? "Theorem." : "Theorems.")
+    document.getElementById("timetheorems").innerHTML = "You have <span style='display:inline' class=\"TheoremAmount\">"+player.timestudy.theorem+"</span> unspent Time "+ (player.timestudy.theorem === 1 ? "Theorem." : "Theorems.")
+    document.getElementById("totaltimetheorems").innerHTML = "You have <span style='display:inline' class=\"TheoremAmount\">"+getTotalTT()+"</span> total Time "+ (getTotalTT() === 1 ? "Theorem." : "Theorems.")
     if (nextStudiesAt[player.timestudy.studyGroupsUnlocked] === undefined) {
         document.getElementById("nextstudy").innerHTML = "You've unlocked all the time studies.";
     }
@@ -2813,152 +2816,62 @@ function getBuyableGalacticStudies () {
 }
 
 function galacticTheoremsPerAntigalaxy () {
-  return player.intergalactic.galacticstudy.upgrades[1];
+    return player.intergalactic.galacticstudy.upgrades[1];
 }
 
 function buyOneGalacticStudy () {
-  if (getBuyableGalacticStudies() > 0) {
+  if (getBuyableGalacticStudies() >= 1) {
     player.intergalactic.antigalaxies += 1;
     player.intergalactic.galacticstudy.theorems += galacticTheoremsPerAntigalaxy();
   }
 }
 
+function setAntigalaxyBulk () {
+    var bulk = document.getElementById("bulkantigalaxies").value
+    bulk = parseInt(bulk);
+    if (isNaN(bulk) || bulk < 1) {
+        bulk = 1;
+    }
+    player.intergalactic.galacticstudy.bulk = bulk;
+}
+
+function updateAntigalaxyBulk () {
+    document.getElementById("bulkantigalaxies").value = player.intergalactic.galacticstudy.bulk;
+}
+
+function buyChosenGalacticStudies () {
+  let b = player.intergalactic.galacticstudy.bulk;
+  if (getBuyableGalacticStudies() >= b) {
+    player.intergalactic.antigalaxies += b;
+    player.intergalactic.galacticstudy.theorems += b * galacticTheoremsPerAntigalaxy();
+  }
+}
+
+function buyMaxGalacticStudies () {
+  let g = getBuyableGalacticStudies();
+  player.intergalactic.antigalaxies += g;
+  player.intergalactic.galacticstudy.theorems += g * galacticTheoremsPerAntigalaxy();
+}
+
+function getTotalGT () {
+  return player.intergalactic.antigalaxies * galacticTheoremsPerAntigalaxy();
+}
+
+function updateGalacticTheoremButtons() {
+    let b = player.intergalactic.galacticstudy.bulk;
+    let g = getBuyableGalacticStudies();
+    let per = galacticTheoremsPerAntigalaxy();
+    document.getElementById("gtheoremone").className = (g >= 1) ? "galactictheorembtn" : "galactictheorembtnlocked"
+    document.getElementById("gtheoremchosen").className = (g >= b) ? "galactictheorembtn" : "galactictheorembtnlocked"
+    document.getElementById("gtheoremmax").className = (g >= 1) ? "galactictheorembtn" : "galactictheorembtnlocked"
+    document.getElementById("gtheoremone").innerHTML = 'Get 1 antigalaxy and ' + per + ' galactic theorem' + ((per === 1) ? '' : 's') + '.';
+    document.getElementById("gtheoremchosen").innerHTML = 'Get ' + b + ' antigalax' + ((b === 1) ? 'y' : 'ies') + ' and ' + (b * per) + ' galactic theorem' + ((b * per === 1) ? '' : 's') + '.';
+    document.getElementById("gtheoremmax").innerHTML = 'Get ' + g + ' antigalax' + ((g === 1) ? 'y' : 'ies') + ' and ' + (g * per) + ' galactic theorem' + ((g * per === 1) ? '' : 's') + '.';
+    document.getElementById("galactictheorems").innerHTML = "You have <span style='display:inline' class=\"GalacticTheoremAmount\">"+player.intergalactic.galacticstudy.theorem+"</span> unspent Time "+ (player.intergalactic.galacticstudy.theorem === 1 ? "Theorem." : "Theorems.")
+    document.getElementById("galactictheorems").innerHTML = "You have <span style='display:inline' class=\"GalacticTheoremAmount\">"+getTotalGT()+"</span> total Time "+ (getTotalGT() === 1 ? "Theorem." : "Theorems.");
+}
+
 /*
-function buyWithAntimatter() {
-    if (player.money.gte(player.timestudy.amcost)) {
-        player.money = player.money.minus(player.timestudy.amcost)
-        player.timestudy.amcost = player.timestudy.amcost.times(new Decimal('1e20000'))
-        player.timestudy.theorem += 1
-        updateTheoremButtons()
-        updateTimeStudyButtons()
-        return true;
-    } else {
-        return false;
-    }
-}
-
-function buyWithIP() {
-    if (player.infinityPoints.gte(player.timestudy.ipcost)) {
-        player.infinityPoints = player.infinityPoints.minus(player.timestudy.ipcost)
-        player.timestudy.ipcost = player.timestudy.ipcost.times(1e100)
-        player.timestudy.theorem += 1
-        updateTheoremButtons()
-        updateTimeStudyButtons()
-        return true;
-    } else {
-        return false;
-    }
-}
-
-function checkEPTTPurchaseAbility () {
-  let tdBought = false;
-  for (let i = 1; i <= 4; i++) {
-      if (player['timeDimension' + i].bought > 0) {
-          tdBought = true;
-      }
-  }
-  if (!tdBought) {
-      alert('You need to buy a time dimension before you can purchase time theorems with Eternity Points.');
-      return false;
-  } else {
-      return true;
-  }
-}
-
-function buyWithEP() {
-    if (!checkEPTTPurchaseAbility()) {
-        return false;
-    }
-    if (player.eternityPoints.gte(player.timestudy.epcost)) {
-        player.eternityPoints = player.eternityPoints.minus(player.timestudy.epcost)
-        player.timestudy.epcost = player.timestudy.epcost.times(2)
-        player.timestudy.theorem += 1
-        updateTheoremButtons()
-        updateTimeStudyButtons()
-        return true;
-    } else {
-        return false;
-    }
-}
-
-function buyMaxWithAntimatter () {
-    let buy = makePurchase(player.money, player.timestudy.amcost, new Decimal('1e20000'));
-    if (buy.amount > 0) {
-        player.money = player.money.minus(buy.cost);
-        player.timestudy.amcost = player.timestudy.amcost.times(Decimal.pow(new Decimal('1e20000'), buy.amount));
-        player.timestudy.theorem += buy.amount;
-        updateTheoremButtons()
-        updateTimeStudyButtons()
-        return true;
-    } else {
-        return false;
-    }
-}
-
-function buyMaxWithIP () {
-    let buy = makePurchase(player.infinityPoints, player.timestudy.ipcost, 1e100);
-    if (buy.amount > 0) {
-        player.infinityPoints = player.infinityPoints.minus(buy.cost);
-        player.timestudy.ipcost = player.timestudy.ipcost.times(Decimal.pow(1e100, buy.amount));
-        player.timestudy.theorem += buy.amount;
-        updateTheoremButtons()
-        updateTimeStudyButtons()
-        return true;
-    } else {
-        return false;
-    }
-}
-
-function buyMaxWithEP () {
-    if (!checkEPTTPurchaseAbility()) {
-        return false;
-    }
-    let buy = makePurchase(player.eternityPoints, player.timestudy.epcost, 2);
-    if (buy.amount > 0) {
-        player.eternityPoints = player.eternityPoints.minus(buy.cost);
-        player.timestudy.epcost = player.timestudy.epcost.times(Decimal.pow(2, buy.amount));
-        player.timestudy.theorem += buy.amount;
-        updateTheoremButtons()
-        updateTimeStudyButtons()
-        return true;
-    } else {
-        return false;
-    }
-}
-
-function getTotalTT () {
-  return Math.round(player.timestudy.amcost.log(10) / 20000 + player.timestudy.ipcost.log(10) / 100 + player.timestudy.epcost.log(2) - 1);
-}
-
-let nextStudiesAt = [60, 1000];
-
-let studyRowLevels = {1: 0, 2: 0, 3: 1, 4: 2}
-
-function updateTheoremButtons() {
-    document.getElementById("theoremam").className = player.money.gte(player.timestudy.amcost) ? "timetheorembtn" : "timetheorembtnlocked"
-    document.getElementById("theoremip").className = player.infinityPoints.gte(player.timestudy.ipcost) ? "timetheorembtn" : "timetheorembtnlocked"
-    document.getElementById("theoremep").className = player.eternityPoints.gte(player.timestudy.epcost) ? "timetheorembtn" : "timetheorembtnlocked"
-    document.getElementById("theoremammax").className = player.money.gte(player.timestudy.amcost) ? "timetheorembtn" : "timetheorembtnlocked"
-    document.getElementById("theoremipmax").className = player.infinityPoints.gte(player.timestudy.ipcost) ? "timetheorembtn" : "timetheorembtnlocked"
-    document.getElementById("theoremepmax").className = player.eternityPoints.gte(player.timestudy.epcost) ? "timetheorembtn" : "timetheorembtnlocked"
-    document.getElementById("theoremep").innerHTML = "Buy Time Theorems <br>Cost: "+shortenDimensions(player.timestudy.epcost)+" EP"
-    document.getElementById("theoremip").innerHTML = "Buy Time Theorems <br>Cost: "+shortenCosts(player.timestudy.ipcost)+" IP"
-    document.getElementById("theoremam").innerHTML = "Buy Time Theorems <br>Cost: "+shortenCosts(player.timestudy.amcost)
-    document.getElementById("timetheorems").innerHTML = "You have <span style='display:inline' class=\"TheoremAmount\">"+player.timestudy.theorem+"</span> unspent Time "+ (player.timestudy.theorem == 1 ? "Theorem." : "Theorems.")
-    document.getElementById("totaltimetheorems").innerHTML = "You have <span style='display:inline' class=\"TheoremAmount\">"+getTotalTT()+"</span> total Time "+ (getTotalTT() == 1 ? "Theorem." : "Theorems.")
-    if (nextStudiesAt[player.timestudy.studyGroupsUnlocked] === undefined) {
-        document.getElementById("nextstudy").innerHTML = "You've unlocked all the time studies.";
-    }
-    else {
-        document.getElementById("nextstudy").innerHTML = "Next time studies unlock at " + nextStudiesAt[player.timestudy.studyGroupsUnlocked] + " total Time Theorems.";
-        if (getTotalTT() >= nextStudiesAt[player.timestudy.studyGroupsUnlocked]) {
-            player.timestudy.studyGroupsUnlocked += 1
-            if (player.timestudy.studyGroupsUnlocked === nextStudiesAt.length) {
-                giveAchievement('Now actually go study')
-            }
-        }
-    }
-}
 
 function buyTimeStudy(num) {
   if (player.timestudy.theorem >= 1 + player.timestudy.studies[num] && studyHasBeenUnlocked(num)) {
@@ -5510,6 +5423,7 @@ document.getElementById("reset").onclick = function () {
         updateChallenges();
         updateAutobuyers();
         updateReplicantiGalaxyPowerControl();
+        updateAntigalaxyBulk();
         updateInfCosts();
     }
 };
@@ -6877,6 +6791,7 @@ function eternity(force, enteringChallenge) {
         }
         updateAutobuyers();
         updateReplicantiGalaxyPowerControl();
+        updateAntigalaxyBulk();
         updateInitialMoney();
         if (player.achievements.includes("r104")) player.infinityPoints = new Decimal(2e25);
         resetInfDimensions();
@@ -7257,6 +7172,7 @@ function intergalaxy(force) {
         }
         updateAutobuyers();
         updateReplicantiGalaxyPowerControl();
+        updateAntigalaxyBulk();
         updateInitialMoney();
         if (player.achievements.includes("r104")) player.infinityPoints = new Decimal(2e25);
         resetInfDimensions();
@@ -8956,6 +8872,7 @@ function init() {
     updateTickSpeed();
     updateAutobuyers();
     updateReplicantiGalaxyPowerControl();
+    updateAntigalaxyBulk();
     updateChallengeTimes()
 }
 
