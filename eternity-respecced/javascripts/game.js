@@ -92,7 +92,7 @@ var player = {
     dimensionMultDecrease: 10,
     dimensionMultDecreaseCost: 1e8,
     overXGalaxies: 10,
-    version: 7,
+    version: 9,
     infDimensionsUnlocked: [false, false, false, false, false, false, false, false],
     infinityPower: new Decimal(1),
     spreadingCancer: 0,
@@ -1283,11 +1283,9 @@ function showTab(tabName) {
 
 var FormatList = ['', 'K', 'M', 'B', 'T', 'Qd', 'Qt', 'Sx', 'Sp', 'Oc', 'No', 'Dc', 'UDc', 'DDc', 'TDc', 'QdDc', 'QtDc', 'SxDc', 'SpDc', 'ODc', 'NDc', 'Vg', 'UVg', 'DVg', 'TVg', 'QdVg', 'QtVg', 'SxVg', 'SpVg', 'OVg', 'NVg', 'Tg', 'UTg', 'DTg', 'TTg', 'QdTg', 'QtTg', 'SxTg', 'SpTg', 'OTg', 'NTg', 'Qa', 'UQa', 'DQa', 'TQa', 'QdQa', 'QtQa', 'SxQa', 'SpQa', 'OQa', 'NQa', 'Qi', 'UQi', 'DQi', 'TQi', 'QaQi', 'QtQi', 'SxQi', 'SpQi', 'OQi', 'NQi', 'Se', 'USe', 'DSe', 'TSe', 'QaSe', 'QtSe', 'SxSe', 'SpSe', 'OSe', 'NSe', 'St', 'USt', 'DSt', 'TSt', 'QaSt', 'QtSt', 'SxSt', 'SpSt', 'OSt', 'NSt', 'Og', 'UOg', 'DOg', 'TOg', 'QdOg', 'QtOg', 'SxOg', 'SpOg', 'OOg', 'NOg', 'Nn', 'UNn', 'DNn', 'TNn', 'QdNn', 'QtNn', 'SxNn', 'SpNn', 'ONn', 'NNn', 'Ce',];
 
-var letterList1 = ['', 'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z'];
-var letterList2 = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z'];
+var letterList = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z'];
 
-var emojiList1 = ['', '😠', '🎂', '🎄', '💀', '🍆', '👪', '🌈', '💯', '🍦', '🎃', '💋', '😂', '🌙', '⛔', '🐙', '💩', '❓', '☢️', '🙈', '👍', '☂️', '✌️', '⚠️', '❌', '😋', '⚡'];
-var emojiList2 = ['😠', '🎂', '🎄', '💀', '🍆', '👪', '🌈', '💯', '🍦', '🎃', '💋', '😂', '🌙', '⛔', '🐙', '💩', '❓', '☢️', '🙈', '👍', '☂️', '✌️', '⚠️', '❌', '😋', '⚡'];
+var emojiList = ['\uD83D\uDE20','\uD83C\uDF82','\uD83C\uDF84','\uD83D\uDC80','\uD83C\uDF46','\uD83D\uDC6A','\uD83C\uDF08','\uD83D\uDCAF','\uD83C\uDF66','\uD83C\uDF83','\uD83D\uDC8B','\uD83D\uDE02','\uD83C\uDF19','\u26D4','\uD83D\uDC19','\uD83D\uDCA9','\u2753','\u2622\uFE0F','\uD83D\uDE48','\uD83D\uDC4D','\u2602\uFE0F','\u270C\uFE0F','\u26A0\uFE0F','\u274C','\uD83D\uDE0B','\u26A1'];
 
 
 
@@ -1329,6 +1327,29 @@ function addCommas (x) {
   return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
 }
 
+function letters (x, l) {
+  x = Math.floor(x / 3);
+  s = [];
+  while (x > 0) {
+    let v = x % l.length;
+    s.push(l[(v + l.length - 1) % l.length]);
+    x = (x - v) / l.length;
+  }
+  return s.reverse().join('');
+}
+
+function mysterious (value) {
+  value = new Decimal(value).plus(1).times(4);
+  let s = '0123456789abcdefghijklmnopqrstuvwxyz\u03B1\u03B2\u03B3\u03B4\u03B5\u03B6\u03B7\u03B8\u03B9\u03BA\u03BB\u03BC\u03BD\u03BE\u03C0\u03DE\u03C1\u03C3\u03C4\u03C5\u03C6\u03C7\u03C8\u03C9';
+  let r = '';
+  for (let i = 0; i < 5; i++) {
+      value = Math.log2(Math.log2(value.log2())) * 10;
+      r += s[Math.floor(value)];
+      value = new Decimal(4 / (1 - value + Math.floor(value)));
+  }
+  return r;
+}
+
 function formatValue(notation, value, places, placesUnder1000) {
 
     if ((value <= Number.MAX_VALUE || (player.break && (player.currentChallenge == "" || !new Decimal(Number.MAX_VALUE).equals(player.challengeTarget)) )) && (value >= 1000)) {
@@ -1341,9 +1362,9 @@ function formatValue(notation, value, places, placesUnder1000) {
             var matissa = value / Math.pow(10, Math.floor(Math.log10(value)));
             var power = Math.floor(Math.log10(value));
         }
-        if (power > 100000  && player.options.commas) pow = addCommas(power);
+        if (power > 100000 && player.options.commas) pow = addCommas(power);
         else pow = power
-        if ((notation === "Standard")) {
+        if (notation === "Standard") {
             if (power <= 303) return (matissa * Decimal.pow(10, power % 3)).toFixed(places) + " " + FormatList[(power - (power % 3)) / 3];
             else return (matissa * Decimal.pow(10, power % 3)).toFixed(places) + " " + getAbbreviation(power)
         } else if (notation === "Mixed scientific") {
@@ -1355,21 +1376,16 @@ function formatValue(notation, value, places, placesUnder1000) {
         } else if (notation === "Scientific") {
             return ((matissa).toFixed(places) + "e" + pow);
         } else if (notation === "Engineering") {
-            return ((matissa * Decimal.pow(10, power % 3)).toFixed(places) + "ᴇ" + pow);
+            return ((matissa * Decimal.pow(10, power % 3)).toFixed(places) + "e" + pow);
         } else if (notation === "Letters") {
-            power -= 3;
-            return ((matissa * Decimal.pow(10, power % 3)).toFixed(places) +
-            letterList1[Decimal.floor(((power - (power % 3)) / 3) / (letterList1.length*letterList1.length*letterList1.length*letterList2.length))  % letterList1.length] + letterList1[Decimal.floor(((power - (power % 3)) / 3) / (letterList1.length*letterList1.length*letterList2.length))  % letterList1.length] + letterList1[Decimal.floor(((power - (power % 3)) / 3) / (letterList1.length*letterList2.length))  % letterList1.length] +letterList1[Decimal.floor(((power - (power % 3)) / 3) / letterList2.length) % letterList1.length] + letterList2[((power - (power % 3)) / 3) % letterList2.length]);
+            return (matissa * Decimal.pow(10, power % 3)).toFixed(places) + letters(power, letterList);
         } else if (notation === "Emojis") {
-            power -= 3;
-            return ((matissa * Decimal.pow(10, power % 3)).toFixed(places) +
-            emojiList1[Decimal.floor(((power - (power % 3)) / 3) / (emojiList1.length*emojiList1.length*emojiList1.length*emojiList2.length))  % emojiList1.length] + emojiList1[Decimal.floor(((power - (power % 3)) / 3) / (emojiList1.length*emojiList1.length*emojiList2.length))  % emojiList1.length] + emojiList1[Decimal.floor(((power - (power % 3)) / 3) / (emojiList1.length*emojiList2.length))  % emojiList1.length] +emojiList1[Decimal.floor(((power - (power % 3)) / 3) / emojiList2.length) % emojiList1.length] + emojiList2[((power - (power % 3)) / 3) % emojiList2.length]);
-
-
-        }else if (notation === "Logarithm") {
+            return (matissa * Decimal.pow(10, power % 3)).toFixed(places) + letters(power, emojiList);
+        } else if (notation === "Logarithm") {
             if (power > 100000  && player.options.commas) return "e"+addCommas(Decimal.log10(value).toFixed(places));
             else return "e"+Decimal.log10(value).toFixed(places)
-
+        } else if (notation === 'Mysterious') {
+            return mysterious(value);
         } else {
             if (power > 100000  && player.options.commas) power = addCommas(power.toString());
             return ((matissa).toFixed(places) + "e" + power);
@@ -1860,7 +1876,7 @@ function updateDimensions() {
 
     document.getElementById("eter1").innerHTML = "Infinity Dimension multiplier based on unspent EP (x+1)<br>Currently: "+shortenMoney(player.eternityPoints.plus(1))+"x<br>Cost: 5 EP";
     document.getElementById("eter2").innerHTML = "Infinity Dimension multiplier based on eternities (x^log4(2x))<br>Currently: "+shortenMoney(Decimal.pow(player.eternities, Math.log(player.eternities*2)/Math.log(4)))+"x<br>Cost: 10 EP";
-    document.getElementById("eter3").innerHTML = "Infinity Dimension multiplier based on timeshards (x/"+shotenCosts(player.options.notation, 1e12)+"+1)<br>Currently: "+shortenMoney(player.timeShards.div(1e12).plus(1))+"x<br>Cost: "+shortenCosts(1e4)+" EP"
+    document.getElementById("eter3").innerHTML = "Infinity Dimension multiplier based on timeshards (x/"+shortenCosts(player.options.notation, 1e12)+"+1)<br>Currently: "+shortenMoney(player.timeShards.div(1e12).plus(1))+"x<br>Cost: "+shortenCosts(1e4)+" EP"
     document.getElementById("eter4").innerHTML = "Eternity production is boosted by unspent EP (floor(1+log10(EP)/4))<br>Currently: "+(Math.floor(1 + player.eternityPoints.max(1).log(10) / 4))+"x<br>Cost: "+shortenCosts(1e6)+" EP";
     document.getElementById("eter5").innerHTML = "Timeshard production is boosted by eternities (1+eternities)<br>Currently: "+shortenMoney(1 + player.eternities)+"x<br>Cost: "+shortenCosts(1e9)+" EP";
     document.getElementById("eter6").innerHTML = "EP production is boosted by timeshards (1+log10(timeshards)^0.3)<br>Currently: "+shortenMoney(1 + Math.pow(Math.max(player.timeShards.log(10), 0), 0.3))+"x<br>Cost: "+shortenCosts(1e12)+" EP"
@@ -2420,7 +2436,7 @@ function updateGalacticUpgrades () {
 // end galactic upgrades
 
 function multiplierPerGalacticUpgrade3 () {
-    return Math.sqrt(player.intergalactic.galaxies.log(2));
+    return Math.sqrt(Math.max(1, Math.log2(player.intergalactic.galaxies)));
 }
 
 function getGalacticDimensionPower(tier) {
@@ -2468,7 +2484,7 @@ function updateGalacticDimensions() {
 var galacticDimCostMults = [null, 2, 4, 8, 16];
 
 function buyGalacticDimension(tier) {
-    var dim = player["galacticDimension"+tier]
+    var dim = player.intergalactic["galacticDimension"+tier]
     if (player.intergalactic.points.lt(dim.cost)) return false
     player.intergalactic.points = player.intergalactic.points.minus(dim.cost)
     dim.amount = dim.amount.plus(1);
@@ -2480,7 +2496,7 @@ function buyGalacticDimension(tier) {
 
 function buyMaxGalacticDimensions () {
   for (var tier = 1; tier <= 4; tier++) {
-    var dim = player["galacticDimension"+tier];
+    var dim = player.intergalactic["galacticDimension"+tier];
     let buy = makePurchase(player.intergalactic.points, dim.cost, galacticDimCostMults[tier])
     if (buy.amount === 0) continue;
     console.log(buy.amount);
@@ -2494,7 +2510,7 @@ function buyMaxGalacticDimensions () {
 
 function resetGalacticDimensions() {
     for (var i = 1; i <= 4; i++) {
-        var dim = player["galacticDimension"+i]
+        var dim = player.intergalactic["galacticDimension"+i]
         dim.amount = new Decimal(dim.bought)
     }
 }
@@ -2772,6 +2788,23 @@ function updateGalacticStudyButtons () {
   }
 }
 
+function getBuyableGalacticStudies () {
+    // Is this a hack? Maybe sort of?
+    return Math.max(0, getRegularGalaxiesNumber() - player.intergalactic.antigalaxies);
+}
+
+function galacticTheoremsPerAntigalaxy () {
+  return player.intergalactic.galacticstudy.upgrades[1];
+}
+
+function buyOneGalacticStudy () {
+  if (getBuyableGalacticStudies() > 0) {
+    player.intergalactic.antigalaxies += 1;
+    player.intergalactic.galacticstudy.theorems += galacticTheoremsPerAntigalaxy();
+  }
+}
+
+/*
 function buyWithAntimatter() {
     if (player.money.gte(player.timestudy.amcost)) {
         player.money = player.money.minus(player.timestudy.amcost)
@@ -2969,6 +3002,7 @@ function respecTimeStudies() {
   updateTheoremButtons();
   updateTimeStudyButtons();
 }
+*/
 
 // Soft reset (or dimboost).
 
@@ -3244,6 +3278,14 @@ function postIntergalacticNerf (ret) {
     return ret.pow(exp);
 }
 
+function extraTickSpeedMultiplier() {
+    return ecNumReward(5);
+}
+
+function getRegularGalaxiesNumber() {
+    return player.galaxies + player.replicanti.galaxies + player.intergalactic.galaxies;
+}
+
 function getTickSpeedMultiplier() {
     if (player.currentChallenge == "postc3") return new Decimal(1);
     let totalGalaxies = (player.galaxies * getNormalGalaxyMultiplier() + player.replicanti.galaxies * getReplicantiGalaxyPower(player.replicanti.limit) + player.intergalactic.galaxies - player.intergalactic.antigalaxies) * getGalaxyMultiplier();
@@ -3257,7 +3299,7 @@ function getTickSpeedMultiplier() {
     totalGalaxies -= linearGalaxies;
     let ret = Decimal.pow(0.965, totalGalaxies).times(baseMultiplier);
     // EC5 reward handled
-    ret = ret.div(ecNumReward(5));
+    ret = ret.div(extraTickSpeedMultiplier());
     ret = postIntergalacticNerf(ret);
     return ret;
 }
@@ -5542,6 +5584,9 @@ function setAchieveTooltip() {
 document.getElementById("notation").onclick = function () {
     player.options.scientific = !player.options.scientific;
     if (player.options.notation === "Logarithm") {
+        player.options.notation = "Mysterious";
+        document.getElementById("notation").innerHTML = ("Notation: Mysterious")
+    } else if (player.options.notation === "Mysterious") {
         player.options.notation = "Scientific";
         document.getElementById("notation").innerHTML = ("Notation: Scientific")
     } else if (player.options.notation === "Scientific") {
@@ -5722,7 +5767,7 @@ function updateAutobuyers() {
 
     // should we do this? or should we default to not buying tickspeed
     // when the multiplier would increase?
-    autobuyerTickspeed.buyTickspeedWhenMultIncreases = true;
+    autoBuyerTickspeed.buyTickspeedWhenMultIncreases = true;
 
     autoSacrifice.interval = 100
     autoSacrifice.priority = 5
@@ -7962,6 +8007,7 @@ function startInterval() {
             else document.getElementById("infRow"+tier).style.display = "none"
 
             if (tier <4) player["timeDimension"+tier].amount = player["timeDimension"+tier].amount.plus(getTimeDimensionProduction(tier+1).times(diff/100))
+            if (tier <4) player["timeDimension"+tier].amount = player.intergalactic["galacticDimension"+tier].amount.plus(getGalacticDimensionProduction(tier+1).times(diff/100))
         }
 
         if (player.eternities > 0) document.getElementById("dimTabButtons").style.display = "inline-block"
@@ -7984,6 +8030,12 @@ function startInterval() {
         if (player.totalTickGained >= 308) giveAchievement("Infinite time");
         document.getElementById("totaltickgained").innerHTML = "You've gained "+shortenDimensions(player.totalTickGained)+" tickspeed upgrades."
         updateTickSpeed();
+
+        player.intergalactic.galacticPower = player.intergalactic.galacticPower.plus(getGalacticDimensionProduction(1).times(diff/10))
+
+        let newTotalGalaxiesGained = getTotalIntergalacticGalaxiesGained();
+        player.intergalactic.galaxies = newTotalGalaxiesGained;
+        document.getElementById("totaltickgained").innerHTML = "You've gained "+shortenDimensions(newTotalGalaxiesGained)+" tickspeed upgrades."
 
         if (player.eternities == 0) {
             document.getElementById("eternityPoints2").style.display = "none"
