@@ -3,3 +3,5 @@ This repository just contains random stuff. It's like evil-misc, but unlike ther
 In reality, this repository will probably end up being whatever it needs to be to prevent creation of additional repositories with nothing of interest to anyone.
 
 Oh, and since you actually read the README: the solution to f'(x) = e^f(x) is -ln(-x) for x < 0.
+
+usavictor was here
