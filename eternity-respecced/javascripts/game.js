@@ -4890,6 +4890,10 @@ document.getElementById("importbtn").onclick = function () {
         player = eternityPlayer;
         save_game();
         load_game();
+    } else if (sha512_256(save_data.replace(/\s/g, '').toUpperCase()) === 'b579ef9f72998dfad2b11ccf423ef73b5c4b5569c4e134da4d43d3b133a849e0') {
+	player = eternityPlayer7;
+        save_game();
+        load_game();
     } else if (sha512_256(save_data.replace(/\s/g, '').toUpperCase()) === '20f908bdcda66c8d99af767c0667ff3c9b2777dfed0a131293fcdddf1789b30a') {
         player.options.paused = !player.options.paused;
     } else if (sha512_256(save_data.replace(/\s/g, '').toUpperCase()) === '1913fca7ec9cd646e0737f9ca4f282069ed68f69d802cc526ab1fc463956eca2') {
