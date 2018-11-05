@@ -859,7 +859,7 @@ function onLoad() {
     }
 
     if (player.version < 9) {
-        alert("Development probably won't continue (at least for a while), see final_notes.md (https://github.com/dan-simon/b/blob/master/eternity-respecced/final_notes.md) for more.");
+        alert("You are currently running a old save, which was in version 7. This only serves a purpose to bring old saves to version 9. (before this would display that dan-simon would discontinue development of the game)");
         player.version = 9;
     }
 
