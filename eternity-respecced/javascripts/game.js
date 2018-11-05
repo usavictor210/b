@@ -7090,12 +7090,12 @@ function startInterval() {
         if (currentEPmin.gt(EPminpeak) && player.infinityPoints.gte(currentEternityRequirement())) {
           EPminpeak = currentEPmin;
         }
-        let eterButtonStart = (player.eternities === 0) ? "<b>Other times await.. I need to become Eternal</b><br/>" : "<b>I need to become Eternal.</b><br/>";
+        let eterButtonStart = (player.eternities === 0) ? "<b>Other times await.. I need to become Eternal.</b><br/>" : "<b>I need to become Eternal.</b><br/>";
         if (gainedEternityPoints().gte(1e3)) {
           eterButtonStart = '';
         }
         if (player.eternityChallenges.current) {
-          eterButtonStart = '<b>Other challenges await.. I need to become Eternal</b><br/>';
+          eterButtonStart = '<b>Other challenges await.. I need to become Eternal.</b><br/>';
         }
         let eterButtonEnd = "<br>" + shortenDimensions(currentEPmin) + " EP/min<br>Peaked at " + shortenDimensions(EPminpeak) + " EP/min";
         if (player.eternities === 0 || player.eternityChallenges.current) {
