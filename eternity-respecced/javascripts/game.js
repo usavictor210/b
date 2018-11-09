@@ -4890,7 +4890,7 @@ document.getElementById("importbtn").onclick = function () {
         player = eternityPlayer;
         save_game();
         load_game();
-    } else if (sha512_256(save_data.replace(/\s/g, '').toUpperCase()) === 'b579ef9f72998dfad2b11ccf423ef73b5c4b5569c4e134da4d43d3b133a849e0') {
+    } else if (sha512_256(save_data.replace(/\s/g, '').toUpperCase()) === '39e70561c2ff9e4126b2cfc751e9e6be63c1582b26852c5e7802843366c75bf3') {
 	player = eternityPlayer7;
         save_game();
         load_game();
