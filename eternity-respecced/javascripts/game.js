@@ -231,6 +231,16 @@ var player = {
         limit: new Decimal(0),
         isOn: false
     },
+    peaks: {
+        ip: {
+            perMin: new Decimal(0),
+            total: new Decimal(0)
+        },
+        ep: {
+            perMin: new Decimal(0),
+            total: new Decimal(0)
+        }
+    },
     options: {
         newsHidden: false,
         notation: "Standard",
@@ -583,6 +593,19 @@ function onLoad() {
         }
     }
 
+    if (player.peaks === undefined) {
+        player.peaks: {
+            ip: {
+                perMin: new Decimal(0),
+                total: new Decimal(0)
+            },
+            ep: {
+                perMin: new Decimal(0),
+                total: new Decimal(0)
+            }
+        }
+    }
+
     if (player.eternityChallenges === undefined) {
       player.eternityChallenges = {
         done: {},
@@ -858,11 +881,6 @@ function onLoad() {
         player.version = 7
     }
 
-    if (player.version < 9) {
-        alert("You are currently running a old save, which was in version 7. This only serves a purpose to bring old saves to version 9. (before this would display that dan-simon would discontinue development of the game)");
-        player.version = 9;
-    }
-
     setMatterDisplay();
     setQuickResetDisplay();
     // setDarkMatterDisplay();
@@ -1061,6 +1079,11 @@ function transformSaveToDecimal() {
 
     player.epmultCost = new Decimal(player.epmultCost);
     player.eternityBuyer.limit = new Decimal(player.eternityBuyer.limit);
+
+    player.peaks.ip.perMin = new Decimal(player.peaks.ip.perMin);
+    player.peaks.ip.total = new Decimal(player.peaks.ip.total);
+    player.peaks.ep.perMin = new Decimal(player.peaks.ep.perMin);
+    player.peaks.ep.total = new Decimal(player.peaks.ep.total);
 
     player.chall11Pow = new Decimal(player.chall11Pow)
 }
@@ -2658,6 +2681,7 @@ function softReset(bulk, reallyZero) {
         autoCrunchMode: player.autoCrunchMode,
         respec: player.respec,
         eternityBuyer: player.eternityBuyer,
+        peaks: player.peaks,
         options: player.options
     };
     if (player.currentChallenge === "challenge10" || player.currentChallenge == "postc1") {
@@ -4795,6 +4819,7 @@ function galaxyReset() {
         autoCrunchMode: player.autoCrunchMode,
         respec: player.respec,
         eternityBuyer: player.eternityBuyer,
+        peaks: player.peaks,
         options: player.options
     };
 
@@ -5819,6 +5844,13 @@ document.getElementById("bigcrunch").onclick = function () {
         autoCrunchMode: player.autoCrunchMode,
         respec: player.respec,
         eternityBuyer: player.eternityBuyer,
+        peaks: {
+            ip: {
+                perMin: new Decimal(0),
+                total: new Decimal(0)
+            },
+            ep: player.peaks.ep
+        },
         options: player.options
         };
 
@@ -5862,8 +5894,6 @@ document.getElementById("bigcrunch").onclick = function () {
         giveBoostFromTDTickSpeedUpgrades(player.totalTickGained);
         updateTickSpeed();
         if (player.challenges.length == 20) giveAchievement("Anti-antichallenged");
-        IPminpeak = new Decimal(0);
-        IPpeak = new Decimal(0);
         updateInfCosts()
 
         if (player.eternities > 10) {
@@ -6194,6 +6224,16 @@ function eternity(force, enteringChallenge) {
             autoCrunchMode: player.autoCrunchMode,
             respec: player.respec,
             eternityBuyer: player.eternityBuyer,
+            peaks: {
+                ip: {
+                    perMin: new Decimal(0),
+                    total: new Decimal(0)
+                },
+                ep: {
+                    perMin: new Decimal(0),
+                    total: new Decimal(0)
+                }
+            },
             options: player.options
         };
         if (player.respec) respecTimeStudies()
@@ -6241,9 +6281,6 @@ function eternity(force, enteringChallenge) {
         updateLastTenEternities()
         var infchalls = Array.from(document.getElementsByClassName('infchallengediv'))
         for (var i = 0; i< infchalls.length; i++) infchalls[i].style.display = "none"
-        IPminpeak = new Decimal(0)
-        IPpeak = new Decimal(0);
-        EPminpeak = new Decimal(0);
         updateMilestones()
         resetTimeDimensions()
         if (player.eternities < 20) player.autobuyers[9].bulk = 1
@@ -6430,6 +6467,13 @@ function startChallenge(name, target) {
       autoCrunchMode: player.autoCrunchMode,
       respec: player.respec,
       eternityBuyer: player.eternityBuyer,
+      peaks: {
+          ip: {
+              perMin: new Decimal(0),
+              total: new Decimal(0)
+          },
+          ep: player.peaks.ep
+      },
       options: player.options
     };
 	  if (player.currentChallenge === "challenge10" || player.currentChallenge === "postc1") {
@@ -6444,8 +6488,6 @@ function startChallenge(name, target) {
     if (player.replicanti.unl) player.replicanti.amount = new Decimal(1);
     player.replicanti.galaxies = 0;
 
-    IPminpeak = new Decimal(0);
-    IPpeak = new Decimal(0);
     if (player.currentChallenge.includes("post")) player.break = true
     if (player.achievements.includes("r36")) player.tickspeed = player.tickspeed.times(0.98);
     if (player.achievements.includes("r45")) player.tickspeed = player.tickspeed.times(0.98);
@@ -6638,7 +6680,7 @@ let savefix = function () {
   }
   if (nan) {
     showMults = false
-    alert('There is a bug in the game and your save was just fixed. If this message shows up, and especially if it shows up multiple times, notify dan-simon#7202 (although he is no longer developing this game) or usavictor#4761 on Discord.')
+    alert('There is a bug in the game and your save was just fixed. If this message shows up, and especially if it shows up multiple times, notify usavictor#4761 on Discord (don\'t notify dan-simon#7202, who knows what he\'s doing now).')
   }
 }
 
@@ -6808,9 +6850,6 @@ setInterval(function() {
 
 
 var postC2Count = 0;
-var IPminpeak = new Decimal(0);
-var IPpeak = new Decimal(0);
-var EPminpeak = new Decimal(0);
 var replicantiTicks = 0
 
 function getReplicantiETA (amount, limit) {
@@ -6842,6 +6881,16 @@ function getReplicantiETA (amount, limit) {
     postInf = 0;
   }
   return preInf + postInf;
+}
+
+function getPerMin (amount, time) {
+  return amount.dividedBy(time/600);
+}
+
+function updatePeaks (object, amount, time) {
+  if (amount.gt(object.total)) object.total = amount;
+  let perMin = getPerMin(amount, time);
+  if (perMin.gt(object.perMin)) object.perMin = perMin;
 }
 
 function startInterval() {
@@ -7022,12 +7071,12 @@ function startInterval() {
           document.getElementById("IPPeakDiv").style.display = "none";
         }
 
-        var currentIPmin = gainedInfinityPoints().dividedBy(player.thisInfinityTime/600)
-        if (currentIPmin.gt(IPminpeak)) IPminpeak = currentIPmin;
-        var currentIP = gainedInfinityPoints();
-        if (currentIP.gt(IPpeak)) IPpeak = currentIP;
+        if (canInfinity) {
+             updatePeaks(player.peaks.ip, gainedInfinityPoints(), player.thisInfinityTime);
+        }
+
         let main = "<b>Big Crunch for "+shortenDimensions(gainedInfinityPoints())+" Infinity Points</b>"
-        let extra = "<br>"+shortenDimensions(currentIPmin) + " IP/min<br>Peaked at "+shortenDimensions(IPminpeak)+" IP/min";
+        let extra = "<br>"+shortenDimensions(getPerMin(gainedInfinityPoints(), player.thisInfinityTime)) + " IP/min<br>Peaked at "+shortenDimensions(player.peaks.ip.perMin)+" IP/min";
         if (gainedInfinityPoints().lt(new Decimal('1e100000'))) main += extra;
         document.getElementById("postInfinityButton").innerHTML = main;
 
@@ -7086,18 +7135,18 @@ function startInterval() {
         var places = Math.floor(Math.log10(getReplicantiInterval()/1000)) * (-1);
         updateReplicantiInterval(places);
 
-        var currentEPmin = gainedEternityPoints().dividedBy(player.thisEternity/600);
-        if (currentEPmin.gt(EPminpeak) && player.infinityPoints.gte(currentEternityRequirement())) {
-          EPminpeak = currentEPmin;
+        if (player.infinityPoints.gte(currentEternityRequirement())) {
+          updatePeaks(player.peaks.ep, gainedEternityPoints(), player.thisEternity);
         }
-        let eterButtonStart = (player.eternities === 0) ? "<b>Other times await.. I need to become Eternal.</b><br/>" : "<b>I need to become Eternal.</b><br/>";
+
+        let eterButtonStart = (player.eternities === 0) ? "<b>Other times await.. I need to become Eternal</b><br/>" : "<b>I need to become Eternal.</b><br/>";
         if (gainedEternityPoints().gte(1e3)) {
           eterButtonStart = '';
         }
         if (player.eternityChallenges.current) {
-          eterButtonStart = '<b>Other challenges await.. I need to become Eternal.</b><br/>';
+          eterButtonStart = '<b>Other challenges await.. I need to become Eternal</b><br/>';
         }
-        let eterButtonEnd = "<br>" + shortenDimensions(currentEPmin) + " EP/min<br>Peaked at " + shortenDimensions(EPminpeak) + " EP/min";
+        let eterButtonEnd = "<br>" + shortenDimensions(getPerMin(gainedEternityPoints(), player.thisEternity)) + " EP/min<br>Peaked at " + shortenDimensions(player.peaks.ep.perMin) + " EP/min";
         if (player.eternities === 0 || player.eternityChallenges.current) {
           eterButtonEnd = '';
         }
@@ -7471,7 +7520,7 @@ function autoBuyerTick() {
 
     if (player.autobuyers[11]%1 !== 0) {
     if (player.autobuyers[11].ticks*100 >= player.autobuyers[11].interval && player.money.gte(Number.MAX_VALUE)) {
-        if (player.autobuyers[11].isOn && (!player.autobuyers[11].requireIPPeak || gainedInfinityPoints().gte(IPpeak))) {
+        if (player.autobuyers[11].isOn && (!player.autobuyers[11].requireIPPeak || gainedInfinityPoints().gte(player.peaks.ip.total))) {
             if (player.autoCrunchMode === "amount") {
                 if (!player.break || player.currentChallenge != "" || player.autobuyers[11].priority.lt(gainedInfinityPoints())) {
                     autoS = false;
@@ -7946,7 +7995,7 @@ function autoPlay () {
   let needReplicantiGalaxies = false;
   let checkForTheBigCrunch = function () {
     let g = gainedInfinityPoints();
-    if (timeSinceLastAction > 15 && g.gte(IPpeak)) {
+    if (timeSinceLastAction > 15 && g.gte(player.peaks.ip.total)) {
       document.getElementById('bigcrunch').onclick();
       timeSinceLastAction = 0;
       if (g < lastIP.times(1e10)) {
