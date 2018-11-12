@@ -595,7 +595,7 @@ function onLoad() {
     }
 
     if (player.peaks === undefined) {
-        player.peaks: {
+        player.peaks = {
             ip: {
                 perMin: new Decimal(0),
                 total: new Decimal(0)
@@ -1236,7 +1236,7 @@ function updateMoney() {
 
 function getAntimatterPerSecond() {
     if (player.currentChallenge == "challenge3" || player.currentChallenge == "postc1") {
-      return getDimensionProductionPerSecond(1).times(player.chall3Pow));
+      return getDimensionProductionPerSecond(1).times(player.chall3Pow);
     } else if (player.currentChallenge == "challenge7") {
       return getDimensionProductionPerSecond(1).plus(getDimensionProductionPerSecond(2));
     } else {
@@ -6892,10 +6892,12 @@ function startInterval() {
         if (player.eternities == 0) {
             document.getElementById("eternityPoints2").style.display = "none"
             document.getElementById("eternitystorebtn").style.display = "none"
-          }
+        }
+
+        let canInfinity = player.money.gte(Number.MAX_VALUE) && (!player.break || (player.currentChallenge != "" && player.money.gte(player.challengeTarget)));
 
 
-        if (player.money.gte(Number.MAX_VALUE) && (!player.break || (player.currentChallenge != "" && player.money.gte(player.challengeTarget)))) {
+        if (canInfinity) {
             document.getElementById("bigcrunch").style.display = 'inline-block';
             if ((player.currentChallenge == "" || player.options.retryChallenge) && (player.bestInfinityTime <= 600 || player.break)) {}
             else showTab('emptiness');
@@ -6909,11 +6911,11 @@ function startInterval() {
 
 
         if (player.break) {
-          document.getElementById("iplimit").style.display = "inline";
-          document.getElementById("IPPeakDiv").style.display = "inline";
+            document.getElementById("iplimit").style.display = "inline";
+            document.getElementById("IPPeakDiv").style.display = "inline";
         } else {
-          document.getElementById("iplimit").style.display = "none";
-          document.getElementById("IPPeakDiv").style.display = "none";
+            document.getElementById("iplimit").style.display = "none";
+            document.getElementById("IPPeakDiv").style.display = "none";
         }
 
         if (canInfinity) {
