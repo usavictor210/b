@@ -1111,8 +1111,9 @@ function loadAutoBuyerSettings() {
     document.getElementById("bulkgalaxy").value = player.autobuyers[10].bulk
     document.getElementById("maxReplicantiCrunchSwitch").checked = player.autobuyers[11].requireMaxReplicanti;
     document.getElementById("requireIPPeak").checked = player.autobuyers[11].requireIPPeak;
+    document.getElementById("waitreplgalaxy").value = player.replicanti.galaxybuyer.bulk;
+    document.getElementById("bulkreplgalaxy").value = player.replicanti.galaxybuyer.wait;
     document.getElementById("priority13").value = player.eternityBuyer.limit
-
 }
 
 
@@ -5423,7 +5424,7 @@ function updatePriorities() {
       replBulk = 1;
     }
 
-    var replWait = parseFloat(document.getElementById("bulkreplgalaxy").value)
+    var replWait = parseFloat(document.getElementById("waitreplgalaxy").value)
     if (!player.achievements.includes('r134') || isNaN(replWait)) {
       replWait = 0;
     }
@@ -6735,7 +6736,8 @@ setInterval(function() {
     let tick = getTickSpeedMultiplier();
     if (tick.lt(0.001)) giveAchievement("Do you even bend time bro?");
     if (tick.lt(Decimal.pow(Number.MAX_VALUE, -1))) giveAchievement("But you promised me another prestige layer!");
-    if (tick.lt(new Decimal('1e-1000'))) giveAchievement("Yeah you definitely bend time");
+    // comment out a currently nonexistant achievement
+    // if (tick.lt(new Decimal('1e-1000'))) giveAchievement("Yeah you definitely bend time");
 
     if (player.eternities > 9) document.getElementById("bulklabel").innerHTML="Max dimboost interval:"
 
