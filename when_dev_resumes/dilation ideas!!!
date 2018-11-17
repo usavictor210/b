@@ -1,0 +1,9 @@
+dilation:
+- In IC3
+- 10% of galaxies are dilated galaxies when exiting dilation (ceiling). Dilated galaxies act like galaxies
+- upgrades cost dilated galaxies
+
+Or just do dilation in vanilla:
+- 1e6000 EP
+- All formulas in dilation should be changed
+- upgrades are intact, but with some more upgrades from NG++, NGUpdate (maybe not), etc.
