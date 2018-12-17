@@ -1163,6 +1163,8 @@ function getAbbreviation(e) {
     var prefix3 = prefixes3[index3%10]
     if (e <= 3002) {
         return prefix + prefix2 + prefix3
+    } else if (3003 <= e <= 6002) {
+        return "MI" + prefix + prefix2 + prefix3
     } else {
         var secondIndex = Decimal.floor(index/1000)-1
         var secondIndex2 = Decimal.floor(secondIndex/10)
