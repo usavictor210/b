@@ -6475,7 +6475,7 @@ function startChallenge(name, target) {
 }
 
 function getDimensionProductionPerSecond(tier) {
-    let ret = Math.floor(player[TIER_NAMES[tier] + 'Amount']).times(getDimensionFinalMultiplier(tier)).times(1000).dividedBy(player.tickspeed)
+    let ret = Decimal.floor(player[TIER_NAMES[tier] + 'Amount']).times(getDimensionFinalMultiplier(tier)).times(1000).dividedBy(player.tickspeed)
     if (player.currentChallenge == "challenge7") {
         if (tier == 4) ret = player[TIER_NAMES[tier] + 'Amount'].floor().pow(1.4).times(getDimensionFinalMultiplier(tier)).dividedBy(player.tickspeed.dividedBy(1000))
         else if (tier == 2) ret = player[TIER_NAMES[tier] + 'Amount'].floor().pow(1.6).times(getDimensionFinalMultiplier(tier)).dividedBy(player.tickspeed.dividedBy(1000))
