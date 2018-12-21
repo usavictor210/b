@@ -1154,10 +1154,10 @@ function getAbbreviation(e) {
     var prefixes2 = ['', 'Dc', 'Vg', 'Tg', 'Qa', 'Qi', 'Se', 'St', 'Og', 'Nn']
     var prefixes3 = ['', 'Ce', 'Dn', 'Tc', 'Qe', 'Qu', 'Sc', 'Si', 'Oe', 'Ne']
     var prefixes4 = ['', 'U', 'D', 'T', 'Qd', 'Qt', 'Sx', 'Sp', 'O', 'N']
-    var index = Decimal.floor(e/3)-1
-    var index2 = Decimal.floor(index/10)
-    var index3 = Decimal.floor(index2/10)
-    var index4 = Decimal.floor(index3/10)
+    var index = Math.floor(e/3)-1
+    var index2 = Math.floor(index/10)
+    var index3 = Math.floor(index2/10)
+    var index4 = Math.floor(index3/10)
     var prefix = prefixes[index%10]
     var prefix2 = prefixes2[index2%10]
     var prefix3 = prefixes3[index3%10]
@@ -1166,10 +1166,10 @@ function getAbbreviation(e) {
     } else if (e <= 6002) {
         return "MI-" + prefix + prefix2 + prefix3
     } else if (e >= 6003) {
-        var secondIndex = Decimal.floor(index/1000)
-        var secondIndex2 = Decimal.floor(secondIndex/10)
-        var secondIndex3 = Decimal.floor(secondIndex2/10)
-        var secondIndex4 = Decimal.floor(secondIndex3/10)
+        var secondIndex = Math.floor(index/1000)
+        var secondIndex2 = Math.floor(secondIndex/10)
+        var secondIndex3 = Math.floor(secondIndex2/10)
+        var secondIndex4 = Math.floor(secondIndex3/10)
         var secondPrefix = prefixes4[secondIndex%10]
         var secondPrefix2 = prefixes2[secondIndex2%10]
         var secondPrefix3 = prefixes3[secondIndex3%10]
@@ -1213,11 +1213,11 @@ function formatValue(notation, value, places, placesUnder1000) {
         } else if (notation === "Letters") {
             power -= 3;
             return ((matissa * Decimal.pow(10, power % 3)).toFixed(places) +
-            letterList1[Decimal.floor(((power - (power % 3)) / 3) / (letterList1.length*letterList1.length*letterList1.length*letterList2.length))  % letterList1.length] + letterList1[Decimal.floor(((power - (power % 3)) / 3) / (letterList1.length*letterList1.length*letterList2.length))  % letterList1.length] + letterList1[Decimal.floor(((power - (power % 3)) / 3) / (letterList1.length*letterList2.length))  % letterList1.length] +letterList1[Decimal.floor(((power - (power % 3)) / 3) / letterList2.length) % letterList1.length] + letterList2[((power - (power % 3)) / 3) % letterList2.length]);
+            letterList1[Math.floor(((power - (power % 3)) / 3) / (letterList1.length*letterList1.length*letterList1.length*letterList2.length))  % letterList1.length] + letterList1[Math.floor(((power - (power % 3)) / 3) / (letterList1.length*letterList1.length*letterList2.length))  % letterList1.length] + letterList1[Math.floor(((power - (power % 3)) / 3) / (letterList1.length*letterList2.length))  % letterList1.length] +letterList1[Math.floor(((power - (power % 3)) / 3) / letterList2.length) % letterList1.length] + letterList2[((power - (power % 3)) / 3) % letterList2.length]);
         } else if (notation === "Emojis") {
             power -= 3;
             return ((matissa * Decimal.pow(10, power % 3)).toFixed(places) +
-            emojiList1[Decimal.floor(((power - (power % 3)) / 3) / (emojiList1.length*emojiList1.length*emojiList1.length*emojiList2.length))  % emojiList1.length] + emojiList1[Decimal.floor(((power - (power % 3)) / 3) / (emojiList1.length*emojiList1.length*emojiList2.length))  % emojiList1.length] + emojiList1[Decimal.floor(((power - (power % 3)) / 3) / (emojiList1.length*emojiList2.length))  % emojiList1.length] +emojiList1[Decimal.floor(((power - (power % 3)) / 3) / emojiList2.length) % emojiList1.length] + emojiList2[((power - (power % 3)) / 3) % emojiList2.length]);
+            emojiList1[Math.floor(((power - (power % 3)) / 3) / (emojiList1.length*emojiList1.length*emojiList1.length*emojiList2.length))  % emojiList1.length] + emojiList1[Math.floor(((power - (power % 3)) / 3) / (emojiList1.length*emojiList1.length*emojiList2.length))  % emojiList1.length] + emojiList1[Math.floor(((power - (power % 3)) / 3) / (emojiList1.length*emojiList2.length))  % emojiList1.length] +emojiList1[Math.floor(((power - (power % 3)) / 3) / emojiList2.length) % emojiList1.length] + emojiList2[((power - (power % 3)) / 3) % emojiList2.length]);
 
 
         }else if (notation === "Logarithm") {
@@ -2768,19 +2768,19 @@ document.getElementById("tickSpeed").onclick = function () {
 
 function timeDisplay(time) {
     if (time <= 100) return (time/10).toFixed(2) + " seconds"
-    time = Decimal.floor(time / 10)
+    time = Math.floor(time / 10)
 
 
 
     if (time >= 31536000) {
-        return Decimal.floor(time / 31536000) + " years, " + Decimal.floor((time % 31536000) / 86400) + " days, " + Decimal.floor((time % 86400) / 3600) + " hours, " + Decimal.floor((time % 3600) / 60) + " minutes and " + Decimal.floor(time % 60) + " seconds"
+        return Math.floor(time / 31536000) + " years, " + Math.floor((time % 31536000) / 86400) + " days, " + Math.floor((time % 86400) / 3600) + " hours, " + Math.floor((time % 3600) / 60) + " minutes and " + Math.floor(time % 60) + " seconds"
     } else if (time >= 86400) {
-        return Decimal.floor(time / 86400) + " days, " + Decimal.floor((time % 86400) / 3600) + " hours, " + Decimal.floor((time % 3600) / 60) + " minutes and " + Decimal.floor(time % 60) + " seconds"
+        return Math.floor(time / 86400) + " days, " + Math.floor((time % 86400) / 3600) + " hours, " + Math.floor((time % 3600) / 60) + " minutes and " + Math.floor(time % 60) + " seconds"
     } else if (time >= 3600) {
-        return Decimal.floor(time / 3600) + " hours, " + Decimal.floor((time % 3600) / 60) + " minutes and " + Decimal.floor(time % 60) + " seconds"
+        return Math.floor(time / 3600) + " hours, " + Math.floor((time % 3600) / 60) + " minutes and " + Math.floor(time % 60) + " seconds"
     } else if (time >= 60) {
-        return Decimal.floor(time / 60) + " minutes and " + Decimal.floor(time % 60) + " seconds"
-    } else return Decimal.floor(time % 60) + " seconds"
+        return Math.floor(time / 60) + " minutes and " + Math.floor(time % 60) + " seconds"
+    } else return Math.floor(time % 60) + " seconds"
 }
 
 function preformat(int) {
@@ -2790,8 +2790,8 @@ function preformat(int) {
 
 function timeDisplayShort(time) {
     if (time <= 600) return (time/10).toFixed(2) + " seconds"
-    time = Decimal.floor(time / 10)
-    return preformat(Decimal.floor((time) / 3600)) + ":" + preformat(Decimal.floor((time % 3600) / 60)) + ":" + preformat(Decimal.floor(time % 60))
+    time = Math.floor(time / 10)
+    return preformat(Math.floor((time) / 3600)) + ":" + preformat(Math.floor((time % 3600) / 60)) + ":" + preformat(Math.floor(time % 60))
 }
 
 const allAchievements = {
@@ -4920,7 +4920,7 @@ function gainedInfinityPoints() {
     }
     ret = ret.times(getTSBenefit(5, player.timestudy.studies[5]));
     ret = ret.times(getTSBenefit(6, player.timestudy.studies[6]));
-    ret = Decimal.floor(ret);
+    ret = Math.floor(ret);
     return ret
 }
 
@@ -4937,7 +4937,7 @@ function gainedEternityPoints() {
     if (player.achievements.includes('r136')) {
         ret = ret.times(Math.max(1, player.thisEternity / 10));
     }
-    ret = Decimal.floor(ret);
+    ret = Math.floor(ret);
     return ret;
 }
 
@@ -6475,7 +6475,7 @@ function startChallenge(name, target) {
 }
 
 function getDimensionProductionPerSecond(tier) {
-    let ret = Decimal.floor(player[TIER_NAMES[tier] + 'Amount']).times(getDimensionFinalMultiplier(tier)).times(1000).dividedBy(player.tickspeed)
+    let ret = Math.floor(player[TIER_NAMES[tier] + 'Amount']).times(getDimensionFinalMultiplier(tier)).times(1000).dividedBy(player.tickspeed)
     if (player.currentChallenge == "challenge7") {
         if (tier == 4) ret = player[TIER_NAMES[tier] + 'Amount'].floor().pow(1.4).times(getDimensionFinalMultiplier(tier)).dividedBy(player.tickspeed.dividedBy(1000))
         else if (tier == 2) ret = player[TIER_NAMES[tier] + 'Amount'].floor().pow(1.6).times(getDimensionFinalMultiplier(tier)).dividedBy(player.tickspeed.dividedBy(1000))
