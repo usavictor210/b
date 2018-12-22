@@ -1133,100 +1133,133 @@ function showTab(tabName) {
     }
 }
 
-var FormatList = ['', 'K', 'M', 'B', 'T', 'Qd', 'Qt', 'Sx', 'Sp', 'Oc', 'No', 'Dc', 'UDc', 'DDc', 'TDc', 'QdDc', 'QtDc', 'SxDc', 'SpDc', 'ODc', 'NDc', 'Vg', 'UVg', 'DVg', 'TVg', 'QdVg', 'QtVg', 'SxVg', 'SpVg', 'OVg', 'NVg', 'Tg', 'UTg', 'DTg', 'TTg', 'QdTg', 'QtTg', 'SxTg', 'SpTg', 'OTg', 'NTg', 'Qa', 'UQa', 'DQa', 'TQa', 'QdQa', 'QtQa', 'SxQa', 'SpQa', 'OQa', 'NQa', 'Qi', 'UQi', 'DQi', 'TQi', 'QaQi', 'QtQi', 'SxQi', 'SpQi', 'OQi', 'NQi', 'Se', 'USe', 'DSe', 'TSe', 'QaSe', 'QtSe', 'SxSe', 'SpSe', 'OSe', 'NSe', 'St', 'USt', 'DSt', 'TSt', 'QaSt', 'QtSt', 'SxSt', 'SpSt', 'OSt', 'NSt', 'Og', 'UOg', 'DOg', 'TOg', 'QdOg', 'QtOg', 'SxOg', 'SpOg', 'OOg', 'NOg', 'Nn', 'UNn', 'DNn', 'TNn', 'QdNn', 'QtNn', 'SxNn', 'SpNn', 'ONn', 'NNn', 'Ce',];
+var FormatList = ['', 'K', 'M', 'B', 'T', 'Qa', 'Qt', 'Sx', 'Sp', 'Oc', 'No', 'Dc', 'UDc', 'DDc', 'TDc', 'QaDc', 'QtDc', 'SxDc', 'SpDc', 'ODc', 'NDc', 'Vg', 'UVg', 'DVg', 'TVg', 'QaVg', 'QtVg', 'SxVg', 'SpVg', 'OVg', 'NVg', 'Tg', 'UTg', 'DTg', 'TTg', 'QaTg', 'QtTg', 'SxTg', 'SpTg', 'OTg', 'NTg', 'Qd', 'UQd', 'DQd', 'TQd', 'QaQd', 'QtQd', 'SxQd', 'SpQd', 'OQd', 'NQd', 'Qi', 'UQi', 'DQi', 'TQi', 'QaQi', 'QtQi', 'SxQi', 'SpQi', 'OQi', 'NQi', 'Se', 'USe', 'DSe', 'TSe', 'QaSe', 'QtSe', 'SxSe', 'SpSe', 'OSe', 'NSe', 'St', 'USt', 'DSt', 'TSt', 'QaSt', 'QtSt', 'SxSt', 'SpSt', 'OSt', 'NSt', 'Og', 'UOg', 'DOg', 'TOg', 'QaOg', 'QtOg', 'SxOg', 'SpOg', 'OOg', 'NOg', 'Nn', 'UNn', 'DNn', 'TNn', 'QaNn', 'QtNn', 'SxNn', 'SpNn', 'ONn', 'NNn', 'Ce',];
 
-var letterList1 = ['', 'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z'];
-var letterList2 = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z'];
-
-var emojiList1 = ['', '😠', '🎂', '🎄', '💀', '🍆', '👪', '🌈', '💯', '🍦', '🎃', '💋', '😂', '🌙', '⛔', '🐙', '💩', '❓', '☢️', '🙈', '👍', '☂️', '✌️', '⚠️', '❌', '😋', '⚡'];
-var emojiList2 = ['😠', '🎂', '🎄', '💀', '🍆', '👪', '🌈', '💯', '🍦', '🎃', '💋', '😂', '🌙', '⛔', '🐙', '💩', '❓', '☢️', '🙈', '👍', '☂️', '✌️', '⚠️', '❌', '😋', '⚡'];
-
-
-
-function isDecimal(value) {
-    return value instanceof Decimal
+function letter(power,str) {
+    const len = str.length;
+    function lN(n) {
+        let result = 1;
+        for (var j = 0; j < n; ++j) result = len*result+1;
+        return result;
+    }
+    if (power <= 5) return str[0];
+    power = Math.floor(power / 3);
+    let i=0;
+    while (power >= lN(++i));
+    if (i==1) return str[power-1];
+    power -= lN(i-1);
+    let ret = '';
+    while (i>0) ret += str[Math.floor(power/Math.pow(len,--i))%len]
+    return ret;
 }
 
-
-
 function getAbbreviation(e) {
-    var prefixes = ['', 'U', 'D', 'T', 'Qd', 'Qt', 'Sx', 'Sp', 'O', 'N']
-    var prefixes2 = ['', 'Dc', 'Vg', 'Tg', 'Qa', 'Qi', 'Se', 'St', 'Og', 'Nn']
-    var prefixes3 = ['', 'Ce', 'Dn', 'Tc', 'Qe', 'Qu', 'Sc', 'Si', 'Oe', 'Ne']
-    var prefixes4 = ['', 'U', 'D', 'T', 'Qd', 'Qt', 'Sx', 'Sp', 'O', 'N']
-    var index = Decimal.floor(e/3)-1
-    var index2 = Decimal.floor(index/10)
-    var index3 = Decimal.floor(index2/10)
-    var index4 = Decimal.floor(index3/10)
-    var prefix = prefixes[index%10]
-    var prefix2 = prefixes2[index2%10]
-    var prefix3 = prefixes3[index3%10]
-    if (e <= 3002) {
-        return prefix + prefix2 + prefix3
-    } else if (e <= 6002) {
-        return "MI-" + prefix + prefix2 + prefix3
-    } else if (e >= 6003) {
-        var secondIndex = Decimal.floor(index/1000)
-        var secondIndex2 = Decimal.floor(secondIndex/10)
-        var secondIndex3 = Decimal.floor(secondIndex2/10)
-        var secondIndex4 = Decimal.floor(secondIndex3/10)
-        var secondPrefix = prefixes4[secondIndex%10]
-        var secondPrefix2 = prefixes2[secondIndex2%10]
-        var secondPrefix3 = prefixes3[secondIndex3%10]
-        var x = "MI"
-        if ((index)%1000 !== 0) x += "-"
-        return secondPrefix + secondPrefix2 + secondPrefix3 + x + prefix + prefix2 + prefix3
+    const prefixes = [
+    ['', 'U', 'D', 'T', 'Qa', 'Qt', 'Sx', 'Sp', 'O', 'N'],
+    ['', 'Dc', 'Vg', 'Tg', 'Qd', 'Qi', 'Se', 'St', 'Og', 'Nn'],
+    ['', 'Ce', 'Dn', 'Tc', 'Qe', 'Qu', 'Sc', 'Si', 'Oe', 'Ne']]
+    const prefixes2 = ['', 'MI-', 'MC-', 'NA-', 'PC-', 'FM-']
+    e = Math.floor(e/3)-1;
+    let index2 = 0;
+    let prefix = [prefixes[0][e%10]];
+    while (e >= 10) {
+        e = Math.floor(e/10);
+        prefix.push(prefixes[(++index2)%3][e%10])
     }
+    index2 = Math.floor(index2/3)
+    while (prefix.length%3 != 0) prefix.push("");
+    let ret = "";
+    while (index2 >= 0) ret += prefix[index2*3] + prefix[index2*3+1] + prefix[index2*3+2] + prefixes2[index2--];
+    if (ret.endsWith("-")) ret = ret.slice(0,ret.length-1)
+    return ret.replace("UM","M").replace("UNA","NA").replace("UPC","PC").replace("UFM","FM")
 }
 
 function addCommas (x) {
   return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
 }
 
+const inflog = Math.log10(Number.MAX_VALUE)
 function formatValue(notation, value, places, placesUnder1000) {
 
     if ((value <= Number.MAX_VALUE || (player.break && (player.currentChallenge == "" || !new Decimal(Number.MAX_VALUE).equals(player.challengeTarget)) )) && (value >= 1000)) {
-        if (isDecimal(value)) {
+        if (value instanceof Decimal) {
            var power = value.e
-           var temp = value.toExponential(4).split("e")
-           var matissa = parseFloat(temp[0])
-           if (parseInt(temp[1]) != power) power++;
+           var matissa = value.mantissa
         } else {
             var matissa = value / Math.pow(10, Math.floor(Math.log10(value)));
             var power = Math.floor(Math.log10(value));
         }
-        if (power > 100000  && player.options.commas) pow = addCommas(power);
+        if ((notation === "Mixed scientific" && power >= 33) || notation === "Scientific") {
+            matissa = matissa.toFixed(places)
+            if (matissa >= 10) {
+                matissa /= 10;
+                power++;
+            }
+            if (power > 100000  && !player.options.commas) return (matissa + "e" + formatValue(notation, power, 3, 3))
+            if (power > 100000  && player.options.commas) return (matissa + "e" + power.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ","));
+            return (matissa + "e" + power);
+        }
+        if (notation === "Infinity") {
+            const pow = Decimal.log10(value)
+            if (pow / inflog < 1000) var infPlaces = 4
+            else var infPlaces = 3
+            if (player.options.commas) return (pow / inflog).toFixed(Math.max(infPlaces, places)).toString().split(".")[0].replace(/\B(?=(\d{3})+(?!\d))/g, ",")+"."+(pow / inflog).toFixed(Math.max(infPlaces, places)).toString().split(".")[1]+"∞"
+            else return (pow / inflog).toFixed(Math.max(infPlaces, places))+"∞"
+        }
+        if (notation.includes("engineering") || notation.includes("Engineering")) pow = power - (power % 3)
         else pow = power
-        if ((notation === "Standard")) {
-            if (power <= 303) return (matissa * Decimal.pow(10, power % 3)).toFixed(places) + " " + FormatList[(power - (power % 3)) / 3];
-            else return (matissa * Decimal.pow(10, power % 3)).toFixed(places) + " " + getAbbreviation(power)
-        } else if (notation === "Mixed scientific") {
-            if (power < 33) return (matissa * Decimal.pow(10, power % 3)).toFixed(places) + " " + FormatList[(power - (power % 3)) / 3];
-            else return ((matissa).toFixed(places) + "e" + pow);
+        if (power > 100000  && !player.options.commas) pow = formatValue(notation, pow, 3, 3)
+        if (power > 100000  && player.options.commas) pow = pow.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+
+        if (notation === "Logarithm") {
+            if (power > 100000  && !player.options.commas) return "ee"+Math.log10(Decimal.log10(value)).toFixed(3)
+            if (power > 100000  && player.options.commas) return "e"+Decimal.log10(value).toFixed(places).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+            else return "e"+Decimal.log10(value).toFixed(Math.max(places, 1))
+        }
+
+        if (notation === "Brackets") {
+          var table = [")", "[", "{", "]", "(", "}"];
+          var log6 = Math.LN10 / Math.log(6) * Decimal.log10(value);
+          var wholePartOfLog = Math.floor(log6);
+          var decimalPartOfLog = log6 - wholePartOfLog;
+          //Easier to convert a number between 0-35 to base 6 than messing with fractions and shit
+          var decimalPartTimes36 = Math.floor(decimalPartOfLog * 36);
+          var string = "";
+          while (wholePartOfLog >= 6) {
+            var remainder = wholePartOfLog % 6;
+            wholePartOfLog -= remainder;
+            wholePartOfLog /= 6;
+            string = table[remainder] + string;
+          }
+          string = "e" + table[wholePartOfLog] + string + ".";
+          string += table[Math.floor(decimalPartTimes36 / 6)];
+          string += table[decimalPartTimes36 % 6];
+          return string;
+        }
+
+        matissa = (matissa * Decimal.pow(10, power % 3)).toFixed(places)
+        if (matissa >= 1000) {
+            matissa /= 1000;
+            power++;
+        }
+
+        if (notation === "Standard" || notation === "Mixed scientific") {
+            if (power <= 303) return matissa + " " + FormatList[(power - (power % 3)) / 3];
+            else return matissa + " " + getAbbreviation(power);
         } else if (notation === "Mixed engineering") {
-            if (power < 33) return (matissa * Decimal.pow(10, power % 3)).toFixed(places) + " " + FormatList[(power - (power % 3)) / 3];
-            else return ((matissa * Decimal.pow(10, power % 3)).toFixed(places) + "ᴇ" + pow);
-        } else if (notation === "Scientific") {
-            return ((matissa).toFixed(places) + "e" + pow);
+            if (power <= 33) return matissa + " " + FormatList[(power - (power % 3)) / 3];
+            else return (matissa + "e" + pow);
         } else if (notation === "Engineering") {
-            return ((matissa * Decimal.pow(10, power % 3)).toFixed(places) + "ᴇ" + pow);
+            return (matissa + "e" + pow);
         } else if (notation === "Letters") {
-            power -= 3;
-            return ((matissa * Decimal.pow(10, power % 3)).toFixed(places) +
-            letterList1[Decimal.floor(((power - (power % 3)) / 3) / (letterList1.length*letterList1.length*letterList1.length*letterList2.length))  % letterList1.length] + letterList1[Decimal.floor(((power - (power % 3)) / 3) / (letterList1.length*letterList1.length*letterList2.length))  % letterList1.length] + letterList1[Decimal.floor(((power - (power % 3)) / 3) / (letterList1.length*letterList2.length))  % letterList1.length] +letterList1[Decimal.floor(((power - (power % 3)) / 3) / letterList2.length) % letterList1.length] + letterList2[((power - (power % 3)) / 3) % letterList2.length]);
+            return matissa + letter(power,'abcdefghijklmnopqrstuvwxyz');
         } else if (notation === "Emojis") {
-            power -= 3;
-            return ((matissa * Decimal.pow(10, power % 3)).toFixed(places) +
-            emojiList1[Decimal.floor(((power - (power % 3)) / 3) / (emojiList1.length*emojiList1.length*emojiList1.length*emojiList2.length))  % emojiList1.length] + emojiList1[Decimal.floor(((power - (power % 3)) / 3) / (emojiList1.length*emojiList1.length*emojiList2.length))  % emojiList1.length] + emojiList1[Decimal.floor(((power - (power % 3)) / 3) / (emojiList1.length*emojiList2.length))  % emojiList1.length] +emojiList1[Decimal.floor(((power - (power % 3)) / 3) / emojiList2.length) % emojiList1.length] + emojiList2[((power - (power % 3)) / 3) % emojiList2.length]);
+            return matissa + letter(power,['😠', '🎂', '🎄', '💀', '🍆', '👪', '🌈', '💯', '🍦', '🎃', '💋', '😂', '🌙', '⛔', '🐙', '💩', '❓', '☢', '🙈', '👍', '☂', '✌', '⚠', '❌', '😋', '⚡'])
+        }
 
-
-        }else if (notation === "Logarithm") {
-            if (power > 100000  && player.options.commas) return "e"+addCommas(Decimal.log10(value).toFixed(places));
-            else return "e"+Decimal.log10(value).toFixed(places)
-
-        } else {
-            if (power > 100000  && player.options.commas) power = addCommas(power.toString());
-            return ((matissa).toFixed(places) + "e" + power);
+        else {
+            if (power > 100000  && player.options.commas) power = power.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".");
+            return "1337 H4CK3R"
         }
     } else if (value < 1000) {
         return (value).toFixed(placesUnder1000);
@@ -1234,7 +1267,6 @@ function formatValue(notation, value, places, placesUnder1000) {
         return "Infinite";
     }
 }
-
 
 function updateMoney() {
     var element = document.getElementById("coinAmount");
@@ -1557,7 +1589,7 @@ function updateDimensions() {
     document.getElementById("galaxies").innerHTML = 'You have ' + Math.round(player.galaxies) + ' Antimatter Galaxies.';
     document.getElementById("totalTime").innerHTML = "You have played for " + timeDisplay(player.totalTimePlayed) + ".";
 
-    if (player.infinitied === 0 && player.eternities === 0) {
+if (player.infinitied === 0 && player.eternities === 0) {
         document.getElementById("bestInfinity").innerHTML = ""
         document.getElementById("infinitied").innerHTML = ""
         document.getElementById("thisInfinity").innerHTML = ""
@@ -2625,11 +2657,6 @@ function softReset(bulk, reallyZero) {
     if (player.achievements.includes("r66")) player.tickspeed = player.tickspeed.times(0.98);
     if (player.achievements.includes("r83")) player.tickspeed = player.tickspeed.times(Decimal.pow(0.95, player.galaxies));
 
-
-
-
-
-
     clearInterval(player.interval);
     //updateInterval();
     if (player.eternities < 30) {
@@ -2768,19 +2795,19 @@ document.getElementById("tickSpeed").onclick = function () {
 
 function timeDisplay(time) {
     if (time <= 100) return (time/10).toFixed(2) + " seconds"
-    time = Decimal.floor(time / 10)
+    time = Math.floor(time / 10)
 
 
 
     if (time >= 31536000) {
-        return Decimal.floor(time / 31536000) + " years, " + Decimal.floor((time % 31536000) / 86400) + " days, " + Decimal.floor((time % 86400) / 3600) + " hours, " + Decimal.floor((time % 3600) / 60) + " minutes and " + Decimal.floor(time % 60) + " seconds"
+        return Math.floor(time / 31536000) + " years, " + Math.floor((time % 31536000) / 86400) + " days, " + Math.floor((time % 86400) / 3600) + " hours, " + Math.floor((time % 3600) / 60) + " minutes and " + Math.floor(time % 60) + " seconds"
     } else if (time >= 86400) {
-        return Decimal.floor(time / 86400) + " days, " + Decimal.floor((time % 86400) / 3600) + " hours, " + Decimal.floor((time % 3600) / 60) + " minutes and " + Decimal.floor(time % 60) + " seconds"
+        return Math.floor(time / 86400) + " days, " + Math.floor((time % 86400) / 3600) + " hours, " + Math.floor((time % 3600) / 60) + " minutes and " + Math.floor(time % 60) + " seconds"
     } else if (time >= 3600) {
-        return Decimal.floor(time / 3600) + " hours, " + Decimal.floor((time % 3600) / 60) + " minutes and " + Decimal.floor(time % 60) + " seconds"
+        return Math.floor(time / 3600) + " hours, " + Math.floor((time % 3600) / 60) + " minutes and " + Math.floor(time % 60) + " seconds"
     } else if (time >= 60) {
-        return Decimal.floor(time / 60) + " minutes and " + Decimal.floor(time % 60) + " seconds"
-    } else return Decimal.floor(time % 60) + " seconds"
+        return Math.floor(time / 60) + " minutes and " + Math.floor(time % 60) + " seconds"
+    } else return Math.floor(time % 60) + " seconds"
 }
 
 function preformat(int) {
@@ -2790,8 +2817,8 @@ function preformat(int) {
 
 function timeDisplayShort(time) {
     if (time <= 600) return (time/10).toFixed(2) + " seconds"
-    time = Decimal.floor(time / 10)
-    return preformat(Decimal.floor((time) / 3600)) + ":" + preformat(Decimal.floor((time % 3600) / 60)) + ":" + preformat(Decimal.floor(time % 60))
+    time = Math.floor(time / 10)
+    return preformat(Math.floor((time) / 3600)) + ":" + preformat(Math.floor((time % 3600) / 60)) + ":" + preformat(Math.floor(time % 60))
 }
 
 const allAchievements = {
@@ -5000,30 +5027,36 @@ function setAchieveTooltip() {
 
 document.getElementById("notation").onclick = function () {
     player.options.scientific = !player.options.scientific;
-    if (player.options.notation === "Logarithm") {
+    if (player.options.notation === "Infinity") {
         player.options.notation = "Scientific";
-        document.getElementById("notation").innerHTML = ("Notation: Scientific")
+        document.getElementById("notation").textContent = ("Notation: Scientific")
     } else if (player.options.notation === "Scientific") {
         player.options.notation = "Engineering";
-        document.getElementById("notation").innerHTML = ("Notation: Engineering")
+        document.getElementById("notation").textContent = ("Notation: Engineering")
     } else if (player.options.notation === "Engineering") {
         player.options.notation = "Letters";
-        document.getElementById("notation").innerHTML = ("Notation: Letters")
+        document.getElementById("notation").textContent = ("Notation: Letters")
     } else if (player.options.notation === "Letters") {
         player.options.notation = "Standard";
-        document.getElementById("notation").innerHTML = ("Notation: Standard")
+        document.getElementById("notation").textContent = ("Notation: Standard")
     } else if (player.options.notation === "Standard") {
         player.options.notation = "Emojis";
-        document.getElementById("notation").innerHTML = ("Notation: Cancer")
+        document.getElementById("notation").textContent = ("Notation: Cancer")
     } else if (player.options.notation === "Emojis") {
         player.options.notation = "Mixed scientific";
-        document.getElementById("notation").innerHTML = ("Notation: Mixed scientific")
+        document.getElementById("notation").textContent = ("Notation: Mixed scientific")
     } else if (player.options.notation === "Mixed scientific") {
         player.options.notation = "Mixed engineering";
-        document.getElementById("notation").innerHTML = ("Notation: Mixed engineering")
+        document.getElementById("notation").textContent = ("Notation: Mixed engineering")
     } else if (player.options.notation === "Mixed engineering") {
         player.options.notation = "Logarithm";
-        document.getElementById("notation").innerHTML = ("Notation: Logarithm")
+        document.getElementById("notation").textContent = ("Notation: Logarithm")
+    } else if (player.options.notation === "Logarithm") {
+        player.options.notation = "Brackets";
+        document.getElementById("notation").textContent = ("Notation: Brackets")
+    } else if (player.options.notation === "Brackets") {
+      player.options.notation = "Infinity";
+      document.getElementById("notation").textContent = ("Notation: Infinity")
     }
     setAchieveTooltip();
     updateCosts();
@@ -5539,7 +5572,7 @@ function updateLastTenRuns() {
     var ippm = tempIP.dividedBy(tempTime/600)
     var tempstring = shorten(ippm) + " IP/min"
     if (ippm<1) tempstring = shorten(ippm*60) + " IP/hour"
-    document.getElementById("averagerun").innerHTML = "Last 10 infinities average time: "+ timeDisplayShort(tempTime)+" Average IP gain: "+shortenDimensions(tempIP)+" IP. "+tempstring
+    document.getElementById("averagerun").innerHTML = "Average time of last 10 infinities: "+ timeDisplayShort(tempTime)+" Average IP gain: "+shortenDimensions(tempIP)+" IP. "+tempstring
 
     if (tempBest.gte(1e8)) giveAchievement("Oh hey, you're still here");
     if (tempBest.gte(1e300)) giveAchievement("MAXIMUM OVERDRIVE");
@@ -5567,10 +5600,10 @@ function updateLastTenEternities() {
     }
 
     var eppm = tempEP.dividedBy(tempTime/600)
-    var tempstring = shorten(eppm) + " IP/min"
+    var tempstring = shorten(eppm) + " EP/min"
     averageEp = tempEP
-    if (eppm<1) tempstring = shorten(eppm*60) + " IP/hour"
-    document.getElementById("averageEternityRun").innerHTML = "Last 10 eternities average time: "+ timeDisplayShort(tempTime)+" Average EP gain: "+shortenDimensions(tempEP)+" IP. "+tempstring
+    if (eppm<1) tempstring = shorten(eppm*60) + " EP/hour"
+    document.getElementById("averageEternityRun").innerHTML = "Average time of last 10 eternities: "+ timeDisplayShort(tempTime)+" Average EP gain: "+shortenDimensions(tempEP)+" EP. "+tempstring
 }
 
 function addEternityTime(time, ep) {
@@ -5808,7 +5841,7 @@ document.getElementById("bigcrunch").onclick = function () {
         setMatterDisplay();
         setQuickResetDisplay();
 
-        document.getElementById("replicantireset").innerHTML = "Reset replicanti amount, but get a free galaxy<br>"+player.replicanti.galaxies + " replicated galaxies created."
+        document.getElementById("replicantireset").innerHTML = "Reset replicanti amount for a free galaxy.<br>"+player.replicanti.galaxies + " replicated galaxies created."
 
         if (player.achievements.includes("r36")) player.tickspeed = player.tickspeed.times(0.98);
         if (player.achievements.includes("r45")) player.tickspeed = player.tickspeed.times(0.98);
@@ -6543,7 +6576,7 @@ function getTotalTickGained (timeshards, num) {
 function updateTimeShards() {
     document.getElementById("timeShardAmount").innerHTML = shortenMoney(player.timeShards)
     document.getElementById("tickThreshold").innerHTML = shortenMoney(getTickThreshold(player.timeShards))
-    document.getElementById("timeShardsPerSec").innerHTML = "You are getting "+shortenDimensions(getTimeDimensionProduction(1))+" time shards per second."
+    document.getElementById("timeShardsPerSec").innerHTML = "You are getting "+shortenDimensions(getTimeDimensionProduction(1))+" Timeshards per second."
 }
 
 
@@ -7048,10 +7081,10 @@ function startInterval() {
             let newGalGain = Math.min(currentGalGain + 1, maxGalGain);
             let estimate = getReplicantiETA(player.replicanti.amount, player.replicanti.limit.pow(newGalGain * 5));
             let galGainDisplay = (newGalGain === maxGalGain) ? 'maximum' : newGalGain;
-            document.getElementById("replicantiapprox").innerHTML = "Approximately " + timeDisplay(estimate) + " until gain of " + galGainDisplay + ' replicanti galaxies';
+            document.getElementById("replicantiapprox").innerHTML = "Approximately " + timeDisplay(estimate) + " left until gain of " + galGainDisplay + ' replicanti galaxies';
         } else {
             let estimate = getReplicantiETA();
-            document.getElementById("replicantiapprox").innerHTML = "Approximately " + timeDisplay(estimate) + " until infinite replicanti"
+            document.getElementById("replicantiapprox").innerHTML = "Approximately " + timeDisplay(estimate) + " left until infinite replicanti"
         }
 
         document.getElementById("replicantiamount").innerHTML = shortenDimensions(player.replicanti.amount)
@@ -7065,7 +7098,7 @@ function startInterval() {
           updatePeaks(player.peaks.ep, gainedEternityPoints(), player.thisEternity);
         }
 
-        let eterButtonStart = (player.eternities === 0) ? "<b>Other times await.. I need to become Eternal</b><br/>" : "<b>I need to become Eternal.</b><br/>";
+        let eterButtonStart = (player.eternities === 0) ? "<b>Other times await.. I need to become Eternal.</b><br/>" : "<b>I need to become Eternal.</b><br/>";
         if (gainedEternityPoints().gte(1e3)) {
           eterButtonStart = '';
         }
@@ -7344,16 +7377,19 @@ function startInterval() {
                 while (player.money.times(4.22419e-105).gt(scale1[id])) id++;
                 if (id > 0) id--;
             }
-            if (id >= 7 && id < 11) document.getElementById("infoScale").innerHTML = "If every antimatter were a planck volume, you would have enough to fill " + formatValue(player.options.notation, player.money * 4.22419e-105 / scale1[id], 2, 1) + scale2[id];
-            else document.getElementById("infoScale").innerHTML = "If every antimatter were a planck volume, you would have enough to make " + formatValue(player.options.notation, player.money.times(4.22419e-105).dividedBy(scale1[id]), 2, 1) + scale2[id];
-        } else {
-            //does this part work correctly? i doubt it does - hevipelle
-            //you and me both - dan-simon
-            if (player.money.times(1e-54).lt(2.82e-45)) document.getElementById("infoScale").innerHTML = "If every antimatter were " + formatValue(player.options.notation,2.82e-45 / 1e-54 / player.money, 2, 1) + " attometers cubed, you would have enough to make a proton.";
-            else if (player.money.times(1e-63).lt(2.82e-45)) document.getElementById("infoScale").innerHTML = "If every antimatter were " + formatValue(player.options.notation,2.82e-45 / 1e-63 / player.money, 2, 1) + " zeptometers cubed, you would have enough to make a proton.";
-            else if (player.money.times(1e-72).lt(2.82e-45)) document.getElementById("infoScale").innerHTML = "If every antimatter were " + formatValue(player.options.notation,2.82e-45 / 1e-72 / player.money, 2, 1) + " yoctometers cubed, you would have enough to make a proton.";
-            else document.getElementById("infoScale").innerHTML = "If every antimatter were " + formatValue(player.options.notation,2.82e-45 / 4.22419e-105 / player.money, 2, 1) + " planck volumes, you would have enough to make a proton.";
-        }
+        if (id >= 7 && id < 11) document.getElementById("infoScale").textContent = "If every antimatter were a planck volume, you would have enough to fill " + formatValue(player.options.notation, player.money * 4.22419e-105 / scale1[id], 2, 1) + scale2[id];
+        else document.getElementById("infoScale").textContent = "If every antimatter were a planck volume, you would have enough to make " + formatValue(player.options.notation, player.money.times(4.22419e-105).dividedBy(scale1[id]), 2, 1) + scale2[id];
+    } else { //does this part work correctly? i doubt it does
+	    // you and me both - dan-simon
+        if (player.money.times(1e-54) < 2.82e-45) document.getElementById("infoScale").textContent = "If every antimatter were " + formatValue(player.options.notation,2.82e-45 / 1e-54 / player.money, 2, 1) + " attometers cubed, you would have enough to make a proton."
+        else if (player.money * 1e-63 < 2.82e-45) document.getElementById("infoScale").textContent = "If every antimatter were " + formatValue(player.options.notation,2.82e-45 / 1e-63 / player.money, 2, 1) + " zeptometers cubed, you would have enough to make a proton."
+        else if (player.money * 1e-72 < 2.82e-45) document.getElementById("infoScale").textContent = "If every antimatter were " + formatValue(player.options.notation,2.82e-45 / 1e-72 / player.money, 2, 1) + " yoctometers cubed, you would have enough to make a proton."
+        else document.getElementById("infoScale").textContent = "If every antimatter were " + formatValue(player.options.notation,2.82e-45 / 4.22419e-105 / player.money, 2, 1) + " planck volumes, you would have enough to make a proton."
+    }
+    if (player.money.gt(new Decimal("1e100000"))) {
+        document.getElementById("infoScale").innerHTML = "<br>If you wrote 3 numbers a second, it would take you <br>" + timeDisplay(player.money.log10()*10/3) + "<br> to write down your antimatter amount.";
+    }
+
 
         var shiftRequirement = getShiftRequirement(0);
 
@@ -7602,7 +7638,7 @@ var newsArray = ["You just made your 1,000,000,000,000,000 antimatter. This one 
 "Somebody told me to wait five hours for the update yesterday but it's today and it still hasn't come! What do I do?", "Antimatter Dimensions is proud to be sponsored by Lehmä! Now offering - grass eating lessons! Learn what grass is safe to eat and what grass isn't.",
 "It is the year 2422. The update still isn't out. Hevi is working on balancing unfunity dimension dimensions and challenges for the 38th layer of prestige. There are over 100 rows of achievements. They're getting ready to start using breaking_breaking_breaking_infinity.js",
 "Thanos is gonna be super dissapointed when he shows up with a fully powered infinity gauntlet, and Hevi has a fully powered eternity gauntlet", "If the 9th dimension is all evil, then is 3 the root of all evil?",
-"Import Christmas for a secret theme", "Hello.", "This news message doesn't have much of a purpose. It's just extra things usavictor put in...", "Breaking News: .................."]
+"Import Christmas for a secret theme", "Hello.", "This news message doesn't have much of a purpose. It's just extra things usavictor put in...", "Breaking News: usavictor keeps breaking things in the javascript code. It's not.. good."]
 //any message after "Import Christmas for a secret theme" is by usavictor.
 
 var conditionalNewsArray = ["Our universe is falling apart. We are all evacuating. This is the last news cast", "THIS NEWS STATION HAS SHUT DOWN DUE TO COLLAPSING UNIVERSE",

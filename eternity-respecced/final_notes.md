@@ -1,3 +1,5 @@
+usavictor's note: This is outdated, I have however changed the links so it works.
+
 Eternity Respecced development is more-or-less stopping (exceptions given below). Also, I'm probably not going to be on Discord for a while (perhaps forever). The reason for this is that I currently think that AD (and its variants, and incremental games in general) are all mostly wastes of time (this refers to the act of playing them and, to a far lesser extent, coding them). This attitude I currently have might change, but I'm hoping that linking this in a way that people will see it will make me feel a bit embarrassed to change my mind.
 
 Some important additional information and exceptions that someone should read:
@@ -28,4 +30,4 @@ If this repo gets a commit on April 1st saying that development is resuming, it'
 
 This itself is not intended as a joke. I actually do plan to stop development.
 
-Wow, you actually read to the bottom of this! Here's a link to another incremental game I made (much shorter, current content can probably be finished in a day): https://rawgit.com/dan-simon/numbers/master/index.html. I'm not going to do development on this game either, though.
+Wow, you actually read to the bottom of this! Here's a link to another incremental game I made (much shorter, current content can probably be finished in a day): https://usavictor210.github.io/b/numbers-master/. I'm not going to do development on this game either, though.
