@@ -6576,7 +6576,7 @@ function getTotalTickGained (timeshards, num) {
 function updateTimeShards() {
     document.getElementById("timeShardAmount").innerHTML = shortenMoney(player.timeShards)
     document.getElementById("tickThreshold").innerHTML = shortenMoney(getTickThreshold(player.timeShards))
-    document.getElementById("timeShardsPerSec").innerHTML = "You are getting "+shortenDimensions(getTimeDimensionProduction(1))+" time shards per second."
+    document.getElementById("timeShardsPerSec").innerHTML = "You are getting "+shortenDimensions(getTimeDimensionProduction(1))+" Timeshards per second."
 }
 
 
@@ -7081,10 +7081,10 @@ function startInterval() {
             let newGalGain = Math.min(currentGalGain + 1, maxGalGain);
             let estimate = getReplicantiETA(player.replicanti.amount, player.replicanti.limit.pow(newGalGain * 5));
             let galGainDisplay = (newGalGain === maxGalGain) ? 'maximum' : newGalGain;
-            document.getElementById("replicantiapprox").innerHTML = "Approximately " + timeDisplay(estimate) + " until gain of " + galGainDisplay + ' replicanti galaxies';
+            document.getElementById("replicantiapprox").innerHTML = "Approximately " + timeDisplay(estimate) + " left until gain of " + galGainDisplay + ' replicanti galaxies';
         } else {
             let estimate = getReplicantiETA();
-            document.getElementById("replicantiapprox").innerHTML = "Approximately " + timeDisplay(estimate) + " until infinite replicanti"
+            document.getElementById("replicantiapprox").innerHTML = "Approximately " + timeDisplay(estimate) + " left until infinite replicanti"
         }
 
         document.getElementById("replicantiamount").innerHTML = shortenDimensions(player.replicanti.amount)
@@ -7377,16 +7377,19 @@ function startInterval() {
                 while (player.money.times(4.22419e-105).gt(scale1[id])) id++;
                 if (id > 0) id--;
             }
-            if (id >= 7 && id < 11) document.getElementById("infoScale").innerHTML = "If every antimatter were a planck volume, you would have enough to fill " + formatValue(player.options.notation, player.money * 4.22419e-105 / scale1[id], 2, 1) + scale2[id];
-            else document.getElementById("infoScale").innerHTML = "If every antimatter were a planck volume, you would have enough to make " + formatValue(player.options.notation, player.money.times(4.22419e-105).dividedBy(scale1[id]), 2, 1) + scale2[id];
-        } else {
-            //does this part work correctly? i doubt it does - hevipelle
-            //you and me both - dan-simon
-            if (player.money.times(1e-54).lt(2.82e-45)) document.getElementById("infoScale").innerHTML = "If every antimatter were " + formatValue(player.options.notation,2.82e-45 / 1e-54 / player.money, 2, 1) + " attometers cubed, you would have enough to make a proton.";
-            else if (player.money.times(1e-63).lt(2.82e-45)) document.getElementById("infoScale").innerHTML = "If every antimatter were " + formatValue(player.options.notation,2.82e-45 / 1e-63 / player.money, 2, 1) + " zeptometers cubed, you would have enough to make a proton.";
-            else if (player.money.times(1e-72).lt(2.82e-45)) document.getElementById("infoScale").innerHTML = "If every antimatter were " + formatValue(player.options.notation,2.82e-45 / 1e-72 / player.money, 2, 1) + " yoctometers cubed, you would have enough to make a proton.";
-            else document.getElementById("infoScale").innerHTML = "If every antimatter were " + formatValue(player.options.notation,2.82e-45 / 4.22419e-105 / player.money, 2, 1) + " planck volumes, you would have enough to make a proton.";
-        }
+        if (id >= 7 && id < 11) document.getElementById("infoScale").textContent = "If every antimatter were a planck volume, you would have enough to fill " + formatValue(player.options.notation, player.money * 4.22419e-105 / scale1[id], 2, 1) + scale2[id];
+        else document.getElementById("infoScale").textContent = "If every antimatter were a planck volume, you would have enough to make " + formatValue(player.options.notation, player.money.times(4.22419e-105).dividedBy(scale1[id]), 2, 1) + scale2[id];
+    } else { //does this part work correctly? i doubt it does
+	    // you and me both - dan-simon
+        if (player.money.times(1e-54) < 2.82e-45) document.getElementById("infoScale").textContent = "If every antimatter were " + formatValue(player.options.notation,2.82e-45 / 1e-54 / player.money, 2, 1) + " attometers cubed, you would have enough to make a proton."
+        else if (player.money * 1e-63 < 2.82e-45) document.getElementById("infoScale").textContent = "If every antimatter were " + formatValue(player.options.notation,2.82e-45 / 1e-63 / player.money, 2, 1) + " zeptometers cubed, you would have enough to make a proton."
+        else if (player.money * 1e-72 < 2.82e-45) document.getElementById("infoScale").textContent = "If every antimatter were " + formatValue(player.options.notation,2.82e-45 / 1e-72 / player.money, 2, 1) + " yoctometers cubed, you would have enough to make a proton."
+        else document.getElementById("infoScale").textContent = "If every antimatter were " + formatValue(player.options.notation,2.82e-45 / 4.22419e-105 / player.money, 2, 1) + " planck volumes, you would have enough to make a proton."
+    }
+    if (player.money.gt(new Decimal("1e100000"))) {
+        document.getElementById("infoScale").innerHTML = "<br>If you wrote 3 numbers a second, it would take you <br>" + timeDisplay(player.money.log10()*10/3) + "<br> to write down your antimatter amount.";
+    }
+
 
         var shiftRequirement = getShiftRequirement(0);
 
