@@ -1154,10 +1154,10 @@ function getAbbreviation(e) {
     var prefixes2 = ['', 'Dc', 'Vg', 'Tg', 'Qa', 'Qi', 'Se', 'St', 'Og', 'Nn']
     var prefixes3 = ['', 'Ce', 'Dn', 'Tc', 'Qe', 'Qu', 'Sc', 'Si', 'Oe', 'Ne']
     var prefixes4 = ['', 'U', 'D', 'T', 'Qd', 'Qt', 'Sx', 'Sp', 'O', 'N']
-    var index = Math.floor(e/3)-1
-    var index2 = Math.floor(index/10)
-    var index3 = Math.floor(index2/10)
-    var index4 = Math.floor(index3/10)
+    var index = Decimal.floor(e/3)-1
+    var index2 = Decimal.floor(index/10)
+    var index3 = Decimal.floor(index2/10)
+    var index4 = Decimal.floor(index3/10)
     var prefix = prefixes[index%10]
     var prefix2 = prefixes2[index2%10]
     var prefix3 = prefixes3[index3%10]
@@ -1166,10 +1166,10 @@ function getAbbreviation(e) {
     } else if (e <= 6002) {
         return "MI-" + prefix + prefix2 + prefix3
     } else if (e >= 6003) {
-        var secondIndex = Math.floor(index/1000)
-        var secondIndex2 = Math.floor(secondIndex/10)
-        var secondIndex3 = Math.floor(secondIndex2/10)
-        var secondIndex4 = Math.floor(secondIndex3/10)
+        var secondIndex = Decimal.floor(index/1000)
+        var secondIndex2 = Decimal.floor(secondIndex/10)
+        var secondIndex3 = Decimal.floor(secondIndex2/10)
+        var secondIndex4 = Decimal.floor(secondIndex3/10)
         var secondPrefix = prefixes4[secondIndex%10]
         var secondPrefix2 = prefixes2[secondIndex2%10]
         var secondPrefix3 = prefixes3[secondIndex3%10]
@@ -1213,11 +1213,11 @@ function formatValue(notation, value, places, placesUnder1000) {
         } else if (notation === "Letters") {
             power -= 3;
             return ((matissa * Decimal.pow(10, power % 3)).toFixed(places) +
-            letterList1[Math.floor(((power - (power % 3)) / 3) / (letterList1.length*letterList1.length*letterList1.length*letterList2.length))  % letterList1.length] + letterList1[Math.floor(((power - (power % 3)) / 3) / (letterList1.length*letterList1.length*letterList2.length))  % letterList1.length] + letterList1[Math.floor(((power - (power % 3)) / 3) / (letterList1.length*letterList2.length))  % letterList1.length] +letterList1[Math.floor(((power - (power % 3)) / 3) / letterList2.length) % letterList1.length] + letterList2[((power - (power % 3)) / 3) % letterList2.length]);
+            letterList1[Decimal.floor(((power - (power % 3)) / 3) / (letterList1.length*letterList1.length*letterList1.length*letterList2.length))  % letterList1.length] + letterList1[Decimal.floor(((power - (power % 3)) / 3) / (letterList1.length*letterList1.length*letterList2.length))  % letterList1.length] + letterList1[Decimal.floor(((power - (power % 3)) / 3) / (letterList1.length*letterList2.length))  % letterList1.length] +letterList1[Decimal.floor(((power - (power % 3)) / 3) / letterList2.length) % letterList1.length] + letterList2[((power - (power % 3)) / 3) % letterList2.length]);
         } else if (notation === "Emojis") {
             power -= 3;
             return ((matissa * Decimal.pow(10, power % 3)).toFixed(places) +
-            emojiList1[Math.floor(((power - (power % 3)) / 3) / (emojiList1.length*emojiList1.length*emojiList1.length*emojiList2.length))  % emojiList1.length] + emojiList1[Math.floor(((power - (power % 3)) / 3) / (emojiList1.length*emojiList1.length*emojiList2.length))  % emojiList1.length] + emojiList1[Math.floor(((power - (power % 3)) / 3) / (emojiList1.length*emojiList2.length))  % emojiList1.length] +emojiList1[Math.floor(((power - (power % 3)) / 3) / emojiList2.length) % emojiList1.length] + emojiList2[((power - (power % 3)) / 3) % emojiList2.length]);
+            emojiList1[Decimal.floor(((power - (power % 3)) / 3) / (emojiList1.length*emojiList1.length*emojiList1.length*emojiList2.length))  % emojiList1.length] + emojiList1[Decimal.floor(((power - (power % 3)) / 3) / (emojiList1.length*emojiList1.length*emojiList2.length))  % emojiList1.length] + emojiList1[Decimal.floor(((power - (power % 3)) / 3) / (emojiList1.length*emojiList2.length))  % emojiList1.length] +emojiList1[Decimal.floor(((power - (power % 3)) / 3) / emojiList2.length) % emojiList1.length] + emojiList2[((power - (power % 3)) / 3) % emojiList2.length]);
 
 
         }else if (notation === "Logarithm") {
@@ -2766,7 +2766,7 @@ document.getElementById("tickSpeed").onclick = function () {
     updateTickSpeed();
 };
 
-function timeDisplay(time) {
+function timeDisplay(time) {a
     if (time <= 100) return (time/10).toFixed(2) + " seconds"
     time = Math.floor(time / 10)
 
@@ -4920,7 +4920,7 @@ function gainedInfinityPoints() {
     }
     ret = ret.times(getTSBenefit(5, player.timestudy.studies[5]));
     ret = ret.times(getTSBenefit(6, player.timestudy.studies[6]));
-    ret = Math.floor(ret);
+    ret = Decimal.floor(ret);
     return ret
 }
 
@@ -4937,7 +4937,7 @@ function gainedEternityPoints() {
     if (player.achievements.includes('r136')) {
         ret = ret.times(Math.max(1, player.thisEternity / 10));
     }
-    ret = Math.floor(ret);
+    ret = Decimal.floor(ret);
     return ret;
 }
 
@@ -5539,7 +5539,7 @@ function updateLastTenRuns() {
     var ippm = tempIP.dividedBy(tempTime/600)
     var tempstring = shorten(ippm) + " IP/min"
     if (ippm<1) tempstring = shorten(ippm*60) + " IP/hour"
-    document.getElementById("averagerun").innerHTML = "Last 10 infinities average time: "+ timeDisplayShort(tempTime)+" Average IP gain: "+shortenDimensions(tempIP)+" IP. "+tempstring
+    document.getElementById("averagerun").innerHTML = "Average time of last 10 infinities: "+ timeDisplayShort(tempTime)+" Average IP gain: "+shortenDimensions(tempIP)+" IP. "+tempstring
 
     if (tempBest.gte(1e8)) giveAchievement("Oh hey, you're still here");
     if (tempBest.gte(1e300)) giveAchievement("MAXIMUM OVERDRIVE");
@@ -5567,10 +5567,10 @@ function updateLastTenEternities() {
     }
 
     var eppm = tempEP.dividedBy(tempTime/600)
-    var tempstring = shorten(eppm) + " IP/min"
+    var tempstring = shorten(eppm) + " EP/min"
     averageEp = tempEP
-    if (eppm<1) tempstring = shorten(eppm*60) + " IP/hour"
-    document.getElementById("averageEternityRun").innerHTML = "Last 10 eternities average time: "+ timeDisplayShort(tempTime)+" Average EP gain: "+shortenDimensions(tempEP)+" IP. "+tempstring
+    if (eppm<1) tempstring = shorten(eppm*60) + " EP/hour"
+    document.getElementById("averageEternityRun").innerHTML = "Average time of last 10 eternities: "+ timeDisplayShort(tempTime)+" Average EP gain: "+shortenDimensions(tempEP)+" EP. "+tempstring
 }
 
 function addEternityTime(time, ep) {
