@@ -1589,24 +1589,22 @@ function updateDimensions() {
     document.getElementById("galaxies").innerHTML = 'You have ' + Math.round(player.galaxies) + ' Antimatter Galaxies.';
     document.getElementById("totalTime").innerHTML = "You have played for " + timeDisplay(player.totalTimePlayed) + ".";
 
- if (player.bestInfinityTime == 9999999999) {
-        document.getElementById("bestInfinity").textContent = ""
-        document.getElementById("infinitied").textContent = ""
-        document.getElementById("thisInfinity").textContent = ""
+if (player.infinitied === 0 && player.eternities === 0) {
+        document.getElementById("bestInfinity").innerHTML = ""
+        document.getElementById("infinitied").innerHTML = ""
+        document.getElementById("thisInfinity").innerHTML = ""
     } else {
-        document.getElementById("bestInfinity").textContent = "Your fastest Infinity is in " + timeDisplay(player.bestInfinityTime) + "."
-        document.getElementById("thisInfinity").textContent = "You have spent " + timeDisplay(player.thisInfinityTime) + " in this Infinity."
-        if (player.infinityPoints.equals(1)) {
-            document.getElementById("infinityPoints1").textContent = "You have 1 Infinity point."
-            document.getElementById("infinityPoints2").textContent = "You have 1 Infinity point."
+        document.getElementById("bestInfinity").innerHTML = "Your fastest Infinity is in " + timeDisplay(player.bestInfinityTime) + "."
+        document.getElementById("thisInfinity").innerHTML = "You have spent " + timeDisplay(player.thisInfinityTime) + " in this Infinity."
+        let ipPlural = player.infinityPoints.equals(1) ? '' : 's';
+        document.getElementById("infinityPoints1").innerHTML = "You have <span class=\"IPAmount1\">"+shortenDimensions(player.infinityPoints)+"</span> Infinity Point" + ipPlural + ".";
+        document.getElementById("infinityPoints2").innerHTML = "You have <span class=\"IPAmount2\">"+shortenDimensions(player.infinityPoints)+"</span> Infinity Point" + ipPlural + ".";
+        let infPlural = getInfinitied() === 1 ? '' : 's';
+        if (player.eternities > 0) {
+            document.getElementById("infinitied").innerHTML = "You have infinitied " + addCommas(player.infinitied) + " time" + infPlural + " this eternity.";
+        } else {
+            document.getElementById("infinitied").innerHTML = "You have infinitied " + addCommas(player.infinitied) + " time" + infPlural + ".";
         }
-        else {
-            document.getElementById("infinityPoints1").innerHTML = "You have <span class=\"IPAmount1\">"+shortenDimensions(player.infinityPoints)+"</span> Infinity points."
-            document.getElementById("infinityPoints2").innerHTML = "You have <span class=\"IPAmount2\">"+shortenDimensions(player.infinityPoints)+"</span> Infinity points."
-        }
-        if (player.infinitied == 1) document.getElementById("infinitied").textContent = "You have infinitied 1 time."
-        else document.getElementById("infinitied").textContent = "You have infinitied " + player.infinitied.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") + " times."
-        if (player.infinitiedBank > 0) document.getElementById("infinitied").textContent = "You have infinitied " + player.infinitied.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") + " times this eternity."
     }
     if (player.bankedInfinities === 0) {
         document.getElementById("bankedInfinities").innerHTML = ""
@@ -5843,7 +5841,7 @@ document.getElementById("bigcrunch").onclick = function () {
         setMatterDisplay();
         setQuickResetDisplay();
 
-        document.getElementById("replicantireset").innerHTML = "Reset replicanti amount, but get a free galaxy<br>"+player.replicanti.galaxies + " replicated galaxies created."
+        document.getElementById("replicantireset").innerHTML = "Reset replicanti amount for a free galaxy.<br>"+player.replicanti.galaxies + " replicated galaxies created."
 
         if (player.achievements.includes("r36")) player.tickspeed = player.tickspeed.times(0.98);
         if (player.achievements.includes("r45")) player.tickspeed = player.tickspeed.times(0.98);
@@ -7100,7 +7098,7 @@ function startInterval() {
           updatePeaks(player.peaks.ep, gainedEternityPoints(), player.thisEternity);
         }
 
-        let eterButtonStart = (player.eternities === 0) ? "<b>Other times await.. I need to become Eternal</b><br/>" : "<b>I need to become Eternal.</b><br/>";
+        let eterButtonStart = (player.eternities === 0) ? "<b>Other times await.. I need to become Eternal.</b><br/>" : "<b>I need to become Eternal.</b><br/>";
         if (gainedEternityPoints().gte(1e3)) {
           eterButtonStart = '';
         }
