@@ -1174,6 +1174,9 @@ function getAbbreviation(e) {
     return ret.replace("UM","M").replace("UNA","NA").replace("UPC","PC").replace("UFM","FM")
 }
 
+function addCommas (x) {
+  return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+}
 
 const inflog = Math.log10(Number.MAX_VALUE)
 function formatValue(notation, value, places, placesUnder1000) {
@@ -1586,22 +1589,24 @@ function updateDimensions() {
     document.getElementById("galaxies").innerHTML = 'You have ' + Math.round(player.galaxies) + ' Antimatter Galaxies.';
     document.getElementById("totalTime").innerHTML = "You have played for " + timeDisplay(player.totalTimePlayed) + ".";
 
-    if (player.infinitied === 0 && player.eternities === 0) {
-        document.getElementById("bestInfinity").innerHTML = ""
-        document.getElementById("infinitied").innerHTML = ""
-        document.getElementById("thisInfinity").innerHTML = ""
+ if (player.bestInfinityTime == 9999999999) {
+        document.getElementById("bestInfinity").textContent = ""
+        document.getElementById("infinitied").textContent = ""
+        document.getElementById("thisInfinity").textContent = ""
     } else {
-        document.getElementById("bestInfinity").innerHTML = "Your fastest Infinity is in " + timeDisplay(player.bestInfinityTime) + "."
-        document.getElementById("thisInfinity").innerHTML = "You have spent " + timeDisplay(player.thisInfinityTime) + " in this Infinity."
-        let ipPlural = player.infinityPoints.equals(1) ? '' : 's';
-        document.getElementById("infinityPoints1").innerHTML = "You have <span class=\"IPAmount1\">"+shortenDimensions(player.infinityPoints)+"</span> Infinity Point" + ipPlural + ".";
-        document.getElementById("infinityPoints2").innerHTML = "You have <span class=\"IPAmount2\">"+shortenDimensions(player.infinityPoints)+"</span> Infinity Point" + ipPlural + ".";
-        let infPlural = getInfinitied() === 1 ? '' : 's';
-        if (player.eternities > 0) {
-            document.getElementById("infinitied").innerHTML = "You have infinitied " + addCommas(player.infinitied) + " time" + infPlural + " this eternity.";
-        } else {
-            document.getElementById("infinitied").innerHTML = "You have infinitied " + addCommas(player.infinitied) + " time" + infPlural + ".";
+        document.getElementById("bestInfinity").textContent = "Your fastest Infinity is in " + timeDisplay(player.bestInfinityTime) + "."
+        document.getElementById("thisInfinity").textContent = "You have spent " + timeDisplay(player.thisInfinityTime) + " in this Infinity."
+        if (player.infinityPoints.equals(1)) {
+            document.getElementById("infinityPoints1").textContent = "You have 1 Infinity point."
+            document.getElementById("infinityPoints2").textContent = "You have 1 Infinity point."
         }
+        else {
+            document.getElementById("infinityPoints1").innerHTML = "You have <span class=\"IPAmount1\">"+shortenDimensions(player.infinityPoints)+"</span> Infinity points."
+            document.getElementById("infinityPoints2").innerHTML = "You have <span class=\"IPAmount2\">"+shortenDimensions(player.infinityPoints)+"</span> Infinity points."
+        }
+        if (player.infinitied == 1) document.getElementById("infinitied").textContent = "You have infinitied 1 time."
+        else document.getElementById("infinitied").textContent = "You have infinitied " + player.infinitied.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") + " times."
+        if (player.infinitiedBank > 0) document.getElementById("infinitied").textContent = "You have infinitied " + player.infinitied.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") + " times this eternity."
     }
     if (player.bankedInfinities === 0) {
         document.getElementById("bankedInfinities").innerHTML = ""
