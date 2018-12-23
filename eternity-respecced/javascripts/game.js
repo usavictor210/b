@@ -4057,7 +4057,7 @@ let initialECGoals = {
   2: new Decimal('1e350'),
   3: new Decimal('1e700'),
   4: new Decimal('1e10000'),
-  5: new Decimal('1e3600')
+  5: new Decimal('1e3600'),
   6: new Decimal('1e1800'),
   7: new Decimal('1e30000'),
   8: new Decimal('1e1500'),
@@ -4073,7 +4073,7 @@ let incrementECGoals = {
   2: new Decimal('1e50'),
   3: new Decimal('1e200'),
   4: new Decimal('1e1000'),
-  5: new Decimal('1e1200')
+  5: new Decimal('1e1200'),
   6: new Decimal('1e600'),
   7: new Decimal('1e5000'),
   8: new Decimal('1e500'),
@@ -4209,7 +4209,7 @@ function currentEternityRequirement () {
   }
 }
 
-let ecTTCosts = [null, 30, 40, 50, 60, 80, 1000, 1200, 1500]
+let ecTTCosts = [null, 30, 40, 50, 60, 80, 1000, 1200, 1500, 200, 240, 300, 400, 500]
 // let's require some more TT for EC6-8, shall we?
 // 200, 240, 300, 400, 500;
 
@@ -4218,7 +4218,7 @@ let ecReqProps = {
   2: function () {return player.totalTickGained},
   3: function () {return player.eightAmount},
   4: function () {return getInfinitied()},
-  5: function () {return player.galaxies}
+  5: function () {return player.galaxies},
   6: function () {return player.replicanti.galaxies},
   7: function () {return player.money},
   8: function () {return player.infinityPoints},
