@@ -3725,10 +3725,8 @@ function getReplicantiSpeedup (amount) {
   let ret = 1;
   // do we need both these functions? I am not sure.
   ret *= getReplicantiIntervalBonus(amount);
-  /*
   // EC12 reward handled
   ret *= ecNumReward(12);
-  */
   return ret;
 }
 
@@ -3849,18 +3847,15 @@ function unlockReplicantis() {
 }
 
 function canGetReplChance () {
-  return player.replicanti.unl && player.infinityPoints.gte(player.replicanti.chanceCost) && (player.replicanti.chance < 1 || player.achievements.includes('r106'));
-  // && !ec8noMorePurchases('repl');
+  return player.replicanti.unl && player.infinityPoints.gte(player.replicanti.chanceCost) && (player.replicanti.chance < 1 || player.achievements.includes('r106')) && !ec8noMorePurchases('repl');
 }
 
 function canGetReplInterval () {
-  return player.replicanti.unl && player.infinityPoints.gte(player.replicanti.intervalCost) && (player.replicanti.interval > 1 || player.achievements.includes('r106'));
-  // && !ec8noMorePurchases('repl');
+  return player.replicanti.unl && player.infinityPoints.gte(player.replicanti.intervalCost) && (player.replicanti.interval > 1 || player.achievements.includes('r106')) && !ec8noMorePurchases('repl');
 }
 
 function canGetReplGal () {
-  return player.replicanti.unl && player.infinityPoints.gte(player.replicanti.galCost);
-  // && !ec8noMorePurchases('repl');
+  return player.replicanti.unl && player.infinityPoints.gte(player.replicanti.galCost) && !ec8noMorePurchases('repl');
 }
 
 function upgradeReplicantiChance() {
@@ -3869,8 +3864,8 @@ function upgradeReplicantiChance() {
         player.replicanti.chanceCost = player.replicanti.chanceCost.times(1e15)
         player.replicanti.chance += 0.01
         updateInfCosts()
-        // player.ec8.PurchasesMade.repl++;
-        // ec8Update('repl');
+        player.ec8.PurchasesMade.repl++;
+        ec8Update('repl');
     }
 }
 
@@ -3885,8 +3880,8 @@ function maxUpgradeReplicantiChance() {
         player.replicanti.chanceCost = player.replicanti.chanceCost.times(Decimal.pow(1e15, buy.amount));
         player.replicanti.chance += 0.01 * buy.amount;
         updateInfCosts()
-        // player.ec8.PurchasesMade.repl++;
-        // ec8Update('repl');
+        player.ec8.PurchasesMade.repl++;
+        ec8Update('repl');
     }
 }
 
@@ -3899,30 +3894,28 @@ function upgradeReplicantiInterval() {
         player.replicanti.interval *= 0.9
         if (player.replicanti.interval < 1 && !player.achievements.includes('r106')) player.replicanti.interval = 1
         updateInfCosts()
-        // player.ec8.PurchasesMade.repl++;
-        // ec8Update('repl');
+        player.ec8.PurchasesMade.repl++;
+	ec8Update('repl');
     }
 }
 
 function getInitialReplicantiGalaxyCost () {
-  /*
   if (player.eternityChallenges.current === 6) {
     return new Decimal(1e3);
   } else {
     return new Decimal(1e170);
   }
-  */
   return new Decimal(1e170);
 }
 
 function getReplicantiGalaxyCostIncrease () {
-  /*
+  
   if (player.eternityChallenges.current === 6) {
     return Decimal.pow(10, player.replicanti.gal).times(1e3);
   } else {
     return Decimal.pow(1e5, player.replicanti.gal).times(1e25);
   }
-  */
+  
   return Decimal.pow(1e5, player.replicanti.gal).times(1e20);
 }
 
@@ -4147,7 +4140,6 @@ function ec8Update (x) {
 function ec8noMorePurchases (x) {
   return player.eternityChallenges.current === 8 && player.ec8.PurchasesMade[x] === 50;
 }
-*/
 
 function hasInfiniteTime () {
   return player.achievements.includes("r112");
