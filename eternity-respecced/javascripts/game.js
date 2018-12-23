@@ -4025,7 +4025,7 @@ let initialECCosts = {
   2: 250,
   3: 20000,
   4: 2000000,
-  5: 400
+  5: 400,
   6: 150,
   7: new Decimal('1e20000000'),
   8: new Decimal('1e100000')
@@ -4041,7 +4041,7 @@ let incrementECCosts = {
   2: 50,
   3: 4000,
   4: 500000,
-  5: 100
+  5: 100,
   6: 50,
   7: new Decimal('1e5000000'),
   8: new Decimal('1e20000'),
