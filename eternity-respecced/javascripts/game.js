@@ -108,6 +108,9 @@ var player = {
     eternityUpgrades: [],
     epmult: new Decimal(1),
     epmultCost: new Decimal(500),
+    ec8 : {
+        PurchasesMade: 0,
+    },
     infinityDimension1 : {
         cost: new Decimal(1e8),
         amount: new Decimal(0),
@@ -261,9 +264,8 @@ var player = {
     }
 };
 
-/*var c = document.getElementById("game");
-var ctx = c.getContext("2d");*/
-
+var c = document.getElementById("game");
+var ctx = c.getContext("2d");
 var defaultStart = $.extend(true, {}, player);
 var firstButton = document.getElementById("first");
 var secondButton = document.getElementById("second");
@@ -530,6 +532,10 @@ function onLoad() {
         document.getElementById("tickSpeedAmount").style.visibility = "visible";
     }
     if (player.options.notation == "Mixed") player.options.notation = "Mixed scientific"
+	
+    if (player.ec8.PurchasesMade === undefined) {
+	player.ec8.PurchasesMade === 0
+	}
 
     if (player.infinityPower === undefined) {
         player.infinityPower = new Decimal(1)
@@ -3938,8 +3944,8 @@ function upgradeReplicantiGalaxy() {
         player.replicanti.gal += 1;
         player.replicanti.galCost = player.replicanti.galCost.times(getReplicantiGalaxyCostIncrease());
         updateInfCosts()
-        // player.ec8.PurchasesMade.repl++;
-        // ec8Update('repl');
+        player.ec8.PurchasesMade.repl++;
+        ec8Update('repl');
     }
 }
 
@@ -3950,8 +3956,8 @@ function maxUpgradeReplicantiGalaxy() {
         player.replicanti.gal += buy.amount;
         player.replicanti.galCost = buy.cost.times(getReplicantiGalaxyCostIncrease());
         updateInfCosts()
-        // player.ec8.PurchasesMade.repl++;
-        // ec8Update('repl');
+        player.ec8.PurchasesMade.repl++;
+        ec8Update('repl');
     }
 }
 
@@ -6056,7 +6062,10 @@ function eternity(force, enteringChallenge) {
             overXGalaxies: player.overXGalaxies,
             spreadingCancer: player.spreadingCancer,
             infDimensionsUnlocked: [false, false, false, false, false, false, false, false],
-            infinityPower: new Decimal(1),
+            infinityPower: new Decimal(1),	
+	    ec8 : {
+		PurchasesMade: 0,
+	    },
             infinityDimension1 : {
                 cost: new Decimal(1e8),
                 amount: new Decimal(0),
