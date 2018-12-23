@@ -4028,7 +4028,7 @@ let initialECCosts = {
   5: 400,
   6: 150,
   7: new Decimal('1e20000000'),
-  8: new Decimal('1e100000')
+  8: new Decimal('1e100000'),
   9: new Decimal('1e18000'),
   10: new Decimal('1e100'),
   11: new Decimal('1e500000'),
@@ -4828,11 +4828,11 @@ document.getElementById("importbtn").onclick = function () {
         save_game();
         load_game();
     } else if (sha512_256(save_data.replace(/\s/g, '').toUpperCase()) === 'fe89aef2d6c0f56082b20a6fcac75a1952bcf8aa9df17bcea745e238f20d38bb') {
-        player = eternityPlayer;
+        player = eternityPlayer; //beginning of 2nd eternity
         save_game();
         load_game();
     } else if (sha512_256(save_data.replace(/\s/g, '').toUpperCase()) === '39e70561c2ff9e4126b2cfc751e9e6be63c1582b26852c5e7802843366c75bf3') {
-	player = eternityPlayer7;
+	player = eternityPlayer7; //beginning of 7th eternity (modified the beginning of 2nd eternity file)
         save_game();
         load_game();
     } else if (sha512_256(save_data.replace(/\s/g, '').toUpperCase()) === '20f908bdcda66c8d99af767c0667ff3c9b2777dfed0a131293fcdddf1789b30a') {
@@ -4864,7 +4864,7 @@ document.getElementById("importbtn").onclick = function () {
 
 
 document.getElementById("reset").onclick = function () {
-    if (confirm("Do you really want to erase all your progress?")) {
+    if (confirm("Do you really want to erase all your progress? This will not give you anything prestige related, and will 'delete' your save.")) {
         set_save('dimensionSave', defaultStart);
         player = defaultStart
         save_game();
