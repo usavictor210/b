@@ -265,7 +265,6 @@ var player = {
 };
 
 var c = document.getElementById("game");
-var ctx = c.getContext("2d");
 var defaultStart = $.extend(true, {}, player);
 var firstButton = document.getElementById("first");
 var secondButton = document.getElementById("second");
