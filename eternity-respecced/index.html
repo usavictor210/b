@@ -47,6 +47,7 @@
             <button id="postInfinityButton" class="postinfcrunch">Big Crunch for x Infinity Points</button>
             <button id="newDimensionButton" class="newdim" onclick="newDimension()">Get x antimatter to unlock a new Dimension.</button>
             <button id="eternitybtn" class="eternitybtn" onclick="eternity()">Other times await.. I need to become Eternal.</button>
+            <button id="intergalacticbtn" class="intergalacticbtn" onclick="intergalactic()">The stars are too bright.. I need to go Intergalactic.</button>
         </div>
         <div id="coinsPerSec">You are getting 0 antimatter per second.</div>
 
@@ -68,6 +69,7 @@
             <button id="challengesbtn" style="font-family: Typewriter; font-size: 20px" class="tabbtn">Challenges</button>
             <button id="infinitybtn" style="font-family: Typewriter; font-size: 20px; display: none" class="infinitybtn">Infinity</button>
             <button id="eternitystorebtn" style="font-family: Typewriter; font-size: 20px; display: none" class="eternitytabbtn">Eternity</button>
+            <button id="intergalacticstorebtn" style="font-family: Typewriter; font-size: 20px; display: none" class="intergalactictabbtn">Intergalactic</button>
             <button id="cheatbtn" style="font-family: Typewriter; font-size: 20px; display: none" class="tabbtn">Cheat</button>
         </div>
         <div id="emptiness" class="tab" style="font-size: 150%">
@@ -188,7 +190,7 @@
                     </tr>
                 </table>
             </div>
-            <div  class="eternitytab" id="eternityupgrades">
+            <div class="eternitytab" id="eternityupgrades">
                 <br>
                 <table class="table" style="margin: 0 auto">
                     <tr>
@@ -260,7 +262,7 @@
                         <td class="milestoneText">5 Eternities:</td>
                         <td class="milestoneText">7 Eternities:</td>
                     </tr>
-                    <tr>
+                    <tr> 
                         <td><button class="milestonerewardlocked" id="reward4" style="font-size: 12px">Unlock more big crunch autobuyer options.</button></td>
                         <td><button class="milestonerewardlocked" id="reward5" style="font-size: 10px">You complete Infinity Challenges as soon as you unlock them (you get sacrifice autobuyer immediately)</button></td>
                     </tr>
@@ -309,7 +311,7 @@
                         <td class="milestoneText">25 Eternities:</td>
                     </tr>
                     <tr>
-                        <td><button class="milestonerewardlocked" id="reward16">You keep your /ing infinity upgrades on Eternity</button></td>
+                        <td><button class="milestonerewardlocked" id="reward16">You keep your Breaking Infinity upgrades on Eternity</button></td>
                         <td><button class="milestonerewardlocked" id="reward17">You automatically unlock Infinity Dimensions upon reaching them</button></td>
                     </tr>
                     <tr>
@@ -339,12 +341,133 @@
                 </table>
             </div>
         </div>
+        
+        
+        //separate
+        
+         
+        <div id="intergalacticstore" class="tab" style="font-size: 15px; width: 60%; margin: 0 auto; display: none" align="center">
+            <table class="table" align="center" style="margin: auto">
+                <tr>
+                        <td><button class="secondarytabbtn" onclick="showIntergalacticTab('milestones')">Intergalactic milestones</button><td>
+                </tr>
+            </table>
+            <div class="intergalactictab" id="milestones">
+              <table class="table" align="center" style="margin: auto" id="milestones">
+                    <tr>
+                        <td class="milestoneText">1 Intergalaxy:</td>
+                        <td class="milestoneText">2 Intergalaxies:</td>
+                    </tr>
+                    <tr>
+                        <td><button class="milestonerewardlocked" id="rewardi1">You can do Eternity Challenges more than 5 times, but they get exponentially harder for every completion.</button></td>
+                        <td><button class="milestonerewardlocked" id="rewardi2">Keep eternity milestones on intergalaxy.</button></td>
+                    </tr>
+                    <tr>
+                        <td class="milestoneText">3 Intergalaxies:</td>
+                        <td class="milestoneText">4 Intergalaxies:</td>
+                    </tr>
+                    <tr>
+                        <td><button class="milestonerewardlocked" id="rewardi3">Keep eternity upgrades on intergalaxy.</button></td>
+                        <td><button class="milestonerewardlocked" id="rewardi4">You start with all time studies unlocked.</button></td>
+                    </tr>
+                    <tr>
+                        <td class="milestoneText">5 Intergalaxies:</td>
+                        <td class="milestoneText">6 Intergalaxies:</td>
+                    </tr>
+                    <tr> 
+                        <td><button class="milestonerewardlocked" id="rewardi5" style="font-size: 12px">Unlock more eternity autobuyer options (just like current infinity autobuyer).</button></td>
+                        <td><button class="milestonerewardlocked" id="rewardi6" style="font-size: 10px">Keep your banked infinities.</button></td>
+                    </tr>
+                    <tr>
+                        <td class="milestoneText">7 Intergalaxies:</td>
+                        <td class="milestoneText">8 Intergalaxies:</td>
+                    </tr>
+                    <tr>
+                        <td><button class="milestonerewardlocked" id="rewardi7">Complete already-completed eternity challenge tiers as soon as they can be unlocked.</button></td>
+                        <td><button class="milestonerewardlocked" id="rewardi8">Keep 10% of your eternities in the current intergalaxy, converting them into banked eternities.</button></td>
+                    </tr>
+                    <tr>
+                        <td class="milestoneText">10 Intergalaxies:</td>
+                        <td class="milestoneText">12 Intergalaxies:</td>
+                    </tr>
+                    <tr>
+                        <td><button class="milestonerewardlocked" id="rewardi9">Replicanti grow 10x faster if RG power is at most 2.</button></td>
+                        <td><button class="milestonerewardlocked" id="rewardi10">Unlock antimatter autobuyer for TT.</button></td>
+                    </tr>
+                    <tr>
+                        <td class="milestoneText">16 Intergalaxies:</td>
+                        <td class="milestoneText">20 Intergalaxies:</td>
+                    </tr>
+                    <tr>
+                        <td><button class="milestonerewardlocked" id="rewardi11">Unlock IP autobuyer for TT.</button></td>
+                        <td><button class="milestonerewardlocked" id="rewardi12">Unlock EP autobuyer for TT.</button></td>
+                    </tr>
+                    <tr>
+                        <td class="milestoneText">25 Intergalaxies:</td>
+                        <td class="milestoneText">30 Intergalaxies:</td>
+                    </tr>
+                    <tr>
+                        <td><button class="milestonerewardlocked" id="rewardi13">Unlock autobuyer for x5 EP.</button></td>
+                        <td><button class="milestonerewardlocked" id="rewardi14">You keep your TT and TS on intergalaxy.</button></td>
+                    </tr>
+                    <tr>
+                        <td class="milestoneText">35 Intergalaxies:</td>
+                        <td class="milestoneText">40 Intergalaxies:</td>
+                    </tr>
+                    <tr>
+                        <td><button class="milestonerewardlocked" id="rewardi15">You start with all Infinity Dimensions unlocked and all Infinity Challenges unlocked and completed.</button></td>
+                        <td><button class="milestonerewardlocked" id="rewardi16">Unlock autobuyer for First Time Dimension.</button></td>
+                    </tr>
+                    <tr>
+                        <td class="milestoneText">50 Intergalaxies:</td>
+                        <td class="milestoneText">60 Intergalaxies:</td>
+                    </tr>
+                    <tr>
+                        <td><button class="milestonerewardlocked" id="rewardi17">Unlock autobuyer for Second Time Dimension.</button></td>
+                        <td><button class="milestonerewardlocked" id="rewardi18">Unlock autobuyer for Third Time Dimension.</button></td>
+                    </tr>
+                    <tr>
+                        <td class="milestoneText">70 Intergalaxies:</td>
+                        <td class="milestoneText">100 Intergalaxies:</td>
+                    </tr>
+                    <tr>
+                        <td><button class="milestonerewardlocked" id="rewardi19">Unlock autobuyer for Fourth Time Dimension.</button></td>
+                        <td><button class="milestonerewardlocked" id="rewardi20">Unlock autobuyer for intergalaxies.</button></td>
+                    </tr>
+                    <tr>
+                        <td class="milestoneText">150 Intergalaxies:</td>
+                        <td class="milestoneText">200 Intergalaxies:</td>
+                    </tr>
+                    <tr>
+                        <td><button class="milestonerewardlocked" id="rewardi21">You keep your EC completions on intergalaxy.</button></td>
+                        <td><button class="milestonerewardlocked" id="rewardi22">You keep your dimension boosts when you get a galaxy.</button></td>
+                    </tr>
+                    <tr>
+                        <td class="milestoneText">300 Intergalaxies:</td>
+                        <td class="milestoneText">500 Intergalaxies:</td>
+                    </tr>
+                    <tr>
+                        <td><button class="milestonerewardlocked" id="rewardi23">You keep your dimensions on dimension boost and galaxy.</button></td>
+                        <td><button class="milestonerewardlocked" id="rewardi24">You get more banked infinities based on your intergalaxies. (floor(((x / 100) ** .5))x more)</button></td>
+                    </tr>
+                    <tr>
+                        <td class="milestoneText">700 Intergalaxies:</td>
+                        <td class="milestoneText">1,000 Intergalaxies:</td>
+                    </tr>
+                    <tr>
+                        <td><button class="milestonerewardlocked" id="rewardi25">You get more banked eternities based on your intergalaxies. (floor(((x / 100) ** .5))x more)</button></td>
+                        <td><button class="milestonerewardlocked" id="rewardi26">You get more galactic points based on your intergalaxies. (floor(((x / 100) ** .5))x more)</button></td>
+                </table>
+            </div>
+        </div>
+        
         <div id="dimensions" class="tab">
             <table class="table" align="center" style="margin: auto" id="dimTabButtons">
                 <tr>
                     <td><button class="secondarytabbtn" onclick="showDimTab('antimatterdimensions')">Dimensions</button><td>
                     <td><button class="secondarytabbtn" onclick="showDimTab('infinitydimensions')">Infinity Dimensions</button><td>
                     <td><button id="tdtabbtn"class="secondarytabbtn"  style="display: none" onclick="showDimTab('timedimensions')">Time Dimensions</button><td>
+                    <td><button id="tdtabbtn"class="secondarytabbtn"  style="display: none" onclick="showDimTab('galacticdimensions')">Galactic Dimensions</button><td>
                 </tr>
             </table>
             <div id="antimatterdimensions" class="dimtab">
@@ -372,7 +495,7 @@
                     </tr>
                     <tr id="secondRow" style="display: none; font-size: 15px">
                         <td id="secondD">
-                            Second Dimension
+                            Second Dimension x1
                         </td>
                         <td>
                             <div id="secondAmount" align="left">0 (0)</div>
@@ -385,7 +508,7 @@
                     </tr>
                     <tr id="thirdRow" style="display: none; font-size: 15px">
                         <td id="thirdD">
-                            Third Dimension
+                            Third Dimension x1
                         </td>
                         <td>
                             <div id="thirdAmount" align="left">0 (0)</div>
@@ -399,7 +522,7 @@
                     </tr>
                     <tr id="fourthRow" style="display: none; font-size: 15px">
                         <td id="fourthD">
-                            Fourth Dimension
+                            Fourth Dimension x1
                         </td>
                         <td>
                             <div id="fourthAmount" align="left">0 (0)</div>
@@ -413,7 +536,7 @@
                     </tr>
                     <tr id="fifthRow" style="display: none; font-size: 15px">
                         <td id="fifthD">
-                            Fifth Dimension
+                            Fifth Dimension x1
                         </td>
                         <td>
                             <div id="fifthAmount" align="left">0 (0)</div>
@@ -427,7 +550,7 @@
                     </tr>
                     <tr id="sixthRow" style="display: none; font-size: 15px">
                         <td id="sixthD">
-                            Sixth Dimension
+                            Sixth Dimension x1
                         </td>
                         <td>
                             <div id="sixthAmount" align="left">0 (0)</div>
@@ -441,7 +564,7 @@
                     </tr>
                     <tr id="seventhRow" style="display: none; font-size: 15px">
                         <td id="seventhD">
-                            Seventh Dimension
+                            Seventh Dimension x1
                         </td>
                         <td>
                             <div id="seventhAmount" align="left">0 (0)</div>
@@ -455,7 +578,7 @@
                     </tr>
                     <tr id="eightRow" style="display: none; font-size: 15px">
                         <td id="eightD">
-                            Eight Dimension
+                            Eight Dimension x1
                         </td>
                         <td>
                             <div id="eightAmount" align="left">0 (0)</div>
@@ -481,7 +604,7 @@
                     </tr>
                     <tr style="font-size: 15px">
                         <td id="secondResetLabel">
-                            Antimatter Galaxies: requires 80 Eight Dimension
+                            Antimatter Galaxies: requires 80 Eighth Dimension
                         </td>
                         <td>
                             <button id="secondSoftReset" style="color:black; width: 200px; height: 35px; font-size: 9px" class="storebtn">Lose all your previous progress, but get a tickspeed boost</button>
@@ -667,6 +790,77 @@
                             </tr>
                         </table>
             </div>
+            <div id="galacticdimensions" class="dimtab">
+                    <div>
+                        <p id="totalgalaxiesgained">You've gained 0 intergalactic galaxies.</p>
+                            <p>You have <span id="galacticPowerAmount" style="font-size:35px; color: black">0</span> intergalactic galaxies. Next intergalactic galaxy at <span id="galaxyThreshold" style="font-size:35px; color: black">0</span></p>
+                        </div>
+
+                        <div id="galacticPowerPerSec">You are getting 0 Galactic Power per second.</div>
+                        <div>Note: You can only buy galactic dimension upgrades when you have no galactic studies. Each galactic dimension upgrade bought additionally multiplies galactic dimensions by 1.05x.</div>
+                        <table class="table" style="margin: 0 auto">
+                            <tr>
+                                <td>
+                                    <button id="galdimupg1" class="galacticupbtn" onclick="buyGalacticUpgrade(1)">Double all galactic dimension multipliers<br>Cost: x galactic power</button>
+                                </td>
+                                <td>
+                                    <button id="galdimupg2" class="galacticupbtn" onclick="buyGalacticUpgrade(2)">Decrease intergalactic galaxy cost multiplier<br>Intergalactic galaxies: x -> x<br>Cost: x galactic power</button>
+                                </td>
+                                <td>
+                                    <button id="galdimupg3" class="galacticupbtn" onclick="buyGalacticUpgrade(3)">Multiply all galactic dimensions based on intergalactic galaxies<br>Additional multiplier: x<br>Cost: x galactic power</button>
+                                </td>
+                                <td>
+                                    <button id="galdimupg4" class="galacticupbtn" onclick="buyGalacticUpgrade(4)">Increase GP formula base based on intergalactic galaxies<br>Currently: x -> x<br>Cost: x galactic power</button>
+                                </td>
+                            </tr>
+                        </table>
+                        <button id="maxGalacticDimensions" class="storebtn" style="font-size: 12px" onclick="buyMaxGalacticDimensions()">Max all</Button>
+                        <table class="table" >
+                            <tr style="font-size: 17px" id="galacticRow1">
+                                <td id="galacticD1" width="43%">
+                                    First Galactic Dimension x1
+                                </td>
+                                <td>
+                                    <div id="galacticAmount1">0 (0)</div>
+                                </td>
+                                <td align="right" width="10%">
+                                    <button id="galacticMax1" style="color:black; width:195px; height:30px" class="storebtn" align="right" onclick="buyGalacticDimension(1)">Cost: 10</button>
+                                </td>
+                            </tr>
+                            <tr id="galacticRow2" style="font-size: 17px">
+                                <td id="galacticD2">
+                                    Second Galactic Dimension x1
+                                </td>
+                                <td>
+                                    <div id="galacticAmount2" align="left">0 (0)</div>
+                                <td>
+                                    <button id="galacticMax2" style="color:black; width:195px; height:30px" class="storebtn" onclick="buyGalacticDimension(2)">Cost: 10</button>
+                                </td>
+                            </tr>
+                            <tr id="galacticRow3" style="font-size: 17px">
+                                <td id="galacticD3">
+                                    Third Galactic Dimension x1
+                                </td>
+                                <td>
+                                    <div id="galacticAmount3" align="left">0 (0)</div>
+                                </td>
+                                <td>
+                                    <button id="galacticMax3" style="color:black; width:195px; height:30px" class="storebtn" onclick="buyGalacticDimension(3)">Cost: 10</button>
+                                </td>
+                            </tr>
+                            <tr id="galacticRow4" style="font-size: 17px">
+                                <td id="galacticD4">
+                                    Fourth Galactic Dimension x1
+                                </td>
+                                <td>
+                                    <div id="galacticAmount4" align="left">0 (0)</div>
+                                </td>
+                                <td>
+                                    <button id="galacticMax4" style="color:black; width:195px; height:30px" class="storebtn" onclick="buyGalacticDimension(4)">Cost: 10</button>
+                                </td>
+                            </tr>
+                        </table>
+            </div>
             <div id="progress" ach-tooltip="Percentage to Infinity">
                 <div id="progressbar"></div>
             </div>
@@ -698,7 +892,7 @@
                     <td><div><button id="eternityconf" onclick="toggleEternityConf()" class="storebtn" style="color:black; width: 200px; height: 55px; font-size:120%; display: none">Eternity confimation ON</button></div></td>
                 </tr>
                 <tr>
-
+                    <td><div><button id="intergalaxyconf" onclick="toggleIntergalaxyConf()" class="storebtn" style="color:black; width: 200px; height: 55px; font-size:120%; display: none">Intergalaxy confimation ON</button></div></td>
 
                 </tr>
                 <tr>
@@ -714,7 +908,7 @@
                 <a href="howto.html">How to play  </a> |
                 <a href="about.html">Donate   </a> |
                 <a href="changelog.html">Changelog   </a> |
-                <a href="https://discord.gg/ST9NaXa">Discord</a> |
+                <a href="https://discord.gg/DcJqwUq">Discord (NG-- Dev)</a> |
                 <a href="https://www.reddit.com/r/AntimatterDimensions/">Subreddit</a> |
                 <a href="tt_spec.html">TT spec helper</a>
             </div>
@@ -732,20 +926,24 @@
             <br>
             <div id="totalmoney">You have made x antimatter.</div>
             <div id="totalresets">You have made x soft resets.</div>
-            <div id="galaxies">You have made x Antimatter galaxies.</div>
+            <div id="galaxies">You have made x Antimatter Galaxies.</div>
             <br>
-            <div id="eternitied">You have eternitied x times.</div>
-            <div id="thiseternity">You have spent x in this eternity</div>
-            <div id="besteternity">Your fastest eternity is in x.</div>
-            <br>
-            <div id="bankedInfinities">You have x banked infinities.</div>
             <div id="infinitied">You have infinitied x times.</div>
+            <div id="bankedInfinities">You have x banked infinities.</div>
             <div id="bestInfinity">Your fastest infinity is in x.</div>
             <div id="thisInfinity">You have spent x in this Infinity.</div>
             <br>
+            <div id="eternitied">You have eternitied x times.</div>
+            <div id="besteternity">Your fastest eternity is in x.</div>
+            <div id="thiseternity">You have spent x in this eternity</div>
+            <br>
+            <div id="intergalaxied">You have went intergalactic x times.</div>
+            <div id="bestintergalaxy">Your fastest intergalaxy is in x.</div>
+            <div id="thisintergalaxy">You have spent x in this intergalaxy.</div>
+            <br>
             <div id="totalTime">You have played for </div>
             <br>
-            <div id="infoScale">If every antimatter were a planck volume, you would have enough to </div>
+            <div id="infoScale">If every antimatter were a planck volume, you would have enough to...</div>
             </div>
             <div id="challengetimes" class="statstab" >
                 <br>
@@ -808,7 +1006,21 @@
                     <br>
                     <div id="averageEternityRun"></div>
                     <br>
-
+                 </div>
+             <div id="lasttenintergalaxies" class="statstab">
+                    <div id="intergalaxyrun1"></div>
+                    <div id="intergalaxyrun2"></div>
+                    <div id="intergalaxyrun3"></div>
+                    <div id="intergalaxyrun4"></div>
+                    <div id="intergalaxyrun5"></div>
+                    <div id="intergalaxyrun6"></div>
+                    <div id="intergalaxyrun7"></div>
+                    <div id="intergalaxyrun8"></div>
+                    <div id="intergalaxyrun9"></div>
+                    <div id="intergalaxyrun10"></div>
+                    <br>
+                    <div id="averageIntergalaxyRun"></div>
+                    <br>
                 </div>
         </div>
 
@@ -1160,10 +1372,9 @@
                             <div id="Universal harmony" class="achievement achievementlocked" style="background-image: url(images/94.png)" ach-tooltip="Have the same number (at least 100) of normal galaxies, replicanti galaxies, and intergalactic galaxies. Reward: All galaxies are 0.1% stronger."><br></div>
                         </td>
                         <td>
-                            <div id="I told you already, time is relative" class="achievement achievementlocked" style="background-image: url(images/94.png)" ach-tooltip="Dilate time."><br></div>
+                            <div id="The void" class="achievement achievementlocked" style="background-image: url(images/94.png)" ach-tooltip="Go intergalactic."><br></div>
                         </td>
-                    </tr>
-                  -->
+                    </tr> --> 
             </table>
         </div>
 
@@ -1368,7 +1579,7 @@
                     <tr>
                         <td>
                             <div class="infchallengediv" id="postc1div" style="height: 140px; display: none">
-                                <span>All previous challenges (except tickspeed challenge and automatic big crunch challenge) at once.</span>
+                                <span>All previous challenges (except tickspeed challenge and automatic big crunch challenge) happens at once.</span>
                                 <br>
                                 <br>
                                 <div class="outer">
@@ -1410,7 +1621,7 @@
                         </td>
                         <td>
                             <div class="infchallengediv" id="postc4div" style="height: 140px; display: none">
-                                <span>Only the latest bought dimension production is normal, all other dimensions produce less.</span>
+                                <span>Only the latest bought dimension production is normal, and all other dimensions produce less.</span>
                                 <br>
                                 <br>
                                 <div class="outer">
@@ -1425,7 +1636,7 @@
                     <tr>
                         <td>
                             <div class="infchallengediv" id="postc5div" style="height: 140px; display: none">
-                                <span>When buying dimensions 1-4, everything with costs smaller or equal increases. When buying dimensions 5-8, everything with costs bigger or equal increases. When buying tickspeed, everything with the same cost increases.</span>
+                                <span>When buying Dimensions 1-4, everything with costs smaller or equal increases. When buying Dimensions 5-8, everything with costs bigger or equal increases. When buying tickspeed, everything with the same cost increases.</span>
                                 <br>
                                 <br>
                                 <div class="outer">
@@ -1498,12 +1709,12 @@
                                 </div>
                                 <button id="eterc1unlockbtn" class="challengesbtn" onclick="attemptEterChallUnlock(1)">Unlock</button>
                                 <div id="eterc1conditionsdiv" style="display: none;">
-                                  <span>Time dimensions are disabled.</span>
+                                  <span>Time Dimensions are disabled.</span>
                                 </div>
                                 <button id="eterc1" class="challengesbtn" onclick="startEternityChallenge(1)">Start</button>
                                 <div id="eterc1goaldiv" style="display: none;">
                                   <span id="ec1goal">Goal: z</span><br>
-                                  <span>Reward: Time dimensions get a multiplier based on time in eternity. Currently: <span id="ec1reward">reward</span>.</span>
+                                  <span>Reward: Time Dimensions get a multiplier based on time spent in current Eternity. Currently: <span id="ec1reward">reward</span>.</span>
                                 </div>
                             </div>
                         </td>
@@ -1514,18 +1725,18 @@
                               <span id="ec2completions">Completed x times.</span>
                               <br/>
                               <div id="eterc2costdiv">
-                                <span>Requires <span id="ec2cost">y</span> tickspeed upgrades from time dimensions.</span>
+                                <span>Requires <span id="ec2cost">y</span> tickspeed upgrades from Time Dimensions.</span>
                                 <br/>
                                 <span>Costs 40 time theorems.</span>
                               </div>
                               <button id="eterc2unlockbtn" class="challengesbtn" onclick="attemptEterChallUnlock(2)">Unlock</button>
                               <div id="eterc2conditionsdiv" style="display: none;">
-                                <span>Infinity power doesn't affect normal dimensions. Instead it affects time dimensions with reduced effect.</span>
+                                <span>Infinity power doesn't affect Normal Dimensions, but instead affects Time Dimensions with a reduced effect.</span>
                               </div>
                               <button id="eterc2" class="challengesbtn" onclick="startEternityChallenge(2)">Start</button>
                               <div id="eterc2goaldiv" style="display: none;">
                                 <span id="ec2goal">Goal: z</span><br>
-                                <span>Reward: Infinity power affects time dimensions. Currently: <span id="ec2reward">reward</span>.</span>
+                                <span>Reward: Infinity power affects Time Dimensions. Currently: <span id="ec2reward">reward</span>.</span>
                               </div>
                             </div>
                         </td>
@@ -1549,7 +1760,7 @@
                               <button id="eterc3" class="challengesbtn" onclick="startEternityChallenge(3)">Start</button>
                               <div id="eterc3goaldiv" style="display: none;">
                                 <span id="ec3goal">Goal: z</span><br>
-                                <span>Reward: A multiplier for buying 10 dimensions based on eternities. Currently: <span id="ec3reward">reward</span>.</span>
+                                <span>Reward: Gain a multiplier for buying 10 dimensions based on eternities. Currently: <span id="ec3reward">reward</span>.</span>
                               </div>
                             </div>
                         </td>
@@ -1571,7 +1782,7 @@
                               <button id="eterc4" class="challengesbtn" onclick="startEternityChallenge(4)">Start</button>
                               <div id="eterc4goaldiv" style="display: none;">
                                 <span id="ec4goal">Goal: z</span> with at most <span id="ec4constraint">w</span> infinities.<br>
-                                <span>Reward: All infinity dimensions get a multiplier based on infinities. Currently: <span id="ec4reward">reward</span>.</span>
+                                <span>Reward: All Infinity Dimensions get a multiplier based on infinities. Currently: <span id="ec4reward">reward</span>.</span>
                               </div>
                             </div>
                         </td>
@@ -1613,12 +1824,12 @@
                               </div>
                               <button id="eterc6unlockbtn" class="challengesbtn" onclick="attemptEterChallUnlock(6)">Unlock</button>
                               <div id="eterc6conditionsdiv" style="display: none;">
-                                <span>You can't get normal galaxies, but the max replicanti galaxy upgrade cost is massively decreased.</span>
+                                <span>You can't get normal galaxies, but the max replicanti galaxy upgrade cost is massively reduced.</span>
                               </div>
                               <button id="eterc6" class="challengesbtn" onclick="startEternityChallenge(6)">Start</button>
                               <div id="eterc6goaldiv" style="display: none;">
                                 <span id="ec6goal">Goal: z</span><br>
-                                <span>Reward: Replicanti also gives a multiplier to normal dimensions. Currently: <span id="ec6reward">reward</span>.</span>
+                                <span>Reward: Replicanti also gives a multiplier to Normal Dimensions. Currently: <span id="ec6reward">reward</span>.</span>
                               </div>
                             </div>
                         </td>
@@ -1637,12 +1848,12 @@
                               </div>
                               <button id="eterc7unlockbtn" class="challengesbtn" onclick="attemptEterChallUnlock(7)">Unlock</button>
                               <div id="eterc7conditionsdiv" style="display: none;">
-                                <span>There's an exponentially increasing dark matter dividing multipliers on normal, infinity, and time dimensions.</span>
+                                <span>There's an exponentially increasing dark matter dividing multipliers on Normal, Infinity, and Time dDimensions.</span>
                               </div>
                               <button id="eterc7" class="challengesbtn" onclick="startEternityChallenge(7)">Start</button>
                               <div id="eterc7goaldiv" style="display: none;">
                                 <span id="ec7goal">Goal: z</span><br>
-                                <span>Reward: Gain a multiplier to normal, infinity, and time dimensions based on antimatter. Currently: <span id="ec7reward">reward</span>.</span>
+                                <span>Reward: Gain a multiplier to Normal/Infinity/Time Dimensions based on antimatter. Currently: <span id="ec7reward">reward</span>.</span>
                               </div>
                             </div>
                         </td>
@@ -1659,7 +1870,7 @@
                               </div>
                               <button id="eterc8unlockbtn" class="challengesbtn" onclick="attemptEterChallUnlock(8)">Unlock</button>
                               <div id="eterc8conditionsdiv" style="display: none;">
-                                <span>You can only upgrade infinity dimensions and replicanti 50 times each.</span>
+                                <span>You can only upgrade Infinity Dimensions and Replicanti 50 times each.</span>
                               </div>
                               <button id="eterc8" class="challengesbtn" onclick="startEternityChallenge(8)">Start</button>
                               <div id="eterc8goaldiv" style="display: none;">
@@ -1683,12 +1894,12 @@
                               </div>
                               <button id="eterc9unlockbtn" class="challengesbtn" onclick="attemptEterChallUnlock(9)">Unlock</button>
                               <div id="eterc9conditionsdiv" style="display: none;">
-                                <span>Infinity dimensions are disabled.</span>
+                                <span>Infinity Dimensions are disabled.</span>
                               </div>
                               <button id="eterc9" class="challengesbtn" onclick="startEternityChallenge(9)">Start</button>
                               <div id="eterc9goaldiv" style="display: none;">
                                 <span id="ec9goal">Goal: z</span><br>
-                                <span>Reward: All infinity dimensions are affected by infinity power with reduced effect. Currently: <span id="ec9reward">reward</span>.</span>
+                                <span>Reward: All Infinity Dimensions are affected by infinity power with reduced effect. Currently: <span id="ec9reward">reward</span>.</span>
                               </div>
                             </div>
                         </td>
@@ -1705,12 +1916,12 @@
                               </div>
                               <button id="eterc10unlockbtn" class="challengesbtn" onclick="attemptEterChallUnlock(10)">Unlock</button>
                               <div id="eterc10conditionsdiv" style="display: none;">
-                                <span>Time and infinity dimensions are disabled, but normal dimensions are multiplied by infinities^10000.</span>
+                                <span>Time and Infinity Dimensions are disabled, but Normal Dimensions get a immense boost of infinities^10000.</span>
                               </div>
                               <button id="eterc10" class="challengesbtn" onclick="startEternityChallenge(10)">Start</button>
                               <div id="eterc10goaldiv" style="display: none;">
                                 <span id="ec10goal">Goal: z</span><br>
-                                <span>Reward: Normal dimensions gain a multiplier based on infinities. Currently: <span id="ec10reward">reward<span>.</span>
+                                <span>Reward: Normal Dimensions gain a multiplier based on infinities. Currently: <span id="ec10reward">reward<span>.</span>
                               </div>
                             </div>
                         </td>
@@ -1723,18 +1934,18 @@
                               <span id="ec11completions">Completed x times.</span>
                               <br/>
                               <div id="eterc11costdiv">
-                                <span>Requires <span id="ec11cost">y</span> first dimension multiplier.</span>
+                                <span>Requires <span id="ec11cost">y</span> First Dimension multiplier.</span>
                                 <br/>
                                 <span>Costs 300 time theorems.</span>
                               </div>
                               <button id="eterc11unlockbtn" class="challengesbtn" onclick="attemptEterChallUnlock(11)">Unlock</button>
                               <div id="eterc11conditionsdiv" style="display: none;">
-                                <span>The only dimension multipliers are from dimension boosts and infinity power on normal dimensions.</span>
+                                <span>All dimension boost multipliers are disabled except from dimension boosts and infinity power on normal dimensions.</span>
                               </div>
                               <button id="eterc11" class="challengesbtn" onclick="startEternityChallenge(11)">Start</button>
                               <div id="eterc11goaldiv" style="display: none;">
                                 <span id="ec11goal">Goal: z</span><br>
-                                <span>Reward: Dimension boosts and infinity power make normal dimensions more powerful. Currently: <span id="ec11reward">reward</span>.</span>
+                                <span>Reward: Dimension Boosts and infinity power gives a more powerful multiplier to normal dimensions. Currently: <span id="ec11reward">reward</span>.</span>
                               </div>
                             </div>
                         </td>
@@ -1777,12 +1988,12 @@
                               </div>
                               <button id="eterc13unlockbtn" class="challengesbtn" onclick="attemptEterChallUnlock(13)">Unlock</button>
                               <div id="eterc13conditionsdiv" style="display: none;">
-                                <span>Normal dimensions don't produce anything, but you get one antimatter and one infinity point per tick.</span>
+                                <span>Normal Dimensions don't produce anything, but you get one antimatter and one infinity point per tick.</span>
                               </div>
                               <button id="eterc13" class="challengesbtn" onclick="startEternityChallenge(13)">Start</button>
                               <div id="eterc13goaldiv" style="display: none;">
                                 <span id="ec13goal">Goal: z</span><br>
-                                <span>Reward: Infinite Time's reward is slightly stronger. Tickspeed effect on time dimensions is <span id="ec13reward">reward</span>.</span>
+                                <span>Reward: Infinite Time's reward is slightly stronger. Tickspeed effect on Time Dimensions is <span id="ec13reward">reward</span>x.</span>
                               </div>
                             </div>
                         </td>
@@ -1810,7 +2021,7 @@
             <table class="table" style="margin: 0 auto">
                 <tr>
                     <td>
-                        <button id="infi11" class="infinistorebtn1">Production increase over time <br>currently:</button>
+                        <button id="infi11" class="infinistorebtn1">Production increases over time <br>currently:</button>
                     </td>
                     <td>
                         <button id="infi21" class="infinistorebtn2">Multiplier for 10 Dimensions <br>2x -> 2.2x<br>Cost: 1 IP</button>
@@ -1819,7 +2030,7 @@
                         <button id="infi31" class="infinistorebtn3">Production increase over time in current infinity<br>Cost: 3 IP</button>
                     </td>
                     <td>
-                        <button id="infi41" class="infinistorebtn4">You start with 5th dimension<br>Cost: 20 IP</button>
+                        <button id="infi41" class="infinistorebtn4">You start with the 5th dimension (1 shift)<br>Cost: 20 IP</button>
                     </td>
                 </tr>
                 <tr>
@@ -1833,7 +2044,7 @@
                         <button id="infi32" class="infinistorebtn3">Bonus per unspent Infinity Point <br>xx</button>
                     </td>
                     <td>
-                        <button id="infi42" class="infinistorebtn4">You start with 6th dimension<br>Cost: 40 IP</button>
+                        <button id="infi42" class="infinistorebtn4">You start with the 6th dimension (2 shifts)<br>Cost: 40 IP</button>
                     </td>
                 </tr>
                 <tr>
@@ -1847,7 +2058,7 @@
                         <button id="infi33" class="infinistorebtn3">Increase Dimension Boost power <br>2x -> 2.5x<br>Cost: 7 IP</button>
                     </td>
                     <td>
-                        <button id="infi43" class="infinistorebtn4">You start with 7th dimension<br>Cost: 80 IP</button>
+                        <button id="infi43" class="infinistorebtn4">You start with the 7th dimension (3 shifts)<br>Cost: 80 IP</button>
                     </td>
                 </tr>
                 <tr>
@@ -1861,7 +2072,7 @@
                         <button id="infi34" class="infinistorebtn3">Infinity Point generation (based on fastest infinity) <br>xx</button>
                     </td>
                     <td>
-                        <button id="infi44" class="infinistorebtn4">You start with 8th dimension, and a Galaxy<br>Cost: 500 IP</button>
+                        <button id="infi44" class="infinistorebtn4">You start with 8th dimension (4 shifts), and a Galaxy<br>Cost: 500 IP</button>
                     </td>
                 </tr>
                 <tr>
