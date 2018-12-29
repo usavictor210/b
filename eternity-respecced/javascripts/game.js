@@ -1434,8 +1434,7 @@ function formatValue(notation, value, places, placesUnder1000) {
 	    return mysterious(value);
 	} else if (notation === "Custom") {
             return customNotationFunction(value, places);
-
-        else {
+	} else {
             if (power > 100000  && player.options.commas) power = power.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".");
             return "1337 H4CK3R"
         }
@@ -5037,6 +5036,7 @@ function galaxyReset() {
     if (player.spreadingCancer >= 10) giveAchievement("Spreading Cancer")
     if (player.achievements.includes("r36")) player.tickspeed = player.tickspeed.times(0.98);
     if (player.achievements.includes("r45")) player.tickspeed = player.tickspeed.times(0.98);
+    if (player.achievements.includes("r66")) player.tickspeed = player.tickspeed.times(0.98);
     if (player.achievements.includes("r83")) player.tickspeed = player.tickspeed.times(Decimal.pow(0.95,player.galaxies));
     clearInterval(player.interval);
     //updateInterval();
@@ -5281,31 +5281,31 @@ document.getElementById("notation").onclick = function () {
         document.getElementById("notation").innerHTML = ("Notation: Scientific")
     } else if (player.options.notation === "Scientific") {
         player.options.notation = "Engineering";
-        document.getElementById("notation").textContent = ("Notation: Engineering")
+        document.getElementById("notation").innerHTML = ("Notation: Engineering")
     } else if (player.options.notation === "Engineering") {
         player.options.notation = "Letters";
-        document.getElementById("notation").textContent = ("Notation: Letters")
+        document.getElementById("notation").innerHTML = ("Notation: Letters")
     } else if (player.options.notation === "Letters") {
         player.options.notation = "Standard";
-        document.getElementById("notation").textContent = ("Notation: Standard")
+        document.getElementById("notation").innerHTML = ("Notation: Standard")
     } else if (player.options.notation === "Standard") {
         player.options.notation = "Emojis";
-        document.getElementById("notation").textContent = ("Notation: Cancer")
+        document.getElementById("notation").innerHTML = ("Notation: Cancer")
     } else if (player.options.notation === "Emojis") {
         player.options.notation = "Mixed scientific";
-        document.getElementById("notation").textContent = ("Notation: Mixed scientific")
+        document.getElementById("notation").innerHTML = ("Notation: Mixed scientific")
     } else if (player.options.notation === "Mixed scientific") {
         player.options.notation = "Mixed engineering";
-        document.getElementById("notation").textContent = ("Notation: Mixed engineering")
+        document.getElementById("notation").innerHTML = ("Notation: Mixed engineering")
     } else if (player.options.notation === "Mixed engineering") {
         player.options.notation = "Logarithm";
-        document.getElementById("notation").textContent = ("Notation: Logarithm")
+        document.getElementById("notation").innerHTML = ("Notation: Logarithm")
     } else if (player.options.notation === "Logarithm") {
         player.options.notation = "Brackets";
-        document.getElementById("notation").textContent = ("Notation: Brackets")
+        document.getElementById("notation").innerHTML = ("Notation: Brackets")
     } else if (player.options.notation === "Brackets") {
       player.options.notation = "Infinity";
-      document.getElementById("notation").textContent = ("Notation: Infinity")
+      document.getElementById("notation").innerHTML = ("Notation: Infinity")
     }
     setAchieveTooltip();
     updateCosts();
