@@ -300,7 +300,11 @@ var player = {
         ep: {
             perMin: new Decimal(0),
             total: new Decimal(0)
-        }
+        },
+	gp: {
+	    perMin: new Decimal(0),
+	    total: new Decimal(0)
+	},
     },
     options: {
         newsHidden: false,
