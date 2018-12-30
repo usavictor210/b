@@ -1681,7 +1681,7 @@ function getDimensionFinalMultiplier(tier) {
     else if (player.achievements.includes("r34")) multiplier = multiplier.times(1.02);
     if (tier <= 4 && player.achievements.includes("r43")) multiplier = multiplier.times(1.25);
     if (player.achievements.includes("r48")) multiplier = multiplier.times(1.1);
-    if (player.achievements.includes("r72")) multiplier = multiplier.times(1.1); // tbd
+    if (player.achievements.includes("r72")) multiplier = multiplier.times(1.1); // tbd..?
     if (player.achievements.includes("r74") && player.currentChallenge != "") multiplier = multiplier.times(1.4);
     if (player.achievements.includes("r77")) multiplier = multiplier.times(1+tier/100);
     if (player.achievements.includes("r56") && player.thisInfinityTime < 1800) multiplier = multiplier.times(3600/(player.thisInfinityTime+1800));
@@ -1790,7 +1790,7 @@ function getShiftRequirement(bulk) {
     return { tier: tier, amount: Math.floor(amount) };
 }
 
-function galaxyIncrement () {
+function galaxyIncrement() {
   let ret = 60;
   if (player.currentChallenge === "challenge4") {
     ret = 90;
@@ -1905,7 +1905,7 @@ function updateDimensions() {
     document.getElementById("galaxies").innerHTML = 'You have ' + Math.round(player.galaxies) + ' Antimatter Galaxies.';
     document.getElementById("totalTime").innerHTML = "You have played for " + timeDisplay(player.totalTimePlayed) + ".";
 
-    if (player.infinitied === 0 && player.eternities === 0) {
+    if (player.infinitied === 0 && player.eternities === 0 && player.intergalactic.intergalaxies === 0) {
         document.getElementById("bestInfinity").innerHTML = ""
         document.getElementById("infinitied").innerHTML = ""
         document.getElementById("thisInfinity").innerHTML = ""
@@ -1922,20 +1922,36 @@ function updateDimensions() {
             document.getElementById("infinitied").innerHTML = "You have infinitied " + addCommas(player.infinitied) + " time" + infPlural + ".";
         }
     }
-    if (player.bankedInfinities === 0) {
+    if (player.bankedInfinities == 0 && player.intergalactic.intergalaxies == 0) {
         document.getElementById("bankedInfinities").innerHTML = ""
     } else {
+        if (player.intergalactic.intergalaxies < 0 | player.intergalactic.intergalaxies == 0) {
         document.getElementById("bankedInfinities").innerHTML = "You have " + addCommas(player.bankedInfinities) + " banked infinities.";
+        } else document.getElementById("bankedInfinities").innerHTML = "You have " + addCommas(player.bankedInfinities) + " banked infinities in this intergalaxy."
     }
 
-    if (player.eternities == 0) {
+    if (player.eternities == 0 && player.intergalactic.intergalaxies == 0) {
         document.getElementById("eternitied").innerHTML = ""
         document.getElementById("besteternity").innerHTML = ""
         document.getElementById("thiseternity").innerHTML = ""
     } else {
-        document.getElementById("eternitied").innerHTML = "You have eternitied "+addCommas(player.eternities)+" times.";
+	if (player.intergalactic.intergalaxies < 0 | player.intergalactic.intergalaxies == 0) {
+	let eternityPlural = player.eternities.equals(1) ? '' : 's'
+        document.getElementById("eternitied").innerHTML = "You have eternitied "+addCommas(player.eternities)+" time" + eternityPlural + ".";
         document.getElementById("besteternity").innerHTML = "You have spent "+timeDisplay(player.thisEternity)+" in this Eternity.";
         document.getElementById("thiseternity").innerHTML = "Your fastest Eternity is in "+timeDisplay(player.bestEternity)+".";
+    } else document.getElementById("eternitied").innerHTML = "You have eternitied "+addCommas(player.eternities)+" time" + eternityPlural + " in this intergalaxy.";
+        document.getElementById("besteternity").innerHTML = "You have spent "+timeDisplay(player.thisEternity)+" in this Eternity.";
+        document.getElementById("thiseternity").innerHTML = "Your fastest Eternity is in "+timeDisplay(player.bestEternity)+".";
+    }
+    if (player.intergalactic.intergalaxies == 0) {
+        document.getElementById("intergalaxied").innerHTML = ""
+        document.getElementById("bestintergalaxy").innerHTML = ""
+        document.getElementById("thisintergalaxy").innerHTML = ""
+    } else {
+        document.getElementById("intergalaxied").innerHTML = "You have went intergalactic "+addCommas(player.intergalactic.intergalaxies)+" times.";
+        document.getElementById("bestintergalaxy").innerHTML = "You have spent "+timeDisplay(player.intergalactic.thisIntergalaxy)+" in this Intergalaxy.";
+        document.getElementById("thisintergalaxy").innerHTML = "Your fastest Intergalaxy is in "+timeDisplay(player.intergalactic.bestIntergalaxy)+".";
     }
 
     document.getElementById("infi11").innerHTML = "Normal dimensions gain a multiplier based on time played<br>Currently: " + (Math.pow(0.5 * player.totalTimePlayed / 600, 0.15)).toFixed(2) + "x<br>Cost: 1 IP"
@@ -1957,7 +1973,7 @@ function updateDimensions() {
     document.getElementById("postinfi42").innerHTML = "Dimension cost multiplier increase <br>"+player.dimensionMultDecrease+"x -> "+(player.dimensionMultDecrease-1)+"x<br>Cost: "+shortenCosts(player.dimensionMultDecreaseCost) +" IP"
 
     document.getElementById("postinfi13").innerHTML = "You passively generate infinitied stat based on fastest infinity<br>1 Infinity every "+timeDisplay(player.bestInfinityTime*5)+ " <br>Cost: "+shortenCosts(20e6)+" IP"
-    document.getElementById("postinfi23").innerHTML = "Option to bulk buy Dimension Boosts <br>Cost: "+shortenCosts(5e9)+" IP"
+    document.getElementById("postinfi23").innerHTML = "Option to bulk buy Dimension Boosts. <br>Cost: "+shortenCosts(5e9)+" IP"
     document.getElementById("postinfi33").innerHTML = "Autobuyers work twice as fast.<br>Cost:"+ shortenCosts(1e15)+" IP"
     if (player.dimensionMultDecrease == 3) document.getElementById("postinfi42").innerHTML = "Dimension cost multiplier increase <br>"+player.dimensionMultDecrease+"x"
 
@@ -7089,7 +7105,7 @@ function intergalaxy(force) {
                 limit: player.replicanti.newLimit,
                 newLimit: player.replicanti.newLimit
             },
-            timestudy: initTimeStudy(),
+            timestudy: initTimestudy(),
             autoIP: new Decimal(0),
             autoTime: 1e300,
             infMultBuyer: hasEternityMilestones ? player.infMultBuyer: false,
@@ -8572,7 +8588,7 @@ var newsArray = ["You just made your 1,000,000,000,000,000 antimatter. This one 
 "Technically speaking, your intergalactic galaxies are actually just lonely galaxies. An intergalactic galaxy is still a contradiction in terms, but \"lonely galaxy\" sounds like there was a cost increase or something so I couldn't use it.",
 "The hardest part of the intergalactic update was finding somewhere to put the \"Go intergalactic\" button. Not to say that the rest was easy, but that was the hardest part.",
 "If you haven't unlocked antipichus yet, you're playing the game wrong. How in the world are you supposed to finish this two-hour long game in any reasonable amount of time without figuring out antipichus? I guess it might be possible if you're the type of crazy person willing to spend weeks or even months on the game, but I doubt it.", "Hello.", "This news message doesn't have much of a purpose. It's just extra things usavictor put in...", "Breaking News: usavictor keeps breaking things in the javascript code. It's not.. good.",
-"This is a reminder to backup your save. New updates might break your game, so you should backup your save just in case."]
+"This is a reminder to backup your save. New updates might break your game, so you should backup your save just in case.", "A thing is happening! What is happening, however, is unknown.", "usavictor may or may not update the news."]
 //any news message after "If you haven't unlocked antipichus yet, you're playing the game wrong. How in the world are you supposed to finish this two-hour long game in any reasonable amount of time without figuring out antipichus? I guess it might be possible if you're the type of crazy person willing to spend weeks or even months on the game, but I doubt it." is by usavictor.
 
 var conditionalNewsArray = ["Our universe is falling apart. We are all evacuating. This is the last news cast", "THIS NEWS STATION HAS SHUT DOWN DUE TO COLLAPSING UNIVERSE",
@@ -8582,7 +8598,7 @@ var conditionalNewsArray = ["Our universe is falling apart. We are all evacuatin
 
 var cheatCodeNewsArray = [
   "-2: All kinds of points are less than 1e100. If not, you or I made a mistake.",
-  "-1: I initially understood letter notation incorrectly, but I don't want to fix it, so I'm instead putting in this disclaimer. For the purposes of these messages about points, all numbers in letter notation are 1000 times what they are in the regular game (so 1a is a million, not a thousand).",
+  "-1: I initially understood letter notation incorrectly, but I don't want to fix it, so I'm instead putting in this disclaimer. For the purposes of these messages about points, all numbers in letter notation are 1000 times what they are in the regular game (so 1a is a million, not a thousand). You might want to ignore this though, usavictor may have fixed it.",
   "0: The numbered messages about the sixteen different types of points can give a cheat code when considered correctly.",
   "1: Your alternative points are your exponential points or your logarithmic points, whichever is greater.",
   "2: Your binary points are 2^bits rounded to the nearest power of 10. The formula for bits is 2^8 - greatest number of dragons you ever had - 2 * log10(overflow points)",
