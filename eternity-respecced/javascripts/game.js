@@ -7432,6 +7432,97 @@ function newDimension() {
         }
     }
 }
+//bugs!
+function bugCheck (tier) {
+    var name = TIER_NAMES[tier];
+
+    if (Number.isNaN(player[name + 'Pow'].e)) {
+      console.log('bug check: dim pow is buggy');
+    }
+    if (Number.isNaN(player.achPow.e)) {
+      console.log('bug check: ach pow is buggy');
+    }
+
+    if (Number.isNaN(player.infinityPower.e)) {
+      console.log('bug check: inf pow is buggy');
+    }
+
+    if (Number.isNaN(totalMult)) {
+      console.log('bug check: total mult is buggy');
+    }
+
+    if (Number.isNaN(currentMult)) {
+      console.log('bug check: current mult is buggy');
+    }
+
+    if (Number.isNaN(infinitiedMult)) {
+      console.log('bug check: infinitied mult is buggy');
+    }
+
+    if (Number.isNaN(achievementMult)) {
+      console.log('bug check: achievement mult is buggy');
+    }
+
+    if (Number.isNaN(challengeMult.e)) {
+      console.log('bug check: challenge mult is buggy');
+    }
+
+    if (Number.isNaN(dimMults().e)) {
+      console.log('bug check: inf dim mult is buggy');
+    }
+
+    if (Number.isNaN(unspentBonus.e)) {
+      console.log('bug check: inf unspent bonus is buggy');
+    }
+
+    if (Number.isNaN(timeMult().e)) {
+      console.log('bug check: time mult is buggy');
+    }
+
+    if (Number.isNaN(player.thisInfinityTime)) {
+      console.log('bug check: infinity time is buggy')
+    }
+
+    if (Number.isNaN(player.infinityDimension8.amount.e)) {
+      console.log('bug check: id8 is buggy')
+    }
+
+    if (Number.isNaN(player.money.e)) {
+      console.log('bug check: money is buggy')
+    }
+
+    if (Number.isNaN(player.money.pow(0.00004).plus(1).e)) {
+      console.log('bug check: money is weirdly buggy')
+    }
+
+    if (Number.isNaN(player.postC3Reward.e)) {
+      console.log('bug check: postc3 reward is buggy')
+    }
+
+    if (Number.isNaN(mult18.e)) {
+      console.log('bug check: mult18 is buggy')
+    }
+
+    if (Number.isNaN(postc8Mult.e)) {
+      console.log('bug check: post c8 mult is buggy')
+    }
+
+    let l = [player[name + 'Pow'], player.achPow, player.infinityPower,
+    totalMult, currentMult, infinitiedMult, achievementMult, challengeMult,
+    dimMults(), unspentBonus, timeMult(), player.thisInfinityTime,
+    player.infinityDimension8.amount, player.money, player.money.pow(0.00004).plus(1),
+    player.postC3Reward, mult18, postc8Mult];
+
+    let r = new Decimal(1);
+
+    for (let i of l) {
+      r = r.times(new Decimal(1).plus(i));
+    }
+
+    if (Number.isNaN(r.e)) {
+      console.log('bug check: something is really weirdly buggy')
+    }
+}
 
 let savefix = function () {
   let oldPlayer = {};
@@ -7477,7 +7568,7 @@ let savefix = function () {
   }
 }
 
-
+//end of bug catching stuff
 var blink = true;
 
 
