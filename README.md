@@ -1,3 +1,5 @@
+12/30/2018: The intergalactic update is coming. Soon.
+
 usavictor, 11/3/18: I now own /b, originally owned by dan-simon until he deleted the original repository. Since I had one of the only forks, by randomness, ownership was transferred to me. THIS MEANS ETERNITY RESPECCED IS NOW OWNED BY ME (well basically everything in here is maintained by me now)
 
 Original description:
