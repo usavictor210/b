@@ -5784,6 +5784,7 @@ function updatePriorities() {
     for (var x=0 ; x < autoBuyerArray().length; x++) {
         if (x < 9) autoBuyerArray()[x].priority = parseInt(document.getElementById("priority" + (x+1)).value)
     }
+    player.autobuyers[8].buyTickspeedWhenMultIncreases = document.getElementById('buyTickspeedWhenMultIncreases').checked;
     player.autobuyers[9].priority = parseInt(document.getElementById("priority10").value)
     player.autobuyers[10].priority = parseInt(document.getElementById("priority11").value)
     var infvalue = document.getElementById("priority12").value
@@ -5808,7 +5809,7 @@ function updatePriorities() {
     if (player.autoSacrifice.priority === null) player.autoSacrifice.priority = 10
     if (player.autoSacrifice.priority == 1) player.autoSacrifice.priority = 1.5
     player.autobuyers[10].bulk = parseFloat(document.getElementById("bulkgalaxy").value)
-
+	
     var replBulk = document.getElementById("bulkreplgalaxy").value
     if (replBulk.slice(0, 3) === 'max') {
       replBulk = 'max';
@@ -5821,8 +5822,7 @@ function updatePriorities() {
     if (!player.achievements.includes('r134')) {
       replBulk = 1;
     }
-
-    var replWait = parseFloat(document.getElementById("waitreplgalaxy").value)
+    var replWait = parseFloat(document.getElementById("bulkreplgalaxy").value)
     if (!player.achievements.includes('r134') || isNaN(replWait)) {
       replWait = 0;
     }
@@ -5830,7 +5830,6 @@ function updatePriorities() {
     player.replicanti.galaxybuyer.wait = replWait;
     var eterValue = new Decimal(document.getElementById("priority13").value)
     if (!isNaN(eterValue)) player.eternityBuyer.limit = eterValue
-
     priorityOrder()
 }
 
