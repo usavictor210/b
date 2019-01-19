@@ -3,7 +3,7 @@
 <html>
 
 <head>
-    <title>Antimatter Dimensions</title>
+    <title>Antimatter Dimensions | Eternity Respecced (TESTING)</title>
     <link rel="icon" type="image/png" href="icon.png">
     <meta name="Antimatter Dimensions" content="A game about huge numbers and watching them go up." />
     <h1 id="hiddenheader" style="display: none">Antimatter Dimensions</h1>
@@ -47,7 +47,7 @@
             <button id="postInfinityButton" class="postinfcrunch">Big Crunch for x Infinity Points</button>
             <button id="newDimensionButton" class="newdim" onclick="newDimension()">Get x antimatter to unlock a new Dimension.</button>
             <button id="eternitybtn" class="eternitybtn" onclick="eternity()">Other times await.. I need to become Eternal.</button>
-            <button id="intergalacticbtn" class="intergalacticbtn" onclick="intergalactic()">The stars are too bright.. I need to go Intergalactic.</button>
+            <button id="intergalacticbtn" class="intergalacticbtn" onclick="intergalaxy()">The stars are too bright.. I need to go Intergalactic.</button>
         </div>
         <div id="coinsPerSec">You are getting 0 antimatter per second.</div>
 
@@ -206,13 +206,13 @@
                     </tr>
                     <tr>
                         <td>
-                            <button id="eter4" class="eternityupbtn" onclick="buyEternityUpgrade(4, 1e6)">Eternity production is boosted by unspent EP (1+floor(log10(EP)/6))<br>Currently: x<br>Cost: x EP</button>
+                            <button id="eter4" class="eternityupbtn" onclick="buyEternityUpgrade(4, 1e6)">Eternity production is boosted by unspent EP (1+floor(log10(x)/6))<br>Currently: x<br>Cost: x EP</button>
                         </td>
                         <td>
-                            <button id="eter5" class="eternityupbtn" onclick="buyEternityUpgrade(5, 1e9)">Timeshard production is boosted by eternities (1+eternities)<br>Currently: x<br>Cost: x EP</button>
+                            <button id="eter5" class="eternityupbtn" onclick="buyEternityUpgrade(5, 1e9)">Timeshard production is boosted by eternities (1+x)<br>Currently: x<br>Cost: x EP</button>
                         </td>
                         <td>
-                            <button id="eter6" class="eternityupbtn" onclick="buyEternityUpgrade(6, 1e12)">EP production is boosted by timeshards (1+log10(timeshards)^0.5)<br>Currently: x<br>Cost: x EP</button>
+                            <button id="eter6" class="eternityupbtn" onclick="buyEternityUpgrade(6, 1e12)">EP production is boosted by timeshards (1+log10(x)^0.5)<br>Currently: x<br>Cost: x EP</button>
                         </td>
                     </tr>
                     <tr id="eterrow3" style="display: none;">
@@ -264,7 +264,7 @@
                     </tr>
                     <tr> 
                         <td><button class="milestonerewardlocked" id="reward4" style="font-size: 12px">Unlock more big crunch autobuyer options.</button></td>
-                        <td><button class="milestonerewardlocked" id="reward5" style="font-size: 10px">You complete Infinity Challenges as soon as you unlock them (you get sacrifice autobuyer immediately)</button></td>
+                        <td><button class="milestonerewardlocked" id="reward5" style="font-size: 10px">You complete Infinity Challenges as soon as you unlock them (you get sacrifice autobuyer immediately).</button></td>
                     </tr>
                     <tr>
                         <td class="milestoneText">9 Eternities:</td>
@@ -342,10 +342,6 @@
             </div>
         </div>
         
-        
-        //separate
-        
-         
         <div id="intergalacticstore" class="tab" style="font-size: 15px; width: 60%; margin: 0 auto; display: none" align="center">
             <table class="table" align="center" style="margin: auto">
                 <tr>
@@ -1586,7 +1582,7 @@
                                     <button id="postc1" class="challengesbtn" onclick="startChallenge('postc1', new Decimal('1e850'))">Start</button>
                                     <br>
                                     <span id="postc1goal" >Goal: 1e850</span><br>
-                                    <span>Reward: 1.3x on all Infinity Dimensions for each Infinity Challenge completed</span>
+                                    <span>Reward: 1.3x on all Infinity Dimensions for each Infinity Challenge completed.</span>
                                 </div>
                             </div>
                         </td>
@@ -1599,7 +1595,7 @@
                                     <button id="postc2" class="challengesbtn" onclick="startChallenge('postc2', new Decimal('1e10500'))">Start</button>
                                     <br>
                                     <span id="postc2goal" >Goal: 1e10500</span><br>
-                                    <span>Reward: Sacrifice autobuyer and more powerful sacrifice</span>
+                                    <span>Reward: Get the sacrifice autobuyer, and a more powerful sacrifice.</span>
                                 </div>
                             </div>
                         </td>
@@ -1615,7 +1611,7 @@
                                     <button id="postc3" class="challengesbtn" onclick="startChallenge('postc3', new Decimal('1e5000'))">Start</button>
                                     <br>
                                     <span id="postc3goal" >Goal: 1e5000</span><br>
-                                    <span>Reward: Static multiplier on each tickspeed purchase</span>
+                                    <span>Reward: Gain a static multiplier on each tickspeed purchase.</span>
                                 </div>
                             </div>
                         </td>
@@ -1628,7 +1624,7 @@
                                     <button id="postc4" class="challengesbtn" onclick="startChallenge('postc4', new Decimal('1e13000'))">Start</button>
                                     <br>
                                     <span id="postc4goal" >Goal: 1e13000</span><br>
-                                    <span>Reward: All normal dimension multipliers become multiplier^1.05</span>
+                                    <span>Reward: All normal dimension multipliers are increased to x^1.05.</span>
                                 </div>
                             </div>
                         </td>
@@ -1643,7 +1639,7 @@
                                     <button id="postc5" class="challengesbtn" onclick="startChallenge('postc5', new Decimal('1e11111'))">Start</button>
                                     <br>
                                     <span id="postc5goal" >Goal: 1e11111</span><br>
-                                    <span>Reward: Galaxies are 10% more powerful and reduce the requirements for them and dimensional boosts by 1</span>
+                                    <span>Reward: Galaxies are 10% more powerful, and reduce the requirements for galaxies and dimensional boosts by 1.</span>
                                 </div>
                             </div>
                         </td>
@@ -1656,7 +1652,7 @@
                                     <button id="postc6" class="challengesbtn" onclick="startChallenge('postc6', new Decimal('2e22222'))">Start</button>
                                     <br>
                                     <span id="postc6goal" >Goal: 2e22222</span><br>
-                                    <span>Reward: Tickspeed affects Infinity Dimensions with reduced effect</span>
+                                    <span>Reward: Tickspeed affects Infinity Dimensions with reduced effect.</span>
                                 </div>
                             </div>
                         </td>
@@ -1714,7 +1710,7 @@
                                 <button id="eterc1" class="challengesbtn" onclick="startEternityChallenge(1)">Start</button>
                                 <div id="eterc1goaldiv" style="display: none;">
                                   <span id="ec1goal">Goal: z</span><br>
-                                  <span>Reward: Time Dimensions get a multiplier based on time spent in current Eternity. Currently: <span id="ec1reward">reward</span>.</span>
+                                  <span>Reward: Time Dimensions get a multiplier based on time spent in the current Eternity. Currently: <span id="ec1reward">reward</span>.</span>
                                 </div>
                             </div>
                         </td>
@@ -1962,7 +1958,7 @@
                               </div>
                               <button id="eterc12unlockbtn" class="challengesbtn" onclick="attemptEterChallUnlock(12)">Unlock</button>
                               <div id="eterc12conditionsdiv" style="display: none;">
-                                <span>The game runs 1000x slower.</span>
+                                <span>The game runs 1,000x slower.</span>
                               </div>
                               <button id="eterc12" class="challengesbtn" onclick="startEternityChallenge(12)">Start</button>
                               <div id="eterc12goaldiv" style="display: none;">
@@ -2511,13 +2507,13 @@
 
 
 <script type="text/javascript"src="PlayFab/PlayFabClientApi.js"></script>
+<script type="text/javascript" src="javascripts/fixstuff.js"></script>
 <script type="text/javascript" src="javascripts/autobuyer.js"></script>
 <script type="text/javascript" src="javascripts/confractus_numerus.js"></script>
 <script type="text/javascript" src="javascripts/game.js?82"></script>
 <script type="text/javascript" src="javascripts/sha512.js"></script>
 <script type="text/javascript" src="javascripts/eter_player.js"></script>
 <script type="text/javascript" src="javascripts/lz-string.js"></script>
-
 
 
 
