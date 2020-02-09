@@ -16,6 +16,7 @@ var TIER_NAMES = [ null, "first", "second", "third", "fourth", "fifth", "sixth",
 var DISPLAY_NAMES = [ null, "First", "Second", "Third", "Fourth", "Fifth", "Sixth", "Seventh", "Eighth" ];
 var forceHardReset = false;
 var player = {
+    ngPlus: 1,
     money: new Decimal(10),
     tickSpeedCost: new Decimal(1000),
     tickspeed: new Decimal(1000),
@@ -378,7 +379,7 @@ var player = {
 };
 
 function ngplus () {
-        if (player.eternities < 100)
+        if (player.ngPlus = 0) {
         player.money=new Decimal(1e25)
         player.infinitiedBank=1e6
         player.infinityUpgrades=["timeMult", "dimMult", "timeMult2", "unspentBonus", "27Mult", "18Mult", "36Mult", "resetMult", "passiveGen", "45Mult", "resetBoost", "galaxyBoost"]
@@ -401,6 +402,8 @@ function ngplus () {
         player.achievements.push("r102")
         player.achievements.push("r131")
         player.achievements.push("r123")
+        player.ngPlus = 1
+        }
 }
 
 var defaultStart = $.extend(true, {}, player);
@@ -628,7 +631,7 @@ function getDilReq () {
 }
 
 function getDilTimeGainPerSecond () {
-  let gain = player.dilation.tachyonParticles.times(Math.pow(2, player.dilation.rebuyables[1]));
+  let gain = player.dilation.tachyonParticles.times(Math.pow(2, player.dilation.rebuyables[1]) * 2);
   if (player.dilation.upgrades.includes(12)) {
     gain = gain.times(Math.pow(player.eternities, .1));
   }
@@ -3120,6 +3123,7 @@ document.getElementById("bigcrunch").onclick = function () {
         auto = autoS; //only allow autoing if prev crunch was autoed
         autoS = true;
         player = {
+            ngPlus: 1,
             money: new Decimal(10),
             tickSpeedCost: new Decimal(1000),
             tickspeed: new Decimal(1000),
@@ -3425,6 +3429,7 @@ function eternity(force, auto) {
         }
         player.challenges = temp
         player = {
+            ngPlus: 1,
             money: new Decimal(10),
             tickSpeedCost: new Decimal(1000),
             tickspeed: new Decimal(1000),
@@ -3746,6 +3751,7 @@ function startChallenge(name, target) {
   if(player.options.challConf || name == "" ? true : (name.includes("post")) ? confirm("You will start over with just your infinity upgrades, and achievements. You need to reach a set goal with special conditions. NOTE: The rightmost infinity upgrade column doesn't work on challenges.") : confirm("You will start over with just your infinity upgrades, and achievements. You need to reach infinity with special conditions. NOTE: The rightmost infinity upgrade column doesn't work on challenges.")) {
     if (player.currentChallenge != "") document.getElementById(player.currentChallenge).textContent = "Start"
     player = {
+        ngPlus: 1,
         money: new Decimal(10),
         tickSpeedCost: new Decimal(1000),
         tickspeed: new Decimal(1000),
@@ -4242,6 +4248,7 @@ function startEternityChallenge(name, startgoal, goalIncrease) {
     if (player.eternityChallUnlocked == 0 || parseInt(name.split("c")[1]) !== player.eternityChallUnlocked) return
     if((player.options.challConf) || name == "" ? true :  (confirm("You will start over with just your time studies, eternity upgrades and achievements. You need to reach a set IP with special conditions."))) {
         player = {
+            ngPlus: 1,
             money: new Decimal(10),
             tickSpeedCost: new Decimal(1000),
             tickspeed: new Decimal(1000),
@@ -4634,7 +4641,7 @@ function updateDilationUpgradeButtons() {
             document.getElementById("dil"+i).className = ( DIL_UPG_COSTS[i] > player.dilation.dilatedTime ) ? "dilationupglocked" : "dilationupg";
         }
     }
-    document.getElementById("dil9desc").textContent = "Currently: "+shortenMoney(player.dilation.dilatedTime.pow(1000).max(1)) + 'x';
+    document.getElementById("dil9desc").textContent = "Currently: "+shortenMoney(player.dilation.dilatedTime.pow(2000).max(1)) + 'x';
     document.getElementById("dil13desc").textContent = "Currently: "+shortenMoney(getDil13Bonus()) + 'x';
     document.getElementById("dil14desc").textContent = "Currently: "+shortenMoney(getDil14Bonus()) + 'x';
     document.getElementById("dil16desc").textContent = "Currently: "+shortenMoney(getDil16Bonus()) + 'x';
