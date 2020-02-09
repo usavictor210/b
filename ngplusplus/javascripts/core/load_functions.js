@@ -410,6 +410,8 @@ if (player.version < 5) {
   toggleChallengeRetry()
   toggleBulk()
   toggleBulk()
+  toggleCloud()
+  toggleCloud()
   respecToggle()
   respecToggle()
   toggleEternityConf()
