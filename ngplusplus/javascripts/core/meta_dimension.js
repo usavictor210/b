@@ -1,5 +1,5 @@
 function getDilationMetaDimensionMultiplier () {
-  return player.dilation.dilatedTime.div(1e40).pow(.1).plus(1);
+  return player.dilation.dilatedTime.div(1e38).pow(.2).plus(1);
 }
 
 function getMetaResetPower () {
