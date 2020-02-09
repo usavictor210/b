@@ -378,10 +378,11 @@ var player = {
 };
 
 function ngplus () {
+        if (player.eternities < 100)
         player.money=new Decimal(1e25)
         player.infinitiedBank=1e6
         player.infinityUpgrades=["timeMult", "dimMult", "timeMult2", "unspentBonus", "27Mult", "18Mult", "36Mult", "resetMult", "passiveGen", "45Mult", "resetBoost", "galaxyBoost"]
-        player.infMult=new Decimal(16)
+        player.infMult=new Decimal(1024)
         player.dimensionMultDecrease=2
         player.tickSpeedMultDecrease=1.65
         player.eternities=100
