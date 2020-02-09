@@ -3,6 +3,7 @@ function quantum(force, auto) {
         player.quantum.quarks = player.quantum.quarks.plus(quarkGain());
         player.quantum.gluons = 0;
         player = {
+            ngPlus: 1,
             money: new Decimal(10),
             tickSpeedCost: new Decimal(1000),
             tickspeed: new Decimal(1000),
