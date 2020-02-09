@@ -1,5 +1,5 @@
 function quantum(force, auto) {
-    if (player.meta.antimatter.gte(Number.MAX_VALUE) && (!player.options.quantumconfirm || auto || confirm("Quantum will reset everything eternity resets, and also some other things like dilation. You will gain a quark and unlock various upgrades.")) || force === true) {
+    if (player.meta.antimatter.gte(Number.MAX_VALUE) && (!player.options.quantumconfirm || auto || confirm("Quantum will reset everything eternity resets, including dilation and meta-dimensions. You will gain a quark and unlock various upgrades.")) || force === true) {
         player.quantum.quarks = player.quantum.quarks.plus(quarkGain());
         player.quantum.gluons = 0;
         player = {

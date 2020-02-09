@@ -679,9 +679,9 @@ function updateMetaDimensions () {
       }
 
       if (shiftRequirement.tier < 8) {
-          document.getElementById("metaSoftReset").textContent = "Reset meta-dimensions for a new Dimension"
+          document.getElementById("metaSoftReset").textContent = "Reset Meta-Dimensions for a new Dimension"
       } else {
-          document.getElementById("metaSoftReset").textContent = "Reset meta-dimension for a Boost"
+          document.getElementById("metaSoftReset").textContent = "Reset Meta-Dimensions for a Boost"
       }
 
       if (player.meta[shiftRequirement.tier].amount.lt(shiftRequirement.amount)) {
@@ -692,7 +692,7 @@ function updateMetaDimensions () {
       // also quantum stuff since why not
       if (player.meta.antimatter.gte(Number.MAX_VALUE)) {
         let qg = quarkGain();
-        document.getElementById('quantumResetLabel').textContent = 'Go quantum: get ' + qg + (qg.eq(1) ? ' quark' : 'quarks');
+        document.getElementById('quantumResetLabel').textContent = 'Go quantum: Sacrifice everything to get ' + qg + (qg.eq(1) ? ' quark' : ' quarks');
         document.getElementById('quantumbuttondiv').style.display = '';
       } else {
         document.getElementById('quantumbuttondiv').style.display = 'none';
