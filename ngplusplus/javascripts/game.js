@@ -1578,30 +1578,30 @@ function replicantiGalaxyBulkModeToggle() {
 function timeDimensionAutoToggle() {
     if (player.timeDimensionAutobuyer) {
         player.timeDimensionAutobuyer = false
-        document.getElementById("tdautotoggle").textContent = "Auto max TD OFF"
+        document.getElementById("tdautotoggle").textContent = "Auto max TD: OFF"
     } else {
         player.timeDimensionAutobuyer = true
-        document.getElementById("tdautotoggle").textContent = "Auto max TD ON"
+        document.getElementById("tdautotoggle").textContent = "Auto max TD: ON"
     }
 }
 
 function ep5xAutoToggle() {
     if (player.ep5xAutobuyer) {
         player.ep5xAutobuyer = false
-        document.getElementById("epautotoggle").textContent = "Auto max 5x EP OFF"
+        document.getElementById("epautotoggle").textContent = "Auto max 5x EP: OFF"
     } else {
         player.ep5xAutobuyer = true
-        document.getElementById("epautotoggle").textContent = "Auto max 5x EP ON"
+        document.getElementById("epautotoggle").textContent = "Auto max 5x EP: ON"
     }
 }
 
 function infMultAutoToggle() {
     if (player.infMultBuyer) {
         player.infMultBuyer = false
-        document.getElementById("infmultbuyer").textContent = "Autobuy IP mult OFF"
+        document.getElementById("infmultbuyer").textContent = "Autobuy IP mult: OFF"
     } else {
         player.infMultBuyer = true
-        document.getElementById("infmultbuyer").textContent = "Autobuy IP mult ON"
+        document.getElementById("infmultbuyer").textContent = "Autobuy IP mult: ON"
     }
 }
 
@@ -5280,7 +5280,7 @@ function gameLoop(diff) {
         if (dif > 0) {
             player.infMult = player.infMult.times(Decimal.pow(2, dif))
             player.infMultCost = player.infMultCost.times(Decimal.pow(10, dif))
-            document.getElementById("infiMult").innerHTML = "Multiply infinity points from all sources by 2 <br>currently: "+shorten(player.infMult.times(kongIPMult)) +"x<br>Cost: "+shortenCosts(player.infMultCost)+" IP"
+            document.getElementById("infiMult").innerHTML = "Multiply infinity points from all sources by 2 <br>currently: "+shorten(player.infMult) +"x<br>Cost: "+shortenCosts(player.infMultCost)+" IP"
             player.infinityPoints = player.infinityPoints.minus(player.infMultCost.dividedBy(10))
             if (player.autobuyers[11].priority !== undefined && player.autobuyers[11].priority !== null && player.autoCrunchMode == "amount") player.autobuyers[11].priority = player.autobuyers[11].priority.times(Decimal.pow(2, dif));
             if (player.autoCrunchMode == "amount") document.getElementById("priority12").value = player.autobuyers[11].priority
@@ -6129,7 +6129,6 @@ function init() {
     };
     document.getElementById("shopbtn").onclick = function () {
         showTab('shop')
-        updateKongPurchases()
     }
     document.getElementById("eternitystorebtn").onclick = function () {
         showTab('eternitystore')
@@ -6317,3 +6316,8 @@ setInterval( function() {
         ec10bonus = new Decimal(1)
     }
 }, 100)
+
+function closeToolTip() {
+    var elements = document.getElementsByClassName("popup")
+    for (var i=0; i<elements.length; i++) if (elements[i].id!='welcome') elements[i].style.display = "none"
+}

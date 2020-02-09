@@ -11,8 +11,6 @@ function getDimensionFinalMultiplier(tier) {
   }
 
   multiplier = multiplier.times(player.achPow);
-  multiplier = multiplier.times(kongDimMult)
-  multiplier = multiplier.times(kongAllDimMult)
 
   if (player.currentEternityChall == "eterc9") multiplier = multiplier;
   else multiplier = multiplier.times(player.infinityPower.pow(7).max(1))
