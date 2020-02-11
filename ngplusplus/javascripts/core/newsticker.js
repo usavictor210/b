@@ -167,7 +167,13 @@ newsArray = [//always true
 ["Infinite bugs? In my NG+3? It's more likely than you think.", true, "respecced13"],
 ["Quantum doesn't exist yet.", true, "respecced14"],
 ["It appears when we looked closer at the explosion, the antimatter and matter were hugging each other. Oh well. I guess they would've made it to the semi-finals if they were careful. NEXT!", 'player.newsArray.includes("respecced5")', "respecced15"],
-["You just made your first 1e1,000,000,000 antimatter. This one take", true, "respecced16"]
+["You just made your first 1e1,000,000,000 antimatter. This one tastes like turkey.", "player.money.e >= 1e9", "respecced16"],
+["You cannot halate snow.", true, "respecced17"],
+["A news ticker has just been declared dead! It doesn't provide any purpose.", true, "respecced18"],
+["Person with money regrets they spent $10 just for a 2x dimension multiplier that has no effect.", true, "respecced19"],
+["In order to create the perfect antimatter, we need to mix [REDACTED], reality fabric and Chemical Z.", true, "respecced20"],
+["If you are not playing NG+2 Respecced on http://ngplus2.glitch.me/ngplusplus/, the site is bootleg. Wait, we're already bootleg.", true, "respecced21"],
+["If you are not playing NG+2 Respecced on http://ngplus2.glitch.me/ngplusplus/, the site is bootleg. Wait, we're already bootleg.", true, "respecced22"]
 ];}
 
 var s = document.getElementById('news');
