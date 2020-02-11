@@ -173,7 +173,12 @@ newsArray = [//always true
 ["Person with money regrets they spent $10 just for a 2x dimension multiplier that has no effect.", true, "respecced19"],
 ["In order to create the perfect antimatter, we need to mix [REDACTED], reality fabric and Chemical Z.", true, "respecced20"],
 ["If you are not playing NG+2 Respecced on http://ngplus2.glitch.me/ngplusplus/, the site is bootleg. Wait, we're already bootleg.", true, "respecced21"],
-["If you are not playing NG+2 Respecced on http://ngplus2.glitch.me/ngplusplus/, the site is bootleg. Wait, we're already bootleg.", true, "respecced22"]
+["I'm so meta", true, "respecced22"],
+["I'm blue, da ba dee", true, "respecced23"],
+["From the mountains rises a new type of hill, called THE HILL. It's my hill.", true, "respecced24"],
+["Thank you Devion! But our battle replicants is in another castle!", true, "respecced25"],
+["One small step for antimatter, one giant leap for antimatterkind", "player.quantum.times >= 1", "respecced26"],
+  
 ];}
 
 var s = document.getElementById('news');
