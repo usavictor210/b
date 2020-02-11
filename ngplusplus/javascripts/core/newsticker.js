@@ -179,7 +179,7 @@ newsArray = [//always true
 ["Thank you Devion! But our battle replicants is in another castle!", true, "respecced25"],
 ["One small step for antimatter, one giant leap for antimatterkind", "player.quantum.times >= 1", "respecced26"],
 ["How it feels to chew 5 Gum", "player.dilation.active", "respecced27"],
-["A man has fallen into the 9th dimension in Antimatter City! Start the new big crunch! Hey! Build the big crunch and off to the rescue. Prepare the crunch, wipe the 9th dimension and make the rescue. The new big crunch collection from Antimatter Dimensions"]
+["A man has fallen into the 9th dimension in Antimatter City! Start the new big crunch! Hey! Build the big crunch and off to the rescue. Prepare the crunch, wipe the 9th dimension and make the rescue. The new big crunch collection from Antimatter Dimensions", "player.infinitied >= 1", "respecced28"]
 ];}
 
 var s = document.getElementById('news');
