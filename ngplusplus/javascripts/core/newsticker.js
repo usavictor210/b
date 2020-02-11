@@ -151,7 +151,7 @@ newsArray = [//always true
 ["Whale is bad at making smart purchases.", "kongIPMult > 500 && kongDimMult < 5e307", "s4"],
 ["Whale complains that the game broke.", "kongDimMult > 5e307", "s5"],
 ["Whale complains that their buying isn't doing anything.", "kongIPMult > 1.8e16", "s6"],
-  
+// respecced news tickers
 ["You exist. I exist.", true, "respecced1"],
 ["In another alternate universe, NG+2 Respecced is the most popular mod", true, "respecced2"],
 ["Who am I? Oh wait, I'm just the news ticker.", true, "respecced3"],
