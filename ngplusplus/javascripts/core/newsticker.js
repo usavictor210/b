@@ -150,7 +150,15 @@ newsArray = [//always true
 ["Person with money likes to support this game.", "kongDimMult > 1 || kongIPMult > 1", "s3"],
 ["Whale is bad at making smart purchases.", "kongIPMult > 500 && kongDimMult < 5e307", "s4"],
 ["Whale complains that the game broke.", "kongDimMult > 5e307", "s5"],
-["Whale complains that their buying isn't doing anything.", "kongIPMult > 1.8e16", "s6"]
+["Whale complains that their buying isn't doing anything.", "kongIPMult > 1.8e16", "s6"],
+  
+["You exist. I exist.", true, "respecced1"],
+["In another alternate universe, NG+2 Respecced is the most popular mod", true, "respecced2"],
+["Who am I? Oh wait, I'm just the news ticker.", true, "respecced3"],
+["Something's wrong here, the place is devoid of onions", true, "respecced4"],
+["Next on Universe's Got Talent, we have antimatter and matter coming up on the stage. This better not end with a **BANG** ...well, nevermind.", true, "respecced5"],
+["Aren't you glad it didn't gild banana?", true, "respecced6"],
+[""," true, "respecced7"]
 ];}
 
 var s = document.getElementById('news');
