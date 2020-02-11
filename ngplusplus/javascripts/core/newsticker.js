@@ -158,7 +158,16 @@ newsArray = [//always true
 ["Something's wrong here, the place is devoid of onions", true, "respecced4"],
 ["Next on Universe's Got Talent, we have antimatter and matter coming up on the stage. This better not end with a **BANG** ...well, nevermind.", true, "respecced5"],
 ["Aren't you glad it didn't gild banana?", true, "respecced6"],
-[""," true, "respecced7"]
+["I broke stuff. Again.", true, "respecced7"],
+["Who would win, an ace scout or a bunch of photons?", true, "respecced8"],
+["TYOP", true, "respecced9"],
+["It's the year 2517. Nothing happened. Well, maybe except for the human race dying.", true, "respecced10"],
+["Time Flux for NG+5 when", true, "respecced11"],
+["You know the game is old when it has tons of spaghetti code.", true, "respecced12"],
+["Infinite bugs? In my NG+3? It's more likely than you think.", true, "respecced13"],
+["Quantum doesn't exist yet.", true, "respecced14"],
+["It appears when we looked closer at the explosion, the antimatter and matter were hugging each other. Oh well. I guess they would've made it to the semi-finals if they were careful. NEXT!", 'player.newsArray.includes("respecced5")', "respecced15"],
+["You just made your first 1e1,000,000,000 antimatter. This one take", true, "respecced16"]
 ];}
 
 var s = document.getElementById('news');
