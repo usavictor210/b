@@ -378,34 +378,6 @@ var player = {
 
 };
 
-function ngplus () {
-        if (player.ngPlus = 0) {
-        player.money=new Decimal(1e25)
-        player.infinitiedBank=1e6
-        player.infinityUpgrades=["timeMult", "dimMult", "timeMult2", "unspentBonus", "27Mult", "18Mult", "36Mult", "resetMult", "passiveGen", "45Mult", "resetBoost", "galaxyBoost"]
-        player.infMult=new Decimal(1024)
-        player.dimensionMultDecrease=2
-        player.tickSpeedMultDecrease=1.65
-        player.eternities=100
-        player.replicanti.unl=true
-        player.replicanti.amount=new Decimal(1)
-        for (ec=1;ec<13;ec++) player.eternityChalls['eterc'+ec]=5
-        player.eternityChalls.eterc1=1
-        player.eternityChalls.eterc4=1
-        player.eternityChalls.eterc10=1
-        player.dilation.studies=[1]
-        player.achievements.push("r77")
-        player.achievements.push("r78")
-        player.achievements.push("r85")
-        player.achievements.push("r93")
-        player.achievements.push("r95")
-        player.achievements.push("r102")
-        player.achievements.push("r131")
-        player.achievements.push("r123")
-        player.ngPlus = 1
-        }
-}
-
 var defaultStart = $.extend(true, {}, player);
 
 

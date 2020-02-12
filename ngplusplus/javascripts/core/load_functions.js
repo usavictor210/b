@@ -5,6 +5,35 @@ var saves = {
   2: null
 };
 
+
+function ngplus () {
+        if (player.ngPlus === 0) {
+        player.money=new Decimal(1e25)
+        player.infinitiedBank=1e6
+        player.infinityUpgrades=["timeMult", "dimMult", "timeMult2", "unspentBonus", "27Mult", "18Mult", "36Mult", "resetMult", "passiveGen", "45Mult", "resetBoost", "galaxyBoost"]
+        player.infMult=new Decimal(1024)
+        player.dimensionMultDecrease=2
+        player.tickSpeedMultDecrease=1.65
+        player.eternities=100
+        player.replicanti.unl=true
+        player.replicanti.amount=new Decimal(1)
+        for (ec=1;ec<13;ec++) player.eternityChalls['eterc'+ec]=5
+        player.eternityChalls.eterc1=1
+        player.eternityChalls.eterc4=1
+        player.eternityChalls.eterc10=1
+        player.dilation.studies=[1]
+        player.achievements.push("r77")
+        player.achievements.push("r78")
+        player.achievements.push("r85")
+        player.achievements.push("r93")
+        player.achievements.push("r95")
+        player.achievements.push("r102")
+        player.achievements.push("r131")
+        player.achievements.push("r123")
+        player.ngPlus = 1
+        }
+}
+
 function onLoad() {
   if (player.totalmoney === undefined || isNaN(player.totalmoney)) player.totalmoney = player.money;
   if (player.options === undefined) {
@@ -13,11 +42,11 @@ function onLoad() {
           animationOn: true
       }
   }
-  if (player.ngPlus === undefined) player.ngPlus === 0
+  if (player.ngPlus === undefined) player.ngPlus = 0;
   if (player.options.invert === true) player.options.theme = "Inverted"; player.options.invert = undefined;
   if (player.options.notation === undefined) player.options.notation = "Standard"
   if (player.options.challConf === undefined) player.options.challConf = false
-if (player.options.notation === undefined) player.options.notation = "Standard";
+  if (player.options.notation === undefined) player.options.notation = "Standard";
   if (player.options.newsHidden === undefined) player.options.newsHidden = false;
   if (player.options.sacrificeConfirmation === undefined) player.options.sacrificeConfirmation = true;
   if (player.options.retryChallenge === undefined) player.options.retryChallenge = false;
@@ -44,7 +73,7 @@ if (player.options.notation === undefined) player.options.notation = "Standard";
   if (player.firstAmount !== 0) document.getElementById("secondRow").style.display = "table-row";
   if (player.challenges === undefined) player.challenges = []
   if (player.currentChallenge === undefined) player.currentChallenge = ""
-if (player.infinitied > 0 && !player.challenges.includes("challenge1")) player.challenges.push("challenge1")
+  if (player.infinitied > 0 && !player.challenges.includes("challenge1")) player.challenges.push("challenge1")
   if (player.matter === undefined) player.matter = new Decimal(0)
   if (player.autobuyers === undefined) player.autobuyers = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12]
   if (player.costMultipliers === undefined) player.costMultipliers = [new Decimal(1e3), new Decimal(1e4), new Decimal(1e5), new Decimal(1e6), new Decimal(1e8), new Decimal(1e10), new Decimal(1e12), new Decimal(1e15)]
@@ -584,7 +613,7 @@ if (player.version < 5) {
   if (player.version < 15.1) {
     player.version = 15.1;
     player.ngPlus = 0;
-    ngPlus();
+    ngplus()
     $.notify("Welcome to version 15.1!", "info")
   }
   // player.version is currently 12.3
@@ -912,3 +941,4 @@ function getRootSaveObject() {
 
 setTimeout(drawAnimations, 100)
 setTimeout(onLoad, 100)
+ngplus()
