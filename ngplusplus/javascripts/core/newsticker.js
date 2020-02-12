@@ -183,7 +183,8 @@ newsArray = [//always true
 ["5 hours left till the next UA:RP update", true, "respecced29"],
 ["No, no it isn't AD with 10 dimensions! Shut up, stop it-", true, "respecced30"],
 ["¬θ ¬θ´ μ€'§ ¤θ% Ω Гθ|¬!", true, "respecced31"],
-["\"Onion was a mistake.\" -TheTastyPi, 2020", 'player.newsArray.includes("respecced4")', "respeccced32"]
+["\"Onion was a mistake.\" -TheTastyPi, 2020", 'player.newsArray.includes("respecced4")', "respeccced32"],
+["Florida man goes to idol hell, is never heard of again", true, "respecced33"]
 ];}
 
 var s = document.getElementById('news');
