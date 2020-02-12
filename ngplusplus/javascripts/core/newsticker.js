@@ -182,7 +182,8 @@ newsArray = [//always true
 ["A man has fallen into the 9th dimension in Antimatter City! Start the new big crunch! Hey! Build the big crunch and off to the rescue. Prepare the crunch, wipe the 9th dimension and make the rescue. The new big crunch collection from Antimatter Dimensions", "player.infinitied > 0", "respecced28"],
 ["5 hours left till the next UA:RP update", true, "respecced29"],
 ["No, no it isn't AD with 10 dimensions! Shut up, stop it-", true, "respecced30"],
-["¬θ ¬θ´ μ€'§ ¤θ% Ω Гθ|¬!", true, "respecced31"]
+["¬θ ¬θ´ μ€'§ ¤θ% Ω Гθ|¬!", true, "respecced31"],
+["\"Onion was a mistake.\" -TheTastyPi, 2020", 'player.newsArray.includes("respecced4")', "respeccced32"]
 ];}
 
 var s = document.getElementById('news');
