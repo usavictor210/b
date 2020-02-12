@@ -167,7 +167,7 @@ newsArray = [//always true
 ["Infinite bugs? In my NG+3? It's more likely than you think.", true, "respecced13"],
 ["Quantum doesn't exist yet.", true, "respecced14"],
 ["It appears when we looked closer at the explosion, the antimatter and matter were hugging each other. Oh well. I guess they would've made it to the semi-finals if they were careful. NEXT!", 'player.newsArray.includes("respecced5")', "respecced15"],
-["You just made your first 1e1,000,000,000 antimatter. This one tastes like turkey.", "player.money.e >= 1e9", "respecced16"],
+["You just made your first 1e1,000,000,000 antimatter. This one tastes like turkey.", "player.totalmoney.e > 1e9", "respecced16"],
 ["You cannot halate snow.", true, "respecced17"],
 ["A news ticker has just been declared dead! It doesn't provide any purpose.", true, "respecced18"],
 ["Person with money regrets they spent $10 just for a 2x dimension multiplier that has no effect.", true, "respecced19"],
@@ -177,9 +177,12 @@ newsArray = [//always true
 ["I'm blue, da ba dee", true, "respecced23"],
 ["From the mountains rises a new type of hill, called THE HILL. It's my hill.", true, "respecced24"],
 ["Thank you Devion! But our battle replicants is in another castle!", true, "respecced25"],
-["One small step for antimatter, one giant leap for antimatterkind", "player.quantum.times >= 1", "respecced26"],
+["One small step for antimatter, one giant leap for antimatterkind", "player.quantum.times > 0", "respecced26"],
 ["How it feels to chew 5 Gum", "player.dilation.active", "respecced27"],
-["A man has fallen into the 9th dimension in Antimatter City! Start the new big crunch! Hey! Build the big crunch and off to the rescue. Prepare the crunch, wipe the 9th dimension and make the rescue. The new big crunch collection from Antimatter Dimensions", "player.infinitied >= 1", "respecced28"]
+["A man has fallen into the 9th dimension in Antimatter City! Start the new big crunch! Hey! Build the big crunch and off to the rescue. Prepare the crunch, wipe the 9th dimension and make the rescue. The new big crunch collection from Antimatter Dimensions", "player.infinitied > 0", "respecced28"],
+["5 hours left till the next UA:RP update", true, "respecced29"],
+["No, no it isn't AD with 10 dimensions! Shut up, stop it-", true, "respecced30"],
+["¬θ ¬θ´ μ€'§ ¤θ% Ω Гθ|¬!", true, "respecced31"]
 ];}
 
 var s = document.getElementById('news');
