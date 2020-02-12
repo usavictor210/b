@@ -184,7 +184,9 @@ newsArray = [//always true
 ["No, no it isn't AD with 10 dimensions! Shut up, stop it-", true, "respecced30"],
 ["¬θ ¬θ´ μ€'§ ¤θ% Ω Гθ|¬!", true, "respecced31"],
 ["\"Onion was a mistake.\" -TheTastyPi, 2020", 'player.newsArray.includes("respecced4")', "respeccced32"],
-["Florida man goes to idol hell, is never heard of again", true, "respecced33"]
+["Florida man goes to idol hell, is never heard of again", true, "respecced33"],
+["In another timeline, there isn't a thing such as the 9th dimension or the existence of 5 hours. There is instead something much worse. The unmentionable thing.", true, "respecced34"],
+["'If you could convert your " + player.money " units of antimatter to dollars, the economy would inflate and go upside down and inside out.", true, "respecced35"]
 ];}
 
 var s = document.getElementById('news');
