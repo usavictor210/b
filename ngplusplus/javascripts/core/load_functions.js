@@ -581,7 +581,13 @@ if (player.version < 5) {
     }
   }
 
-  // player.version is currently 12.1
+  if (player.version < 15.1) {
+    player.version = 15.1;
+    player.ngPlus = 0;
+    ngPlus();
+    $.notify("Welcome to version 15.1!", "info")
+  }
+  // player.version is currently 12.3
   if (player.options.notation == "Default") {
       player.options.notation = "Brackets";
       document.getElementById("notation").textContent = ("Notation: Brackets")
