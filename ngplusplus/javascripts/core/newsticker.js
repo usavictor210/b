@@ -185,8 +185,9 @@ newsArray = [//always true
 ["¬θ ¬θ´ μ€'§ ¤θ% Ω Гθ|¬!", true, "respecced31"],
 ["\"Onion was a mistake.\" -TheTastyPi, 2020", 'player.newsArray.includes("respecced4")', "respeccced32"],
 ["Florida man goes to idol hell, is never heard of again", true, "respecced33"],
-["In another timeline, there isn't a thing such as the 9th dimension or the existence of 5 hours. There is instead something much worse. The unmentionable thing.", true, "respecced34"],
-["'If you could convert your " + player.money " units of antimatter to dollars, the economy would inflate and go upside down and inside out.", true, "respecced35"]
+["In another timeline, there isn't a thing such as the 9th dimension or the existence of 5 hours. There is instead something much worse. The unmentionable thing.", true, "respecced34"], //not sure if this is supposed to be an NGU reference 
+["If you could convert your " + player.money + " units of antimatter to dollars, the economy would inflate and go upside down and inside out.", true, "respecced35"],
+["This is a test of our new creative works software. Your random number is: " + Math.random(1,1000) + ".     ...did it work? We hope it did.", true, "respecced36"]
 ];}
 
 var s = document.getElementById('news');
