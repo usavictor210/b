@@ -92,7 +92,7 @@ var player = {
     dimensionMultDecrease: 10,
     dimensionMultDecreaseCost: 1e8,
     overXGalaxies: 10,
-    version: 15.1,
+    version: 15.2,
     infDimensionsUnlocked: [false, false, false, false, false, false, false, false],
     infinityPower: new Decimal(1),
     spreadingCancer: 0,
@@ -838,6 +838,9 @@ function updateDimensions() {
         document.getElementById("eter4").innerHTML = "Your achievement bonus affects Time Dimensions"+"<br>Cost: "+shortenCosts(1e16)+" EP"
         document.getElementById("eter5").innerHTML = "Time Dimensions are multiplied by your unspent time theorems"+"<br>Cost: "+shortenCosts(1e40)+" EP"
         document.getElementById("eter6").innerHTML = "Time Dimensions are multiplied by days played"+"<br>Cost: "+shortenCosts(1e50)+" EP"
+        document.getElementById("eter7").innerHTML = "Dilated time gain is boosted by antimatter<br>Currently: "+(1 + Math.log10(Math.max(1, player.money.log(10))) / 30).toFixed(3)+"x<br>Cost: "+shortenCosts(new Decimal("1e1500"))+" EP"
+        document.getElementById("eter8").innerHTML = "Dilated time gain is boosted by infinity points<br>Currently: "+(1 + Math.log10(Math.max(1, player.infinityPoints.log(10))) / 16).toFixed(3)+"x<br>Cost: "+shortenCosts(new Decimal("1e2000"))+" EP"
+        document.getElementById("eter9").innerHTML = "Dilated time gain is boosted by eternity points<br>Currently: "+(1 + Math.log10(Math.max(1, player.eternityPoints.log(10))) / 8).toFixed(3)+"x<br>Cost: "+shortenCosts(new Decimal("1e3000"))+" EP"
     }
 
     if (document.getElementById("dilation").style.display == "block") {
@@ -1192,6 +1195,9 @@ function updateEternityUpgrades() {
     document.getElementById("eter4").className = (player.eternityUpgrades.includes(4)) ? "eternityupbtnbought" : (player.eternityPoints.gte(1e16)) ? "eternityupbtn" : "eternityupbtnlocked"
     document.getElementById("eter5").className = (player.eternityUpgrades.includes(5)) ? "eternityupbtnbought" : (player.eternityPoints.gte(1e40)) ? "eternityupbtn" : "eternityupbtnlocked"
     document.getElementById("eter6").className = (player.eternityUpgrades.includes(6)) ? "eternityupbtnbought" : (player.eternityPoints.gte(1e50)) ? "eternityupbtn" : "eternityupbtnlocked"
+    document.getElementById("eter7").className = (player.eternityUpgrades.includes(7)) ? "eternityupbtnbought" : (player.eternityPoints.gte(new Decimal('1e1500'))) ? "eternityupbtn" : "eternityupbtnlocked"
+    document.getElementById("eter8").className = (player.eternityUpgrades.includes(8)) ? "eternityupbtnbought" : (player.eternityPoints.gte(new Decimal('1e2000'))) ? "eternityupbtn" : "eternityupbtnlocked"
+    document.getElementById("eter9").className = (player.eternityUpgrades.includes(9)) ? "eternityupbtnbought" : (player.eternityPoints.gte(new Decimal('1e3000'))) ? "eternityupbtn" : "eternityupbtnlocked"
 }
 
 
