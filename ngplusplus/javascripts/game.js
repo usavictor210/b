@@ -603,7 +603,16 @@ function getDilReq () {
 }
 
 function getDilTimeGainPerSecond () {
-  let gain = player.dilation.tachyonParticles.times(Math.pow(2, player.dilation.rebuyables[1]) * 2);
+  let gain = player.dilation.tachyonParticles.times(Math.pow(2, player.dilation.rebuyables[1]) * 2); // tachyon particle amount
+  if (player.eternityUpgrades.includes(7)) { //upgrades 7-9, 12 and 16
+     gain = gain.times(1 + Math.log10(Math.max(1, player.money.log(10))) / 30);
+  }
+  if (player.eternityUpgrades.includes(8)) {
+    gain = gain.times(1 + Math.log10(Math.max(1, player.infinityPoints.log(10))) / 16);
+  }
+  if (player.eternityUpgrades.includes(9)) {
+    gain = gain.times(1 + Math.log10(Math.max(1, player.eternityPoints.log(10))) / 8);
+  }
   if (player.dilation.upgrades.includes(12)) {
     gain = gain.times(Math.pow(player.eternities, .1));
   }
@@ -840,7 +849,7 @@ function updateDimensions() {
         document.getElementById("eter6").innerHTML = "Time Dimensions are multiplied by days played"+"<br>Cost: "+shortenCosts(1e50)+" EP"
         document.getElementById("eter7").innerHTML = "Dilated time gain is boosted by antimatter<br>Currently: "+(1 + Math.log10(Math.max(1, player.money.log(10))) / 30).toFixed(3)+"x<br>Cost: "+shortenCosts(new Decimal("1e1500"))+" EP"
         document.getElementById("eter8").innerHTML = "Dilated time gain is boosted by infinity points<br>Currently: "+(1 + Math.log10(Math.max(1, player.infinityPoints.log(10))) / 16).toFixed(3)+"x<br>Cost: "+shortenCosts(new Decimal("1e2000"))+" EP"
-        document.getElementById("eter9").innerHTML = "Dilated time gain is boosted by eternity points<br>Currently: "+(1 + Math.log10(Math.max(1, player.eternityPoints.log(10))) / 8).toFixed(3)+"x<br>Cost: "+shortenCosts(new Decimal("1e3000"))+" EP"
+        document.getElementById("eter9").innerHTML = "Dilated time gain is boosted by eternity points<br>Currently: "+(1 + Math.log10(Math.max(1, player.eternityPoints.log(10))) / 8).toFixed(3)+"x<br>Cost: "+shortenCosts(new Decimal("1e2500"))+" EP"
     }
 
     if (document.getElementById("dilation").style.display == "block") {
@@ -1197,7 +1206,7 @@ function updateEternityUpgrades() {
     document.getElementById("eter6").className = (player.eternityUpgrades.includes(6)) ? "eternityupbtnbought" : (player.eternityPoints.gte(1e50)) ? "eternityupbtn" : "eternityupbtnlocked"
     document.getElementById("eter7").className = (player.eternityUpgrades.includes(7)) ? "eternityupbtnbought" : (player.eternityPoints.gte(new Decimal('1e1500'))) ? "eternityupbtn" : "eternityupbtnlocked"
     document.getElementById("eter8").className = (player.eternityUpgrades.includes(8)) ? "eternityupbtnbought" : (player.eternityPoints.gte(new Decimal('1e2000'))) ? "eternityupbtn" : "eternityupbtnlocked"
-    document.getElementById("eter9").className = (player.eternityUpgrades.includes(9)) ? "eternityupbtnbought" : (player.eternityPoints.gte(new Decimal('1e3000'))) ? "eternityupbtn" : "eternityupbtnlocked"
+    document.getElementById("eter9").className = (player.eternityUpgrades.includes(9)) ? "eternityupbtnbought" : (player.eternityPoints.gte(new Decimal('1e2500'))) ? "eternityupbtn" : "eternityupbtnlocked"
 }
 
 
@@ -1234,10 +1243,6 @@ function buyMaxEPMult() {
         buyEPMult()
     }
 }
-
-
-
-
 
 function playerInfinityUpgradesOnEternity() {
     if (player.eternities < 4) player.infinityUpgrades = []
