@@ -1276,6 +1276,26 @@ button {
     background: white;
 }
 
+.dilationUnstablebtn {
+    color: #0b0b6b;
+    background: black;
+    font-weight: bold;
+    font-size: 0.7rem;
+    border: 2px solid #0b0b6b;
+    width: 190px;
+    height: 90px;
+    transition-duration: 0.2s;
+    cursor: pointer;
+    border-radius: 4px;
+    font-family: Typewriter;
+    animation: dilationUnstableBtnGlow 10s infinite;
+}
+
+.dilationUnstablebtn:hover {
+    color: #0b0b6b;
+    background: white;
+}
+
 .glyph {
     display:flex;
     justify-content:center;
@@ -1779,6 +1799,14 @@ screen and (max-width: 480px) {
     50% {box-shadow: inset 5px 0px 20px #64ddad;}
     75% {box-shadow: inset 0px 5px 20px #64ddad;}
     100% {box-shadow: inset -5px 0px 20px #64ddad;}
+}
+
+@keyframes dilationUnstableBtnGlow {
+    0%  {box-shadow: inset 5px 0px 20px #0e0e89;}
+    25% {box-shadow: inset 0px 5px 20px #0e0e89;}
+    50% {box-shadow: inset -5px 0px 20px #0e0e89;}
+    75% {box-shadow: inset 0px -5px 20px #0e0e89;}
+    100% {box-shadow: inset 5px 0px 20px #0e0e89;}
 }
 
 @keyframes barrelRoll {

@@ -187,7 +187,8 @@ newsArray = [//always true
 ["Florida man goes to idol hell, is never heard of again", true, "respecced33"],
 ["In another timeline, there isn't a thing such as the 9th dimension or the existence of 5 hours. There is instead something much worse. The unmentionable thing.", true, "respecced34"], //not sure if this is supposed to be an NGU reference 
 ["If you could convert your " + player.money + " units of antimatter to dollars, the economy would inflate and go upside down and inside out.", true, "respecced35"],
-["This is a test of our new creative works software. Your random number is: " + Math.random(1,1000) + ".     ...did it work? We hope it did.", true, "respecced36"]
+["This is a test of our new creative works software. Your random number is: " + Math.random(1,1000) + ".     ...did it work? We hope it did.", true, "respecced36"],
+["We've heard that dilation seems very boring. Our scientists are changing that. It might turn too unstable soon, so watch out for that.", 'player.eternityPoints.gte(new Decimal("1e1300"))', "respecced37"]
 ];}
 
 var s = document.getElementById('news');
