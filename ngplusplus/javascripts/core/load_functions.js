@@ -15,7 +15,7 @@ function ngplus () {
         player.infMultCost=new Decimal(10)
         player.dimensionMultDecrease=2
         player.tickSpeedMultDecrease=1.65
-        if (player.eternities<100) player.eternities=100
+        if (player.eternities<1012680) player.eternities=1012680
         player.replicanti.unl=true
         player.replicanti.amount=new Decimal(1)
         for (ec=1;ec<13;ec++) player.eternityChalls['eterc'+ec]=5
@@ -617,6 +617,12 @@ if (player.version < 5) {
     player.ngPlus = 0;
     ngplus()
     $.notify("Welcome to version 15.1!", "info")
+  }
+  
+  if (player.version < 15.2) {
+    player.version = 15.2;
+    if (player.eternities<1012680) player.eternities = 1012680
+    $.notify("Welcome to version 15.2! Just a eternity checkup.", "info")
   }
   // player.version is currently 12.3
   if (player.options.notation == "Default") {
