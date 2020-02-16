@@ -619,6 +619,7 @@ function getDilTimeGainPerSecond () {
   if (player.dilation.upgrades.includes(16)) {
     gain = gain.times(getDil16Bonus());
   }
+  if (player.dilation.upgrades.includes(18)) gain = gain.times()
   return gain;
 }
 
