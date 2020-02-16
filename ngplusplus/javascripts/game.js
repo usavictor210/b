@@ -4566,7 +4566,7 @@ function unlockDilation() {
     document.getElementById("dilationunlock").innerHTML = "Unlock time dilation<span>Cost: 5000 Time Theorems"
 }
 
-
+/////// DILATION \\\\\\\
 /**
  *
  * @param {Name of the ugrade} id
@@ -4583,7 +4583,7 @@ function unlockDilation() {
                               5e6,         1e9,          5e7,   1e20,
                               2e12,        1e10,         1e11,  1e25,
                               1e50,        1e60,         1e80,  1e100,
-                              1e15]
+                              1e15, 1e20]
 
 
 function buyDilationUpgrade(id, costInc) {
@@ -4629,6 +4629,7 @@ function updateDilationUpgradeButtons() {
     document.getElementById("dil14desc").textContent = "Currently: "+shortenMoney(getDil14Bonus()) + 'x';
     document.getElementById("dil16desc").textContent = "Currently: "+shortenMoney(getDil16Bonus()) + 'x';
     document.getElementById("dil17desc").textContent = "Currently: "+shortenMoney(Math.floor(player.dilation.tachyonParticles.div(20000).max(1))) + '/s'
+    document.getElement
 }
 
 let getDilRebuyableUpgCost = function (i) {
