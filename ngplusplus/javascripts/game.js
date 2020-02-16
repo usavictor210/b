@@ -92,7 +92,7 @@ var player = {
     dimensionMultDecrease: 10,
     dimensionMultDecreaseCost: 1e8,
     overXGalaxies: 10,
-    version: 15.3,
+    version: 15.2,
     infDimensionsUnlocked: [false, false, false, false, false, false, false, false],
     infinityPower: new Decimal(1),
     spreadingCancer: 0,
@@ -5054,7 +5054,7 @@ var replicantiTicks = 0
 
 function gameLoop(diff) {
     var thisUpdate = new Date().getTime();
-    if (thisUpdate - player.lastUpdate >= 21600000) giveAchievement("Don't you dare to sleep")
+    if (thisUpdate - player.lastUpdate >= 21600000) giveAchievement("Don't you dare sleep")
     if (typeof diff === 'undefined') var diff = Math.min(thisUpdate - player.lastUpdate, 21600000);
     diff = diff / 100;
     if (diff < 0) diff = 1;
