@@ -203,6 +203,7 @@ newsArray = [//always true
 ["Are meta dimensions really that meta?", 'player.dilation.studies.includes(6)', "respecced47"],
 ["blah blah blah meta dimensions blah blah blah", 'player.dilation.studies.includes(6)', "respecced48"],
 ["There should be eleven dimensions. Oh wait...", 'player.dilation.studies.includes(6)', "respecced47"],
+["Help, my save vanished!", 'player.dilation.studies.includes(6)', "respecced47"],
 ];}
 
 var s = document.getElementById('news');
