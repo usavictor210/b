@@ -114,7 +114,7 @@ const allAchievements = {
   r151: "Time Leaper",
   r152: "That's too meta",
   r153: "Time waits for me",
-  r154: "Dilation machine broke",
+  r154: "Unusual space and time",
   r155: "Sub-atomic",
   r156: "I never meta-dimension I didn't like",
   r157: "The future is now, old man",
