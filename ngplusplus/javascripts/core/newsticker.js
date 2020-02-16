@@ -194,7 +194,12 @@ newsArray = [//always true
 ["Yes, you can get Zero Deaths on your first run. Don't worry about it.", true, "respecced40"],
 ["Nonus modus non est.", true, "respecced41"],
 ["\"that... aint uh... fuck. no more words\" - The Incremental Nerd, 2020", 'player.newsArray.length == (newsArray.length)-1', "respecced42"],
-["Time Leaper is definitely not from a silly cube game. Trust me.", true, "respecced43"]
+["Time Leaper is definitely not from a silly cube game. Trust me.", true, "respecced43"],
+["Qqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqq", true, "respecced44"],
+// and now a sponsor from our old friend AD redux
+["Zoinks, scoobs! The antimatter is heading straight towards us!", true, "respecced45"],
+["You can't talk about something that doesn't exist. In this case, the Tenth Dimension.", 'player.resets >= 5 || player.galaxies > 0', "respecced46"]
+// oh wait, nevermind. RESPECCED PART 2
 ];}
 
 var s = document.getElementById('news');
