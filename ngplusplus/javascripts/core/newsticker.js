@@ -188,7 +188,11 @@ newsArray = [//always true
 ["In another timeline, there isn't a thing such as the 9th dimension or the existence of 5 hours. There is instead something much worse. The unmentionable thing.", true, "respecced34"], //not sure if this is supposed to be an NGU reference 
 ["If you could convert your " + player.money + " units of antimatter to dollars, the economy would inflate and go upside down and inside out.", true, "respecced35"],
 ["This is a test of our new creative works software. Your random number is: " + Math.random(1,1000) + ".     ...did it work? We hope it did.", true, "respecced36"],
-["We've heard that dilation seems very boring. Our scientists are changing that. It might turn too unstable soon, so watch out for that.", 'player.eternityPoints.gte(new Decimal("1e1300"))', "respecced37"]
+["We've heard that dilation seems very boring. Our scientists are changing that. It might turn too unstable soon, so watch out for that.", 'player.eternityPoints.gte(new Decimal("1e1300"))', "respecced37"],
+["An infinite clock has been detected. It seems it just repeats the time over and over again.", true, "respecced38"],
+["This game just gets more meta the more you look at your meta dimensions.", 'player.dilation.studies.includes(6)', "respecced39"],
+["Yes, you can get Zero Deaths on your first run. Don't worry about it.", true, "respecced40"],
+[""]
 ];}
 
 var s = document.getElementById('news');
