@@ -4629,7 +4629,7 @@ function updateDilationUpgradeButtons() {
     document.getElementById("dil14desc").textContent = "Currently: "+shortenMoney(getDil14Bonus()) + 'x';
     document.getElementById("dil16desc").textContent = "Currently: "+shortenMoney(getDil16Bonus()) + 'x';
     document.getElementById("dil17desc").textContent = "Currently: "+shortenMoney(Math.floor(player.dilation.tachyonParticles.div(20000).max(1))) + '/s'
-    document.getElement
+    document.getElementById("dil18desc").textContent = "Currently: "+shortenMoney(Math.round(Math.log10(player.dilation.tachyonParticles)/5)) + 'x'
 }
 
 let getDilRebuyableUpgCost = function (i) {
