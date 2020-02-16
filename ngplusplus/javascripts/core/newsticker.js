@@ -192,7 +192,9 @@ newsArray = [//always true
 ["An infinite clock has been detected. It seems it just repeats the time over and over again.", true, "respecced38"],
 ["This game just gets more meta the more you look at your meta dimensions.", 'player.dilation.studies.includes(6)', "respecced39"],
 ["Yes, you can get Zero Deaths on your first run. Don't worry about it.", true, "respecced40"],
-[""]
+["Nonus modus non est.", true, "respecced41"],
+["\"that... aint uh... fuck. no more words\" - The Incremental Nerd, 2020", 'player.newsArray.length == (newsArray.length)-1', "respecced42"],
+["Time Leaper is definitely not from a silly cube game. Trust me.", true, "respecced43"]
 ];}
 
 var s = document.getElementById('news');
