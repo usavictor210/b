@@ -4612,7 +4612,7 @@ function buyDilationUpgrade(id, costInc) {
     updateTimeStudyButtons()
 }
 
-let DIL_UPG_NUM = 17;
+let DIL_UPG_NUM = 18;
 
 function updateDilationUpgradeButtons() {
     for (var i = 1; i <= DIL_UPG_NUM; i++) {
