@@ -604,22 +604,13 @@ function getDilReq () {
 
 function getDilTimeGainPerSecond () {
   let gain = player.dilation.tachyonParticles.times(Math.pow(2, player.dilation.rebuyables[1]) * 2); // tachyon particle amount
-  if (player.eternityUpgrades.includes(7)) { //upgrades 7-9, 12 and 16
-     gain = gain.times(1 + Math.log10(Math.max(1, player.money.log(10))) / 30);
-  }
-  if (player.eternityUpgrades.includes(8)) {
-    gain = gain.times(1 + Math.log10(Math.max(1, player.infinityPoints.log(10))) / 16);
-  }
-  if (player.eternityUpgrades.includes(9)) {
-    gain = gain.times(1 + Math.log10(Math.max(1, player.eternityPoints.log(10))) / 8);
-  }
-  if (player.dilation.upgrades.includes(12)) {
-    gain = gain.times(Math.pow(player.eternities, .1));
-  }
-  if (player.dilation.upgrades.includes(16)) {
-    gain = gain.times(getDil16Bonus());
-  }
-  if (player.dilation.upgrades.includes(18)) gain = gain.times()
+  //upgrades 7-9, 12 and 16
+  if (player.eternityUpgrades.includes(7)) gain = gain.times(1 + Math.log10(Math.max(1, player.money.log(10))) / 30);
+  if (player.eternityUpgrades.includes(8)) gain = gain.times(1 + Math.log10(Math.max(1, player.infinityPoints.log(10))) / 16);
+  if (player.eternityUpgrades.includes(9)) gain = gain.times(1 + Math.log10(Math.max(1, player.eternityPoints.log(10))) / 8);
+  if (player.dilation.upgrades.includes(12)) gain = gain.times(Math.pow(player.eternities, .1));
+  if (player.dilation.upgrades.includes(16)) gain = gain.times(getDil16Bonus());
+  if (player.dilation.upgrades.includes(18)) gain = gain.times(Math.round(Math.log10(player.dilation.tachyonParticles)/5))
   return gain;
 }
 
