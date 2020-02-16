@@ -22,7 +22,7 @@ function ngplus () {
         if (player.eternityChalls.eterc1 != 5) player.eternityChalls.eterc1=1
         if (player.eternityChalls.eterc4 != 5) player.eternityChalls.eterc4=1
         if (player.eternityChalls.eterc10 != 5) player.eternityChalls.eterc10=1
-        player.dilation.studies=[1]
+        if (!player.dilation.studies.includes(1)) player.dilation.studies=[1]
         player.achievements.push("r77")
         player.achievements.push("r78")
         player.achievements.push("r85")
