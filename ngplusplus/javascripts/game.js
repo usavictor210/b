@@ -4575,7 +4575,7 @@ function unlockDilation() {
                               5e6,         1e9,          5e7,   1e20,
                               2e12,        1e10,         1e11,  1e25,
                               1e50,        1e60,         1e80,  1e100,
-                              1e15, 1e20]
+                              1e15, 1e20, 1e25]
 
 
 function buyDilationUpgrade(id, costInc) {
@@ -4604,7 +4604,7 @@ function buyDilationUpgrade(id, costInc) {
     updateTimeStudyButtons()
 }
 
-let DIL_UPG_NUM = 18;
+let DIL_UPG_NUM = 19;
 
 function updateDilationUpgradeButtons() {
     for (var i = 1; i <= DIL_UPG_NUM; i++) {
@@ -4622,6 +4622,7 @@ function updateDilationUpgradeButtons() {
     document.getElementById("dil16desc").textContent = "Currently: "+shortenMoney(getDil16Bonus()) + 'x';
     document.getElementById("dil17desc").textContent = "Currently: "+shortenMoney(Math.floor(player.dilation.tachyonParticles.div(20000).max(1))) + '/s'
     document.getElementById("dil18desc").textContent = "Currently: "+(Math.log10(player.dilation.tachyonParticles)/5).toFixed(3) + 'x'
+    document.getElementById("dil19desc").textContent = "Currently: "+shortenMoney((player.dilation.dilatedTime.pow(8.5)).divide(1e6).max(1)) + 'x'
     
 }
 
