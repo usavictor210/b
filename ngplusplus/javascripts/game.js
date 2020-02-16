@@ -2311,7 +2311,7 @@ function setAchieveTooltip() {
     let onlywar = document.getElementById("In the grim darkness of the far endgame")
     let thecap = document.getElementById("The cap is a million, not a trillion")
     let neverenough = document.getElementById("It will never be enough")
-    let iamspeed = document.getElementById("I am speed")
+    let iamspeed = document.getElementById("GAS GAS GAS")
 
     apocAchieve.setAttribute('ach-tooltip', "Get over " + formatValue(player.options.notation, 1e80, 0, 0) + " antimatter.");
     noPointAchieve.setAttribute('ach-tooltip', "Buy a single First Dimension when you have over " + formatValue(player.options.notation, 1e150, 0, 0) + " of them. Reward: First Dimensions are 10% stronger.");
@@ -4991,9 +4991,9 @@ setInterval(function() {
     if (player.infinityPower.gt(1e6)) giveAchievement("1 million is a lot"); //TBD
     if (player.infinityPower.gt(1e260)) giveAchievement("Minute of infinity"); //TBD
     if (player.totalTickGained >= 308) giveAchievement("Infinite time");
-    if (player.totalTickGained >= 1e6) giveAchievement("I am speed");
-    if (player.firstPow >= 10e30) giveAchievement("I forgot to nerf that")
-    if (player.money >= 10e79) giveAchievement("Antimatter Apocalypse")
+    if (player.totalTickGained >= 1e6) giveAchievement("GAS GAS GAS");
+    if (player.firstPow >= 1e31) giveAchievement("I forgot to nerf that")
+    if (player.money >= 1e80) giveAchievement("Antimatter Apocalypse")
     if (player.totalTimePlayed >= 10 * 60 * 60 * 24 * 8) giveAchievement("One for each dimension")
     if (player.seventhAmount > 1e12) giveAchievement("Multidimensional");
     if (player.tickspeed.lt(1e-26)) giveAchievement("Faster than a potato");

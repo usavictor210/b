@@ -109,7 +109,7 @@ const allAchievements = {
   r144 : "Meta-boosting to the max",
   r145 : "The cap is a million, not a trillion",
   r146 : "It will never be enough",
-  r147 : "",
+  r147 : "GAS GAS GAS",
   r148 : "Universal harmony",
   r151: "Time Leaper",
   r152: "That's too meta",
