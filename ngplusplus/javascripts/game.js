@@ -276,6 +276,7 @@ var player = {
       antimatter: new Decimal(10),
       bestAntimatter: new Decimal(10),
       resets: 0,
+      galaxies, 0,
       '1': {
         amount: new Decimal(0),
         bought: 0,
@@ -662,6 +663,7 @@ function updateMetaDimensions () {
       } else {
           document.getElementById("metaSoftReset").className = 'storebtn';
       }
+      var galaxyRequirement = get
       // also quantum stuff since why not
       if (player.meta.antimatter.gte(Number.MAX_VALUE)) {
         let qg = quarkGain();
