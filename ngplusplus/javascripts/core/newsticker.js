@@ -199,7 +199,7 @@ newsArray = [//always true
 ["Qqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqq", true, "respecced44"],
 // and now a sponsor from our old friend AD redux
 ["Zoinks, scoobs! The antimatter is heading straight towards us!", true, "respecced45"],
-["You can't talk about something that doesn't exist. In this case, the Tenth Dimension.", 'player.resets >= 5 || player.galaxies > 0', "respecced46"]
+["You can't talk about something that doesn't exist. In this case, the Tenth Dimension.", 'player.resets >= 5 || player.galaxies > 0', "respecced46"],
 // oh wait, nevermind. RESPECCED PART 2
 ["Are meta dimensions really that meta?", 'player.dilation.studies.includes(6)', "respecced47"],
 ["blah blah blah meta dimensions blah blah blah", 'player.dilation.studies.includes(6)', "respecced48"],
