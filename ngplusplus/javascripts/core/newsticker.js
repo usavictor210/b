@@ -205,8 +205,12 @@ newsArray = [//always true
 ["blah blah blah meta dimensions blah blah blah", 'player.dilation.studies.includes(6)', "respecced48"],
 ["There should be eleven dimensions. Oh wait...", 'player.dilation.studies.includes(6)', "respecced49"],
 ["Help, my save vanished!", 'player.dilation.studies.includes(6)', "respecced50"],
-["I thought Meta-Antimatter Galaxies didn't exist. Well, I guess they do now.", 'player.dilation.studies.includes(6) && player.meta.galaxies > 0', "respecced51"]
-["Well, if there's meta-antimatter galaxies, then where is meta-infinity?", 'player.dilation.studies.includes(6) && player.meta.galaxies > 0 && player.meta.bestAntimatter.lt(Number.MAX_VALUE)', "respecced51"]
+["I thought Meta-Antimatter Galaxies didn't exist. Well, I guess they do now.", 'player.dilation.studies.includes(6) && player.meta.galaxies > 0', "respecced51"],
+["Do you speak Galaxy?", 'player.dilation.studies.includes(6) && player.meta.galaxies > 0', "respecced52"],
+["Well, if there's meta-antimatter galaxies, then where is meta-infinity?", 'player.dilation.studies.includes(6) && player.meta.galaxies > 0 && player.meta.bestAntimatter.lt(Number.MAX_VALUE)', "respecced53"],
+["Friendly reminder that there's tons of pseudoscience! It's ok, don't worry, it's fictional.", true, "respecced54"],
+["A new study has appeared linking meta-antimatter to more antimatter production. Scientists say this is pseudoscience.", 'player.dilation.studies.includes(6)', "respecced55"],
+["So I've been pondering for some time... where are we in Antimatter Dimensions? Sure, we're probably living on Earth, but to be honest, if we had made antimatter condensers, it'd probably not be reasonable. One day I was sitting on my chair. I thought about all the antimatter I had produced. Then it hit me. We were living in the 22nd century. Scientists found a way to manipulate antimatter, for some reason. By the strange events of Infinity and Eternity, we're breaking the very universe we exist in. Maybe this is a dream. No. It can't be. I", true, "respecced56"]
 ];}
 
 var s = document.getElementById('news');
