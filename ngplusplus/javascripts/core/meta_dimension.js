@@ -51,7 +51,7 @@ function getDil14Bonus () {
 }
 
 function getDil16Bonus () {
-  return Math.pow(player.meta.bestAntimatter.log10(), .5);
+  return Math.pow((player.meta.bestAntimatter.log10())/2.5, .5);
 }
 
 function getMetaDimensionMultiplier (tier) {
@@ -252,10 +252,4 @@ document.getElementById("metaGalaxySoftReset").onclick = function () {
 
 function getMetaDimensionProductionPerSecond(tier) {
     return Decimal.floor(player.meta[tier].amount).times(getMetaDimensionMultiplier(tier));
-}
-
-function getDil18Bonus() {
-var x = new Decimal((Math.log10(player.dilation.tachyonParticles)/5))
-if (x.gt(7.5)) x = x.pow(.75).max(7.5)
-return x
 }

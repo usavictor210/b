@@ -18,3 +18,9 @@ let usGain = (Math.floor(player.dilation.tachyonParticles.log(5)/10))
         player.dilation.unstableShards.add(usGain)
 }
 */
+
+function getDil18Bonus() {
+var x = new Decimal((Math.log10(player.dilation.tachyonParticles)/6))
+if (x.gt(7.5)) x = x.pow(.75).max(7.5)
+return x
+}
