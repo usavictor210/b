@@ -75,7 +75,7 @@ function getMetaDimensionMultiplier (tier) {
     }
   }
 
-  if (multiplier.gt(1e36)) multiplier = multiplier.pow(0.95).max(1e36)
+  if (multiplier.gt(1e36)) multiplier = multiplier.pow(0.96).max(1e36)
   return multiplier;
 }
 
