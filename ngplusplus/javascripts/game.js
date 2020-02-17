@@ -673,7 +673,7 @@ function updateMetaDimensions () {
       }
       
       // also quantum stuff since why not
-      if (player.meta.antimatter.gte(Number.MAX_VALUE)) {
+      if (player.meta.antimatter.gte(quantRequirement())) {
         let qg = quarkGain();
         document.getElementById('quantumResetLabel').textContent = 'Go quantum: Sacrifice everything to get ' + qg + (qg.eq(1) ? ' quark' : ' quarks');
         document.getElementById('quantumbuttondiv').style.display = '';

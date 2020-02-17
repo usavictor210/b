@@ -376,7 +376,7 @@ function quantum(force, auto) {
 }
 
 let quarkGain = function () {
-  return Decimal.pow(10, player.meta.antimatter.log(10) / Math.log10(Number.MAX_VALUE) - 1).times(quarkMult()).floor();
+  return Decimal.pow(10, player.meta.antimatter.log(10) / Math.log10(quantRequirement()) - 1).times(quarkMult()).floor();
 }
 
 let quarkMult = function () {
@@ -385,4 +385,8 @@ let quarkMult = function () {
     ret = ret.times(Decimal.pow(2, player.quantum.realGluons / 1024));
   }
   return ret;
+}
+
+let quantRequirement = function () {
+  return new Decimal(Number.MAX_VALUE).pow(1.5)
 }
