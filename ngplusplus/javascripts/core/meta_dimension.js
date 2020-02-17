@@ -5,10 +5,10 @@ function getDilationMetaDimensionMultiplier () {
 }
 
 function getMetaGalaxyPower () {
-  let ret = 1.1;
-  
-  if(player.meta.galaxy < 2) ret = ret**player.meta.galaxy
-  else ret = ret**2+(player.meta.galaxy**0.25)
+  let ret = 1.1; //base
+  // multiplier has a different amount depending on the amount of meta galaxies
+  if (player.meta.galaxy < 2) ret = ret**player.meta.galaxy
+  else ret = ret**2+(player.meta.galaxy**0.015)
   
   return ret-1;
 }
@@ -253,3 +253,4 @@ document.getElementById("metaGalaxySoftReset").onclick = function () {
 function getMetaDimensionProductionPerSecond(tier) {
     return Decimal.floor(player.meta[tier].amount).times(getMetaDimensionMultiplier(tier));
 }
+
