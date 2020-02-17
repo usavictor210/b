@@ -134,7 +134,7 @@ function metaBoost () {
         return false;
     }
     player.meta.antimatter = new Decimal(10);
-    if (player.achievements.includes('r142')) {
+    if (player.achievements.includes('r142') and !player.achi) {
       player.meta.antimatter = new Decimal(100);
     }
     clearMetaDimensions();
