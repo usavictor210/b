@@ -6334,7 +6334,8 @@ window.addEventListener('keydown', function(event) {
         break;
 
         case 77: // M
-            document.getElementById("maxall").onclick()
+            //if () 
+        document.getElementById("maxall").onclick()
         break;
 
         case 83: // S
