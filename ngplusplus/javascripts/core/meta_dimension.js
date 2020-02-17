@@ -134,9 +134,10 @@ function metaBoost () {
         return false;
     }
     player.meta.antimatter = new Decimal(10);
-    if (player.achievements.includes('r142') and !player.achi) {
+    if (player.achievements.includes('r142') && !player.achievements.includes('r152')) {
       player.meta.antimatter = new Decimal(100);
-    }
+    } else player.meta.antimatter = new Decimal(1000);
+
     clearMetaDimensions();
     for (let i = 2; i <= 8; i++) {
       document.getElementById(i + "MetaRow").style.display = "none"
@@ -161,9 +162,9 @@ function metaGalaxy () {
         return false;
     }
     player.meta.antimatter = new Decimal(10);
-    if (player.achievements.includes('r142')) {
+    if (player.achievements.includes('r142') && !player.achievements.includes('r152')) {
       player.meta.antimatter = new Decimal(100);
-    }
+    } else player.meta.antimatter = new Decimal(1000);
     clearMetaDimensions();
     player.meta.resets = 0
     for (let i = 2; i <= 8; i++) {
