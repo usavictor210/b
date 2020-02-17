@@ -32,6 +32,8 @@ function ngplus () {
         player.achievements.push("r131")
         player.achievements.push("r123")
         player.achievements.push("r22")
+        player.achievements.push("r35")
+        player.challenges = ["challenge1", "challenge2", "challenge3", "challenge4", "challenge5", "challenge6", "challenge7", "challenge8", "challenge9", "challenge10", "challenge11", "challenge12"]
         player.ngPlus = 1
         }
 }
