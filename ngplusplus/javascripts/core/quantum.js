@@ -388,5 +388,5 @@ let quarkMult = function () {
 }
 
 let quantRequirement = function () {
-  return new Decimal(Number.MAX_VALUE).pow(1.5)
+  return new Decimal(Number.MAX_VALUE).pow(2)
 }

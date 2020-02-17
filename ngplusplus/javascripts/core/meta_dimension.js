@@ -5,7 +5,7 @@ function getDilationMetaDimensionMultiplier () {
 }
 
 function getMetaGalaxyPower () {
-  let ret = 1.2;
+  let ret = 1.15;
   
   if(player.meta.galaxy < 2) ret = ret**player.meta.galaxy
   else ret = ret**2+(player.meta.galaxy**0.5)
@@ -151,7 +151,7 @@ function metaBoost () {
 function metaGalaxyCost() {
   return {
     tier: 8,
-    amount: Math.max(50, -10 + 40 * player.meta.galaxy)
+    amount: Math.max(40, -5 + 50 * player.meta.galaxy)
   }
 }
 
