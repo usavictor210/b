@@ -253,3 +253,9 @@ document.getElementById("metaGalaxySoftReset").onclick = function () {
 function getMetaDimensionProductionPerSecond(tier) {
     return Decimal.floor(player.meta[tier].amount).times(getMetaDimensionMultiplier(tier));
 }
+
+function getDil18Bonus() {
+var x = gain.times(Math.round(Math.log10(player.dilation.tachyonParticles)/5))
+i
+return x
+}

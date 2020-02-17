@@ -611,7 +611,7 @@ function getDilTimeGainPerSecond () {
   if (player.eternityUpgrades.includes(9)) gain = gain.times(1 + Math.log10(Math.max(1, player.eternityPoints.log(10))) / 8);
   if (player.dilation.upgrades.includes(12)) gain = gain.times(Math.pow(player.eternities, .1));
   if (player.dilation.upgrades.includes(16)) gain = gain.times(getDil16Bonus());
-  if (player.dilation.upgrades.includes(18)) gain = gain.times(Math.round(Math.log10(player.dilation.tachyonParticles)/5))
+  if (player.dilation.upgrades.includes(18)) gain = gain.times(getDil18Bonus());
   return gain;
 }
 
