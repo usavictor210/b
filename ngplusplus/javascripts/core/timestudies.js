@@ -24,7 +24,8 @@ function buyWithIP() {
 
 function buyWithEP() {
   if (player.timeDimension1.bought < 1) {
-      alert("You need to buy at least 1 time dimension before you can purchase theorems with Eternity points.")
+      buyTimeDimension(1);
+      $.notify("One 1st Time Dimension was bought.", "error")
       return false;
   }
   if (player.eternityPoints.gte(player.timestudy.epcost)) {
