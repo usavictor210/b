@@ -2344,7 +2344,7 @@ function setAchieveTooltip() {
     when.setAttribute('ach-tooltip', "Reach "+shortenCosts( new Decimal("1e20000"))+" replicanti. Reward: You gain replicanti 2 times faster under "+shortenMoney(Number.MAX_VALUE)+" replicanti.")
     thinking.setAttribute('ach-tooltip', "Eternity for "+shortenCosts( new Decimal("1e600"))+" EP in 1 minute or less while dilated.")
     thisis.setAttribute('ach-tooltip', "Reach "+shortenCosts(new Decimal('1e20000'))+" IP without any time studies while dilated.")
-    onlywar.setAttribute('ach-tooltip', "Reach "+shortenMoney(new Decimal('1e40000'))+" EP.")
+    onlywar.setAttribute('ach-tooltip', "Reach "+shortenMoney(new Decimal('1e40000'))+" EP. Reward: The penalties for active, idle, and passive are removed.")
     thecap.setAttribute('ach-tooltip', "Get "+formatValue(player.options.notation, 1e12, 0, 0)+" eternities. Reward: Eternity upgrade 2 uses a better formula.")
     neverenough.setAttribute('ach-tooltip', "Reach "+shortenCosts( new Decimal("1e100000"))+" replicanti. Reward: You can buy max replicanti galaxies.")
     iamspeed.setAttribute('ach-tooltip', "Get "+formatValue(player.options.notation, 1e6, 0, 0)+" tickspeed upgrades from time dimensions. Reward: Autobuyers for max TD and x5 EP.")
