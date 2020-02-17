@@ -222,6 +222,7 @@ newsArray = [//always true
 ["Someone keeps sacrificing my replicants to the void. DAMN IT NOT AGAIN.", 'player.dilation.studies.includes(6)', "respecced65"],
 ["ELECTRONS CONSUME YOUR STARS", 'player.dilation.studies.includes(6)', "respecced66"],
 ["Tree of Decay isn't a upgrade tree, I have been lied to.", 'player.dilation.studies.includes(6)', "respecced67"],
+["Who keeps breaking the news tickers?!?", true, "respecced68"]
 ];}
 
 var s = document.getElementById('news');
