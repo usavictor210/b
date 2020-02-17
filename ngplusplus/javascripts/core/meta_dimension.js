@@ -4,11 +4,21 @@ function getDilationMetaDimensionMultiplier () {
   return x
 }
 
+function getMetaGalaxyPower () {
+  let ret = 1.25;
+  
+  if(player.meta.galaxy < 2) ret = ret**player.meta.galaxy
+  else ret = ret**2+(player.meta.galaxy**0.5)
+  
+  return ret-1;
+}
+
 function getMetaResetPower () {
   let ret = getDil14RealBonus();
   if (player.achievements.includes('r144')) {
     ret *= 1.01;
   }
+  ret += getMetaGalaxyPower()
   return ret;
 }
 

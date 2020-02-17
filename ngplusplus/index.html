@@ -183,9 +183,9 @@
                 <table class="table" id="studytable">
                     <tr>
                         <td><button class="eternitychallengestudy" id="ec6unl">Eternity Challenge 6<span>Requirement: 40 replicanti galaxies<span>Cost: 100 Time Theorems</button></td>
-                        <td><button class="timestudy activestudy" id="131" onclick="buyTimeStudy(131, 5)">Automatic replicanti galaxies are disabled, but you can get 50% more<span>Cost: 5 Time Theorems</button></td>
-                        <td><button class="timestudy passivestudy" id="132" onclick="buyTimeStudy(132, 5)">Replicanti galaxies are 40% more effective<span>Cost: 5 Time Theorems</button></td>
-                        <td><button class="timestudy idlestudy" id="133" onclick="buyTimeStudy(133, 5)">Replicanti are 10x slower until infinity, but their galaxies are 50% stronger<span>Cost: 5 Time Theorems</button></td>
+                          <td><button class="timestudy activestudy" id="131" onclick="buyTimeStudy(131, 5)"><span id="131penalty">Automatic replicanti galaxies are disabled, but you can get 50% more</span><span>Cost: 5 Time Theorems</button></td>
+                          <td><button class="timestudy passivestudy" id="132" onclick="buyTimeStudy(132, 5)">Replicanti galaxies are <span id="132penalty">40%</span> more effective<span>Cost: 5 Time Theorems</button></td>
+                        <td><button class="timestudy idlestudy" id="133" onclick="buyTimeStudy(133, 5)">Replicanti<span id="133penalty"> are 10x slower until infinity, but their</span> galaxies are 50% stronger<span>Cost: 5 Time Theorems</button></td>
                         <td><button class="eternitychallengestudy" id="ec8unl">Eternity Challenge 8<span>Cost: 100 Time Theorems</button></td>
                     </tr>
                 </table>
@@ -1090,22 +1090,6 @@
             <div id="progress">
                 <div id="progressbar"><span id="progresspercent" ach-tooltip="Percentage until Infinity">0%</span></div>
             </div>
-            <div id="footercontainer">
-                <table id="footer">
-                    <tr>
-                        <td>
-                            <div style="text-align:center">
-                                <a href="howto.html" target="_newtab">How to play  </a> |
-                                <a href="about.html" target="_newtab" onclick="giveAchievement('A sound financial decision')">Donate   </a> |
-                                <a href="changelog.html" target="_newtab">Changelog   </a> |
-                                <a href="https://discord.gg/ST9NaXa" target="_newtab">Discord</a> |
-                                <a href="https://www.reddit.com/r/AntimatterDimensions/" target="_newtab">Subreddit</a>      |    <a href="https://ivark.github.io/savefixer/index.html" target="_newtab">Savefixer</a>
-
-                            </div>
-                        </td>
-                    </tr>
-                </table>
-            </div>
         </div>
         <div id="options" class="tab" align="center">
             <br>
@@ -1247,22 +1231,6 @@
                 <br>
                 <div id="averageEternityRun"></div>
                 <br>
-            </div>
-            <div id="footercontainer">
-                <table id="footer">
-                    <tr>
-                        <td>
-                            <div style="text-align:center">
-                                <a href="howto.html" target="_newtab">How to play  </a> |
-                                <a href="about.html" target="_newtab" onclick="giveAchievement('A sound financial decision')">Donate   </a> |
-                                <a href="changelog.html" target="_newtab">Changelog   </a> |
-                                <a href="https://discord.gg/ST9NaXa" target="_newtab">Discord</a> |
-                                <a href="https://www.reddit.com/r/AntimatterDimensions/" target="_newtab">Subreddit</a>      |    <a href="https://ivark.github.io/savefixer/index.html" target="_newtab">Savefixer</a>
-
-                            </div>
-                        </td>
-                    </tr>
-                </table>
             </div>
         </div>
         <div id="achievements" class="tab">
