@@ -8,7 +8,7 @@ function getMetaGalaxyPower () {
   let ret = 1.1;
   
   if(player.meta.galaxy < 2) ret = ret**player.meta.galaxy
-  else ret = ret**2+(player.meta.galaxy**0.5)
+  else ret = ret**2+(player.meta.galaxy**0.25)
   
   return ret-1;
 }
