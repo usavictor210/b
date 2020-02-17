@@ -59,7 +59,6 @@ function getMetaDimensionMultiplier (tier) {
     return new Decimal(1);
   }
   let multiplier = Decimal.pow(getMetaPerTenPower(), player.meta[tier].tensBought).times(Decimal.pow(getMetaResetPower(), Math.max(0, player.meta.resets - tier + 1))).times(getDilationMetaDimensionMultiplier());
-
   if (player.dilation.upgrades.includes(13)) {
     multiplier = multiplier.times(getDil13Bonus());
   }
@@ -76,7 +75,7 @@ function getMetaDimensionMultiplier (tier) {
     }
   }
 
-  if (multiplier.gt(1e30)) multiplier = multiplier.pow(0.9).max 
+  if (multiplier.gt(1e36)) multiplier = multiplier.pow(0.95).max(1e36)
   return multiplier;
 }
 
