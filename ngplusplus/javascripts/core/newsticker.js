@@ -206,6 +206,7 @@ newsArray = [//always true
 ["There should be eleven dimensions. Oh wait...", 'player.dilation.studies.includes(6)', "respecced49"],
 ["Help, my save vanished!", 'player.dilation.studies.includes(6)', "respecced50"],
 ["I thought Meta-Antimatter Galaxies didn't exist. Well, I guess they do now.", 'player.dilation.studies.includes(6) && player.meta.galaxies > 0', "respecced51"]
+["Well, if there's meta-antimatter galaxies, then where is meta-infinity?", 'player.dilation.studies.includes(6) && player.meta.galaxies > 0 && player.meta.bestAntimatter.lt(Number.MAX_VALUE)', "respecced51"]
 ];}
 
 var s = document.getElementById('news');
