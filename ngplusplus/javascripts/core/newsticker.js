@@ -212,7 +212,16 @@ newsArray = [//always true
 ["A new study has appeared linking meta-antimatter to more antimatter production. Scientists say this is pseudoscience.", 'player.dilation.studies.includes(6)', "respecced55"],
 ["So I've been pondering for some time... where are we in Antimatter Dimensions? Sure, we're probably living on Earth, but to be honest, if we had made antimatter condensers, it'd probably not be reasonable. One day I was sitting on my chair. I thought about all the antimatter I had produced. Then it hit me. We were living in the 22nd century. Scientists found a way to manipulate antimatter, for some reason. By the strange events of Infinity and Eternity, we're breaking the very universe we exist in. We break the time and space fabric to produce more antimatter. Then all of a sudden, it all fades into a flash. I woke up. Maybe this is a dream. No. It can't be. I see many galaxies in the sky. There's thousands upon thousands of dimensions, not to mention even centillions. Oh no. I think I know what this means. When I touched that antimatter dimension, more antimatter began to produce. My curiosity made me create more dimensions. I am controlling the planet, even the universe. I am the one who caused all this. But, for what? Massive greed? Is it only that I enjoy the large numbers? Huh. Maybe I was wrong about taking this job just to do some science. The universe gets worse each and every time I big crunch, or reshape the universe by going Eternal. Who am I? ...  I'm a monster. I destroyed everything for my personal gain. I want to stop, but I cannot. Soon, the antimatter will consume me. It is only a matter of time before I die. If you're reading this, please be safe out there. Don't end up like me who destroyed the rest of humanity.", true, "respecced56"],
 ["Well, if we have meta-galaxies, then where is meta-tickspeed?", 'player.dilation.studies.includes(6) && player.meta.galaxies > 0', "respecced57"],
-["The invasion of the battle replicants has been postponed indefinitely. Everyone, please remain calm!", 'player.dilation.studies.includes(6) && player.meta.galaxies > 0', "respecced57"],
+["The invasion of the battle replicants has been postponed indefinitely. Everyone, please remain calm!", 'player.dilation.studies.includes(6) && player.meta.galaxies > 0', "respecced58"],
+["Breaking news: Hevipelle has stopped accepting new news. Suggest all news tickers to Usavictor instead", true, "respecced59"],
+["First-time developer releases incremental game, gets mocked by Aarex for inflation", true, "respecced60"],
+["Whenever I try to give Aarex a antimatter onion, the onion vanishes. Does this mean Aarex is made of matter?", true, "respecced61"],
+["NG+3 has prestige layers, and onions have layers. Does this mean NG+3 is a prestige onion?", true, "respecced62"],
+["Alright, so we're checking the only game where you can destroy Florida with antimatter, it's Antimatter Dimensions NG+2 Respecced.", true, "respecced63"],
+["We have discovered that tachyon particles may drift and end the universe", 'player.dilation.studies.includes(1)', "respecced64"],
+["Someone keeps sacrificing my replicants to the void. DAMN IT NOT AGAIN.", 'player.dilation.studies.includes(6)', "respecced65"],
+["ELECTRONS CONSUME YOUR STARS", 'player.dilation.studies.includes(6)', "respecced66"],
+["Tree of Decay isn't a upgrade tree, I have been lied to.", 'player.dilation.studies.includes(6)', "respecced67"],
 ];}
 
 var s = document.getElementById('news');

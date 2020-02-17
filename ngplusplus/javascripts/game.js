@@ -4639,6 +4639,9 @@ function updateDilationUpgradeButtons() {
 let getDilRebuyableUpgCost = function (i) {
   let cost = new Decimal(DIL_UPG_COSTS[i][0]).times(Decimal.pow(DIL_UPG_COSTS[i][1],(player.dilation.rebuyables[i])));
   // rounding
+  if (i === 2 & cost.gte(9e99)) {
+
+  }
   if (i === 3 && cost.gte(9e99)) {
     cost = new Decimal(1e100).times(Decimal.pow(1e3, player.dilation.rebuyables[i] - 75).times(1.05*player.dilation.rebuyables[i]-75));
   }
