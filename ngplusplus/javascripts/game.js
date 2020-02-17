@@ -666,15 +666,10 @@ function updateMetaDimensions () {
       var galaxyRequirement = metaGalaxyCost();
       document.getElementById("metaGalaxyResetLabel").textContent = 'Meta-Antimatter Galaxy ('+ player.meta.galaxy +'): Requires ' + galaxyRequirement.amount + " Eighth Meta Dimensions"
       // metaGalaxybuttondiv
-      if (shiftRequirement.tier < 8) {
-        document.getElementById('quantumbuttondiv').style.display = '';
-      } else {
-        document.getElementById('quantumbuttondiv').style.display = 'none';
-      }
       if (player.meta[galaxyRequirement.tier].amount.lt(galaxyRequirement.amount)) {
-          document.getElementById("metaSoftReset").className = 'unavailablebtn';
+          document.getElementById("metaGalaxySoftReset").className = 'unavailablebtn';
       } else {
-          document.getElementById("metaSoftReset").className = 'storebtn';
+          document.getElementById("metaGalaxySoftReset").className = 'storebtn';
       }
       
       // also quantum stuff since why not

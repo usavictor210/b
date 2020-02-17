@@ -140,9 +140,28 @@ function metaBoost () {
 
 function metaGalaxyCost() {
   return {
-    tier: Math.min(8, player.meta.resets + 4),
-    amount: Math.max(50, -10 + 60 * player.meta.galaxy)
+    tier: 8,
+    amount: Math.max(50, -10 + 40 * player.meta.galaxy)
   }
+}
+
+function metaGalaxy () {
+    let req = metaGalaxyCost();
+    if (player.meta[req.tier].amount.lt(req.amount)) {
+        return false;
+    }
+    player.meta.antimatter = new Decimal(10);
+    if (player.achievements.includes('r142')) {
+      player.meta.antimatter = new Decimal(100);
+    }
+    clearMetaDimensions();
+    player.meta.resets = 0
+    for (let i = 2; i <= 8; i++) {
+      document.getElementById(i + "MetaRow").style.display = "none"
+    }
+    player.meta.galaxy++;
+    giveAchievement("That's too meta");
+    return true;
 }
 
 function getMetaDimensionCostMultiplier(tier) {
@@ -215,6 +234,9 @@ document.getElementById("metaMaxAll").onclick = function () {
 
 document.getElementById("metaSoftReset").onclick = function () {
     metaBoost();
+}
+document.getElementById("metaGalaxySoftReset").onclick = function () {
+    metaGalaxy();
 }
 
 function getMetaDimensionProductionPerSecond(tier) {
