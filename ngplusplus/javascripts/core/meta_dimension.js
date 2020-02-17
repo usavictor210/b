@@ -5,7 +5,7 @@ function getDilationMetaDimensionMultiplier () {
 }
 
 function getMetaGalaxyPower () {
-  let ret = 1.25;
+  let ret = 1.2;
   
   if(player.meta.galaxy < 2) ret = ret**player.meta.galaxy
   else ret = ret**2+(player.meta.galaxy**0.5)
