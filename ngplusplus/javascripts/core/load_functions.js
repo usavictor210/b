@@ -153,6 +153,7 @@ function onLoad() {
   if (player.meta.resets === undefined) player.meta.resets = 0
   if (player.meta.antimatter === undefined) player.meta.antimatter = new Decimal(10);
   if (player.meta.bestAntimatter === undefined) player.meta.bestAntimatter = player.meta.antimatter;
+  if (player.meta.galaxy === undefined) player.meta.galaxy = 0;
   if (player.quantum === undefined) {
     player.quantum = {
       times: 0,
@@ -616,14 +617,18 @@ if (player.version < 5) {
     player.version = 15.1;
     player.ngPlus = 0;
     ngplus()
-    $.notify("Welcome to version 15.1!", "info")
   }
   
   if (player.version < 15.2) {
     player.version = 15.2;
     if (player.eternities<1012680) player.eternities = 1012680
-    $.notify("Welcome to version 15.2! Just a eternity checkup.", "info")
   }
+  
+  if (player.version < 15.3) {
+    player.version = 15.3;
+    if (!player.meta.galaxies === undefined) player.meta.galaxies == player.meta.galaxy
+    delete player.meta.galaxies;
+}
   // player.version is currently 12.3
   if (player.options.notation == "Default") {
       player.options.notation = "Brackets";

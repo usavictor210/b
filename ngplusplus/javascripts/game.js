@@ -92,7 +92,7 @@ var player = {
     dimensionMultDecrease: 10,
     dimensionMultDecreaseCost: 1e8,
     overXGalaxies: 10,
-    version: 15.2,
+    version: 15.3,
     infDimensionsUnlocked: [false, false, false, false, false, false, false, false],
     infinityPower: new Decimal(1),
     spreadingCancer: 0,
@@ -276,7 +276,7 @@ var player = {
       antimatter: new Decimal(10),
       bestAntimatter: new Decimal(10),
       resets: 0,
-      galaxies: 0,
+      galaxy: 0,
       '1': {
         amount: new Decimal(0),
         bought: 0,
@@ -664,8 +664,19 @@ function updateMetaDimensions () {
           document.getElementById("metaSoftReset").className = 'storebtn';
       }
       var galaxyRequirement = metaGalaxyCost();
-      document.getElementById("metaGalaxyResetLabel").textContent = 'Meta-Antimatter Galaxy ('+ player.meta.galaxy +'): Requires ' + galaxyRequirement.amount + " " + DISPLAY_NAMES[shiftRequirement.tier] + " 8th Meta Dimensions"
-
+      document.getElementById("metaGalaxyResetLabel").textContent = 'Meta-Antimatter Galaxy ('+ player.meta.galaxy +'): Requires ' + galaxyRequirement.amount + " Eighth Meta Dimensions"
+      // metaGalaxybuttondiv
+      if (shiftRequirement.tier < 8) {
+        document.getElementById('quantumbuttondiv').style.display = '';
+      } else {
+        document.getElementById('quantumbuttondiv').style.display = 'none';
+      }
+      if (player.meta[galaxyRequirement.tier].amount.lt(galaxyRequirement.amount)) {
+          document.getElementById("metaSoftReset").className = 'unavailablebtn';
+      } else {
+          document.getElementById("metaSoftReset").className = 'storebtn';
+      }
+      
       // also quantum stuff since why not
       if (player.meta.antimatter.gte(Number.MAX_VALUE)) {
         let qg = quarkGain();

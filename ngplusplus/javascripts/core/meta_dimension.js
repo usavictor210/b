@@ -138,6 +138,12 @@ function metaBoost () {
     return true;
 }
 
+function metaGalaxyCost() {
+  return {
+    tier: Math.min(8, player.meta.resets + 4),
+    amount: Math.max(50, -10 + 60 * player.meta.galaxy)
+  }
+}
 
 function getMetaDimensionCostMultiplier(tier) {
     return costMults[tier];
