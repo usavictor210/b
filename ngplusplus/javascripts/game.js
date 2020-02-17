@@ -4655,6 +4655,7 @@ function updateDilationUpgradeCosts() {
     for (let i = 1; i <= 4; i++) {
       let cost = getDilRebuyableUpgCost(i);
       document.getElementById("dil" + i + "cost").textContent = "Cost: " + formatValue(player.options.notation, cost, 1, 1) + " dilated time";
+      if (i === 2 && cost.gt(new Decimal("1e9999")) document.getElementById("dil2cost").textContent = "Maxed out"
     }
     for (let i = 5; i <= DIL_UPG_NUM; i++) {
       document.getElementById("dil" + i + "cost").textContent = "Cost: " + shortenCosts(DIL_UPG_COSTS[i]) + " dilated time"
