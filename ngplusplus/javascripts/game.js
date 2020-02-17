@@ -664,7 +664,7 @@ function updateMetaDimensions () {
           document.getElementById("metaSoftReset").className = 'storebtn';
       }
       var galaxyRequirement = metaGalaxyCost();
-      document.getElementById("metaGalaxyResetLabel").textContent = 'Meta-Antimatter Galaxy ('+ player.meta.galaxy +'): Requires ' + galaxyRequirement.amount + " Eighth Meta Dimensions"
+      document.getElementById("metaGalaxyResetLabel").textContent = 'Meta-Antimatter Galaxies ('+ player.meta.galaxy +'): Requires ' + galaxyRequirement.amount + " Eighth Meta Dimensions"
       // metaGalaxybuttondiv
       if (player.meta[galaxyRequirement.tier].amount.lt(galaxyRequirement.amount)) {
           document.getElementById("metaGalaxySoftReset").className = 'unavailablebtn';
