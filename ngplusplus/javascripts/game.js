@@ -4552,11 +4552,13 @@ function startDilatedEternity() {
         }, 250)
         return
     }
-    if (!player.options.dilationconfirm) if (!confirm("Dilating time will start a new alternate eternity, where all of your types of dimension multiplier's exponents and the tickspeed multiplier's exponent will be reduced to ^ 0.75. If you can eternity while dilated, you'll be rewarded with tachyon particles based on your antimatter and tachyon particles.")) {
+    if (player.options.dilationconfirm) {
+    if (!confirm("Dilating time will start a new alternate eternity, where all of your types of dimension multiplier's exponents and the tickspeed multiplier's exponent will be reduced to ^ 0.75. If you can eternity while dilated, you'll be rewarded with tachyon particles based on your antimatter and tachyon particles.")) {
         setTimeout(function() {
             gameLoopIntervalId = setInterval(gameLoop, player.options.updateRate);
         }, 250)
         return
+    }
     }
     giveAchievement("I told you already, time is relative")
     eternity(true)
