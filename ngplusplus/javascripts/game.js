@@ -2153,7 +2153,7 @@ document.getElementById("importbtn").onclick = function () {
         player.options.theme = "S5";
         player.options.secretThemeKey = save_data;
         setTheme(player.options.theme);
-    } else if (sha512_256(save_data) === "781f11ec17dece92a7c1860c65ef05043e3982a9830c1065964ebc7dc355ed16f5a52206420bf77752a81437366b0072ef9a13e804f8768eeed9deefff1e3496") {
+    } else if (sha512_256(save_data) === "3ede5fb375d355a98a1fc546ea95b4604c9206c0b1313280b255ba9530dc184e") {
         player = metaplayer;
         saved = 0;
         totalMult = 1
@@ -2166,7 +2166,6 @@ document.getElementById("importbtn").onclick = function () {
         postc8Mult = new Decimal(0)
         mult18 = new Decimal(1)
         ec10bonus = new Decimal(1)
-      
     } else {
         save_data = JSON.parse(atob(save_data), function(k, v) { return (v === Infinity) ? "Infinity" : v; });
         if(verify_save(save_data)) forceHardReset = true

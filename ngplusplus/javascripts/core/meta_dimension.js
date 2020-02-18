@@ -254,3 +254,8 @@ function getMetaDimensionProductionPerSecond(tier) {
     return Decimal.floor(player.meta[tier].amount).times(getMetaDimensionMultiplier(tier));
 }
 
+function getDil18Bonus() {
+var x = new Decimal((Math.log10(player.dilation.tachyonParticles)/6))
+if (x.gt(7.5)) x = x.pow(.75).max(7.5)
+return x
+}
