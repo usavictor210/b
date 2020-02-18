@@ -260,7 +260,8 @@ function getMetaDimensionProductionPerSecond(tier) {
 }
 
 function getDil18Bonus() {
-var x = new Decimal((Math.log10(player.dilation.tachyonParticles)/6)).min(1)
+var x = new Decimal((Math.log10(player.dilation.tachyonParticles)/6))
+if (isNan(x)) x = new Decimal(1)
 if (x.gt(7.5)) x = x.pow(.75).max(7.5)
 return x
 }
