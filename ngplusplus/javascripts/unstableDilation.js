@@ -22,3 +22,5 @@ var usGain = new Decimal(((player.dilation.tachyonParticles.log(10)/15))).max(1)
 //showing the unstable dilation button
 if (player.dilation.dilatedTime.gte(9.99e99)) document.getElementById("enabledilation2").style.display = "inline-block"
 else document.getElementById("enabledilation2").style.display = "none"
+
+//if (player.dilation.unstableShards.gte(0)) document.getElementById("")
