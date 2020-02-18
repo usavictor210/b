@@ -634,6 +634,16 @@ if (player.version < 5) {
     if (!player.meta.galaxies === undefined) player.meta.galaxies == player.meta.galaxy
     delete player.meta.galaxies;
   }
+  
+  if (player.version < 15.45) {
+    if (player.dilation.rebuyables[2] > 52) {
+        player.dilation.rebuyables[2] = 52
+        player.dilation.dilatedTime = new Decimal(0)
+        player.dilation.nextThreshold = new Decimal(1000)
+        player.dilation.freeGalaxies = 0
+      }
+  }
+
   // player.version is currently 12.3
   if (player.options.notation == "Default") {
       player.options.notation = "Brackets";
