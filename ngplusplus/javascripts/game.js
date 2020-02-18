@@ -6195,9 +6195,6 @@ setInterval(function () {
     save_game()
 }, 30000);
 
-setInterval(function () {
-    if (playFabId != -1 && player.options.cloud) playFabSaveCheck();
-}, 1000*60*5)
 updateCosts();
 //updateInterval();
 updateDimensions();
