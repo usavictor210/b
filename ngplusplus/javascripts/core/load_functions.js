@@ -142,6 +142,11 @@ function onLoad() {
   if (player.dilation.upgrades === undefined) player.dilation.upgrades = []
   if (player.dilation.rebuyables === undefined) player.dilation.rebuyables =  { 1: 0, 2: 0, 3: 0, 4: 0}
   if (!(4 in player.dilation.rebuyables)) {player.dilation.rebuyables[4] = 0};
+  if (player.dilation.unstable === undefined) player.dilation.unstable = {
+  times: 0,
+  shards: new Decimal(0),
+  severity: 1, //layers of dilation
+  }
   if (player.timeDimension5 === undefined) player.timeDimension5 = {cost: new Decimal("1e2350"), amount: new Decimal(0), power: new Decimal(1), bought: 0 }
   if (player.timeDimension6 === undefined) player.timeDimension6 = {cost: new Decimal("1e2650"), amount: new Decimal(0), power: new Decimal(1), bought: 0 }
   if (player.timeDimension7 === undefined) player.timeDimension7 = {cost: new Decimal("1e3000"), amount: new Decimal(0), power: new Decimal(1), bought: 0 }
