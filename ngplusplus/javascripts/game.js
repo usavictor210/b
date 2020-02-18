@@ -6251,8 +6251,8 @@ window.addEventListener('keydown', function(event) {
         break;
 
         case 77: // M
-            //if () 
-        document.getElementById("maxall").onclick()
+        if (player.dilation.studies.includes(6)) document.getElementById("metaMaxAll").onclick()
+        else document.getElementById("maxall").onclick()
         break;
 
         case 83: // S
