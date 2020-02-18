@@ -645,12 +645,21 @@ if (player.version < 5) {
   }
   
   if (player.version < 15.45) {
+      player.version = 15.45;
     if (player.dilation.rebuyables[2] > 52) {
         player.dilation.rebuyables[2] = 52
         player.dilation.dilatedTime = new Decimal(0)
         player.dilation.nextThreshold = new Decimal(1000)
         player.dilation.freeGalaxies = 0
       }
+  }
+
+  if (player.version < 15.5) {
+      player.version = 15.5;
+  if (!player.dilation.unstableShards === undefined) {
+    player.dilation.unstable.shards = player.dilation.unstableShards
+    delete player.dilation.unstableShards
+    }
   }
 
   // player.version is currently 12.3
@@ -935,6 +944,9 @@ function transformSaveToDecimal() {
   player.dilation.dilatedTime = new Decimal(player.dilation.dilatedTime)
   player.dilation.totalTachyonParticles = new Decimal(player.dilation.totalTachyonParticles)
   player.dilation.nextThreshold = new Decimal(player.dilation.nextThreshold)
+  player.dilation.unstable.shards = new Decimal (player.dilation.unstable.shards)
+  player.dilation.timeRift.temporalPower = new Decimal(player.dilation.timeRift.temporalPower)
+  }
 }
 
 
@@ -966,7 +978,7 @@ function set_save(name, saveId, value) {
 function get_save(name) {
   try {
     return JSON.parse(atob(localStorage.getItem(name)), function(k, v) { return (v === Infinity) ? "Infinity" : v; });
-  } catch(e) { console.log("Fuck IE", e); }
+  } catch(e) { console.loDon't use IE. IE", e); }
 }
 
 function getRootSaveObject() {
