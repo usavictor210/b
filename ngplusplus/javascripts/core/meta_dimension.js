@@ -154,7 +154,7 @@ function metaBoost () {
 function metaGalaxyCost() {
   return {
     tier: 8,
-    amount: Math.max(40, -5 + 50 * player.meta.galaxy)
+    amount: Math.max(40, -5 + 50 * player.meta.galaxy + ((player.meta.galaxy-6)*10))
   }
 }
 
