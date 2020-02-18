@@ -613,7 +613,7 @@ if (player.version < 5) {
     player.version = 15;
     for (let i = 0; i < player.dilation.upgrades.length; i++) {
       if (player.dilation.upgrades[i] === 13) {
-        player.dilation.upgrades[i] = 17;
+        player.dilation.upgrades[i] = 19;
       }
     }
   }
@@ -633,7 +633,7 @@ if (player.version < 5) {
     player.version = 15.3;
     if (!player.meta.galaxies === undefined) player.meta.galaxies == player.meta.galaxy
     delete player.meta.galaxies;
-}
+  }
   // player.version is currently 12.3
   if (player.options.notation == "Default") {
       player.options.notation = "Brackets";
