@@ -18,3 +18,5 @@ let usGain = (Math.floor(player.dilation.tachyonParticles.log(5)/10))
         player.dilation.unstableShards.add(usGain)
 }
 */
+
+if (player.dilation.dilatedTime.gte(9.99e99) 
