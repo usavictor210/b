@@ -859,6 +859,7 @@ function updateDimensions() {
 }
 
 function updateCosts() {
+let NDArray = ["first", "second", "third", "fourth", "fifth", "sixth", "seventh", "eight"]
     document.getElementById("first").textContent = 'Cost: ' + shortenCosts(player.firstCost);
     document.getElementById("second").textContent = 'Cost: ' + shortenCosts(player.secondCost);
     document.getElementById("third").textContent = 'Cost: ' + shortenCosts(player.thirdCost);
