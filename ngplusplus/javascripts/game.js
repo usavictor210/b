@@ -4552,7 +4552,7 @@ function startDilatedEternity() {
         }, 250)
         return
     }
-    if (player.options.dilationconfirm || !confirm("Dilating time will start a new eternity, and all of your Dimension/Infinity Dimension/Time Dimension multiplier's exponents and tickspeed multiplier's exponent will be reduced to ^ 0.75. If you can eternity while dilated, you'll be rewarded with tachyon particles based on your antimatter and tachyon particles.")) {
+    if (!player.options.dilationconfirm || !confirm("Dilating time will start a new eternity, and all of your Dimension/Infinity Dimension/Time Dimension multiplier's exponents and tickspeed multiplier's exponent will be reduced to ^ 0.75. If you can eternity while dilated, you'll be rewarded with tachyon particles based on your antimatter and tachyon particles.")) {
         setTimeout(function() {
             gameLoopIntervalId = setInterval(gameLoop, player.options.updateRate);
         }, 250)
@@ -4985,7 +4985,6 @@ setInterval(function() {
 
 
 
-
     if (player.currentEternityChall == "eterc8") {
         document.getElementById("eterc8repl").style.display = "block"
         document.getElementById("eterc8ids").style.display = "block"
@@ -5007,7 +5006,12 @@ setInterval(function() {
     document.getElementById("infinitiedBank").style.display = (player.infinitiedBank > 0) ? "block" : "none"
     document.getElementById("infinitiedBank").textContent = "You have " + formatInfOrEter(player.infinitiedBank) + " banked infinities."
 
-    if (infchallengeTimes < 7.5) giveAchievement("Never again")
+  if (player.dilation.tachyonParticles !== 0 || player.quantum.times !== 0 ) document.getElementById("dilationconf").style.display = "inline-block"
+  else document.getElementById("dilationconf").style.display = "none"
+  if (player.quantum.times !== 0) document.getElementById("quantumconf").style.display = "inline-block"
+  else document.getElementById("quantumconf").style.display = "none"
+
+  if (infchallengeTimes < 7.5) giveAchievement("Never again")
     if (player.infinityPoints.gte(new Decimal("1e22000")) && player.timestudy.studies.length == 0) giveAchievement("What do I have to do to get rid of you")
     if (player.replicanti.galaxies >= 180*player.galaxies && player.galaxies > 0) giveAchievement("Popular music")
     if (player.eternityPoints.gte(Number.MAX_VALUE)) giveAchievement("But I wanted another prestige layer...");

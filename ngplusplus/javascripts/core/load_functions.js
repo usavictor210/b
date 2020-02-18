@@ -59,7 +59,8 @@ function onLoad() {
   if (player.options.cloud === undefined) player.options.cloud = true
   if (player.options.hotkeys === undefined) player.options.hotkeys = true
   if (player.options.eternityconfirm === undefined) player.options.eternityconfirm = true
-  if (player.options)
+  if (player.options.dilationconfirm === undefined) player.options.dilationconfirm = true
+  if (player.options.quantumconfirm === undefined) player.options.quantumconfirm = true
   if (player.options.themes === undefined) player.options.themes = "Normal"
   if (player.options.secretThemeKey === undefined) player.options.secretThemeKey = 0
   if (player.achievements === undefined) player.achievements = [];

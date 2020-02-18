@@ -410,3 +410,8 @@ function toggleQuantumConf() {
         document.getElementById("quantumconf").textContent = "Quantum confirmation ON"
     }
 }
+
+if (player.dilation.tachyonParticles !== 0 || player.quantum.times !== 0 ) document.getElementById("dilationconf").style.display = "inline-block"
+else document.getElementById("dilationconf").style.display = "inline-block"
+if (player.quantum.times !== 0 ) document.getElementById("quantumconf").style.display = "inline-block"
+else document.getElementById("quantumconf").style.display = "inline-block"
