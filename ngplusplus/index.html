@@ -1120,7 +1120,8 @@
                     <td><div><button id="animationoptionsbtn" class="storebtn" style="width: 200px; height: 55px; font-size:160%;">Animations</button></div></td>
                 </tr>
                 <tr>
-
+          <td><div><button id="dilationconf" onclick="toggleDilationConf()" class="storebtn" style="color:black; width: 200px; height: 55px; font-size:120%; display: none">Dilation confirmation ON</button></div></td>
+          <td><div><button id="quantumconf" onclick="toggleQuantumConf()" class="storebtn" style="color:black; width: 200px; height: 55px; font-size:120%; display: none">Quantum confirmation ON</button></div></td>
 
                 </tr>
 
@@ -2781,7 +2782,7 @@
         </div>
     </div>
     <div class="popup" id="update">
-        <div id="updatePopup">The last test.</div>
+        <div id="updatePopup">.</div>
         <button class="storebtn" style="font-size: 15px" onclick="closeToolTip()" style="display: inline">Okay</button>
     </div>
     <div class="popup" id="challfail">
@@ -2789,7 +2790,7 @@
         <button class="storebtn" style="font-size: 15px" onclick="closeToolTip()" style="display: inline">Okay</button>
     </div>
     <div class="popup" id="offlineprogress" style="width: 450px; height: 200px;">
-        <div id="offlinePopup" style="height: 150px">You made X antimatter and stuff</div>
+        <div id="offlinePopup" style="height: 150px">If you see this, stuff went wrong.</div>
         <button class="storebtn" style="font-size: 15px" onclick="closeToolTip()" style="display: inline">Okay</button>
 	</div>
 	<div class="popup savemenu" id="loadmenu">
@@ -2865,7 +2866,6 @@
 
 <script type="text/javascript"src="PlayFab/PlayFabClientApi.js"></script>
 <script type="text/javascript" src="javascripts/autobuyer.js"></script>
-<!-- script type="text/javascript" src="javascripts/decimal.js"></script> -->
 <script type="text/javascript" src="javascripts/breakinfinity.js"></script>
 <script type="text/javascript" src="javascripts/chart.js"></script>
 <script type="text/javascript" src="javascripts/lz-string.js"></script>

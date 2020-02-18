@@ -390,3 +390,23 @@ let quarkMult = function () {
 let quantRequirement = function () {
   return new Decimal(Number.MAX_VALUE).pow(4)
 }
+
+function toggleDilationConf() {
+    if (player.options.dilationconfirm) {
+        player.options.dilationconfirm = false
+        document.getElementById("dilationconf").textContent = "Dilation confirmation OFF"
+    } else {
+        player.options.dilationconfirm = true
+        document.getElementById("dilationconf").textContent = "Dilation confirmation ON"
+    }
+}
+
+function toggleQuantumConf() {
+    if (player.options.quantumconfirm) {
+        player.options.quantumconfirm = false
+        document.getElementById("quantumconf").textContent = "Quantum confirmation OFF"
+    } else {
+        player.options.quantumconfirm = true
+        document.getElementById("quantumconf").textContent = "Quantum confirmation ON"
+    }
+}
