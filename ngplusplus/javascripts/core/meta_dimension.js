@@ -136,7 +136,8 @@ function metaBoost () {
     player.meta.antimatter = new Decimal(10);
     if (player.achievements.includes('r142') && !player.achievements.includes('r152')) {
       player.meta.antimatter = new Decimal(100);
-    } else player.meta.antimatter = new Decimal(1000);
+    } else if (player.achievements.includes('r152')) player.meta.antimatter = new Decimal(1000);
+    else player.meta.antimatter = new Decimal(10);
 
     clearMetaDimensions();
     for (let i = 2; i <= 8; i++) {
