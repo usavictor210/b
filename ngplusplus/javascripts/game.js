@@ -265,6 +265,7 @@ var player = {
         nextThreshold: new Decimal(1000),
         freeGalaxies: 0,
         upgrades: [],
+        unstableShards: new Decimal(0),
         rebuyables: {
             1: 0,
             2: 0,
