@@ -145,7 +145,11 @@ function onLoad() {
   if (player.dilation.unstable === undefined) player.dilation.unstable = {
   times: 0,
   shards: new Decimal(0),
-  severity: 1, //layers of dilation
+  severity: 1, //layers of dilation stacked 
+  }
+  if (player.dilation.timeRift === undefined) player.dilation.timeRift = {
+  seconds: 0,
+  temporalPower: new Decimal(0),
   }
   if (player.timeDimension5 === undefined) player.timeDimension5 = {cost: new Decimal("1e2350"), amount: new Decimal(0), power: new Decimal(1), bought: 0 }
   if (player.timeDimension6 === undefined) player.timeDimension6 = {cost: new Decimal("1e2650"), amount: new Decimal(0), power: new Decimal(1), bought: 0 }
