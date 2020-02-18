@@ -946,9 +946,9 @@ function transformSaveToDecimal() {
   player.dilation.nextThreshold = new Decimal(player.dilation.nextThreshold)
   player.dilation.unstable.shards = new Decimal (player.dilation.unstable.shards)
   player.dilation.timeRift.temporalPower = new Decimal(player.dilation.timeRift.temporalPower)
+    }
   }
 }
-
 
 function loadAutoBuyerSettings() {
   for (var i=0; i<9; i++) {
