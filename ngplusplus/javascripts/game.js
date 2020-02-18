@@ -1032,18 +1032,11 @@ document.getElementById("The first one's always free").onclick = function () {
     giveAchievement("The first one's always free")
 };
 
-
-
-
 function glowText(id) {
   var text = document.getElementById(id);
   text.style.setProperty("-webkit-animation", "glow 1s");
   text.style.setProperty("animation", "glow 1s");
 }
-
-
-
-
 
 document.getElementById("maxall").onclick = function () {
     if (!player.break && player.money.gt(Number.MAX_VALUE)) return false;
@@ -1567,30 +1560,30 @@ function replicantiGalaxyBulkModeToggle() {
 function timeDimensionAutoToggle() {
     if (player.timeDimensionAutobuyer) {
         player.timeDimensionAutobuyer = false
-        document.getElementById("tdautotoggle").textContent = "Auto max TD OFF"
+        document.getElementById("tdautotoggle").textContent = "Auto max TD: OFF"
     } else {
         player.timeDimensionAutobuyer = true
-        document.getElementById("tdautotoggle").textContent = "Auto max TD ON"
+        document.getElementById("tdautotoggle").textContent = "Auto max TD: ON"
     }
 }
 
 function ep5xAutoToggle() {
     if (player.ep5xAutobuyer) {
         player.ep5xAutobuyer = false
-        document.getElementById("epautotoggle").textContent = "Auto max 5x EP OFF"
+        document.getElementById("epautotoggle").textContent = "Auto max 5x EP: OFF"
     } else {
         player.ep5xAutobuyer = true
-        document.getElementById("epautotoggle").textContent = "Auto max 5x EP ON"
+        document.getElementById("epautotoggle").textContent = "Auto max 5x EP: ON"
     }
 }
 
 function infMultAutoToggle() {
     if (player.infMultBuyer) {
         player.infMultBuyer = false
-        document.getElementById("infmultbuyer").textContent = "Autobuy IP mult OFF"
+        document.getElementById("infmultbuyer").textContent = "Autobuy IP mult: OFF"
     } else {
         player.infMultBuyer = true
-        document.getElementById("infmultbuyer").textContent = "Autobuy IP mult ON"
+        document.getElementById("infmultbuyer").textContent = "Autobuy IP mult: ON"
     }
 }
 
@@ -1634,10 +1627,10 @@ function toggleAutoEterMode() {
 function toggleEternityConf() {
     if (player.options.eternityconfirm) {
         player.options.eternityconfirm = false
-        document.getElementById("eternityconf").textContent = "Eternity confirmation OFF"
+        document.getElementById("eternityconf").textContent = "Eternity confirmation: OFF"
     } else {
         player.options.eternityconfirm = true
-        document.getElementById("eternityconf").textContent = "Eternity confirmation ON"
+        document.getElementById("eternityconf").textContent = "Eternity confirmation: ON"
     }
 }
 
@@ -1804,20 +1797,6 @@ document.getElementById("toggleBtnTickSpeed").onclick = function () {
         document.getElementById("toggleBtnTickSpeed").textContent = "Buys singles"
     }
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 document.getElementById("secondSoftReset").onclick = function() {
     if (player.currentEternityChall == "eterc6") return
@@ -2010,7 +1989,6 @@ function galaxyReset() {
     }
 
     setInitialDimensionPower();
-
 
     if (player.options.notation == "Emojis") player.spreadingCancer+=1;
     if (player.spreadingCancer >= 10) giveAchievement("Spreading Cancer")
