@@ -148,10 +148,10 @@ newsArray = [//always true
 //missable / pay req
 ["How dare you actually get zero deaths on a first run?", 'player.achievements.includes("r43") && player.infinitied == 1 && player.eternities == 0', "s1"],
 ["Legend says the ninth dimension is supposed to be found here, but I don't see anything.", "player.money.e >= 41900 && !player.replicanti.unl && player.eternities == 0", "s2"],
-["Person with money likes to support this game.", "kongDimMult > 1 || kongIPMult > 1", "s3"],
-["Whale is bad at making smart purchases.", "kongIPMult > 500 && kongDimMult < 5e307", "s4"],
-["Whale complains that the game broke.", "kongDimMult > 5e307", "s5"],
-["Whale complains that their buying isn't doing anything.", "kongIPMult > 1.8e16", "s6"],
+["Person with money likes to support this game.", true, "s3"],
+["Whale is bad at making smart purchases.", true, "s4"],
+["Whale complains that the game broke.", true, "s5"],
+["Whale complains that their buying isn't doing anything.", true, "s6"],
 // respecced news tickers
 ["You exist. I exist.", true, "respecced1"],
 ["In another alternate universe, NG+2 Respecced is the most popular mod", true, "respecced2"],
