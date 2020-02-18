@@ -743,7 +743,7 @@ function updateDimensions() {
 
     if (canBuyTickSpeed() || player.currentEternityChall == "eterc9") {
         var tickmult = getTickSpeedMultiplier()
-        if (tickmult < 1e-9) document.getElementById("tickLabel").textContent = "Divide the tick interval by " + shortenDimensions(1 / tickmult) + '.'
+        if (tickmult < 1e-9) document.getElementById("tickLabel").textContent = "Divide the tick interval by " + new Decimal(shortenDimensions(1 / tickmult)) + '.'
         else {
             var places = 0
             if (tickmult < 0.2) places = Math.floor(Math.log10(Math.round(1/tickmult)))
