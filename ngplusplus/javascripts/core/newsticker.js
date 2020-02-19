@@ -115,7 +115,7 @@ newsArray = [//always true
 ["You're almost there!", "player.newsArray.length >= 160", "n11"],
 ["You can stop now", "player.newsArray.length >= 165", "n9"],
 ["fucking hacker", "player.newsArray.length >= 200", "n10"],
-["You are a pure being of chaos", "player.newsArray.length >= 250", "n10"],
+["You are a pure being of chaos", "player.newsArray.length >= 250", "n11"],
 ["Asian man trys to steal the trophy of fastest infinty of -1 seconds, AND HE DOES IT!", 'player.newsArray.includes("c1")', "n4"],
 ["I broke the 8th wall, there is only chaos, Slabdrill is ritually sacrificing antimatter to the 9th dimension. This will be my last entry, may Hevipelle have mercy on our souls, we didn't listen, We should have listened.", 'player.newsArray.includes("b17")', "n6"],
 ["I thought the update was 5 hours away... -new players after more than 5 hours of gameplay", 'player.newsArray.includes("a91") && player.totalTimePlayed >= 600*300', "n7"],
