@@ -53,7 +53,7 @@ newsArray = [//always true
 ["A preview of the next update - loot boxes! Feel a sense of pride and progression as you open cosmic, galactic, and universal lootboxes for chances at rare skins, unique challenges with uniquer rewards, time skips and even new dimensions!", true, "a114"],
 ["The intent of dimensions is to give a sense of pride and accomplishment", true, "a115"],
 ["Refreshing cures cancer", true, "a116"],
-["I have a 9th, i have a dimension... UHH... IT DOESN'T EXIST!", true, "a117"],
+["I have a 9th, I have a dimension... UHH... IT DOESN'T EXIST!", true, "a117"],
 ["Since when did we start reporting stuff like this? Half of it isn't even proper news, it's just jokes and meta-references, it doesn't even make sens-HAHAHA DISREGARD THAT I SUCK CO-", true, "a118"],
 ["The year is 1944, Hevipelle can't release updates for AD because he doesn't exist", true, "a119"],
 ['"THAT DIMENSION DOESN\'T EXIST" -GhostBot', true, "a120"],
