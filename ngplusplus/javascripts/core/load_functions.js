@@ -266,12 +266,14 @@ function onLoad() {
     player.dilation.unstable = {
       times: 0,
       shards: new Decimal(0),
-      severity: 1 //layers of dilation stacked
+      severity: 1,
+      upgrades: []//layers of dilation stacked
     };
   if (player.dilation.timeRift === undefined)
     player.dilation.timeRift = {
       seconds: 0,
-      temporalPower: new Decimal(0)
+      temporalPower: new Decimal(0),
+      upgrades: []
     };
   if (player.timeDimension5 === undefined)
     player.timeDimension5 = {
@@ -1006,6 +1008,22 @@ function onLoad() {
       player.dilation.unstable.shards = player.dilation.unstableShards;
       delete player.dilation.unstableShards;
     }
+  }
+
+  if (player.version < 15.6) {
+  if (player.dilation.unstable.upgrades === undefined)
+    player.dilation.unstable = {
+      times: player.dilation.unstable.times,
+      shards: player.dilation.unstable.shards,
+      severity: player.dilation.unstable.severity,
+      upgrades: []
+    };
+  if (player.dilation.timeRift.upgrades === undefined)
+    player.dilation.timeRift = {
+      seconds: player.dilation.timeRift.seconds,
+      temporalPower: player.dilation.timeRift.temporalPower,
+      upgrades: []
+    };
   }
 
   // player.version is currently 12.3
