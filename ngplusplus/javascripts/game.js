@@ -582,7 +582,7 @@ function getDilExp () {
 }
 
 function getDilGain () {
-  return Math.pow(Decimal.log10(player.money) / 400, getDilExp()) * (Math.pow(3, player.dilation.rebuyables[3]));
+  return Decimal.pow(Decimal.log10(player.money) / 400, getDilExp()).times(Decimal.pow(3, player.dilation.rebuyables[3]));
 }
 
 function getDilReq () {
@@ -852,10 +852,11 @@ function updateDimensions() {
         if (player.dilation.active) {
             let gain = getDilGain()
             let req = getDilReq();
-            if (gain - player.dilation.totalTachyonParticles <= 0) {
+            let finalGain = gain.minus(player.dilation.totalTachyonParticles)
+            if (finalGain.lte(0)) {
                 document.getElementById("enabledilation").innerHTML = "Disable dilation.<br>Reach " + shortenMoney(req) + " antimatter to gain more Tachyon Particles."
             } else {
-                document.getElementById("enabledilation").textContent = "Disable dilation."
+                document.getElementById("enabledilation").textContent = `Disable dilation for ${shortenMoney(finalGain)} Tachyon Particles.`
             }
         }
         else document.getElementById("enabledilation").textContent = "Dilate time."
