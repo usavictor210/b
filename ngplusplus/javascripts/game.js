@@ -592,7 +592,7 @@ function getDilReq () {
 function getDilPunish() {
   let x = 0.75
   
- // if(player.dilation.unstable.severity > 0) x = x**player.dilation.unstable.severity
+  if(player.dilation.unstable.severity > 0) x = x**(player.dilation.unstable.severity**0.25)
   
   return x
 }
@@ -3598,7 +3598,8 @@ function eternity(force, auto) {
                 nextThreshold: player.dilation.nextThreshold,
                 freeGalaxies: player.dilation.freeGalaxies,
                 upgrades: player.dilation.upgrades,
-                rebuyables: player.dilation.rebuyables
+                rebuyables: player.dilation.rebuyables,
+                unstable: player.dilation.unstable
             },
             meta: player.meta,
             quantum: player.quantum,
@@ -4494,7 +4495,6 @@ function startEternityChallenge(name, startgoal, goalIncrease) {
 }
 
 function startDilatedEternity() {
-      debugger;
     if (!player.dilation.studies.includes(1)) return
     clearInterval(gameLoopIntervalId);
     if (player.dilation.active) {
