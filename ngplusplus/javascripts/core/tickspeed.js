@@ -8,8 +8,10 @@ function getGalaxies (broken) {
   if (broken) {
     galaxies -= 2;
     galaxies += player.replicanti.galaxies+player.dilation.freeGalaxies
-    if (player.timestudy.studies.includes(133)) galaxies += player.replicanti.galaxies/2
-    if (player.timestudy.studies.includes(132)) galaxies += player.replicanti.galaxies*0.4
+    if (player.timestudy.studies.includes(133)) if (!player.achievements.includes('r151')) galaxies += player.replicanti.galaxies/2
+    else if (player.achievements.includes('r151')) galaxies += player.replicanti.galaxies
+    if (player.timestudy.studies.includes(132)) if (!player.achievements.includes('r151')) galaxies += player.replicanti.galaxies*0.4
+    else if (player.achievements.includes('r151')) galaxies += player.replicanti.galaxies*0.5
     if (player.timestudy.studies.includes(225)) galaxies += Math.floor(player.replicanti.amount.e / 1000)
     if (player.timestudy.studies.includes(226)) galaxies += Math.floor(player.replicanti.gal / 15)
     galaxies += Math.min(player.replicanti.galaxies, player.replicanti.gal) *
