@@ -27,3 +27,8 @@ var usGain = new Decimal(((player.dilation.tachyonParticles.log(10)/15))).max(1)
 if (player.dilation.dilatedTime.gte(9.99e99)) document.getElementById("enabledilation2").style.display = "inline-block"
 else document.getElementById("enabledilation2").style.display = "none"
 
+
+function timeLeaperMult() {
+var x = Math.pow(player.totalTickGained)
+return x
+}

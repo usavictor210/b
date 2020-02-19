@@ -182,7 +182,7 @@ function buyTimeStudy(name, cost, check) {
     } else {
       document.getElementById("" + name).className = "timestudybought";
     }
-    if (name == 131) {
+    if (name == 131 && !player.achievements.includes("r143")) {
       if (player.replicanti.galaxybuyer)
         document.getElementById("replicantiresettoggle").textContent =
           "Auto galaxy ON (disabled)";
