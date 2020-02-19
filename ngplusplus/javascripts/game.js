@@ -589,6 +589,14 @@ function getDilReq () {
   return Decimal.pow(10, Math.pow(player.dilation.totalTachyonParticles / Math.pow(3, player.dilation.rebuyables[3]), 1 / getDilExp()) * 400);
 }
 
+function getDilPunish() {
+  let x = 0.75
+  
+  if(player.dilation.unstable.times > 0) x = x**player.dilation.unstable.times
+  
+  return x
+}
+
 function getDilTimeGainPerSecond () {
   let gain = player.dilation.tachyonParticles.times(Math.pow(2, player.dilation.rebuyables[1]) * 2); // tachyon particle amount
   //upgrades 7-9, 12 and 16
@@ -739,7 +747,7 @@ function updateDimensions() {
 
     if (canBuyTickSpeed() || player.currentEternityChall == "eterc9") {
         var tickmult = getTickSpeedMultiplier()
-        if (tickmult < 1e-9) document.getElementById("tickLabel").textContent = "Divide the tick interval by " + new Decimal(shortenDimensions(Decimal.recip(tickmult))) + '.'
+        if (tickmult < 1e-9) document.getElementById("tickLabel").textContent = "Divide the tick interval by " + shortenDimensions(Decimal.recip(tickmult)) + '.'
         else {
             var places = 0
             if (tickmult < 0.2) places = Math.floor(Math.log10(Math.round(1/tickmult)))

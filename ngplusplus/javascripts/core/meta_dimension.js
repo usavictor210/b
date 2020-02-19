@@ -69,7 +69,7 @@ function getMetaDimensionMultiplier (tier) {
 
   if (multiplier.lt(1)) multiplier = new Decimal(1);
   if (player.dilation.active) {
-    multiplier = Decimal.pow(10, Math.pow(multiplier.log10(), 0.75))
+    multiplier = Decimal.pow(10, Math.pow(multiplier.log10(), getDilPunish()))
     if (player.dilation.upgrades.includes(11)) {
       multiplier = Decimal.pow(10, Math.pow(multiplier.log10(), 1.05))
     }
