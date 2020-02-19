@@ -34,15 +34,18 @@ if (!player.achievements.includes("r151")) return new Decimal(1)
 else return x
 }
 
-function timeMultUpg(x) {
+function timeMultUpg(x, check) {
 var y = 1
+var z = 1
 if (x === 1) {
   if (player.achievements.includes("r151")) {
-  y = shortenDimensions((Decimal.pow(0.5 * player.totalTimePlayed / 600, 0.15)).pow(timeLeaperMult().log10()).toFixed(2))
-  } else y = Decimal.pow(0.5 * player.totalTimePlayed / 600, 0.15).toFixed(2)
+  y = shortenDimensions((Decimal.pow(0.5 * player.totalTimePlayed / 600, 0.15)).pow(timeLeaperMult().log10()))
+  } else y = Decimal.pow(0.5 * player.totalTimePlayed / 600, 0.15)
 }
 if (x === 2) {
-
+  if (player.achievements.includes("r151")) {
+  y = Decimal.max(Math.pow(player.thisInfinityTime / 2400, 0.25), 1).pow(timeLeaperMult().log10())
+  } else y = Decimal.max(Math.pow(player.thisInfinityTime / 2400, 0.25), 1)
   }
 
 
@@ -50,6 +53,10 @@ if (x === 2) {
 
 
 
-
-return y
+z = y.toFixed(2)
+if (check === 1) {
+  return y
+} else if (check === 2) {
+  return z
+} else throw ("Invalid check value")
 }
