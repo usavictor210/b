@@ -30,5 +30,26 @@ else document.getElementById("enabledilation2").style.display = "none"
 
 function timeLeaperMult() {
 var x = Decimal.pow(player.totalTickGained/500, 30)
-return x
+if (!player.achievements.includes("r151")) return new Decimal(1)
+else return x
+}
+
+function timeMultUpg(x) {
+var y = 1
+if (x === 1) {
+  if (player.achievements.includes("r151")) {
+  y = shortenDimensions((Decimal.pow(0.5 * player.totalTimePlayed / 600, 0.15)).pow(timeLeaperMult().log10()).toFixed(2))
+  } else y = Decimal.pow(0.5 * player.totalTimePlayed / 600, 0.15).toFixed(2)
+}
+if (x === 2) {
+
+  }
+
+
+
+
+
+
+
+return y
 }

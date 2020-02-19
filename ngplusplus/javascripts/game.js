@@ -816,7 +816,7 @@ function updateDimensions() {
 
     if (document.getElementById("infinity").style.display == "block") {
         if (document.getElementById("preinf").style.display == "block") {
-            document.getElementById("infi11").innerHTML = "Normal dimensions gain a multiplier based on time played.<br>Currently: " + (Math.pow(0.5 * player.totalTimePlayed / 600, 0.15)).toFixed(2) + "x<br>Cost: 1 IP"
+            document.getElementById("infi11").innerHTML = "Normal dimensions gain a multiplier based on time played.<br>Currently: " + timeMultUpg(1) + "x<br>Cost: 1 IP"
             document.getElementById("infi12").innerHTML = "First and Eighth Dimensions gain a multiplier based on infinitied stat.<br>Currently: " + formatValue(player.options.notation, dimMults(), 1, 1) + "x<br>Cost: 1 IP"
             document.getElementById("infi13").innerHTML = "Third and Sixth Dimensions gain a multiplier based on infinitied stat.<br>Currently: " + formatValue(player.options.notation, dimMults(), 1, 1) + "x<br>Cost: 1 IP"
             document.getElementById("infi22").innerHTML = "Second and seventh Dimensions gain a multiplier based on infinitied stat.<br>Currently: " + formatValue(player.options.notation, dimMults(), 1, 1) + "x<br>Cost: 1 IP"
