@@ -10,6 +10,7 @@ var usGain = new Decimal(((player.dilation.tachyonParticles.log(10)/15))).max(1)
         player.dilation.nextThreshold = new Decimal(1000),
         player.dilation.freeGalaxies = 0,
         player.dilation.upgrades = [],
+        player.dilation.totalTachyonParticles = new Decimal(0),
         player.dilation.rebuyables = {
             1: 0,
             2: 0,

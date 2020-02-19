@@ -6313,3 +6313,5 @@ setInterval( function() {
         ec10bonus = new Decimal(1)
     }
 }, 100)
+setTimeout(drawAnimations, 100);
+setTimeout(onLoad, 100);

@@ -1428,6 +1428,3 @@ function getRootSaveObject() {
     saves: saves
   };
 }
-
-setTimeout(drawAnimations, 100);
-setTimeout(onLoad, 100);
