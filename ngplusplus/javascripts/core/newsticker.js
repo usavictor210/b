@@ -185,7 +185,7 @@ newsArray = [//always true
 ["5 hours left till the next UA:RP update", true, "respecced29"],
 ["No, no it isn't AD with 10 dimensions! Shut up, stop it-", true, "respecced30"],
 ["¬θ ¬θ´ μ€'§ ¤θ% Ω Гθ|¬!", true, "respecced31"],
-["\"Onion was a mistake.\" -TheTastyPi, 2020", 'player.newsArray.includes("respecced4")', "respeccced32"],
+["\"Onion was a mistake.\" ~ TheTastyPi, 2020", 'player.newsArray.includes("respecced4")', "respeccced32"],
 ["Florida man goes to idol hell, is never heard of again", true, "respecced33"],
 ["In another timeline, there isn't a thing such as the 9th dimension or the existence of 5 hours. There is instead something much worse. The unmentionable thing.", true, "respecced34"], //not sure if this is supposed to be an NGU reference 
 ["If you could convert your " + player.money + " units of antimatter to dollars, the economy would inflate and go upside down and inside out.", true, "respecced35"],
@@ -225,11 +225,11 @@ newsArray = [//always true
 ["Tree of Decay isn't a upgrade tree, I have been lied to.", 'player.dilation.studies.includes(6)', "respecced67"],
 ["Who keeps breaking the news tickers?!?", true, "respecced68"],
 ["Nice.", true, "respecced69"], // Nice.
-["\"I think he became depressed after he realized that Antimatter Dimensions is real.\" ~ Aarex, 2020", true, "respecced70"],
+["\"I think he became depressed after he realized that Antimatter Dimensions is real.\" ~ Aarex, 2020", 'player.newsArray.includes("respecced56")', "respecced70"],
 ["You feel like baking antimatter, but no body wants to explode.", true, "respecced71"],
 ["'We need to ban standard.' - Douche who can't balance his mods correctly", true, "respecced72"],
 ["NG+3.1, now featuring 33% less timewalls and the all new Higgs timewall!", true, "respecced73"],
-["Warning! We have reported an anomaly within the space and time continuum! Don't proceed f", ]
+["Warning! We have reported an anomaly within the space and time continuum! It is likely that it will strike and make more time inconsistencies! Protect the time you have at all costs!", 'player.dilation.unstable.times > 0', "respecced74"]
 ];}
 
 var s = document.getElementById('news');
