@@ -5279,7 +5279,6 @@ function gameLoop(diff) {
     }
     if (player.replicanti.amount !== 0) replicantiTicks += player.options.updateRate
 
-
     if (current == Decimal.ln(Number.MAX_VALUE) && player.thisInfinityTime < 600*30) giveAchievement("Is this safe?");
     if (player.replicanti.galaxies >= 10 && player.thisInfinityTime < 150) giveAchievement("The swarm");
 
