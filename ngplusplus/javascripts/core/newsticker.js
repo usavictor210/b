@@ -75,6 +75,7 @@ newsArray = [//always true
 ["AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAntimatter Dimensions was made by some dude from Finland", true, "a136"],
 ['The Holy trinity of Hevipelle, Antimatter, Infinity Points, and Eternity Points. These 3 resources let us access Hevi’s gift, Time Theorems. And with these Time Theorems, we reach out to Hevi, and call, “Hevi, bless us on this fine day!” And Hevi does. He give us the blessing of Time Studies. These Time Studies were blessings so powerful, Hevi restricted their power. He said, “ I will give you a choice of three paths” and then humanity chose. The short, cheap route of Normal Dimensions, giving instant gratification, the powerful choice of Infinity Dimensions, which were a fast, middle ground path, or Time Dimension, the long wait, and struggle, of humanity. Then, as humanity chose, a crack broke the earth. A serpent snaked out and sneered to humanity, “I will offer the powerful choice of a ninth dimension! I am Slabdrill, lord of all Unhevi. Humanity rose and said “ Begone Slabdrill! We want none of your foul Heresy!” And Hevi rose as well, and smote Slabdrill with his godlike power. As Slabdrill’s corpse fell into the earth, he cried “ this will not be the last of me! Hevi will betr-“ and he fell in the Abyss of matter. Hevi gifted humanity with Eternity upgrades, which boosted infinity dimensions and time dimensions. And Hevi gave humanity his greatest gift . EP multipliers. He said, these will multiply all EP gained by 5, but their cost will increase 25 times. Use them wisely. And Humanity journeyed off with their new power, as Slabdrill’s words echoed in their heads.', true, "a137"],
 ["We have updated our Antimatter Privacy Policy.", true, "a138"],
+["Is this a jojo reference?", true, "pat1"], // patreon
 
 //basic (pre-inf)
 ["You just made your 1,000,000,000,000,000 antimatter. This one tastes like chicken", "player.money.e == 15", "b1"],
@@ -107,7 +108,7 @@ newsArray = [//always true
 ["Thanos is gonna be super dissapointed when he shows up with a fully powered infinity gauntlet, and Hevi has a fully powered eternity gauntlet", "player.eternities > 0", "b23"],
 ["New strange material was been found. It seems to grow exponentially, but only helps with antimatter production.", "player.replicanti.unl && player.replicanti.chance == 0.01", "b25"],
 ["It seems this \"replicanti\" stuff won't be growing any faster now.", "player.replicanti.chance == 1 && player.replicanti.interval == 1", "b26"],
-//newsarray
+//newsarray - HEVI WHY?!
 ["Does Hevi just pick quotes to put into the game?", "player.newsArray.length >= 30", "n3"],
 ["New news company has become rivals with us. They are made entirely of antimatter.", "player.newsArray.length >= 80", "n1"],
 ["How many times can we use \"Anti\" in a row before people stop listening?", "player.newsArray.length >= 100", "n5"],
@@ -115,7 +116,7 @@ newsArray = [//always true
 ["You're almost there!", "player.newsArray.length >= 160", "n11"],
 ["You can stop now", "player.newsArray.length >= 165", "n9"],
 ["fucking hacker", "player.newsArray.length >= 200", "n10"],
-["You are a pure being of chaos", "player.newsArray.length >= 250", "n11"],
+["You are a pure being of chaos", "player.newsArray.length >= 250", "n12"],
 ["Asian man trys to steal the trophy of fastest infinty of -1 seconds, AND HE DOES IT!", 'player.newsArray.includes("c1")', "n4"],
 ["I broke the 8th wall, there is only chaos, Slabdrill is ritually sacrificing antimatter to the 9th dimension. This will be my last entry, may Hevipelle have mercy on our souls, we didn't listen, We should have listened.", 'player.newsArray.includes("b17")', "n6"],
 ["I thought the update was 5 hours away... -new players after more than 5 hours of gameplay", 'player.newsArray.includes("a91") && player.totalTimePlayed >= 600*300', "n7"],
@@ -222,7 +223,8 @@ newsArray = [//always true
 ["Someone keeps sacrificing my replicants to the void. DAMN IT NOT AGAIN.", 'player.dilation.studies.includes(6)', "respecced65"],
 ["ELECTRONS CONSUME YOUR STARS", 'player.dilation.studies.includes(6)', "respecced66"],
 ["Tree of Decay isn't a upgrade tree, I have been lied to.", 'player.dilation.studies.includes(6)', "respecced67"],
-["Who keeps breaking the news tickers?!?", true, "respecced68"]
+["Who keeps breaking the news tickers?!?", true, "respecced68"],
+["Nice.", true, "respecced69"] // Nice.
 ];}
 
 var s = document.getElementById('news');

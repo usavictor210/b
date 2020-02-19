@@ -497,13 +497,9 @@ function updateCoinPerSec() {
     }
 }
 
-function getInfinitied() {return Math.max(player.infinitied + player.infinitiedBank, 0)}
-
-
-
-
-
-
+function getInfinitied() {
+  return Math.max(player.infinitied + player.infinitiedBank, 0)
+}
 
 function getGalaxyCostScalingStart() {
     var n = 100 + ECTimesCompleted("eterc5")*5
