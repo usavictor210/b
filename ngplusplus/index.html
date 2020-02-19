@@ -87,6 +87,7 @@
                     <td><button class="secondarytabbtn" onclick="showEternityTab('eternityupgrades')">Eternity upgrades</button></td>
                     <td><button class="secondarytabbtn" onclick="showEternityTab('milestones')">Eternity milestones</button></td>
                     <td><button class="secondarytabbtn" onclick="showEternityTab('dilation')" id="dilationTabbtn">Time dilation</button></td>
+                    <td><button class="secondarytabbtn" onclick="showEternityTab('timeRift')" id="timeRiftTabbtn">Time Rift</button></td>
                 </tr>
             </table>
             <div class="eternitytab" id="timestudies" style="font-size: 15px">
@@ -458,7 +459,7 @@
                     <p>You have <span id="tachyonParticleAmount" style="font-size:35px; color: black">0</span> tachyon particles.</p>
                 </div>
                 <button id="enabledilation" class="dilationbtn" onclick="startDilatedEternity()">Dilate time.</button>
-        <button id="enabledilation2" class="dilationUnstablebtn" onclick="unstableDilation()" style="display: none">Unstabilize dilation.</button>
+                <button id="enabledilation2" class="dilationUnstablebtn" onclick="unstableDilation()" style="display: none">Unstabilize dilation.</button>
                 <p>You have <span id="dilatedTimeAmount" style="font-size:35px; color: black">0</span> dilated time. <span id="dilatedTimePerSecond" style="font-size:25px; color: black">0</span></p>
                 <p>The next free galaxy is at <span id="galaxyThreshold" style="font-size:25px; color: black">1000</span> dilated time. You've gained a total of <span id="dilatedGalaxies" style="font-size:25px; color: black">0</span> free galaxies.</p>
                 <table>
@@ -532,6 +533,9 @@
                         </td>
                     </tr>
                 </table>
+            </div>
+            <div class="eternitytab" id="timeRift" style="font-size: 11px">
+            <p>You have <span id="unstableShardAmount" style="font-size:35px; color: black">0</span> tachyon particles.</p>
             </div>
         </div>
         <div id="dimensions" class="tab">
