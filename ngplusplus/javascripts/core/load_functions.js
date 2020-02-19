@@ -1075,6 +1075,9 @@ function onLoad() {
 
   if (!player.options.hotkeys)
     document.getElementById("hotkeys").textContent = "Enable hotkeys";
+  if (!player.options.dilationconfirm)
+    document.getElementById("dilationconf").textContent = "Dilation confirmation OFF";
+  
   updateAutobuyers();
   setAchieveTooltip();
   updatePriorities();
