@@ -592,7 +592,7 @@ function getDilReq () {
 function getDilPunish() {
   let x = 0.75
   
-  if(player.dilation.unstable.times > 0) x = x**player.dilation.unstable.times
+ // if(player.dilation.unstable.severity > 0) x = x**player.dilation.unstable.severity
   
   return x
 }
@@ -4494,6 +4494,7 @@ function startEternityChallenge(name, startgoal, goalIncrease) {
 }
 
 function startDilatedEternity() {
+      debugger;
     if (!player.dilation.studies.includes(1)) return
     clearInterval(gameLoopIntervalId);
     if (player.dilation.active) {

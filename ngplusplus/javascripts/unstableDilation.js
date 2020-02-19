@@ -19,6 +19,7 @@ var usGain = new Decimal(((player.dilation.tachyonParticles.log(10)/15))).max(1)
         }
         Decimal.add(player.dilation.unstable.shards, usGain)
         player.dilation.unstable.times++
+        player.dilation.unstable.severity++
         giveAchievement("Time Leaper")
   }
 }
