@@ -224,7 +224,12 @@ newsArray = [//always true
 ["ELECTRONS CONSUME YOUR STARS", 'player.dilation.studies.includes(6)', "respecced66"],
 ["Tree of Decay isn't a upgrade tree, I have been lied to.", 'player.dilation.studies.includes(6)', "respecced67"],
 ["Who keeps breaking the news tickers?!?", true, "respecced68"],
-["Nice.", true, "respecced69"] // Nice.
+["Nice.", true, "respecced69"], // Nice.
+["\"I think he became depressed after he realized that Antimatter Dimensions is real.\" ~ Aarex, 2020", true, "respecced70"],
+["You feel like baking antimatter, but no body wants to explode.", true, "respecced71"],
+["'We need to ban standard.' - Douche who can't balance his mods correctly", true, "respecced72"],
+["NG+3.1, now featuring 33% less timewalls and the all new Higgs timewall!", true, "respecced73"],
+["Warning! We have reported an anomaly within the space and time continuum! Don't proceed f", ]
 ];}
 
 var s = document.getElementById('news');

@@ -29,6 +29,6 @@ else document.getElementById("enabledilation2").style.display = "none"
 
 
 function timeLeaperMult() {
-var x = Math.pow(player.totalTickGained/500, 30)
+var x = Decimal.pow(player.totalTickGained/500, 30)
 return x
 }
