@@ -271,6 +271,17 @@ var player = {
             2: 0,
             3: 0,
             4: 0
+        },
+        unstable: {
+          times: 0,
+          shards: new Decimal(0),
+          severity: 1,
+          upgrades: []
+        },
+        timeRift: {
+          temporalPower: new Decimal (0),
+          seconds: 0,
+          upgrades: []
         }
     },
     meta: {
@@ -4986,6 +4997,7 @@ setInterval(function() {
     if ((player.matter.gte(2.586e15) && player.currentChallenge == "postc6") || player.matter.gte(Number.MAX_VALUE)) giveAchievement("It's not called matter dimensions is it?")
 
     document.getElementById("dilationTabbtn").style.display = (player.dilation.studies.includes(1)) ? "inline-block" : "none"
+    document.getElementById("timeRiftTabbtn").style.display = (player.dilation.unstable.times > 0 || player.quantum.times > 0) ? "inline-block" : "none"
     
     updateDilationUpgradeButtons()
 
