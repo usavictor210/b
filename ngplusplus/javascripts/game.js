@@ -1542,13 +1542,15 @@ function updateMilestones() {
 }
 
 function replicantiGalaxyAutoToggle() {
+
     if (player.replicanti.galaxybuyer) {
         player.replicanti.galaxybuyer = false
-        if (player.timestudy.studies.includes(131)) document.getElementById("replicantiresettoggle").textContent = "Auto galaxy OFF (disabled)"
-        else document.getElementById("replicantiresettoggle").textContent = "Auto galaxy OFF"
+        if (player.timestudy.studies.includes(131) && (!player.achievements.includes('r143')))
+              document.getElementById("replicantiresettoggle").textContent = "Auto galaxy OFF (disabled)"
+              else document.getElementById("replicantiresettoggle").textContent = "Auto galaxy OFF"
     } else {
         player.replicanti.galaxybuyer = true
-        if (player.timestudy.studies.includes(131)) document.getElementById("replicantiresettoggle").textContent = "Auto galaxy ON (disabled)"
+        if (player.timestudy.studies.includes(131) && (!player.achievements.includes('r143'))) document.getElementById("replicantiresettoggle").textContent = "Auto galaxy ON (disabled)"
         else document.getElementById("replicantiresettoggle").textContent = "Auto galaxy ON"
     }
 }
@@ -5283,7 +5285,8 @@ function gameLoop(diff) {
 
     if (player.replicanti.galaxybuyer && player.replicanti.amount.gte(Number.MAX_VALUE) && !player.timestudy.studies.includes(131)) {
         document.getElementById("replicantireset").click()
-    }
+    } else if (player.replicanti.galaxybuyer && player.replicanti.amount.gte(Number.MAX_VALUE) && player.timestudy.studies.includes(131) && player.achievements.includes('r143'))
+        document.getElementById("replicantireset").click()
     if (player.timestudy.studies.includes(22) ? player.replicanti.interval !== 1 : (player.replicanti.interval !== 50)) document.getElementById("replicantiinterval").innerHTML = "Interval: "+(interval).toFixed(3)+"ms<br>-> "+Math.max(interval*0.9).toFixed(3)+" Costs: "+shortenCosts(player.replicanti.intervalCost)+" IP"
     else document.getElementById("replicantiinterval").textContent = "Interval: "+(interval).toFixed(3)+"ms"
 
