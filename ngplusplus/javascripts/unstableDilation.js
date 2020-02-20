@@ -29,34 +29,36 @@ else document.getElementById("enabledilation2").style.display = "none"
 
 
 function timeLeaperMult() {
-var x = Decimal.pow(player.totalTickGained/500, 30)
-if (!player.achievements.includes("r151")) return new Decimal(1)
-else return x
+  var x = Decimal.pow(player.totalTickGained/500, 30)
+  if (!player.achievements.includes("r151")) return new Decimal(1)
+  else return x
 }
 
 function timeMultUpg(x, check) {
-var y = 1
-var z = 1
-if (x === 1) {
-  if (player.achievements.includes("r151")) {
-  y = shortenDimensions((Decimal.pow(0.5 * player.totalTimePlayed / 600, 0.15)).pow(timeLeaperMult().log10()))
+  var y = 1
+  var z = 1
+  if (x === 1) {
+    if (player.achievements.includes("r151")) {
+    y = (Decimal.pow(0.5 * player.totalTimePlayed / 600, 0.15)).pow(timeLeaperMult().log10())
   } else y = Decimal.pow(0.5 * player.totalTimePlayed / 600, 0.15)
 }
-if (x === 2) {
-  if (player.achievements.includes("r151")) {
-  y = Decimal.max(Math.pow(player.thisInfinityTime / 2400, 0.25), 1).pow(timeLeaperMult().log10())
-  } else y = Decimal.max(Math.pow(player.thisInfinityTime / 2400, 0.25), 1)
+  if (x === 2) {
+    if (player.achievements.includes("r151")) {
+    y = new Decimal (Decimal.max(Math.pow(player.thisInfinityTime / 100, 0.25)+1, 1).pow((timeLeaperMult()).times(player.thisInfinityTime), 1).log10())
+    } else y = Decimal.max(Math.pow(player.thisInfinityTime / 2400, 0.25), 1)
+  }
+  if (x === 3) {
+  
   }
 
 
 
 
 
-
-z = y.toFixed(2)
-if (check === 1) {
-  return y
+  z = new Decimal(y).toFixed(2)
+  if (check === 1) {
+    return y
 } else if (check === 2) {
-  return z
+    return z
 } else throw ("Invalid check value")
 }
