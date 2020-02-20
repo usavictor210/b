@@ -3621,7 +3621,8 @@ function eternity(force, auto) {
                 freeGalaxies: player.dilation.freeGalaxies,
                 upgrades: player.dilation.upgrades,
                 rebuyables: player.dilation.rebuyables,
-                unstable: player.dilation.unstable
+                unstable: player.dilation.unstable,
+                autobuy: player.dilation.autobuy
             },
             meta: player.meta,
             quantum: player.quantum,
