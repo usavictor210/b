@@ -542,7 +542,7 @@ function timeMult() {
     } else if (player.achievements.includes('r151')) {
       if (player.infinityUpgrades.includes("timeMult")) mult = mult.times(timeMultUpg(1,1))
       if (player.infinityUpgrades.includes("timeMult2")) mult = mult.times(timeMultUpg(2,1))
-      if (player.achievements.includes("r76")) mult = mult.times(Decimal.pow(timeMultUpg(3,1)))
+      if (player.achievements.includes("r76")) mult = mult.times(timeMultUpg(3,1))
       mult = mult.times(Decimal.pow(timeLeaperMult(), 1))
   }
   return mult;
