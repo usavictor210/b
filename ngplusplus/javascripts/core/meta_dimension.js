@@ -76,6 +76,7 @@ function getMetaDimensionMultiplier (tier) {
   }
 
   if (multiplier.gt(1e36)) multiplier = multiplier.pow(0.96).max(1e36)
+
   return multiplier;
 }
 
@@ -273,4 +274,4 @@ getMetaDimensionMultiplier(4).gte(1e25) &&
 getMetaDimensionMultiplier(5).gte(1e25) &&
 getMetaDimensionMultiplier(6).gte(1e25) &&
 getMetaDimensionMultiplier(7).gte(1e25) &&
-getMetaDimensionMultiplier(8).gte(1e25))
+getMetaDimensionMultiplier(8).gte(1e25)) giveAchievement("I never meta-dimension I didn't like");
