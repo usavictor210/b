@@ -58,7 +58,7 @@ function timeMultUpg(x, check) {
   if (x === 4) {
     if (player.achievements.includes("r151")) {
     y = new Decimal (Decimal.pow(Decimal.max(player.thisEternity*10, 1), (0.6)*(player.thisEternity)+1).pow(0.125))
-    if (y.gte(1e300)) y = y.pow(.25).max(1e300)
+    if (y.gte(1e100)) y = y.pow(0.25).max(1e100)
   } else y = new Decimal (Math.pow(Math.max(player.thisEternity*10, 1), 0.3+(ECTimesCompleted("eterc1")*0.05)))
   }
   z = shortenMoney(y)
