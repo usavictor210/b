@@ -816,12 +816,12 @@ function updateDimensions() {
 
     if (document.getElementById("infinity").style.display == "block") {
         if (document.getElementById("preinf").style.display == "block") {
-            document.getElementById("infi11").innerHTML = "Normal dimensions gain a multiplier based on time played.<br>Currently: " + timeMultUpg(1,2) + "x<br>Cost: 1 IP"
+            document.getElementById("infi11").innerHTML = "Normal dimensions gain a multiplier based on time played.<br>Currently: " + timeMultUpg(1,1) + "x<br>Cost: 1 IP"
             document.getElementById("infi12").innerHTML = "First and Eighth Dimensions gain a multiplier based on infinitied stat.<br>Currently: " + formatValue(player.options.notation, dimMults(), 1, 1) + "x<br>Cost: 1 IP"
             document.getElementById("infi13").innerHTML = "Third and Sixth Dimensions gain a multiplier based on infinitied stat.<br>Currently: " + formatValue(player.options.notation, dimMults(), 1, 1) + "x<br>Cost: 1 IP"
             document.getElementById("infi22").innerHTML = "Second and seventh Dimensions gain a multiplier based on infinitied stat.<br>Currently: " + formatValue(player.options.notation, dimMults(), 1, 1) + "x<br>Cost: 1 IP"
             document.getElementById("infi23").innerHTML = "Fourth and Fifth Dimensions gain a multiplier based on infinitied stat.<br>Currently: " + formatValue(player.options.notation, dimMults(), 1, 1) + "x<br>Cost: 1 IP"
-            document.getElementById("infi31").innerHTML = "Normal dimensions gain a multiplier based on time spent in the current infinity.<br>Currently: " + timeMultUpg(2,2) + "x<br>Cost: 3 IP"
+            document.getElementById("infi31").innerHTML = "Normal dimensions gain a multiplier based on time spent in the current infinity.<br>Currently: " + timeMultUpg(2,1) + "x<br>Cost: 3 IP"
             document.getElementById("infi32").innerHTML = "1st Dimension is stronger based on your unspent Infinity Points.<br>Currently: " + formatValue(player.options.notation, player.infinityPoints.dividedBy(2).pow(1.5).plus(1), 2, 2) + "x<br>Cost: 5 IP"
             document.getElementById("infi34").innerHTML = "You generate IP based on your fastest infinity time.<br>Currently: "+shortenDimensions(player.infMult)+" every " + timeDisplay(player.bestInfinityTime*10) + "<br>Cost: 10 IP"
         }
