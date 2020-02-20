@@ -246,21 +246,34 @@ function quantum(force, auto) {
             dimlife: true,
             dead: true,
             dilation: {
-                studies: [],
-                active: false,
-                tachyonParticles: new Decimal(0),
-                dilatedTime: new Decimal(0),
-                totalTachyonParticles: new Decimal(0),
-                nextThreshold: new Decimal(1000),
-                freeGalaxies: 0,
-                upgrades: [],
-                rebuyables: {
-                    1: 0,
-                    2: 0,
-                    3: 0,
-                    4: 0
-                }
-            },
+              studies: [],
+              active: false,
+              tachyonParticles: new Decimal(0),
+              dilatedTime: new Decimal(0),
+              totalTachyonParticles: new Decimal(0),
+              nextThreshold: new Decimal(1000),
+              freeGalaxies: 0,
+              upgrades: [],
+              unstableShards: new Decimal(0),
+              rebuyables: {
+              1: 0,
+              2: 0,
+              3: 0,
+              4: 0
+             },
+          unstable: {
+          times: 0,
+          shards: new Decimal(0),
+          severity: 1,
+          upgrades: []
+        },
+        timeRift: {
+          temporalPower: new Decimal (0),
+          seconds: 0,
+          upgrades: []
+        },
+        autobuy: false
+    },
             meta: {
               antimatter: new Decimal(10),
               bestAntimatter: player.meta.bestAntimatter,

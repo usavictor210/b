@@ -153,9 +153,13 @@ function metaBoost () {
 }
 
 function metaGalaxyCost() {
+var x = -20 + (40 * (player.meta.galaxy+1))
+var y = ((player.meta.galaxy-6)*10)
+if (player.meta.galaxy > 6) x = x + y
+if (player.meta.galaxy > 10) x = x + Math.floor(y * 1.5)
   return {
     tier: 8,
-    amount: Math.max(40, -20 + (40 * (player.meta.galaxy+1)) + ((player.meta.galaxy-6)*10))
+    amount: Math.max(40, x)
   }
 }
 
