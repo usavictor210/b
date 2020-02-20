@@ -1,4 +1,4 @@
-function unstableDilation() {
+/*function unstableDilation() {
 var usGain = new Decimal(((player.dilation.tachyonParticles.log(10).divide(15)))).max(1).floor()
  if (!player.dilation.studies.includes(6) || player.dilation.dilatedTime.lt(9.99e99)) return
  if (confirm("Unstabilizing time dilation will result in harsher scaling, allowing you to get more TP, but dilation will reset in exchange for Dilation Shards. Are you prepared for this change?")) {
@@ -22,8 +22,8 @@ var usGain = new Decimal(((player.dilation.tachyonParticles.log(10).divide(15)))
         player.dilation.unstable.severity++
         giveAchievement("Time Leaper")
   }
-}
-//showing the unstable dilation button
+}*/ 
+//showing the unstable dilation button (above is commented; we need to make sure we know what we're doing)
 function checkUnstableDilationButton() {
   if (player.dilation.dilatedTime.gte(9.99e99)) document.getElementById("enabledilation2").style.display = "inline-block"
   else document.getElementById("enabledilation2").style.display = "none"
@@ -36,9 +36,8 @@ function timeLeaperMult() {
   else return x
 }
 
-function timeMultUpg(x, check) {
+function timeMultUpg(x) {
   var y = 1
-  var z = 1
   if (x === 1) {
     if (player.achievements.includes("r151")) {
     y = shortenDimensions((Decimal.pow(0.5 * player.totalTimePlayed / 600, 0.15)).pow(timeLeaperMult().log10()))
@@ -47,20 +46,11 @@ function timeMultUpg(x, check) {
   if (x === 2) {
     if (player.achievements.includes("r151")) {
     y = shortenDimensions(new Decimal(Decimal.max(Math.pow(player.thisInfinityTime / 100, 0.25)+1, 1).pow((timeLeaperMult()).times(player.thisInfinityTime), 1).log10()))
-    } else y = Decimal.max(Math.pow(player.thisInfinityTime / 2400, 0.25), 1)
+    } else y = Decimal.max(Math.pow(player.thisInfinityTime / 2400, 0.25), 1).toFixed(2)
   }
   if (x === 3) {
   
   }
 
-
-
-
-
-  z = new Decimal(y).toFixed(2)
-  if (check === 1) {
     return y
-} else if (check === 2) {
-    return z
-} else throw ("Invalid check value")
-}
+  }
