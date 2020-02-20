@@ -6166,8 +6166,8 @@ function init() {
     document.getElementById('infinitybtn').onclick = function () {
         showTab('infinity');
     };
-    document.getElementById("shopbtn").onclick = function () {
-        showTab('shop')
+    document.getElementById("quantumbtn").onclick = function () {
+        showTab('quantum')
     }
     document.getElementById("eternitystorebtn").onclick = function () {
         showTab('eternitystore')
