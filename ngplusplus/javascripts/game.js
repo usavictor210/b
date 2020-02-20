@@ -4585,15 +4585,15 @@ function unlockDilation() {
 
 function buyDilationUpgrade(id, costInc) {
     if (id > 4) { // Not rebuyable
-        if (player.dilation.dilatedTime < DIL_UPG_COSTS[id]) return // Not enough dilated time
-        if (player.dilation.upgrades.includes(id)) return // Has the upgrade
+        if (player.dilation.dilatedTime < DIL_UPG_COSTS[id]) return false // Not enough dilated time
+        if (player.dilation.upgrades.includes(id)) return false // Has the upgrade
         player.dilation.dilatedTime = player.dilation.dilatedTime.minus(DIL_UPG_COSTS[id])
         // consistency
         player.dilation.upgrades.push(id)
         if (id == 5) player.dilation.freeGalaxies *= 2 // Double the current galaxies
     } else { // Is rebuyable
         let realCost = getDilRebuyableUpgCost(id);
-        if (player.dilation.dilatedTime.lt(realCost)) return
+        if (player.dilation.dilatedTime.lt(realCost)) return false
 
         player.dilation.dilatedTime = player.dilation.dilatedTime.minus(realCost)
         player.dilation.rebuyables[id] += 1
@@ -4607,6 +4607,7 @@ function buyDilationUpgrade(id, costInc) {
     updateDilationUpgradeCosts()
     updateDilationUpgradeButtons()
     updateTimeStudyButtons()
+    return true
 }
 
 let DIL_UPG_NUM = 19;
@@ -5404,12 +5405,16 @@ function gameLoop(diff) {
     }
     
     if (player.achievements.includes("r141")) {
-      document.getElementById("rebuyupgauto").innerText = `Autobuy Rebuyables: ${player.dilation.autobuy?"ON":"OFF"} (PLACEHOLDER)`
+      document.getElementById("rebuyupgauto").innerText = `Autobuy Rebuyables: ${player.dilation.autobuy?"ON":"OFF"}`
       document.getElementById("rebuyupgauto").style.display = ""
       if (player.dilation.autobuy) {
-        
+        for (let id of [4,3,1,2]) {
+          while (buyDilationUpgrade(id)) {
+            // Clever, right?
+          }
+        }
       }
-    }  else {
+    } else {
       document.getElementById("rebuyupgauto").style.display = "none"
     }
   
