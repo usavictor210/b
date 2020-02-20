@@ -551,8 +551,8 @@ function timeMult() {
       if (player.infinityUpgrades.includes("timeMult2")) mult = mult.times(timeMultUpg(2,2))
       if (player.achievements.includes("r76")) mult = mult.times(Math.pow(timeMultUpg(3,2)))
       if (player.achievements.includes("r151")) mult = mult.times(Math.pow(timeLeaperMult(), 1))
-    return mult;
   }
+  return mult;
 }
 
 function dimMults() {
