@@ -265,3 +265,12 @@ if (isNaN(x) || x.lt(1)) x = new Decimal(1)
 if (x.gt(12.5)) x = x.pow(.75).max(12.5)
 return x
 }
+
+if (getMetaDimensionMultiplier(1).gte(1e25) && 
+getMetaDimensionMultiplier(2).gte(1e25) &&
+getMetaDimensionMultiplier(3).gte(1e25) &&
+getMetaDimensionMultiplier(4).gte(1e25) &&
+getMetaDimensionMultiplier(5).gte(1e25) &&
+getMetaDimensionMultiplier(6).gte(1e25) &&
+getMetaDimensionMultiplier(7).gte(1e25) &&
+getMetaDimensionMultiplier(8).gte(1e25))
