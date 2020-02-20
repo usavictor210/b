@@ -57,10 +57,10 @@ function timeMultUpg(x, check) {
   }
   if (x === 4) {
     if (player.achievements.includes("r151")) {
-    y = new Decimal (Decimal.pow(Decimal.max(player.thisEternity*20, 1), (0.625)*(player.thisEternity)+1).pow(0.125))
-    if (y.gte (1e100)) y = y.pow(0.5).max(1e100)
-    if (y.gte (new Decimal ("1e2000"))) y = y.pow(0.1).max(new Decimal("1e2000"))
-    if (y.gte (new Decimal ("1e30000"))) y = y.pow(0.01).max(new Decimal("1e30000"))
+    y = new Decimal (Decimal.pow(Decimal.max(player.thisEternity*20, 1), (0.55+new Decimal(player.totalTickGained**0.0125).log10())*(player.thisEternity)+1).pow(0.125))
+    if (y.gte (player.dilation.active ? 1e25 : 1e100)) y = y.pow(0.5).max(player.dilation.active ? 1e25 : 1e100)
+    if (y.gte (new Decimal (player.dilation.active ? "1e100" : "1e2000"))) y = y.pow(0.1).max(new Decimal(player.dilation.active ? "1e100" : "1e2000"))
+    if (y.gte (new Decimal (player.dilation.active ? Number.MAX_VALUE : "1e30000"))) y = y.pow(0.01).max(new Decimal(player.dilation.active ? Number.MAX_VALUE : "1e30000"))
   } else y = new Decimal (Math.pow(Math.max(player.thisEternity*10, 1), 0.3+(ECTimesCompleted("eterc1")*0.05)))
   }
   z = shortenMoney(y)
