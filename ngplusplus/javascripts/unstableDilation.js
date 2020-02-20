@@ -55,7 +55,7 @@ function timeMultUpg(x, check) {
     } else y = new Decimal (Math.pow(player.totalTimePlayed / (600*60*48), 0.05));
     if (y.lt(1)) y = new Decimal(1)
   }
-  z = shortenDimensions(y)
+  z = shortenMoney(y)
   if (check === 1) {
     return y
   } else if (check === 2) {
