@@ -41,18 +41,21 @@ function timeMultUpg(x, check) {
   var z = 1
   if (x === 1) {
       if (player.achievements.includes("r151")) {
-      y = (Decimal.pow(0.5 * player.totalTimePlayed / 600, 0.15)).pow(timeLeaperMult().log10())
-      z = shortenDimensions((Decimal.pow(0.5 * player.totalTimePlayed / 600, 0.15)).pow(timeLeaperMult().log10()))
+        y = new Decimal(Decimal.pow(0.5 * player.totalTimePlayed / 600, 0.15)).pow(timeLeaperMult().log10())
+        z = shortenDimensions(new Decimal(Decimal.pow(0.5 * player.totalTimePlayed / 600, 0.15)).pow(timeLeaperMult().log10()))
     } else y = Decimal.pow(0.5 * player.totalTimePlayed / 600, 0.15).toFixed(2)
   }
   if (x === 2) {
     if (player.achievements.includes("r151")) {
-    y = new Decimal(Decimal.max(Math.pow(player.thisInfinityTime / 100, 0.25)+1, 1).pow((timeLeaperMult()).times(player.thisInfinityTime), 1).log10())
-    z = shortenDimensions(Decimal(Decimal.max(Math.pow(player.thisInfinityTime / 100, 0.25)+1, 1).pow((timeLeaperMult()).times(player.thisInfinityTime), 1).log10()))
+      y = new Decimal(Decimal.max(Math.pow(player.thisInfinityTime / 100, 0.25)+1, 1).pow((timeLeaperMult()).times(player.thisInfinityTime), 1).log10())
+      z = shortenDimensions(new Decimal(Decimal.max(Math.pow(player.thisInfinityTime / 100, 0.25)+1, 1).pow((timeLeaperMult()).times(player.thisInfinityTime), 1).log10()))
     } else y = Decimal.max(Math.pow(player.thisInfinityTime / 2400, 0.25), 1).toFixed(2)
   }
   if (x === 3) {
-  
+    if (player.achievements.includes("r151")) {
+      y = new Decimal ((Decimal.pow(player.totalTimePlayed / (600*60*48), (0.05*timeLeaperMult()**0.025))))
+      z = shortenDimensions(new Decimal ((Decimal.pow(player.totalTimePlayed / (600*60*48), (0.05*timeLeaperMult()**0.025)))))
+    } else y = new Decimal ((Decimal.pow(player.totalTimePlayed / (600*60*48), (0.05*timeLeaperMult()**0.025)))).toFixed(2)
   }
 
   if (check === 1) {
