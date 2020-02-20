@@ -282,7 +282,8 @@ var player = {
           temporalPower: new Decimal (0),
           seconds: 0,
           upgrades: []
-        }
+        },
+        autobuy: false
     },
     meta: {
       antimatter: new Decimal(10),
@@ -5401,7 +5402,17 @@ function gameLoop(diff) {
       let gain = getDilTimeGainPerSecond().times(diff / 10);
       player.dilation.dilatedTime = player.dilation.dilatedTime.plus(gain);
     }
-
+    
+    if (player.achievements.includes("r141")) {
+      document.getElementById("rebuyupgauto").innerText = `Autobuy Rebuyables: ${player.dilation.autobuy?"ON":"OFF"} (PLACEHOLDER)`
+      document.getElementById("rebuyupgauto").style.display = ""
+      if (player.dilation.autobuy) {
+        
+      }
+    }  else {
+      document.getElementById("rebuyupgauto").style.display = "none"
+    }
+  
     let thresholdMult = 1.35 + 3.65 * Math.pow(0.8, player.dilation.rebuyables[2]);
 
 

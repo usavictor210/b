@@ -457,7 +457,7 @@
                 <button id="enabledilation2" class="dilationUnstablebtn" onclick="unstableDilation()" style="display: none">Unstabilize dilation.</button>
                 <p>You have <span id="dilatedTimeAmount" style="font-size:35px; color: black">0</span> dilated time. <span id="dilatedTimePerSecond" style="font-size:25px; color: black">0</span></p>
                 <p>The next free galaxy is at <span id="galaxyThreshold" style="font-size:25px; color: black">1000</span> dilated time. You've gained a total of <span id="dilatedGalaxies" style="font-size:25px; color: black">0</span> free galaxies.</p>
-                <button id="rebuyupgauto" style="width:210px; height: 30px; font-size: 12px" onclick="rebuyableDilationUpgrade()" class="storebtn">Autobuy Rebuyables: ON (PLACEHOLDER)</button>
+                <button id="rebuyupgauto" style="width:210px; height: 30px; font-size: 12px; display: none" onclick="player.dilation.autobuy = !player.dilation.autobuy" class="storebtn">Autobuy Rebuyables: ON (PLACEHOLDER)</button>
                 <table>
                     <tr>
                         <td>

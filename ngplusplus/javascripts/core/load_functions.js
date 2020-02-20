@@ -275,6 +275,9 @@ function onLoad() {
       temporalPower: new Decimal(0),
       upgrades: []
     };
+  if (player.dilation.autobuy === undefined) {
+    player.dilation.autobuy = false
+  }
   if (player.timeDimension5 === undefined)
     player.timeDimension5 = {
       cost: new Decimal("1e2350"),
