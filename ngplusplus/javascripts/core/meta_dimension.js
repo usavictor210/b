@@ -267,6 +267,7 @@ if (x.gt(12.5)) x = x.pow(.75).max(12.5)
 return x
 }
 
+function metaDimensionAchievement() {
 if (getMetaDimensionMultiplier(1).gte(1e25) && 
 getMetaDimensionMultiplier(2).gte(1e25) &&
 getMetaDimensionMultiplier(3).gte(1e25) &&
@@ -275,3 +276,4 @@ getMetaDimensionMultiplier(5).gte(1e25) &&
 getMetaDimensionMultiplier(6).gte(1e25) &&
 getMetaDimensionMultiplier(7).gte(1e25) &&
 getMetaDimensionMultiplier(8).gte(1e25)) giveAchievement("I never meta-dimension I didn't like");
+}
