@@ -265,6 +265,8 @@ function quantum(force, auto) {
               antimatter: new Decimal(10),
               bestAntimatter: player.meta.bestAntimatter,
               resets: 0,
+              galaxy: 0,
+              
               '1': {
                 amount: new Decimal(0),
                 bought: 0,

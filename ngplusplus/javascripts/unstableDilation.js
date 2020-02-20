@@ -25,7 +25,7 @@ var usGain = new Decimal(((player.dilation.tachyonParticles.log(10).divide(15)))
 }
 //showing the unstable dilation button
 function checkUnstableDilationButton() {
-  if (player.dilation.dilatedTime.gte(9.99e99) && !player.quantum.times(0)) document.getElementById("enabledilation2").style.display = "inline-block"
+  if (player.dilation.dilatedTime.gte(9.99e99) && !player.quantum.times === 0 )) document.getElementById("enabledilation2").style.display = "inline-block"
   else document.getElementById("enabledilation2").style.display = "none"
 }
 
