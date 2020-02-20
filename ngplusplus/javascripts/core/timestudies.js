@@ -94,6 +94,11 @@ function maxTheorems() {
   updateEternityUpgrades();
 }
 
+function updatePenalty() {
+  document.getElementById("131penalty").textContext = player.achievements.includes("r143") ? "You can get 50% more replicanti galaxies" : "Automatic replicanti galaxies are disabled, but you can get 50% more"
+  document.getElementById("132penalty").textContext = player.achievements.includes("r143") ? "50%" : "40%"
+  document.getElementById("133penalty").textContext = player.achievements.includes("r143") ? "" : " are 10x slower until infinity, but their"
+}
 function updateTheoremButtons() {
   document.getElementById("theoremam").className = player.money.gte(
     player.timestudy.amcost
