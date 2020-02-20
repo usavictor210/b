@@ -76,12 +76,6 @@ function getDimensionFinalMultiplier(tier) {
   return multiplier;
 }
 
-// unused???
-/*
-function getMoneyPerSecond() {
-  return getDimensionFinalMultiplier(1)*Math.floor(player.firstAmount)/player.tickspeed;
-}
-*/
 
 function getDimensionDescription(tier) {
   var name = TIER_NAMES[tier];
@@ -541,16 +535,15 @@ document.getElementById("eightMax").onclick = function () {
 
 function timeMult() {
     var mult = new Decimal(1)
-    var timeLeaper = new Decimal(player.totalTickGained)
     if (!player.achievements.includes('r151')) {
       if (player.infinityUpgrades.includes("timeMult")) mult = mult.times(Math.pow(player.totalTimePlayed / 1200, 0.15));
       if (player.infinityUpgrades.includes("timeMult2")) mult = mult.times(Decimal.max(Math.pow(player.thisInfinityTime / 2400, 0.25), 1));
       if (player.achievements.includes("r76")) mult = mult.times(Math.pow(player.totalTimePlayed / (600*60*48), 0.05));
     } else if (player.achievements.includes('r151')) {
-      if (player.infinityUpgrades.includes("timeMult")) mult = mult.times(timeMultUpg(1,2))
-      if (player.infinityUpgrades.includes("timeMult2")) mult = mult.times(timeMultUpg(2,2))
-      if (player.achievements.includes("r76")) mult = mult.times(Math.pow(timeMultUpg(3,2)))
-      if (player.achievements.includes("r151")) mult = mult.times(Math.pow(timeLeaperMult(), 1))
+      if (player.infinityUpgrades.includes("timeMult")) mult = mult.times(timeMultUpg(1,1))
+      if (player.infinityUpgrades.includes("timeMult2")) mult = mult.times(timeMultUpg(2,1))
+      if (player.achievements.includes("r76")) mult = mult.times(Decimal.pow(timeMultUpg(3,1)))
+      mult = mult.times(Decimal.pow(timeLeaperMult(), 1))
   }
   return mult;
 }
