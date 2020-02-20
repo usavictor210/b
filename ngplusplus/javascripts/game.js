@@ -737,9 +737,9 @@ function updateDimensions() {
         else document.getElementById("resetLabel").textContent = 'Dimension Boost ('+ player.resets +'): requires ' + shiftRequirement.amount + " " + DISPLAY_NAMES[shiftRequirement.tier] + " Dimensions"
 
         if (player.currentChallenge == "challenge4" ? player.resets > 2 : player.resets > 3) {
-            document.getElementById("softReset").textContent = "Reset the game for a Boost"
+            document.getElementById("softReset").textContent = "Reset your Dimensions for a Boost"
         } else {
-            document.getElementById("softReset").textContent = "Reset the game for a new Dimension"
+            document.getElementById("softReset").textContent = "Reset your Dimensions for a new Dimension"
         }
         let extraGals = getTotalRGs();
         var galString = ""
