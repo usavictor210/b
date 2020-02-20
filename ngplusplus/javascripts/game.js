@@ -2296,6 +2296,7 @@ function setAchieveTooltip() {
     var IPBelongs = document.getElementById("All your IP are belong to us")
     var reference = document.getElementById("Yet another infinity reference")
     let blink = document.getElementById("Blink of an eye")
+    let oneforeach = document.getElementById("One for each dimension")
     let exist = document.getElementById("This achievement doesn't exist")
     let exist2 = document.getElementById("This achievement doesn't exist II")
     let spare = document.getElementById("I got a few to spare")
@@ -2318,6 +2319,8 @@ function setAchieveTooltip() {
     let thecap = document.getElementById("The cap is a million, not a trillion")
     let neverenough = document.getElementById("It will never be enough")
     let iamspeed = document.getElementById("GAS GAS GAS")
+    let nevermetadimension = document.getElementById("I never meta-dimension I didn't like")
+    let sanctum = document.getElementById("Deeper Sanctum")
 
     apocAchieve.setAttribute('ach-tooltip', "Get over " + formatValue(player.options.notation, 1e80, 0, 0) + " antimatter.");
     noPointAchieve.setAttribute('ach-tooltip', "Buy a single First Dimension when you have over " + formatValue(player.options.notation, 1e150, 0, 0) + " of them. Reward: First Dimensions are 10% stronger.");
@@ -2330,6 +2333,7 @@ function setAchieveTooltip() {
     IPBelongs.setAttribute('ach-tooltip', "Big Crunch for "+shortenCosts(1e150)+" IP. Reward: Additional 4x multiplier to IP.")
     reference.setAttribute('ach-tooltip', "Get a x"+shortenDimensions(Number.MAX_VALUE)+" multiplier in a single sacrifice. Reward: Sacrifices are stronger.")
     blink.setAttribute('ach-tooltip', "Get to Infinity in under 200 milliseconds. Reward: Start with " + formatValue(player.options.notation, 1e25, 0, 0) + " antimatter and all dimensions are stronger in first 300ms of Infinity.");
+    oneforeach.setAttribute('ach-tooltip', "Play for 8 days. Reward: Extremely small time multiplier. Currently: " + timeMultUpg(3,1))
     spare.setAttribute('ach-tooltip', "Reach " +formatValue(player.options.notation, new Decimal("1e35000"), 0, 0)+" antimatter. Reward: Dimensions are more powerful the more unspent antimatter you have.");
     //exist.setAttribute('ach-tooltip', "Reach " + formatValue(player.options.notation, 9.9999e9999, 0, 0) + " antimatter. Reward: Dimensions are more powerful the more unspent antimatter you have."); (i like the 9 9s thing and no one will see it with a formatted value)
     //exist2.setAttribute('ach-tooltip', "Reach " + formatValue(player.options.notation, 1e35000, 0, 0) + " antimatter. Reward: Dimensions are more powerful the more unspent antimatter you have.")
@@ -2351,7 +2355,10 @@ function setAchieveTooltip() {
     onlywar.setAttribute('ach-tooltip', "Reach "+shortenMoney(new Decimal('1e40000'))+" EP. Reward: The penalties for active, idle, and passive are removed.")
     thecap.setAttribute('ach-tooltip', "Get "+formatValue(player.options.notation, 1e12, 0, 0)+" eternities. Reward: Eternity upgrade 2 uses a better formula.")
     neverenough.setAttribute('ach-tooltip', "Reach "+shortenCosts( new Decimal("1e100000"))+" replicanti. Reward: You can buy max replicanti galaxies.")
-    iamspeed.setAttribute('ach-tooltip', "Get "+formatValue(player.options.notation, 1e6, 0, 0)+" tickspeed upgrades from time dimensions. Reward: Autobuyers for max TD and x5 EP.")
+    iamspeed.setAttribute('ach-tooltip', "Get "+formatValue(player.options.notation, 1e6, 0, 0)+" tickspeed upgrades from time dimensions. Reward: Unlock autobuyers for max TD and x5 EP.")
+    nevermetadimension.setAttribute('ach-tooltip', "Get at least "+formatValue(player.options.notation, 1e25, 0, 0)+"x multiplier on all meta-dimensions. Reward: You can autobuy meta dimensions.")
+    sanctum.setAttribute('ach-tooltip', "Produce "+shortenCosts( new Decimal("1e1000000"))+" antimatter with only 1 normal galaxy and your free galaxies in dilation. Reward: Galaxies (including meta galaxies) are 0.05% stronger.")
+
 }
 
 document.getElementById("notation").onclick = function () {
