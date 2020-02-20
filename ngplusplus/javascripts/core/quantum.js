@@ -246,34 +246,34 @@ function quantum(force, auto) {
             dimlife: true,
             dead: true,
             dilation: {
-              studies: [],
-              active: false,
-              tachyonParticles: new Decimal(0),
-              dilatedTime: new Decimal(0),
-              totalTachyonParticles: new Decimal(0),
-              nextThreshold: new Decimal(1000),
-              freeGalaxies: 0,
-              upgrades: [],
-              unstableShards: new Decimal(0),
-              rebuyables: {
-              1: 0,
-              2: 0,
-              3: 0,
-              4: 0
-             },
-          unstable: {
-          times: 0,
-          shards: new Decimal(0),
-          severity: 1,
-          upgrades: []
-        },
-        timeRift: {
-          temporalPower: new Decimal (0),
-          seconds: 0,
-          upgrades: []
-        },
-        autobuy: false
-    },
+                studies: [],
+                active: false,
+                tachyonParticles: new Decimal(0),
+                dilatedTime: new Decimal(0),
+                totalTachyonParticles: new Decimal(0),
+                nextThreshold: new Decimal(1000),
+                freeGalaxies: 0,
+                upgrades: [],
+                unstableShards: new Decimal(0),
+                rebuyables: {
+                1: 0,
+                2: 0,
+                3: 0,
+                4: 0
+               },
+              unstable: {
+                times: 0,
+                shards: new Decimal(0),
+                severity: 1,
+                upgrades: []
+              },
+              timeRift: {
+                temporalPower: new Decimal (0),
+                seconds: 0,
+                upgrades: []
+              },
+              autobuy: player.dilation.autobuy
+           },
             meta: {
               antimatter: new Decimal(10),
               bestAntimatter: player.meta.bestAntimatter,
@@ -403,25 +403,25 @@ let quarkMult = function () {
 }
 
 let quantRequirement = function () {
-  return new Decimal(Number.MAX_VALUE).pow(4)
+  return new Decimal(Number.MAX_VALUE)
 }
 
 function toggleDilationConf() {
     if (player.options.dilationconfirm) {
         player.options.dilationconfirm = false
-        document.getElementById("dilationconf").textContent = "Dilation confirmation OFF"
+        document.getElementById("dilationconf").textContent = "Dilation confirmation: OFF"
     } else {
         player.options.dilationconfirm = true
-        document.getElementById("dilationconf").textContent = "Dilation confirmation ON"
+        document.getElementById("dilationconf").textContent = "Dilation confirmation: ON"
     }
 }
 
 function toggleQuantumConf() {
     if (player.options.quantumconfirm) {
         player.options.quantumconfirm = false
-        document.getElementById("quantumconf").textContent = "Quantum confirmation OFF"
+        document.getElementById("quantumconf").textContent = "Quantum confirmation: OFF"
     } else {
         player.options.quantumconfirm = true
-        document.getElementById("quantumconf").textContent = "Quantum confirmation ON"
+        document.getElementById("quantumconf").textContent = "Quantum confirmation: ON"
     }
 }
