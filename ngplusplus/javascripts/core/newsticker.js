@@ -229,7 +229,8 @@ newsArray = [//always true
 ["You feel like baking antimatter, but no body wants to explode.", true, "respecced71"],
 ["'We need to ban standard.' - Douche who can't balance his mods correctly", true, "respecced72"],
 ["NG+3.1, now featuring 33% less timewalls and the all new Higgs timewall!", true, "respecced73"],
-["Warning! We have reported an anomaly within the space and time continuum! It is likely that it will strike and make more time inconsistencies! Protect the time you have at all costs!", 'player.dilation.unstable.times > 0', "respecced74"]
+["Warning! We have reported an anomaly within the space and time continuum! It is likely that it will strike and make more time inconsistencies! Protect the time you have at all costs!", 'player.dilation.unstable.times > 0', "respecced74"],
+["I like Gunvolt Chronicles.", true, "respecced75"]
 ];}
 
 var s = document.getElementById('news');
