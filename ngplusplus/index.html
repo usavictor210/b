@@ -462,7 +462,7 @@
                 <button id="enabledilation2" class="dilationUnstablebtn" onclick="unstableDilation()" style="display: none">Unstabilize dilation.</button>
                 <p>You have <span id="dilatedTimeAmount" style="font-size:35px; color: black">0</span> dilated time. <span id="dilatedTimePerSecond" style="font-size:25px; color: black">0</span></p>
                 <p>The next free galaxy is at <span id="galaxyThreshold" style="font-size:25px; color: black">1000</span> dilated time. You've gained a total of <span id="dilatedGalaxies" style="font-size:25px; color: black">0</span> free galaxies.</p>
-                <button id="rebuyupgauto" style="width:210px; height: 30px; font-size: 12px" onclick="rebuyableDilationUpgrade()" class="storebtn">Autobuy Rebuyables: ON</button>
+                <button id="rebuyupgauto" style="width:210px; height: 30px; font-size: 12px" onclick="rebuyableDilationUpgrade()" class="storebtn">Autobuy Rebuyables: ON (PLACEHOLDER)</button>
                 <table>
                     <tr>
                         <td>
@@ -2749,9 +2749,11 @@
         <button class="timetheorembtn" onclick="studyTreeSaveButton(1)" style="margin-left:176px; width:30px; height: 30px; font-size: 0.75rem; bottom: 77px;">1</button>
         <button class="timetheorembtn" onclick="studyTreeSaveButton(2)" style="margin-left:211px; width:30px; height: 30px; font-size: 0.75rem; bottom: 77px;">2</button>
         <button class="timetheorembtn" onclick="studyTreeSaveButton(3)" style="margin-left:246px; width:30px; height: 30px; font-size: 0.75rem; bottom: 77px;">3</button>
+        <div id="theorembuyers">
         <button class="timetheorembtn" onclick="buyWithAntimatter()" id="theoremam" style="margin-left: -276px">Buy Time Theorems <br>Cost: 1e20000 antimatter</button>
         <button class="timetheorembtn" onclick="buyWithIP()" id="theoremip" style="margin-left: -86px">Buy Time Theorems <br>Cost: 1 IP</button>
         <button class="timetheorembtnlocked" onclick="buyWithEP()" id="theoremep" style="margin-left: 106px">Buy Time Theorems <br>Cost: 1 EP</button>
+      </div>
         <div id="theorembuybackground"></div>
         <p id="timetheorems" style="position: fixed;">You have 0 Time Theorems.</p>
         <p id="studytreeloadsavetext" style="position: fixed;">load:</p>
