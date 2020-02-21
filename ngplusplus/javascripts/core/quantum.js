@@ -389,7 +389,7 @@ function quantum(force, auto) {
         Marathon2 = 0;
         player.quantum.times++
         document.getElementById("mdtabbtn").style.display = "none"
-        giveAchievement("Sub-atomic")
+                giveAchievement("Sub-atomic")
     }
 }
 
@@ -434,3 +434,4 @@ function updateQuantum() {
   else document.getElementById("quantumbtn").style.display = "none"
   
 }
+
