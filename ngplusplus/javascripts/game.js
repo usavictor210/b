@@ -8291,7 +8291,7 @@ function gameLoop(diff) {
   document.getElementById("replicantiapprox").textContent =
     "Approximately " +
     timeDisplay(estimate * 10) +
-    " Until Infinite Replicanti";
+    " until infinite Replicanti";
 
   document.getElementById("replicantiamount").textContent = shortenDimensions(
     player.replicanti.amount
@@ -9223,6 +9223,7 @@ function gameLoop(diff) {
     "</span> Infinity points.";
 
   player.lastUpdate = thisUpdate;
+  checkQuantumButton();
 }
 
 function simulateTime(seconds, real) {
@@ -9968,7 +9969,7 @@ setInterval(function() {
     Math.pow(player.achievements.length - 30 - getSecretAchAmount(), 3) / 40,
     1
   );
-  challengeMult = Decimal.max((10 * 3000) / worstChallengeTime, 1);
+  challengeMult = Decimal.max((1000000) / worstChallengeTime, 1);
   unspentBonus = player.infinityPoints
     .dividedBy(2)
     .pow(1.5)
