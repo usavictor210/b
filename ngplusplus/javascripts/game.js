@@ -7721,7 +7721,7 @@ setInterval(function() {
     ? "inline-block"
     : "none";
   document.getElementById("timeRiftTabbtn").style.display =
-    player.dilation.unstable.times > 0 || player.quantum.times > 0
+    player.dilation.unstable.times > 0 && player.quantum.times > 0
       ? "inline-block"
       : "none";
 
