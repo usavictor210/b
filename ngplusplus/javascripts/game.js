@@ -337,7 +337,8 @@ var player = {
         bought: 0,
         tensBought: 0,
         cost: new Decimal(1e24)
-      }
+      },
+      autoMaxAll: false
     },
     quantum: {
       times: 0,
