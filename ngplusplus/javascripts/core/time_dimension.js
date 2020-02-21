@@ -46,14 +46,12 @@ function getTimeDimensionPower(tier) {
     }
   }
 
-
+  document.getElementById("itmult").innerHTML = "Your 'Infinite Time' multiplier is currently " + shortenMoney(getInfiniteTimeReward().recip()) + "x."
   return ret
-
 }
 
 function getInfiniteTimeReward() {
 return (player.tickspeed.div(1000).pow(0.000005))
-document.getElementById("itmult").textContent = "Your 'Infinite Time' multiplier is currently " + getInfiniteTimeReward().recip() + "x."
 }
 function getTimeDimensionProduction(tier) {
   if (player.currentEternityChall == "eterc10") return new Decimal(0)

@@ -1,4 +1,4 @@
-//test
+// ok, this code is absolutely very messy and we'll need to separate it into parts, and also simplify some parts of the code.
 var gameLoopIntervalId;
 var Marathon = 0;
 var Marathon2 = 0;
@@ -8114,7 +8114,7 @@ function gameLoop(diff) {
       shortenDimensions(IPminpeak) +
       " IP/min";
   else
-    document.getElementById("postInfinityButton").innerHTML =
+    document.getElementById("postInfinityButton").innerHTML = // add infinities gained on big crunch like in NG^^
       "<b>Big Crunch for " +
       shortenDimensions(gainedInfinityPoints()) +
       " Infinity Points.</b>";
