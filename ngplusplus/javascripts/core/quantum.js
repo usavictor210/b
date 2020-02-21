@@ -388,10 +388,8 @@ function quantum(force, auto) {
         drawStudyTree()
         Marathon2 = 0;
         player.quantum.times++
-        if (player.quantum.bestQuantum > player.quantum.thisQuantum) player.quantum.bestQuantum = player.quantum.thisQuantum
-        player.quantum.thisQuantum = 0
         document.getElementById("mdtabbtn").style.display = "none"
-        giveAchievement("Sub-atomic")
+                giveAchievement("Sub-atomic")
     }
 }
 
@@ -432,13 +430,13 @@ function toggleQuantumConf() {
 }
 
 function updateQuantum() {
-  let plural = player.quantum.times != 1 ? "s" : ""
+  let Plural = 
   if (player.quantum.times != 0)  {
   document.getElementById("quantumbtn").style.display = "inline-block"
   document.getElementById("quantumStats").style.display = "block"
-  document.getElementById("quantumed").textContent = "You have gone quantum " + player.quantum.times + " time" + plural + "."
-  document.getElementById("thisquantum").textContent = "You have spent " + timeDisplay(player.thisQuantum) + " in this Quantum."
-  document.getElementById("bestquantum").textContent = "Your fastest Quantum is in " + timeDisplay(player.bestQuantum) + "."
+  document.getElementById("quantumed").textContent = "You have gone quantum " + player.quantum.times + " time" + player.quantum.times != 1 ? "s" : ""
+  document.getElementById("thisquantum").textContent = "You have spent " + timeDisplay(player.thisEternity) + " in this Quantum. (eternity time is placeholder)"
+  document.getElementById("bestquantum").textContent = "Your fastest Quantum is in " + timeDisplay(player.thisEternity) + ". (placeholder)"
   } else document.getElementById("quantumbtn").style.display = "none"
     document.getElementById("quantumStats").style.display = "none"
 }
