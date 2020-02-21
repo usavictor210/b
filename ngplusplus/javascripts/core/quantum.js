@@ -429,7 +429,8 @@ function toggleQuantumConf() {
     }
 }
 
-function checkQuantumButton() {
+function updateQuantum() {
   if (player.quantum.times != 0) document.getElementById("quantumbtn").style.display = "inline-block"
   else document.getElementById("quantumbtn").style.display = "none"
+  
 }

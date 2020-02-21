@@ -9222,7 +9222,7 @@ function gameLoop(diff) {
     "</span> Infinity points.";
 
   player.lastUpdate = thisUpdate;
-  checkQuantumButton();
+  updateQuantum();
 }
 
 function simulateTime(seconds, real) {
