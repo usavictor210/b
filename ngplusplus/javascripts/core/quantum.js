@@ -432,10 +432,10 @@ function toggleQuantumConf() {
 function updateQuantum() {
   if (player.quantum.times != 0)  {
   document.getElementById("quantumbtn").style.display = "inline-block"
-  document.getElementById("quantumStats").style.display = "inline-block"
+  document.getElementById("quantumStats").style.display = ""
   document.getElementById("quantumed").textContent = "You have gone quantum " + player.quantum.times + " time" + player.quantum.times != 1 ? "s" : ""
-  document.getElementById("thisquantum").textContent = "block" 
-  document.getElementById("bestquantum").textContent = "block"
+  document.getElementById("thisquantum").textContent = "You have spent " + timeDisplay(player.thisEternity) + " in this Quantum. (eternity time is placeholder)"
+  document.getElementById("bestquantum").textContent = "Your fastest Quantum is in " + timeDisplay(player.thisEternity) + ". (placeholder)"
   } else document.getElementById("quantumbtn").style.display = "none"
     document.getElementById("quantumStats").style.display = "none"
 }
