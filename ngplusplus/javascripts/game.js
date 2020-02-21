@@ -424,6 +424,8 @@ var player = {
   quantum: {
     times: 0,
     quarks: new Decimal(0),
+    thisQuantum: 0,
+    bestQuantum: 9999999999,
     producedGluons: 0,
     realGluons: 0,
     bosons: {
@@ -440,7 +442,19 @@ var player = {
       1: 0,
       2: 0
     },
-    upgrades: []
+    upgrades: [],
+    lastTenQuantums: [
+    [600 * 60 * 24 * 31, 1],
+    [600 * 60 * 24 * 31, 1],
+    [600 * 60 * 24 * 31, 1],
+    [600 * 60 * 24 * 31, 1],
+    [600 * 60 * 24 * 31, 1],
+    [600 * 60 * 24 * 31, 1],
+    [600 * 60 * 24 * 31, 1],
+    [600 * 60 * 24 * 31, 1],
+    [600 * 60 * 24 * 31, 1],
+    [600 * 60 * 24 * 31, 1]
+    ],
   },
   why: 0,
   options: {
