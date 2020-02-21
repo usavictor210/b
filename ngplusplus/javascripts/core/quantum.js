@@ -431,10 +431,13 @@ function toggleQuantumConf() {
 
 function updateQuantum() {
   if (player.quantum.times != 0)  {
-  ocument.getElementById("quantumbtn").style.display = "inline-block"
-
-  document.getElementById("quantumed").style.display = "inline-block"
-  document.getElementById("thisquantum").style.display = "inline-block"
-  document.getElementById("bestquantum").style.display = "inline-block"
-   } else document.getElementById("quantumbtn").style.display = "none"}
+  document.getElementById("quantumbtn").style.display = "inline-block"
+  document.getElementById("quantumed").style.display = "block"
+  document.getElementById("thisquantum").style.display = "block"
+  document.getElementById("bestquantum").style.display = "block"
+  } else document.getElementById("quantumbtn").style.display = "none"
+    document.getElementById("quantumed").style.display = "none"
+    document.getElementById("thisquantum").style.display = "none"
+    document.getElementById("bestquantum").style.display = "none"
+}
 
