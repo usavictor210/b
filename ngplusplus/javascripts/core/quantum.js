@@ -436,8 +436,8 @@ function updateQuantum() {
   document.getElementById("thisquantum").style.display = "block"
   document.getElementById("bestquantum").style.display = "block"
   } else document.getElementById("quantumbtn").style.display = "none"
-    document.getElementById("quantumed").style.display = "none"
-    document.getElementById("thisquantum").style.display = "none"
-    document.getElementById("bestquantum").style.display = "none"
+    document.getElementById("quantumed").textContent = ""
+    document.getElementById("thisquantum").textContent= ""
+    document.getElementById("bestquantum").textContent = ""
 }
 
