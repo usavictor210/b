@@ -133,7 +133,7 @@ function hasInfinityMult(tier) {
 
 
     function multiplyPC5Costs(cost, tier) {
-        var tiers = [ null, "first", "second", "third", "fourth", "fifth", "sixth", "seventh", "eight" ];
+        var tiers = [null, "first", "second", "third", "fourth", "fifth", "sixth", "seventh", "eight"];
 
         if (tier < 5) {
             for (var i = 1; i<9; i++) {

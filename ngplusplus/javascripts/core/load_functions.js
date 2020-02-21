@@ -1028,7 +1028,9 @@ function onLoad() {
       upgrades: []
     };
   }
-
+  
+  if (player.meta.autoMaxAll === undefined) player.meta.autoMaxAll = false
+  
   // player.version is currently 12.3
   if (player.options.notation == "Default") {
     player.options.notation = "Brackets";
