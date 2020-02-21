@@ -24,7 +24,7 @@ const allAchievements = {
   r37 : "That's fast!",
   r38 : "I don't believe in Gods",
   r41 : "Spreading Cancer",
-  r42 : "Supersanic",
+  r42 : "Super Sanic",
   r43 : "Zero Deaths",
   r44 : "Over in 30 seconds",
   r45 : "Faster than a potato",

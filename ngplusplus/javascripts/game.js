@@ -3608,7 +3608,7 @@ function setAchieveTooltip() {
   var noPointAchieve = document.getElementById(
     "There's no point in doing that"
   );
-  var sanic = document.getElementById("Supersanic");
+  var sanic = document.getElementById("Super Sanic");
   var forgotAchieve = document.getElementById("I forgot to nerf that");
   var potato = document.getElementById("Faster than a potato");
   let potato2 = document.getElementById("Faster than a squared potato");
@@ -3672,20 +3672,21 @@ function setAchieveTooltip() {
   ) + ". Reward: First Dimensions are 5% stronger.";
   sanic.setAttribute(
     "ach-tooltip",
-    "Have antimatter/sec exceed your current antimatter above " +
-      formatValue(player.options.notation, 1e63, 0, 0)
+    "Get over " +
+      formatValue(player.options.notation, 1e63, 0, 0) +
+    " antimatter."
   );
   potato.setAttribute(
     "ach-tooltip",
     "Get more than " +
       formatValue(player.options.notation, 1e29, 0, 0) +
-      " ticks per second. Reward: Reduces starting tick interval by 2%."
+      " ticks per second. Reward: Reduce the starting tick interval by 2%."
   );
   potato2.setAttribute(
     "ach-tooltip",
     "Get more than " +
       formatValue(player.options.notation, 1e58, 0, 0) +
-      " ticks per second. Reward: Reduces starting tick interval by 2%."
+      " ticks per second. Reward: Reduce the starting tick interval by 2%."
   );
   potato3.setAttribute(
     "ach-tooltip",
@@ -3695,9 +3696,9 @@ function setAchieveTooltip() {
   );
   dimensional.setAttribute(
     "ach-tooltip",
-    "Reach " +
+    "Get at least " +
       formatValue(player.options.notation, 1e12, 0, 0) +
-      " of all dimensions except 8th."
+      " of all dimensions except for the 8th dimension."
   );
   IPBelongs.setAttribute(
     "ach-tooltip",
@@ -3729,8 +3730,6 @@ function setAchieveTooltip() {
       formatValue(player.options.notation, new Decimal("1e35000"), 0, 0) +
       " antimatter. Reward: Dimensions are more powerful the more unspent antimatter you have."
   );
-  //exist.setAttribute('ach-tooltip', "Reach " + formatValue(player.options.notation, 9.9999e9999, 0, 0) + " antimatter. Reward: Dimensions are more powerful the more unspent antimatter you have."); (i like the 9 9s thing and no one will see it with a formatted value)
-  //exist2.setAttribute('ach-tooltip', "Reach " + formatValue(player.options.notation, 1e35000, 0, 0) + " antimatter. Reward: Dimensions are more powerful the more unspent antimatter you have.")
   speed.setAttribute(
     "ach-tooltip",
     "Big Crunch for " +
@@ -3775,7 +3774,7 @@ function setAchieveTooltip() {
     "ach-tooltip",
     "Reach " +
       shortenCosts(1e100) +
-      " IP without any infinities or first dimensions. Reward: IP multiplier based on time spent this infinity."
+      " IP without any infinities or first dimensions. Reward: Gain a IP multiplier based on time spent this infinity."
   );
   layer.setAttribute(
     "ach-tooltip",
@@ -3823,7 +3822,7 @@ function setAchieveTooltip() {
     "ach-tooltip",
     "Reach " +
       shortenMoney(new Decimal("1e40000")) +
-      " EP. Reward: The penalties for active, idle, and passive are removed."
+      " EP. Reward: The penalties for active, idle, and passive time study paths are removed."
   );
   thecap.setAttribute(
     "ach-tooltip",
@@ -8387,7 +8386,7 @@ function gameLoop(diff) {
     if (painTimer >= 600) giveAchievement("Do you enjoy pain?");
   }
 
-  if (player.money.gt(Math.pow(10, 63))) giveAchievement("Supersanic");
+  if (player.money.gt(1e63)) giveAchievement("Super Sanic");
 
   for (let tier = 1; tier <= 8; ++tier) {
     var name = TIER_NAMES[tier];
