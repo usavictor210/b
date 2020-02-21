@@ -395,7 +395,7 @@ var player = {
 };
 
 var defaultStart = $.extend(true, {}, player);
-
+var mult18 = new Decimal(1)
 
 
 
@@ -6349,7 +6349,6 @@ var achievementMult = 1
 var challengeMult = 1
 var unspentBonus = 1
 var postc8Mult = new Decimal(0)
-var mult18 = new Decimal(1)
 var ec10bonus = new Decimal(1)
 setInterval( function() {
     totalMult = Math.pow(player.totalmoney.e+1, 0.5)

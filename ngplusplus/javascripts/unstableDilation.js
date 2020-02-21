@@ -53,7 +53,6 @@ function timeMultUpg(x, check) {
     if (player.achievements.includes("r151")) {
       y = new Decimal (((Decimal.pow(player.totalTimePlayed / (600*60*48), (0.05*timeLeaperMult()**0.025)))))
     } else y = new Decimal (Math.pow(player.totalTimePlayed / (600*60*48), 0.05));
-    if (y.lt(1)) y = new Decimal(1)
   }
   if (x === 4) {
     if (player.achievements.includes("r151")) {
