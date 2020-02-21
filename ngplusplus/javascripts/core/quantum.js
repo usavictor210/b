@@ -1,5 +1,5 @@
 function quantum(force, auto) {
-    if (player.meta.antimatter.gte(quantRequirement()) && (!player.options.quantumconfirm || auto || confirm("Quantum will reset everything eternity resets, including dilation, unstable dilation, meta-dimensions and the time rift, in exchange for a quark and unlock various upgrades. Are you sure you want to do this?")) || force === true) {
+    if (player.meta.antimatter.gte(quantRequirement()) && (!player.options.quantumconfirm || auto || confirm("Quantum will reset everything eternity resets, including dilation, and meta-dimensions, in exchange for a quark and unlock various upgrades. Are you sure you want to do this?")) || force === true) {
         player.quantum.quarks = player.quantum.quarks.plus(quarkGain());
         player.quantum.gluons = 0;
         player = {
@@ -376,7 +376,7 @@ function quantum(force, auto) {
         document.getElementById("eternitybtn").style.display = player.infinityPoints.gte(player.eternityChallGoal) ? "inline-block" : "none"
         document.getElementById("eternityPoints2").style.display = "inline-block"
         document.getElementById("eternitystorebtn").style.display = "inline-block"
-        document.getElementById("infiMult").innerHTML = "Multiply infinity points from all sources by 2 <br>currently: "+shorten(player.infMult.times(kongIPMult)) +"x<br>Cost: "+shortenCosts(player.infMultCost)+" IP"
+        document.getElementById("infiMult").innerHTML = "Multiply infinity points from all sources by 2 <br>currently: "+shorten(player.infMult) +"x<br>Cost: "+shortenCosts(player.infMultCost)+" IP"
         updateEternityUpgrades()
         document.getElementById("totaltickgained").textContent = "You've gained "+player.totalTickGained.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")+" tickspeed upgrades."
         updateTickSpeed();
@@ -387,6 +387,7 @@ function quantum(force, auto) {
         updateTimeStudyButtons()
         drawStudyTree()
         Marathon2 = 0;
+        player.quantum.times++
         giveAchievement("Sub-atomic")
     }
 }
