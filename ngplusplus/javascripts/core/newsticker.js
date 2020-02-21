@@ -232,7 +232,8 @@ newsArray = [//always true
 ["Warning! We have reported an anomaly within the space and time continuum! It is likely that it will strike and make more time inconsistencies! Protect the time you have at all costs!", 'player.dilation.unstable.times > 0', "respecced74"],
 ["I like Gunvolt Chronicles.", true, "respecced75"],
 ["We apologize in advance for all the AD related news tickers.", true, "respecced76"],
-["The news ticker industry is inflating. There have not been any major advancements in the news ticker department. We need to think of better news tickers, but most of them are just horribly written stuff...", true, "respecced77"]
+["The news ticker industry is inflating. There have not been any major advancements in the news ticker department. We need to think of better news tickers, but most of them are just horribly written stuff...", true, "respecced77"],
+["5 hours was a mistake. There stands only an infinite time between Reality. 5 hours was never an accurate measurement, it just kept moving away from us. Everything we knew of it was wrong. What are we waiting for then?", 'player.newsArray.includes("a91") && player.totalTimePlayed >= 600*300', "respecced78"]
 ];}
 
 var s = document.getElementById('news');

@@ -1223,7 +1223,7 @@ function updateDimensions() {
         shortenCosts(5e9) +
         " IP";
       document.getElementById("postinfi33").innerHTML =
-        "Autobuyers work twice as fast<br>Cost:" + shortenCosts(1e15) + " IP";
+        "Autobuyers work twice as fast<br>Cost: " + shortenCosts(1e15) + " IP";
       if (player.dimensionMultDecrease <= 3)
         document.getElementById("postinfi42").innerHTML =
           "Dimension cost multiplier increase <br>" +
