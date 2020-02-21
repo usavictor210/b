@@ -46,7 +46,9 @@ function getTimeDimensionPower(tier) {
     }
   }
 
-  document.getElementById("itmult").innerHTML = "Your 'Infinite Time' multiplier is currently " + shortenMoney(getInfiniteTimeReward().recip()) + "x."
+  if (player.achievements.includes("r105")) { 
+    document.getElementById("itmult").innerHTML = "Your 'Infinite Time' multiplier is currently " + shortenMoney(getInfiniteTimeReward().recip()) + "x."
+  } else document.getElementById("itmult").style.display = "none"
   return ret
 }
 
