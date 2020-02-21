@@ -1,5 +1,5 @@
 function quantum(force, auto) {
-    if (player.meta.antimatter.gte(Number.MAX_VALUE) && (!player.options.quantumconfirm || auto || confirm("Quantum will reset everything eternity resets, including dilation, unstable dilation, meta-dimensions and the time rift, in exchange for a quark and unlock various upgrades. Are you sure you want to do this?")) || force === true) {
+    if (player.meta.antimatter.gte(quantRequirement()) && (!player.options.quantumconfirm || auto || confirm("Quantum will reset everything eternity resets, including dilation, unstable dilation, meta-dimensions and the time rift, in exchange for a quark and unlock various upgrades. Are you sure you want to do this?")) || force === true) {
         player.quantum.quarks = player.quantum.quarks.plus(quarkGain());
         player.quantum.gluons = 0;
         player = {
@@ -195,7 +195,7 @@ function quantum(force, auto) {
                 bought: 0
             },
             eternityPoints: new Decimal(0),
-            eternities: player.eternities,
+            eternities: 10000,
             thisEternity: 0,
             bestEternity: 9999999999,
             eternityUpgrades: [],
@@ -387,6 +387,7 @@ function quantum(force, auto) {
         updateTimeStudyButtons()
         drawStudyTree()
         Marathon2 = 0;
+        giveAchievement("Sub-atomic")
     }
 }
 
