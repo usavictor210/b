@@ -53,6 +53,7 @@ function timeMultUpg(x, check) {
     if (player.achievements.includes("r151")) {
       y = new Decimal (((Decimal.pow(player.totalTimePlayed / (600*60*48), (0.05*timeLeaperMult()**0.025)))))
     } else y = new Decimal (Math.pow(player.totalTimePlayed / (600*60*48), 0.05));
+    if (y.lt(1)) y = new Decimal(1)
   }
   if (x === 4) {
     if (player.achievements.includes("r151")) {
@@ -62,7 +63,6 @@ function timeMultUpg(x, check) {
     if (y.gte (new Decimal (player.dilation.active ? Number.MAX_VALUE : "1e30000"))) y = y.pow(0.01).max(new Decimal(player.dilation.active ? Number.MAX_VALUE : "1e30000"))
   } else y = new Decimal (Math.pow(Math.max(player.thisEternity*10, 1), 0.3+(ECTimesCompleted("eterc1")*0.05)))
   }
-  if (y.lt(1) || isNaN(y)) y = new Decimal(1)
   z = shortenMoney(y)
   if (check === 1) {
     return y
