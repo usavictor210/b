@@ -708,16 +708,7 @@ function onLoad() {
       isOn: false
     };
   }
-  if (player.quantum.bestQuantum === undefined) {
-    player.quantum.bestQuantum = 9999999999;
-    player.quantum.thisQuantum = player.totalTimePlayed;
-    if (player.bestQuantum != undefined) {
-    player.quantum.bestQuantum = player.bestQuantum
-    player.quantum.thisQuantum = player.quantum.bestQuantum
-    delete player.thisQuantum
-    delete player.bestQuantum
-    }
-  }
+
   transformSaveToDecimal();
   updateCosts();
   updateTickSpeed();
