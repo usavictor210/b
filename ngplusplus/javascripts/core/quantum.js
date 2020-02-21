@@ -430,9 +430,10 @@ function toggleQuantumConf() {
 }
 
 function updateQuantum() {
+  let Plural = 
   if (player.quantum.times != 0)  {
   document.getElementById("quantumbtn").style.display = "inline-block"
-  document.getElementById("quantumStats").style.display = ""
+  document.getElementById("quantumStats").style.display = "block"
   document.getElementById("quantumed").textContent = "You have gone quantum " + player.quantum.times + " time" + player.quantum.times != 1 ? "s" : ""
   document.getElementById("thisquantum").textContent = "You have spent " + timeDisplay(player.thisEternity) + " in this Quantum. (eternity time is placeholder)"
   document.getElementById("bestquantum").textContent = "Your fastest Quantum is in " + timeDisplay(player.thisEternity) + ". (placeholder)"
