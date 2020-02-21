@@ -423,6 +423,8 @@ var player = {
   },
   quantum: {
     times: 0,
+    thisQuantum: 0,
+    bestQuantum: 9999999999,
     quarks: new Decimal(0),
     producedGluons: 0,
     realGluons: 0,
@@ -440,7 +442,19 @@ var player = {
       1: 0,
       2: 0
     },
-    upgrades: []
+    upgrades: [],
+    lastTenQuantums: [
+      [600 * 60 * 24 * 31, 1],
+      [600 * 60 * 24 * 31, 1],
+      [600 * 60 * 24 * 31, 1],
+      [600 * 60 * 24 * 31, 1],
+      [600 * 60 * 24 * 31, 1],
+      [600 * 60 * 24 * 31, 1],
+      [600 * 60 * 24 * 31, 1],
+      [600 * 60 * 24 * 31, 1],
+      [600 * 60 * 24 * 31, 1],
+      [600 * 60 * 24 * 31, 1]
+    ]
   },
   why: 0,
   options: {
@@ -1148,7 +1162,8 @@ function updateDimensions() {
         " every " +
         timeDisplay(player.bestInfinityTime * 10) +
         "<br>Cost: 10 IP";
-    } else if (document.getElementById("postinf").style.display == "block") { //TODO - SIMPLIFY ALL BREAK INFINITY FORMULAS INTO ONE FUNCTION
+    } else if (document.getElementById("postinf").style.display == "block") {
+      //TODO - SIMPLIFY ALL BREAK INFINITY FORMULAS INTO ONE FUNCTION
       document.getElementById("postinfi11").innerHTML =
         "All dimension multipliers increase based on total antimatter produced<br>Currently: " +
         shortenMoney(Math.pow(player.totalmoney.e + 1, 0.5)) +
@@ -1182,7 +1197,7 @@ function updateDimensions() {
         " IP";
       document.getElementById("postinfi12").innerHTML =
         "All dimension multipliers increase based on infinitied stat <br>Currently: " +
-        shortenMoney((1 + Math.log10(getInfinitied() + 1) * 10)) +
+        shortenMoney(1 + Math.log10(getInfinitied() + 1) * 10) +
         "x<br>Cost: " +
         shortenCosts(1e5) +
         " IP";
@@ -3674,7 +3689,7 @@ function setAchieveTooltip() {
     "ach-tooltip",
     "Get over " +
       formatValue(player.options.notation, 1e63, 0, 0) +
-    " antimatter."
+      " antimatter."
   );
   potato.setAttribute(
     "ach-tooltip",
@@ -9968,7 +9983,7 @@ setInterval(function() {
     Math.pow(player.achievements.length - 30 - getSecretAchAmount(), 3) / 40,
     1
   );
-  challengeMult = Decimal.max((1000000) / worstChallengeTime, 1);
+  challengeMult = Decimal.max(1000000 / worstChallengeTime, 1);
   unspentBonus = player.infinityPoints
     .dividedBy(2)
     .pow(1.5)
