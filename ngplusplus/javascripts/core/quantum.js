@@ -430,8 +430,11 @@ function toggleQuantumConf() {
 }
 
 function updateQuantum() {
-  if (player.quantum.times != 0) document.getElementById("quantumbtn").style.display = "inline-block"
-  else document.getElementById("quantumbtn").style.display = "none"
-  
-}
+  if (player.quantum.times != 0)  {
+  ocument.getElementById("quantumbtn").style.display = "inline-block"
+
+  document.getElementById("quantumed").style.display = "inline-block"
+  document.getElementById("thisquantum").style.display = "inline-block"
+  document.getElementById("bestquantum").style.display = "inline-block"
+   } else document.getElementById("quantumbtn").style.display = "none"}
 
