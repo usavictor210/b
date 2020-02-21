@@ -388,8 +388,8 @@ function quantum(force, auto) {
         drawStudyTree()
         Marathon2 = 0;
         player.quantum.times++
-        player.quantum.thisQuantum = 0
         if (player.quantum.bestQuantum > player.quantum.thisQuantum) player.quantum.bestQuantum = player.quantum.thisQuantum
+        player.quantum.thisQuantum = 0
         document.getElementById("mdtabbtn").style.display = "none"
                 giveAchievement("Sub-atomic")
     }
