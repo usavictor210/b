@@ -432,12 +432,11 @@ function toggleQuantumConf() {
 function updateQuantum() {
   if (player.quantum.times != 0)  {
   document.getElementById("quantumbtn").style.display = "inline-block"
-  document.getElementById("quantumed").style.display = "block"
-  document.getElementById("thisquantum").style.display = "block"
-  document.getElementById("bestquantum").style.display = "block"
+  document.getElementById("quantumStats").style.display = "inline-block"
+  document.getElementById("quantumed").textContent = "You have gone quantum " + player.quantum.times + " time" + player.quantum.times != 1 ? "s" : ""
+  document.getElementById("thisquantum").textContent = "block" 
+  document.getElementById("bestquantum").textContent = "block"
   } else document.getElementById("quantumbtn").style.display = "none"
-    document.getElementById("quantumed").style.display = "none"
-    document.getElementById("thisquantum").style.display = "none"
-    document.getElementById("bestquantum").style.display = "none"
+    document.getElementById("quantumStats").style.display = "none"
 }
 
