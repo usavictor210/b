@@ -1148,16 +1148,16 @@ function updateDimensions() {
         " every " +
         timeDisplay(player.bestInfinityTime * 10) +
         "<br>Cost: 10 IP";
-    } else if (document.getElementById("postinf").style.display == "block") {
+    } else if (document.getElementById("postinf").style.display == "block") { //TODO - SIMPLIFY ALL BREAK INFINITY FORMULAS INTO ONE FUNCTION
       document.getElementById("postinfi11").innerHTML =
         "All dimension multipliers increase based on total antimatter produced<br>Currently: " +
-        Math.pow(player.totalmoney.e + 1, 0.5).toFixed(2) +
+        shortenMoney(Math.pow(player.totalmoney.e + 1, 0.5)) +
         "x<br>Cost: " +
         shortenCosts(1e4) +
         " IP";
       document.getElementById("postinfi21").innerHTML =
         "All dimension multipliers increase based on current antimatter<br>Currently: " +
-        Math.pow(player.money.e + 1, 0.5).toFixed(2) +
+        shortenMoney(Math.pow(player.money.e + 1, 0.5)) +
         "x<br>Cost: " +
         shortenCosts(5e4) +
         " IP";
@@ -1176,13 +1176,13 @@ function updateDimensions() {
           "x";
       document.getElementById("postinfi22").innerHTML =
         "All dimension multipliers increase based on achievements completed <br>Currently: " +
-        achievementMult.toFixed(2) +
+        shortenMoney(achievementMult) +
         "x<br>Cost: " +
         shortenCosts(1e6) +
         " IP";
       document.getElementById("postinfi12").innerHTML =
         "All dimension multipliers increase based on infinitied stat <br>Currently: " +
-        (1 + Math.log10(getInfinitied() + 1) * 10).toFixed(2) +
+        shortenMoney((1 + Math.log10(getInfinitied() + 1) * 10)) +
         "x<br>Cost: " +
         shortenCosts(1e5) +
         " IP";
@@ -1198,8 +1198,8 @@ function updateDimensions() {
       document.getElementById("postinfi41").innerHTML =
         "Galaxies are 50% stronger.<br>Cost: " + shortenCosts(5e11) + " IP";
       document.getElementById("postinfi32").innerHTML =
-        "All dimension multipliers increase based on slowest challenge run<br>Currently:" +
-        Decimal.max((10 * 3000) / worstChallengeTime, 1).toFixed(2) +
+        "All dimension multipliers increase based on slowest challenge run<br>Currently: " +
+        shortenMoney(challengeMult) +
         "x<br>Cost: " +
         shortenCosts(1e7) +
         " IP";
