@@ -6,7 +6,7 @@ function getTimeDimensionPower(tier) {
   var ret = dim.power.pow(2)
 
   if (player.timestudy.studies.includes(11) && tier == 1) ret = ret.dividedBy(player.tickspeed.dividedBy(1000).pow(0.005).times(0.95).plus(player.tickspeed.dividedBy(1000).pow(0.0003).times(0.05)).max(Decimal.fromMantissaExponent(1, -2500)))
-  if (player.achievements.includes("r105")) ret = ret.div(player.tickspeed.div(1000).pow(0.000005))
+  if (player.achievements.includes("r105")) ret = ret.div(getInfiniteTimeReward())
   if (player.eternityUpgrades.includes(4)) ret = ret.times(player.achPow)
   if (player.eternityUpgrades.includes(5)) ret = ret.times(Math.max(player.timestudy.theorem, 1))
   if (player.eternityUpgrades.includes(6)) ret = ret.times(player.totalTimePlayed / 10 / 60 / 60 / 24)
@@ -51,7 +51,10 @@ function getTimeDimensionPower(tier) {
 
 }
 
-
+function getInfiniteTimeReward() {
+return (player.tickspeed.div(1000).pow(0.000005))
+document.getElementById("itmult").textContent = "Your 'Infinite Time' multiplier is currently " + getInfiniteTimeReward().recip() + "x."
+}
 function getTimeDimensionProduction(tier) {
   if (player.currentEternityChall == "eterc10") return new Decimal(0)
   var dim = player["timeDimension"+tier]
