@@ -425,3 +425,8 @@ function toggleQuantumConf() {
         document.getElementById("quantumconf").textContent = "Quantum confirmation: ON"
     }
 }
+
+function checkQuantumButton() {
+  if (!player.quantum.times === 0) document.getElementById("quantumbtn").style.display = "inline-block"
+  else document.getElementById("quantumbtn").style.display = "none"
+}
