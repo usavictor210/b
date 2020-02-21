@@ -1277,7 +1277,7 @@ button {
 }
 
 .dilationUnstablebtn {
-    color: #0b0b6b;
+    color: #4682B4;
     background: black;
     font-weight: bold;
     font-size: 0.7rem;
@@ -1292,7 +1292,7 @@ button {
 }
 
 .dilationUnstablebtn:hover {
-    color: #0b0b6b;
+    color: #4682B4;
     background: white;
 }
 

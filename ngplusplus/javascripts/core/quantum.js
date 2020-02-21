@@ -197,7 +197,7 @@ function quantum(force, auto) {
             eternityPoints: new Decimal(0),
             eternities: player.eternities,
             thisEternity: 0,
-            bestEternity: player.bestEternity,
+            bestEternity: 9999999999,
             eternityUpgrades: [],
             epmult: new Decimal(1),
             epmultCost: new Decimal(500),
@@ -276,10 +276,10 @@ function quantum(force, auto) {
            },
             meta: {
               antimatter: new Decimal(10),
-              bestAntimatter: player.meta.bestAntimatter,
+              bestAntimatter: new Decimal(10),
               resets: 0,
               galaxy: 0,
-              
+              autoMaxAll: player.autoMaxAll,
               '1': {
                 amount: new Decimal(0),
                 bought: 0,

@@ -7967,7 +7967,7 @@ function gameLoop(diff) {
 
   if (player.achievements.includes("r156")) {
     document.getElementById("metaMaxAllAuto").style.display = "";
-    document.getElementById("metaMaxAllAuto").innerText = `Auto Max all: ${
+    document.getElementById("metaMaxAllAuto").innerText = `Auto Max All: ${
       player.meta.autoMaxAll ? "ON" : "OFF"
     }`;
     if (player.meta.autoMaxAll) {
