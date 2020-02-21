@@ -427,6 +427,6 @@ function toggleQuantumConf() {
 }
 
 function checkQuantumButton() {
-  if (!player.quantum.times === 0) document.getElementById("quantumbtn").style.display = "inline-block"
-  else document.getElementById("quantumbtn").style.display = "none"
+  if (!player.quantum.times === 0) document.getElementById("quantumtabbtn").style.display = "inline-block"
+  else document.getElementById("quantumtabbtn").style.display = "none"
 }
