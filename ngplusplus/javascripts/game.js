@@ -9234,9 +9234,8 @@ function gameLoop(diff) {
     'You have <span class="IPAmount2">' +
     shortenDimensions(player.infinityPoints) +
     "</span> Infinity points.";
-
-  player.lastUpdate = thisUpdate;
   updateQuantum();
+  player.lastUpdate = thisUpdate
 }
 
 function simulateTime(seconds, real) {

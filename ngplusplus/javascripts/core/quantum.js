@@ -550,4 +550,5 @@ function updateQuantum() {
   document.getElementById("quantumed").textContent = "";
   document.getElementById("thisquantum").textContent = "";
   document.getElementById("bestquantum").textContent = "";
+  document.getElementById("quarkAmount").textContent = `You have ${shortenDimensions(player.quantum.quarks)} quarks.`
 }
