@@ -1,6 +1,6 @@
 function quantum(force, auto) {
   if (
-    (player.meta.antimatter.gte(quantRequirement()) &&
+    (player.meta.antimatter.gte(quantRequirement()) && player.dilation.dilatedTime.gte(1e100) &&
       (!player.options.quantumconfirm ||
         auto ||
         confirm(
@@ -243,7 +243,7 @@ function quantum(force, auto) {
         bought: 0
       },
       eternityPoints: new Decimal(0),
-      eternities: 10000,
+      eternities: 1012680,
       thisEternity: 0,
       bestEternity: 9999999999,
       eternityUpgrades: [],
@@ -484,11 +484,25 @@ function quantum(force, auto) {
       shortenDimensions(player.eternityPoints) +
       "</span> Eternity point" +
       (player.eternityPoints.eq(1) ? "." : "s.");
+    if (player.lastTenQuantums === undefined) {
+    player.lastTenQuantums = [
+      [600 * 60 * 24 * 31, 1],
+      [600 * 60 * 24 * 31, 1],
+      [600 * 60 * 24 * 31, 1],
+      [600 * 60 * 24 * 31, 1],
+      [600 * 60 * 24 * 31, 1],
+      [600 * 60 * 24 * 31, 1],
+      [600 * 60 * 24 * 31, 1],
+      [600 * 60 * 24 * 31, 1],
+      [600 * 60 * 24 * 31, 1],
+      [600 * 60 * 24 * 31, 1]
+    ];
+  }
     updateEternityChallenges();
     updateTheoremButtons();
     updateTimeStudyButtons();
     drawStudyTree();
-    updateLastTenQuantums();
+    //updateLastTenQuantums();
     Marathon2 = 0;
     player.quantum.times++;
     document.getElementById("mdtabbtn").style.display = "none";

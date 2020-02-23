@@ -719,6 +719,21 @@ function onLoad() {
     delete player.bestQuantum
     }
   }
+
+  if (player.lastTenQuantums === undefined) {
+    player.lastTenQuantums = [
+      [600 * 60 * 24 * 31, 1],
+      [600 * 60 * 24 * 31, 1],
+      [600 * 60 * 24 * 31, 1],
+      [600 * 60 * 24 * 31, 1],
+      [600 * 60 * 24 * 31, 1],
+      [600 * 60 * 24 * 31, 1],
+      [600 * 60 * 24 * 31, 1],
+      [600 * 60 * 24 * 31, 1],
+      [600 * 60 * 24 * 31, 1],
+      [600 * 60 * 24 * 31, 1]
+    ];
+  }
   transformSaveToDecimal();
   updateCosts();
   updateTickSpeed();
