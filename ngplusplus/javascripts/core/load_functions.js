@@ -369,7 +369,7 @@ function onLoad() {
   if (player.meta.bestAntimatter === undefined)
     player.meta.bestAntimatter = player.meta.antimatter;
   if (player.meta.galaxy === undefined) player.meta.galaxy = 0;
-  if (player.quantum.investmentAmount === undefined) player.quantum.investmentAmount = []
+  if (player.quantum.investmentAmount === undefined) player.quantum.investmentAmount = [new Decimal(0), new Decimal(0), new Decimal(0), new Decimal(0), new Decimal(0)]
   if (player.quantum === undefined) {
     player.quantum = {
     times: 0,
@@ -392,7 +392,7 @@ function onLoad() {
       1: 0,
       2: 0
     },
-    investmentAmount: [],
+    investmentAmount: [new Decimal(0), new Decimal(0), new Decimal(0), new Decimal(0), new Decimal(0)],
     upgrades: [],
     lastTenQuantums: [
     [600 * 60 * 24 * 31, 1],

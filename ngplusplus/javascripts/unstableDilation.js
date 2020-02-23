@@ -67,7 +67,7 @@ function timeMultUpg(x, check) {
       y = new Decimal (Decimal.pow(Decimal.max(player.thisEternity*20, 1), (0.55+new Decimal(player.totalTickGained**0.0125).log10())*(player.thisEternity)+1).pow(0.125))
       if (y.gte (player.dilation.active ? 1e25 : 1e100)) y = y.pow(player.dilation.active ? 0.75 : 0.1).max(player.dilation.active ? 1e25 : 1e100)
       if (y.gte (new Decimal (player.dilation.active ? "1e100" : "1e2000"))) y = y.pow(player.dilation.active ? 0.375 : 0.1).max(new Decimal(player.dilation.active ? "1e100" : "1e2000"))
-      if (y.gte (new Decimal (player.dilation.active ? Number.MAX_VALUE : "1e30000"))) y = y.pow(0.01).max(new Decimal(player.dilation.active ? Number.MAX_VALUE : "1e30000"))
+      if (y.gte (new Decimal (player.dilation.active ? Number.MAX_VALUE : "1e30000"))) y = y.pow(0.025).min(new Decimal(player.dilation.active ? Number.MAX_VALUE : "1e30000"))
     } else y = new Decimal (Math.pow(Math.max(player.thisEternity*10, 1), 0.3+(ECTimesCompleted("eterc1")*0.05)))
   }
   if (y.lt(1)) y = new Decimal (1)

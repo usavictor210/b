@@ -624,9 +624,13 @@ function updateLastTenQuantums() {
     tempstring;
 }
 
-function investQuarks(x) {
-
+function investQuarks(feature, amount) {
+if (feature != 0 && feature < 6) {
+  player.quantum.investmentAmount[feature] = player.quantum.investmentAmount[feature].add(amount)
+}
+player.dilation.
 }
 
 function getInvestMultiplier(x) {
+
 }
