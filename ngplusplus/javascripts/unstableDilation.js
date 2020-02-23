@@ -19,7 +19,6 @@ var usGain = new Decimal(((player.dilation.tachyonParticles.log(10)/15))).max(1)
         }
         Decimal.add(player.dilation.unstable.shards, usGain)
         player.dilation.unstable.times++
-        player.dilation.unstable.severity++
         giveAchievement("Time Leaper")
         document.getElementById("unstableShardAmount").textContent = player.dilation.unstable.shards
   }
@@ -33,6 +32,11 @@ function checkUnstableDilationButton() {
   } else document.getElementById("enabledilation2").innerHTML = "Unstabilize dilation."
 }
 
+function calculateDilationSeverity() {
+  var x = player.dilation.unstable.times
+  if (x > 2) player.dilation.unstable.times**1.05
+  return
+}
 
 function timeLeaperMult() {
   var x = Decimal.pow(player.totalTickGained/500, 30)

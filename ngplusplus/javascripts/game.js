@@ -756,10 +756,11 @@ function getDilReq() {
 
 function getDilPunish() {
   let x = 0.75;
-
+  if player.dilation.unstable.severity === undefined {
+  calculateDilationSeverity()
+  }
   if (player.dilation.unstable.severity > 0)
     x = x ** (player.dilation.unstable.severity ** 0.25);
-
   return x;
 }
 
