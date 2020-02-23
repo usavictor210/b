@@ -757,7 +757,7 @@ function getDilReq() {
 
 function getDilPunish() {
   let x = 0.75;
-  if player.dilation.unstable.severity === undefined {
+  if (player.dilation.unstable.severity === undefined) {
   calculateDilationSeverity()
   }
   if (player.dilation.unstable.severity > 0)
@@ -901,7 +901,7 @@ function updateMetaDimensions() {
       document.getElementById("quantumResetLabel").textContent =
         "Go quantum: Sacrifice everything to get " +
         qg +
-        (qg.eq(1) ? " quark" : " quarks");
+        (qg.eq(1) ? " quark" : " quarks"); + "."
       document.getElementById("quantumbuttondiv").style.display = "";
     } else {
       document.getElementById("quantumbuttondiv").style.display = "none";

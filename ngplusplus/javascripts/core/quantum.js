@@ -623,3 +623,10 @@ function updateLastTenQuantums() {
     " QK. " +
     tempstring;
 }
+
+function investQuarks(x) {
+
+}
+
+function getInvestMultiplier(x) {
+}

@@ -369,6 +369,7 @@ function onLoad() {
   if (player.meta.bestAntimatter === undefined)
     player.meta.bestAntimatter = player.meta.antimatter;
   if (player.meta.galaxy === undefined) player.meta.galaxy = 0;
+  if (player.quantum.investmentAmount === undefined) player.quantum.investmentAmount = []
   if (player.quantum === undefined) {
     player.quantum = {
     times: 0,
@@ -405,6 +406,7 @@ function onLoad() {
     [600 * 60 * 24 * 31, 1],
     [600 * 60 * 24 * 31, 1]
     ],
+    }
   }
   if (player.why === undefined) player.why = 0;
   if (player.options.animations === undefined)
