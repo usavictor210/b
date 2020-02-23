@@ -28,7 +28,7 @@ function checkUnstableDilationButton() {
   if (player.dilation.dilatedTime.gte(9.99e99)) document.getElementById("enabledilation2").style.display = "inline-block"
   else document.getElementById("enabledilation2").style.display = "none"
   if (!player.dilation.studies.includes(6) || player.dilation.dilatedTime.lt(9.99e99) || player.quantum.times === 0) {
-  document.getElementById("enabledilation2").innerHTML = "Go quantum and have at least 1e100 DT to unstabilize dilation."
+  document.getElementById("enabledilation2").innerHTML = "Go quantum, have at least 1e100 DT and unlock Meta Dimensions to unstabilize dilation."
   } else document.getElementById("enabledilation2").innerHTML = "Unstabilize dilation."
 }
 
@@ -65,6 +65,7 @@ function timeMultUpg(x, check) {
       if (y.gte (new Decimal (player.dilation.active ? Number.MAX_VALUE : "1e30000"))) y = y.pow(0.01).max(new Decimal(player.dilation.active ? Number.MAX_VALUE : "1e30000"))
     } else y = new Decimal (Math.pow(Math.max(player.thisEternity*10, 1), 0.3+(ECTimesCompleted("eterc1")*0.05)))
   }
+  if (y.lt(1)) y = new Decimal (1)
   z = shortenMoney(y)
   if (check === 1) {
     return y
