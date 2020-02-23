@@ -416,8 +416,12 @@ function quantum(force, auto) {
       player.infMult = player.infMult.times(4);
     if (player.achievements.includes("r104"))
       player.infinityPoints = new Decimal(2e25);
-    if (player.achievements.includes("r142"))
+    if (player.achievements.includes("r142") && !player.achievements.includes("r152")) {
       player.meta.antimatter = new Decimal(100);
+  } else if (player.achievements.includes("r152")) {
+    player.meta.antimatter = new Decimal (1000)
+  }
+    
     resetInfDimensions();
     updateChallenges();
     updateChallengeTimes();
@@ -484,9 +488,11 @@ function quantum(force, auto) {
     updateTheoremButtons();
     updateTimeStudyButtons();
     drawStudyTree();
+    updateLastTenQuantums();
     Marathon2 = 0;
     player.quantum.times++;
     document.getElementById("mdtabbtn").style.display = "none";
+    showDimTab('antimatterdimensions')
     giveAchievement("Sub-atomic");
   }
 }
@@ -539,6 +545,7 @@ function toggleQuantumConf() {
 function updateQuantum() {
   let plural = player.quantum.times != 0 ? "s" : "";
   if (player.quantum.times != 0) {
+    document.getElementById("pastquantums").style.display = "inline-block";
     document.getElementById("quantumbtn").style.display = "inline-block";
     document.getElementById("quantumed").textContent =
       "You have gone quantum " + player.quantum.times + " time" + plural + ".";
@@ -546,10 +553,12 @@ function updateQuantum() {
       "You have spent " + timeDisplay(player.thisQuantum) + " in this Quantum.";
     document.getElementById("bestquantum").textContent =
       "Your fastest Quantum is in " + timeDisplay(player.bestQuantum) + ".";
-  } else document.getElementById("quantumbtn").style.display = "none";
+  } else { document.getElementById("quantumbtn").style.display = "none";
   document.getElementById("quantumed").textContent = "";
   document.getElementById("thisquantum").textContent = "";
   document.getElementById("bestquantum").textContent = "";
+  document.getElementById("pastquantums").style.display = "none";
+}
   document.getElementById("quarkAmount").textContent = `You have ${shortenDimensions(player.quantum.quarks)} quarks.`
 }
 
