@@ -4949,6 +4949,8 @@ document.getElementById("bigcrunch").onclick = function() {
         Math.floor(player.dilation.dilatedTime.pow(0.25).toNumber())
       );
     }
+    if (player.achievements.includes("r156")) {
+      infGain *= Math.max ( )}}
     if (player.currentEternityChall == "eterc4") {
       infGain = 1;
       if (player.infinitied >= 16 - ECTimesCompleted("eterc4") * 4) {
@@ -5614,7 +5616,7 @@ function eternity(force, auto) {
         player.eternities +
         (player.dilation.upgrades.includes(12)
           ? Math.floor(Decimal.pow(player.dilation.dilatedTime, 0.1).toNumber())
-          : 1),
+          : 1 * player.achievements.includes("r155") ? 100 : 1),
       thisEternity: 0,
       bestEternity: player.bestEternity,
       eternityUpgrades: player.eternityUpgrades,
@@ -6689,7 +6691,7 @@ function startEternityChallenge(name, startgoal, goalIncrease) {
         player.eternities +
         (player.dilation.upgrades.includes(12)
           ? Math.floor(Decimal.pow(player.dilation.dilatedTime, 0.1).toNumber())
-          : 1),
+          : 1 * player.achievements.includes("r155") ? 100 : 1),
       thisEternity: 0,
       bestEternity: player.bestEternity,
       eternityUpgrades: player.eternityUpgrades,
