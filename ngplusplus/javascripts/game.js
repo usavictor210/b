@@ -442,6 +442,7 @@ var player = {
       1: 0,
       2: 0
     },
+    investmentAmount: [],
     upgrades: [],
     lastTenQuantums: [
     [600 * 60 * 24 * 31, 1],

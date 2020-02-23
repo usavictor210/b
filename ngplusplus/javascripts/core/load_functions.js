@@ -371,26 +371,40 @@ function onLoad() {
   if (player.meta.galaxy === undefined) player.meta.galaxy = 0;
   if (player.quantum === undefined) {
     player.quantum = {
-      times: 0,
+    times: 0,
+    quarks: new Decimal(0),
+    thisQuantum: 0,
+    bestQuantum: 9999999999,
+    producedGluons: 0,
+    realGluons: 0,
+    bosons: {
+      "w+": 0,
+      "w-": 0,
+      z0: 0
+    },
+    neutronstar: {
       quarks: new Decimal(0),
-      producedGluons: 0,
-      realGluons: 0,
-      bosons: {
-        "w+": 0,
-        "w-": 0,
-        z0: 0
-      },
-      neutronstar: {
-        quarks: new Decimal(0),
-        metaAntimatter: new Decimal(0),
-        dilatedTime: new Decimal(0)
-      },
-      rebuyables: {
-        1: 0,
-        2: 0
-      },
-      upgrades: []
-    };
+      metaAntimatter: new Decimal(0),
+      dilatedTime: new Decimal(0)
+    },
+    rebuyables: {
+      1: 0,
+      2: 0
+    },
+    investmentAmount: [],
+    upgrades: [],
+    lastTenQuantums: [
+    [600 * 60 * 24 * 31, 1],
+    [600 * 60 * 24 * 31, 1],
+    [600 * 60 * 24 * 31, 1],
+    [600 * 60 * 24 * 31, 1],
+    [600 * 60 * 24 * 31, 1],
+    [600 * 60 * 24 * 31, 1],
+    [600 * 60 * 24 * 31, 1],
+    [600 * 60 * 24 * 31, 1],
+    [600 * 60 * 24 * 31, 1],
+    [600 * 60 * 24 * 31, 1]
+    ],
   }
   if (player.why === undefined) player.why = 0;
   if (player.options.animations === undefined)
