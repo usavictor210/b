@@ -578,6 +578,7 @@ function updateQuantum() {
   document.getElementById("pastquantums").style.display = "none";
 }
   document.getElementById("quarkAmount").textContent = `You have ${shortenDimensions(player.quantum.quarks)} quarks.`
+  document.getElementById("unstableShardAmount").textContent = player.dilation.unstable.shards
 }
 
 function updateLastTenQuantums() {

@@ -21,6 +21,7 @@ var usGain = new Decimal(((player.dilation.tachyonParticles.log(10)/15))).max(1)
         player.dilation.unstable.times++
         player.dilation.unstable.severity++
         giveAchievement("Time Leaper")
+        document.getElementById("unstableShardAmount").textContent = player.dilation.unstable.shards
   }
 }
 //showing the unstable dilation button
