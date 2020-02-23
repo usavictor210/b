@@ -552,3 +552,44 @@ function updateQuantum() {
   document.getElementById("bestquantum").textContent = "";
   document.getElementById("quarkAmount").textContent = `You have ${shortenDimensions(player.quantum.quarks)} quarks.`
 }
+
+function updateLastTenQuantums() {
+  let tempBest = 0;
+  var tempTime = new Decimal(0);
+  var tempQK = new Decimal(0);
+  for (var i = 0; i < 10; i++) {
+    tempTime = tempTime.plus(player.quantum.lastTenQuantums[i][0]);
+    tempQK = tempQK.plus(player.quantum.lastTenQuantums[i][1]);
+  }
+  tempTime = tempTime.dividedBy(10);
+  tempEP = tempEP.dividedBy(10);
+  for (var i = 0; i < 10; i++) {
+    var eppm = player.quantum.lastTenQuantums[i][1].dividedBy(
+      player.quantum.lastTenQuantums[i][0] / 600
+    );
+    if (eppm.gt(tempBest)) tempBest = eppm;
+    var tempstring = shorten(eppm) + " EP/min";
+    if (eppm < 1) tempstring = shorten(eppm * 60) + " EP/hour";
+    document.getElementById("eternityrun" + (i + 1)).textContent =
+      "The Quantum " +
+      (i + 1) +
+      " eternities ago took " +
+      timeDisplayShort(player.lastTenEternities[i][0]) +
+      " and gave " +
+      shortenDimensions(player.lastTenEternities[i][1]) +
+      " EP. " +
+      tempstring;
+  }
+
+  var eppm = tempEP.dividedBy(tempTime / 600);
+  var tempstring = shorten(eppm) + " EP/min";
+  averageEp = tempEP;
+  if (eppm < 1) tempstring = shorten(eppm * 60) + " EP/hour";
+  document.getElementById("averageEternityRun").textContent =
+    "Last 10 eternities average time: " +
+    timeDisplayShort(tempTime) +
+    " Average EP gain: " +
+    shortenDimensions(tempEP) +
+    " EP. " +
+    tempstring;
+}
