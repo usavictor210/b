@@ -555,6 +555,7 @@ function updateQuantum() {
 
 function updateLastTenQuantums() {
   let tempBest = 0;
+  var averageQK = new Decimal(0);
   var tempTime = new Decimal(0);
   var tempQK = new Decimal(0);
   for (var i = 0; i < 10; i++) {
@@ -562,34 +563,35 @@ function updateLastTenQuantums() {
     tempQK = tempQK.plus(player.quantum.lastTenQuantums[i][1]);
   }
   tempTime = tempTime.dividedBy(10);
-  tempEP = tempEP.dividedBy(10);
+  tempQK = tempQK.dividedBy(10);
   for (var i = 0; i < 10; i++) {
-    var eppm = player.quantum.lastTenQuantums[i][1].dividedBy(
+    var qkpm = player.quantum.lastTenQuantums[i][1].dividedBy(
       player.quantum.lastTenQuantums[i][0] / 600
     );
-    if (eppm.gt(tempBest)) tempBest = eppm;
-    var tempstring = shorten(eppm) + " EP/min";
-    if (eppm < 1) tempstring = shorten(eppm * 60) + " EP/hour";
-    document.getElementById("eternityrun" + (i + 1)).textContent =
+    var plural = s
+    if (qkpm.gt(tempBest)) tempBest = qkpm;
+    var tempstring = shorten(qkpm) + " QK/min";
+    if (qkpm < 1) tempstring = shorten(qkpm * 60) + " QK/hour";
+    document.getElementById("quantumrun" + (i + 1)).textContent =
       "The Quantum " +
       (i + 1) +
-      " eternities ago took " +
-      timeDisplayShort(player.lastTenEternities[i][0]) +
+      " quantum" + plural + " ago took " +
+      timeDisplayShort(player.lastTenQuantums[i][0]) +
       " and gave " +
-      shortenDimensions(player.lastTenEternities[i][1]) +
-      " EP. " +
+      shortenDimensions(player.lastTenQuantums[i][1]) +
+      " QK. " +
       tempstring;
   }
 
-  var eppm = tempEP.dividedBy(tempTime / 600);
-  var tempstring = shorten(eppm) + " EP/min";
-  averageEp = tempEP;
-  if (eppm < 1) tempstring = shorten(eppm * 60) + " EP/hour";
+  var qkpm = tempQK.dividedBy(tempTime / 600);
+  var tempstring = shorten(qkpm) + " QK/min";
+  averageQK = tempQK;
+  if (qkpm < 1) tempstring = shorten(qkpm * 60) + " QK/hour";
   document.getElementById("averageEternityRun").textContent =
-    "Last 10 eternities average time: " +
+    "Last 10 quantums average time: " +
     timeDisplayShort(tempTime) +
-    " Average EP gain: " +
-    shortenDimensions(tempEP) +
-    " EP. " +
+    " Average QK gain: " +
+    shortenDimensions(tempQK) +
+    " QK. " +
     tempstring;
 }
