@@ -631,6 +631,6 @@ if (feature != 0 && feature < 6) {
 player.dilation.quarks.minus(amount)
 }
 
-function getInvestMultiplier(x) {
+function getInvestMultiplier(x) { // you have to decide a formula for each
 
 }
