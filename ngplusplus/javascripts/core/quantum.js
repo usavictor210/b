@@ -10,6 +10,10 @@ function quantum(force, auto) {
   ) {
     player.quantum.quarks = player.quantum.quarks.plus(quarkGain());
     player.quantum.gluons = 0;
+    if (player.thisQuantum < player.bestQuantum && !force) {
+    player.bestQuantum = player.thisQuantum;
+    }
+    player.thisQuantum = 0
     player = {
       ngPlus: 1,
       money: new Decimal(10),
@@ -564,9 +568,9 @@ function updateQuantum() {
     document.getElementById("quantumed").textContent =
       "You have gone quantum " + player.quantum.times + " time" + plural + ".";
     document.getElementById("thisquantum").textContent =
-      "You have spent " + timeDisplay(player.thisQuantum) + " in this Quantum.";
+      "You have spent " + timeDisplay(player.quantum.thisQuantum) + " in this Quantum.";
     document.getElementById("bestquantum").textContent =
-      "Your fastest Quantum is in " + timeDisplay(player.bestQuantum) + ".";
+      "Your fastest Quantum is in " + timeDisplay(player.quantum.bestQuantum) + ".";
   } else { document.getElementById("quantumbtn").style.display = "none";
   document.getElementById("quantumed").textContent = "";
   document.getElementById("thisquantum").textContent = "";

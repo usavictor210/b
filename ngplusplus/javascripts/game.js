@@ -7942,8 +7942,10 @@ function gameLoop(diff) {
   if (player.currentEternityChall === "eterc12")
     player.totalTimePlayed += diff * 1000;
   else player.totalTimePlayed += diff;
+
   player.thisInfinityTime += diff;
   player.thisEternity += diff;
+  player.thisQuantum += diff;
 
   if (player.eternities > 0)
     document.getElementById("tdtabbtn").style.display = "inline-block";
