@@ -74,7 +74,19 @@
             <br>
         </div>
         <div id="quantum" class="tab" style="font-size: 15px">
+          <td><button class="secondarytabbtn" onclick="showQuantumTab('timestudies')">Investments</button></td>
+          <td><button class="secondarytabbtn" onclick="showQuantumTab('eternityupgrades')">Gluon Research</button></td>
+          <td><button class="secondarytabbtn" onclick="showQuantumTab('milestones')">Eternity milestones</button></td>
+          <td><button class="secondarytabbtn" onclick="showQuantumTab('dilation')" id="dilationTabbtn">Time dilation</button></td>
+          <td><button class="secondarytabbtn" onclick="showQuantumTab('timeRift')" id="timeRiftTabbtn">Time Rift</button></td>
+        <div class="quantumtab" id="investments" style="font-size: 15px">
           <div id="quarkAmount">You have x quarks.</div>
+          <td><button class="investmentbtn" id="timestudyinvestment" style="font-size: 16px">Invest your quarks in Time Studies</button></td>
+          <td><button class="investmentbtn" id="timestudyinvestment" style="font-size: 16px">Invest your quarks in Time Dimensions</button></td>
+          <td><button class="investmentbtn" id="timestudyinvestment" style="font-size: 16px">Invest your quarks in Replic</button></td>
+          <td><button class="investmentbtn" id="timestudyinvestment" style="font-size: 16px">Invest your quarks in Time Studies</button></td>
+          <td><button class="investmentbtn" id="timestudyinvestment" style="font-size: 16px">Invest your quarks in Time Studies</button></td>
+        </div>
         </div>
         <div id="eternitystore" class="tab" style="font-size: 15px; margin: 0 auto; display: none" align="center">
             <table class="table" align="center" style="margin: auto">
@@ -231,7 +243,7 @@
                 <table class="table" id="studytable">
                     <tr>
                         <td><button class="timestudy" id="191" onclick="buyTimeStudy(191, 400)">You bank 5% of your infinities on Eternity (permanently kept).<span>Cost: 400 Time Theorems</button></td>
-                        <td><button class="timestudy" id="192" onclick="buyTimeStudy(192, 730)" style="font-size: 10px;"><span id="192desc">You can get beyond 1.8e308 replicantis, but the interval is increased the more you have</span>Cost: 730 Time Theorems</button></td>
+                        <td><button class="timestudy" id="192" onclick="buyTimeStudy(192, 730)" style="font-size: 10px;"><span id="192desc">You can get beyond 1.8e308 replicantis, but the interval increases with your amount</span>Cost: 730 Time Theorems</button></td>
                         <td><button class="timestudy" id="193" onclick="buyTimeStudy(193, 300)">Normal dimension boost based on eternities<span id="193desc">Currently: 1x</span>Cost: 300 Time Theorems</button></td>
                     </tr>
                 </table>
@@ -314,7 +326,7 @@
                             <button id="eter2" class="eternityupbtn" onclick="buyEternityUpgrade(2, 10)">You gain Infinity Dimension multiplier based on eternities (x^log4(2x))<br>Currently: x<br>Cost: 10 EP</button>
                         </td>
                         <td>
-                            <button id="eter3" class="eternityupbtn" onclick="buyEternityUpgrade(3, 50e3)">Infinity Dimensions multiplier based on sum of Infinity Challenge times<br>Currently: Xx<br>Cost: 50 K EP</button>
+                            <button id="eter3" class="eternityupbtn" onclick="buyEternityUpgrade(3, 5e4)">Infinity Dimensions multiplier based on sum of Infinity Challenge times<br>Currently: Xx<br>Cost: 50 K EP</button>
                         </td>
                     </tr>
                     <tr>
