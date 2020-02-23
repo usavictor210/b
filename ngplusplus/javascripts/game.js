@@ -4950,7 +4950,11 @@ document.getElementById("bigcrunch").onclick = function() {
       );
     }
     if (player.achievements.includes("r156")) {
-      infGain *= Math.max ( )}}
+      infGain *= Math.max(
+        1,
+        Math.floor(Math.log10(player.eternities/250)**0.8)
+      );
+    }
     if (player.currentEternityChall == "eterc4") {
       infGain = 1;
       if (player.infinitied >= 16 - ECTimesCompleted("eterc4") * 4) {
