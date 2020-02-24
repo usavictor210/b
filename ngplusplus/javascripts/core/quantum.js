@@ -579,6 +579,7 @@ function updateQuantum() {
 }
   document.getElementById("quarkAmount").textContent = `You have ${shortenDimensions(player.quantum.quarks)} quarks.`
   document.getElementById("unstableShardAmount").textContent = player.dilation.unstable.shards
+  document.getElementById("totalInvest").textContent = `You have invested a total of x quarks.`
 }
 
 function updateLastTenQuantums() {
@@ -633,4 +634,18 @@ player.dilation.quarks.minus(amount)
 
 function getInvestMultiplier(x) { // you have to decide a formula for each
 
+}
+
+function showQuantumTab(tabName, init) {
+  //iterate over all elements in div_tab class. Hide everything that's not tabName and show tabName
+  var tabs = document.getElementsByClassName("quantumtab");
+  var tab;
+  for (var i = 0; i < tabs.length; i++) {
+    tab = tabs.item(i);
+    if (tab.id === tabName) {
+      tab.style.display = "block";
+    } else {
+      tab.style.display = "none";
+    }
+  }
 }
