@@ -579,7 +579,7 @@ function updateQuantum() {
 }
   document.getElementById("quarkAmount").textContent = `You have ${shortenDimensions(player.quantum.quarks)} quarks.`
   document.getElementById("unstableShardAmount").textContent = player.dilation.unstable.shards
-  document.getElementById("totalInvest").textContent = `You have invested a total of x quarks.`
+  document.getElementById("totalInvest").textContent = `You have invested a total of ${shortenDimensions(getTotalInvestmentAmount())} quarks.`
 }
 
 function updateLastTenQuantums() {
@@ -630,6 +630,14 @@ if (feature != 0 && feature < 6 && player.quantum.quarks >= amount && amount != 
   player.quantum.investmentAmount[feature] = player.quantum.investmentAmount[feature].add(amount)
 }
 player.dilation.quarks.minus(amount)
+}
+
+function getTotalInvestmentAmount() {
+  let ret = new Decimal(0)
+  for (let feature of Object.values(player.quantum.investmentAmount)) {
+    Decimal.add(ret, feature)
+  }
+  return ret
 }
 
 function getInvestMultiplier(x) { // you have to decide a formula for each
