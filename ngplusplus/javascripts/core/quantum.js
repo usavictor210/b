@@ -579,8 +579,9 @@ function updateQuantum() {
 }
   let plural2 = player.quantum.quarks != 1 ? "s" : "";
   var x = new Decimal(0)
+  let i = 1
   for (i=1; i<6; i++) {
-  //x = player.quantum.investmentAmount.add("[i]")
+  x = player.quantum.investmentAmount.add("[i]")
   }
   let plural3 = x.notEquals(1) ? "s" : ""
   document.getElementById("quarkAmount").textContent = `You have ${shortenDimensions(player.quantum.quarks)} quark` + plural2 + `.`
