@@ -561,7 +561,7 @@ function toggleQuantumConf() {
 }
 
 function updateQuantum() {
-  let plural = player.quantum.times != 0 ? "s" : "";
+  let plural = player.quantum.times != 1 ? "s" : "";
   if (player.quantum.times != 0) {
     document.getElementById("pastquantums").style.display = "inline-block";
     document.getElementById("quantumbtn").style.display = "inline-block";
@@ -577,9 +577,15 @@ function updateQuantum() {
   document.getElementById("bestquantum").textContent = "";
   document.getElementById("pastquantums").style.display = "none";
 }
-  document.getElementById("quarkAmount").textContent = `You have ${shortenDimensions(player.quantum.quarks)} quarks.`
+  let plural2 = player.quantum.quarks != 1 ? "s" : "";
+  var x = new Decimal(0)
+  for (i=1; i<6; i++) {
+  //x = player.quantum.investmentAmount.add("[i]")
+  }
+  let plural3 = x.notEquals(1) ? "s" : ""
+  document.getElementById("quarkAmount").textContent = `You have ${shortenDimensions(player.quantum.quarks)} quark` + plural2 + `.`
   document.getElementById("unstableShardAmount").textContent = player.dilation.unstable.shards
-  document.getElementById("totalInvest").textContent = `You have invested a total of ${shortenDimensions(getTotalInvestmentAmount())} quarks.`
+  document.getElementById("totalInvest").textContent = `You have invested a total of ${shortenDimensions(getTotalInvestmentAmount())} quark` + plural3 + `.`
 }
 
 function updateLastTenQuantums() {
