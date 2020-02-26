@@ -121,6 +121,7 @@ newsArray = [//always true
 ["I broke the 8th wall, there is only chaos, Slabdrill is ritually sacrificing antimatter to the 9th dimension. This will be my last entry, may Hevipelle have mercy on our souls, we didn't listen, We should have listened.", 'player.newsArray.includes("b17")', "n6"],
 ["I thought the update was 5 hours away... -new players after more than 5 hours of gameplay", 'player.newsArray.includes("a91") && player.totalTimePlayed >= 600*300', "n7"],
 ["Somebody told me to wait five hours for the update yesterday but it's today and it still hasn't come! What do I do?", 'player.newsArray.includes("a91") && player.totalTimePlayed >= 600*300', "n8"],
+["hackers are coming", "player.newsArray.length >= 300", "n13"],
 //hard
 ["You do know that you won't reach Infinity in -1 seconds, right?", "player.bestInfinityTime == 0.1", "c1"],
 ["Where does Antimatter Nemo live? In a NNnNeMI-NNnNe.", "player.totalmoney.e >= 3e6", "c2"],  //might not be poss?
@@ -255,7 +256,7 @@ newsArray = [//always true
 ["It cries above mount Everest, and antimatter from the raindrops of the antimatter galaxies made by Hevi Pelle who smote slabdrill and mighty aarex and produced too much antimatter and the forbidden matter from Slabdrill.", true, "respecced95"],
 ["There are now more comments in the code. We hope you understand it better.", true, "respecced96"],
 ["These news tickers are getting too meta. I need to take a break. See you later.                                 ...wait, why is it still going?", true, "respecced97"],
-["Even if you could halate snow, you don't have enough light to do that. We'd need more tickspeed.", 'player.newsArray.includes("")', "respecced98"]
+["Even if you could halate snow, you don't have enough light to do that. We'd need more tickspeed. Speaking of more tickspeed... a potato's on the loose.", 'player.newsArray.includes("respecced17")', "respecced98"]
 ];}
 
 var s = document.getElementById('news');

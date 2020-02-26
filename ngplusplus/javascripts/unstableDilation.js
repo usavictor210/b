@@ -29,12 +29,13 @@ function checkUnstableDilationButton() {
   else document.getElementById("enabledilation2").style.display = "none"
   if (!player.dilation.studies.includes(6) || player.dilation.dilatedTime.lt(9.99e99) || player.quantum.times === 0) {
   document.getElementById("enabledilation2").innerHTML = "Go quantum, have at least 1e100 DT and unlock Meta Dimensions to unstabilize dilation."
-  } else document.getElementById("enabledilation2").innerHTML = "Unstabilize dilation."
+  } else document.getElementById("enabledilation2").innerHTML = "Unstabilize dilation for " + new Decimal(((player.dilation.tachyonParticles.log(10)/15))).max(1).floor() + "unstable shards."
 }
 
 function calculateDilationSeverity() { // for deciding how harsh dilation is.
   var x = player.dilation.unstable.times
   if (x > 2) player.dilation.unstable.times**1.05 // x^1.05
+  document.getElementById("dilationseverity").textContent = "Dilation's penalty on all dimensions is x^" + getDilPunish() + "."
   return
 }
 
