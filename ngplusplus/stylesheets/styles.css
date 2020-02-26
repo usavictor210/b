@@ -1880,12 +1880,13 @@ screen and (max-width: 480px) {
     color: #074007;
 }
 .gluonupgbtn {
-    background: #27960e;
-    color: #1a4511;
-    border: 2px solid #32c832;
+    background: #2597a1;
+    color: #8ad222;
+    border: 2px solid #2597a1;
     font-family: Typewriter;
     font-weight: bold;
     border-radius: 4px;
+    box-shadow: inset #22aa48 0px 0px 10px 2px, #22aa48 0px 0px 10px 2px;
     transition-duration: 0.2s;
     cursor: pointer;
 }
