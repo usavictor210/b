@@ -30,7 +30,7 @@ function buyWithEP() {
   if (player.eternityPoints.gte(player.timestudy.epcost)) {
     if (player.timeDimension1.bought < 1) {
       buyTimeDimension(1);
-      $.notify("One 1st Time Dimension was bought.", "error");
+      $.notify("One 1st Time Dimension was bought.", "error"); // because notifications were just stupid
       return false;
     }
     player.eternityPoints = player.eternityPoints.minus(
@@ -125,7 +125,7 @@ function updateTheoremButtons() {
     " IP";
   document.getElementById("theoremam").innerHTML =
     "Buy Time Theorems <br>Cost: " + shortenCosts(player.timestudy.amcost);
-  if (player.timestudy.theorem > 99999)
+  if (player.timestudy.theorem > 99999) // only formats at 100k+
     document.getElementById("timetheorems").innerHTML =
       "You have <span style='display:inline' class=\"TheoremAmount\">" +
       shortenMoney(player.timestudy.theorem) +
@@ -139,7 +139,7 @@ function updateTheoremButtons() {
       (player.timestudy.theorem == 1 ? "Theorem." : "Theorems.");
 }
 
-function buyTimeStudy(name, cost, check) {
+function buyTimeStudy(name, cost, check) { //checks for if you can buy studies, can be changed for 201 eventually
   if (shiftDown && check === undefined) studiesUntil(name);
   else if (
     player.timestudy.theorem >= cost &&

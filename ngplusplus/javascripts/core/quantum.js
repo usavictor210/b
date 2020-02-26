@@ -460,7 +460,7 @@ function quantum(force, auto) {
     if (player.eternities < 2)
       document.getElementById("break").textContent = "BREAK INFINITY";
     document.getElementById("replicantireset").innerHTML =
-      "Reset replicanti amount, but get a free galaxy<br>" +
+      "Reset replicanti amount for a free galaxy.<br>" +
       player.replicanti.galaxies +
       " replicated galaxies created.";
     document.getElementById(
@@ -506,7 +506,7 @@ function quantum(force, auto) {
     updateTheoremButtons();
     updateTimeStudyButtons();
     drawStudyTree();
-    //updateLastTenQuantums();
+    //updateLastTenQuantums(); this is too buggy right now, either we could pull a NG^^ or actually fix it
     Marathon2 = 0;
     player.quantum.times++;
     document.getElementById("mdtabbtn").style.display = "none";
@@ -525,15 +525,15 @@ let quarkGain = function() {
 };
 
 let quarkMult = function() {
-  let ret = Decimal.pow(2, player.quantum.rebuyables[2]);
+  let ret = Decimal.pow(2, player.quantum.rebuyables[2]); // how many times you bought rebuyable 2 will increase quarks.
   if (player.quantum.upgrades.includes(4)) {
-    ret = ret.times(Decimal.pow(2, player.quantum.realGluons / 1024));
+    ret = ret.times(Decimal.pow(2, player.quantum.realGluons / 1024)); // quantum upgrade 4
   }
   return ret;
 };
 
 let quantRequirement = function() {
-  return new Decimal(Number.MAX_VALUE);
+  return new Decimal(Number.MAX_VALUE); // 1.79e308 - this can be changed to different values in outer challenges.
 };
 
 function toggleDilationConf() {
