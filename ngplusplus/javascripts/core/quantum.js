@@ -632,10 +632,10 @@ function updateLastTenQuantums() {
 }
 
 function investQuarks(feature, amount) {
-if (feature != 0 && feature < 6 && player.quantum.quarks >= amount && amount != 0 && !amount < 1) {
+if (feature != 0 && feature < 6 && player.quantum.quarks >= amount && amount != 0 && !amount < 1) { // i screwed up on the code
   player.quantum.investmentAmount[feature] = Decimal.add(player.quantum.investmentAmount[feature], amount)
 }
-Decimal.minus(player.dilation.quarks, amount)
+player.dilation.quarks = Decimal.minus(player.dilation.quarks, amount)
 }
 
 function getTotalInvestmentAmount() {
