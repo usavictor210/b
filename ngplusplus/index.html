@@ -74,6 +74,8 @@
             <br>
         </div>
         <div id="quantum" class="tab" style="font-size: 15px">
+          <div id="quarkAmount">You have x quarks.</div>
+        <br>
         <tr>
           <td><button class="secondarytabbtn" onclick="showQuantumTab('investment')">Investments</button></td>
           <td><button class="secondarytabbtn" onclick="showQuantumTab('gluons')">Gluon Research</button></td>
@@ -81,17 +83,14 @@
           <td><button class="secondarytabbtn" onclick="showQuantumTab('secretlab')" id="secretLabTabbtn">Secret Lab</button></td>
           <td><button class="secondarytabbtn" onclick="showQuantumTab('universe')" id="universeTabbtn">Universe</button></td>
         </tr>
-        <br>
-          <div id="quarkAmount">You have x quarks.</div>
-        <br>
         <div class="quantumtab" id="investment" style="font-size: 15px">
           <input type="text" id="investAmount" name="investAmount"><br>Amount to invest:
           <br>
-          <td><button class="investmentbtn" id="timestudyinvestment" onclick="investQuarks(0, 1)" style="font-size: 16px">Invest your quarks in Time Studies</button></td>
-          <td><button class="investmentbtn" id="tdinvestment" onclick="investQuarks(1, 1)" style="font-size: 16px">Invest your quarks in Time Dimensions</button></td>
-          <td><button class="investmentbtn" id="replicantiinvestment" onclick="investQuarks(2, 1)" style="font-size: 16px">Invest your quarks in Replicantis</button></td>
-          <td><button class="investmentbtn" id="mdinvestment" onclick="investQuarks(3, 1)" style="font-size: 16px">Invest your quarks in Meta Dimensions</button></td>
-          <td><button class="investmentbtn" id="timedilationinvestment" onclick="investQuarks(4, 1)" style="font-size: 16px">Invest your quarks in Time Dilation</button></td>
+          <td><button class="investmentbtn" id="timestudyinvestment" onclick="investQuarks(1, 1)" style="font-size: 16px">Invest your quarks in Time Studies</button></td>
+          <td><button class="investmentbtn" id="tdinvestment" onclick="investQuarks(2, 1)" style="font-size: 16px">Invest your quarks in Time Dimensions</button></td>
+          <td><button class="investmentbtn" id="replicantiinvestment" onclick="investQuarks(3, 1)" style="font-size: 16px">Invest your quarks in Replicantis</button></td>
+          <td><button class="investmentbtn" id="mdinvestment" onclick="investQuarks(4, 1)" style="font-size: 16px">Invest your quarks in Meta Dimensions</button></td>
+          <td><button class="investmentbtn" id="timedilationinvestment" onclick="investQuarks(5, 1)" style="font-size: 16px">Invest your quarks in Time Dilation</button></td>
           <div id="totalInvest">You have invested a total of x quarks.</div>
         </div>
         <div class="quantumtab" id="gluons" style="font-size: 15px">
@@ -100,9 +99,9 @@
           <td><button class="gluonupgbtn" id="gluonupg1" style="font-size: 16px">NDs gain a multiplier based on quarks invested<br>Cost: 1 gluon</button></td>
           <td><button class="gluonupgbtn" id="gluonupg2" style="font-size: 16px">Keep all EC completions up to 5<br>Cost: 1 gluon</button></td>
           <td><button class="gluonupgbtn" id="gluonupg3" style="font-size: 16px">Upgrade all EC limits<br>Cost: 2 gluons</button></td>
-          <td><button class="gluonupgbtn" id="gluonupg1" style="font-size: 16px">Do something<br>Cost: 1 gluon</button></td>
+          <td><button class="gluonupgbtn" id="gluonupg4" style="font-size: 16px">Do something<br>Cost: 1 gluon</button></td>
         </div>
-        </div>
+  </div>
         <div id="eternitystore" class="tab" style="font-size: 15px; margin: 0 auto; display: none" align="center">
             <table class="table" align="center" style="margin: auto">
                 <tr>

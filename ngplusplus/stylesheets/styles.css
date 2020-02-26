@@ -1879,6 +1879,7 @@ screen and (max-width: 480px) {
     background: #3de117;
     color: #074007;
 }
+
 .gluonupgbtn {
     background: #2597a1;
     color: #8ad222;
@@ -1889,4 +1890,9 @@ screen and (max-width: 480px) {
     box-shadow: inset #22aa48 0px 0px 10px 2px, #22aa48 0px 0px 10px 2px;
     transition-duration: 0.2s;
     cursor: pointer;
+}
+
+.gluonupgbtn:hover {
+    background: #429057;
+    color: #22ce52;
 }

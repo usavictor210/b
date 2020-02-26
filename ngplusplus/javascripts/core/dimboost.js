@@ -72,7 +72,7 @@ function softReset(bulk) {
       interval: null,
       lastUpdate: player.lastUpdate,
       achPow: player.achPow,
-    newsArray: player.newsArray,
+      newsArray: player.newsArray,
       autobuyers: player.autobuyers,
       costMultipliers: [new Decimal(1e3), new Decimal(1e4), new Decimal(1e5), new Decimal(1e6), new Decimal(1e8), new Decimal(1e10), new Decimal(1e12), new Decimal(1e15)],
       tickspeedMultiplier: new Decimal(10),
