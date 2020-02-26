@@ -1,6 +1,6 @@
-function unstableDilation() {
-var usGain = new Decimal(((player.dilation.tachyonParticles.log(10)/15))).max(1).floor()
- if (!player.dilation.studies.includes(6) || player.dilation.dilatedTime.lt(9.99e99) || player.quantum.times === 0) return
+function unstableDilation() { // begins a reset for unstable dilation
+var usGain = new Decimal(((player.dilation.tachyonParticles.log(10)/15))).max(1).floor() // formula
+ if (!player.dilation.studies.includes(6) || player.dilation.dilatedTime.lt(9.99e99) || player.quantum.times === 0) return // if player doesn't have meta dimensions, 1e100 DT
  if (confirm("Unstabilizing time dilation will result in harsher scaling, allowing you to get more TP, but dilation will reset in exchange for Dilation Shards. Are you prepared for this change?")) {
         eternity(true)
         player.dilation.studies = player.dilation.studies,

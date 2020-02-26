@@ -585,7 +585,7 @@ function updateQuantum() {
   let plural3 = x.notEquals(1) ? "s" : ""
   document.getElementById("quarkAmount").textContent = `You have ${shortenDimensions(player.quantum.quarks)} quark` + plural2 + `.`
   document.getElementById("unstableShardAmount").textContent = player.dilation.unstable.shards
-  document.getElementById("totalInvest").textContent = `You have invested a total of ${shortenDimensions(getTotalInvestmentAmount())} quark` + plural3 + `.`
+  //document.getElementById("totalInvest").textContent = `You have invested a total of ${shortenDimensions(getTotalInvestmentAmount())} quark` + plural3 + `.`
 }
 
 function updateLastTenQuantums() {
@@ -632,26 +632,42 @@ function updateLastTenQuantums() {
 }
 
 function investQuarks(feature, amount) {
-if (feature != 0 && feature < 6 && player.quantum.quarks >= amount && amount != 0 && !amount < 1) { // i screwed up on the code
+if (feature != 0 && feature < 6 && player.quantum.quarks >= amount && amount != 0 && !amount < 1) { // i screwed up on the array, it appears there is array value number 0 and it looks weird.
   player.quantum.investmentAmount[feature] = Decimal.add(player.quantum.investmentAmount[feature], amount)
 }
 player.dilation.quarks = Decimal.minus(player.dilation.quarks, amount)
 }
 
-function getTotalInvestmentAmount() {
+function getTotalInvestmentAmount() { // gets a value from all values of the array and adds it into a decimal
   let ret = new Decimal(0)
   for (let feature of Object.values(player.quantum.investmentAmount)) {
-    Decimal.add(ret, feature)
+  if (player.quantum.investmentAmount === null) { // this doesn't even make sense, and there is currently a null value that causes problems.
+    ret = ret // if it detects null, just continue on...
   }
+    Decimal.add(ret, feature) //add to decimal
   return ret
+  }
 }
-
-function getInvestMultiplier(x) { // you have to decide a formula for each
-
+function getInvestMultiplier(x) { // you have to decide a formula for each feature.
+if (x = 1) {
+  return 1
+  }
+if (x = 2) {
+  return 1
+  }
+if (x = 3) {
+  return 1
+  }
+if (x = 4) {
+  return 1
+  }
+if (x = 5) {
+  return 1
+  }
 }
 
 function showQuantumTab(tabName, init) {
-  //iterate over all elements in div_tab class. Hide everything that's not tabName and show tabName
+  //iterate over all elements in div_tab class. Hide everything that's not tabName and show tabName - "showEternityTab, 2018"
   var tabs = document.getElementsByClassName("quantumtab");
   var tab;
   for (var i = 0; i < tabs.length; i++) {
