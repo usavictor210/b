@@ -757,7 +757,6 @@ function getDilReq() {
 
 function getDilPunish() {
   let x = 0.75;
-  calculateDilationSeverity()
   if (player.dilation.unstable.severity > 0)
     x = x ** (player.dilation.unstable.severity ** 0.25);
   return x;
@@ -9243,6 +9242,7 @@ function gameLoop(diff) {
     shortenDimensions(player.infinityPoints) +
     "</span> Infinity points.";
   updateQuantum();
+  calculateDilationSeverity();
   player.lastUpdate = thisUpdate
 }
 
