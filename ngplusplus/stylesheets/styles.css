@@ -1863,3 +1863,19 @@ screen and (max-width: 480px) {
     background: #32c832;
     color: #0a640a;
 }
+
+.investmentbtn {
+    background: #27960e;
+    color: #1a4511;
+    border: 2px solid #32c832;
+    font-family: Typewriter;
+    font-weight: bold;
+    border-radius: 4px;
+    transition-duration: 0.2s;
+    cursor: pointer;
+}
+
+.investmentbtn:hover {
+    background: #3de117;
+    color: #074007;
+}
