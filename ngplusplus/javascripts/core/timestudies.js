@@ -900,7 +900,7 @@ document.getElementById("11desc").textContent =
       shortenCosts(new Decimal("1e616")) +
       "x multiplier on all normal dimensions";
     document.getElementById("162desc").textContent =
-      shortenCosts(1e11) + "x multiplier on all Infinity dimensions";
+     "Get a" + shortenCosts(1e11) + "x multiplier on all Infinity dimensions";
     document.getElementById("192desc").textContent =
       "You can get beyond " +
       shortenMoney(Number.MAX_VALUE) +
@@ -944,7 +944,7 @@ document.getElementById("11desc").textContent =
     document.getElementById("232desc").textContent =
       "Currently: " + (Math.pow(1+player.galaxies/1000, 0.2)*100-100).toFixed(1) + "%"
     document.getElementById("unknownCost").textContent =
-      shortenCosts(new Decimal.pow(10, Math.random() * 20 + 300)) v
+      shortenCosts(new Decimal.pow(10, Math.random() * 20 + 300))
 }
 function getECStudyDescription() {
 if (player.etercreq !== 1)
