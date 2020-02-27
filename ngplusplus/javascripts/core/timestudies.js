@@ -944,7 +944,7 @@ document.getElementById("11desc").textContent =
     document.getElementById("232desc").textContent =
       "Currently: " + (Math.pow(1+player.galaxies/1000, 0.2)*100-100).toFixed(1) + "%"
     document.getElementById("unknownCost").textContent =
-      shortenCosts(new Decimal.pow(10, Math.random() * 20 + 300))
+      shortenCosts(new Decimal.pow(10, Math.random() * 20 + 300)) v
 }
 function getECStudyDescription() {
 if (player.etercreq !== 1)
@@ -959,7 +959,7 @@ if (player.etercreq !== 1)
       document.getElementById("ec2unl").innerHTML =
         "Eternity Challenge 2<span>Requirement: " +
         (1300 + ECTimesCompleted("eterc2") * 150) +
-        " Tickspeed upgrades gained from time dimensions<span>Cost: 35 Time Theorems";
+        " free tickspeed upgrades<span>Cost: 35 Time Theorems";
     else
       document.getElementById("ec2unl").innerHTML =
         "Eternity Challenge 2<span>Cost: 35 Time Theorems";
