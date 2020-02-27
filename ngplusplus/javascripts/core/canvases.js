@@ -241,10 +241,23 @@ function drawStudyTree() {
     drawTreeBranch("ec12unl", "dilstudy1")
     drawTreeBranch("dilstudy1", "dilstudy2")
     drawTreeBranch("dilstudy1", "diltime241")
+    drawTreeBranch("dilstudy1", "diltime242")
+    drawTreeBranch("diltime241", "diltime251")
+    drawTreeBranch("diltime242", "diltime252")
     drawTreeBranch("dilstudy2", "dilstudy3")
     drawTreeBranch("dilstudy3", "dilstudy4")
+    drawTreeBranch("diltime251", "diltime261")
+    drawTreeBranch("diltime252", "diltime262")
     drawTreeBranch("dilstudy4", "dilstudy5")
     drawTreeBranch("dilstudy5", "dilstudy6")
+    drawTreeBranch("diltime261", "diltime271")
+    drawTreeBranch("diltime262", "diltime272")
+    drawTreeBranch("diltime271", "diltime281")
+    drawTreeBranch("diltime272", "diltime283")
+    drawTreeBranch("diltime281", "diltime282")
+    drawTreeBranch("diltime283", "diltime282")
+    drawTreeBranch("diltime282", "diltime282")
+    
     if (shiftDown && document.getElementById("eternitystore").style.display !== "none" && document.getElementById("timestudies").style.display !== "none") {
         for (i=0; i<all.length; i++) {
             var start = document.getElementById(all[i]).getBoundingClientRect();
@@ -266,6 +279,7 @@ function drawStudyTree() {
                 else if (tempName.includes("activestudy")) name = "active"
                 else if (tempName.includes("passivestudy")) name = "passive"
                 else if (tempName.includes("idlestudy")) name = "idle"
+                else if (tempName.includes("diltime")) name = "bent study"
                 ctx.strokeText(all[i]+" "+name, x1 - start.width / 2, y1 - start.height / 2 - 1);
                 ctx.fillText(all[i]+" "+name, x1 - start.width / 2, y1 - start.height / 2 - 1);
             } else {
