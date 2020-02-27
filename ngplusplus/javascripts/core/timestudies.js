@@ -944,7 +944,7 @@ document.getElementById("11desc").textContent =
     document.getElementById("232desc").textContent =
       "Currently: " + (Math.pow(1+player.galaxies/1000, 0.2)*100-100).toFixed(1) + "%"
     document.getElementById("unknownCost").textContent =
-      new Decimal(Math.random(1e100,Number.MAX_VALUE))
+      shortenCosts(new Decimal.pow(10, Math.random() * 20 + 300))
 }
 function getECStudyDescription() {
 if (player.etercreq !== 1)
