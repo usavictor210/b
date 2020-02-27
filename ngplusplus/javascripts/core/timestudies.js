@@ -578,9 +578,9 @@ function updateTimeStudyButtons() {
           all[i] == 233
         ) {
           document.getElementById(all[i]).className = "timestudy lightstudy";
-        } else {
-          document.getElementById(all[i]).className = "timestudy";
-        }
+        } else if (all[i] == 261 || all[i] == 262 || all[i] == 271 || all[i] == 272 || all[i] == 281 || all[i] == 282 || all[i] == 283 || all[i] == 291) {
+          document.getElementById(all[i]).className = "timestudy diltimestudy";
+        } else document.getElementById(all[i]).className = "timestudy"
       } else {
         if (all[i] == 71 || all[i] == 81 || all[i] == 91 || all[i] == 101) {
           document.getElementById(all[i]).className =
@@ -610,9 +610,10 @@ function updateTimeStudyButtons() {
         } else if (all[i] == 123 || all[i] == 133 || all[i] == 143) {
           document.getElementById(all[i]).className =
             "timestudylocked idlestudylocked";
-        } else {
-          document.getElementById(all[i]).className = "timestudylocked";
-        }
+        } else if (all[i] == 261 || all[i] == 262 || all[i] == 271 || all[i] == 272 || all[i] == 281 || all[i] == 282 || all[i] == 283 || all[i] == 291) {
+          document.getElementById(all[i]).className =
+            "timestudylocked diltimelocked";
+        } else document.getElementById(all[i]).className = "timestudylocked";
       }
     }
   }
