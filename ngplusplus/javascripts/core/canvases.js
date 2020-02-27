@@ -256,7 +256,7 @@ function drawStudyTree() {
     drawTreeBranch("diltime272", "diltime283")
     drawTreeBranch("diltime281", "diltime282")
     drawTreeBranch("diltime283", "diltime282")
-    drawTreeBranch("diltime282", "diltime282")
+    drawTreeBranch("diltime282", "diltime291")
     
     if (shiftDown && document.getElementById("eternitystore").style.display !== "none" && document.getElementById("timestudies").style.display !== "none") {
         for (i=0; i<all.length; i++) {
