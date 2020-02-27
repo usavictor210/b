@@ -895,12 +895,12 @@ document.getElementById("11desc").textContent =
       ) +
       "x";
     document.getElementById("151desc").textContent =
-      "Get a" + shortenCosts(1e4) + "x multiplier on all Time dimensions";
+      "Get a " + shortenCosts(1e4) + "x multiplier on all Time dimensions";
     document.getElementById("161desc").textContent =
-     "Get a" + shortenCosts(new Decimal("1e616")) +
+     "Get a " + shortenCosts(new Decimal("1e616")) +
       "x multiplier on all normal dimensions";
     document.getElementById("162desc").textContent =
-     "Get a" + shortenCosts(1e11) + "x multiplier on all Infinity dimensions";
+     "Get a " + shortenCosts(1e11) + "x multiplier on all Infinity dimensions";
     document.getElementById("192desc").textContent =
       "You can get beyond " +
       shortenMoney(Number.MAX_VALUE) +
