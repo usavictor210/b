@@ -927,21 +927,17 @@ document.getElementById("11desc").textContent =
           .min(new Decimal("1e125000"))
       ) +
       "x";
-  document.getElementById("214desc").textContent =
-      "Currently: " +
-      shortenMoney(
-        calcTotalSacrificeBoost()
-          .pow(8)
-          .min("1e46000")
-          .times(calcTotalSacrificeBoost().pow(1.1))
-          .div(calcTotalSacrificeBoost())
-          .max(1)
-          .min(new Decimal("1e125000"))
-      ) +
-      "x";
+    document.getElementById("221desc").textContent =
+      "Currently: " + shortenMoney(Decimal.pow(1.0025, player.resets)) + "x";
+    let desc1 = Math.floor(player.resets / 2000) == 1 ? " galaxy later" : " galaxies later" //TS224
+    let desc2 = Math.floor(player.replicanti.amount.e / 1000) == 1 ? " galaxy later" : " galaxies later" //TS225
+    document.getElementById("224desc").textContent =
+      "Currently: " + Math.floor(player.resets / 2000) + desc1
+    document.getElementById("225desc").textContent = 
+      "Currently: +" + Math.floor(player.replicanti.amount.e / 1000) + " RGS"
+    document.getElementById("226desc").textContent = 
+      "Currently: +" + Math.floor(player.replicanti.amount.e / 1000) + " RGS"
 }
-
-
 function getECStudyDescription() {
 if (player.etercreq !== 1)
       document.getElementById("ec1unl").innerHTML =
