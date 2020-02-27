@@ -95,7 +95,7 @@ function drawTreeBranch(num1, num2) {
         var name2 = parseInt(num2.split("y")[1]);
     } else if (num2.includes("diltime")) {
         var isDilTimeName = true;
-        var name2 = parseInt(num2.split("e")[2]) // i want to make this blue
+        var name2 = parseInt(num2) // i want to make this blue
     } else var name2 = parseInt(num2)
     var start = document.getElementById(num1).getBoundingClientRect();
     var end = document.getElementById(num2).getBoundingClientRect();
@@ -256,7 +256,7 @@ function drawStudyTree() {
     drawTreeBranch("diltime272", "diltime283")
     drawTreeBranch("diltime281", "diltime282")
     drawTreeBranch("diltime283", "diltime282")
-    drawTreeBranch("diltime282", "diltime282")
+    drawTreeBranch("diltime282", "diltime291")
     
     if (shiftDown && document.getElementById("eternitystore").style.display !== "none" && document.getElementById("timestudies").style.display !== "none") {
         for (i=0; i<all.length; i++) {

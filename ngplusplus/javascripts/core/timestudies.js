@@ -447,7 +447,19 @@ var all = [ // literally all the time studies
   231,
   232,
   233,
-  234
+  234,
+  241, // the post-dilation era studies
+  242,
+  251,
+  252,
+  261,
+  262,
+  271,
+  272,
+  281,
+  282,
+  283,
+  291
 ];
 var studyCosts = [ // literally all the time studies's costs
   1,
@@ -507,7 +519,19 @@ var studyCosts = [ // literally all the time studies's costs
   500,
   500,
   500,
-  500
+  500,
+  1e12, // the post-dilation era studies
+  1e18,
+  1e24,
+  1e30,
+  1e40,
+  1e50,
+  1e60,
+  1e75,
+  1e100,
+  1e120,
+  1e110,
+  1e130
 ];
 function updateTimeStudyButtons() {
   for (var i = 0; i < all.length; i++) {
