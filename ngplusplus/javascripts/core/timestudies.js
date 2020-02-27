@@ -768,7 +768,7 @@ function studyTreeSaveButton(num) {
   }
 }
 
-function getTimeStudiesDescription() {
+function getTimeStudiesDescription() { // update all the time study descriptions. to be honest, i could just get all the TS formulas and put it into one function and then grab those forumlas from that function to this function.
 document.getElementById("11desc").textContent =
       "Currently: " +
       shortenMoney(
@@ -934,9 +934,17 @@ document.getElementById("11desc").textContent =
     document.getElementById("224desc").textContent =
       "Currently: " + Math.floor(player.resets / 2000) + desc1
     document.getElementById("225desc").textContent = 
-      "Currently: +" + Math.floor(player.replicanti.amount.e / 1000) + " RGS"
+      "Currently: +" + Math.floor(player.replicanti.amount.e / 1000) + " RGs"
     document.getElementById("226desc").textContent = 
-      "Currently: +" + Math.floor(player.replicanti.amount.e / 1000) + " RGS"
+      "Currently: +" + Math.floor(player.replicanti.gal / 15) + " RGs"
+    document.getElementById("227desc").textContent = 
+      "Currently: " + shortenMoney(Math.max(Math.pow(calcTotalSacrificeBoost().log10(), 10), 1)) + "x"
+    document.getElementById("231desc").textContent =
+      "Currently: " + (Decimal.pow(player.resets, 0.3)).toFixed(2) + "x per boost"
+    document.getElementById("232desc").textContent =
+      "Currently: " + (Math.pow(1+player.galaxies/1000, 0.2)*100-100).toFixed(1) + "%"
+    document.getElementById("unknownCost").textContent =
+      new Decimal(Math.random(1e100,Number.MAX_VALUE))
 }
 function getECStudyDescription() {
 if (player.etercreq !== 1)
