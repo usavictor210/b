@@ -1809,6 +1809,14 @@ screen and (max-width: 480px) {
     100% {box-shadow: inset 5px 0px 20px #0e0e89;}
 }
 
+@keyframes dilationUnstableUpgBtnGlow {
+    0%  {box-shadow: inset 5px 0px 20px #0e0e89;}
+    25% {box-shadow: inset 0px 5px 20px #0e0e89;}
+    50% {box-shadow: inset -5px 0px 20px #0e0e89;}
+    75% {box-shadow: inset 0px -5px 20px #0e0e89;}
+    100% {box-shadow: inset 5px 0px 20px #0e0e89;}
+}
+
 @keyframes barrelRoll {
     0%  {transform: rotateZ(0deg);}
     50% {transform: rotateZ(360deg);}
@@ -1898,6 +1906,25 @@ screen and (max-width: 480px) {
 }
 
 .timeriftbtn {
+    background: #404040;
+    color: #A9A9A9;
+    border: 2px solid #404040;
+    font-family: Typewriter;
+    font-weight: bold;
+    border-radius: 4px;
+    box-shadow: inset #282828 0px 0px 10px 2px, #282828 0px 0px 10px 2px;
+    transition-duration: 0.2s;
+    cursor: pointer;
+    width: 200px;
+    height: 100px;
+}
+
+.timeriftbtn:hover {
+    background: #BEBEBE;
+    color: #000000;
+}
+
+.unstabledilationupgbtn {
     background: #404040;
     color: #A9A9A9;
     border: 2px solid #404040;

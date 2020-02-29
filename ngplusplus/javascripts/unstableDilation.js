@@ -1,6 +1,6 @@
 function unstableDilation() { // begins a reset for unstable dilation
 var usGain = new Decimal(((player.dilation.tachyonParticles.log(10)/15))).max(1).floor() // formula
- if (!player.dilation.studies.includes(6) || player.dilation.dilatedTime.lt(9.99e99) || player.quantum.times === 0) return // if player doesn't have meta dimensions, 1e100+ DT or quantum, return
+ if (!player.dilation.studies.includes(6) || player.dilation.dilatedTime.lt(9.99e99) || player.quantum.times === 0) return // if player doesn't have meta dimensions, 1e100+ DT or have went quantum, return
  if (confirm("Unstabilizing time dilation will result in harsher scaling, allowing you to get more TP, but dilation will reset in exchange for Dilation Shards. Are you prepared for this change?")) {
         eternity(true) // forced eternity
         player.dilation.unstable.sacrificedTP = player.dilation.unstable.sacrificedTP.add(player.dilation.tachyonParticles.pow(0.025).floor())
@@ -31,7 +31,7 @@ function checkUnstableDilationButton() {
   else document.getElementById("enabledilation2").style.display = "none"
   if (!player.dilation.studies.includes(6) || player.dilation.dilatedTime.lt(9.99e99) || player.quantum.times === 0) {
   document.getElementById("enabledilation2").innerHTML = "Go quantum, have at least 1e100 DT and unlock Meta Dimensions to unstabilize dilation."
-  } else document.getElementById("enabledilation2").innerHTML = "Unstabilize dilation for " + new Decimal(((player.dilation.tachyonParticles.log(10)/15))).max(1).floor() + " unstable shards."
+  } else document.getElementById("enabledilation2").innerHTML = "Unstabilize dilation for " + new Decimal(((player.dilation.tachyonParticles.log(10)/15))).max(1).floor() + " unstable shards and " + player.dilation.tachyonParticles.pow(0.025).floor() + " sacrificed TP."
 }
 // for deciding how harsh dilation is. 
 function calculateDilationSeverity() {
@@ -48,7 +48,8 @@ function timeLeaperMult() { // for time leaper achievement
 }
 
 function calculateTemporalPowerPerSec() {
-  var x = 
+  var x = Decimal.pow(player.dilation.unstable.sacrificedTP, 0.1).div(1000).floor()
+  return x
 }
 
 function timeMultUpg(x, check) {
