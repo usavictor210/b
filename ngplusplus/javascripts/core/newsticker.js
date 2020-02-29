@@ -234,14 +234,14 @@ newsArray = [//always true
 ["I like Gunvolt Chronicles.", true, "respecced75"],
 ["We apologize in advance for all the AD related news tickers.", true, "respecced76"],
 ["The news ticker industry is inflating. There have not been any major advancements in the news ticker department. We need to think of better news tickers, but most of them are just horribly written stuff...", true, "respecced77"],
-["5 hours was a mistake. There stands only an infinite time between Reality. 5 hours was never an accurate measurement, it just kept moving away from us. Everything we knew of it was wrong. What are we waiting for then?", 'player.newsArray.includes("a91") && player.totalTimePlayed >= 600*300', "respecced78"]
+["5 hours was a mistake. There stands only an infinite time between Reality. 5 hours was never an accurate measurement, it just kept moving away from us. Everything we knew of it was wrong. What are we waiting for then?", 'player.newsArray.includes("a91") && player.totalTimePlayed >= 600*300', "respecced78"],
 //news tickers from randomtuba
 ["Just wait six hours and your package will arrive", true, "respecced79"],
 ["Anti-Jake from StateFarm says that he is not on your side.", true, "respecced80"],
 ["Recipe for anti-cereal: it's just the same as the recipe for cereal, but pour the milk before the anti-bowl is even on the table", true, "respecced81"],
 ["If there's no triple exponentiational growth in this game I will stop playing", true, "respecced82"],
 ["'It's not respecced, it's NG+2 modded' -some random loser", true, "respecced83"],
-["Did antimatter cause the Local58 incidents? If it did, boy were they wrong", true, "respecced84"]
+["Did antimatter cause the Local58 incidents? If it did, boy were they wrong", true, "respecced84"],
 ["PLEASE INSERT THE ANTIMATTER INTO THE PROPER SLOT. IF THERE IS NO MORE SLOT, THEN PLEASE TRY AGAIN.", true, "respecced85"],
 ["https://safeyoutube.net/w/4nj1", true, "respecced86"],
 ["John, I want a divorce.", true, "respecced87"],

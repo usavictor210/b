@@ -7858,7 +7858,7 @@ function gameLoop(diff) {
     document.getElementById("postInfinityButton").innerHTML = // add infinities gained on big crunch like in NG^^
       "<b>Big Crunch for " +
       shortenDimensions(gainedInfinityPoints()) +
-      " Infinity Points.</b>"; +
+      " Infinity Points.</b>" +
       "<br>+" + shortenDimensions(getInfinitiedGain()) + " infinities"
 
   if (nextAt[player.postChallUnlocked] === undefined)
