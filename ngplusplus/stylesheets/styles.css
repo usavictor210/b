@@ -1810,11 +1810,11 @@ screen and (max-width: 480px) {
 }
 
 @keyframes dilationUnstableUpgBtnGlow {
-    0%  {box-shadow: inset 5px 0px 20px #0e0e89;}
+    0%  {box-shadow: inset 5px 0px 20px #006400;}
     25% {box-shadow: inset 0px 5px 20px #0e0e89;}
-    50% {box-shadow: inset -5px 0px 20px #0e0e89;}
+    50% {box-shadow: inset -5px 0px 20px #006400;}
     75% {box-shadow: inset 0px -5px 20px #0e0e89;}
-    100% {box-shadow: inset 5px 0px 20px #0e0e89;}
+    100% {box-shadow: inset 5px 0px 20px #006400;}
 }
 
 @keyframes barrelRoll {
@@ -1941,4 +1941,24 @@ screen and (max-width: 480px) {
 .timeriftbtn:hover {
     background: #BEBEBE;
     color: #000000;
+}
+
+.dilationunstableupgbtn {
+    color: #000000;
+    background: radial-gradient(transparent, #000000), repeating-linear-gradient(#9c9c9c, #009900, #000099, #9c9c9c);
+    font-weight: bold;
+    font-size: 0.7rem;
+    border: 2px solid #0b0b6b;
+    width: 190px;
+    height: 90px;
+    transition-duration: 0.2s;
+    cursor: pointer;
+    border-radius: 4px;
+    font-family: Typewriter;
+    animation: dilationUnstableBtnGlow 10s infinite;
+}
+
+.dilationunstableupgbtn:hover {
+    color: #FFFFFF;
+    background: white;
 }
