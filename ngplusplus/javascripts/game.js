@@ -357,7 +357,8 @@ var player = {
       times: 0,
       shards: new Decimal(0),
       severity: 1,
-      upgrades: []
+      upgrades: [],
+      sacrificedTP: new Decimal(0)
     },
     timeRift: {
       temporalPower: new Decimal(0),

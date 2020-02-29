@@ -1907,8 +1907,8 @@ screen and (max-width: 480px) {
     box-shadow: inset #282828 0px 0px 10px 2px, #282828 0px 0px 10px 2px;
     transition-duration: 0.2s;
     cursor: pointer;
-    width: 150px;
-    height
+    width: 200px;
+    height: 100px;
 }
 
 .timeriftbtn:hover {

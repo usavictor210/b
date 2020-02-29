@@ -262,12 +262,14 @@ function onLoad() {
   if (!(4 in player.dilation.rebuyables)) {
     player.dilation.rebuyables[4] = 0;
   }
+  if (player.dilation.unstable.sacrificedTP === undefined) player.dilation.unstable.sacrificedTP === new Decimal(0)
   if (player.dilation.unstable === undefined)
     player.dilation.unstable = {
       times: 0,
       shards: new Decimal(0),
       severity: 1,
-      upgrades: []//layers of dilation stacked
+      upgrades: [], //layers of dilation stacked
+      sacrificedTP: new Decimal(0)
     };
   if (player.dilation.timeRift === undefined)
     player.dilation.timeRift = {
