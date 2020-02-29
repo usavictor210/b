@@ -1896,3 +1896,22 @@ screen and (max-width: 480px) {
     background: #429057;
     color: #22ce52;
 }
+
+.timeriftbtn {
+    background: #404040;
+    color: #A9A9A9;
+    border: 2px solid #404040;
+    font-family: Typewriter;
+    font-weight: bold;
+    border-radius: 4px;
+    box-shadow: inset #282828 0px 0px 10px 2px, #282828 0px 0px 10px 2px;
+    transition-duration: 0.2s;
+    cursor: pointer;
+    width: 150px;
+    height
+}
+
+.timeriftbtn:hover {
+    background: #BEBEBE;
+    color: #000000;
+}
