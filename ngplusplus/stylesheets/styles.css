@@ -1944,8 +1944,8 @@ screen and (max-width: 480px) {
 }
 
 .dilationunstableupgbtn {
-    color: #000000;
-    background: radial-gradient(transparent, #000000), repeating-linear-gradient(#9c9c9c, #009900, #000099, #9c9c9c);
+    color: #103820;
+    background: #14274d;
     font-weight: bold;
     font-size: 0.7rem;
     border: 2px solid #0b0b6b;
@@ -1959,6 +1959,6 @@ screen and (max-width: 480px) {
 }
 
 .dilationunstableupgbtn:hover {
-    color: #FFFFFF;
+    color: #454343;
     background: white;
 }
