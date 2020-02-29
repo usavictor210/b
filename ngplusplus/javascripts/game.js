@@ -4670,23 +4670,9 @@ document.getElementById("bigcrunch").onclick = function() {
       }
       if (n == 9) giveAchievement("Yo dawg, I heard you liked infinities...");
     }
-    let infGain = 1;
-    if (player.thisInfinityTime > 50 && player.achievements.includes("r87"))
-      infGain = 250;
-    if (player.timestudy.studies.includes(32))
-      infGain *= Math.max(player.resets, 1);
-    if (player.achievements.includes("r133")) {
-      infGain *= Math.max(
-        1,
-        Math.floor(player.dilation.dilatedTime.pow(0.25).toNumber())
-      );
-    }
-    if (player.achievements.includes("r156")) {
-      infGain *= Math.max(
-        1,
-        Math.floor(Math.log10(player.eternities/250)**0.8)
-      );
-    }
+
+    let infGain
+
     if (player.currentEternityChall == "eterc4") {
       infGain = 1;
       if (player.infinitied >= 16 - ECTimesCompleted("eterc4") * 4) {
@@ -4696,7 +4682,8 @@ document.getElementById("bigcrunch").onclick = function() {
         failureCount++;
         if (failureCount > 9) giveAchievement("You're a failure");
       }
-    }
+    } else infGain = getInfinitiedGain()
+
     if (autoS && auto) {
       if (
         gainedInfinityPoints()
@@ -7856,12 +7843,12 @@ function gameLoop(diff) {
     player.thisInfinityTime / 600
   );
   if (currentIPmin.gt(IPminpeak)) IPminpeak = currentIPmin;
+
   if (IPminpeak.lte("1e100000"))
     document.getElementById("postInfinityButton").innerHTML =
       "<b>Big Crunch for " +
       shortenDimensions(gainedInfinityPoints()) +
       " Infinity Points.</b><br>" +
-      "<br>+" + shortenDimensions(getInfinitiedGain()) + " infinities" +
       shortenDimensions(currentIPmin) +
       " IP/min" +
       "<br>Peaked at " +
@@ -7871,8 +7858,8 @@ function gameLoop(diff) {
     document.getElementById("postInfinityButton").innerHTML = // add infinities gained on big crunch like in NG^^
       "<b>Big Crunch for " +
       shortenDimensions(gainedInfinityPoints()) +
-      " Infinity Points.</b>"; + "<br>+" +
-      shortenDimensions(getInfinitiedGain()) + " infinities"
+      " Infinity Points.</b>"; +
+      "<br>+" + shortenDimensions(getInfinitiedGain()) + " infinities"
 
   if (nextAt[player.postChallUnlocked] === undefined)
     document.getElementById("nextchall").textContent = " ";
