@@ -15,7 +15,7 @@ function quantum(force, auto) {
     }
     player.thisQuantum = 0
     player = {
-      ngPlus: 1,
+      ngPlus: player.ngPlus,
       money: new Decimal(10),
       tickSpeedCost: new Decimal(1000),
       tickspeed: new Decimal(1000),

@@ -4701,7 +4701,7 @@ document.getElementById("bigcrunch").onclick = function() {
     auto = autoS; //only allow autoing if prev crunch was autoed
     autoS = true;
     player = {
-      ngPlus: 1,
+      ngPlus: player.ngPlus,
       money: new Decimal(10),
       tickSpeedCost: new Decimal(1000),
       tickspeed: new Decimal(1000),
@@ -5109,7 +5109,7 @@ function eternity(force, auto) {
     }
     player.challenges = temp;
     player = {
-      ngPlus: 1,
+      ngPlus: player.ngPlus,
       money: new Decimal(10),
       tickSpeedCost: new Decimal(1000),
       tickspeed: new Decimal(1000),
@@ -5567,7 +5567,7 @@ function startChallenge(name, target) {
     if (player.currentChallenge != "")
       document.getElementById(player.currentChallenge).textContent = "Start";
     player = {
-      ngPlus: 1,
+      ngPlus: player.ngPlus,
       money: new Decimal(10),
       tickSpeedCost: new Decimal(1000),
       tickspeed: new Decimal(1000),
@@ -6187,7 +6187,7 @@ function startEternityChallenge(name, startgoal, goalIncrease) {
         )
   ) {
     player = {
-      ngPlus: 1,
+      ngPlus: player.ngPlus,
       money: new Decimal(10),
       tickSpeedCost: new Decimal(1000),
       tickspeed: new Decimal(1000),

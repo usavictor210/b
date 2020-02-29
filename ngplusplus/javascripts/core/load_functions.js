@@ -67,6 +67,7 @@ function ngplus() {
 }
 
 function onLoad() {
+  if (player.ngPlus === undefined) player.ngPlus = 0
   if (player.totalmoney === undefined || isNaN(player.totalmoney))
     player.totalmoney = player.money;
   if (player.options === undefined) {
