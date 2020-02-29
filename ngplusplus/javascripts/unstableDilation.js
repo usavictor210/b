@@ -89,7 +89,8 @@ function timeMultUpg(x, check) {
 
 function getUnstableUpgMult(x) {
   switch(x) {
-    case 1:
-    return player.dilation.unstable.shards
-  }
+    case 1: return 1 + Decimal.log(player.dilation.unstable.shards.pow(0.75))/10
+    case 2: return timeLeaperMult()
+    case 3: return player.dialt
+  } 
 }
