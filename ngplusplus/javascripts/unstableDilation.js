@@ -89,9 +89,10 @@ function timeMultUpg(x, check) {
 
 function getUnstableUpgMult(x) {
   switch(x) {
-    case 1: return 1 + Decimal.log(player.dilation.unstable.shards.pow(0.75))/10
+    case 1: return (Decimal.log(player.dilation.unstable.shards.pow(0.75))/10).min(1)
     case 2: return timeLeaperMult()
     case 3: return new Decimal(getDilPunish()).recip()
-    case 4: return Decimal.pow(0.00125, player.dilation.unstable.shards)
+    case 4: return Decimal.pow(1.2, player.dilation.unstable.shards).plus(4)
+    case 5:
   } 
 }
