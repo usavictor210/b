@@ -86,3 +86,10 @@ function timeMultUpg(x, check) {
     return z
   } else throw "Invalid check value"
 }
+
+function getUnstableUpgMult(x) {
+  switch(x) {
+    case 1:
+    return player.dilation.unstable.shards
+  }
+}
