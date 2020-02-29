@@ -256,7 +256,8 @@ newsArray = [//always true
 ["It cries above mount Everest, and antimatter from the raindrops of the antimatter galaxies made by Hevi Pelle who smote slabdrill and mighty aarex and produced too much antimatter and the forbidden matter from Slabdrill.", true, "respecced95"],
 ["There are now more comments in the code. We hope you understand it better.", true, "respecced96"],
 ["These news tickers are getting too meta. I need to take a break. See you later.                                 ...wait, why is it still going? The spaces I put in didn't even work! That's just dumb. I'm leaving.", true, "respecced97"],
-["Even if you could halate snow, you don't have enough light to do that. We'd need more tickspeed. Speaking of more tickspeed... a potato's on the loose.", 'player.newsArray.includes("respecced17")', "respecced98"]
+["Even if you could halate snow, you don't have enough light to do that. We'd need more tickspeed. Speaking of more tickspeed... a potato's on the loose.", 'player.newsArray.includes("respecced17")', "respecced98"],
+["When the news ticker keeps coming back... and coming back...", true, "respecced99"]
 ];}
 
 var s = document.getElementById('news');
