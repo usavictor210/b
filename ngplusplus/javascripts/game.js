@@ -6877,7 +6877,7 @@ function updateTimeShards() {
       document.getElementById("timeShardsPerSec").textContent =
         "You are getting " +
         shortenDimensions(getTimeDimensionProduction(1)) +
-        " Timeshards per second.";
+        " time shards per second.";
   }
 }
 
