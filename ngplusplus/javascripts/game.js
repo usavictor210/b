@@ -4755,7 +4755,7 @@ document.getElementById("bigcrunch").onclick = function() {
       currentChallenge: player.currentChallenge,
       infinityUpgrades: player.infinityUpgrades,
       infinityPoints: player.infinityPoints,
-      infinitied: player.infinitied + infGain,
+      infinitied: player.infinitied + getInfinitiedGain(),
       infinitiedBank: player.infinitiedBank,
       totalTimePlayed: player.totalTimePlayed,
       bestInfinityTime: Math.min(
@@ -7861,6 +7861,7 @@ function gameLoop(diff) {
       "<b>Big Crunch for " +
       shortenDimensions(gainedInfinityPoints()) +
       " Infinity Points.</b><br>" +
+      "<br>+" + shortenDimensions(getInfinitiedGain()) + " infinities" +
       shortenDimensions(currentIPmin) +
       " IP/min" +
       "<br>Peaked at " +
@@ -7870,7 +7871,8 @@ function gameLoop(diff) {
     document.getElementById("postInfinityButton").innerHTML = // add infinities gained on big crunch like in NG^^
       "<b>Big Crunch for " +
       shortenDimensions(gainedInfinityPoints()) +
-      " Infinity Points.</b>";
+      " Infinity Points.</b>"; + "<br>+" +
+      shortenDimensions(getInfinitiedGain()) + " infinities"
 
   if (nextAt[player.postChallUnlocked] === undefined)
     document.getElementById("nextchall").textContent = " ";
