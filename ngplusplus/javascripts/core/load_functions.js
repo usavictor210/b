@@ -59,7 +59,8 @@ function ngplus() {
       "challenge9",
       "challenge10",
       "challenge11",
-      "challenge12"
+      "challenge12",
+      
     ];
     player.ngPlus = 1;
   }
