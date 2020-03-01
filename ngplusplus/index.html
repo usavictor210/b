@@ -1185,23 +1185,16 @@
             </table>
             <div style="display: none;"><textarea id="exportOutput" style="color:black; width: 200px; height: 55px;"></textarea></div>
             <p>Hotkeys: 1-8 for buy 10 dimension, shift+1-8 for buy 1 dimension, T to buy max tickspeed, shift+T to buy one tickspeed, M for max all<br>S for sacrifice, D for dimension boost, G for galaxy, C for crunch, A for toggle autobuyers, R for replicanti galaxies, E for eternity.<br>You can hold shift while buying time studies to buy all up until that point, see each study's number, and save study trees.<br>Hotkeys do not work while holding control.<br>Import "I'm so meta" without quotation marks to get a save at meta-dimensions.</p>
-            <div id="footercontainer">
-                <table id="footer">
-                    <tr>
-                        <td>
-                            <div style="text-align:center">
-                                <a href="howto.html" target="_newtab">How to play  </a> |
-                                <a href="about.html" target="_newtab" onclick="giveAchievement('A sound financial decision')">Donate   </a> |
-                                <a href="changelog.html" target="_newtab">Changelog   </a> |
-                                <a href="https://discord.gg/ST9NaXa" target="_newtab">Discord (Vanilla)</a> |
-                                <a href="https://discord.gg/GtdRCt7" target="_newtab">Discord (UA:RP)</a> |
-                                <a href="https://www.reddit.com/r/AntimatterDimensions/" target="_newtab">Subreddit</a>      |    <a href="https://ivark.github.io/savefixer/index.html" target="_newtab">Savefixer</a>
-
-                            </div>
-                        </td>
-                    </tr>
-                </table>
-            </div>
+            <td>
+                <div style="text-align:center">
+                   <a href="howto.html" target="_newtab">How to play  </a> |
+                   <a href="about.html" target="_newtab" onclick="giveAchievement('A sound financial decision')">Donate   </a> |
+                   <a href="changelog.html" target="_newtab">Changelog   </a> |
+                   <a href="https://discord.gg/ST9NaXa" target="_newtab">Discord (Vanilla)</a> |
+                   <a href="https://discord.gg/GtdRCt7" target="_newtab">Discord (UA:RP)</a> |
+                   <a href="https://www.reddit.com/r/AntimatterDimensions/" target="_newtab">Subreddit</a>      |    <a href="https://ivark.github.io/savefixer/index.html" target="_newtab">Savefixer</a>
+                </div>
+          </td>
         </div>
         <div id="statistics" class="tab" align="center" style="color: black; font-size: 12px; font-family: Typewriter; margin: 0 auto">
             <br>
@@ -2719,10 +2712,10 @@
                             <button id="postinfi13" class="infinistorebtn1" onclick="buyInfinityUpgrade('infinitiedGeneration',20e6)">You passively generate Infinitied stat based on your fastest infinity.<br>1 every <br>Cost: 20 M IP</button>
                         </td>
                         <td>
-                            <button id="postinfi23" class="infinistorebtn1" onclick="buyInfinityUpgrade('bulkBoost',5e9)">Option to bulk buy Dimension Boosts <br>Cost: </button>
+                            <button id="postinfi23" class="infinistorebtn1" onclick="buyInfinityUpgrade('bulkBoost',5e9)">Option to bulk buy Dimension Boosts<br>Cost: </button>
                         </td>
                         <td>
-                            <button id="postinfi33" class="infinistorebtn1" onclick="buyInfinityUpgrade('autoBuyerUpgrade',1e15)">Autobuyers work twice as fast <br>Cost: 1 Qa IP</button>
+                            <button id="postinfi33" class="infinistorebtn1" onclick="buyInfinityUpgrade('autoBuyerUpgrade',1e15)">Autobuyers work twice as fast<br>Cost: 1 Qa IP</button>
                         </td>
 
                     </tr>
@@ -2768,11 +2761,11 @@
         <button class="storebtn" style="font-size: 15px" onclick="closeToolTip()" style="display: inline">Okay</button>
     </div>
     <div class="popup" id="challfail">
-        <div id="failPopup">You failed the challenge, you will now exit it.</div>
+        <div id="failPopup">You failed the challenge, so you will now exit it.</div>
         <button class="storebtn" style="font-size: 15px" onclick="closeToolTip()" style="display: inline">Okay</button>
     </div>
     <div class="popup" id="offlineprogress" style="width: 450px; height: 200px;">
-        <div id="offlinePopup" style="height: 150px">x</div>
+        <div id="offlinePopup" style="height: 150px">If you're seeing this text, something is broken. Check the console by pressing F12 or right click -> inspect element -> console. Copy and paste the potential error into the #bugs-and-glitches channel.</div>
         <button class="storebtn" style="font-size: 15px" onclick="closeToolTip()" style="display: inline">Okay</button>
 	</div>
 	<div class="popup savemenu" id="loadmenu">
@@ -2793,37 +2786,6 @@
 			<button class="storebtn" style="font-size: 15px" onclick="change_save(2)" style="display: inline">Load</button>
 		</div>
 	</div>
-	<div class="popup savemenu" id="cloudloadconflict">
-		<strong>Your cloud save appears to be older than your local save. Please select which one you would like to keep.</strong>
-		<div id="local">
-			<strong>Save #<span class="save_id"></span> (local):</strong>
-			<span>Infinities: <span class="save_infinities"></span></span>
-			<span>Eternities: <span class="save_eternities"></span></span>
-			<button class="storebtn" style="font-size: 15px" style="display: inline">Load local</button>
-		</div>
-		<div id="cloud">
-			<strong>Save #<span class="save_id"></span> (cloud):</strong>
-			<span>Infinities: <span class="save_infinities"></span></span>
-			<span>Eternities: <span class="save_eternities"></span></span>
-			<button class="storebtn" style="font-size: 15px" style="display: inline">Load cloud</button>
-		</div>
-	</div>
-	<div class="popup savemenu" id="cloudsaveconflict">
-		<strong>Your local save appears to be older than your cloud save. Would you like to overwrite the cloud save?</strong>
-		<div id="local">
-			<strong>Save #<span class="save_id"></span> (local):</strong>
-			<span>Infinities: <span class="save_infinities"></span></span>
-			<span>Eternities: <span class="save_eternities"></span></span>
-		</div>
-		<div id="cloud">
-			<strong>Save #<span class="save_id"></span> (cloud):</strong>
-			<span>Infinities: <span class="save_infinities"></span></span>
-			<span>Eternities: <span class="save_eternities"></span></span>
-		</div>
-
-		<button class="storebtn yes" style="font-size: 15px" style="display: inline">Yes</button>
-		<button class="storebtn no" style="font-size: 15px" style="display: inline">No</button>
-    </div>
     <div class="popup savemenu" id="animationoptions">
         <button class="closebtn storebtn" onclick="closeToolTip()">&times;</button>
 		<button id="floatingTextAnimBtn" class="storebtn" onclick="animationOnOff('floatingText')" style="width: 200px; height: 55px; font-size: 15px" style="display: inline">ON</button>
