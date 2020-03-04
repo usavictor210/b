@@ -3463,11 +3463,11 @@ function setAchieveTooltip() {
     "ach-tooltip",
     "Get to Infinity in under 200 milliseconds. Reward: Start with " +
       formatValue(player.options.notation, 1e25, 0, 0) +
-      " antimatter and all dimensions are stronger in first 300ms of Infinity."
+      " antimatter and all dimensions are stronger in the first 300 milliseconds of Infinity."
   );
   oneforeach.setAttribute(
     "ach-tooltip",
-    "Play for 8 days. Reward: Extremely small time multiplier. Currently: " +
+    "Play for 8 days. Reward: Gain an extremely small time multiplier to all Normal Dimensions. Currently: " +
       shortenMoney(new Decimal(timeMultUpg(3, 2))) +
       "x"
   );
@@ -3475,25 +3475,25 @@ function setAchieveTooltip() {
     "ach-tooltip",
     "Reach " +
       formatValue(player.options.notation, new Decimal("1e35000"), 0, 0) +
-      " antimatter. Reward: Dimensions are more powerful the more unspent antimatter you have."
+      " antimatter. Reward: “This achievement doesn't exist”'s reward is buffed."
   );
   speed.setAttribute(
     "ach-tooltip",
     "Big Crunch for " +
       shortenCosts(1e200) +
-      " IP in 2 seconds or less. Reward: All dimensions are significantly stronger in first 5 seconds of infinity."
+      " IP in 2 seconds or less. Reward: All dimensions are significantly stronger in the first 5 seconds of an infinity."
   );
   speed2.setAttribute(
     "ach-tooltip",
     "Big Crunch for " +
       shortenCosts(1e250) +
-      " IP in 20 seconds or less. Reward: All dimensions are significantly stronger in first 60 seconds of infinity."
+      " IP in 20 seconds or less. Reward: All dimensions are significantly stronger in the first 60 seconds of an infinity."
   );
   overdrive.setAttribute(
     "ach-tooltip",
     "Big Crunch with " +
       shortenCosts(1e300) +
-      " IP/min. Reward: Additional 4x multiplier to IP."
+      " IP/min. Reward: Gain an additional 4x multiplier to IP."
   );
   minute.setAttribute(
     "ach-tooltip",
