@@ -880,7 +880,7 @@ function updateMetaDimensions() {
     document.getElementById("metaGalaxyResetLabel").textContent =
       "Meta-Antimatter Galaxies (" +
       player.meta.galaxy +
-      "): Requires " +
+      "): requires " +
       galaxyRequirement.amount +
       " Eighth Meta Dimensions";
     // metaGalaxybuttondiv
