@@ -4925,12 +4925,7 @@ document.getElementById("bigcrunch").onclick = function() {
       player.challenges.push("challenge1");
 
     updateAutobuyers();
-    if (player.challenges.includes("challenge1"))
-      player.money = new Decimal(100);
-    if (player.achievements.includes("r37")) player.money = new Decimal(1000);
-    if (player.achievements.includes("r54")) player.money = new Decimal(2e5);
-    if (player.achievements.includes("r55")) player.money = new Decimal(1e10);
-    if (player.achievements.includes("r78")) player.money = new Decimal(1e25);
+    getAntimatterOnCrunch()
     if (player.challenges.length >= 2) giveAchievement("Daredevil");
     if (player.challenges.length == 12) giveAchievement("AntiChallenged");
     resetInfDimensions();
@@ -5799,12 +5794,7 @@ function startChallenge(name, target) {
 
     showTab("dimensions");
     updateChallenges();
-    if (player.challenges.includes("challenge1"))
-      player.money = new Decimal(100);
-    if (player.achievements.includes("r37")) player.money = new Decimal(1000);
-    if (player.achievements.includes("r54")) player.money = new Decimal(2e5);
-    if (player.achievements.includes("r55")) player.money = new Decimal(1e10);
-    if (player.achievements.includes("r78")) player.money = new Decimal(1e25);
+    getAntimatterOnCrunch()
     showTab("dimensions");
 
     if (player.infinitied >= 10) giveAchievement("That's a lot of infinites");
