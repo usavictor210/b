@@ -930,23 +930,22 @@ document.getElementById("11desc").textContent =
     document.getElementById("221desc").textContent =
       "Currently: " + shortenMoney(Decimal.pow(1.0025, player.resets)) + "x";
     let desc1 = Math.floor(player.resets / 2000) == 1 ? " galaxy later" : " galaxies later" //TS224
-    let desc2 = Math.floor(player.replicanti.amount.e / 1000) == 1 ? " galaxy later" : " galaxies later" //TS225
-    document.getElementById("224desc").textContent =
+    document.getElementById("224desc").textContent = //ts224
       "Currently: " + Math.floor(player.resets / 2000) + desc1
-    document.getElementById("225desc").textContent = 
+    document.getElementById("225desc").textContent =  //ts225
       "Currently: +" + Math.floor(player.replicanti.amount.e / 1000) + " RGs"
-    document.getElementById("226desc").textContent = 
+    document.getElementById("226desc").textContent = //ts226
       "Currently: +" + Math.floor(player.replicanti.gal / 15) + " RGs"
-    document.getElementById("227desc").textContent = 
+    document.getElementById("227desc").textContent = //ts227
       "Currently: " + shortenMoney(Math.max(Math.pow(calcTotalSacrificeBoost().log10(), 10), 1)) + "x"
-    document.getElementById("231desc").textContent =
+    document.getElementById("231desc").textContent = //ts231
       "Currently: " + (Decimal.pow(player.resets, 0.3)).toFixed(2) + "x per boost"
-    document.getElementById("232desc").textContent =
+    document.getElementById("232desc").textContent = //ts232
       "Currently: " + (Math.pow(1+player.galaxies/1000, 0.2)*100-100).toFixed(1) + "%"
-    document.getElementById("unknownCost").textContent =
+    document.getElementById("unknownCost").textContent = // the unknown time theorem isn't even coded yet, this is a placeholder
       shortenCosts(new Decimal.pow(10, Math.random() * 20 + 300))
 }
-function getECStudyDescription() {
+function getECStudyDescription() { //exactly what it says it does
 if (player.etercreq !== 1)
       document.getElementById("ec1unl").innerHTML =
         "Eternity Challenge 1<span>Requirement: " +
