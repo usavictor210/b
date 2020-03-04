@@ -3270,77 +3270,6 @@ function breakInfinity() {
   }
 }
 
-function gainedInfinityPoints() {
-  let div = 308;
-  if (player.timestudy.studies.includes(111)) div = 285;
-  else if (player.achievements.includes("r103")) div = 307.8;
-
-  var ret = Decimal.pow(10, player.money.e / div - 0.75).times(player.infMult);
-  if (player.timestudy.studies.includes(41))
-    ret = ret.times(
-      Decimal.pow(1.2, player.galaxies + player.replicanti.galaxies)
-    );
-  if (player.timestudy.studies.includes(51)) ret = ret.times(1e15);
-  if (player.timestudy.studies.includes(141))
-    ret = ret.times(
-      new Decimal(1e45)
-        .dividedBy(
-          Decimal.pow(
-            15,
-            Math.log(player.thisInfinityTime + 1) *
-              Math.pow(player.thisInfinityTime + 1, 0.125)
-          )
-        )
-        .max(1)
-    );
-  if (player.timestudy.studies.includes(142)) ret = ret.times(1e25);
-  if (player.timestudy.studies.includes(143))
-    ret = ret.times(
-      Decimal.pow(
-        15,
-        Math.log(player.thisInfinityTime + 1) *
-          Math.pow(player.thisInfinityTime + 1, 0.125)
-      )
-    );
-  if (player.achievements.includes("r116"))
-    ret = ret.times(Decimal.pow(2, Math.log10(getInfinitied() + 1)));
-  if (player.achievements.includes("r125"))
-    ret = ret.times(
-      Decimal.pow(
-        2,
-        Math.log(player.thisInfinityTime + 1) *
-          Math.pow(player.thisInfinityTime + 1, 0.11)
-      )
-    );
-  if (player.dilation.upgrades.includes(9))
-    ret = ret.times(player.dilation.dilatedTime.pow(1000));
-  return ret.floor();
-}
-
-function gainedEternityPoints() {
-  var ret = Decimal.pow(
-    5,
-    player.infinityPoints.plus(gainedInfinityPoints()).e / 308 - 0.7
-  ).times(player.epmult);
-  if (player.timestudy.studies.includes(61)) ret = ret.times(10);
-  if (player.timestudy.studies.includes(121))
-    ret = ret.times(
-      (253 -
-        averageEp
-          .dividedBy(player.epmult)
-          .dividedBy(10)
-          .min(248)
-          .max(3)) /
-        5
-    );
-  //x300 if tryhard, ~x60 if not
-  else if (player.timestudy.studies.includes(122)) ret = ret.times(35);
-  else if (player.timestudy.studies.includes(123))
-    ret = ret.times(Math.sqrt((1.39 * player.thisEternity) / 10));
-
-  return ret.floor();
-}
-
 function setAchieveTooltip() {
   var apocAchieve = document.getElementById("Antimatter Apocalypse");
   var noPointAchieve = document.getElementById(
@@ -5323,10 +5252,7 @@ function eternity(force, auto) {
       timeDimension8: player.timeDimension8,
       eternityPoints: player.eternityPoints,
       eternities:
-        player.eternities +
-        (player.dilation.upgrades.includes(12)
-          ? Math.floor(Decimal.pow(player.dilation.dilatedTime, 0.1).toNumber())
-          : 1 * player.achievements.includes("r155") ? 100 : 1),
+        player.eternities + calculateEternitiedGain(),
       thisEternity: 0,
       bestEternity: player.bestEternity,
       eternityUpgrades: player.eternityUpgrades,
@@ -6393,10 +6319,7 @@ function startEternityChallenge(name, startgoal, goalIncrease) {
       timeDimension8: player.timeDimension8,
       eternityPoints: player.eternityPoints,
       eternities:
-        player.eternities +
-        (player.dilation.upgrades.includes(12)
-          ? Math.floor(Decimal.pow(player.dilation.dilatedTime, 0.1).toNumber())
-          : 1 * player.achievements.includes("r155") ? 100 : 1),
+        player.eternities + calculateEternitiedGain(),
       thisEternity: 0,
       bestEternity: player.bestEternity,
       eternityUpgrades: player.eternityUpgrades,
@@ -8032,9 +7955,6 @@ function gameLoop(diff) {
     replmult.max(1)
   );
 
-  var currentEPmin = gainedEternityPoints().dividedBy(
-    player.thisEternity / 600
-  );
   updateEternityButton()
   document.getElementById("metaCost").innerHTML = shortenCosts(1e24);
 

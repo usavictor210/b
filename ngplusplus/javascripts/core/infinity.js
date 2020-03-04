@@ -19,3 +19,50 @@ let antimatter = [10, 100, 1000, 2e5, 1e10, 1e25]
   if (player.achievements.includes("r78")) tier = 5
 return new Decimal (antimatter[tier])
 }
+
+function gainedInfinityPoints() {
+  let div = 308;
+  if (player.timestudy.studies.includes(111)) div = 285;
+  else if (player.achievements.includes("r103")) div = 307.8;
+
+  var ret = Decimal.pow(10, player.money.e / div - 0.75).times(player.infMult);
+  if (player.timestudy.studies.includes(41))
+    ret = ret.times(
+      Decimal.pow(1.2, player.galaxies + player.replicanti.galaxies)
+    );
+  if (player.timestudy.studies.includes(51)) ret = ret.times(1e15);
+  if (player.timestudy.studies.includes(141))
+    ret = ret.times(
+      new Decimal(1e45)
+        .dividedBy(
+          Decimal.pow(
+            15,
+            Math.log(player.thisInfinityTime + 1) *
+              Math.pow(player.thisInfinityTime + 1, 0.125)
+          )
+        )
+        .max(1)
+    );
+  if (player.timestudy.studies.includes(142)) ret = ret.times(1e25);
+  if (player.timestudy.studies.includes(143))
+    ret = ret.times(
+      Decimal.pow(
+        15,
+        Math.log(player.thisInfinityTime + 1) *
+          Math.pow(player.thisInfinityTime + 1, 0.125)
+      )
+    );
+  if (player.achievements.includes("r116"))
+    ret = ret.times(Decimal.pow(2, Math.log10(getInfinitied() + 1)));
+  if (player.achievements.includes("r125"))
+    ret = ret.times(
+      Decimal.pow(
+        2,
+        Math.log(player.thisInfinityTime + 1) *
+          Math.pow(player.thisInfinityTime + 1, 0.11)
+      )
+    );
+  if (player.dilation.upgrades.includes(9))
+    ret = ret.times(player.dilation.dilatedTime.pow(1000));
+  return ret.floor();
+}
