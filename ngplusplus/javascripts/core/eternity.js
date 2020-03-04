@@ -29,12 +29,11 @@ function gainedEternityPoints() {
   return ret.floor();
 }
 
+function updateEternityButton() { //updates the eternity button based on your eternities and EP gained on eternity
 var currentEPmin = gainedEternityPoints().dividedBy(
   player.thisEternity / 600
 );
-
-function updateEternityButton() { //updates the eternity button based on your eternities and EP gained on eternity
-EPminpeak = new Decimal(0);
+var EPminpeak = new Decimal(0);
 if (currentEPmin.gt(EPminpeak) && player.infinityPoints.gte(Number.MAX_VALUE))
     EPminpeak = currentEPmin;
   document.getElementById("eternitybtn").innerHTML =
@@ -48,7 +47,7 @@ if (currentEPmin.gt(EPminpeak) && player.infinityPoints.gte(Number.MAX_VALUE))
         " EP/min<br>Peaked at " +
         shortenDimensions(EPminpeak) +
         " EP/min";
-  if (gainedEternityPoints().gte(1e6)) {
+  if (gainedEternityPoints().gte(1e6) && !(gainedEternityPoints().gte(new Decimal("1e100000")))) {
     document.getElementById("eternitybtn").innerHTML =
       "Gain <b>" +
       shortenDimensions(gainedEternityPoints()) +
@@ -57,12 +56,12 @@ if (currentEPmin.gt(EPminpeak) && player.infinityPoints.gte(Number.MAX_VALUE))
       " EP/min<br>Peaked at " +
       shortenDimensions(EPminpeak) +
       " EP/min";
-  } else if (gainedEternityPOints().gte(new Decimal("1e100000"))) {
+  } else if (gainedEternityPoints().gte(new Decimal("1e100000"))) {
     document.getElementById("eternitybtn").innerHTML =
       "Gain <b>" +
       shortenDimensions(gainedEternityPoints()) +
-      "</b> Eternity points.<br>" +
-      calculateEternitiedGain()
+      "</b> Eternity points.<br>" + "+"
+      + shortenDimensions(calculateEternitiedGain()) + " eternities"
   }
   if (player.dilation.active)
     document.getElementById("eternitybtn").innerHTML =

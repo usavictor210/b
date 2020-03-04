@@ -7730,41 +7730,7 @@ function gameLoop(diff) {
     } else showTab("emptiness");
   } else document.getElementById("bigcrunch").style.display = "none";
 
-  if (
-    player.break &&
-    player.money.gte(Number.MAX_VALUE) &&
-    player.currentChallenge == ""
-  ) {
-    document.getElementById("postInfinityButton").style.display =
-      "inline-block";
-  } else {
-    document.getElementById("postInfinityButton").style.display = "none";
-  }
-
-  if (player.break) document.getElementById("iplimit").style.display = "inline";
-  else document.getElementById("iplimit").style.display = "none";
-
-  var currentIPmin = gainedInfinityPoints().dividedBy(
-    player.thisInfinityTime / 600
-  );
-  if (currentIPmin.gt(IPminpeak)) IPminpeak = currentIPmin;
-
-  if (IPminpeak.lte("1e100000"))
-    document.getElementById("postInfinityButton").innerHTML =
-      "<b>Big Crunch for " +
-      shortenDimensions(gainedInfinityPoints()) +
-      " Infinity Points.</b><br>" +
-      shortenDimensions(currentIPmin) +
-      " IP/min" +
-      "<br>Peaked at " +
-      shortenDimensions(IPminpeak) +
-      " IP/min";
-  else
-    document.getElementById("postInfinityButton").innerHTML = // add infinities gained on big crunch like in NG^^
-      "<b>Big Crunch for " +
-      shortenDimensions(gainedInfinityPoints()) +
-      " Infinity Points.</b>" +
-      "<br>+" + shortenDimensions(getInfinitiedGain()) + " infinities"
+ updateBigCrunchButton()
 
   if (nextAt[player.postChallUnlocked] === undefined)
     document.getElementById("nextchall").textContent = " ";
