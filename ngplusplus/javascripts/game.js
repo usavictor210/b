@@ -3451,7 +3451,7 @@ function setAchieveTooltip() {
     "ach-tooltip",
     "Big Crunch for " +
       shortenCosts(1e150) +
-      " IP. Reward: Additional 4x multiplier to IP."
+      " IP. Reward: Gain an additional 4x multiplier to IP."
   );
   reference.setAttribute(
     "ach-tooltip",
@@ -3499,7 +3499,7 @@ function setAchieveTooltip() {
     "ach-tooltip",
     "Reach " +
       shortenCosts(1e260) +
-      " infinity power. Reward: Double infinity power gain."
+      " infinity power. Reward: The 1st Infinity Dimension gains a 2x multiplier."
   );
   infiniteIP.setAttribute(
     "ach-tooltip",
@@ -6513,7 +6513,7 @@ function startEternityChallenge(name, startgoal, goalIncrease) {
         "inline-block";
     }
     updateAutobuyers();
-    if (player.achievements.includes("r37")) player.money = new Decimal(1000);
+    if (player.achievements.includes("r37")) player.money = new Decimal(1000); // consider highest tier of antimatter on reset function
     if (player.achievements.includes("r54")) player.money = new Decimal(2e5);
     if (player.achievements.includes("r55")) player.money = new Decimal(1e10);
     if (player.achievements.includes("r78")) player.money = new Decimal(1e25);
