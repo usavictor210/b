@@ -9,7 +9,7 @@ function getInfinitiedGain() {
   return infGain
 }
 
-function getAntimatterOnCrunch() {
+function getAntimatterOnReset() {
 let tier = 0
 let antimatter = [10, 100, 1000, 2e5, 1e10, 1e25]
   if (player.challenges.includes("challenge1")) tier = 1
@@ -17,5 +17,5 @@ let antimatter = [10, 100, 1000, 2e5, 1e10, 1e25]
   if (player.achievements.includes("r54")) tier = 3
   if (player.achievements.includes("r55")) tier = 4
   if (player.achievements.includes("r78")) tier = 5
-player.money = new Decimal (antimatter[tier])
+return new Decimal (antimatter[tier])
 }

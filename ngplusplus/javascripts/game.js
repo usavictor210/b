@@ -3001,16 +3001,7 @@ function galaxyReset() {
   if (player.galaxies >= 50) giveAchievement("YOU CAN GET 50 GALAXIES!??");
   if (player.galaxies >= 2) giveAchievement("Double Galaxy");
   if (player.galaxies >= 1) giveAchievement("You got past The Big Wall");
-  if (player.challenges.includes("challenge1"))
-    player.money = new Decimal(100).max(player.money);
-  if (player.achievements.includes("r37"))
-    player.money = new Decimal(1000).max(player.money);
-  if (player.achievements.includes("r54"))
-    player.money = new Decimal(2e5).max(player.money);
-  if (player.achievements.includes("r55"))
-    player.money = new Decimal(1e10).max(player.money);
-  if (player.achievements.includes("r78"))
-    player.money = new Decimal(1e25).max(player.money);
+    player.money = getAntimatterOnReset().max(player.money);
   player.tickspeed = player.tickspeed.times(
     Decimal.pow(getTickSpeedMultiplier(), player.totalTickGained)
   );
@@ -4925,7 +4916,7 @@ document.getElementById("bigcrunch").onclick = function() {
       player.challenges.push("challenge1");
 
     updateAutobuyers();
-    getAntimatterOnCrunch()
+    player.money = getAntimatterOnReset()
     if (player.challenges.length >= 2) giveAchievement("Daredevil");
     if (player.challenges.length == 12) giveAchievement("AntiChallenged");
     resetInfDimensions();
@@ -5794,7 +5785,7 @@ function startChallenge(name, target) {
 
     showTab("dimensions");
     updateChallenges();
-    getAntimatterOnCrunch()
+    player.money = getAntimatterOnReset()
     showTab("dimensions");
 
     if (player.infinitied >= 10) giveAchievement("That's a lot of infinites");
