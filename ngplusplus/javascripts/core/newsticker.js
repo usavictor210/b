@@ -73,7 +73,7 @@ newsArray = [//always true
 ["Ahhh i love the smell of particle annihilation in the morning", true, "a134"],
 ["The person who said ghosts don't exist obviously doesn't have a discord", true, "a135"],
 ["AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAntimatter Dimensions was made by some dude from Finland", true, "a136"],
-['The Holy trinity of Hevipelle, Antimatter, Infinity Points, and Eternity Points. These 3 resources let us access Hevi’s gift, Time Theorems. And with these Time Theorems, we reach out to Hevi, and call, “Hevi, bless us on this fine day!” And Hevi does. He give us the blessing of Time Studies. These Time Studies were blessings so powerful, Hevi restricted their power. He said, “I will give you a choice of three paths.” and then humanity chose. The short, cheap route of Normal Dimensions, giving instant gratification, the powerful choice of Infinity Dimensions, which were a fast, middle ground path, or Time Dimensions, the long wait, and struggle, of humanity. Then, as humanity chose, a crack broke the earth. A serpent snaked out and sneered to humanity, “I will offer the powerful choice of a ninth dimension! I am Slabdrill, lord of all Unhevi.” Humanity rose and said, “Begone Slabdrill! We want none of your foul Heresy!” And Hevi rose as well, and smote Slabdrill with his godlike power. As Slabdrill’s corpse fell into the earth, he cried, “This will not be the last of me! Hevi will betr-“ and he fell in the Abyss of matter. Hevi gifted humanity with Eternity upgrades, which boosted Infinity Dimensions and Time Dimensions, and Hevi gave humanity his greatest gift. EP multipliers. He said, “These will multiply all EP gained by 5, but their cost will increase 25 times. Use them wisely.” And Humanity journeyed off with their new power, as Slabdrill’s words echoed in their heads.', true, "a137"],
+['The Holy trinity of Hevipelle, Antimatter, Infinity Points, and Eternity Points. These 3 resources let us access Hevi’s gift, Time Theorems. And with these Time Theorems, we reach out to Hevi, and call, “Hevi, bless us on this fine day!” And Hevi does. He give us the blessing of Time Studies. These Time Studies were blessings so powerful, Hevi restricted their power. He said, “I will give you a choice of three paths.” and then humanity chose. The short, cheap route of Normal Dimensions, giving instant gratification, the powerful choice of Infinity Dimensions, which were a fast, middle ground path, or Time Dimensions, the long wait, and struggle, of humanity. Then, as humanity chose, a crack broke the earth. A serpent snaked out and sneered to humanity, “I will offer the powerful choice of a ninth dimension! I am Slabdrill, lord of all Unhevi.” Humanity rose and said, “Begone Slabdrill! We want none of your foul Heresy!” And Hevi rose as well, and smote Slabdrill with his godlike power. As Slabdrill’s corpse fell into the earth, he cried, “This will not be the last of me! Hevi will betr-“ and he fell in the Abyss of matter. Hevi gifted humanity with Eternity upgrades, which boosted Infinity Dimensions and Time Dimensions, and Hevi gave humanity his greatest gift. EP multipliers. He said, “These will multiply all EP gained by 5, but their cost will increase 25 times. Use them wisely.” And Humanity journeyed off with their new power, as Slabdrill’s words echoed in their heads.', 'player.eternities > 0', "a137"],
 ["We have updated our Antimatter Privacy Policy.", true, "a138"],
 ["Is this a jojo reference?", true, "pat1"], // patreon
 
@@ -108,7 +108,7 @@ newsArray = [//always true
 ["Thanos is gonna be super dissapointed when he shows up with a fully powered infinity gauntlet, and Hevi has a fully powered eternity gauntlet", "player.eternities > 0", "b23"],
 ["New strange material was been found. It seems to grow exponentially, but only helps with antimatter production.", "player.replicanti.unl && player.replicanti.chance == 0.01", "b25"],
 ["It seems this \"replicanti\" stuff won't be growing any faster now.", "player.replicanti.chance == 1 && player.replicanti.interval == 1", "b26"],
-//newsarray - HEVI WHY?!
+//newsarray - these unorganized news tickers aren't good
 ["Does Hevi just pick quotes to put into the game?", "player.newsArray.length >= 30", "n3"],
 ["New news company has become rivals with us. They are made entirely of antimatter.", "player.newsArray.length >= 80", "n1"],
 ["How many times can we use \"Anti\" in a row before people stop listening?", "player.newsArray.length >= 100", "n5"],
@@ -136,6 +136,7 @@ newsArray = [//always true
 ["You can probably stop farming for eternities now...", "player.eternities > 2000000", "c11"],
 ["Are you serious?", "worstChallengeTime <= 0.1", "c12"],
 ["The amazing speedster", "infchallengeTimes <= 0.8", "c13"],
+["More people are now grinding endlessly to no benefit. What ", "player.eternities > 2000000", "c14"],
 //luck
 ["This news message is 1000x rarer than all the others.", "Math.random() < 0.001", "l1"],
 ["You just won a small prize in the lottery.", "Math.random() < 1e-4", "l2"],
@@ -178,7 +179,7 @@ newsArray = [//always true
 ["If you are not playing NG+2 Respecced on http://ngplus2.glitch.me/ngplusplus/, the site is bootleg. Wait, we're already bootleg.", true, "respecced21"],
 ["I'm so meta", true, "respecced22"],
 ["I'm blue, da ba dee", true, "respecced23"],
-["From the mountains rises a new type of hill, called THE HILL. It's my hill.", true, "respecced24"],
+["From the mountains rises a new type of hill, called THE HILL. It's my hill. Uh... somebody just showed up and said they're going to live here. I guess it's their hill now... or is it?", true, "respecced24"],
 ["Thank you Devion! But our battle replicants is in another castle!", true, "respecced25"],
 ["One small step for antimatter, one giant leap for antimatterkind", "player.quantum.times > 0", "respecced26"],
 ["How it feels to chew 5 Gum", "player.dilation.active", "respecced27"],
@@ -257,7 +258,8 @@ newsArray = [//always true
 ["There are now more comments in the code. We hope you understand it better.", true, "respecced96"],
 ["These news tickers are getting too meta. I need to take a break. See you later.                                 ...wait, why is it still going? The spaces I put in didn't even work! That's just dumb. I'm leaving.", true, "respecced97"],
 ["Even if you could halate snow, you don't have enough light to do that. We'd need more tickspeed. Speaking of more tickspeed... a potato's on the loose.", 'player.newsArray.includes("respecced17")', "respecced98"],
-["When the news ticker keeps coming back... and coming back...", true, "respecced99"]
+["When the news ticker keeps coming back... and coming back...", true, "respecced99"],
+["how to fix the game's bugs: revision 45 - 1. Make sure no pesky bugs exist in your code and blast them with antimatter if you see them. 2. Do something", true, "respecced100"]
 ];}
 
 var s = document.getElementById('news');
