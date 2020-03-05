@@ -3934,7 +3934,7 @@ function updateAutobuyers() {
     if (player.autobuyers[tier - 1].bulk >= 1e100) {
       player.autobuyers[tier - 1].bulk = 1e100;
       document.getElementById("buyerBtn" + tier).textContent =
-        shortenDimensions(player.autobuyers[tier - 1].bulk) + "x bulk purchase";
+       "Next: " + shortenDimensions(player.autobuyers[tier - 1].bulk) + "x bulk purchase";
       e100autobuy++;
     } else {
       if (player.autobuyers[tier - 1].interval <= 100) {

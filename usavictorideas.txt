@@ -51,4 +51,6 @@ unlike in ng+3, we will do challenges differently.
 3. you can't get boosts, but can get more powerful galaxies. however, scaling starts earlier which applies to all types of galaxies
 4. meta dimensions produce antimatter instead. everything is changed to account for this.
 5. Tickspeed starts at 0.01%, and dimension boosts and galaxies barely increase it. The game is also 1,000x slower.
-6. You can only use 15 time studies, and  
+6. You can only use 15 time studies.
+7.  
+8. 
