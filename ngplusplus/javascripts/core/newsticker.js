@@ -136,7 +136,7 @@ newsArray = [//always true
 ["You can probably stop farming for eternities now...", "player.eternities > 2000000", "c11"],
 ["Are you serious?", "worstChallengeTime <= 0.1", "c12"],
 ["The amazing speedster", "infchallengeTimes <= 0.8", "c13"],
-["More people are now grinding endlessly to no benefit. What ", "player.eternities > 2000000", "c14"],
+["More people are now grinding endlessly to no benefit in a cheese factory. What happens there may shock you.", "player.eternities > 1e12", "c14"], // respecced101
 //luck
 ["This news message is 1000x rarer than all the others.", "Math.random() < 0.001", "l1"],
 ["You just won a small prize in the lottery.", "Math.random() < 1e-4", "l2"],
@@ -259,7 +259,9 @@ newsArray = [//always true
 ["These news tickers are getting too meta. I need to take a break. See you later.                                 ...wait, why is it still going? The spaces I put in didn't even work! That's just dumb. I'm leaving.", true, "respecced97"],
 ["Even if you could halate snow, you don't have enough light to do that. We'd need more tickspeed. Speaking of more tickspeed... a potato's on the loose.", 'player.newsArray.includes("respecced17")', "respecced98"],
 ["When the news ticker keeps coming back... and coming back...", true, "respecced99"],
-["how to fix the game's bugs: revision 45 - 1. Make sure no pesky bugs exist in your code and blast them with antimatter if you see them. 2. Do something", true, "respecced100"]
+["How to fix the game's bugs: Revision 45 - 1. Make sure no pesky bugs exist in your code and blast them with antimatter if you see them. 2. Do something to prevent the spread of these evil bugs. Maybe alter the code and encourage the bugs to go away. 3. Watch as more bugs emerge from the previous bugs you've exploded. If in any case the bugs begin a revolution, big crunch the universe.", true, "respecced100"],
+// AD Ultimate
+
 ];}
 
 var s = document.getElementById('news');
