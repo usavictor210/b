@@ -96,6 +96,6 @@ function getUnstableUpgMult(x) {
     case 6: return Decimal.max(Math.pow(Math.log10(player.dilation.tachyonParticles), 0.075), 1);
     case 7: return Decimal.max(Math.pow(player.galaxies, 0.18), 1);
     case 8: return 1
-    case 9: return
+    case 9: return 1
   } 
 }
