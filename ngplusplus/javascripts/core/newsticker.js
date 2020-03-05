@@ -260,8 +260,7 @@ newsArray = [//always true
 ["Even if you could halate snow, you don't have enough light to do that. We'd need more tickspeed. Speaking of more tickspeed... a potato's on the loose.", 'player.newsArray.includes("respecced17")', "respecced98"],
 ["When the news ticker keeps coming back... and coming back...", true, "respecced99"],
 ["How to fix the game's bugs: Revision 45 - 1. Make sure no pesky bugs exist in your code and blast them with antimatter if you see them. 2. Do something to prevent the spread of these evil bugs. Maybe alter the code and encourage the bugs to go away. 3. Watch as more bugs emerge from the previous bugs you've exploded. If in any case the bugs begin a revolution, big crunch the universe.", true, "respecced100"],
-// AD Ultimate
-
+["This message's contents will only be viewable if you have performed [REDACTED]." + "Checking: "  + " It appears you know the secret. It wasn't that", true, "respecced101"]
 ];}
 
 var s = document.getElementById('news');
