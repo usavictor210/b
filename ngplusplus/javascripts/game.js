@@ -4475,7 +4475,7 @@ function checkForEndMe() {
   if (temp2 <= 66.6) giveAchievement("Yes. This is hell.");
 }
 
-document.getElementById("bigcrunch").onclick = big()
+document.getElementById("bigcrunch").onclick = infinity()
 function respecToggle() {
   if (player.respec) {
     player.respec = false;
