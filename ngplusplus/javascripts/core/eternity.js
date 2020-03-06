@@ -2,6 +2,7 @@ function calculateEternitiedGain() {
 let base = 1
 if (player.dilation.upgrades.includes(12)) base = base * Math.floor(Decimal.pow(player.dilation.dilatedTime, 0.1).toNumber()) // If you have eternities and DT power up each other (x^0.1)
 if (player.achievements.includes("r155")) base = base*100 // If you have Sub-atomic (x100 eternitied stat gain)
+if (player.achievements.includes("r124")) base = base*Math.min(Math.sqrt(player.thisEternity/10), 100)
 return base // grand total
 }
 

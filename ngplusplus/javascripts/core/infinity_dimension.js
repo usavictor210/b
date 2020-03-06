@@ -121,6 +121,8 @@ function DimensionPower(tier) {
 
   if (ECTimesCompleted("eterc9") !== 0) mult = mult.times(player.timeShards.pow(ECTimesCompleted("eterc9")*0.1).plus(1).min(new Decimal("1e400")))
 
+  if (player.achievements.includes("r113")) mult = mult.times(timeMultUpg(4, 1).pow(10)) // long lasting relationship
+
   if (mult.lt(0)) mult = new Decimal(0)
 
   if (player.dilation.active) {
