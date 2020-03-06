@@ -410,10 +410,7 @@ function quantum(force, auto) {
     if (player.infinitied >= 1 && !player.challenges.includes("challenge1"))
       player.challenges.push("challenge1");
     updateAutobuyers();
-    if (player.achievements.includes("r37")) player.money = new Decimal(1000);
-    if (player.achievements.includes("r54")) player.money = new Decimal(2e5);
-    if (player.achievements.includes("r55")) player.money = new Decimal(1e10);
-    if (player.achievements.includes("r78")) player.money = new Decimal(1e25);
+    player.money = getAntimatterOnReset()
     if (player.achievements.includes("r85"))
       player.infMult = player.infMult.times(4);
     if (player.achievements.includes("r93"))

@@ -4396,7 +4396,7 @@ function updateLastTenRuns() {
     if (tempBest.gte(1e300)) giveAchievement("MAXIMUM OVERDRIVE");
   }
 
-  bestRunIppm = tempBest;
+  bestRunIppm = new Decimal(tempBest);
 }
 
 var averageEp = new Decimal(0);
@@ -5572,7 +5572,7 @@ function gameLoop(diff) {
   }
 
   player.infinityPoints = player.infinityPoints.plus(
-   new Decimal(bestRunIppm).times(player.offlineProd / 100).times(diff / 600)
+   bestRunIppm.times(player.offlineProd / 100).times(diff / 600)
   );
 
   if (

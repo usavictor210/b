@@ -433,7 +433,7 @@ function eternity(force, auto) {
         "inline-block";
     }
     updateAutobuyers();
-    getAntimatterOnReset()
+    player.money = getAntimatterOnReset()
     if (player.achievements.includes("r85"))
       player.infMult = player.infMult.times(4);
     if (player.achievements.includes("r93"))
