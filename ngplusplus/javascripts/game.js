@@ -4351,9 +4351,10 @@ function updateChallengeTimes() {
   updateWorstChallengeTime();
 }
 
+// so i know why you cannot get "Oh hey, you're still here" in aarex's mods, because for some reason bestrunippm is still 0"
 var bestRunIppm = new Decimal(0);
 function updateLastTenRuns() {
-  let tempBest = 0;
+  var tempBest = new Decimal(0);
   var tempTime = new Decimal(0);
   var tempIP = new Decimal(0);
   for (var i = 0; i < 10; i++) {
@@ -4363,9 +4364,7 @@ function updateLastTenRuns() {
   tempTime = tempTime.dividedBy(10);
   tempIP = tempIP.dividedBy(10);
   for (var i = 0; i < 10; i++) {
-    var ippm = new Decimal("player.lastTenRuns[i][1]").div(
-      player.lastTenRuns[i][0] / 600
-    );
+    var ippm = new Decimal("player.lastTenRuns[i][1]").div(player.lastTenRuns[i][0] / 600);
     if (ippm.gt(tempBest)) tempBest = ippm;
     var tempstring = shorten(ippm) + " IP/min";
     if (ippm < 1) tempstring = shorten(ippm * 60) + " IP/hour";
@@ -4379,7 +4378,6 @@ function updateLastTenRuns() {
       " IP. " +
       tempstring;
   }
-
   var ippm = tempIP.dividedBy(tempTime / 600);
   var tempstring = shorten(ippm) + " IP/min";
   if (ippm < 1) tempstring = shorten(ippm * 60) + " IP/hour";
@@ -4390,13 +4388,12 @@ function updateLastTenRuns() {
     shortenDimensions(tempIP) +
     " IP. " +
     tempstring;
-
+  
   if (tempBest) {
     if (tempBest.gte(1e8)) giveAchievement("Oh hey, you're still here");
     if (tempBest.gte(1e300)) giveAchievement("MAXIMUM OVERDRIVE");
   }
-
-  bestRunIppm = new Decimal(tempBest);
+  bestRunIppm = tempBest;
 }
 
 var averageEp = new Decimal(0);
@@ -5571,9 +5568,7 @@ function gameLoop(diff) {
     player.infinitied++;
   }
 
-  player.infinityPoints = player.infinityPoints.plus(
-   bestRunIppm.times(player.offlineProd / 100).times(diff / 600)
-  );
+  player.infinityPoints = player.infinityPoints.plus(new Decimal(bestRunIppm).times(player.offlineProd / 100).times(diff / 600));
 
   if (
     player.money.lte(Number.MAX_VALUE) ||
