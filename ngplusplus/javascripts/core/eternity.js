@@ -1054,3 +1054,198 @@ if (currentEPmin.gt(EPminpeak) && player.infinityPoints.gte(Number.MAX_VALUE))
     document.getElementById("eternitybtn").textContent =
       "Other challenges await.. I need to become Eternal";
 }
+
+/* EC stuff here... */
+
+
+function unlockEChall(idx) {
+  if (player.eternityChallUnlocked == 0) {
+    player.eternityChallUnlocked = idx;
+    document.getElementById(
+      "eterc" + player.eternityChallUnlocked + "div"
+    ).style.display = "inline-block";
+    if (!justImported) showTab("challenges");
+    if (!justImported) showChallengesTab("eternitychallenges");
+    if (idx !== 12 && idx !== 13) player.etercreq = idx;
+  }
+  updateEternityChallenges();
+  updateTimeStudyButtons();
+}
+
+function ECTimesCompleted(name) {
+  if (player.eternityChalls[name] === undefined) return 0;
+  else return player.eternityChalls[name];
+}
+
+/* Ok, I'm going to put dilation stuff here... */
+
+
+function unlockDilation() {
+  if (player.dilation.studies.includes(1)) return;
+  if (player.timestudy.theorem < 5000) return;
+  if (ECTimesCompleted("eterc12") !== 5) return;
+  if (ECTimesCompleted("eterc11") !== 5) return;
+  player.timestudy.theorem -= 5000;
+  document.getElementById("dilationunlock").className = "dilationupgbought";
+  updateTimeStudyButtons();
+  showEternityTab("dilation");
+  document.getElementById("dilationunlock").innerHTML =
+    "Unlock time dilation<span>Cost: 5000 Time Theorems";
+}
+
+/////// DILATION \\\\\\\
+/**
+ *
+ * @param {Name of the ugrade} id
+ * @param {Cost of the upgrade} cost
+ * @param {Cost increase for the upgrade, only for rebuyables} costInc
+ *
+ * id 1-3 are rebuyables
+ *
+ * id 2 resets your dilated time and free galaxies
+ *
+ */
+
+const DIL_UPG_COSTS = [
+  null,
+  [1e5, 10],
+  [1e6, 100],
+  [1e7, 20],
+  [1e8, 1e4],
+  5e6,
+  1e9,
+  5e7,
+  1e20,
+  2e12,
+  1e10,
+  1e11,
+  1e25,
+  1e50,
+  1e60,
+  1e80,
+  1e100,
+  1e15,
+  1e20,
+  1e25
+];
+
+function buyDilationUpgrade(id, costInc) {
+  if (id > 4) {
+    // Not rebuyable
+    if (player.dilation.dilatedTime < DIL_UPG_COSTS[id]) return false; // Not enough dilated time
+    if (player.dilation.upgrades.includes(id)) return false; // Has the upgrade
+    player.dilation.dilatedTime = player.dilation.dilatedTime.minus(
+      DIL_UPG_COSTS[id]
+    );
+    // consistency
+    player.dilation.upgrades.push(id);
+    if (id == 5) player.dilation.freeGalaxies *= 2; // Double the current galaxies
+  } else {
+    // Is rebuyable
+    let realCost = getDilRebuyableUpgCost(id);
+    if (player.dilation.dilatedTime.lt(realCost)) return false;
+
+    player.dilation.dilatedTime = player.dilation.dilatedTime.minus(realCost);
+    player.dilation.rebuyables[id] += 1;
+    if (id == 2) {
+      player.dilation.dilatedTime = new Decimal(0);
+      player.dilation.nextThreshold = new Decimal(1000);
+      player.dilation.freeGalaxies = 0;
+    }
+  }
+
+  updateDilationUpgradeCosts();
+  updateDilationUpgradeButtons();
+  updateTimeStudyButtons();
+  return true;
+}
+
+let DIL_UPG_NUM = 19;
+
+function updateDilationUpgradeButtons() {
+  for (var i = 1; i <= DIL_UPG_NUM; i++) {
+    if (i <= 4) {
+      document.getElementById("dil" + i).className = getDilRebuyableUpgCost(
+        i
+      ).gt(player.dilation.dilatedTime)
+        ? "dilationupgrebuyablelocked"
+        : "dilationupgrebuyable";
+    } else if (player.dilation.upgrades.includes(i)) {
+      document.getElementById("dil" + i).className = "dilationupgbought";
+    } else {
+      document.getElementById("dil" + i).className =
+        DIL_UPG_COSTS[i] > player.dilation.dilatedTime
+          ? "dilationupglocked"
+          : "dilationupg";
+    }
+  }
+  document.getElementById("dil9desc").textContent =
+    "Currently: " +
+    shortenMoney(player.dilation.dilatedTime.pow(1000).max(1)) +
+    "x";
+  document.getElementById("dil13desc").textContent =
+    "Currently: " + shortenMoney(getDil13Bonus()) + "x";
+  document.getElementById("dil14desc").textContent =
+    "Currently: " + shortenMoney(getDil14Bonus()) + "x";
+  document.getElementById("dil16desc").textContent =
+    "Currently: " + shortenMoney(getDil16Bonus()) + "x";
+  document.getElementById("dil17desc").textContent =
+    "Currently: " +
+    shortenMoney(
+      Math.floor(player.dilation.tachyonParticles.div(20000).max(1))
+    ) +
+    "/s";
+  document.getElementById("dil18desc").textContent =
+    "Currently: " + getDil18Bonus().toFixed(3) + "x";
+  document.getElementById("dil19desc").textContent =
+    "Currently: " +
+    shortenMoney(
+      player.dilation.tachyonParticles
+        .pow(1.5)
+        .divide(1e6)
+        .max(1)
+    ) +
+    "x";
+  checkUnstableDilationButton();
+}
+
+let getDilRebuyableUpgCost = function(i) {
+  let cost = new Decimal(DIL_UPG_COSTS[i][0]).times(
+    Decimal.pow(DIL_UPG_COSTS[i][1], player.dilation.rebuyables[i])
+  );
+  // rounding
+  if ((i === 2) & cost.gte(9.999e109)) {
+    cost = new Decimal("1e99999");
+  }
+  if (i === 3 && cost.gte(9e99)) {
+    cost = new Decimal(1e100).times(
+      Decimal.pow(1e3, player.dilation.rebuyables[i] - 75).times(
+        1.05 * player.dilation.rebuyables[i] - 75
+      )
+    );
+  }
+  if (i === 4 && cost.gte(9e99)) {
+    cost = new Decimal(1e100).times(
+      Decimal.pow(1e5, player.dilation.rebuyables[i] - 23).times(
+        1.05 * player.dilation.rebuyables[i] - 23
+      )
+    );
+  }
+  return cost;
+};
+
+function updateDilationUpgradeCosts() {
+  for (let i = 1; i <= 4; i++) {
+    let cost = getDilRebuyableUpgCost(i);
+    document.getElementById("dil" + i + "cost").textContent =
+      "Cost: " +
+      formatValue(player.options.notation, cost, 1, 1) +
+      " dilated time";
+    if (i === 2 && cost.gte(new Decimal("1e9999")))
+      document.getElementById("dil2cost").textContent = "Maxed out";
+  }
+  for (let i = 5; i <= DIL_UPG_NUM; i++) {
+    document.getElementById("dil" + i + "cost").textContent =
+      "Cost: " + shortenCosts(DIL_UPG_COSTS[i]) + " dilated time";
+  }
+}
