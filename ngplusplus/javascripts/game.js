@@ -1284,8 +1284,9 @@ function updateDimensions() {
       "Infinity Dimensions multiplier based on unspent EP (x+1)<br>Currently: " +
       shortenMoney(player.eternityPoints.plus(1)) +
       "x<br>Cost: 5 EP";
+    var eter2 = player.achievements.includes("r145") ? "(x^log(x)^3.75)" : "((x/200)^log4(2x))"
     document.getElementById("eter2").innerHTML =
-      "Infinity Dimensions multiplier based on eternities ((x/200)^log4(2x))<br>Currently: " +
+      "Infinity Dimensions multiplier based on eternities " + eter2 + "<br>Currently: " +
       shortenMoney(eterUpg2Mult()) +
       "x<br>Cost: 10 EP";
     document.getElementById("eter3").innerHTML =
