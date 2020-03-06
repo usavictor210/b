@@ -1262,7 +1262,7 @@ function updateDimensions() {
           Math.min(50, player.offlineProd + 5)
         ) +
         "% of your best IP/min from last 10 infinities, works offline<br>Currently: " +
-        shortenMoney(bestRunIppm.times(player.offlineProd / 100)) +
+        shortenMoney(new Decimal(bestRunIppm).times(player.offlineProd / 100)) +
         "IP/min<br> Cost: " +
         shortenCosts(player.offlineProdCost) +
         " IP";
@@ -1271,7 +1271,7 @@ function updateDimensions() {
           "Generate " +
           player.offlineProd +
           "% of your best IP/min from last 10 infinities, works offline<br>Currently: " +
-          shortenMoney(bestRunIppm.times(player.offlineProd / 100)) +
+          shortenMoney(new Decimal(bestRunIppm).times(player.offlineProd / 100)) +
           " IP/min";
     }
   }

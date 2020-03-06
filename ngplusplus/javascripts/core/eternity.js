@@ -1125,8 +1125,8 @@ const DIL_UPG_COSTS = [
   1e80,
   1e100,
   1e15,
-  1e20,
-  1e25
+  1e12,
+  2.5e14
 ];
 
 function buyDilationUpgrade(id, costInc) {
