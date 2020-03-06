@@ -4352,9 +4352,10 @@ function updateChallengeTimes() {
 }
 
 // so i know why you cannot get "Oh hey, you're still here" in aarex's mods, because for some reason bestrunippm is still 0"
+// tempbest is bugged for whatever reason
 var bestRunIppm = new Decimal(0);
 function updateLastTenRuns() {
-  var tempBest = new Decimal(0);
+  var tempBest = 0;
   var tempTime = new Decimal(0);
   var tempIP = new Decimal(0);
   for (var i = 0; i < 10; i++) {
