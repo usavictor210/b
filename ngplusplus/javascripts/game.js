@@ -4362,7 +4362,7 @@ function updateLastTenRuns() {
   tempTime = tempTime.dividedBy(10);
   tempIP = tempIP.dividedBy(10);
   for (var i = 0; i < 10; i++) {
-    var ippm = player.lastTenRuns[i][1].dividedBy(
+    var ippm = new Decimal("player.lastTenRuns[i][1]").div(
       player.lastTenRuns[i][0] / 600
     );
     if (ippm.gt(tempBest)) tempBest = ippm;
@@ -7058,7 +7058,7 @@ function gameLoop(diff) {
   }
 
   player.infinityPoints = player.infinityPoints.plus(
-    bestRunIppm.times(player.offlineProd / 100).times(diff / 600)
+   new Decimal(bestRunIppm).times(player.offlineProd / 100).times(diff / 600)
   );
 
   if (
