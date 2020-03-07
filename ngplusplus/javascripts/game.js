@@ -6800,6 +6800,14 @@ function gameLoop(diff) {
     }
   }
 
+  function getFullExpansion(num) {
+	if (num === null) return "NaN"
+	if (isNaN(num)) return "NaN"
+	if (!break_infinity_js && typeof(num) != "number") if (isNaN(num.logarithm)) return "NaN"
+	if (num > 1e12) return shorten(num)
+	return num.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")
+}
+
   var shiftRequirement = getShiftRequirement(0);
 
   if (
