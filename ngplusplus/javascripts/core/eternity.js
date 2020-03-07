@@ -1267,7 +1267,7 @@ function getDilExp() {
 
 function getDilGain() {
   // formula: log10(antimatter)/400^((1.5)+0.25(times bought formula upgrade))*(3^(times bought 3x TP upgrade))
-  return Decimal.pow(Decimal.log10(player.money) / 400, getDilExp()).times(
+  return Decimal.pow(Decimal.log10(player.money) / (400-(0.75-getDilPunish())*10), getDilExp()).times(
     Decimal.pow(3, player.dilation.rebuyables[3])
   );
 }
@@ -1285,8 +1285,7 @@ function getDilReq() {
 
 function getDilPunish() {
   let x = 0.75;
-  if (player.dilation.unstable.severity > 0)
-    x = x ** (player.dilation.unstable.severity ** 0.25);
+  x = x ** (calculateDilationSeverity() ** 0.25);
   return x;
 }
 

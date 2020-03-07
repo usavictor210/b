@@ -583,6 +583,7 @@ function updateQuantum() {
   document.getElementById("quarkAmount").textContent = `You have ${shortenDimensions(player.quantum.quarks)} quark` + plural2 + `.`
   document.getElementById("unstableShardAmount").textContent = player.dilation.unstable.shards
   //document.getElementById("totalInvest").textContent = `You have invested a total of ${shortenDimensions(getTotalInvestmentAmount())} quark` + plural3 + `.`
+  document.getElementById("dilationseverity").textContent = "Dilation's penalty on all dimensions is x^" + getDilPunish().toFixed(3) + "."
 }
 
 function updateLastTenQuantums() {

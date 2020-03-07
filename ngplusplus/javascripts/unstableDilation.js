@@ -38,7 +38,7 @@ function checkUnstableDilationButton() {
 function calculateDilationSeverity() {
   var x = player.dilation.unstable.times
   if (x > 2) player.dilation.unstable.times**1.05 // x^1.05
-  document.getElementById("dilationseverity").textContent = "Dilation's penalty on all dimensions is x^" + getDilPunish().toFixed(3) + "."
+  if (x < 1 || isNaN(x)) x = 1
   return x
 }
 
