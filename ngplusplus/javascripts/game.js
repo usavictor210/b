@@ -5829,16 +5829,7 @@ function gameLoop(diff) {
     }
   }
 
-  var estimate = Math.max((Math.log(Number.MAX_VALUE) - current) / est, 0);
-  document.getElementById("replicantiapprox").textContent =
-    "Approximately " +
-    timeDisplay(estimate * 10) +
-    " until infinite Replicanti";
-
-  document.getElementById("replicantiamount").textContent = shortenDimensions(
-    player.replicanti.amount
-  );
-
+  updateReplicantiText()
   updateEternityButton();
   document.getElementById("metaCost").innerHTML = shortenCosts(1e24);
 
