@@ -5672,7 +5672,7 @@ function gameLoop(diff) {
   let interval = player.replicanti.interval;
   if (player.timestudy.studies.includes(62)) interval = interval / 3;
   if (
-    player.timestudy.studies.includes(133) ||
+    player.timestudy.studies.includes(133) && !player.achievements.includes("r143") ||
     player.replicanti.amount.gt(Number.MAX_VALUE)
   )
     interval *= 10;
@@ -6964,16 +6964,13 @@ function simulateTime(seconds, real) {
     autoBuyerTick();
     if (real) console.log(ticksDone);
   }
-  var popupCount = 0
   var popupString = "While you were away";
   if (player.money.gt(playerStart.money))
-    popupCount++
     popupString +=
       ",<br> your antimatter increased by " +
       shortenMoney(player.money.log10() - playerStart.money.log10()) +
       " orders of magnitude";
   if (player.infinityPower.gt(playerStart.infinityPower))
-    popupCount++
     popupString +=
       ",<br> your infinity power increased by " +
       shortenMoney(
@@ -6982,7 +6979,6 @@ function simulateTime(seconds, real) {
       ) +
       " orders of magnitude";
   if (player.timeShards.gt(playerStart.timeShards))
-    popupCount++
     popupString +=
       ",<br> your time shards increased by " +
       shortenMoney(
@@ -6991,7 +6987,6 @@ function simulateTime(seconds, real) {
       ) +
       " orders of magnitude";
   if (player.meta.antimatter.gt(startingMetaAntimatter))
-    popupCount++
     popupString +=
       ",<br> your meta-antimatter increased by " +
       shortenMoney(
@@ -7006,7 +7001,6 @@ function simulateTime(seconds, real) {
     popupString += ",";
   else popupString += ".";
   if (player.infinitied > playerStart.infinitied)
-    popupCount++
     popupString +=
       "<br>you infinitied " +
       formatInfOrEter(player.infinitied - playerStart.infinitied) +

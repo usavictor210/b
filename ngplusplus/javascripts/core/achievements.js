@@ -226,13 +226,13 @@ function updateAchievements() {
               n++
               document.getElementById(name).className = "achievementunlocked"
             } catch (e) {
-              throw new Error('No achievement ' + name);
+              throw new Error('No achievement found with ' + name);
             }
           } else {
             try {
               document.getElementById(name).className = "achievementlocked"
             } catch (e) {
-              throw new Error('No achievement ' + name);
+              throw new Error('No achievement found with ' + name);
             }
           }
       }
