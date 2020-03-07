@@ -5579,11 +5579,64 @@ function gameLoop(diff) {
       updateChallenges();
     }
   }
-replicantiInterval()
-var current = player.replicanti.amount.ln();
-var est = (Math.log(player.replicanti.chance + 1) * 1000) / interval;
-var estimate = Math.max((Math.log(Number.MAX_VALUE) - current) / est, 0);
-replicantiGrow()
+
+   let interval = player.replicanti.interval
+    if (player.timestudy.studies.includes(62)) interval = interval/10
+    if (player.timestudy.studies.includes(133) || player.replicanti.amount.gt(Number.MAX_VALUE)) interval *= 5
+    if (player.timestudy.studies.includes(213)) interval /= 100
+    if (player.replicanti.amount.lt(Number.MAX_VALUE) && player.achievements.includes("r134")) interval /= 2
+    if (player.replicanti.amount.gt(Number.MAX_VALUE)) interval = Math.max(interval * Math.pow(1.2, (player.replicanti.amount.log10() - 308)/308), interval)
+    var est = Math.log(player.replicanti.chance+1) * 1000 / interval
+
+    var current = player.replicanti.amount.ln()
+
+    if (player.replicanti.unl && (diff > 5 || interval < 50 || player.timestudy.studies.includes(192))) {
+        var gained = Decimal.pow(Math.E, current +(diff*est/10))
+        if (player.timestudy.studies.includes(192)) gained = Decimal.pow(Math.E, current +Math.log((diff*est/10) * (Math.log10(1.2)/308)+1) / (Math.log10(1.2)/308))
+        player.replicanti.amount = Decimal.min(Number.MAX_VALUE, gained)
+        if (player.timestudy.studies.includes(192)) player.replicanti.amount = gained
+        replicantiTicks = 0
+    } else {
+        if (interval <= replicantiTicks && player.replicanti.unl) {
+            if (player.replicanti.amount.lte(100)) {
+                var temp = player.replicanti.amount
+                for (var i=0; temp.gt(i); i++) {
+                    if (player.replicanti.chance > Math.random()) player.replicanti.amount = player.replicanti.amount.plus(1)
+                }
+            } else {
+                var temp = Decimal.round(player.replicanti.amount.dividedBy(100))
+                if (Math.round(player.replicanti.chance) !== 1) {
+                    let counter = 0
+                    for (var i=0; i<100; i++) {
+                        if (player.replicanti.chance > Math.random()) {
+                            counter++;
+                        }
+                    }
+                    player.replicanti.amount = Decimal.min(Number.MAX_VALUE, temp.times(counter).plus(player.replicanti.amount))
+                    if (player.timestudy.studies.includes(192)) player.replicanti.amount = temp.times(counter).plus(player.replicanti.amount)
+                    counter = 0
+                } else {
+                    if (player.timestudy.studies.includes(192)) player.replicanti.amount = player.replicanti.amount.times(2)
+                    else player.replicanti.amount = Decimal.min(Number.MAX_VALUE, player.replicanti.amount.times(2))
+
+                }
+            }
+            replicantiTicks -= interval
+        }
+
+    }
+    if (player.replicanti.amount !== 0) replicantiTicks += player.options.updateRate
+
+
+    if (current == Decimal.ln(Number.MAX_VALUE) && player.thisInfinityTime < 600*30) giveAchievement("Is this safe?");
+    if (player.replicanti.galaxies >= 10 && player.thisInfinityTime < 150) giveAchievement("The swarm");
+
+    if (player.replicanti.galaxybuyer && player.replicanti.amount.gte(Number.MAX_VALUE) && !player.timestudy.studies.includes(131)) {
+        document.getElementById("replicantireset").click()
+    }
+    if (player.timestudy.studies.includes(22) ? player.replicanti.interval !== 1 : (player.replicanti.interval !== 50)) document.getElementById("replicantiinterval").innerHTML = "Interval: "+(interval).toFixed(3)+"ms<br>-> "+Math.max(interval*0.9).toFixed(3)+" Costs: "+shortenCosts(player.replicanti.intervalCost)+" IP"
+    else document.getElementById("replicantiinterval").textContent = "Interval: "+(interval).toFixed(3)+"ms"
+
   if (player.infMultBuyer) {
     var dif = player.infinityPoints.e - player.infMultCost.e + 1;
     if (dif > 0) {
