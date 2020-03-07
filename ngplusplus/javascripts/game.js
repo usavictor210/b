@@ -5704,7 +5704,7 @@ function gameLoop(diff) {
   var est = (Math.log(player.replicanti.chance + 1) * 1000) / interval;
 
   var current = player.replicanti.amount.ln();
-
+  if (player.replicanti.amount.lt(1)) player.replicanti.amount = new Decimal (1)
   if (
     player.replicanti.unl &&
     (diff > 5 || interval < 50 || player.timestudy.studies.includes(192))
@@ -5838,6 +5838,7 @@ function gameLoop(diff) {
   document.getElementById("replicantiamount").textContent = shortenDimensions(
     player.replicanti.amount
   );
+
 
   updateEternityButton();
   document.getElementById("metaCost").innerHTML = shortenCosts(1e24);
