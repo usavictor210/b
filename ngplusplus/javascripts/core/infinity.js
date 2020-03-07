@@ -618,7 +618,9 @@ function replicantiInterval() {
         ),
       interval
     );
+}
 
+function replicantiGrow() {
   if (
     player.replicanti.unl &&
     (diff > 5 || interval < 50 || player.timestudy.studies.includes(192))

@@ -5579,13 +5579,11 @@ function gameLoop(diff) {
       updateChallenges();
     }
   }
-
 replicantiInterval()
-
-var est = (Math.log(player.replicanti.chance + 1) * 1000) / interval;
 var current = player.replicanti.amount.ln();
+var est = (Math.log(player.replicanti.chance + 1) * 1000) / interval;
 var estimate = Math.max((Math.log(Number.MAX_VALUE) - current) / est, 0);
-
+replicantiGrow()
   if (player.infMultBuyer) {
     var dif = player.infinityPoints.e - player.infMultCost.e + 1;
     if (dif > 0) {
