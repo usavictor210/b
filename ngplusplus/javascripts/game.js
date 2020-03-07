@@ -3293,6 +3293,10 @@ function setAchieveTooltip() {
       shortenCosts(1e100) +
       " IP without any infinities or first dimensions. Reward: Gain a IP multiplier based on time spent this infinity."
   );
+  eternitiesareinfinity.setAttribute(
+    "ach-tooltip",
+    "Eternity in under 200ms. Reward: Longer eternities give more eternitied stat, up to 30x eternity stat multiplier. Currently: " + r124Mult() + "x more eternities"
+  );
   layer.setAttribute(
     "ach-tooltip",
     "Reach " + shortenMoney(Number.MAX_VALUE) + " EP."
@@ -7507,6 +7511,8 @@ function closeToolTip() {
   var elements = document.getElementsByClassName("popup");
   for (var i = 0; i < elements.length; i++) elements[i].style.display = "none";
 }
+
+setAchieveTooltip();
 
 setInterval(function() {
   save_game();

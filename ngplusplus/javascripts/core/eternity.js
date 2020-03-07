@@ -981,8 +981,12 @@ function calculateEternitiedGain() {
       Math.floor(Decimal.pow(player.dilation.dilatedTime, 0.1).toNumber()); // If you have eternities and DT power up each other (x^0.1)
   if (player.achievements.includes("r155")) base = base * 100; // If you have Sub-atomic (x100 eternitied stat gain)
   if (player.achievements.includes("r124"))
-    base = base * Math.min(Math.sqrt(player.thisEternity / 20), 30); // If you have "Eternities are the new infinity"
+    base = base * r124Mult() // If you have "Eternities are the new infinity"
   return base; // grand total
+}
+
+function r124Mult() {
+return Math.min(Math.sqrt(player.thisEternity / 12.5), 30)
 }
 
 function gainedEternityPoints() {
