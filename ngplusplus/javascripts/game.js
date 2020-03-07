@@ -3140,9 +3140,11 @@ function setAchieveTooltip() {
   let speed2 = document.getElementById("I brake for nobody");
   let overdrive = document.getElementById("MAXIMUM OVERDRIVE");
   let minute = document.getElementById("4.3333 minutes of Infinity");
-  let longlasting = document.getElementById("Long lasting relationship")
+  let longlasting = document.getElementById("Long lasting relationship");
   let infiniteIP = document.getElementById("Can you get infinite IP?");
-  let eternitiesareinfinity = document.getElementById("Eternities are the new infinity")
+  let eternitiesareinfinity = document.getElementById(
+    "Eternities are the new infinity"
+  );
   let over9000 = document.getElementById("IT'S OVER 9000");
   let dawg = document.getElementById(
     "Yo dawg, I heard you liked infinities..."
@@ -3295,12 +3297,16 @@ function setAchieveTooltip() {
   );
   eternitiesareinfinity.setAttribute(
     "ach-tooltip",
-    "Eternity in under 200ms. Reward: Longer eternities give more eternitied stat, up to 30x eternity stat multiplier. Currently: " + r124Mult().toFixed(2) + "x more eternities"
+    "Eternity in under 200ms. Reward: Longer eternities give more eternitied stat, up to 30x eternity stat multiplier. Currently: " +
+      r124Mult().toFixed(2) +
+      "x more eternities"
   );
   longlasting.setAttribute(
     "ach-tooltip",
-    "Have your Infinity power per second exceed your infinity power for 60 consecutive seconds during a single infinity. Reward: Infinity Dimensions gain a multiplier based on EC1's reward to the power of 10. Currently: " + shortenDimensions((timeMultUpg(4, 1).pow(10))) + "x"
-  )
+    "Have your Infinity power per second exceed your infinity power for 60 consecutive seconds during a single infinity. Reward: Infinity Dimensions gain a multiplier based on EC1's reward to the power of 10. Currently: " +
+      shortenDimensions(timeMultUpg(4, 1).pow(10)) +
+      "x"
+  );
   layer.setAttribute(
     "ach-tooltip",
     "Reach " + shortenMoney(Number.MAX_VALUE) + " EP."
@@ -4736,7 +4742,8 @@ function updateDilation() {
   }
 }
 
-function getNewInfReq() { // unlock the infinity dimensions
+function getNewInfReq() {
+  // unlock the infinity dimensions
   if (!player.infDimensionsUnlocked[0]) return new Decimal("1e1100");
   else if (!player.infDimensionsUnlocked[1]) return new Decimal("1e1900");
   else if (!player.infDimensionsUnlocked[2]) return new Decimal("1e2400");
@@ -4747,7 +4754,8 @@ function getNewInfReq() { // unlock the infinity dimensions
   else return new Decimal("1e60000");
 }
 
-function newDimension() { // get the infinity dimensions
+function newDimension() {
+  // get the infinity dimensions
   if (player.money.gte(getNewInfReq())) {
     if (!player.infDimensionsUnlocked[0])
       player.infDimensionsUnlocked[0] = true;
@@ -4788,7 +4796,8 @@ setInterval(function() {
   });
 }, 60000);
 
-var nextAt = [ //ic unlock requirements
+var nextAt = [
+  //ic unlock requirements
   new Decimal("1e2000"),
   new Decimal("1e5000"),
   new Decimal("1e12000"),
@@ -4799,7 +4808,8 @@ var nextAt = [ //ic unlock requirements
   new Decimal("1e28000")
 ];
 
-var goals = [ //IC goals
+var goals = [
+  //IC goals
   new Decimal("1e850"),
   new Decimal("1e10500"),
   new Decimal("1e5000"),
@@ -5682,7 +5692,8 @@ function gameLoop(diff) {
   let interval = player.replicanti.interval;
   if (player.timestudy.studies.includes(62)) interval = interval / 3;
   if (
-    player.timestudy.studies.includes(133) && !player.achievements.includes("r143") ||
+    (player.timestudy.studies.includes(133) &&
+      !player.achievements.includes("r143")) ||
     player.replicanti.amount.gt(Number.MAX_VALUE)
   )
     interval *= 10;
@@ -5704,7 +5715,7 @@ function gameLoop(diff) {
   var est = (Math.log(player.replicanti.chance + 1) * 1000) / interval;
 
   var current = player.replicanti.amount.ln();
-  if (player.replicanti.amount.lt(1)) player.replicanti.amount = new Decimal (1)
+  if (player.replicanti.amount.lt(1)) player.replicanti.amount = new Decimal(1);
   if (
     player.replicanti.unl &&
     (diff > 5 || interval < 50 || player.timestudy.studies.includes(192))
@@ -5839,6 +5850,9 @@ function gameLoop(diff) {
     player.replicanti.amount
   );
 
+  document.getElementById("replicantimult").textContent = shortenDimensions(
+    getReplMult()
+  );
 
   updateEternityButton();
   document.getElementById("metaCost").innerHTML = shortenCosts(1e24);
@@ -6285,7 +6299,8 @@ function gameLoop(diff) {
 
   calculateProgressBar();
 
-  function calculateProgressBar() { //even more aarex code...
+  function calculateProgressBar() {
+    //even more aarex code...
     document.getElementById("progressbar").className = "";
     if (document.getElementById("metadimensions").style.display == "block")
       doQuantumProgress();
@@ -6305,7 +6320,8 @@ function gameLoop(diff) {
     } else if (!player.break) {
       var percentage =
         Math.min(
-          (Decimal.log10(player.money.plus(1)) / Decimal.log10(Number.MAX_VALUE)) *
+          (Decimal.log10(player.money.plus(1)) /
+            Decimal.log10(Number.MAX_VALUE)) *
             100,
           100
         ).toFixed(2) + "%";
@@ -6316,9 +6332,10 @@ function gameLoop(diff) {
         .setAttribute("ach-tooltip", "Percentage to Infinity");
     } else if (player.infDimensionsUnlocked.includes(false)) {
       var percentage =
-        Math.min((player.money.e / Decimal.log10(getNewInfReq())) * 100, 100).toFixed(
-          2
-        ) + "%";
+        Math.min(
+          (player.money.e / Decimal.log10(getNewInfReq())) * 100,
+          100
+        ).toFixed(2) + "%";
       document.getElementById("progressbar").style.width = percentage;
       document.getElementById("progresspercent").textContent = percentage;
       document
@@ -6458,7 +6475,7 @@ function gameLoop(diff) {
 
   function doQuantumProgress() {
     id = 1;
-    var className = id > 4 ? "idekProgress" : "quantumProgress"
+    var className = id > 4 ? "idekProgress" : "quantumProgress";
     if (document.getElementById("progressbar").className != className)
       document.getElementById("progressbar").className = className;
     if (id == 1) {
@@ -6801,12 +6818,13 @@ function gameLoop(diff) {
   }
 
   function getFullExpansion(num) {
-	if (num === null) return "NaN"
-	if (isNaN(num)) return "NaN"
-	if (!break_infinity_js && typeof(num) != "number") if (isNaN(num.logarithm)) return "NaN"
-	if (num > 1e12) return shorten(num)
-	return num.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")
-}
+    if (num === null) return "NaN";
+    if (isNaN(num)) return "NaN";
+    if (!break_infinity_js && typeof num != "number")
+      if (isNaN(num.logarithm)) return "NaN";
+    if (num > 1e12) return shorten(num);
+    return num.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+  }
 
   var shiftRequirement = getShiftRequirement(0);
 
@@ -7462,7 +7480,7 @@ function showAchTab(tabName) {
   }
 }
 
-function init() { 
+function init() {
   //setup the onclick callbacks for the buttons
   document.getElementById("dimensionsbtn").onclick = function() {
     showTab("dimensions");
