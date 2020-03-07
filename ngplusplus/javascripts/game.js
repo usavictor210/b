@@ -3299,8 +3299,8 @@ function setAchieveTooltip() {
   );
   longlasting.setAttribute(
     "ach-tooltip",
-    "" + (timeMultUpg(4, 1).pow(10)) + "x"
-  )}
+    "Have your Infinity power per second exceed your infinity power for 60 consecutive seconds during a single infinity. Reward: Infinity Dimensions gain a multiplier based on EC1's reward to the power of 10. Currently: " + shortenDimensions((timeMultUpg(4, 1).pow(10))) + "x"
+  )
   layer.setAttribute(
     "ach-tooltip",
     "Reach " + shortenMoney(Number.MAX_VALUE) + " EP."
