@@ -742,15 +742,6 @@ function sacrificeConf() {
   player.options.sacrificeConfirmation = !player.options.sacrificeConfirmation;
 }
 
-let getTotalRGs = function() {
-  let extraGals = player.replicanti.galaxies;
-  if (player.timestudy.studies.includes(225))
-    extraGals += Math.floor(player.replicanti.amount.e / 1000);
-  if (player.timestudy.studies.includes(226))
-    extraGals += Math.floor(player.replicanti.gal / 15);
-  return extraGals;
-};
-
 function formatInfOrEter(x) {
   if (x < 1e12) {
     return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
@@ -759,98 +750,7 @@ function formatInfOrEter(x) {
   }
 }
 
-function updateDimensions() {
-  if (
-    document.getElementById("antimatterdimensions").style.display == "block" &&
-    document.getElementById("dimensions").style.display == "block"
-  ) {
-    for (let tier = 1; tier <= 8; ++tier) {
-      var name = TIER_NAMES[tier];
-      if (
-        !canBuyDimension(tier) &&
-        document.getElementById(name + "Row").style.display !== "table-row"
-      ) {
-        break;
-      }
-      document.getElementById(name + "D").childNodes[0].nodeValue =
-        DISPLAY_NAMES[tier] +
-        " Dimension x" +
-        formatValue(
-          player.options.notation,
-          getDimensionFinalMultiplier(tier),
-          1,
-          1
-        );
-      document.getElementById(
-        name + "Amount"
-      ).textContent = getDimensionDescription(tier);
-    }
-
-    for (let tier = 1; tier <= 8; ++tier) {
-      var name = TIER_NAMES[tier];
-      if (!canBuyDimension(tier)) {
-        break;
-      }
-
-      document.getElementById(name + "Row").style.display = "table-row";
-      document.getElementById(name + "Row").style.visibility = "visible";
-    }
-
-    var shiftRequirement = getShiftRequirement(0);
-    if (
-      player.currentChallenge == "challenge4"
-        ? shiftRequirement.tier < 6
-        : shiftRequirement.tier < 8
-    ) {
-      document.getElementById("resetLabel").textContent =
-        "Dimension Shift (" +
-        player.resets +
-        "): requires " +
-        shiftRequirement.amount +
-        " " +
-        DISPLAY_NAMES[shiftRequirement.tier] +
-        " Dimensions";
-    } else
-      document.getElementById("resetLabel").textContent =
-        "Dimension Boost (" +
-        player.resets +
-        "): requires " +
-        shiftRequirement.amount +
-        " " +
-        DISPLAY_NAMES[shiftRequirement.tier] +
-        " Dimensions";
-
-    if (
-      player.currentChallenge == "challenge4"
-        ? player.resets > 2
-        : player.resets > 3
-    ) {
-      document.getElementById("softReset").textContent =
-        "Reset your Dimensions for a Boost";
-    } else {
-      document.getElementById("softReset").textContent =
-        "Reset your Dimensions for a new Dimension";
-    }
-    let extraGals = getTotalRGs();
-    var galString = "";
-    if (player.galaxies >= 800) galString += "Remote Antimatter Galaxies (";
-    else if (
-      player.galaxies >= getGalaxyCostScalingStart() ||
-      player.currentEternityChall === "eterc5"
-    )
-      galString += "Distant Antimatter Galaxies (";
-    else galString += "Antimatter Galaxies (";
-    galString += player.galaxies;
-    if (extraGals > 0) galString += " + " + extraGals;
-    if (player.dilation.freeGalaxies > 0)
-      galString += " + " + player.dilation.freeGalaxies;
-    galString += "): requires " + getGalaxyRequirement();
-    if (player.currentChallenge == "challenge4")
-      galString += " Sixth Dimensions";
-    else galString += " Eighth Dimensions";
-    document.getElementById("secondResetLabel").textContent = galString;
-  }
-
+  updateDimensions()
   updateMetaDimensions();
 
   if (canBuyTickSpeed() || player.currentEternityChall == "eterc9") {
@@ -1201,7 +1101,7 @@ function updateDimensions() {
     } else
       document.getElementById("enabledilation").textContent = "Dilate time.";
   }
-}
+
 
 function updateCosts() {
   document.getElementById("first").textContent =
@@ -5679,127 +5579,12 @@ function gameLoop(diff) {
       updateChallenges();
     }
   }
-  let interval = player.replicanti.interval;
-  if (player.timestudy.studies.includes(62)) interval = interval / 3;
-  if (
-    player.timestudy.studies.includes(133) && !player.achievements.includes("r143") ||
-    player.replicanti.amount.gt(Number.MAX_VALUE)
-  )
-    interval *= 10;
-  if (player.timestudy.studies.includes(213)) interval /= 20;
-  if (
-    player.replicanti.amount.lt(Number.MAX_VALUE) &&
-    player.achievements.includes("r134")
-  )
-    interval /= 2;
-  if (player.replicanti.amount.gt(Number.MAX_VALUE))
-    interval = Math.max(
-      interval *
-        Math.pow(
-          getReplSpeed(),
-          (player.replicanti.amount.log10() - 308) / 308
-        ),
-      interval
-    );
-  var est = (Math.log(player.replicanti.chance + 1) * 1000) / interval;
 
-  var current = player.replicanti.amount.ln();
+replicantiInterval()
 
-  if (
-    player.replicanti.unl &&
-    (diff > 5 || interval < 50 || player.timestudy.studies.includes(192))
-  ) {
-    var gained = Decimal.pow(Math.E, current + (diff * est) / 10);
-    let c = Math.log10(getReplSpeed()) / 308;
-    if (player.timestudy.studies.includes(192)) {
-      gained = Decimal.pow(
-        Math.E,
-        current + Math.log(((diff * est) / 10) * c + 1) / c
-      );
-    }
-    player.replicanti.amount = Decimal.min(Number.MAX_VALUE, gained);
-    if (player.timestudy.studies.includes(192))
-      player.replicanti.amount = gained;
-    replicantiTicks = 0;
-  } else {
-    if (interval <= replicantiTicks && player.replicanti.unl) {
-      if (player.replicanti.amount.lte(100)) {
-        var temp = player.replicanti.amount;
-        for (var i = 0; temp.gt(i); i++) {
-          if (player.replicanti.chance > Math.random())
-            player.replicanti.amount = player.replicanti.amount.plus(1);
-        }
-      } else {
-        var temp = Decimal.round(player.replicanti.amount.dividedBy(100));
-        if (Math.round(player.replicanti.chance) !== 1) {
-          let counter = 0;
-          for (var i = 0; i < 100; i++) {
-            if (player.replicanti.chance > Math.random()) {
-              counter++;
-            }
-          }
-          player.replicanti.amount = Decimal.min(
-            Number.MAX_VALUE,
-            temp.times(counter).plus(player.replicanti.amount)
-          );
-          if (player.timestudy.studies.includes(192))
-            player.replicanti.amount = temp
-              .times(counter)
-              .plus(player.replicanti.amount);
-          counter = 0;
-        } else {
-          if (player.timestudy.studies.includes(192))
-            player.replicanti.amount = player.replicanti.amount.times(2);
-          else
-            player.replicanti.amount = Decimal.min(
-              Number.MAX_VALUE,
-              player.replicanti.amount.times(2)
-            );
-        }
-      }
-      replicantiTicks -= interval;
-    }
-  }
-  if (player.replicanti.amount !== 0)
-    replicantiTicks += player.options.updateRate;
-
-  if (
-    current == Decimal.ln(Number.MAX_VALUE) &&
-    player.thisInfinityTime < 600 * 30
-  )
-    giveAchievement("Is this safe?");
-  if (player.replicanti.galaxies >= 10 && player.thisInfinityTime < 150)
-    giveAchievement("The swarm");
-
-  if (
-    player.replicanti.galaxybuyer &&
-    player.replicanti.amount.gte(Number.MAX_VALUE) &&
-    !player.timestudy.studies.includes(131)
-  ) {
-    document.getElementById("replicantireset").click();
-  } else if (
-    player.replicanti.galaxybuyer &&
-    player.replicanti.amount.gte(Number.MAX_VALUE) &&
-    player.timestudy.studies.includes(131) &&
-    player.achievements.includes("r143")
-  )
-    document.getElementById("replicantireset").click();
-  if (
-    player.timestudy.studies.includes(22)
-      ? player.replicanti.interval !== 1
-      : player.replicanti.interval !== 50
-  )
-    document.getElementById("replicantiinterval").innerHTML =
-      "Interval: " +
-      interval.toFixed(3) +
-      "ms<br>-> " +
-      Math.max(interval * 0.9).toFixed(3) +
-      " Costs: " +
-      shortenCosts(player.replicanti.intervalCost) +
-      " IP";
-  else
-    document.getElementById("replicantiinterval").textContent =
-      "Interval: " + interval.toFixed(3) + "ms";
+var est = (Math.log(player.replicanti.chance + 1) * 1000) / interval;
+var current = player.replicanti.amount.ln();
+var estimate = Math.max((Math.log(Number.MAX_VALUE) - current) / est, 0);
 
   if (player.infMultBuyer) {
     var dif = player.infinityPoints.e - player.infMultCost.e + 1;
@@ -5828,6 +5613,15 @@ function gameLoop(diff) {
           player.autobuyers[11].priority;
     }
   }
+
+  let getTotalRGs = function() {
+  let extraGals = player.replicanti.galaxies;
+  if (player.timestudy.studies.includes(225))
+    extraGals += Math.floor(player.replicanti.amount.e / 1000);
+  if (player.timestudy.studies.includes(226))
+    extraGals += Math.floor(player.replicanti.gal / 15);
+  return extraGals;
+  };
 
   updateReplicantiText()
   updateEternityButton();

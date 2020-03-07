@@ -571,3 +571,96 @@ function getDimensionProductionPerSecond(tier) {
     }
     return ret;
 }
+
+function updateDimensions() {
+  if (
+    document.getElementById("antimatterdimensions").style.display == "block" &&
+    document.getElementById("dimensions").style.display == "block"
+  ) {
+    for (let tier = 1; tier <= 8; ++tier) {
+      var name = TIER_NAMES[tier];
+      if (
+        !canBuyDimension(tier) &&
+        document.getElementById(name + "Row").style.display !== "table-row"
+      ) {
+        break;
+      }
+      document.getElementById(name + "D").childNodes[0].nodeValue =
+        DISPLAY_NAMES[tier] +
+        " Dimension x" +
+        formatValue(
+          player.options.notation,
+          getDimensionFinalMultiplier(tier),
+          1,
+          1
+        );
+      document.getElementById(
+        name + "Amount"
+      ).textContent = getDimensionDescription(tier);
+    }
+
+    for (let tier = 1; tier <= 8; ++tier) {
+      var name = TIER_NAMES[tier];
+      if (!canBuyDimension(tier)) {
+        break;
+      }
+
+      document.getElementById(name + "Row").style.display = "table-row";
+      document.getElementById(name + "Row").style.visibility = "visible";
+    }
+
+    var shiftRequirement = getShiftRequirement(0);
+    if (
+      player.currentChallenge == "challenge4"
+        ? shiftRequirement.tier < 6
+        : shiftRequirement.tier < 8
+    ) {
+      document.getElementById("resetLabel").textContent =
+        "Dimension Shift (" +
+        player.resets +
+        "): requires " +
+        shiftRequirement.amount +
+        " " +
+        DISPLAY_NAMES[shiftRequirement.tier] +
+        " Dimensions";
+    } else
+      document.getElementById("resetLabel").textContent =
+        "Dimension Boost (" +
+        player.resets +
+        "): requires " +
+        shiftRequirement.amount +
+        " " +
+        DISPLAY_NAMES[shiftRequirement.tier] +
+        " Dimensions";
+
+    if (
+      player.currentChallenge == "challenge4"
+        ? player.resets > 2
+        : player.resets > 3
+    ) {
+      document.getElementById("softReset").textContent =
+        "Reset your Dimensions for a Boost";
+    } else {
+      document.getElementById("softReset").textContent =
+        "Reset your Dimensions for a new Dimension";
+    }
+    let extraGals = getTotalRGs();
+    var galString = "";
+    if (player.galaxies >= 800) galString += "Remote Antimatter Galaxies (";
+    else if (
+      player.galaxies >= getGalaxyCostScalingStart() ||
+      player.currentEternityChall === "eterc5"
+    )
+      galString += "Distant Antimatter Galaxies (";
+    else galString += "Antimatter Galaxies (";
+    galString += player.galaxies;
+    if (extraGals > 0) galString += " + " + extraGals;
+    if (player.dilation.freeGalaxies > 0)
+      galString += " + " + player.dilation.freeGalaxies;
+    galString += "): requires " + getGalaxyRequirement();
+    if (player.currentChallenge == "challenge4")
+      galString += " Sixth Dimensions";
+    else galString += " Eighth Dimensions";
+    document.getElementById("secondResetLabel").textContent = galString;
+  }
+}
