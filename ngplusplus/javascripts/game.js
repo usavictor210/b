@@ -1271,7 +1271,9 @@ function updateDimensions() {
           "Generate " +
           player.offlineProd +
           "% of your best IP/min from last 10 infinities, works offline<br>Currently: " +
-          shortenMoney(new Decimal(bestRunIppm).times(player.offlineProd / 100)) +
+          shortenMoney(
+            new Decimal(bestRunIppm).times(player.offlineProd / 100)
+          ) +
           " IP/min";
     }
   }
@@ -1284,9 +1286,13 @@ function updateDimensions() {
       "Infinity Dimensions multiplier based on unspent EP (x+1)<br>Currently: " +
       shortenMoney(player.eternityPoints.plus(1)) +
       "x<br>Cost: 5 EP";
-    var eter2 = player.achievements.includes("r145") ? "(x^log(x)^3.75)" : "((x/200)^log4(2x))"
+    var eter2 = player.achievements.includes("r145")
+      ? "(x^log(x)^3.75)"
+      : "((x/200)^log4(2x))";
     document.getElementById("eter2").innerHTML =
-      "Infinity Dimensions multiplier based on eternities " + eter2 + "<br>Currently: " +
+      "Infinity Dimensions multiplier based on eternities " +
+      eter2 +
+      "<br>Currently: " +
       shortenMoney(eterUpg2Mult()) +
       "x<br>Cost: 10 EP";
     document.getElementById("eter3").innerHTML =
@@ -1353,6 +1359,11 @@ function updateDimensions() {
           "Disable dilation.<br>Reach " +
           shortenMoney(req) +
           " antimatter to gain more Tachyon Particles.";
+      } else if (player.infinityPoints.lte(Number.MAX_VALUE)) {
+        document.getElementById("enabledilation").textContent =
+          "You need to get " +
+          shortenMoney(Number.MAX_VALUE) +
+          " IP in dilation to gain Tachyon Particles.";
       } else {
         document.getElementById(
           "enabledilation"
@@ -4335,7 +4346,8 @@ function updateChallengeTimes() {
     temp += player.challengeTimes[i];
   }
   document.getElementById("challengetimesum").textContent =
-    "The sum of challenge time records is " + timeDisplayShort(temp); + "."
+    "The sum of challenge time records is " + timeDisplayShort(temp);
+  +".";
 
   temp = 0;
   for (var i = 0; i < 8; i++) {
@@ -4347,42 +4359,60 @@ function updateChallengeTimes() {
     temp += player.infchallengeTimes[i];
   }
   document.getElementById("infchallengetimesum").textContent =
-    "The sum of infinity challenge time records is " + timeDisplayShort(temp); + "."
+    "The sum of infinity challenge time records is " + timeDisplayShort(temp);
+  +".";
   updateWorstChallengeTime();
 }
 
 // so i know why you cannot get "Oh hey, you're still here" in aarex's mods, because for some reason bestrunippm is still 0"
 // tempbest is bugged for whatever reason and will be at 0.
 // copied and pasted vanilla code and now it works. weird.
-var bestRunIppm = new Decimal(0)
+var bestRunIppm = new Decimal(0);
 function updateLastTenRuns() {
-    let tempBest = 0
-    var tempTime = new Decimal(0)
-    var tempIP = new Decimal(0)
-    for (var i=0; i<10;i++) {
-        tempTime = tempTime.plus(player.lastTenRuns[i][0])
-        tempIP = tempIP.plus(player.lastTenRuns[i][1])
-    }
-    tempTime = tempTime.dividedBy(10)
-    tempIP = tempIP.dividedBy(10)
-    for (var i=0; i<10; i++) {
-        var ippm = player.lastTenRuns[i][1].dividedBy(player.lastTenRuns[i][0]/600)
-        if (ippm.gt(tempBest)) tempBest = ippm
-        var tempstring = shorten(ippm) + " IP/min"
-        if (ippm<1) tempstring = shorten(ippm*60) + " IP/hour"
-        var plural = i == 0 ? " infinity" : " infinities"
-        document.getElementById("run"+(i+1)).textContent = "The infinity "+ (i+1) + plural + " ago took " + timeDisplayShort(player.lastTenRuns[i][0]) + " and gave " + shortenDimensions(player.lastTenRuns[i][1]) +" IP. "+ tempstring
-    }
+  let tempBest = 0;
+  var tempTime = new Decimal(0);
+  var tempIP = new Decimal(0);
+  for (var i = 0; i < 10; i++) {
+    tempTime = tempTime.plus(player.lastTenRuns[i][0]);
+    tempIP = tempIP.plus(player.lastTenRuns[i][1]);
+  }
+  tempTime = tempTime.dividedBy(10);
+  tempIP = tempIP.dividedBy(10);
+  for (var i = 0; i < 10; i++) {
+    var ippm = player.lastTenRuns[i][1].dividedBy(
+      player.lastTenRuns[i][0] / 600
+    );
+    if (ippm.gt(tempBest)) tempBest = ippm;
+    var tempstring = shorten(ippm) + " IP/min";
+    if (ippm < 1) tempstring = shorten(ippm * 60) + " IP/hour";
+    var plural = i == 0 ? " infinity" : " infinities";
+    document.getElementById("run" + (i + 1)).textContent =
+      "The infinity " +
+      (i + 1) +
+      plural +
+      " ago took " +
+      timeDisplayShort(player.lastTenRuns[i][0]) +
+      " and gave " +
+      shortenDimensions(player.lastTenRuns[i][1]) +
+      " IP. " +
+      tempstring;
+  }
 
-    var ippm = tempIP.dividedBy(tempTime/600)
-    var tempstring = shorten(ippm) + " IP/min"
-    if (ippm<1) tempstring = shorten(ippm*60) + " IP/hour"
-    document.getElementById("averagerun").textContent = "Last 10 infinities average time: "+ timeDisplayShort(tempTime)+ " | Average IP gain: "+shortenDimensions(tempIP)+" IP. "+tempstring
+  var ippm = tempIP.dividedBy(tempTime / 600);
+  var tempstring = shorten(ippm) + " IP/min";
+  if (ippm < 1) tempstring = shorten(ippm * 60) + " IP/hour";
+  document.getElementById("averagerun").textContent =
+    "Last 10 infinities average time: " +
+    timeDisplayShort(tempTime) +
+    " | Average IP gain: " +
+    shortenDimensions(tempIP) +
+    " IP. " +
+    tempstring;
 
-    if (tempBest.gte(1e8)) giveAchievement("Oh hey, you're still here");
-    if (tempBest.gte(1e300)) giveAchievement("MAXIMUM OVERDRIVE");
+  if (tempBest.gte(1e8)) giveAchievement("Oh hey, you're still here");
+  if (tempBest.gte(1e300)) giveAchievement("MAXIMUM OVERDRIVE");
 
-    bestRunIppm = tempBest
+  bestRunIppm = tempBest;
 }
 
 var averageEp = new Decimal(0);
@@ -4403,10 +4433,12 @@ function updateLastTenEternities() {
     if (eppm.gt(tempBest)) tempBest = eppm;
     var tempstring = shorten(eppm) + " EP/min";
     if (eppm < 1) tempstring = shorten(eppm * 60) + " EP/hour";
-    var plural = i == 0 ? " eternity" : " eternities"
+    var plural = i == 0 ? " eternity" : " eternities";
     document.getElementById("eternityrun" + (i + 1)).textContent =
       "The Eternity " +
-      (i + 1) + plural + " ago took " +
+      (i + 1) +
+      plural +
+      " ago took " +
       timeDisplayShort(player.lastTenEternities[i][0]) +
       " and gave " +
       shortenDimensions(player.lastTenEternities[i][1]) +
@@ -5557,7 +5589,9 @@ function gameLoop(diff) {
     player.infinitied++;
   }
 
-  player.infinityPoints = player.infinityPoints.plus(new Decimal(bestRunIppm).times(player.offlineProd / 100).times(diff / 600));
+  player.infinityPoints = player.infinityPoints.plus(
+    new Decimal(bestRunIppm).times(player.offlineProd / 100).times(diff / 600)
+  );
 
   if (
     player.money.lte(Number.MAX_VALUE) ||
