@@ -6964,15 +6964,17 @@ function simulateTime(seconds, real) {
     autoBuyerTick();
     if (real) console.log(ticksDone);
   }
+  var popupCount = 0
   var popupString = "While you were away";
   if (player.money.gt(playerStart.money))
+    popupCount++
     popupString +=
       ",<br> your antimatter increased " +
       shortenMoney(player.money.log10() - playerStart.money.log10()) +
       " orders of magnitude";
   if (player.infinityPower.gt(playerStart.infinityPower))
     popupString +=
-      ",<br> infinity power increased " +
+      ",<br> your infinity power increased " +
       shortenMoney(
         player.infinityPower.log10() -
           Decimal.max(playerStart.infinityPower, 1).log10()
@@ -6980,7 +6982,7 @@ function simulateTime(seconds, real) {
       " orders of magnitude";
   if (player.timeShards.gt(playerStart.timeShards))
     popupString +=
-      ",<br> time shards increased " +
+      ",<br> your time shards increased " +
       shortenMoney(
         player.timeShards.log10() -
           Decimal.max(playerStart.timeShards, 1).log10()
@@ -7003,12 +7005,12 @@ function simulateTime(seconds, real) {
   if (player.infinitied > playerStart.infinitied)
     popupString +=
       "<br>you infinitied " +
-      (player.infinitied - playerStart.infinitied) +
+      formatInfOrEter(player.infinitied - playerStart.infinitied) +
       " times.";
   if (player.eternities > playerStart.eternities)
     popupString +=
       " <br>you eternitied " +
-      (player.eternities - playerStart.eternities) +
+      formatInfOrEter(player.eternities - playerStart.eternities) +
       " times.";
   if (popupString.length == 20) {
     popupString = popupString.slice(0, -1);
