@@ -6285,7 +6285,7 @@ function gameLoop(diff) {
 
   calculateProgressBar();
 
-  function calculateProgressBar() {
+  function calculateProgressBar() { //even more aarex code...
     document.getElementById("progressbar").className = "";
     if (document.getElementById("metadimensions").style.display == "block")
       doQuantumProgress();
@@ -6305,7 +6305,7 @@ function gameLoop(diff) {
     } else if (!player.break) {
       var percentage =
         Math.min(
-          (Decimal.log10(player.money.plus(1)) / Decimal.log10(getLimit())) *
+          (Decimal.log10(player.money.plus(1)) / new Decima) *
             100,
           100
         ).toFixed(2) + "%";
@@ -6316,7 +6316,7 @@ function gameLoop(diff) {
         .setAttribute("ach-tooltip", "Percentage to Infinity");
     } else if (player.infDimensionsUnlocked.includes(false)) {
       var percentage =
-        Math.min((player.money.e / getNewInfReq().money.e) * 100, 100).toFixed(
+        Math.min((player.money.e / Decimal.log10(getNewInfReq())) * 100, 100).toFixed(
           2
         ) + "%";
       document.getElementById("progressbar").style.width = percentage;
@@ -6388,7 +6388,7 @@ function gameLoop(diff) {
         .getElementById("progresspercent")
         .setAttribute(
           "ach-tooltip",
-          'Percentage to "That is what I have to do to get rid of you."'
+          'Percentage to "This is what I have to do to get rid of you."'
         );
     } else if (
       player.dilation.active &&
