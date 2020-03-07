@@ -3295,8 +3295,12 @@ function setAchieveTooltip() {
   );
   eternitiesareinfinity.setAttribute(
     "ach-tooltip",
-    "Eternity in under 200ms. Reward: Longer eternities give more eternitied stat, up to 30x eternity stat multiplier. Currently: " + r124Mult() + "x more eternities"
+    "Eternity in under 200ms. Reward: Longer eternities give more eternitied stat, up to 30x eternity stat multiplier. Currently: " + r124Mult().toFixed(2) + "x more eternities"
   );
+  longlasting.setAttribute(
+    "ach-tooltip",
+    "" + (timeMultUpg(4, 1).pow(10)) + "x"
+  )}
   layer.setAttribute(
     "ach-tooltip",
     "Reach " + shortenMoney(Number.MAX_VALUE) + " EP."
@@ -3323,7 +3327,7 @@ function setAchieveTooltip() {
     "ach-tooltip",
     "Reach " +
       shortenCosts(new Decimal("1e20000")) +
-      " replicanti. Reward: You gain replicanti 2 times faster under " +
+      " replicanti. Reward: You gain replicanti 2 times faster when you have below " +
       shortenMoney(Number.MAX_VALUE) +
       " replicanti."
   );
@@ -3331,7 +3335,7 @@ function setAchieveTooltip() {
     "ach-tooltip",
     "Eternity for " +
       shortenCosts(new Decimal("1e600")) +
-      " EP in 1 minute or less while dilated."
+      " EP in at most 1 minute while dilated."
   );
   thisis.setAttribute(
     "ach-tooltip",
@@ -3349,7 +3353,7 @@ function setAchieveTooltip() {
     "ach-tooltip",
     "Get " +
       formatValue(player.options.notation, 1e12, 0, 0) +
-      " eternities. Reward: Eternity upgrade 2 uses a better formula."
+      " eternities. Reward: Eternity Upgrade 2 uses a better formula."
   );
   neverenough.setAttribute(
     "ach-tooltip",
@@ -7512,8 +7516,6 @@ function closeToolTip() {
   for (var i = 0; i < elements.length; i++) elements[i].style.display = "none";
 }
 
-setAchieveTooltip();
-
 setInterval(function() {
   save_game();
 }, 30000);
@@ -7685,6 +7687,7 @@ var unspentBonus = 1;
 var postc8Mult = new Decimal(0);
 var ec10bonus = new Decimal(1);
 setInterval(function() {
+  setAchieveTooltip();
   totalMult = Math.pow(player.totalmoney.e + 1, 0.5);
   currentMult = Math.pow(player.money.e + 1, 0.5);
   if (player.timestudy.studies.includes(31))

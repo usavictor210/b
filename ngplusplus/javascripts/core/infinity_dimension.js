@@ -73,7 +73,7 @@ function eterUpg2Mult () {
   } else {
     let cappedEters = Math.min(player.eternities, 100000);
     return Decimal.pow(cappedEters/200 + 1, Math.log(cappedEters*2+1)/Math.log(4)).times(
-        new Decimal((player.eternities-100000)/200 + 1).times(Math.log((player.eternities- 100000)*2+1)/Math.log(4)).max(1))
+        new Decimal((player.eternities-100000)/200 + 1).times(Math.log((player.eternities-100000)*2+1)/Math.log(4)).max(1))
   }
 }
 
