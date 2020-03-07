@@ -1,4 +1,3 @@
-
 function eternity(force, auto) {
   if (
     (player.infinityPoints.gte(Number.MAX_VALUE) &&
@@ -433,7 +432,7 @@ function eternity(force, auto) {
         "inline-block";
     }
     updateAutobuyers();
-    player.money = getAntimatterOnReset()
+    player.money = getAntimatterOnReset();
     if (player.achievements.includes("r85"))
       player.infMult = player.infMult.times(4);
     if (player.achievements.includes("r93"))
@@ -858,7 +857,7 @@ function startEternityChallenge(name, startgoal, goalIncrease) {
         "inline-block";
     }
     updateAutobuyers();
-    player.money = getAntimatterOnReset()
+    player.money = getAntimatterOnReset();
     if (player.achievements.includes("r85"))
       player.infMult = player.infMult.times(4);
     if (player.achievements.includes("r93"))
@@ -975,11 +974,15 @@ function startDilatedEternity() {
 }
 
 function calculateEternitiedGain() {
-let base = 1 //eterGain
-if (player.dilation.upgrades.includes(12)) base = base * Math.floor(Decimal.pow(player.dilation.dilatedTime, 0.1).toNumber()) // If you have eternities and DT power up each other (x^0.1)
-if (player.achievements.includes("r155")) base = base*100 // If you have Sub-atomic (x100 eternitied stat gain)
-if (player.achievements.includes("r124")) base = base*Math.min(Math.sqrt(player.thisEternity/20), 30) // If you have "Eternities are the new infinity"
-return base // grand total
+  let base = 1; //eterGain
+  if (player.dilation.upgrades.includes(12))
+    base =
+      base *
+      Math.floor(Decimal.pow(player.dilation.dilatedTime, 0.1).toNumber()); // If you have eternities and DT power up each other (x^0.1)
+  if (player.achievements.includes("r155")) base = base * 100; // If you have Sub-atomic (x100 eternitied stat gain)
+  if (player.achievements.includes("r124"))
+    base = base * Math.min(Math.sqrt(player.thisEternity / 20), 30); // If you have "Eternities are the new infinity"
+  return base; // grand total
 }
 
 function gainedEternityPoints() {
@@ -1006,12 +1009,13 @@ function gainedEternityPoints() {
   return ret.floor();
 }
 
-function updateEternityButton() { //updates the eternity button based on your eternities and EP gained on eternity
-var currentEPmin = gainedEternityPoints().dividedBy(
-  player.thisEternity / 600
-);
-var EPminpeak = new Decimal(0);
-if (currentEPmin.gt(EPminpeak) && player.infinityPoints.gte(Number.MAX_VALUE))
+function updateEternityButton() {
+  //updates the eternity button based on your eternities and EP gained on eternity
+  var currentEPmin = gainedEternityPoints().dividedBy(
+    player.thisEternity / 600
+  );
+  var EPminpeak = new Decimal(0);
+  if (currentEPmin.gt(EPminpeak) && player.infinityPoints.gte(Number.MAX_VALUE))
     EPminpeak = currentEPmin;
   document.getElementById("eternitybtn").innerHTML =
     player.eternities == 0
@@ -1024,7 +1028,10 @@ if (currentEPmin.gt(EPminpeak) && player.infinityPoints.gte(Number.MAX_VALUE))
         " EP/min<br>Peaked at " +
         shortenDimensions(EPminpeak) +
         " EP/min";
-  if (gainedEternityPoints().gte(1e6) && !(gainedEternityPoints().gte(new Decimal("1e100000")))) {
+  if (
+    gainedEternityPoints().gte(1e6) &&
+    !gainedEternityPoints().gte(new Decimal("1e100000"))
+  ) {
     document.getElementById("eternitybtn").innerHTML =
       "Gain <b>" +
       shortenDimensions(gainedEternityPoints()) +
@@ -1037,8 +1044,10 @@ if (currentEPmin.gt(EPminpeak) && player.infinityPoints.gte(Number.MAX_VALUE))
     document.getElementById("eternitybtn").innerHTML =
       "Gain <b>" +
       shortenDimensions(gainedEternityPoints()) +
-      "</b> Eternity points.<br>" + "+"
-      + shortenDimensions(calculateEternitiedGain()) + " eternities"
+      "</b> Eternity points.<br>" +
+      "+" +
+      shortenDimensions(calculateEternitiedGain()) +
+      " eternities";
   }
   if (player.dilation.active)
     document.getElementById("eternitybtn").innerHTML =
@@ -1056,7 +1065,6 @@ if (currentEPmin.gt(EPminpeak) && player.infinityPoints.gte(Number.MAX_VALUE))
 }
 
 /* EC stuff here... */
-
 
 function unlockEChall(idx) {
   if (player.eternityChallUnlocked == 0) {
@@ -1078,7 +1086,6 @@ function ECTimesCompleted(name) {
 }
 
 /* Ok, I'm going to put dilation stuff here... */
-
 
 function unlockDilation() {
   if (player.dilation.studies.includes(1)) return;
@@ -1241,8 +1248,8 @@ function updateDilationUpgradeCosts() {
       "Cost: " +
       formatValue(player.options.notation, cost, 1, 1) +
       " dilated time";
-    if (i === 2 && cost.gte(new Decimal("1e9999")))
-      document.getElementById("dil2cost").textContent = "Maxed out";
+    if (cost.gte(new Decimal("1e9999")))
+      document.getElementById("dil" + i + "cost").textContent = "Maxed out";
   }
   for (let i = 5; i <= DIL_UPG_NUM; i++) {
     document.getElementById("dil" + i + "cost").textContent =
@@ -1251,10 +1258,11 @@ function updateDilationUpgradeCosts() {
 }
 
 function getDilExp() {
-  return 1.5 + player.dilation.rebuyables[4] * 0.25;
+  return 1.5 + player.dilation.rebuyables[4] * 0.25; // repeatable upgrade 4
 }
 
 function getDilGain() {
+  // formula: log10(antimatter)/400^((1.5)+0.25(times bought formula upgrade))*(3^(times bought 3x TP upgrade))
   return Decimal.pow(Decimal.log10(player.money) / 400, getDilExp()).times(
     Decimal.pow(3, player.dilation.rebuyables[3])
   );
@@ -1298,4 +1306,34 @@ function getDilTimeGainPerSecond() {
   if (player.dilation.upgrades.includes(16)) gain = gain.times(getDil16Bonus());
   if (player.dilation.upgrades.includes(18)) gain = gain.times(getDil18Bonus());
   return gain;
+}
+
+// DILATION UPGRADES (META DIMENSIONS)
+
+function getDil13Bonus () {
+  return 1 + Math.log10(1 - Math.min(0, player.tickspeed.log(10)));
+}
+
+function getDil14RealBonus() {
+  if (player.dilation.upgrades.includes(14)) {
+    return getDil14Bonus()
+  } else {
+    return 2;
+  }
+}
+
+function getDil14Bonus () {
+  return Math.log(player.dilation.dilatedTime.max(1e10).min(1e100).log(10)) / Math.log(10) + 1;
+}
+
+function getDil16Bonus () {
+  return Math.pow((player.meta.bestAntimatter.log10())/2.5, .5);
+}
+
+
+function getDil18Bonus() {
+var x = new Decimal((Math.log10(player.dilation.tachyonParticles)/4))
+if (isNaN(x) || x.lt(1)) x = new Decimal(1)
+if (x.gt(12.5)) x = x.pow(.75).max(12.5)
+return x
 }
