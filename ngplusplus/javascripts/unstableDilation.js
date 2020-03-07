@@ -5,6 +5,7 @@ var sacTPGain = player.dilation.unstable.sacrificedTP.add(player.dilation.tachyo
  if (confirm("Unstabilizing time dilation will result in harsher scaling, allowing you to get more TP, but dilation will reset in exchange for Unstable Shards and sacrificed TP. Are you prepared for this change?")) {
         eternity(true) // forced eternity
         player.dilation.unstable.sacrificedTP = sacTPGain
+        Decimal.add(player.dilation.unstable.shards, usGain)
         player.dilation.studies = player.dilation.studies, // resetting dilation
         player.dilation.active = false,
         player.dilation.tachyonParticles = new Decimal(0),
@@ -19,7 +20,6 @@ var sacTPGain = player.dilation.unstable.sacrificedTP.add(player.dilation.tachyo
             3: 0,
             4: 0
         }
-        Decimal.add(player.dilation.unstable.shards, usGain)
         
         player.dilation.unstable.times++ // this affects the penalty
         giveAchievement("Time Leaper")
@@ -39,7 +39,7 @@ function calculateDilationSeverity() {
   var x = player.dilation.unstable.times
   if (x > 2) player.dilation.unstable.times**1.05 // x^1.05
   document.getElementById("dilationseverity").textContent = "Dilation's penalty on all dimensions is x^" + getDilPunish().toFixed(3) + "."
-  return
+  return x
 }
 
 function timeLeaperMult() { // for time leaper achievement
