@@ -742,55 +742,6 @@ function sacrificeConf() {
   player.options.sacrificeConfirmation = !player.options.sacrificeConfirmation;
 }
 
-function getDilExp() {
-  return 1.5 + player.dilation.rebuyables[4] * 0.25;
-}
-
-function getDilGain() {
-  return Decimal.pow(Decimal.log10(player.money) / 400, getDilExp()).times(
-    Decimal.pow(3, player.dilation.rebuyables[3])
-  );
-}
-
-function getDilReq() {
-  return Decimal.pow(
-    10,
-    Math.pow(
-      player.dilation.totalTachyonParticles /
-        Math.pow(3, player.dilation.rebuyables[3]),
-      1 / getDilExp()
-    ) * 400
-  );
-}
-
-function getDilPunish() {
-  let x = 0.75;
-  if (player.dilation.unstable.severity > 0)
-    x = x ** (player.dilation.unstable.severity ** 0.25);
-  return x;
-}
-
-function getDilTimeGainPerSecond() {
-  let gain = player.dilation.tachyonParticles.times(
-    Math.pow(2, player.dilation.rebuyables[1]) * 2
-  ); // tachyon particle amount
-  //upgrades 7-9, 12 and 16
-  if (player.eternityUpgrades.includes(7))
-    gain = gain.times(1 + Math.log10(Math.max(1, player.money.log(10))) / 30);
-  if (player.eternityUpgrades.includes(8))
-    gain = gain.times(
-      1 + Math.log10(Math.max(1, player.infinityPoints.log(10))) / 16
-    );
-  if (player.eternityUpgrades.includes(9))
-    gain = gain.times(
-      1 + Math.log10(Math.max(1, player.eternityPoints.log(10))) / 8
-    );
-  if (player.dilation.upgrades.includes(12))
-    gain = gain.times(Math.pow(player.eternities, 0.1));
-  if (player.dilation.upgrades.includes(16)) gain = gain.times(getDil16Bonus());
-  if (player.dilation.upgrades.includes(18)) gain = gain.times(getDil18Bonus());
-  return gain;
-}
 
 function updateMetaDimensions() {
   if (
@@ -1421,7 +1372,7 @@ function updateCosts() {
 
   document.getElementById("tickSpeed").textContent =
     "Cost: " + shortenCosts(player.tickSpeedCost);
-    // see how much simple this is? I wonder why this wasn't done for the normal dimensions...
+  // see how much simple this is? I wonder why this wasn't done for the normal dimensions...
   for (var i = 1; i <= 8; i++) {
     document.getElementById("infMax" + i).textContent =
       "Cost: " + shortenCosts(player["infinityDimension" + i].cost) + " IP";
