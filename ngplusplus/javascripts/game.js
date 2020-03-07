@@ -3140,7 +3140,9 @@ function setAchieveTooltip() {
   let speed2 = document.getElementById("I brake for nobody");
   let overdrive = document.getElementById("MAXIMUM OVERDRIVE");
   let minute = document.getElementById("4.3333 minutes of Infinity");
+  let longlasting = document.getElementById("Long lasting relationship")
   let infiniteIP = document.getElementById("Can you get infinite IP?");
+  let eternitiesareinfinity = document.getElementById("Eternities are the new infinity")
   let over9000 = document.getElementById("IT'S OVER 9000");
   let dawg = document.getElementById(
     "Yo dawg, I heard you liked infinities..."
@@ -3553,7 +3555,7 @@ document.getElementById("sacrifice").onclick = function() {
   if (!document.getElementById("confirmation").checked) {
     if (
       !confirm(
-        "Dimensional Sacrifice will remove all of your first to seventh dimensions (with the cost and multiplier unchanged) for a boost to Eighth Dimension. It will take time to regain production."
+        "Dimensional Sacrifice will remove all of your first to seventh dimensions (with the cost and multiplier unchanged) for a boost to the Eighth Dimension. It will take time to regain production."
       )
     ) {
       return false;
@@ -4597,7 +4599,7 @@ function startChallenge(name, target) {
     if (player.infinitied >= 10) giveAchievement("That's a lot of infinites");
 
     document.getElementById("replicantireset").innerHTML =
-      "Reset replicanti amount, but get a free galaxy<br>" +
+      "Reset replicanti amount for a free galaxy.<br>" +
       player.replicanti.galaxies +
       " replicated galaxies created.";
 
@@ -4726,7 +4728,7 @@ function updateDilation() {
   }
 }
 
-function getNewInfReq() {
+function getNewInfReq() { // unlock the infinity dimensions
   if (!player.infDimensionsUnlocked[0]) return new Decimal("1e1100");
   else if (!player.infDimensionsUnlocked[1]) return new Decimal("1e1900");
   else if (!player.infDimensionsUnlocked[2]) return new Decimal("1e2400");
@@ -4737,7 +4739,7 @@ function getNewInfReq() {
   else return new Decimal("1e60000");
 }
 
-function newDimension() {
+function newDimension() { // get the infinity dimensions
   if (player.money.gte(getNewInfReq())) {
     if (!player.infDimensionsUnlocked[0])
       player.infDimensionsUnlocked[0] = true;
@@ -4778,7 +4780,7 @@ setInterval(function() {
   });
 }, 60000);
 
-var nextAt = [
+var nextAt = [ //ic unlock requirements
   new Decimal("1e2000"),
   new Decimal("1e5000"),
   new Decimal("1e12000"),
@@ -4789,7 +4791,7 @@ var nextAt = [
   new Decimal("1e28000")
 ];
 
-var goals = [
+var goals = [ //IC goals
   new Decimal("1e850"),
   new Decimal("1e10500"),
   new Decimal("1e5000"),

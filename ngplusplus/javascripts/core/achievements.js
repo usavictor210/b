@@ -224,6 +224,7 @@ function updateAchievements() {
           if (player.achievements.includes("r"+achNum)) {
             try {
               n++
+              amount++
               document.getElementById(name).className = "achievementunlocked"
             } catch (e) {
               throw new Error('No achievement found with ' + name);
@@ -237,7 +238,6 @@ function updateAchievements() {
           }
       }
       if (n == 8) {
-          amount++
           document.getElementById("achRow"+i).className = "completedrow"
       } else {
           document.getElementById("achRow"+i).className = ""
@@ -265,7 +265,7 @@ function updateAchievements() {
       }
   }
 
-  player.achPow = Decimal.pow(1.5, amount)
+  player.achPow = Decimal.pow(1.125, amount)
 
   document.getElementById("achmultlabel").textContent = "Current achievement multiplier on each Dimension: " + player.achPow.toFixed(1) + "x"
 
