@@ -6305,7 +6305,7 @@ function gameLoop(diff) {
     } else if (!player.break) {
       var percentage =
         Math.min(
-          (Decimal.log10(player.money.plus(1)) / new Decima) *
+          (Decimal.log10(player.money.plus(1)) / Decimal.log10(Number.MAX_VALUE)) *
             100,
           100
         ).toFixed(2) + "%";
@@ -6458,14 +6458,14 @@ function gameLoop(diff) {
 
   function doQuantumProgress() {
     id = 1;
+    var className = id > 4 ? "idekProgress" : "quantumProgress"
     if (document.getElementById("progressbar").className != className)
       document.getElementById("progressbar").className = className;
     if (id == 1) {
       var percentage =
         Math.min(
           (player.meta.antimatter.max(1).log10() /
-            Decimal.log10(Number.MAX_VALUE) /
-            power) *
+            Decimal.log10(Number.MAX_VALUE)) *
             100,
           100
         ).toFixed(2) + "%";
