@@ -1421,7 +1421,7 @@ function updateCosts() {
 
   document.getElementById("tickSpeed").textContent =
     "Cost: " + shortenCosts(player.tickSpeedCost);
-
+    // see how much simple this is? I wonder why this wasn't done for the normal dimensions...
   for (var i = 1; i <= 8; i++) {
     document.getElementById("infMax" + i).textContent =
       "Cost: " + shortenCosts(player["infinityDimension" + i].cost) + " IP";
