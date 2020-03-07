@@ -1,35 +1,23 @@
 function getInfinitiedGain() {
   let infGain = 1;
   if (player.thisInfinityTime > 50 && player.achievements.includes("r87")) {
-    infGain = 250;
+      infGain = 250;
   }
-  player.timestudy.studies.includes(32)
-    ? (infGain *= Math.max(player.resets, 1))
-    : (infGain = infGain);
-  player.achievements.includes("r133")
-    ? (infGain *= Math.max(
-        1,
-        Math.floor(player.dilation.dilatedTime.pow(0.25).toNumber())
-      ))
-    : (infGain = infGain);
-  player.achievements.includes("r156")
-    ? (infGain *= Math.max(
-        1,
-        Math.floor(Math.log10(player.eternities / 250) ** 0.8)
-      ))
-    : (infGain = infGain);
-  return infGain;
+  player.timestudy.studies.includes(32) ? infGain *= Math.max(player.resets, 1) : infGain = infGain
+  player.achievements.includes("r133") ? infGain *= Math.max(1, Math.floor(player.dilation.dilatedTime.pow(0.25).toNumber())) : infGain = infGain
+  player.achievements.includes("r156") ? infGain *= Math.max(1, Math.floor(Math.log10(player.eternities/250)**0.8)) : infGain = infGain
+  return infGain
 }
 
 function getAntimatterOnReset() {
-  let tier = 0;
-  let antimatter = [10, 100, 1000, 2e5, 1e10, 1e25];
-  if (player.challenges.includes("challenge1")) tier = 1;
-  if (player.achievements.includes("r37")) tier = 2;
-  if (player.achievements.includes("r54")) tier = 3;
-  if (player.achievements.includes("r55")) tier = 4;
-  if (player.achievements.includes("r78")) tier = 5;
-  return new Decimal(antimatter[tier]);
+let tier = 0
+let antimatter = [10, 100, 1000, 2e5, 1e10, 1e25]
+  if (player.challenges.includes("challenge1")) tier = 1
+  if (player.achievements.includes("r37")) tier = 2
+  if (player.achievements.includes("r54")) tier = 3
+  if (player.achievements.includes("r55")) tier = 4
+  if (player.achievements.includes("r78")) tier = 5
+return new Decimal (antimatter[tier])
 }
 
 function gainedInfinityPoints() {
@@ -80,7 +68,7 @@ function gainedInfinityPoints() {
 }
 
 function updateBigCrunchButton() {
-  if (
+ if (
     player.break &&
     player.money.gte(Number.MAX_VALUE) &&
     player.currentChallenge == ""
@@ -114,9 +102,7 @@ function updateBigCrunchButton() {
       "<b>Gain " +
       shortenDimensions(gainedInfinityPoints()) +
       " Infinity Points.</b>" +
-      "<br>+" +
-      shortenDimensions(getInfinitiedGain()) +
-      " infinities";
+      "<br>+" + shortenDimensions(getInfinitiedGain()) + " infinities"
 }
 
 function infinity() {
@@ -565,7 +551,7 @@ function infinity() {
   updateChallenges();
   updateChallengeTimes();
   updateLastTenRuns();
-}
+  };
 
 function getReplMult() {
   var replmult = Decimal.pow(
@@ -576,22 +562,7 @@ function getReplMult() {
     replmult = replmult.plus(Decimal.pow(player.replicanti.amount, 0.032));
   if (player.timestudy.studies.includes(102))
     replmult = replmult.times(Decimal.pow(5, player.replicanti.galaxies, 150));
-  if (player.achievements.includes("r108")) replmult = replmult.pow(1.09);
-  return replmult;
-}
-
-function updateReplicantiText() {
-  var estimate = Math.max((Math.log(Number.MAX_VALUE) - current) / est, 0);
-  document.getElementById("replicantiapprox").textContent =
-    "Approximately " +
-    timeDisplay(estimate * 10) +
-    " until infinite Replicanti";
-
-  document.getElementById("replicantiamount").textContent = shortenDimensions(
-    player.replicanti.amount
-  );
-
-  document.getElementById("replicantimult").textContent = shorten(
-    getReplMult().max(1)
-  );
+  if (player.achievements.includes("r108"))
+    replmult = replmult.pow(1.09)
+  return replmult
 }
