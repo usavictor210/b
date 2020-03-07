@@ -7462,9 +7462,7 @@ function showAchTab(tabName) {
   }
 }
 
-function init() {
-  console.log("init");
-
+function init() { 
   //setup the onclick callbacks for the buttons
   document.getElementById("dimensionsbtn").onclick = function() {
     showTab("dimensions");
@@ -7661,7 +7659,7 @@ window.addEventListener(
         document.getElementById("bigcrunch").onclick();
         break;
 
-      case 69: // E, also, HAHA funy sex number!1!!11111!!1
+      case 69: // E, also, HAHA funy sex number!1!!1!1!11!!1 (no seriously)
         document.getElementById("eternitybtn").onclick();
         break;
     }
