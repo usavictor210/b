@@ -6969,28 +6969,31 @@ function simulateTime(seconds, real) {
   if (player.money.gt(playerStart.money))
     popupCount++
     popupString +=
-      ",<br> your antimatter increased " +
+      ",<br> your antimatter increased by " +
       shortenMoney(player.money.log10() - playerStart.money.log10()) +
       " orders of magnitude";
   if (player.infinityPower.gt(playerStart.infinityPower))
+    popupCount++
     popupString +=
-      ",<br> your infinity power increased " +
+      ",<br> your infinity power increased by " +
       shortenMoney(
         player.infinityPower.log10() -
           Decimal.max(playerStart.infinityPower, 1).log10()
       ) +
       " orders of magnitude";
   if (player.timeShards.gt(playerStart.timeShards))
+    popupCount++
     popupString +=
-      ",<br> your time shards increased " +
+      ",<br> your time shards increased by " +
       shortenMoney(
         player.timeShards.log10() -
           Decimal.max(playerStart.timeShards, 1).log10()
       ) +
       " orders of magnitude";
   if (player.meta.antimatter.gt(startingMetaAntimatter))
+    popupCount++
     popupString +=
-      ",<br> meta-antimatter increased " +
+      ",<br> your meta-antimatter increased by " +
       shortenMoney(
         player.meta.antimatter.log10() -
           Decimal.max(startingMetaAntimatter, 1).log10()
@@ -7003,6 +7006,7 @@ function simulateTime(seconds, real) {
     popupString += ",";
   else popupString += ".";
   if (player.infinitied > playerStart.infinitied)
+    popupCount++
     popupString +=
       "<br>you infinitied " +
       formatInfOrEter(player.infinitied - playerStart.infinitied) +
