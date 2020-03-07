@@ -4352,49 +4352,37 @@ function updateChallengeTimes() {
 }
 
 // so i know why you cannot get "Oh hey, you're still here" in aarex's mods, because for some reason bestrunippm is still 0"
-// tempbest is bugged for whatever reason
-var bestRunIppm = new Decimal(0);
+// tempbest is bugged for whatever reason and will be at 0.
+// copied and pasted vanilla code and now it works. weird.
+var bestRunIppm = new Decimal(0)
 function updateLastTenRuns() {
-  var tempBest = 0;
-  var tempTime = new Decimal(0);
-  var tempIP = new Decimal(0);
-  for (var i = 0; i < 10; i++) {
-    tempTime = tempTime.plus(player.lastTenRuns[i][0]);
-    tempIP = tempIP.plus(player.lastTenRuns[i][1]);
-  }
-  tempTime = tempTime.dividedBy(10);
-  tempIP = tempIP.dividedBy(10);
-  for (var i = 0; i < 10; i++) {
-    var ippm = new Decimal("player.lastTenRuns[i][1]").div(player.lastTenRuns[i][0] / 600);
-    if (ippm.gt(tempBest)) tempBest = ippm;
-    var tempstring = shorten(ippm) + " IP/min";
-    if (ippm < 1) tempstring = shorten(ippm * 60) + " IP/hour";
-    document.getElementById("run" + (i + 1)).textContent =
-      "The infinity " +
-      (i + 1) +
-      " infinities ago took " +
-      timeDisplayShort(player.lastTenRuns[i][0]) +
-      " and gave " +
-      shortenDimensions(player.lastTenRuns[i][1]) +
-      " IP. " +
-      tempstring;
-  }
-  var ippm = tempIP.dividedBy(tempTime / 600);
-  var tempstring = shorten(ippm) + " IP/min";
-  if (ippm < 1) tempstring = shorten(ippm * 60) + " IP/hour";
-  document.getElementById("averagerun").textContent =
-    "Last 10 infinities average time: " +
-    timeDisplayShort(tempTime) +
-    " Average IP gain: " +
-    shortenDimensions(tempIP) +
-    " IP. " +
-    tempstring;
-  
-  if (tempBest) {
+    let tempBest = 0
+    var tempTime = new Decimal(0)
+    var tempIP = new Decimal(0)
+    for (var i=0; i<10;i++) {
+        tempTime = tempTime.plus(player.lastTenRuns[i][0])
+        tempIP = tempIP.plus(player.lastTenRuns[i][1])
+    }
+    tempTime = tempTime.dividedBy(10)
+    tempIP = tempIP.dividedBy(10)
+    for (var i=0; i<10; i++) {
+        var ippm = player.lastTenRuns[i][1].dividedBy(player.lastTenRuns[i][0]/600)
+        if (ippm.gt(tempBest)) tempBest = ippm
+        var tempstring = shorten(ippm) + " IP/min"
+        if (ippm<1) tempstring = shorten(ippm*60) + " IP/hour"
+        var plural = i == 0 ? "infinity" : "infinities"
+        document.getElementById("run"+(i+1)).textContent = "The infinity "+ (i+1) + plural + " ago took " + timeDisplayShort(player.lastTenRuns[i][0]) + " and gave " + shortenDimensions(player.lastTenRuns[i][1]) +" IP. "+ tempstring
+    }
+
+    var ippm = tempIP.dividedBy(tempTime/600)
+    var tempstring = shorten(ippm) + " IP/min"
+    if (ippm<1) tempstring = shorten(ippm*60) + " IP/hour"
+    document.getElementById("averagerun").textContent = "Last 10 infinities average time: "+ timeDisplayShort(tempTime)+" Average IP gain: "+shortenDimensions(tempIP)+" IP. "+tempstring
+
     if (tempBest.gte(1e8)) giveAchievement("Oh hey, you're still here");
     if (tempBest.gte(1e300)) giveAchievement("MAXIMUM OVERDRIVE");
-  }
-  bestRunIppm = tempBest;
+
+    bestRunIppm = tempBest
 }
 
 var averageEp = new Decimal(0);
