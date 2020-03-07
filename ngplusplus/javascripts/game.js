@@ -4335,7 +4335,7 @@ function updateChallengeTimes() {
     temp += player.challengeTimes[i];
   }
   document.getElementById("challengetimesum").textContent =
-    "Sum of challenge time records is " + timeDisplayShort(temp);
+    "The sum of challenge time records is " + timeDisplayShort(temp); + "."
 
   temp = 0;
   for (var i = 0; i < 8; i++) {
@@ -4347,7 +4347,7 @@ function updateChallengeTimes() {
     temp += player.infchallengeTimes[i];
   }
   document.getElementById("infchallengetimesum").textContent =
-    "Sum of infinity challenge time records is " + timeDisplayShort(temp);
+    "The sum of infinity challenge time records is " + timeDisplayShort(temp); + "."
   updateWorstChallengeTime();
 }
 
@@ -4370,14 +4370,14 @@ function updateLastTenRuns() {
         if (ippm.gt(tempBest)) tempBest = ippm
         var tempstring = shorten(ippm) + " IP/min"
         if (ippm<1) tempstring = shorten(ippm*60) + " IP/hour"
-        var plural = i == 0 ? "infinity" : "infinities"
+        var plural = i == 0 ? " infinity" : " infinities"
         document.getElementById("run"+(i+1)).textContent = "The infinity "+ (i+1) + plural + " ago took " + timeDisplayShort(player.lastTenRuns[i][0]) + " and gave " + shortenDimensions(player.lastTenRuns[i][1]) +" IP. "+ tempstring
     }
 
     var ippm = tempIP.dividedBy(tempTime/600)
     var tempstring = shorten(ippm) + " IP/min"
     if (ippm<1) tempstring = shorten(ippm*60) + " IP/hour"
-    document.getElementById("averagerun").textContent = "Last 10 infinities average time: "+ timeDisplayShort(tempTime)+" Average IP gain: "+shortenDimensions(tempIP)+" IP. "+tempstring
+    document.getElementById("averagerun").textContent = "Last 10 infinities average time: "+ timeDisplayShort(tempTime)+ " | Average IP gain: "+shortenDimensions(tempIP)+" IP. "+tempstring
 
     if (tempBest.gte(1e8)) giveAchievement("Oh hey, you're still here");
     if (tempBest.gte(1e300)) giveAchievement("MAXIMUM OVERDRIVE");
@@ -4403,10 +4403,10 @@ function updateLastTenEternities() {
     if (eppm.gt(tempBest)) tempBest = eppm;
     var tempstring = shorten(eppm) + " EP/min";
     if (eppm < 1) tempstring = shorten(eppm * 60) + " EP/hour";
+    var plural = i == 0 ? " eternity" : " eternities"
     document.getElementById("eternityrun" + (i + 1)).textContent =
       "The Eternity " +
-      (i + 1) +
-      " eternities ago took " +
+      (i + 1) + plural + " ago took " +
       timeDisplayShort(player.lastTenEternities[i][0]) +
       " and gave " +
       shortenDimensions(player.lastTenEternities[i][1]) +
@@ -4421,7 +4421,7 @@ function updateLastTenEternities() {
   document.getElementById("averageEternityRun").textContent =
     "Last 10 eternities average time: " +
     timeDisplayShort(tempTime) +
-    " Average EP gain: " +
+    " | Average EP gain: " +
     shortenDimensions(tempEP) +
     " EP. " +
     tempstring;
