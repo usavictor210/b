@@ -6283,6 +6283,7 @@ function gameLoop(diff) {
   if (player.infinityUpgrades.includes("autoBuyerUpgrade"))
     document.getElementById("postinfi33").className = "infinistorebtnbought";
 
+  function calculateProgressBar {
   if (player.currentChallenge !== "") {
     document.getElementById("progressbar").style.width =
       Decimal.min(
@@ -6347,8 +6348,8 @@ function gameLoop(diff) {
     document
       .getElementById("progresspercent")
       .setAttribute("ach-tooltip", "Percentage to Eternity");
+    }
   }
-
   if (player.eternities > 0) {
     document.getElementById("infinitybtn").style.display = "inline-block";
     document.getElementById("challengesbtn").style.display = "inline-block";
@@ -6365,7 +6366,7 @@ function gameLoop(diff) {
                     since = "???"
                     eventBC = 1/0 - eventBC
                 } else if (eventBC > 3.5e6) {
-                    since = "start of Pliocene epoch"
+                    since = "end of the Pliocene epoch"
                     eventBC = 5.332e6 - eventBC
                 } else if (eventBC > 258e4) {
                     since = "birthdate of Lucy (typical Australopithicus afarensis female)"
@@ -6377,25 +6378,25 @@ function gameLoop(diff) {
                     since = "Calabrian age"
                     eventBC = 781e3 - eventBC
                 } else if (eventBC > 25e4) {
-                    since = "Homo sapiens"
+                    since = "emergence of Homo sapiens"
                     eventBC = 315e3 - eventBC
                 } else if (eventBC > 195e3) {
-                    since = "Homo neanderthalensis"
+                    since = "emergence of Homo neanderthalensis"
                     eventBC = 25e4 - eventBC
                 } else if (eventBC > 16e4) {
                     since = "emergence of anatomically modern humans"
                     eventBC = 195e3 - eventBC
                 } else if (eventBC > 125e3) {
-                    since = "Homo sapiens idaltu"
+                    since = "emergence of Homo sapiens idaltu"
                     eventBC = 16e4 - eventBC
                 } else if (eventBC > 7e4) {
-                    since = "peak of Eemian interglacial period"
+                    since = "peak of the Eemian interglacial period"
                     eventBC = 125e3 - eventBC
                 } else if (eventBC > 67e3) {
                     since = "earliest abstract/symbolic art"
                     eventBC = 7e4 - eventBC
                 } else if (eventBC > 5e4) {
-                    since = "Upper Paleolithic"
+                    since = "Upper Paleolithic/Old Stone Age"
                     eventBC = 67e3 - eventBC
                 } else if (eventBC > 45e3) {
                     since = "Late Stone Age"
@@ -6497,17 +6498,17 @@ function gameLoop(diff) {
                     since = "birth of Alexander the Great"
                     eventBC = 356 - eventBC
                 } else if (eventBC > 4) {
-                    since = "the first paper"
+                    since = "invention of paper"
                     eventBC = 200 - eventBC
                 } else {
                     since = "birth of Jesus Christ"
                     eventBC = 4 - eventBC
                 }
-                var message = "<br>If you end the non-stop writing of your full antimatter amount with 3 digits per second, you would start it in "+getFullExpansion(Math.floor(years - 2018))+" BC."+(since=="???"?"":"<br>(around "+getFullExpansion(Math.ceil(eventBC))+" years since the "+since+")")
+                var message = "<br>If you ended the non-stop writing of your full antimatter amount with 3 digits per second right now, it would have started in"+getFullExpansion(Math.floor(years - 2018))+" BC."+(since=="???"?"":"<br>(around "+getFullExpansion(Math.ceil(eventBC))+" years since the "+since+")")
             } else {
                 var message = "<br>If you start writing 3 digits of your full antimatter amount a second down when you were an American baby,<br> it would "
-                if (years>79.3) message+="be a ghost for "+((years-79.3) / years * 100).toFixed(3)+"% of another life."
-                else message+="take up "+(years / 0.793).toFixed(3)+"% of your average life. (79.3 years )"
+                if (years>79.3) message+="take up "+((years-79.3) / years * 100).toFixed(3)+"% of the average lifespan (of another life)."
+                else message+="take up "+(years / 0.793).toFixed(3)+"% of the average lifespan. (79.3 years as of 2018)"
             }
             document.getElementById("infoScale").innerHTML = message
         } else if (player.money.gt(new Decimal("1e100000"))) document.getElementById("infoScale").innerHTML = "<br>If you wrote 3 digits of your antimatter amount every second (with no breaks), it would take you <br>" + timeDisplay(player.money.log10()*10/3) + "<br> to write down your antimatter amount."
