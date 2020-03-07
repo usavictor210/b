@@ -552,3 +552,17 @@ function infinity() {
   updateChallengeTimes();
   updateLastTenRuns();
   };
+
+function getReplMult() {
+  var replmult = Decimal.pow(
+    Decimal.log2(Decimal.max(player.replicanti.amount, 1)),
+    2
+  );
+  if (player.timestudy.studies.includes(21))
+    replmult = replmult.plus(Decimal.pow(player.replicanti.amount, 0.032));
+  if (player.timestudy.studies.includes(102))
+    replmult = replmult.times(Decimal.pow(5, player.replicanti.galaxies, 150));
+  if (player.achievements.includes("r108"))
+    replmult = replmult.pow(1.09)
+  return replmult
+}

@@ -86,12 +86,7 @@ function DimensionPower(tier) {
   if (player.achievements.includes("r94") && tier == 1) mult = mult.times(2);
   if (player.achievements.includes("r75")) mult = mult.times(player.achPow);
   if (player.replicanti.unl && player.replicanti.amount.gt(1)) {
-      var replmult = Decimal.pow(Decimal.log2(player.replicanti.amount), 2)
-
-      if (player.timestudy.studies.includes(21)) replmult = replmult.plus(Decimal.pow(player.replicanti.amount, 0.032))
-      if (player.timestudy.studies.includes(102)) replmult = replmult.times(Decimal.pow(5, player.replicanti.galaxies))
-
-      mult = mult.times(replmult)
+      mult = mult.times(getReplMult())
   }
 
   if (player.timestudy.studies.includes(72) && tier == 4) {
