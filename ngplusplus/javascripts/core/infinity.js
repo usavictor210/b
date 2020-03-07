@@ -581,6 +581,7 @@ function getReplMult() {
 }
 
 function updateReplicantiText() {
+  var estimate = Math.max((Math.log(Number.MAX_VALUE) - current) / est, 0);
   document.getElementById("replicantiapprox").textContent =
     "Approximately " +
     timeDisplay(estimate * 10) +
