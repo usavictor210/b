@@ -6632,13 +6632,13 @@ function gameLoop(diff) {
         eventBC = 4 - eventBC;
       }
       var message =
-        "<br>If you ended the non-stop writing of your full antimatter amount with 3 digits per second right now, it would have started in" +
-        getFullExpansion(Math.floor(years - 2018)) +
+        "<br>If you ended the non-stop writing of your full antimatter amount with 3 digits per second right now, it would have started in " +
+        formatInfOrEter(Math.floor(years - 2018)) +
         " BC." +
         (since == "???"
           ? ""
           : "<br>(around " +
-            getFullExpansion(Math.ceil(eventBC)) +
+            formatInfOrEter(Math.ceil(eventBC)) +
             " years since the " +
             since +
             ")");
@@ -7661,7 +7661,7 @@ window.addEventListener(
         document.getElementById("bigcrunch").onclick();
         break;
 
-      case 69: // E, also, nice.
+      case 69: // E, also, HAHA funy sex number!1!!11111!!1
         document.getElementById("eternitybtn").onclick();
         break;
     }
