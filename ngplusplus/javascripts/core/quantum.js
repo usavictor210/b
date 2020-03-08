@@ -253,7 +253,6 @@ function quantum(force, auto) {
       eternityUpgrades: [],
       epmult: new Decimal(1),
       epmultCost: new Decimal(500),
-      totalTickGained: 0,
       offlineProd: player.offlineProd,
       offlineProdCost: player.offlineProdCost,
       challengeTarget: 0,
