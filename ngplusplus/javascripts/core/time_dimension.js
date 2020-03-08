@@ -31,7 +31,7 @@ function getTimeDimensionPower(tier) {
   }
   if (player.achievements.includes("r127")) ret = ret.times(r127Reward())
 
-  if (player.quantum.investmentAmount[2].gt(0)) ret = ret.times(player.quantum.investmentAmount[2]*10).pow(50)
+  if (player.quantum.investmentAmount[2].gt(0)) ret = ret.times(getInvestMultiplier(2))
   
   if (player.dilation.active) {
     ret = Decimal.pow(10, Math.pow(ret.log10(), getDilPunish()))

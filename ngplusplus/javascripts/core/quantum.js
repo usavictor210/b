@@ -648,7 +648,7 @@ if (x == 1) { // time studies; this will probably multiply the softcaps.
   return new Decimal(player.quantum.investmentAmount[1]).pow(2.5)
   }
 if (x == 2) { // time dimensions
-  return new Decimal(player.quantum.investmentAmount[2]).pow(1e100)
+  return new Decimal(player.quantum.investmentAmount[2]).pow(100)
   }
 if (x == 3) { // replicantis
   return new Decimal(player.quantum.investmentAmount[3]).pow(20)
