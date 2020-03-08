@@ -7481,7 +7481,7 @@ function init() {
     showTab("achievements");
   };
   document.getElementById("challengesbtn").onclick = function() {
-    showTab("challenges");
+    showTab("challengesTab");
   };
   document.getElementById("infinitybtn").onclick = function() {
     showTab("infinity");
