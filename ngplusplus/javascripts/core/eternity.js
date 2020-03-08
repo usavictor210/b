@@ -381,6 +381,7 @@ function eternity(force, auto) {
         upgrades: player.dilation.upgrades,
         rebuyables: player.dilation.rebuyables,
         unstable: player.dilation.unstable,
+        timeRift: player.dilation.timeRift,
         autobuy: player.dilation.autobuy
       },
       meta: player.meta,
@@ -815,7 +816,9 @@ function startEternityChallenge(name, startgoal, goalIncrease) {
         nextThreshold: player.dilation.nextThreshold,
         freeGalaxies: player.dilation.freeGalaxies,
         upgrades: player.dilation.upgrades,
-        rebuyables: player.dilation.rebuyables
+        rebuyables: player.dilation.rebuyables,
+        unstable: player.dilation.unstable,
+        timeRift: player.dilation.timeRift
       },
       meta: player.meta,
       quantum: player.quantum,

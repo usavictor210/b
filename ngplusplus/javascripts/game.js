@@ -3179,7 +3179,8 @@ function setAchieveTooltip() {
     "ach-tooltip",
     "Get any Dimension multiplier over " +
       formatValue(player.options.notation, 1e31, 0, 0)
-  ) + ". Reward: First Dimensions are 5% stronger.";
+      + ". Reward: First Dimensions are 5% stronger."
+  );
   sanic.setAttribute(
     "ach-tooltip",
     "Get over " +
@@ -3306,7 +3307,7 @@ function setAchieveTooltip() {
     "ach-tooltip",
     "Reach " +
       shortenCosts(new Decimal("1e22000")) +
-      " IP without any time studies. Reward: Time dimensions are multiplied by the number of studies you have."
+      " IP without any time studies. Reward: Time Dimensions are multiplied by the number of studies you have."
   );
   minaj.setAttribute(
     "ach-tooltip",
