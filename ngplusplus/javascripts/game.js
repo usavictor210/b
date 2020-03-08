@@ -5629,7 +5629,7 @@ function gameLoop(diff) {
       (player.currentChallenge == "" || player.options.retryChallenge) &&
       !(player.bestInfinityTime <= 600 || player.break)
     ) {
-    showTab("emptiness");
+      showTab("emptiness");
     }
   } else document.getElementById("bigcrunch").style.display = "none";
 
