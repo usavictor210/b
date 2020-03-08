@@ -1114,7 +1114,7 @@ function unlockDilation() {
  * @param {Cost of the upgrade} cost
  * @param {Cost increase for the upgrade, only for rebuyables} costInc
  *
- * id 1-3 are rebuyables
+ * id 1-4 are rebuyables
  *
  * id 2 resets your dilated time and free galaxies
  *
@@ -1196,7 +1196,7 @@ function updateDilationUpgradeButtons() {
   document.getElementById("dil3desc").textContent =
     "Currently: " + shortenMoney(Decimal.pow(3, player.dilation.rebuyables[3])) + "x"
   document.getElementById("dil4desc").textContent =
-    "Currently: " + "x"
+    "Currently: ^" + getDilExp() + " -> ^" + (getDilExp()+0.25)
   document.getElementById("dil7desc").textContent =
     "Currently: " +
     shortenMoney(player.dilation.dilatedTime.pow(308).max(1)) +

@@ -5816,7 +5816,7 @@ function gameLoop(diff) {
   );
 
   document.getElementById("replicantimult").textContent = shortenDimensions(
-    getReplMult().toFixed(2)
+   new Decimal (getReplMult()).toFixed(2)
   );
 
   updateEternityButton();
