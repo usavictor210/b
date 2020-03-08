@@ -564,13 +564,13 @@ function getReplMult() {
     replmult = replmult.times(Decimal.pow(5, player.replicanti.galaxies, 150));
   if (player.achievements.includes("r108"))
     replmult = replmult.pow(1.09)
+  if (replmult.lt(1) || isNaN(replmult)) replmult = new Decimal (1)
   return replmult
 }
 
 function r72Check() {
-  var r72 = 0
   for (i=0, i<8; i++;) {
-    if (getDimensionFinalMultiplier(i).gte(1e308)) r72++
+    if (getDimensionFinalMultiplier(i).gte(1e308)) x++
     }
   if (r72 == 8) giveAchievement("Can't hold all these infinities");
 }

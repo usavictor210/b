@@ -5816,9 +5816,7 @@ function gameLoop(diff) {
     player.replicanti.amount
   );
 
-  document.getElementById("replicantimult").textContent = shortenDimensions(
-    getReplMult()
-  );
+  document.getElementById("replicantimult").textContent = shortenDimensions(getReplMult())
 
   updateEternityButton();
   document.getElementById("metaCost").innerHTML = shortenCosts(1e24);
