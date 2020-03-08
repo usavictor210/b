@@ -1296,21 +1296,21 @@ button {
 .glyph.normalglyph {
   color: #22aa48;
   border: 1px solid #22aa48;
-  box-shadow: inset #22aa48 0px 0px 10px 2px, #22aa48 0px 0px 10px 2px;
+  box-shadow: inset #22aa48 0 0 10px 2px, #22aa48 0px 0px 10px 2px;
   text-shadow: #22aa48 -1px 1px 2px;
 }
 
 .infinityglyph {
   color: #B67F33;
   border: 1px solid #B67F33;
-  box-shadow: inset #B67F33 0px 0px 10px 2px, #B67F33 0px 0px 10px 2px;
+  box-shadow: inset #B67F33 0 0 10px 2px, #B67F33 0px 0px 10px 2px;
   text-shadow: #B67F33 -1px 1px 2px;
 }
 
 .timeglyph {
   color: #B241E3;
   border: 1px solid #B241E3;
-  box-shadow: inset #B241E3 0px 0px 10px 2px, #B241E3 0px 0px 10px 2px;
+  box-shadow: inset #B241E3 0 0 10px 2px, #B241E3 0px 0px 10px 2px;
   text-shadow: #B241E3 -1px 1px 2px;
 }
 
@@ -1916,7 +1916,7 @@ br {
 
 @keyframes float {
   0% {
-    bottom: 0px;
+    bottom: 0;
     opacity: 0;
   }
   50% {
@@ -2003,7 +2003,7 @@ br {
   font-family: Typewriter;
   font-weight: bold;
   border-radius: 4px;
-  box-shadow: inset #22aa48 0px 0px 10px 2px, #22aa48 0px 0px 10px 2px;
+  box-shadow: inset #22aa48 0 0 10px 2px, #22aa48 0px 0px 10px 2px;
   transition-duration: 0.2s;
   display: inline;
   cursor: pointer;
@@ -2021,7 +2021,7 @@ br {
   font-family: Typewriter;
   font-weight: bold;
   border-radius: 4px;
-  box-shadow: inset #282828 0px 0px 10px 2px, #282828 0px 0px 10px 2px;
+  box-shadow: inset #282828 0 0 10px 2px, #282828 0px 0px 10px 2px;
   transition-duration: 0.2s;
   cursor: pointer;
   width: 200px;
@@ -2040,7 +2040,7 @@ br {
   font-family: Typewriter;
   font-weight: bold;
   border-radius: 4px;
-  box-shadow: inset #282828 0px 0px 10px 2px, #282828 0px 0px 10px 2px;
+  box-shadow: inset #282828 0 0 10px 2px, #282828 0px 0px 10px 2px;
   transition-duration: 0.2s;
   cursor: pointer;
   width: 200px;
@@ -2053,7 +2053,7 @@ br {
   background: #14274d;
   font-weight: bold;
   font-size: 0.65rem;
-  text-shadow: 0px 0px 6px #808080;
+  text-shadow: 0 0 6px #808080;
   border: 2px solid #0b0b6b;
   width: 250px;
   height: 150px;
