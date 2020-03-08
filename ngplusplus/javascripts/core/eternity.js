@@ -1076,7 +1076,7 @@ function unlockEChall(idx) {
     document.getElementById(
       "eterc" + player.eternityChallUnlocked + "div"
     ).style.display = "inline-block";
-    if (!justImported) showTab("challenges");
+    if (!justImported) showTab("challengesTab");
     if (!justImported) showChallengesTab("eternitychallenges");
     if (idx !== 12 && idx !== 13) player.etercreq = idx;
   }

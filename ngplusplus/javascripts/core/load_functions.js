@@ -265,8 +265,6 @@ function onLoad() {
   if (!(4 in player.dilation.rebuyables)) {
     player.dilation.rebuyables[4] = 0;
   }
-  if (player.dilation.unstable.sacrificedTP === undefined) player.dilation.unstable.sacrificedTP = new Decimal(0)
-  if (player.dilation.unstable.shards === undefined) player.dilation.unstable.shards = new Decimal(0)
   if (player.dilation.unstable === undefined)
     player.dilation.unstable = {
       times: 0,
@@ -275,6 +273,8 @@ function onLoad() {
       upgrades: [], //layers of dilation stacked
       sacrificedTP: new Decimal(0)
     };
+  if (player.dilation.unstable.sacrificedTP === undefined) player.dilation.unstable.sacrificedTP = new Decimal(0)
+  if (player.dilation.unstable.shards === undefined) player.dilation.unstable.shards = new Decimal(0) 
   if (player.dilation.timeRift === undefined)
     player.dilation.timeRift = {
       seconds: 0,
@@ -1219,6 +1219,7 @@ function load_game(root) {
   if (saves[currentSave]) player = saves[currentSave];
   onLoad();
   ngplus();
+  transformSaveToDecimal()
 }
 
 function save_game(changed, silent) {
@@ -1443,6 +1444,7 @@ function transformSaveToDecimal() {
   player.dilation.timeRift.temporalPower = new Decimal(
     player.dilation.timeRift.temporalPower
   );
+  player.dilation.unstable.sacrificedTP = new Decimal (player.dilation.unstable.sacrificedTP)
 }
 
 function loadAutoBuyerSettings() {
