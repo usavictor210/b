@@ -653,11 +653,11 @@ if (x == 2) { // time dimensions
 if (x == 3) { // replicantis
   return new Decimal(player.quantum.investmentAmount[3]).pow(20)
   }
-if (x == 4) { // 
+if (x == 4) { // meta dimensions
   return new Decimal(player.quantum.investmentAmount[4]).times(4)
   }
-if (x == 5) {
-  return new Decimal(player.quantum.investmentAmount[5]).times(1.5)
+if (x == 5) { // time dilation
+  return new Decimal(player.quantum.investmentAmount[5]).times(1.25)
   }
 }
 
