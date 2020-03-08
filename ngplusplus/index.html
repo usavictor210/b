@@ -617,7 +617,7 @@
                 <p></p>
                 <input id="confirmation" type="checkbox" style="width:20px; height: 18px; display: none" ach-tooltip="No confirmation when doing Dimensional Sacrifice" onchange="sacrificeConf()">
                 <button id="sacrifice" class="storebtn" style="font-size:12px; width: 320px; display: none" ach-tooltip="">Dimensional Sacrifice</button>
-                <button id="maxall" class="storebtn" style="font-size: 12px">Max all (M)</Button>
+                <button id="maxall" class="storebtn" style="font-size: 12px">Max all (M)</button>
                 <span id="chall2Pow"></span>
                 <span id="chall3Pow"></span>
                 <table class="table" >
@@ -877,7 +877,7 @@
                             </tr>
                 </table>
                 <div id="eterc8ids" style="display: none;"></div>
-                <button id="toggleallinfdims"style="width:140px; height: 30px; font-size: 12px; visibility: hidden" onclick="toggleAllInfDims()" class="storebtn">Toggle all ON/OFF</button>
+                <button id="toggleallinfdims" style="width:140px; height:30px; font-size:12px; visibility: hidden" onclick="toggleAllInfDims()" class="storebtn">Toggle all ON/OFF</button>
             </div>
             <div id="timedimensions" class="dimtab">
                     <div>
@@ -906,6 +906,7 @@
                                 </td>
                                 <td>
                                     <div id="timeAmount2" align="left">0 (0)</div>
+                                </td>
                                 <td>
                                     <button id="timeMax2" style="color:black; width:195px; height:30px" class="storebtn" onclick="buyTimeDimension(2)">Cost: 10</button>
                                 </td>
@@ -980,8 +981,8 @@
             </div>
             <div id="metadimensions" class="dimtab">
                   <div>
-                      <p>You have <span id="metaAntimatterAmount" style="font-size:35px; color: black">0</span> meta-antimatter.<p>
-                      <p>Your best ever meta-antimatter was <span id="metaAntimatterBest" style="font-size:35px; color: black">0</span>, which is translated to give a <span id="metaAntimatterEffect" style="font-size:35px; color: black">0</span>x extra multiplier per dimension boost.</p>
+                    <p>You have <span id="metaAntimatterAmount" style="font-size:35px; color: black">0</span> meta-antimatter.</p>
+                    <p>Your best ever meta-antimatter was <span id="metaAntimatterBest" style="font-size:35px; color: black">0</span>, which is translated to give a <span id="metaAntimatterEffect" style="font-size:35px; color: black">0</span>x extra multiplier per dimension boost.</p>
                   </div>
                   <div id="metaAntimatterPerSec">You are getting 0 meta-antimatter per second.</div>
                   <br/>
@@ -1105,7 +1106,7 @@
                     </tbody>
                 </table>
                 <table style="width: 100%">
-                  <tr style="font-size: 15px">
+                <tr style="font-size: 15px">
                     <td id="metaResetLabel">
                         Meta-Dimension Shift: requires 20 Fourth Meta Dimensions
                     </td>
@@ -1125,20 +1126,21 @@
                         Go quantum: get something
                     </td>
                     <td>
-                        <button id="quantum" style="color:black; width: 200px; height: 25px; font-size: 9px" class="storebtn" onclick="quantum()">Go quantum</button>
+                        <button id="quantumButton" style="color:black; width: 200px; height: 25px; font-size: 9px" class="storebtn" onclick="quantum()">Go quantum</button>
                     </td>
                   </tr>
+                </tr>
                 </table>
             </div>
             <div id="production" class="dimtab">
-                <b>seconds of history:</b>
-                <input type="number" value="10" onchange="updateChartValues()" id="chartDurationInput"></input>
-                <b>update rate (in ms):</b>
-                <input type="number" value="1000" onchange="updateChartValues()" id="chartUpdateRateInput"></input>
-                <b>enabled:</b>
-                <input id="chartOnOff" type="checkbox" onchange="enableChart()"></input>
-                <b>dips:</b>
-                <input id="chartDipsOnOff" type="checkbox" onchange="enableChartDips()"></input>
+                <b>Seconds of history:</b>
+                <input type="number" value="10" onchange="updateChartValues()" id="chartDurationInput">
+                <b>Update rate (in ms):</b>
+                <input type="number" value="1000" onchange="updateChartValues()" id="chartUpdateRateInput">
+                <b>Enabled:</b>
+                <input id="chartOnOff" type="checkbox" onchange="enableChart()">
+                <b>Enable dips:</b>
+                <input id="chartDipsOnOff" type="checkbox" onchange="enableChartDips()">
                 <canvas id="normalDimChart" width="1500" height="500" style="user-select: none;"></canvas>
                 <b>Exponents of antimatter per second</b>
             </div>
