@@ -989,7 +989,7 @@ function calculateEternitiedGain() {
 }
 
 function r124Mult() {
-return Math.min(Math.sqrt(player.thisEternity / 12.5), 30)
+return Decimal.min(Math.sqrt(player.thisEternity / 12.5), 30).max(1)
 }
 
 function gainedEternityPoints() {

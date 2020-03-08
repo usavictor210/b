@@ -7476,6 +7476,7 @@ function init() {
   showDimTab("antimatterdimensions");
   showChallengesTab("challenges");
   showEternityTab("timestudies", true);
+  showQuantumTab("investment")
   load_game();
   updateTickSpeed();
   updateAutobuyers();
