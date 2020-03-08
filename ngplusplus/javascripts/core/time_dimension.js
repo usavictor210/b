@@ -29,7 +29,7 @@ function getTimeDimensionPower(tier) {
   if (player.replicanti.unl && player.replicanti.amount.gt(1) && player.dilation.upgrades.includes(6)) {
     ret = ret.times(getReplMult().pow(0.1))
   }
-  if (player.achievements.includes("r127")) ret = ret.times(Math.pow(((player.eternityPoints.e-308)+1), 1.125))
+  if (player.achievements.includes("r127")) ret = ret.times(r127Reward())
   if (ret.lt(0)) {
     ret = new Decimal(0)
   }

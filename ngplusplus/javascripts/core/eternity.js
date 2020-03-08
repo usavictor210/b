@@ -1433,3 +1433,7 @@ function updateECRewardText() {
   document.getElementById("ec10span").textContent =
     shortenMoney(ec10bonus) + "x";
 }
+
+function r127Reward() {
+return Decimal.pow(((player.eternityPoints.e-308)+1), (5+(Decimal.log(player.eternityPoints.e, 20))))+1
+}
