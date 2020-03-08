@@ -150,8 +150,13 @@ shortenMoney = function (money) {
 function timeDisplay(time) {
   if (time <= 100) return (time/10).toFixed(3) + " seconds"
   time = Decimal.floor(time / 10)
+  years = Decimal.floor(time / 31536000)
+  days = Decimal.floor((time % 31536000) / 86400)
+  hours = Decimal.floor(((time % 31536000) % 86400) / 3600)
+  minutes = Decimal.floor((((time % 31536000) % 86400) % 3600) / 60)
+  seconds = Decimal.floor(((((time % 31536000) % 86400) % 3600) % 60) % 60)
   if (time >= 31536000) {
-      return Decimal.floor(time / 31536000) + " years, " + Decimal.floor((time % 31536000) / 86400) + " days, " + Decimal.floor((time % 86400) / 3600) + " hours, " + Decimal.floor((time % 3600) / 60) + " minutes, and " + Decimal.floor(time % 60) + " seconds"
+      return Decimal.floor(time / 31536000) + " year" + yearPlural + ", " + Decimal.floor((time % 31536000) / 86400) + " days, " + Decimal.floor((time % 86400) / 3600) + " hours, " + Decimal.floor((time % 3600) / 60) + " minutes, and " + Decimal.floor(time % 60) + " seconds"
   } else if (time >= 86400) {
       return Decimal.floor(time / 86400) + " days, " + Decimal.floor((time % 86400) / 3600) + " hours, " + Decimal.floor((time % 3600) / 60) + " minutes, and " + Decimal.floor(time % 60) + " seconds"
   } else if (time >= 3600) {
