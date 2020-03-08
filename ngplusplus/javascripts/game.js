@@ -4814,6 +4814,7 @@ var goals = [
   new Decimal("1e27000")
 ];
 setInterval(function() {
+  
   r72Check()
   antitablesCheck()
   metaDimensionAchievement();
