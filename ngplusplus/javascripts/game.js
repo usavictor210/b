@@ -4814,25 +4814,8 @@ var goals = [
   new Decimal("1e27000")
 ];
 setInterval(function() {
-function r72check() {
-  var r72 = 0
-  for (i=0, i<8; i++;) {
-    if (getDimensionFinalMultiplier(i).gte(1e308)) r72++
-    }
-  if (r72 = 8) giveAchievement("Can't hold all these infinities");
-}
-function antitablesCheck() {
-  for (i=8, i>0; i--) {}
-    getDimensionFinalMultiplier(1).lt(getDimensionFinalMultiplier(2)) &&
-    getDimensionFinalMultiplier(2).lt(getDimensionFinalMultiplier(3)) &&
-    getDimensionFinalMultiplier(3).lt(getDimensionFinalMultiplier(4)) &&
-    getDimensionFinalMultiplier(4).lt(getDimensionFinalMultiplier(5)) &&
-    getDimensionFinalMultiplier(5).lt(getDimensionFinalMultiplier(6)) &&
-    getDimensionFinalMultiplier(6).lt(getDimensionFinalMultiplier(7)) &&
-    getDimensionFinalMultiplier(7).lt(getDimensionFinalMultiplier(8))
-  )
-    giveAchievement("How the antitables have turned");
-}
+  r72Check()
+  antitablesCheck()
   metaDimensionAchievement();
 
   if (
