@@ -1178,20 +1178,6 @@ function onLoad() {
   }
 }
 
-function load_cloud_save(saveId, cloudPlayer) {
-  saves[saveId] = cloudPlayer;
-
-  if (window.location.href.split("//")[1].length > 20)
-    set_save("dimensionTestSave", saveId, cloudPlayer);
-  else set_save("dimensionSave", saveId, cloudPlayer);
-
-  if (currentSave == saveId) {
-    load_game();
-    updateChallenges();
-    transformSaveToDecimal();
-  }
-}
-
 function load_game(root) {
   if (!root) {
     if (window.location.href.split("//")[1].length > 20)
