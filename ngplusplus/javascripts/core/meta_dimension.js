@@ -54,7 +54,7 @@ function getMetaDimensionMultiplier (tier) {
       multiplier = Decimal.pow(10, Math.pow(multiplier.log10(), 1.05))
     }
   }
-  if (player.quantum.investmentAmount[4].gt(0)) multiplier = multiplier.pow()
+  if (player.quantum.investmentAmount[4].gt(0)) multiplier = multiplier.times(getInvestMultiplier(4))
   if (multiplier.gt(1e36)) multiplier = multiplier.pow(0.96).max(1e36)
   
   return multiplier;

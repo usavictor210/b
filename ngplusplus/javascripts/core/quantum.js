@@ -651,7 +651,7 @@ if (x == 2) { // time dimensions
   return new Decimal(player.quantum.investmentAmount[2]).pow(100)
   }
 if (x == 3) { // replicantis
-  return new Decimal(player.quantum.investmentAmount[3]).pow(20)
+  return new Decimal(player.quantum.investmentAmount[3]).pow(1.0025)
   }
 if (x == 4) { // meta dimensions
   return new Decimal(player.quantum.investmentAmount[4]).times(4)
