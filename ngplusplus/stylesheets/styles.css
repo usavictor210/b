@@ -1950,7 +1950,6 @@ screen and (max-width: 480px) {
     width: 250px;
     height: 150px;
     transition-duration: 0.2s;
-    cursor: pointer;
     border-radius: 4px;
     display: inline;
     font-family: Typewriter;
