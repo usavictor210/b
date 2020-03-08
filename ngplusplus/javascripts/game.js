@@ -4814,19 +4814,15 @@ var goals = [
   new Decimal("1e27000")
 ];
 setInterval(function() {
-  if (
-    getDimensionFinalMultiplier(1).gte(new Decimal("1e308")) &&
-    getDimensionFinalMultiplier(2).gte(new Decimal("1e308")) &&
-    getDimensionFinalMultiplier(3).gte(new Decimal("1e308")) &&
-    getDimensionFinalMultiplier(4).gte(new Decimal("1e308")) &&
-    getDimensionFinalMultiplier(5).gte(new Decimal("1e308")) &&
-    getDimensionFinalMultiplier(6).gte(new Decimal("1e308")) &&
-    getDimensionFinalMultiplier(7).gte(new Decimal("1e308")) &&
-    getDimensionFinalMultiplier(8).gte(new Decimal("1e308"))
-  )
-    giveAchievement("Can't hold all these infinities");
-
-  if (
+function r72check() {
+  var r72 = 0
+  for (i=0, i<8; i++;) {
+    if (getDimensionFinalMultiplier(i).gte(1e308)) r72++
+    }
+  if (r72 = 8) giveAchievement("Can't hold all these infinities");
+}
+function antitablesCheck() {
+  for (i=8, i>0; i--) {}
     getDimensionFinalMultiplier(1).lt(getDimensionFinalMultiplier(2)) &&
     getDimensionFinalMultiplier(2).lt(getDimensionFinalMultiplier(3)) &&
     getDimensionFinalMultiplier(3).lt(getDimensionFinalMultiplier(4)) &&
@@ -4836,7 +4832,7 @@ setInterval(function() {
     getDimensionFinalMultiplier(7).lt(getDimensionFinalMultiplier(8))
   )
     giveAchievement("How the antitables have turned");
-
+}
   metaDimensionAchievement();
 
   if (
