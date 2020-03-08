@@ -1836,7 +1836,6 @@ function playerInfinityUpgradesOnEternity() {
       "galaxyBoost",
       "skipResetGalaxy"
     ];
-  else player.infinityUpgrades = player.infinityUpgrades;
 }
 
 document.getElementById("infi11").onclick = function() {
@@ -5175,6 +5174,7 @@ setInterval(function() {
       : " seconds or less.");
   document.getElementById("eterc12completed").textContent =
     "Completed " + ECTimesCompleted("eterc12") + " times.";
+
   updateECUnlockButtons();
 
   if (player.currentEternityChall == "eterc8") {
