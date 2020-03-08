@@ -578,7 +578,7 @@ function r72Check() {
 function antitablesCheck() {
   var antitables = 0
   for (i=0, i<8; i++;) {
-   if (getDimensionFinalMultiplier(8-i).lt(getDimensionFinalMultiplier(i))) antitables++
+   if (getDimensionFinalMultiplier(i+1).lt(getDimensionFinalMultiplier(i))) antitables++
   }
   if (antitables == 8) giveAchievement("How the antitables have turned");
 }
