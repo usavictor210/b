@@ -1193,6 +1193,14 @@ function updateDilationUpgradeButtons() {
           : "dilationupg";
     }
   }
+  document.getElementById("dil3desc").textContent =
+    "Currently: " + shortenMoney(Decimal.pow(3, player.dilation.rebuyables[3])) + "x"
+  document.getElementById("dil4desc").textContent =
+    "Currently: " + "x"
+  document.getElementById("dil7desc").textContent =
+    "Currently: " +
+    shortenMoney(player.dilation.dilatedTime.pow(308).max(1)) +
+    "x";
   document.getElementById("dil9desc").textContent =
     "Currently: " +
     shortenMoney(player.dilation.dilatedTime.pow(1000).max(1)) +
