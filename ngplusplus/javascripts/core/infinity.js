@@ -569,7 +569,8 @@ function getReplMult() {
 }
 
 function r72Check() {
-  for (i=0, i<8; i++;) {
+  var r72 = 0
+  for (i=0; i<8; i++) {
     if (getDimensionFinalMultiplier(i).gte(1e308)) x++
     }
   if (r72 == 8) giveAchievement("Can't hold all these infinities");
@@ -577,7 +578,7 @@ function r72Check() {
 
 function antitablesCheck() {
   var antitables = 0
-  for (i=0, i<8; i++;) {
+  for (i=0; i<8; i++) {
    if (getDimensionFinalMultiplier(i+1).lt(getDimensionFinalMultiplier(i))) antitables++
   }
   if (antitables == 8) giveAchievement("How the antitables have turned");
