@@ -164,7 +164,7 @@ function buyMaxTimeDimensions() {
   for(var i=1; i<9; i++) {
     // strategy: repeatedly buy the maximum power of 2 possible
     var dim = player["timeDimension"+i];
-    while (true) {
+    while (true) { // unexpected constant condition
       let toBuy = .5;
       while (timeDimCost(i, dim.bought + 2 * toBuy).times(2).lte(player.eternityPoints)) {
         toBuy *= 2;

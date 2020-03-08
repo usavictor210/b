@@ -3301,7 +3301,7 @@ function setAchieveTooltip() {
   );
   layer.setAttribute(
     "ach-tooltip",
-    "Reach " + shortenMoney(Number.MAX_VALUE) + " EP. Reward: Time Dimensions gain a multiplier based on EP. Currently: " + shortenDimensions(Math.pow(((player.eternityPoints.e-308)+1), 1.125)) + "x"
+    "Reach " + shortenMoney(Number.MAX_VALUE) + " EP. Reward: Time Dimensions gain a multiplier based on EP. Currently: " + shortenMoney(r127Reward()) + "x"
   );
   fkoff.setAttribute(
     "ach-tooltip",
@@ -7633,7 +7633,7 @@ window.addEventListener(
         document.getElementById("bigcrunch").onclick();
         break;
 
-      case 69: // E, also, HAHA funy sex number!1!!1!1!11!!1 (no seriously)
+      case 69: // E
         document.getElementById("eternitybtn").onclick();
         break;
     }

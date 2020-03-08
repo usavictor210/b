@@ -1435,5 +1435,5 @@ function updateECRewardText() {
 }
 
 function r127Reward() {
-return Decimal.pow(((player.eternityPoints.e-308)+1), (5+(Decimal.log(player.eternityPoints.e, 20))))+1
+return new Decimal((Decimal.pow(((player.eternityPoints.e-308)+1), (5+(Decimal.log(player.eternityPoints.e, 20)))))+1)
 }
