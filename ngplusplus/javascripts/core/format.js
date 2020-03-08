@@ -146,21 +146,20 @@ shortenMoney = function (money) {
   return formatValue(player.options.notation, money, 2, 1);
 };
 
-function displayIfNotZero(x) {
-if (!x < 0) return x
-else return ""
-}
 
 function timeDisplay(time) {
   if (time <= 100) return (time/10).toFixed(3) + " seconds"
   time = Decimal.floor(time / 10)
-  years = Decimal.floor(time / 31536000) 
-  days = Decimal.floor((time % 31536000) / 86400)
-  hours = Decimal.floor(((time % 31536000) % 86400) / 3600)
-  minutes = Decimal.floor((((time % 31536000) % 86400) % 3600) / 60)
-  seconds = Decimal.floor(((((time % 31536000) % 86400) % 3600) % 60) % 60)
-  return displayIfNotZero(years) + " years, " + displayIfNotZero(days) + " days, " + displayIfNotZero(hours)  + " hours, " + displayIfNotZero(minutes) + " minutes, and " + seconds + " seconds"
- }
+  if (time >= 31536000) {
+      return Decimal.floor(time / 31536000) + " years, " + Decimal.floor((time % 31536000) / 86400) + " days, " + Decimal.floor((time % 86400) / 3600) + " hours, " + Decimal.floor((time % 3600) / 60) + " minutes, and " + Decimal.floor(time % 60) + " seconds"
+  } else if (time >= 86400) {
+      return Decimal.floor(time / 86400) + " days, " + Decimal.floor((time % 86400) / 3600) + " hours, " + Decimal.floor((time % 3600) / 60) + " minutes, and " + Decimal.floor(time % 60) + " seconds"
+  } else if (time >= 3600) {
+      return Decimal.floor(time / 3600) + " hours, " + Decimal.floor((time % 3600) / 60) + " minutes, and " + Decimal.floor(time % 60) + " seconds"
+  } else if (time >= 60) {
+      return Decimal.floor(time / 60) + " minutes, and " + Decimal.floor(time % 60) + " seconds"
+  } else return Decimal.floor(time % 60) + " seconds"
+}
 
 function preformat(int) {
   if (int.toString().length == 1) return "0"+int
