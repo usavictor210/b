@@ -5627,10 +5627,10 @@ function gameLoop(diff) {
   ) {
     document.getElementById("bigcrunch").style.display = "inline-block";
     if (
-      !(player.currentChallenge == "" || player.options.retryChallenge) &&
+      (player.currentChallenge == "" || player.options.retryChallenge) &&
       !(player.bestInfinityTime <= 600 || player.break)
     ) {
-  showTab("emptiness");
+    showTab("emptiness");
     }
   } else document.getElementById("bigcrunch").style.display = "none";
 
