@@ -6406,7 +6406,7 @@ function gameLoop(diff) {
       if (
         goal > 131072 &&
         player.meta &&
-        !player.achievements.includes("ngpp13")
+        !player.achievements.includes("r143")
       ) {
         goal = Decimal.sub("1e40000", player.eternityPoints).log2();
         var percentage = Math.min((gepLog / goal) * 100, 100).toFixed(2) + "%";
