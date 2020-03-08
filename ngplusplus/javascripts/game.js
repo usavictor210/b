@@ -813,7 +813,7 @@ function updateDimensions() {
     } else
       document.getElementById("resetLabel").textContent =
         "Dimension Boost (" +
-        player.resets +
+        formatInfOrEter(player.resets) +
         "): requires " +
         shiftRequirement.amount +
         " " +
