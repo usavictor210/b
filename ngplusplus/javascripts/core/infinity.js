@@ -476,7 +476,7 @@ function infinity() {
     document.getElementById("matter").style.display = "none";
     document.getElementById("quickReset").style.display = "none";
 
-    checkForEndMe();
+    checkChallengeAchievements();
 
     giveAchievement("To infinity!");
     if (player.infinitied >= 10) giveAchievement("That's a lot of infinites");
@@ -571,7 +571,7 @@ function getReplMult() {
 function r72Check() {
 var r72 = 0
   for (let i=1; i<9; i++) {
-    if (getDimensionFinalMultiplier(i).gte(1e308)) x++
+    if (getDimensionFinalMultiplier(i).gte(1e308)) r72++
   }
   if (r72 == 8) giveAchievement("Can't hold all these infinities");
 return r72
