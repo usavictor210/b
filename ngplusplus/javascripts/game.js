@@ -164,7 +164,7 @@ var player = {
   dimensionMultDecrease: 10,
   dimensionMultDecreaseCost: 1e8,
   overXGalaxies: 10,
-  version: 15.6,
+  version: 15.7,
   infDimensionsUnlocked: [
     false,
     false,
@@ -1247,7 +1247,7 @@ function updateCosts() {
     shortenCosts(player.eightCost.times(10 - dimBought(8)));
 
   document.getElementById("tickSpeed").textContent =
-    "Cost: " + shortenCosts(player.tickSpeedCost);
+    canBuyTickSpeed() ? "Cost: " + shortenCosts(player.tickSpeedCost) : "Disabled"
   // see how much simple this is? I wonder why this wasn't done for the normal dimensions...
   for (var i = 1; i <= 8; i++) {
     document.getElementById("infMax" + i).textContent =
@@ -5960,7 +5960,7 @@ function gameLoop(diff) {
     }
   }
 
-  if (canAfford(player.tickSpeedCost)) {
+  if (canAfford(player.tickSpeedCost) || !player.currentEternityChall == "eterc9") {
     document.getElementById("tickSpeed").className = "storebtn";
     document.getElementById("tickSpeedMax").className = "storebtn";
   } else {
