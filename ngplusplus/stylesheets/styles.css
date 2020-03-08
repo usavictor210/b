@@ -1793,103 +1793,103 @@ br {
     box-shadow: inset 0 0 20px 0 #490066;
   }
   100% {
-    box-shadow: inset 0px 0px 3px 0 #490066;
+    box-shadow: inset 0 0 3px 0 #490066;
   }
 }
 
 @keyframes darkStudyGlowIn {
   0% {
-    box-shadow: inset 0px 0px 3px 0px white;
+    box-shadow: inset 0 0 3px 0 white;
   }
   50% {
-    box-shadow: inset 0px 0px 20px 0px white;
+    box-shadow: inset 0 0 20px 0 white;
   }
   100% {
-    box-shadow: inset 0px 0px 3px 0px white;
+    box-shadow: inset 0 0 3px 0 white;
   }
 }
 
 @keyframes lightStudyGlowIn {
   0% {
-    box-shadow: inset 0px 0px 3px 0px black;
+    box-shadow: inset 0 0 3px 0 black;
   }
   50% {
-    box-shadow: inset 0px 0px 20px 0px black;
+    box-shadow: inset 0 0 20px 0 black;
   }
   100% {
-    box-shadow: inset 0px 0px 3px 0px black;
+    box-shadow: inset 0 0 3px 0 black;
   }
 }
 
 @keyframes dilationBtnGlow {
   0% {
-    box-shadow: inset 5px 0px 20px #64DD17;
+    box-shadow: inset 5px 0 20px #64DD17;
   }
   25% {
-    box-shadow: inset 0px 5px 20px #64DD17;
+    box-shadow: inset 0 5px 20px #64DD17;
   }
   50% {
-    box-shadow: inset -5px 0px 20px #64DD17;
+    box-shadow: inset -5px 0 20px #64DD17;
   }
   75% {
-    box-shadow: inset 0px -5px 20px #64DD17;
+    box-shadow: inset 0 -5px 20px #64DD17;
   }
   100% {
-    box-shadow: inset 5px 0px 20px #64DD17;
+    box-shadow: inset 5px 0 20px #64DD17;
   }
 }
 
 @keyframes dilationBtnGlow2 {
   0% {
-    box-shadow: inset -5px 0px 20px #64ddad;
+    box-shadow: inset -5px 0 20px #64ddad;
   }
   25% {
-    box-shadow: inset 0px -5px 20px #64ddad;
+    box-shadow: inset 0 -5px 20px #64ddad;
   }
   50% {
-    box-shadow: inset 5px 0px 20px #64ddad;
+    box-shadow: inset 5px 0 20px #64ddad;
   }
   75% {
-    box-shadow: inset 0px 5px 20px #64ddad;
+    box-shadow: inset 0 5px 20px #64ddad;
   }
   100% {
-    box-shadow: inset -5px 0px 20px #64ddad;
+    box-shadow: inset -5px 0 20px #64ddad;
   }
 }
 
 @keyframes dilationUnstableBtnGlow {
   0% {
-    box-shadow: inset 5px 0px 20px #0e0e89;
+    box-shadow: inset 5px 0 20px #0e0e89;
   }
   25% {
-    box-shadow: inset 0px 5px 20px #0e0e89;
+    box-shadow: inset 0 5px 20px #0e0e89;
   }
   50% {
-    box-shadow: inset -5px 0px 20px #0e0e89;
+    box-shadow: inset -5px 0 20px #0e0e89;
   }
   75% {
-    box-shadow: inset 0px -5px 20px #0e0e89;
+    box-shadow: inset 0 -5px 20px #0e0e89;
   }
   100% {
-    box-shadow: inset 5px 0px 20px #0e0e89;
+    box-shadow: inset 5px 0 20px #0e0e89;
   }
 }
 
 @keyframes dilationUnstableUpgBtnGlow {
   0% {
-    box-shadow: inset 5px 0px 20px #006400;
+    box-shadow: inset 5px 0 20px #006400;
   }
   25% {
-    box-shadow: inset 0px 5px 20px #0e0e89;
+    box-shadow: inset 0 5px 20px #0e0e89;
   }
   50% {
-    box-shadow: inset -5px 0px 20px #006400;
+    box-shadow: inset -5px 0 20px #006400;
   }
   75% {
-    box-shadow: inset 0px -5px 20px #0e0e89;
+    box-shadow: inset 0 -5px 20px #0e0e89;
   }
   100% {
-    box-shadow: inset 5px 0px 20px #006400;
+    box-shadow: inset 5px 0 20px #006400;
   }
 }
 
@@ -1931,7 +1931,7 @@ br {
 @keyframes implode {
   0% {
     transform: scale(1);
-    filter: blur(0px);
+    filter: blur(0);
   }
   50% {
     transform: scale(0);
@@ -1939,7 +1939,7 @@ br {
   }
   100% {
     transform: scale(1);
-    filter: blur(0px);
+    filter: blur(0);
   }
 }
 
@@ -2003,7 +2003,7 @@ br {
   font-family: Typewriter;
   font-weight: bold;
   border-radius: 4px;
-  box-shadow: inset #22aa48 0 0 10px 2px, #22aa48 0px 0px 10px 2px;
+  box-shadow: inset #22aa48 0 0 10px 2px, #22aa48 0 0 10px 2px;
   transition-duration: 0.2s;
   display: inline;
   cursor: pointer;
@@ -2021,7 +2021,7 @@ br {
   font-family: Typewriter;
   font-weight: bold;
   border-radius: 4px;
-  box-shadow: inset #282828 0 0 10px 2px, #282828 0px 0px 10px 2px;
+  box-shadow: inset #282828 0 0 10px 2px, #282828 0 0 10px 2px;
   transition-duration: 0.2s;
   cursor: pointer;
   width: 200px;
@@ -2040,7 +2040,7 @@ br {
   font-family: Typewriter;
   font-weight: bold;
   border-radius: 4px;
-  box-shadow: inset #282828 0 0 10px 2px, #282828 0px 0px 10px 2px;
+  box-shadow: inset #282828 0 0 10px 2px, #282828 0 0 10px 2px;
   transition-duration: 0.2s;
   cursor: pointer;
   width: 200px;
