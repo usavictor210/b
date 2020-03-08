@@ -5519,7 +5519,7 @@ function gameLoop(diff) {
     }`;
     if (player.meta.autoMaxAll) {
       for (let i = 1; i <= 8; i++) {
-        while (metaBuyManyDimension(i)) {}
+        while (metaBuyManyDimension(i));
       }
     }
   } else {

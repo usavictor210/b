@@ -637,11 +637,8 @@ player.dilation.quarks = Decimal.minus(player.dilation.quarks, amount)
 
 function getTotalInvestmentAmount() { // gets a value from all values of the array and adds it into a decimal
   let ret = new Decimal(0)
-  for (let feature of Object.values(player.quantum.investmentAmount)) {
-  if (player.quantum.investmentAmount === null) { // this doesn't even make sense, and there is currently a null value that causes problems.
-    ret = ret // if it detects null, just continue on...
-  }
-    Decimal.add(ret, feature) //add to decimal
+  for (let feature of Object.values(player.quantum.investmentAmount)) { // currently breaks because null
+  Decimal.add(ret, feature) //add to decimal
   return ret
   }
 }
