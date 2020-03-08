@@ -244,15 +244,10 @@ function getMetaDimensionProductionPerSecond(tier) {
     return Decimal.floor(player.meta[tier].amount).times(getMetaDimensionMultiplier(tier));
 }
 
-function metaDimensionAchievement() { // could be simplified
-if (getMetaDimensionMultiplier(1).gte(1e25) && 
-getMetaDimensionMultiplier(2).gte(1e25) &&
-getMetaDimensionMultiplier(3).gte(1e25) &&
-getMetaDimensionMultiplier(4).gte(1e25) &&
-getMetaDimensionMultiplier(5).gte(1e25) &&
-getMetaDimensionMultiplier(6).gte(1e25) &&
-getMetaDimensionMultiplier(7).gte(1e25) &&
-getMetaDimensionMultiplier(8).gte(1e25)) giveAchievement("I never meta-dimension I didn't like");
+function metaDimensionAchievement() { // SHOULD BE SIMPLIFIED
+for (i=1, i<9, i++) {
+
+giveAchievement("I never meta-dimension I didn't like");
 }
 
 
