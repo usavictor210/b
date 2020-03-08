@@ -569,17 +569,19 @@ function getReplMult() {
 }
 
 function r72Check() {
-  var r72 = 0
-  for (i=0; i<8; i++) {
+var r72 = 0
+  for (let i=1; i<9; i++) {
     if (getDimensionFinalMultiplier(i).gte(1e308)) x++
-    }
+  }
   if (r72 == 8) giveAchievement("Can't hold all these infinities");
+return r72
 }
 
 function antitablesCheck() {
-  var antitables = 0
-  for (i=0; i<8; i++) {
+var antitables = 0
+  for (let i=0; i<8; i++) {
    if (getDimensionFinalMultiplier(i+1).lt(getDimensionFinalMultiplier(i))) antitables++
   }
   if (antitables == 8) giveAchievement("How the antitables have turned");
+return antitables
 }
