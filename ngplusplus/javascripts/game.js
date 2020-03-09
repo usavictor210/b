@@ -6483,22 +6483,22 @@ function gameLoop(diff) {
       } else if (eventBC > 3.5e6) {
         since = "end of the Pliocene epoch";
         eventBC = 5.332e6 - eventBC;
-      } else if (eventBC > 258e4) {
+      } else if (eventBC > 2.58e6) {
         since = "birthdate of Lucy (typical Australopithicus afarensis female)";
-        eventBC = 35e5 - eventBC;
-      } else if (eventBC > 781e3) {
-        since = "Quaternary period";
+        eventBC = 3.5e6 - eventBC;
+      } else if (eventBC > 7.81e5) {
+        since = "the end of the Quaternary period";
         eventBC = 258e4 - eventBC;
-      } else if (eventBC > 315e3) {
-        since = "Calabrian age";
-        eventBC = 781e3 - eventBC;
-      } else if (eventBC > 25e4) {
+      } else if (eventBC > 3.15e5) {
+        since = "the end of the Calabrian age";
+        eventBC = 7.81e5 - eventBC;
+      } else if (eventBC > 2.5e5) {
         since = "emergence of Homo sapiens";
-        eventBC = 315e3 - eventBC;
-      } else if (eventBC > 195e3) {
+        eventBC = 3.15e5 - eventBC;
+      } else if (eventBC > 1.95e5) {
         since = "emergence of Homo neanderthalensis";
         eventBC = 25e4 - eventBC;
-      } else if (eventBC > 16e4) {
+      } else if (eventBC > 1.6e4) {
         since = "emergence of anatomically modern humans";
         eventBC = 195e3 - eventBC;
       } else if (eventBC > 125e3) {
@@ -6557,7 +6557,7 @@ function gameLoop(diff) {
         since = "prehistoric warfare";
         eventBC = 14e3 - eventBC;
       } else if (eventBC > 1e4) {
-        since = "Holocene epoch";
+        since = "end of the Holocene epoch";
         eventBC = 11600 - eventBC;
       } else if (eventBC > 8e3) {
         since = "death of other human breeds";
@@ -6633,7 +6633,7 @@ function gameLoop(diff) {
             ")");
     } else {
       var message =
-        "<br>If you start writing 3 digits of your full antimatter amount a second down when you were an American baby,<br> it would ";
+        "<br>If you started writing 3 digits of your full antimatter amount a second down when you were an American baby,<br> it would ";
       if (years > 79.3)
         message +=
           "take up " +
@@ -6726,7 +6726,7 @@ function gameLoop(diff) {
       }
       if (id >= 7 && id < 11)
         document.getElementById("infoScale").textContent =
-          "If every antimatter were a planck volume, you would have enough to fill " +
+          "If every unit of antimatter were a planck volume, you would have enough to fill " +
           formatValue(
             player.options.notation,
             (player.money * 4.22419e-105) / scale1[id],
@@ -6736,7 +6736,7 @@ function gameLoop(diff) {
           scale2[id];
       else
         document.getElementById("infoScale").textContent =
-          "If every antimatter were a planck volume, you would have enough to make " +
+          "If every unit of antimatter were a planck volume, you would have enough to make " +
           formatValue(
             player.options.notation,
             player.money.times(4.22419e-105).dividedBy(scale1[id]),
@@ -6748,7 +6748,7 @@ function gameLoop(diff) {
       //does this part work correctly? i doubt it does
       if (player.money.times(1e-54) < 2.82e-45)
         document.getElementById("infoScale").textContent =
-          "If every antimatter were " +
+          "If every unit of antimatter were " +
           formatValue(
             player.options.notation,
             2.82e-45 / 1e-54 / player.money,
@@ -6758,7 +6758,7 @@ function gameLoop(diff) {
           " attometers cubed, you would have enough to make a proton.";
       else if (player.money * 1e-63 < 2.82e-45)
         document.getElementById("infoScale").textContent =
-          "If every antimatter were " +
+          "If every unit of antimatter were " +
           formatValue(
             player.options.notation,
             2.82e-45 / 1e-63 / player.money,
@@ -6768,7 +6768,7 @@ function gameLoop(diff) {
           " zeptometers cubed, you would have enough to make a proton.";
       else if (player.money * 1e-72 < 2.82e-45)
         document.getElementById("infoScale").textContent =
-          "If every antimatter were " +
+          "If every unit of antimatter were " +
           formatValue(
             player.options.notation,
             2.82e-45 / 1e-72 / player.money,
@@ -6778,7 +6778,7 @@ function gameLoop(diff) {
           " yoctometers cubed, you would have enough to make a proton.";
       else
         document.getElementById("infoScale").textContent =
-          "If every antimatter were " +
+          "If every unit of antimatter were " +
           formatValue(
             player.options.notation,
             2.82e-45 / 4.22419e-105 / player.money,
