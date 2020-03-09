@@ -1012,18 +1012,18 @@ function updateDimensions() {
         shortenCosts(5e4) +
         " IP";
       document.getElementById("postinfi31").innerHTML =
-        "Decrease the tickspeed cost multiplier increase<br>" +
+        "Decrease the tickspeed cost multiplier increase<br>Currently: " +
         player.tickSpeedMultDecrease +
         "x -> " +
         (player.tickSpeedMultDecrease - 1) +
-        "x each purchase after e308<br>Cost: " +
+        "x each purchase after Infinity<br>Cost: " +
         shortenDimensions(player.tickSpeedMultDecreaseCost) +
         " IP";
       if (player.tickSpeedMultDecrease <= 2)
         document.getElementById("postinfi31").innerHTML =
-          "Decrease the tickspeed cost multiplier increase<br>" +
+          "Decrease the tickspeed cost multiplier increase<br>Currently: " +
           player.tickSpeedMultDecrease +
-          "x each purchase after e308";
+          "x each purchase after Infinity";
       document.getElementById("postinfi22").innerHTML =
         "All dimension multipliers increase based on achievements completed<br>Currently: " +
         shortenMoney(achievementMult) +
@@ -1055,15 +1055,15 @@ function updateDimensions() {
         " IP";
       if (player.dimensionMultDecrease <= 3) {
         document.getElementById("postinfi42").innerHTML =
-          "Decrease the dimension cost multiplier increase <br>Currently:" +
+          "Decrease the dimension cost multiplier increase<br>Currently: " +
           player.dimensionMultDecrease.toFixed(1) +
-          "x each purchase after e308";
+          "x each per-10 purchase after Infinity";
       } else document.getElementById("postinfi42").innerHTML =
-        "Decrease the dimension cost multiplier increase <br>" +
+        "Decrease the dimension cost multiplier increase<br>Currently: " +
         player.dimensionMultDecrease +
         "x -> " +
         (player.dimensionMultDecrease - 1) +
-        "x each purchase after e308<br>Cost: " +
+        "x each per-10 purchase after Infinity<br>Cost: " +
         shortenCosts(player.dimensionMultDecreaseCost) +
         " IP";
 
