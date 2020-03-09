@@ -976,7 +976,7 @@ function updateDimensions() {
         formatValue(player.options.notation, dimMults(), 1, 1) +
         "x<br>Cost: 1 IP";
       document.getElementById("infi31").innerHTML =
-        "Normal dimensions gain a multiplier based on time spent in the current infinity.<br>Currently: " +
+        "Normal Dimensions gain a multiplier based on time spent in the current infinity.<br>Currently: " +
         timeMultUpg(2, 2) +
         "x<br>Cost: 3 IP";
       document.getElementById("infi32").innerHTML =
@@ -1012,33 +1012,33 @@ function updateDimensions() {
         shortenCosts(5e4) +
         " IP";
       document.getElementById("postinfi31").innerHTML =
-        "Tickspeed cost multiplier increase <br>" +
+        "Decrease the tickspeed cost multiplier increase<br>" +
         player.tickSpeedMultDecrease +
         "x -> " +
         (player.tickSpeedMultDecrease - 1) +
-        "x<br>Cost: " +
+        "x each purchase after e308<br>Cost: " +
         shortenDimensions(player.tickSpeedMultDecreaseCost) +
         " IP";
       if (player.tickSpeedMultDecrease <= 2)
         document.getElementById("postinfi31").innerHTML =
-          "Tickspeed cost multiplier increase <br>" +
+          "Decrease the tickspeed cost multiplier increase<br>" +
           player.tickSpeedMultDecrease +
-          "x";
+          "x each purchase after e308";
       document.getElementById("postinfi22").innerHTML =
-        "All dimension multipliers increase based on achievements completed <br>Currently: " +
+        "All dimension multipliers increase based on achievements completed<br>Currently: " +
         shortenMoney(achievementMult) +
         "x<br>Cost: " +
         shortenCosts(1e6) +
         " IP";
       document.getElementById("postinfi12").innerHTML =
-        "All dimension multipliers increase based on infinitied stat <br>Currently: " +
+        "All dimension multipliers increase based on infinitied stat<br>Currently: " +
         shortenMoney(1 + Math.log10(getInfinitied() + 1) * 10) +
         "x<br>Cost: " +
         shortenCosts(1e5) +
         " IP";
       if (player.timestudy.studies.includes(31))
         document.getElementById("postinfi12").innerHTML =
-          "All dimension multipliers increase based on infinitied stat <br>Currently: " +
+          "All dimension multipliers increase based on infinitied stat<br>Currently: " +
           shortenMoney(
             Math.pow((Math.log10(getInfinitied() + 1) * 10).toFixed(2), 4)
           ) +
@@ -1053,12 +1053,17 @@ function updateDimensions() {
         "x<br>Cost: " +
         shortenCosts(1e7) +
         " IP";
-      document.getElementById("postinfi42").innerHTML =
-        "Dimension cost multiplier increase <br>" +
+      if (player.dimensionMultDecrease <= 3) {
+        document.getElementById("postinfi42").innerHTML =
+          "Decrease the dimension cost multiplier increase <br>Currently:" +
+          player.dimensionMultDecrease.toFixed(1) +
+          "x each purchase after e308";
+      } else document.getElementById("postinfi42").innerHTML =
+        "Decrease the dimension cost multiplier increase <br>" +
         player.dimensionMultDecrease +
         "x -> " +
         (player.dimensionMultDecrease - 1) +
-        "x<br>Cost: " +
+        "x each purchase after e308<br>Cost: " +
         shortenCosts(player.dimensionMultDecreaseCost) +
         " IP";
 
@@ -1074,11 +1079,6 @@ function updateDimensions() {
         " IP";
       document.getElementById("postinfi33").innerHTML =
         "Autobuyers work twice as fast<br>Cost: " + shortenCosts(1e15) + " IP";
-      if (player.dimensionMultDecrease <= 3)
-        document.getElementById("postinfi42").innerHTML =
-          "Dimension cost multiplier increase <br>" +
-          player.dimensionMultDecrease.toFixed(1) +
-          "x";
 
       document.getElementById("offlineProd").innerHTML =
         "Generate " +
@@ -1090,7 +1090,7 @@ function updateDimensions() {
         ) +
         "% of your best IP/min from last 10 infinities, works offline<br>Currently: " +
         shortenMoney(new Decimal(bestRunIppm).times(player.offlineProd / 100)) +
-        "IP/min<br> Cost: " +
+        " IP/min<br> Cost: " +
         shortenCosts(player.offlineProdCost) +
         " IP";
       if (player.offlineProd == 50)
