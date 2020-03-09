@@ -803,7 +803,7 @@ document.getElementById("11desc").textContent =
       "x";
     document.getElementById("32desc").textContent =
       "You gain " +
-      Math.max(player.resets, 1) +
+      shortenDimensions(Math.max(player.resets, 1)) +
       "x more infinitied stat (based on dimension boosts)";
     document.getElementById("51desc").textContent =
       "You gain " + shortenCosts(1e15) + "x more IP";

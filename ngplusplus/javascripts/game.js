@@ -931,9 +931,9 @@ function updateDimensions() {
       shortenMoney(player.totalmoney) +
       " antimatter.";
     document.getElementById("totalresets").textContent =
-      "You have done " + player.resets + " dimensional boosts/shifts.";
+      "You have performed " + formatInfOrEter(player.resets) + " dimensional boosts/shifts.";
     document.getElementById("galaxies").textContent =
-      "You have " + Math.round(player.galaxies) + " Antimatter Galaxies.";
+      "You have " + formatInfOrEter(player.galaxies) + " Antimatter Galaxies.";
     document.getElementById("totalTime").textContent =
       "You have played for " + timeDisplay(player.totalTimePlayed) + ".";
 
