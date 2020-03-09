@@ -264,7 +264,8 @@ newsArray = [//always true
 ["When the news ticker keeps coming back... and coming back...", true, "respecced99"],
 ["How to fix the game's bugs: Revision 45 - 1. Make sure no pesky bugs exist in your code and blast them with antimatter if you see them. 2. Do something to prevent the spread of these evil bugs. Maybe alter the code and encourage the bugs to go away. 3. Watch as more bugs emerge from the previous bugs you've exploded. If in any case the bugs begin a revolution, big crunch the universe.", true, "respecced100"],
 ["This message's contents will only be viewable if you have performed [REDACTED]. I don't know if we did anything yet with it though.", true, "respecced101"],
-["This will probably be the last news ticker made by me in a while. I need to think of a better formula. If I kept going on like this, you'd get bored eventually.", true, "respecced102"]
+["This will probably be the last news ticker made by me in a while. I need to think of a better formula. If I kept going on like this, you'd get bored eventually.", true, "respecced102"],
+["\"Make this into the news ticker\" ~ Cats and Dogs, 2020", true, "respecced103"]
 ];}
 
 var s = document.getElementById('news');
