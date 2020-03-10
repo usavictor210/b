@@ -100,44 +100,33 @@ function updatePenalty() { // "In the grim darkness of the far endgame"'s reward
   document.getElementById("133penalty").innerHTML = player.achievements.includes("r143") ? "Replicanti galaxies are 50% stronger" : "Replicanti interval is 10x slower until infinity, but RGs are 50% stronger"
 }
 function updateTheoremButtons() {
-  document.getElementById("theoremam").className = player.money.gte(
-    player.timestudy.amcost
-  )
-    ? "timetheorembtn"
-    : "timetheorembtnlocked";
-  document.getElementById("theoremip").className = player.infinityPoints.gte(
-    player.timestudy.ipcost
-  )
-    ? "timetheorembtn"
-    : "timetheorembtnlocked";
-  document.getElementById("theoremep").className = player.eternityPoints.gte(
-    player.timestudy.epcost
-  )
-    ? "timetheorembtn"
-    : "timetheorembtnlocked";
-  document.getElementById("theoremep").innerHTML =
-    "Buy Time Theorems <br>Cost: " +
-    shortenDimensions(player.timestudy.epcost) +
-    " EP";
-  document.getElementById("theoremip").innerHTML =
-    "Buy Time Theorems <br>Cost: " +
-    shortenCosts(player.timestudy.ipcost) +
-    " IP";
-  document.getElementById("theoremam").innerHTML =
-    "Buy Time Theorems <br>Cost: " + shortenCosts(player.timestudy.amcost);
-  if (player.timestudy.theorem > 99999) // only formats at 100k+
-    document.getElementById("timetheorems").innerHTML =
-      "You have <span style='display:inline' class=\"TheoremAmount\">" +
-      shortenMoney(player.timestudy.theorem) +
-      "</span> Time " +
-      "Theorems.";
-  else
-    document.getElementById("timetheorems").innerHTML =
-      "You have <span style='display:inline' class=\"TheoremAmount\">" +
-      player.timestudy.theorem.toFixed(0) +
-      "</span> Time " +
-      (player.timestudy.theorem == 1 ? "Theorem." : "Theorems.");
+	if (player.dilation.upgrades.includes(10)) {
+		document.getElementById("theoremmax").style.display="none"
+		document.getElementById("theoremam").style.display="none"
+		document.getElementById("theoremip").style.display="none"
+		document.getElementById("theoremep").style.display="none"
+		document.getElementById("timetheorems").style.bottom="0"
+		document.getElementById("presetsbtn").style.bottom="-3px"
+		document.getElementById("theorembuybackground").style.bottom = "-80px"
+	} else {
+		document.getElementById("theoremmax").style.display=""
+		document.getElementById("theoremam").style.display=""
+		document.getElementById("theoremip").style.display=""
+		document.getElementById("theoremep").style.display=""
+		document.getElementById("timetheorems").style.bottom="80px"
+		document.getElementById("presetsbtn").style.bottom="77px"
+		document.getElementById("theorembuybackground").style.bottom = "0"
+		document.getElementById("theoremam").className = player.money.gte(player.timestudy.amcost) ? "timetheorembtn" : "timetheorembtnlocked"
+		document.getElementById("theoremip").className = player.infinityPoints.gte(player.timestudy.ipcost) ? "timetheorembtn" : "timetheorembtnlocked"
+		document.getElementById("theoremep").className = player.eternityPoints.gte(player.timestudy.epcost) ? "timetheorembtn" : "timetheorembtnlocked"
+		document.getElementById("theoremep").innerHTML = "Buy Time Theorems <br>Cost: "+shortenDimensions(player.timestudy.epcost)+" EP"
+		document.getElementById("theoremip").innerHTML = "Buy Time Theorems <br>Cost: "+shortenCosts(player.timestudy.ipcost)+" IP"
+		document.getElementById("theoremam").innerHTML = "Buy Time Theorems <br>Cost: "+shortenCosts(player.timestudy.amcost)
+		document.getElementById("theoremmax").innerHTML = "Buy max Theorems"
+	}
+	document.getElementById("timetheorems").innerHTML = "You have <span style='display:inline' class=\"TheoremAmount\">"+(player.timestudy.theorem>99999?shortenMoney(player.timestudy.theorem):formatInfOrEter(Math.floor(player.timestudy.theorem)))+"</span> Time Theorem"+ (player.timestudy.theorem == 1 ? "." : "s.")
 }
+
 
 function buyTimeStudy(name, cost, check) { //checks for if you can buy studies, can be changed for 201 eventually
   if (shiftDown && check === undefined) studiesUntil(name);
