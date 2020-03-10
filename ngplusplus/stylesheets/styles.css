@@ -982,7 +982,7 @@ button {
   font-weight: bold;
   font-family: Typewriter;
   border: 1px solid #691fa5;
-  width: 170px;
+  width: 200px;
   height: 70px;
   transition-duration: 0.2s;
   border-radius: 4px;
@@ -1022,12 +1022,12 @@ button {
 
 #theorembuybackground {
   background: #E0E0E0;
-  width: 570px;
+  width: 605px;
   height: 110px;
   position: fixed;
   bottom: 0;
   left: 50%;
-  margin-left: -287px;
+  margin-left: -300px;
   border: 2px solid black;
   border-bottom: none;
   border-top-left-radius: 7px;
