@@ -433,7 +433,7 @@ button {
 }
 
 .EP {
-  right: 75%;
+  right: 72.5%;
   position: absolute;
   font-size: 12px;
   width: 300px;
@@ -468,7 +468,7 @@ button {
   border-radius: 4px;
   transition-duration: 0.2s;
   position: absolute;
-  right: 77%;
+  right: 74.5%;
   width: 240px;
   height: 70px;
   color: #000000;
@@ -489,7 +489,7 @@ button {
   transition-duration: 0.2s;
   cursor: pointer;
   position: absolute;
-  right: 77%;
+  right: 74.5%;
   width: 240px;
   height: 70px;
   font-family: Typewriter;
