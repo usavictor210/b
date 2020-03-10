@@ -569,14 +569,10 @@ function updateQuantum() {
   document.getElementById("pastquantums").style.display = "none";
 }
   let plural2 = player.quantum.quarks != 1 ? "s" : "";
-  var x = new Decimal(0)
-  for (i=1; i<6; i++) {
-  x = x.add(player.quantum.investmentAmount[i])
-  }
-  let plural3 = x.notEquals(1) ? "s" : ""
+  let plural3 = getTotalInvestmentAmount().notEquals(1) ? "s" : ""
   document.getElementById("quarkAmount").textContent = `You have ${shortenDimensions(player.quantum.quarks)} quark` + plural2 + `.`
   document.getElementById("unstableShardAmount").textContent = player.dilation.unstable.shards
-  //document.getElementById("totalInvest").textContent = `You have invested a total of ${shortenDimensions(getTotalInvestmentAmount())} quark` + plural3 + `.`
+  document.getElementById("totalInvest").textContent = `You have invested a total of ${shortenDimensions(getTotalInvestmentAmount())} quark` + plural3 + `.`
   document.getElementById("dilationseverity").textContent = "Dilation's penalty on all dimensions is x^" + getDilPunish().toFixed(3) + "."
 }
 
@@ -633,10 +629,10 @@ player.quantum.quarks = player.quantum.quarks.sub(amount)
 
 function getTotalInvestmentAmount() { // gets a value from all values of the array and adds it into a decimal
   let ret = new Decimal(0)
-  for (let feature of Object.values(player.quantum.investmentAmount)) { // currently breaks because null
-  Decimal.add(ret, feature) //add to decimal
-  return ret
+  for (let feature of Object.values(player.quantum.investmentAmount)) {
+  ret = Decimal.add(ret, player.quantum.investmentAmount[i]) //add to decimal
   }
+  return ret
 }
 function getInvestMultiplier(x) { // you have to decide a formula for each feature.
 if (x == 1) { // time studies; this will probably multiply the softcaps.

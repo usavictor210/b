@@ -36,7 +36,7 @@ function eternity(force, auto) {
       player.tickSpeedMultDecrease = parseFloat(
         (player.tickSpeedMultDecrease - 0.07).toFixed(2)
       );
-    if (player.infinitied < 10 && !force)
+    if (player.infinitied <= 10 && !force)
       giveAchievement("Do you really need a guide for this?");
     if (Decimal.round(player.replicanti.amount) == 9)
       giveAchievement("We could afford 9");
