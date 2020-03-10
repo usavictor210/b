@@ -1436,3 +1436,7 @@ function updateECRewardText() {
 function r127Reward() {
 return new Decimal((Decimal.pow(((player.eternityPoints.e-308)+1), (5+(Decimal.log(player.eternityPoints.e, 20)))))+1)
 }
+
+function eterUpgrade(x) {
+
+}
