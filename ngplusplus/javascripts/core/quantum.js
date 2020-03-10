@@ -629,8 +629,7 @@ player.quantum.quarks = player.quantum.quarks.sub(amount)
 
 function getTotalInvestmentAmount() { // gets a value from all values of the array and adds it into a decimal
   let ret = new Decimal(0)
-  const array = player.quantum.investmentAmount
-  for (let feature of Object.values(player.quantum.investmentAmount)) {
+  for (i=1; i<6; i++) { // let feature of Object.values(player.quantum.investmentAmount)  
   ret = Decimal.add(ret, player.quantum.investmentAmount[i]) //add to decimal
   }
   return ret
