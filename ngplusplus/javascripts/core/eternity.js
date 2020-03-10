@@ -1,4 +1,4 @@
-function eternity(force, auto) {
+vcfunction eternity(force, auto) {
   if (
     (player.infinityPoints.gte(Number.MAX_VALUE) &&
       (!player.options.eternityconfirm ||
