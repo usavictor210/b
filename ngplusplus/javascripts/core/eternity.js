@@ -1,4 +1,4 @@
-vcfunction eternity(force, auto) {
+function eternity(force, auto) {
   if (
     (player.infinityPoints.gte(Number.MAX_VALUE) &&
       (!player.options.eternityconfirm ||
@@ -494,12 +494,7 @@ vcfunction eternity(force, auto) {
       : "none";
     document.getElementById("eternityPoints2").style.display = "inline-block";
     document.getElementById("eternitystorebtn").style.display = "inline-block";
-    document.getElementById("infiMult").innerHTML =
-      "You get 2x more IP from all sources for every purchase. <br>currently: " +
-      shorten(player.infMult) +
-      "x<br>Cost: " +
-      shortenCosts(player.infMultCost) +
-      " IP";
+    updateInfMult()
     updateEternityUpgrades();
     document.getElementById("totaltickgained").textContent =
       "You've gained " +
@@ -914,12 +909,7 @@ function startEternityChallenge(name, startgoal, goalIncrease) {
       : "none";
     document.getElementById("eternityPoints2").style.display = "inline-block";
     document.getElementById("eternitystorebtn").style.display = "inline-block";
-    document.getElementById("infiMult").innerHTML =
-      "You get 2x more IP from all sources for every purchase. <br>currently: " +
-      shorten(player.infMult) +
-      "x<br>Cost: " +
-      shortenCosts(player.infMultCost) +
-      " IP";
+    updateInfMult()
     updateEternityUpgrades();
     document.getElementById("totaltickgained").textContent =
       "You've gained " +

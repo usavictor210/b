@@ -806,13 +806,7 @@ function onLoad() {
 
   if (player.break == true)
     document.getElementById("break").textContent = "FIX INFINITY";
-  document.getElementById("infiMult").innerHTML =
-    "You get 2x more IP from all sources for every purchase.<br>Currently: " +
-    shortenDimensions(player.infMult) +
-    "x<br>Cost: " +
-    shortenCosts(player.infMultCost) +
-    " IP";
-
+  updateInfMult()
   document.getElementById("notation").textContent =
     "Notation: " + player.options.notation;
 

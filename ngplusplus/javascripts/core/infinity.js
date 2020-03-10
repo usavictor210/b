@@ -589,7 +589,7 @@ return antitables
 
 function updateInfMult() {
 document.getElementById("infiMult").innerHTML =
-    "You gain 2x more IP per purchase.<br>Currently: " +
+    "You gain 2x more IP.<br>Currently: " +
     shorten(player.infMult) +
     "x<br>Cost: " +
     shortenCosts(player.infMultCost) +

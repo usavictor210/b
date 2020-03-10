@@ -466,12 +466,7 @@ function quantum(force, auto) {
       : "none";
     document.getElementById("eternityPoints2").style.display = "inline-block";
     document.getElementById("eternitystorebtn").style.display = "inline-block";
-    document.getElementById("infiMult").innerHTML =
-      "You get 2x more IP from all sources for every purchase.<br>Currently: " +
-      shorten(player.infMult) +
-      "x<br>Cost: " +
-      shortenCosts(player.infMultCost) +
-      " IP";
+    updateInfMult()
     updateEternityUpgrades();
     document.getElementById("totaltickgained").textContent =
       "You've gained " +

@@ -956,7 +956,7 @@ function updateDimensions() {
   if (document.getElementById("infinity").style.display == "block") {
     if (document.getElementById("preinf").style.display == "block") {
       document.getElementById("infi11").innerHTML =
-        "Normal dimensions gain a multiplier based on time played.<br>Currently: " +
+        "Normal Dimensions gain a multiplier based on time played.<br>Currently: " +
         timeMultUpg(1, 2) +
         "x<br>Cost: 1 IP";
       document.getElementById("infi12").innerHTML =
@@ -968,7 +968,7 @@ function updateDimensions() {
         formatValue(player.options.notation, dimMults(), 1, 1) +
         "x<br>Cost: 1 IP";
       document.getElementById("infi22").innerHTML =
-        "Second and seventh Dimensions gain a multiplier based on infinitied stat.<br>Currently: " +
+        "Second and Seventh Dimensions gain a multiplier based on infinitied stat.<br>Currently: " +
         formatValue(player.options.notation, dimMults(), 1, 1) +
         "x<br>Cost: 1 IP";
       document.getElementById("infi23").innerHTML =
@@ -1000,13 +1000,13 @@ function updateDimensions() {
     } else if (document.getElementById("postinf").style.display == "block") {
       //TODO - SIMPLIFY ALL BREAK INFINITY FORMULAS INTO ONE FUNCTION
       document.getElementById("postinfi11").innerHTML =
-        "All dimension multipliers increase based on total antimatter produced<br>Currently: " +
+        "Dimensions are more powerful based on total antimatter produced<br>Currently: " +
         shortenMoney(Math.pow(player.totalmoney.e + 1, 0.5)) +
         "x<br>Cost: " +
         shortenCosts(1e4) +
         " IP";
       document.getElementById("postinfi21").innerHTML =
-        "All dimension multipliers increase based on current antimatter<br>Currently: " +
+        "Dimensions are more powerful based on current antimatter<br>Currently: " +
         shortenMoney(Math.pow(player.money.e + 1, 0.5)) +
         "x<br>Cost: " +
         shortenCosts(5e4) +
@@ -1025,20 +1025,21 @@ function updateDimensions() {
           player.tickSpeedMultDecrease +
           "x each purchase after Infinity";
       document.getElementById("postinfi22").innerHTML =
-        "All dimension multipliers increase based on achievements completed<br>Currently: " +
+        "Dimensions are more powerful based on achievements completed<br>Currently: " +
         shortenMoney(achievementMult) +
         "x<br>Cost: " +
         shortenCosts(1e6) +
         " IP";
       document.getElementById("postinfi12").innerHTML =
-        "All dimension multipliers increase based on infinitied stat<br>Currently: " +
+        "Dimensions are more powerful based on your infinitied stat<br>Currently: " +
+        if (player.timestudy.studies.includes(31)) {
         shortenMoney(1 + Math.log10(getInfinitied() + 1) * 10) +
         "x<br>Cost: " +
         shortenCosts(1e5) +
         " IP";
       if (player.timestudy.studies.includes(31))
         document.getElementById("postinfi12").innerHTML =
-          "All dimension multipliers increase based on infinitied stat<br>Currently: " +
+          "Dimensions are more powerful based on infinitied stat<br>Currently: " +
           shortenMoney(
             Math.pow((Math.log10(getInfinitied() + 1) * 10).toFixed(2), 4)
           ) +
@@ -5782,12 +5783,7 @@ function gameLoop(diff) {
     if (dif > 0) {
       player.infMult = player.infMult.times(Decimal.pow(2, dif));
       player.infMultCost = player.infMultCost.times(Decimal.pow(10, dif));
-      document.getElementById("infiMult").innerHTML =
-        "Multiply infinity points from all sources by 2 <br>currently: " +
-        shorten(player.infMult) +
-        "x<br>Cost: " +
-        shortenCosts(player.infMultCost) +
-        " IP";
+      updateInfMult()
       player.infinityPoints = player.infinityPoints.minus(
         player.infMultCost.dividedBy(10)
       );
