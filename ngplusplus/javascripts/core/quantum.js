@@ -467,7 +467,7 @@ function quantum(force, auto) {
     document.getElementById("eternityPoints2").style.display = "inline-block";
     document.getElementById("eternitystorebtn").style.display = "inline-block";
     document.getElementById("infiMult").innerHTML =
-      "Multiply infinity points from all sources by 2 <br>currently: " +
+      "You get 2x more IP from all sources for every purchase.<br>Currently: " +
       shorten(player.infMult) +
       "x<br>Cost: " +
       shortenCosts(player.infMultCost) +

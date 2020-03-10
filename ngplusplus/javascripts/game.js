@@ -1676,7 +1676,7 @@ document.getElementById("infiMult").onclick = function() {
     player.autoIP = player.autoIP.times(2);
     player.infMultCost = player.infMultCost.times(10);
     document.getElementById("infiMult").innerHTML =
-      "Multiply infinity points from all sources by 2 <br>currently: " +
+      "You get 2x more IP from all sources for every purchase.<br>Currently: " +
       shorten(player.infMult) +
       "x<br>Cost: " +
       shortenCosts(player.infMultCost) +
@@ -2008,12 +2008,7 @@ document.getElementById("offlineProd").onclick = function() {
 };
 
 function updateInfCosts() {
-  document.getElementById("infiMult").innerHTML =
-    "Multiply infinity points from all sources by 2 <br>currently: " +
-    shorten(player.infMult) +
-    "x<br>Cost: " +
-    shortenCosts(player.infMultCost) +
-    " IP";
+  updateInfMult()
   if (
     document.getElementById("replicantis").style.display == "block" &&
     document.getElementById("infinity").style.display == "block"
