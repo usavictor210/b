@@ -1030,26 +1030,17 @@ function updateDimensions() {
         "x<br>Cost: " +
         shortenCosts(1e6) +
         " IP";
+      var postinfi12 = player.timestudy.studies.includes(31) ? Math.pow((Math.log10(getInfinitied() + 1) * 10).toFixed(2), 4) : shortenMoney(1 + Math.log10(getInfinitied() + 1) * 10)
       document.getElementById("postinfi12").innerHTML =
         "Dimensions are more powerful based on your infinitied stat<br>Currently: " +
-        if (player.timestudy.studies.includes(31)) {
-        shortenMoney(1 + Math.log10(getInfinitied() + 1) * 10) +
+        shortenMoney(postinfi12) +
         "x<br>Cost: " +
         shortenCosts(1e5) +
         " IP";
-      if (player.timestudy.studies.includes(31))
-        document.getElementById("postinfi12").innerHTML =
-          "Dimensions are more powerful based on infinitied stat<br>Currently: " +
-          shortenMoney(
-            Math.pow((Math.log10(getInfinitied() + 1) * 10).toFixed(2), 4)
-          ) +
-          "x<br>Cost: " +
-          shortenCosts(1e5) +
-          " IP";
       document.getElementById("postinfi41").innerHTML =
         "Galaxies are 50% stronger.<br>Cost: " + shortenCosts(5e11) + " IP";
       document.getElementById("postinfi32").innerHTML =
-        "All dimension multipliers increase based on slowest challenge run<br>Currently: " +
+        "Dimensions are more powerful based on your slowest challenge record<br>Currently: " +
         shortenMoney(challengeMult) +
         "x<br>Cost: " +
         shortenCosts(1e7) +
@@ -1124,7 +1115,7 @@ function updateDimensions() {
       shortenMoney(eterUpg2Mult()) +
       "x<br>Cost: 10 EP";
     document.getElementById("eter3").innerHTML =
-      "Infinity Dimensions multiplier based on sum of Infinity Challenge times<br>Currently: " +
+      "Infinity Dimensions multiplier based on the sum of Infinity Challenge times<br>Currently: " +
       shortenMoney(
         Decimal.pow(
           2,
