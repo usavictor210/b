@@ -1135,13 +1135,12 @@ function updateDimensions() {
       shortenCosts(1e16) +
       " EP";
     document.getElementById("eter5").innerHTML =
-      "Time Dimensions are multiplied by your unspent time theorems" +
+      "Time Dimensions are more powerful based on your amount of unspent time theorems" +
       "<br>Cost: " +
       shortenCosts(1e40) +
       " EP";
     document.getElementById("eter6").innerHTML =
-      "Time Dimensions are multiplied by days played" +
-      "<br>Cost: " +
+      "Time Dimensions are more powerful based on time played<br>Currently: " + shortenDimensions(player.totalTimePlayed / (10*21600)) + "x<br>Cost: " +
       shortenCosts(1e50) +
       " EP";
     document.getElementById("eter7").innerHTML =
