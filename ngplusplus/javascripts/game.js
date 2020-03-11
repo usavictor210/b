@@ -1140,7 +1140,7 @@ function updateDimensions() {
       shortenCosts(1e40) +
       " EP";
     document.getElementById("eter6").innerHTML =
-      "Time Dimensions are more powerful based on time played<br>Currently: " + shortenDimensions((player.totalTimePlayed / (10*21600)).max(1)) + "x<br>Cost: " +
+      "Time Dimensions are more powerful based on time played<br>Currently: " + shortenDimensions(new Decimal(player.totalTimePlayed / (10*21600)).max(1)) + "x<br>Cost: " +
       shortenCosts(1e50) +
       " EP";
     document.getElementById("eter7").innerHTML =
