@@ -850,7 +850,7 @@ function onLoad() {
 
 
     if (player.break == true) document.getElementById("break").innerHTML = "FIX INFINITY"
-    document.getElementById("infiMult").innerHTML = "Multiply infinity points from all sources by 2 <br>currently: "+shortenDimensions(getIPMult()) +"x<br>Cost: "+shortenCosts(player.infMultCost)+" IP"
+    document.getElementById("infiMult").innerHTML = "You get 2x more IP.<br>Currently: "+shortenDimensions(getIPMult()) +"x<br>Cost: "+shortenCosts(player.infMultCost)+" IP"
 
     document.getElementById("notation").innerHTML = "Notation: " + player.options.notation
 
@@ -3356,7 +3356,7 @@ document.getElementById("infiMult").onclick = function() {
         if (player.autobuyers[11].priority !== undefined && player.autobuyers[11].priority !== null && player.autoCrunchMode == "amount") player.autobuyers[11].priority = player.autobuyers[11].priority.times(2);
         if (player.autoCrunchMode == "amount") document.getElementById("priority12").value = player.autobuyers[11].priority
         player.infMultCost = player.infMultCost.times(10)
-        document.getElementById("infiMult").innerHTML = "Multiply infinity points from all sources by 2 <br>currently: "+shorten(getIPMult()) +"x<br>Cost: "+shortenCosts(player.infMultCost)+" IP"
+        document.getElementById("infiMult").innerHTML = "You get 2x more IP.<br>Currently: "+shorten(getIPMult()) +"x<br>Cost: "+shortenCosts(player.infMultCost)+" IP"
     }
 }
 
@@ -3627,7 +3627,7 @@ function updateInfCosts() {
     document.getElementById("replicantiunlock").className = (player.infinityPoints.gte(1e140)) ? "storebtn" : "unavailablebtn"
 
 
-    document.getElementById("infiMult").innerHTML = "Multiply infinity points from all sources by 2 <br>currently: "+shorten(getIPMult()) +"x<br>Cost: "+shortenCosts(player.infMultCost)+" IP"
+    document.getElementById("infiMult").innerHTML = "You get 2x more IP.<br>Currently: "+shorten(getIPMult()) +"x<br>Cost: "+shortenCosts(player.infMultCost)+" IP"
 }
 
 function isTSMultiplier (i) {
@@ -4733,25 +4733,106 @@ function setAchieveTooltip() {
     let fkoff = document.getElementById("What do I have to do to get rid of you")
     let infstuff = document.getElementById("I never liked this infinity stuff anyway")
 
-    apocAchieve.setAttribute('ach-tooltip', "Get over " + formatValue(player.options.notation, 1e80, 0, 0) + " antimatter");
-    noPointAchieve.setAttribute('ach-tooltip', "Buy a single First Dimension when you have over " + formatValue(player.options.notation, 1e150, 0, 0) + " of them. Reward: First Dimensions are 10% stronger");
-    sanic.setAttribute('ach-tooltip', "Have antimatter/sec exceed your current antimatter above " + formatValue(player.options.notation, 1e63, 0, 0));
-    forgotAchieve.setAttribute('ach-tooltip', "Get any Dimension multiplier over " + formatValue(player.options.notation, 1e31, 0, 0)) + ". Reward: First Dimensions are 5% stronger";
-    potato.setAttribute('ach-tooltip', "Get more than " + formatValue(player.options.notation, 1e26, 0, 0) + " ticks per second. Reward: Reduces starting tick interval by 2%");
-    potato2.setAttribute('ach-tooltip', "Get more than " + formatValue(player.options.notation, 1e52, 0, 0) + " ticks per second. Reward: Reduces starting tick interval by another 2%");
-    dimensional.setAttribute('ach-tooltip', "Reach " + formatValue(player.options.notation, 1e12, 0, 0) + " of all dimensions except 8th");
-    IPBelongs.setAttribute('ach-tooltip', "Big Crunch for "+shortenCosts(1e150)+" IP. Reward: Additional 4x multiplier to IP")
-    reference.setAttribute('ach-tooltip', "Get a x"+shortenDimensions(Number.MAX_VALUE)+" multiplier in a single sacrifice. Reward: Sacrifice is slightly stronger.")
-    aMillion.setAttribute('ach-tooltip', "Reach "+shortenCosts(1e6)+" infinity power.");
-    blink.setAttribute('ach-tooltip', "Get to Infinity in under 200 milliseconds. Reward: Start with " + formatValue(player.options.notation, 1e25, 0, 0) + " antimatter and all dimensions are stronger in first 300ms of Infinity.");
-    spare.setAttribute('ach-tooltip', "Reach " +formatValue(player.options.notation, new Decimal("1e35000"), 0, 0)+" antimatter. Reward: Dimensions are more powerful the more unspent antimatter you have.");
-    speed.setAttribute('ach-tooltip', "Big Crunch for "+shortenCosts(1e200)+" IP in 2 seconds or less. Reward: All dimensions are significantly stronger in first 5 seconds of infinity.")
-    speed2.setAttribute('ach-tooltip', "Big Crunch for "+shortenCosts(1e250)+" IP in 20 seconds or less. Reward: All dimensions are significantly stronger in first 60 seconds of infinity.")
-    overdrive.setAttribute('ach-tooltip', "Big Crunch with " + shortenCosts(1e300) + " IP/min. Reward: Additional 4x multiplier to IP.")
-    minute.setAttribute('ach-tooltip', "Reach " + shortenCosts(1e260) + " infinity power. Reward: Double infinity power gain.")
-    aLot.setAttribute('ach-tooltip', "Reach " + shortenCosts(new Decimal('1e1000000')) + " replicanti. Reward: Replicanti increase faster the more you have.")
-    infiniteIP.setAttribute('ach-tooltip', "Reach "+shortenCosts(new Decimal("1e30008"))+" IP.")
-    over9000.setAttribute('ach-tooltip', "Get a total sacrifice multiplier of "+shortenCosts(new Decimal("1e9000"))+". Reward: Sacrifice doesn't reset your dimensions.")
+ apocAchieve.setAttribute(
+    "ach-tooltip",
+    "Get over " +
+      formatValue(player.options.notation, 1e80, 0, 0) +
+      " antimatter."
+  );
+  noPointAchieve.setAttribute(
+    "ach-tooltip",
+    "Buy a single First Dimension when you have over " +
+      formatValue(player.options.notation, 1e150, 0, 0) +
+      " of them. Reward: First Dimensions are 10% stronger."
+  );
+  forgotAchieve.setAttribute(
+    "ach-tooltip",
+    "Get any Dimension multiplier over " +
+      formatValue(player.options.notation, 1e31, 0, 0) +
+      ". Reward: First Dimensions are 5% stronger."
+  );
+  sanic.setAttribute(
+    "ach-tooltip",
+    "Get over " +
+      formatValue(player.options.notation, 1e63, 0, 0) +
+      " antimatter."
+  );
+  potato.setAttribute(
+    "ach-tooltip",
+    "Get more than " +
+      formatValue(player.options.notation, 1e29, 0, 0) +
+      " ticks per second. Reward: Reduce the starting tick interval by 2%."
+  );
+  potato2.setAttribute(
+    "ach-tooltip",
+    "Get more than " +
+      formatValue(player.options.notation, 1e58, 0, 0) +
+      " ticks per second. Reward: Reduce the starting tick interval by 2%."
+  );
+  dimensional.setAttribute(
+    "ach-tooltip",
+    "Get at least " +
+      formatValue(player.options.notation, 1e12, 0, 0) +
+      " of all dimensions except for the 8th dimension."
+  );
+  IPBelongs.setAttribute(
+    "ach-tooltip",
+    "Big Crunch for " +
+      shortenCosts(1e150) +
+      " IP. Reward: Gain an additional 4x multiplier to IP."
+  );
+  reference.setAttribute(
+    "ach-tooltip",
+    "Get a x" +
+      shortenDimensions(Number.MAX_VALUE) +
+      " multiplier in a single sacrifice. Reward: Sacrifices are stronger."
+  );
+  blink.setAttribute(
+    "ach-tooltip",
+    "Get to Infinity in under 200 milliseconds. Reward: Start with " +
+      formatValue(player.options.notation, 1e25, 0, 0) +
+      " antimatter and all dimensions are stronger in the first 300 milliseconds of an Infinity."
+  );
+  spare.setAttribute(
+    "ach-tooltip",
+    "Reach " +
+      formatValue(player.options.notation, new Decimal("1e35000"), 0, 0) +
+      " antimatter. Reward: “This achievement doesn't exist”'s reward is buffed."
+  );
+  speed.setAttribute(
+    "ach-tooltip",
+    "Big Crunch for " +
+      shortenCosts(1e200) +
+      " IP in 2 seconds or less. Reward: All dimensions are significantly stronger in the first 5 seconds of an infinity."
+  );
+  speed2.setAttribute(
+    "ach-tooltip",
+    "Big Crunch for " +
+      shortenCosts(1e250) +
+      " IP in 20 seconds or less. Reward: All dimensions are significantly stronger in the first 60 seconds of an infinity."
+  );
+  overdrive.setAttribute(
+    "ach-tooltip",
+    "Big Crunch with " +
+      shortenCosts(1e300) +
+      " IP/min. Reward: Gain an additional 4x multiplier to IP."
+  );
+  minute.setAttribute(
+    "ach-tooltip",
+    "Reach " +
+      shortenCosts(1e260) +
+      " infinity power. Reward: The 1st Infinity Dimension gains a 2x multiplier."
+  );
+  infiniteIP.setAttribute(
+    "ach-tooltip",
+    "Reach " + shortenCosts(new Decimal("1e30008")) + " IP."
+  );
+  over9000.setAttribute(
+    "ach-tooltip",
+    "Get a total sacrifice multiplier of " +
+      shortenCosts(new Decimal("1e9000")) +
+      ". Reward: Sacrifice doesn't reset your dimensions."
+  );
     dawg.setAttribute('ach-tooltip', "Have each infinity be at least "+shortenMoney(Number.MAX_VALUE)+" times higher IP than the previous one within your past 10 infinities. Reward: Your antimatter doesn't reset on dimension boost or galaxy, and your infinity gain is boosted by your unspent IP.")
     layer.setAttribute('ach-tooltip', "Reach "+shortenMoney(Number.MAX_VALUE)+" EP. Reward: Time dimensions get a multiplier based on EP.")
     fkoff.setAttribute('ach-tooltip', "Reach "+shortenCosts(new Decimal("1e66600"))+" IP without any time studies. Reward: Time dimensions are multiplied by the total number of time theorems you have.")
@@ -4900,7 +4981,7 @@ function sacrifice() {
 
 document.getElementById("sacrifice").onclick = function () {
     if (!document.getElementById("confirmation").checked) {
-        if (!confirm("Dimensional Sacrifice will remove all of your first to seventh dimensions (with the cost and multiplier unchanged) for a boost to Eighth Dimension. It will take time to regain production.")) {
+        if (!confirm("Dimensional Sacrifice will remove all of your First to Seventh dimensions (with the cost and multiplier unchanged) for a boost to the Eighth Dimension. It will take time to regain production.")) {
             return false;
         }
     }
@@ -5103,9 +5184,7 @@ function autoBuyerArray() {
     return tempArray;
 }
 
-
 var priority = []
-
 
 function priorityOrder() {
     var tempArray = []
@@ -5119,7 +5198,6 @@ function priorityOrder() {
     }
     priority = tempArray;
 }
-
 
 function updatePriorities() {
     for (var x=0 ; x < autoBuyerArray().length; x++) {
@@ -5226,13 +5304,6 @@ function toggleHotkeys() {
     }
 }
 
-
-
-
-
-
-
-
 function updateChallengeTimes() {
     document.getElementById("challengetime2").innerHTML = "Challenge  " + 2 + " time record " + timeDisplayShort(player.challengeTimes[0])
     document.getElementById("challengetime3").innerHTML = "Challenge  " + 3 + " time record " + timeDisplayShort(player.challengeTimes[1])
@@ -5245,7 +5316,7 @@ function updateChallengeTimes() {
     document.getElementById("challengetime10").innerHTML = "Challenge " + 10 + " time record " + timeDisplayShort(player.challengeTimes[2])
     document.getElementById("challengetime11").innerHTML = "Challenge " + 11 + " time record " + timeDisplayShort(player.challengeTimes[10])
     document.getElementById("challengetime12").innerHTML = "Challenge " + 12 + " time record " + timeDisplayShort(player.challengeTimes[5])
-
+// what are these challenge ids!?
     for (var i=0; i<8; i++) {
         document.getElementById("infchallengetime"+(i+1)).innerHTML = "Infinity Challenge " + (i+1) + " time record " + timeDisplayShort(player.infchallengeTimes[i])
     }
@@ -5941,11 +6012,11 @@ function eternity(force, enteringChallenge) {
         document.getElementById("infinityPoints1").innerHTML = "You have <span class=\"IPAmount1\">"+shortenDimensions(player.infinityPoints)+"</span> Infinity point" + ipPlural + "."
         document.getElementById("infinityPoints2").innerHTML = "You have <span class=\"IPAmount2\">"+shortenDimensions(player.infinityPoints)+"</span> Infinity point" + ipPlural + "."
         if (player.eternities < 2) document.getElementById("break").innerHTML = "BREAK INFINITY"
-        document.getElementById("replicantireset").innerHTML = "Reset replicanti amount, but get a free galaxy<br>"+player.replicanti.galaxies + " replicated galaxies created."
+        document.getElementById("replicantireset").innerHTML = "Reset replicanti amount for a free galaxy.<br>"+player.replicanti.galaxies + " replicated galaxies created."
         document.getElementById("eternitybtn").style.display = player.infinityPoints.gte(currentEternityRequirement()) ? "inline-block" : "none"
         document.getElementById("eternityPoints2").style.display = "inline-block"
         document.getElementById("eternitystorebtn").style.display = "inline-block"
-        document.getElementById("infiMult").innerHTML = "Multiply infinity points from all sources by 2 <br>currently: "+shorten(getIPMult()) +"x<br>Cost: "+shortenCosts(player.infMultCost)+" IP"
+        document.getElementById("infiMult").innerHTML = "You get 2x more IP.<br>Currently: "+shorten(getIPMult()) +"x<br>Cost: "+shortenCosts(player.infMultCost)+" IP"
         updateEternityUpgrades()
         updateInfCosts()
         playerInfinityUpgradesOnEternity()
@@ -6345,31 +6416,29 @@ function setInfAndEterPointDisplay () {
   if (player.eternities == 0) document.getElementById("eternityPoints2").style.display = "none"
   else document.getElementById("eternityPoints2").style.display = "inline-block"
 }
+function r72Check() {
+var r72 = 0
+  for (let i=1; i<9; i++) {
+    if (getDimensionFinalMultiplier(i).gte(1e308)) r72++
+  }
+  if (r72 == 8) giveAchievement("Can't hold all these infinities");
+return r72
+}
 
+function antitablesCheck() {
+var antitables = 0
+  for (let i=0; i<8; i++) {
+   if (getDimensionFinalMultiplier(i+1).lt(getDimensionFinalMultiplier(i))) antitables++
+  }
+  if (antitables == 8) giveAchievement("How the antitables have turned");
+return antitables
+}
 var nextAt = [new Decimal("1e2000"), new Decimal("1e5000"), new Decimal("1e12000"), new Decimal("1e14000"), new Decimal("1e18000"), new Decimal("1e20000"), new Decimal("1e23000"), new Decimal("1e28000")]
 
 var goals = [new Decimal("1e850"), new Decimal("1e10500"), new Decimal("1e5000"), new Decimal("1e13000"), new Decimal("1e11111"), new Decimal("2e22222"), new Decimal("1e10000"), new Decimal("1e27000")]
-setInterval(function() {
-    if (getDimensionFinalMultiplier(1).gte(new Decimal("1e308")) &&
-        getDimensionFinalMultiplier(2).gte(new Decimal("1e308")) &&
-        getDimensionFinalMultiplier(3).gte(new Decimal("1e308")) &&
-        getDimensionFinalMultiplier(4).gte(new Decimal("1e308")) &&
-        getDimensionFinalMultiplier(5).gte(new Decimal("1e308")) &&
-        getDimensionFinalMultiplier(6).gte(new Decimal("1e308")) &&
-        getDimensionFinalMultiplier(7).gte(new Decimal("1e308")) &&
-        getDimensionFinalMultiplier(8).gte(new Decimal("1e308"))) {
-        giveAchievement("Can't hold all these infinities")
-    }
-
-    if (getDimensionFinalMultiplier(1).lt(getDimensionFinalMultiplier(2)) &&
-        getDimensionFinalMultiplier(2).lt(getDimensionFinalMultiplier(3)) &&
-        getDimensionFinalMultiplier(3).lt(getDimensionFinalMultiplier(4)) &&
-        getDimensionFinalMultiplier(4).lt(getDimensionFinalMultiplier(5)) &&
-        getDimensionFinalMultiplier(5).lt(getDimensionFinalMultiplier(6)) &&
-        getDimensionFinalMultiplier(6).lt(getDimensionFinalMultiplier(7)) &&
-        getDimensionFinalMultiplier(7).lt(getDimensionFinalMultiplier(8))) {
-        giveAchievement("How the antitables have turned")
-    }
+setInterval(
+	antitablesCheck()
+	r72Check()
 
     if (player.infinityDimension1.baseAmount == 0 &&
         player.infinityDimension2.baseAmount == 0 &&
@@ -6399,7 +6468,7 @@ setInterval(function() {
         document.getElementById("nextchall").innerHTML = ""
     }
     else {
-        document.getElementById("nextchall").innerHTML = "Next challenge unlocks at "+ shortenCosts(nextAt[player.postChallUnlocked]) + " antimatter."
+        document.getElementById("nextchall").innerHTML = "The next infinity challenge unlocks at "+ shortenCosts(nextAt[player.postChallUnlocked]) + " antimatter."
         if (player.money.gte(nextAt[player.postChallUnlocked])) {
             player.postChallUnlocked += 1
             if (player.eternities > 6) player.challenges.push("postc"+player.postChallUnlocked)
@@ -6693,7 +6762,7 @@ function startInterval() {
         if (currentIPmin.gt(IPminpeak)) IPminpeak = currentIPmin;
         var currentIP = gainedInfinityPoints();
         if (currentIP.gt(IPpeak)) IPpeak = currentIP;
-        document.getElementById("postInfinityButton").innerHTML = "<b>Big Crunch for "+shortenDimensions(gainedInfinityPoints())+" Infinity Points</b><br>"+shortenDimensions(currentIPmin) + " IP/min"+
+        document.getElementById("postInfinityButton").innerHTML = "<b>Big Crunch for "+shortenDimensions(gainedInfinityPoints())+" Infinity Points.</b><br>"+shortenDimensions(currentIPmin) + " IP/min"+
                                                                     "<br>Peaked at "+shortenDimensions(IPminpeak)+" IP/min";
 
         // very quick, very dirty
@@ -6734,7 +6803,7 @@ function startInterval() {
             if (infDiff > 0 && canGetInfMult()) {
                 player.infMult = player.infMult.times(Decimal.pow(2, infDiff))
                 player.infMultCost = player.infMultCost.times(Decimal.pow(10, infDiff))
-                document.getElementById("infiMult").innerHTML = "Multiply infinity points from all sources by 2 <br>currently: "+shorten(getIPMult()) +"x<br>Cost: "+shortenCosts(player.infMultCost)+" IP"
+                document.getElementById("infiMult").innerHTML = "You get 2x more IP.<br>Currently: "+shorten(getIPMult()) +"x<br>Cost: "+shortenCosts(player.infMultCost)+" IP"
                 player.infinityPoints = player.infinityPoints.minus(player.infMultCost.dividedBy(10))
                 if (player.autobuyers[11].priority !== undefined && player.autobuyers[11].priority !== null && player.autoCrunchMode == "amount") player.autobuyers[11].priority = player.autobuyers[11].priority.times(Decimal.pow(2, infDiff));
                 if (player.autoCrunchMode == "amount") document.getElementById("priority12").value = player.autobuyers[11].priority
@@ -6747,10 +6816,10 @@ function startInterval() {
             let newGalGain = Math.min(currentGalGain + 1, maxGalGain);
             let estimate = getReplicantiETA(player.replicanti.amount, player.replicanti.limit.pow(newGalGain * 5));
             let galGainDisplay = (newGalGain === maxGalGain) ? 'maximum' : newGalGain;
-            document.getElementById("replicantiapprox").innerHTML = "Approximately " + timeDisplay(estimate) + " until gain of " + galGainDisplay + ' replicanti galaxies';
+            document.getElementById("replicantiapprox").innerHTML = "Approximately " + timeDisplay(estimate) + " until you gain " + galGainDisplay + ' replicanti galaxies.';
         } else {
             let estimate = getReplicantiETA();
-            document.getElementById("replicantiapprox").innerHTML = "Approximately " + timeDisplay(estimate) + " until infinite replicanti"
+            document.getElementById("replicantiapprox").innerHTML = "Approximately " + timeDisplay(estimate) + " until infinite Replicanti."
         }
 
         document.getElementById("replicantiamount").innerHTML = shortenDimensions(player.replicanti.amount)
@@ -6764,12 +6833,12 @@ function startInterval() {
         if (currentEPmin.gt(EPminpeak) && player.infinityPoints.gte(currentEternityRequirement())) {
           EPminpeak = currentEPmin;
         }
-        let eterButtonStart = (player.eternities === 0) ? "<b>Other times await.. I need to become Eternal</b><br/>" : "<b>I need to become Eternal.</b><br/>";
+        let eterButtonStart = (player.eternities === 0) ? "<b>Other times await.. I need to become Eternal.</b><br/>" : "<b>I need to become Eternal.</b><br/>";
         if (gainedEternityPoints().gte(1e3)) {
           eterButtonStart = '';
         }
         if (player.eternityChallenges.current) {
-          eterButtonStart = '<b>Other challenges await.. I need to become Eternal</b><br/>';
+          eterButtonStart = '<b>Other challenges await.. I need to become Eternal.</b><br/>';
         }
         let eterButtonEnd = "<br>" + shortenDimensions(currentEPmin) + " EP/min<br>Peaked at " + shortenDimensions(EPminpeak) + " EP/min";
         if (player.eternities === 0 || player.eternityChallenges.current) {
@@ -7020,7 +7089,7 @@ function startInterval() {
         } else if (player.infDimensionsUnlocked.includes(false)) {
             document.getElementById("progressbar").style.width = Decimal.min(player.money.e / getNewInfReq().e * 100, 100).toFixed(2) + "%"
             document.getElementById("progressbar").innerHTML = Decimal.min(player.money.e / getNewInfReq().e * 100, 100).toFixed(2) + "%"
-            document.getElementById("progress").setAttribute('ach-tooltip',"Percentage to next dimension unlock")
+            document.getElementById("progress").setAttribute('ach-tooltip',"Percentage to the next dimension unlock")
         } else {
             document.getElementById("progressbar").style.width = Decimal.min(Decimal.log10(player.infinityPoints.plus(1)) / Decimal.log10(currentEternityRequirement())  * 100, 100).toFixed(2) + "%"
             document.getElementById("progressbar").innerHTML = Decimal.min(Decimal.log10(player.infinityPoints.plus(1)) / Decimal.log10(currentEternityRequirement())  * 100, 100).toFixed(2) + "%"
@@ -7300,7 +7369,7 @@ var newsArray = ["You just made your 1,000,000,000,000,000 antimatter. This one 
 "Somebody told me to wait five hours for the update yesterday but it's today and it still hasn't come! What do I do?", "Antimatter Dimensions is proud to be sponsored by Lehmä! Now offering - grass eating lessons! Learn what grass is safe to eat and what grass isn't.",
 "It is the year 2422. The update still isn't out. Hevi is working on balancing unfunity dimension dimensions and challenges for the 38th layer of prestige. There are over 100 rows of achievements. They're getting ready to start using breaking_breaking_breaking_infinity.js",
 "Thanos is gonna be super dissapointed when he shows up with a fully powered infinity gauntlet, and Hevi has a fully powered eternity gauntlet", "If the 9th dimension is all evil, then is 3 the root of all evil?",
-"Import Christmas for a secret theme"]
+"Import Christmas for a secret theme", "I'm back."]
 
 
 var conditionalNewsArray = ["Our universe is falling apart. We are all evacuating. This is the last news cast", "THIS NEWS STATION HAS SHUT DOWN DUE TO COLLAPSING UNIVERSE",
@@ -7373,7 +7442,7 @@ function scrollNextMessage() {
         if (player.newsArray.length>=50 && !player.achievements.includes("r41")) giveAchievement("Fake News")
     }
 
-    if (player.achievements.includes("r41")) player.newsArray = []
+    if (player.achievements.includes("r41")) player.newsArray = [] // Oof
 
 
     //set the transition duration
@@ -7558,7 +7627,7 @@ function skipTime (seconds) {
     player.lastUpdate -= seconds * 1000;
     return seconds;
   } else {
-    alert('Skipped too far!');
+    alert('Skipped too far! No changes have been made.');
     return false;
   }
 }
@@ -7613,7 +7682,7 @@ function farmEter (seconds) {
 }
 
 function autoPlay () {
-  let seconds = (+prompt('How many seconds would you like to autoplay for?')) || 10;
+  let seconds = (+prompt('How many seconds would you like to autoplay for? This will run the game automatically, not like the autobuyers already do that for you.')) || 10;
   let timeAutoplayed = 0;
   let timeSinceLastAction = 0;
   let last = Date.now() / 1000;
@@ -7790,16 +7859,6 @@ setInterval( function() {
     unspentBonus = player.infinityPoints.dividedBy(2).pow(1.5).plus(1)
     mult18 = getDimensionFinalMultiplier(1).max(1).times(getDimensionFinalMultiplier(8).max(1)).pow(0.02)
 }, 500)
-
-
-
-
-
-
-
-
-
-
 
 function generateLookUps(mode, amount) {
     if (mode == "tick") {
