@@ -1067,6 +1067,11 @@ function onLoad() {
       upgrades: []
     };
   }
+
+  if (player.version < 15.7) {
+  player.quantum.investmentAmount = [null, new Decimal(0), new Decimal(0), new Decimal(0), new Decimal(0), new Decimal(0)]
+  }
+
   
   if (player.meta.autoMaxAll === undefined) player.meta.autoMaxAll = false
   
