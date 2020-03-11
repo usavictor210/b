@@ -5646,7 +5646,7 @@ function gameLoop(diff) {
     }
   }
   let interval = player.replicanti.interval;
-  if (player.timestudy.studies.includes(62)) interval = interval / 3;
+  if (player.timestudy.studies.includes(62)) interval = interval / 5;
   if (
     (player.timestudy.studies.includes(133) &&
       !player.achievements.includes("r143")) ||
