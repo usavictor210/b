@@ -1,4 +1,4 @@
-// ok, this code is absolutely very messy and we'll need to separate it into parts, and also simplify some parts of the code.
+ // ok, this code is absolutely very messy and we'll need to separate it into parts, and also simplify some parts of the code.
 var gameLoopIntervalId;
 var Marathon = 0;
 var Marathon2 = 0;
