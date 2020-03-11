@@ -6309,7 +6309,7 @@ let savefix = function () {
   }
   if (nan) {
     showMults = false
-    alert('There is a bug in the game and your save was just fixed. If this message shows up, and especially if it shows up multiple times, tell me.')
+    //alert('There is a bug in the game and your save was just fixed. If this message shows up, and especially if it shows up multiple times, tell me.')
   }
 }
 
