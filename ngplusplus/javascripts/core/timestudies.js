@@ -934,13 +934,13 @@ function getTimeStudiesDescription() {
     ) +
     "x";
   document.getElementById("151desc").textContent =
-    "Get a " + shortenCosts(1e4) + "x multiplier on all Time dimensions";
+    "Give a " + shortenCosts(1e4) + "x multiplier to all Time Dimensions";
   document.getElementById("161desc").textContent =
     "Get a " +
     shortenCosts(new Decimal("1e616")) +
     "x multiplier on all normal dimensions";
   document.getElementById("162desc").textContent =
-    "Get a " + shortenCosts(1e11) + "x multiplier on all Infinity dimensions";
+    "Give a " + shortenCosts(1e11) + "x multiplier on all Infinity Dimensions";
   document.getElementById("192desc").textContent =
     "You can get beyond " +
     shortenMoney(Number.MAX_VALUE) +
@@ -1100,7 +1100,7 @@ function getECStudyDescription() {
       "Unlock time dilation<span>Cost: 5000 Time Theorems";
   else
     document.getElementById("dilstudy1").innerHTML =
-      "Unlock time dilation<span>Requirement: 5 EC11 and EC12 completions and 13000 total theorems<span>Cost: 5000 Time Theorems";
+      "Unlock time dilation<span>Requirement: 5 EC11 and EC12 completions, and 13000 total theorems<span>Cost: 5000 Time Theorems";
 }
 
 //////////////////////////////////// ETERNITY CHALLENGES \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
