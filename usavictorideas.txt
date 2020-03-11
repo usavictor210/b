@@ -9,7 +9,7 @@ research will change up the game immensely. to do this, we need to think of thin
 3. mega theorems (definitely not triternity. jk, it probably is. but i don't like the possibility of another mastery study conundrum so the mega theorems will be different.)
 mega theorems are bought with TT and temporal power. these provide large buffs to your game, but obviously require massive costs. don't make them too massive though.
 4. dimboost costs are decreased by temporal power
-5. tachyon particles can go "lightspeed" for strange things in dilation (idk what it is we'll do with it though)
+5. tachyon particles can go "lightspeed" for strange things in dilation (idk what it is we'll do with it though) (apparently tachyons already go past the speed of light. it's time to go hyperspeed.)
 
 this is example stuff, we'll put more later
 
@@ -52,5 +52,5 @@ unlike in ng+3, we will do challenges differently.
 4. meta dimensions produce antimatter instead. everything is changed to account for this.
 5. Tickspeed starts at 0.01%, and dimension boosts and galaxies barely increase it. The game is also 1,000x slower.
 6. You can only use 15 time studies.
-7.  
-8. 
+7. Infinity Dimensions are the only dimensions that boost Normal Dimensions, but it's power's effect is reduced to ^2.
+8. Time works against you. Every 3 minutes, a forced eternity will occur, and you gain a recurring punishment every time this happens (up to 10 times).
