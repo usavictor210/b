@@ -1002,7 +1002,7 @@ function onLoad() {
   if (player.version < 12.1) {
     player.version = 12.1;
     if (player.achievements.includes("s36")) {
-      player.achievements.splice(player.achievements.indexOf("s36"), 1);
+      player.achievements.splice(player.achievements.indexOf("s36"), 1); // removing the old "dip the antimatter" secret achieve
       updateAchievements();
     }
   }
@@ -1014,8 +1014,50 @@ function onLoad() {
         player.dilation.upgrades[i] = 19;
       }
     }
+    if (player.quantum === undefined) player.quantum = { // migrate save to 
+    times: 0,
+    quarks: new Decimal(0),
+    thisQuantum: 0,
+    bestQuantum: 9999999999,
+    producedGluons: 0,
+    realGluons: 0,
+    bosons: {
+      "w+": 0,
+      "w-": 0,
+      z0: 0
+    },
+    neutronstar: {
+      quarks: new Decimal(0),
+      metaAntimatter: new Decimal(0),
+      dilatedTime: new Decimal(0)
+    },
+    rebuyables: {
+      1: 0,
+      2: 0
+    },
+    investmentAmount: [
+      null,
+      new Decimal(0),
+      new Decimal(0),
+      new Decimal(0),
+      new Decimal(0),
+      new Decimal(0)
+    ],
+    upgrades: [],
+    lastTenQuantums: [
+      [600 * 60 * 24 * 31, 1],
+      [600 * 60 * 24 * 31, 1],
+      [600 * 60 * 24 * 31, 1],
+      [600 * 60 * 24 * 31, 1],
+      [600 * 60 * 24 * 31, 1],
+      [600 * 60 * 24 * 31, 1],
+      [600 * 60 * 24 * 31, 1],
+      [600 * 60 * 24 * 31, 1],
+      [600 * 60 * 24 * 31, 1],
+      [600 * 60 * 24 * 31, 1]
+    ]
+    }
   }
-
   if (player.version < 15.1) {
     player.version = 15.1;
     player.ngPlus = 0;
