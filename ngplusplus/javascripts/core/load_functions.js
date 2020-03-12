@@ -375,7 +375,7 @@ function onLoad() {
   if (player.meta.bestAntimatter === undefined)
     player.meta.bestAntimatter = player.meta.antimatter;
   if (player.meta.galaxy === undefined) player.meta.galaxy = 0;
-  if (player.quantum.investmentAmount === undefined || player.quantum.investmentAmount.length != 6) player.quantum.investmentAmount = [null, new Decimal(0), new Decimal(0), new Decimal(0), new Decimal(0), new Decimal(0)]
+  if (player.quantum.investmentAmount === undefined) player.quantum.investmentAmount = [null, new Decimal(0), new Decimal(0), new Decimal(0), new Decimal(0), new Decimal(0)]
   if (player.quantum === undefined) {
     player.quantum = {
     times: 0,
@@ -1002,7 +1002,7 @@ function onLoad() {
   if (player.version < 12.1) {
     player.version = 12.1;
     if (player.achievements.includes("s36")) {
-      player.achievements.splice(player.achievements.indexOf("s36"), 1); // removing the old "dip the antimatter" secret achieve
+      player.achievements.splice(player.achievements.indexOf("s36"), 1); // removing the old "dip the antimatter" secret achievement
       updateAchievements();
     }
   }
@@ -1014,7 +1014,7 @@ function onLoad() {
         player.dilation.upgrades[i] = 19;
       }
     }
-    if (player.quantum === undefined) player.quantum = { // migrate save to 
+    if (player.quantum === undefined) player.quantum = { // migrate save to ng+2 respecced
     times: 0,
     quarks: new Decimal(0),
     thisQuantum: 0,
@@ -1095,6 +1095,7 @@ function onLoad() {
   }
 
   if (player.version < 15.6) {
+    player.version = 15.6
   if (player.dilation.unstable.upgrades === undefined)
     player.dilation.unstable = {
       times: player.dilation.unstable.times,
@@ -1111,6 +1112,7 @@ function onLoad() {
   }
 
   if (player.version < 15.7) {
+    player.version = 15.7
     if (player.quantum.investmentAmount === undefined) player.quantum.investmentAmount = [null, new Decimal(0), new Decimal(0), new Decimal(0), new Decimal(0), new Decimal(0)]
     
   }

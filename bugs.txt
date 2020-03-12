@@ -1,0 +1,6 @@
+/*
+BUGS:
+
+NGPlus goes undefined when you start a new quantum
+
+*/
