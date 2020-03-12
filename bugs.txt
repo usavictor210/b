@@ -1,6 +1,7 @@
 /*
-BUGS:
+BUGS (pesky bugs...):
 
-NGPlus goes undefined when you start a new quantum
+player.ngPlus goes undefined when you start a new quantum (or eternity, or infinity)
+Something in break infinity breaks when you quantum (Found the cause, it's because of the infinitied mult to all dimensions)
 
 */

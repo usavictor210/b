@@ -1030,7 +1030,7 @@ function updateDimensions() {
         "x<br>Cost: " +
         shortenCosts(1e6) +
         " IP";
-      var postinfi12 = player.timestudy.studies.includes(31) ? Math.pow((Math.log10(getInfinitied() + 1) * 10).toFixed(2), 4) : shortenMoney(1 + Math.log10(getInfinitied() + 1) * 10)
+      var postinfi12 = player.timestudy.studies.includes(31) ? Math.pow((Math.log10(getInfinitied() + 1) * 10), 4) : shortenMoney(1 + Math.log10(getInfinitied() + 1) * 10)
       document.getElementById("postinfi12").innerHTML =
         "Dimensions are more powerful based on your infinitied stat<br>Currently: " +
         shortenMoney(postinfi12) +

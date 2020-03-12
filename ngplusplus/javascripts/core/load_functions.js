@@ -375,7 +375,6 @@ function onLoad() {
   if (player.meta.bestAntimatter === undefined)
     player.meta.bestAntimatter = player.meta.antimatter;
   if (player.meta.galaxy === undefined) player.meta.galaxy = 0;
-  if (player.quantum.investmentAmount === undefined) player.quantum.investmentAmount = [null, new Decimal(0), new Decimal(0), new Decimal(0), new Decimal(0), new Decimal(0)]
   if (player.quantum === undefined) {
     player.quantum = {
     times: 0,
@@ -414,6 +413,7 @@ function onLoad() {
     ],
     }
   }
+  if (player.quantum.investmentAmount === undefined || player.quantum.investmentAmount.length != 6) player.quantum.investmentAmount = [null, new Decimal(0), new Decimal(0), new Decimal(0), new Decimal(0), new Decimal(0)]
   if (player.why === undefined) player.why = 0;
   if (player.options.animations === undefined)
     player.options.animations = {
