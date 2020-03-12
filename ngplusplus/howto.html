@@ -109,6 +109,7 @@
   Eighth Dimension Autobuyer Challenge: m^0.05/n^0.04*j, where m is the current number of first dimensions you have and j is your previous sacrifice multiplier.
   <br>
   After Infinity Challenge 2: n^m, where m is 0.01 at base and 0.011 with the "Yet another infinity reference" achievement.
+  
       <br>
     <b>Hotkey: S</b>
   </div>
@@ -176,17 +177,16 @@
   <br>
   <b>Fixing Infinity:</b>You can revert the breaking at anytime by clicking fix infinity.
   <br>
-  <b>IP Gain Formula:</b>10^(log(current antimatter)/n-0.75)*bonuses, where n is 308 at default, 307.8 with the "This achievement doesn't exist II" achievement, or 290 with the relevant timestudy.
+  <b>IP Gain Formula:</b>10^(log(current antimatter)/n-0.75)*bonuses, where n is 308 at default, 307.8 with the achievement "This achievement doesn't exist II", or 290 with TS111.
   </div>
   <hr id='div10hr'>
   <button onclick='changestate(11)' id='div11btn' class="storebtn">Infinity Dimensions</button>
   <div style="text-align: left" id='div11' class='hidden'>
-  <b>Unlocking Infinity Dimensions:</b>Infinity Dimensions are unlocked by reaching a certain amount of antimatter.
+  <b>Unlocking Infinity Dimensions:</b>Infinity Dimensions are unlocked by reaching a certain amount of antimatter. Once you have enough, you can press the unlock button to unlock them.
   <br>
   <b>Infinity Dimension Cost:</b>Infinity dimensions are only purchasable in sets of 10, and cost Infinity points.
   <br>
-  <b>Infinity Dimension Production:</b>Similar to the original dimensions, each infinity dimension produces the dimension above it. Dimension 3 produce 2, 2 produces 1.  Instead of antimatter, Infinity Dimension produces Infinity power, which translates to an overall multiplier on all original dimensions.
-  <br>
+  <b>Infinity Dimension Production:</b>Like the original dimensions, each infinity dimension produces the dimension above it. Dimension 3 produces Dimension 2, 2 produces 1. However, instead of antimatter, Infinity Dimension produces Infinity power, which translates to an overall multiplier on all normal dimensions, making them significantly more powerful.
   Infinity Power gives a boost to all dimensions equal to (power^7).
   </div>
   <hr id='div11hr'>
@@ -207,9 +207,9 @@
   <br>
   When at low values (100-1000) (when none of the conditions above are true), there may be some minor variances in the expected amount of replicanti gain.
   <br><b>Formulas:
-  <br>Infinity Dimension power increase:</b> log2(replicanti)^2, plus replicanti^0.032 if you have the relevant time study, times 5^galaxies if you have that time study.
-  <br><b>Chance upgrade cost:</b>x(1e15) per upgrade
-  <br><b>Speed upgrade cost:</b>x(1e10) per upgrade
+  <br>Infinity Dimension power increase:</b> log2(replicanti)^2, plus replicanti^0.032 if you have TS21, times 5^galaxies if you have TS102, and is increased to the power of 1.09 if you have "We could afford 9".
+  <br><b>Chance upgrade cost:</b>x(1e15) per upgrade, caps out at 100%.
+  <br><b>Speed upgrade cost:</b>x(1e10) per upgrade, caps out at 50 ms, but can be reduced further to 1 ms with TS22, and can be decreased even further with TS62 (5x faster), TS213 (20x faster), and a dilation upgrade that decreased replicanti interval based on DT.
   <br><b>Galaxy upgrade cost:</b>1e(170+n*25+n^2*5)
   </div>
   <hr id='div13hr'>
@@ -237,16 +237,16 @@
     <br>
     Similarly to the other dimensions, a Time Dimension 2 produces a Time Dimension 1 and so on.
     <br>
-    Each tick threshold takes 33% more time shards than the previous (25% with the relevant time study).
+    Each tick threshold takes 33% more time shards than the previous (25% with TS171).
     </div>
     <hr id='div16hr'>
   <button onclick='changestate(17)' id='div17btn' class="storebtn">Time Study</button>
   <div style="text-align: left" id='div17' class='hidden'>
-    A Time Study is a powerful post-eternity upgrade, which costs Time Theorems. Time Studies are laid out in a tree-like fashion, where you must buy preresiquites before continuing. There are sometimes choices to make with which Time Study to buy, as you cannot get all of them even if affordable.
+    A Time Study is a powerful post-eternity upgrade, which costs Time Theorems. Time Studies are laid out in a tree-like fashion, where you must buy preresiquites before continuing. There are sometimes choices to make with which Time Study to buy, as you cannot get all of them even if affordable. Eventually, it is possible to get almost all of the time studies.
     <br>
     Time Theorems are a limited resource which costs more for each one you buy. They can be bought with antimatter, infinity points, and eternity points.
     <br>
-    <b>Respecs:</b> A Respec allows you to reset the upgrades you have in the tree to retreive the Time Theorems spent on them. It can be done for free on eternity.
+    <b>Respecs:</b> A Respec allows you to reset the upgrades you have in the tree to retreive the Time Theorems spent on them. It can be done for free, but you will have to eternity when you want to respec.
     <br>
     <b>Costs:</b> (1e20000^times bought) for antimatter, (1e100^times bought) for IP, (2^times bought) for EP.
     </div>
