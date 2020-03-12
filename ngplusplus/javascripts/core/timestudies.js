@@ -936,7 +936,7 @@ function getTimeStudiesDescription() {
   document.getElementById("151desc").textContent =
     "Give a " + shortenCosts(1e4) + "x multiplier to all Time Dimensions";
   document.getElementById("161desc").textContent =
-    "Get a " +
+    "Give a " +
     shortenCosts(new Decimal("1e616")) +
     "x multiplier on all normal dimensions";
   document.getElementById("162desc").textContent =
