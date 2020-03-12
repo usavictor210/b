@@ -1,7 +1,9 @@
+
+<!-- To be fixed. -->
 <html>
   <head>
   <title>How to play</title>
-  <link rel='stylesheet' type='text/css' href='stylesheets/howto.css'>
+  <link rel="stylesheet" type="text/css" href="stylesheets/howto.css">
   <link rel="icon" type="image/png" href="icon.png">
   </head>
   <body style="padding: 10px 20%">
@@ -22,7 +24,7 @@
   <table style="margin: auto;">
     <tr>
       <td>
-          <button onclick='showspoilers()' class="storebtn" id="showspoilersbtn" style="margin-top: 5px;">View: <br> Avoid spoilers</button>
+          <button "onclick"='showspoilers()' class="storebtn" id="showspoilersbtn" style="margin-top: 5px;">View:<br>Avoid spoilers</button>
       </td>
       <td>
           <button class="storebtn" id="importbtn" style="margin-top: 5px;">Import your save</button>
@@ -128,9 +130,9 @@
   <hr id='div6hr'>
   <button onclick='changestate(7)' id='div7btn' class="storebtn">Achievements</button>
   <div style="text-align: left" id='div7' class='hidden'>
-  Each achievement has conditions that must be met before they are earned.  Some are very simple, and some are significantly trickier.  You may have to infinity or start a challenge before attempting some of the harder ones.
+  Each achievement has conditions that must be met before they are earned. Some are very simple, and some are significantly trickier.  You may have to infinity or start a challenge before attempting some of the harder ones.
   <br>
-  You will recieve a x1.5 multiplier to all dimensions for each completed row. In addition, some achievements have their own rewards.
+  You will recieve a x1.125 multiplier to all dimensions for each achievement. In addition, some achievements have their own rewards.
   </div>
   <hr id='div7hr'>
   <button onclick='changestate(8)' id='div8btn' class="storebtn">Challenges</button>
@@ -216,9 +218,9 @@
   <hr id='div13hr'>
   <button onclick='changestate(14)' id='div14btn' class="storebtn">Eternity</button>
   <div style="text-align: left" id='div14' class='hidden'>
-  Upon reaching infinity Infinity Points, you can eternity. Eternities will reset everything before this point except challenge times, achievements, and total antimatter. You also unlock a new tab.
+  Upon reaching infinity Infinity Points, you can eternity. Eternities will reset everything before this point except challenge times, achievements, and total antimatter. You also unlock the Eternity tab.
   <br>
-  You can pass infinity Infinity Points whenever. You will recieve more Eternity Points the nore Infinity Points you had before going Eternal.
+  You can pass infinity Infinity Points whenever you want. You will recieve more Eternity Points the more Infinity Points you had before going Eternal.
   <br>
   <b>EP gain formula:</b> floor(5^(floor(log10(IP))/308-0.7)*bonuses. The x10 EP time study gives the bonus before the outer floor.
   </div>
@@ -227,7 +229,7 @@
   <div style="text-align: left" id='div15' class='hidden'>
     To make eternities faster and more convenient, you will unlock various buffs as you get more eternities. These buffs are either making you start with something on eternity or unlock an autobuyer.
     <br>
-    For the buffs at the the start of an eternity, you will keep the relevant statistic on the run you unlock the milestone. (On 1 > 2, you will keep your autobuyers.)
+    For the buffs at the the start of an eternity, you will keep the relevant statistic on the run you unlock the milestone. (On 1 &gt; 2, you will keep your autobuyers.)
     <br>
     The last milestone is at 100 eternities and allows full automation.
     </div>
@@ -262,7 +264,17 @@ Tachyon Particles generate another currency, Dilated Time. Dilated time is trans
 <br> 
 Dilation Upgrades are upgrades that are purchasable with Dilated Time. Some upgrades improve the amount of Dilated Time you gain or reset your free galaxies but decrease the threshold required to get to them. In addition, there is also a TT generator as one of the Dilation upgrades. The first row of dilation upgrades is purchasable as many times as possible, but the rest cannot. 
 </div> 
-<hr id='div18hr'> 
+<hr id='div18hr'>
+<button onclick='changestate(19)' id='div19btn' class="storebtn">Meta Dimensions</button> 
+<div style="text-align: left" id='div19' class="hidden"> 
+TBD 
+</div>
+<hr id='div19hr'>
+<button onclick='changestate(20)' id='div20btn' class="storebtn">Quantum</button> 
+<div style="text-align: left" id='div20' class="hidden"> 
+TBD 
+</div>
+<hr id='div20hr'> 
     <a href="https://www.reddit.com/r/AntimatterDimensions/comments/73jhqe/patashus_antimatter_dimensions_guide/?utm_content=title&utm_medium=hot&utm_source=reddit&utm_name=AntimatterDimensions">Strategy Guide</a>
   </body>
   <script src='javascripts/howto.js'></script>
