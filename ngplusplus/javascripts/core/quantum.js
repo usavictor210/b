@@ -636,19 +636,19 @@ function getTotalInvestmentAmount() { // gets a value from all values of the arr
 }
 function getInvestMultiplier(x) { // you have to decide a formula for each feature.
 if (x == 1) { // time studies; this will probably multiply the softcaps.
-  return new Decimal(player.quantum.investmentAmount[1]).pow(2.5)
+  return new Decimal(player.quantum.investmentAmount[1]).pow(2.5).max(1)
   }
 if (x == 2) { // time dimensions
-  return new Decimal(player.quantum.investmentAmount[2]).pow(100)
+  return new Decimal(player.quantum.investmentAmount[2]).pow(100).max(1)
   }
 if (x == 3) { // replicantis
-  return new Decimal(player.quantum.investmentAmount[3]).pow(1.0025)
+  return new Decimal(player.quantum.investmentAmount[3]).pow(1.0025).max(1)
   }
 if (x == 4) { // meta dimensions
-  return new Decimal(player.quantum.investmentAmount[4]).times(4)
+  return new Decimal(player.quantum.investmentAmount[4]).times(4).max(1)
   }
 if (x == 5) { // time dilation
-  return new Decimal(player.quantum.investmentAmount[5]).times(1.25)
+  return new Decimal(player.quantum.investmentAmount[5]).times(1.25).max(1)
   }
 }
 

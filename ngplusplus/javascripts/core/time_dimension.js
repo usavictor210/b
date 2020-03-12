@@ -40,8 +40,8 @@ function getTimeDimensionPower(tier) {
     }
   }
 
-  if (ret.lt(0)) {
-    ret = new Decimal(0)
+  if (ret.lt(1)) {
+    ret = new Decimal(1)
   }
 
   if (player.achievements.includes("r105")) { 
