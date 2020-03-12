@@ -1069,7 +1069,8 @@ function onLoad() {
   }
 
   if (player.version < 15.7) {
-  player.quantum.investmentAmount = [null, new Decimal(0), new Decimal(0), new Decimal(0), new Decimal(0), new Decimal(0)]
+    if (player.quantum.investmentAmount === undefined) player.quantum.investmentAmount = [null, new Decimal(0), new Decimal(0), new Decimal(0), new Decimal(0), new Decimal(0)]
+    
   }
 
   

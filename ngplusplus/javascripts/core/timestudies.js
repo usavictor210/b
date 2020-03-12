@@ -113,7 +113,7 @@ function updatePenalty() {
     : "Replicanti interval is 10x slower until infinity, but RGs are 50% stronger";
 }
 function updateTheoremButtons() {
-  if (player.dilation.upgrades.includes(10)) {
+  if (player.dilation.upgrades.includes(17)) {
     document.getElementById("theoremmax").style.display = "none";
     document.getElementById("theoremam").style.display = "none";
     document.getElementById("theoremip").style.display = "none";
