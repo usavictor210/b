@@ -1200,9 +1200,10 @@ function updateNewsArray() {
       "player.resets > 4",
       "respecced109"
     ],
-    ["9th Dimension is not real. But it will be 5 hours from now. Maybe...", "player.resets > 4", "respecced110"]
+    ["The 9th Dimension isn't real, but it will be real 5 hours from now. ...But, maybe... maybe it might just be you.", "player.resets > 4", "respecced110"]
     ["\"But now is 2020!\" - C16946986", true, "respecced111"],
-    ["\"What if you PING yourself in Discord?\"", true, "respecced112"]
+    ["<a href ='https://www.youtube.com/watch?v=TN25ghkfgQA'>\"What if you pinged yourself?\"</a>", true, "respecced112"],
+    ["\"plz make this an entry to the news ticker\" ~ Diamboy, 2020", true, "respecced113"]
   ];
 }
 
