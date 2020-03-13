@@ -643,14 +643,14 @@ if (x == 2) { // time dimensions
   y = new Decimal(player.quantum.investmentAmount[2]).pow(3).max(1)
   }
 if (x == 3) { // replicantis
-  y = new Decimal(player.quantum.investmentAmount[3]).pow(1.001).max(1)
-  if (y.gt(1e100))
+  y = new Decimal(player.quantum.investmentAmount[3]).pow(0.75).max(1)
+  if (y.gt(25)) y.pow(0.675).max(25)
   }
 if (x == 4) { // meta dimensions
-  y = new Decimal(player.quantum.investmentAmount[4]).times(4).max(1)
+  y = new Decimal(player.quantum.investmentAmount[4]).times(2).max(1)
   }
 if (x == 5) { // time dilation
-  y = new Decimal(player.quantum.investmentAmount[5]).times(1.25).max(1)
+  y = new Decimal(player.quantum.investmentAmount[5]).times(1.5).max(1)
   }
 return y
 }
