@@ -93,9 +93,6 @@ function drawTreeBranch(num1, num2) {
     } else if (num2.includes("dilstudy")) {
         var isDilStudyName = true;
         var name2 = parseInt(num2.split("y")[1]);
-    } else if (num2.includes("diltime")) {
-        var isDilTimeName = true;
-        var name2 = parseInt(num2.split("e")[2]) // i want to make this blue
     } else var name2 = parseInt(num2)
     var start = document.getElementById(num1).getBoundingClientRect();
     var end = document.getElementById(num2).getBoundingClientRect();
@@ -105,7 +102,7 @@ function drawTreeBranch(num1, num2) {
     var y2 = end.top + (end.height / 2) + (document.documentElement.scrollTop || document.body.scrollTop);
     ctx.lineWidth=15;
     ctx.beginPath();
-    if ((player.timestudy.studies.includes(name1) && player.timestudy.studies.includes(name2) && !isECName) || (player.timestudy.studies.includes(name1) && (player.eternityChallUnlocked === name2 && isECName)) || (player.dilation.studies.includes(name2-1) && (player.dilation.studies.includes(name2) && isDilStudyName) || (isDilTimeName))) {
+    if ((player.timestudy.studies.includes(name1) && player.timestudy.studies.includes(name2) && !isECName) || (player.timestudy.studies.includes(name1) && (player.eternityChallUnlocked === name2 && isECName)) || (player.dilation.studies.includes(name2-1) && (player.dilation.studies.includes(name2) && isDilStudyName))) {
         if (name2 < 20 && isECName) {
             ctx.strokeStyle="#490066";
         } else if (name2 < 20) {
@@ -145,10 +142,6 @@ function drawTreeBranch(num1, num2) {
         }
     }
     if (num2 == "secretstudy") ctx.strokeStyle="#000000";
-    if (num2 == "diltime") ctx.strokeStyle="#00fff9"
-    ctx.moveTo(x1, y1);
-    ctx.lineTo(x2, y2);
-    ctx.stroke();
 }
 
 function drawStudyTree() {
@@ -240,23 +233,23 @@ function drawStudyTree() {
     drawTreeBranch("ec11unl", "dilstudy1")
     drawTreeBranch("ec12unl", "dilstudy1")
     drawTreeBranch("dilstudy1", "dilstudy2")
-    drawTreeBranch("dilstudy1", "diltime241")
-    drawTreeBranch("dilstudy1", "diltime242")
-    drawTreeBranch("diltime241", "diltime251")
-    drawTreeBranch("diltime242", "diltime252")
+    drawTreeBranch("dilstudy1", "241")
+    drawTreeBranch("dilstudy1", "242")
+    drawTreeBranch("241", "251")
+    drawTreeBranch("242", "252")
     drawTreeBranch("dilstudy2", "dilstudy3")
     drawTreeBranch("dilstudy3", "dilstudy4")
-    drawTreeBranch("diltime251", "diltime261")
-    drawTreeBranch("diltime252", "diltime262")
+    drawTreeBranch("251", "261")
+    drawTreeBranch("252", "262")
     drawTreeBranch("dilstudy4", "dilstudy5")
     drawTreeBranch("dilstudy5", "dilstudy6")
-    drawTreeBranch("diltime261", "diltime271")
-    drawTreeBranch("diltime262", "diltime272")
-    drawTreeBranch("diltime271", "diltime281")
-    drawTreeBranch("diltime272", "diltime283")
-    drawTreeBranch("diltime281", "diltime282")
-    drawTreeBranch("diltime283", "diltime282")
-    drawTreeBranch("diltime282", "diltime291")
+    drawTreeBranch("261", "271")
+    drawTreeBranch("262", "272")
+    drawTreeBranch("271", "281")
+    drawTreeBranch("272", "283")
+    drawTreeBranch("281", "282")
+    drawTreeBranch("283", "282")
+    drawTreeBranch("282", "291")
     
     if (shiftDown && document.getElementById("eternitystore").style.display !== "none" && document.getElementById("timestudies").style.display !== "none") {
         for (i=0; i<all.length; i++) {
@@ -279,7 +272,6 @@ function drawStudyTree() {
                 else if (tempName.includes("activestudy")) name = "active"
                 else if (tempName.includes("passivestudy")) name = "passive"
                 else if (tempName.includes("idlestudy")) name = "idle"
-                else if (tempName.includes("diltime")) name = "bent study"
                 ctx.strokeText(all[i]+" "+name, x1 - start.width / 2, y1 - start.height / 2 - 1);
                 ctx.fillText(all[i]+" "+name, x1 - start.width / 2, y1 - start.height / 2 - 1);
             } else {
