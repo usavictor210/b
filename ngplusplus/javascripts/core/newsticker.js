@@ -1204,7 +1204,7 @@ function updateNewsArray() {
     ["\"But now is 2020!\" - C16946986", true, "respecced111"],
     ["<a href ='https://www.youtube.com/watch?v=TN25ghkfgQA'>\"What if you pinged yourself?\"</a>", true, "respecced112"],
     ["\"plz make this an entry to the news ticker\" ~ Diamboy, 2020", true, "respecced113"],
-    /*["I used to rule the world, antimatter came when I gave the word. Now in the night, I dared to sleep, in the projects that were to be. I developed a game, that would exceed past infinity. ", true, "respecced114"]*/// viva la vida parody, probably a very dumb idea to make.  ];
+    /*["I used to rule the world, antimatter came when I gave the word. Now in the night, I dared to sleep, in the projects that were to be. I developed a game, that would exceed past infinity. ", true, "respecced114"]*/// viva la vida parody, probably a very dumb idea to make.
     [
       "Hey there, Despacit here. What the FUCK HAVE YOU DONE?!?!?",
       "player.firstPow.eq(1) && player.quantums.gt(1)",
