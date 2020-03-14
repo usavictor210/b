@@ -564,8 +564,8 @@ var studyCosts = [
   1e60,
   1e75,
   1e100,
-  1e110,
   1e120,
+  1e110,
   1e130
 ];
 function updateTimeStudyButtons() {
@@ -645,6 +645,7 @@ function updateTimeStudyButtons() {
         } else if (all[i] == 123 || all[i] == 133 || all[i] == 143) {
           document.getElementById(all[i]).className =
             "timestudylocked idlestudylocked";
+        
         } else {
           document.getElementById(all[i]).className = "timestudylocked";
         }
