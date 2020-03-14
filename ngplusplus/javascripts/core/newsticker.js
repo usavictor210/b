@@ -1206,8 +1206,8 @@ function updateNewsArray() {
     ["\"plz make this an entry to the news ticker\" ~ Diamboy, 2020", true, "respecced113"],
     /*["I used to rule the world, antimatter came when I gave the word. Now in the night, I dared to sleep, in the projects that were to be. I developed a game, that would exceed past infinity. ", true, "respecced114"]*/// viva la vida parody, probably a very dumb idea to make.  ];
     [
-      "H,
-      "player.resets > 4",
+      "Hey there, Despacit here. What the FUCK HAVE YOU DONE?!?!?",
+      "player.firstPow.eq(1) && player.quantums.gt(1)",
       "respecced115"
     ]
   ];
