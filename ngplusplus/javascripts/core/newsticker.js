@@ -739,7 +739,7 @@ function updateNewsArray() {
     ],
     [
       "Legend says the ninth dimension is supposed to be found here, but I don't see anything.",
-      "player.money.e >= 4190000 && player.dilation.active && player.galaxies == 1 && player.resets == 4 && player.thirdAmount == new Decimal(0)",
+      "player.money.e >= 4190000 && player.dilation.active && player.galaxies == 1 && player.resets == 4 && player.thirdAmount == new Decimal(0)", // reminder to make this a achievement
       "s2"
     ], // requirement changed to e4,190,000 antimatter, 1 galaxy, 4 resets and only up to 2nd dimensions
     ["Person with money likes to support this game.", true, "s3"],
@@ -1203,8 +1203,13 @@ function updateNewsArray() {
     ["The 9th Dimension isn't real, but it will be real 5 hours from now. ...But, maybe... maybe it might just be you.", "player.resets > 4", "respecced110"],
     ["\"But now is 2020!\" - C16946986", true, "respecced111"],
     ["<a href ='https://www.youtube.com/watch?v=TN25ghkfgQA'>\"What if you pinged yourself?\"</a>", true, "respecced112"],
-    ["\"plz make this an entry to the news ticker\" ~ Diamboy, 2020", true, "respecced113"]
+    ["\"plz make this an entry to the news ticker\" ~ Diamboy, 2020", true, "respecced113"],
     /*["I used to rule the world, antimatter came when I gave the word. Now in the night, I dared to sleep, in the projects that were to be. I developed a game, that would exceed past infinity. ", true, "respecced114"]*/// viva la vida parody, probably a very dumb idea to make.  ];
+    [
+      "H,
+      "player.resets > 4",
+      "respecced115"
+    ]
   ];
   }
 var s = document.getElementById("news");
