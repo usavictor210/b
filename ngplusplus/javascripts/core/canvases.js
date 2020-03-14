@@ -142,6 +142,10 @@ function drawTreeBranch(num1, num2) {
         }
     }
     if (num2 == "secretstudy") ctx.strokeStyle="#000000";
+    if (num2 == "diltime") ctx.strokeStyle="#00fff9"
+    ctx.moveTo(x1, y1);
+    ctx.lineTo(x2, y2);
+    ctx.stroke();
 }
 
 function drawStudyTree() {
@@ -246,10 +250,10 @@ function drawStudyTree() {
     drawTreeBranch("261", "271")
     drawTreeBranch("262", "272")
     drawTreeBranch("271", "281")
-    drawTreeBranch("272", "283")
-    drawTreeBranch("281", "282")
-    drawTreeBranch("283", "282")
-    drawTreeBranch("282", "291")
+    drawTreeBranch("7", "diltime283")
+    drawTreeBranch("diltime281", "diltime282")
+    drawTreeBranch("diltime283", "diltime282")
+    drawTreeBranch("diltime282", "diltime291")
     
     if (shiftDown && document.getElementById("eternitystore").style.display !== "none" && document.getElementById("timestudies").style.display !== "none") {
         for (i=0; i<all.length; i++) {
