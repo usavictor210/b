@@ -848,6 +848,13 @@ button {
   animation: lightStudyGlowIn 7s infinite;
 }
 
+.timestudy.diltimestudy {
+  color: blue !important;
+  background-color: black !important;
+  border-color: black !important;
+  animation: darkStudyGlowIn 7s infinite;
+}
+
 .eternitychallengestudy:hover {
   color: white;
   background: #490066;

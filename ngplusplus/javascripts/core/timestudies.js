@@ -645,7 +645,6 @@ function updateTimeStudyButtons() {
         } else if (all[i] == 123 || all[i] == 133 || all[i] == 143) {
           document.getElementById(all[i]).className =
             "timestudylocked idlestudylocked";
-        
         } else {
           document.getElementById(all[i]).className = "timestudylocked";
         }
