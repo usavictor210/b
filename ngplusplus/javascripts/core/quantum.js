@@ -634,25 +634,22 @@ function getTotalInvestmentAmount() { // gets a value from all values of the arr
   }
   return ret
 }
+
 function getInvestMultiplier(x) { // you have to decide a formula for each feature.
-y = new Decimal (1)
-if (x == 1) { // time studies; this will probably multiply the softcaps.
-  y = new Decimal(player.quantum.investmentAmount[1]).pow(2.5).max(1)
-  }
-if (x == 2) { // time dimensions
-  y = new Decimal(player.quantum.investmentAmount[2]).pow(3).max(1)
-  }
-if (x == 3) { // replicantis
-  y = new Decimal(player.quantum.investmentAmount[3]).pow(0.75).max(1)
-  if (y.gt(25)) y = y.pow(0.675).max(25)
-  }
-if (x == 4) { // meta dimensions
-  y = new Decimal(player.quantum.investmentAmount[4]).times(2).max(1)
-  }
-if (x == 5) { // time dilation
-  y = new Decimal(player.quantum.investmentAmount[5]).times(1.5).max(1)
-  }
-return y
+    switch (x) {
+        case 1: // time studies; this will probably multiply the softcaps.
+            return new Decimal(player.quantum.investmentAmount[1]).pow(2.5).max(1)
+        case 2: // time dimensions
+            return new Decimal(player.quantum.investmentAmount[2]).pow(3).max(1)
+        case 3: // replicantis
+            return new Decimal(player.quantum.investmentAmount[3]).pow(0.75).max(1)
+        case 4: // meta dimensions
+            return new Decimal(player.quantum.investmentAmount[4]).times(2).max(1)
+        case 5: // time dilation
+            return new Decimal(player.quantum.investmentAmount[5]).times(1.5).max(1)
+        default:
+            return new Decimal(1)
+    }
 }
 
 function showQuantumTab(tabName, init) {
