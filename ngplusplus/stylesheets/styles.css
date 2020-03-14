@@ -851,8 +851,8 @@ button {
 .timestudy.diltimestudy {
   color: blue !important;
   background-color: black !important;
-  border-color: black !important;
-  animation: darkStudyGlowIn 7s infinite;
+  border-color: green !important;
+  animation: dilTimeStudyGlowIn 7s infinite;
 }
 
 .eternitychallengestudy:hover {
@@ -905,6 +905,12 @@ button {
   color: white !important;
   background-color: black !important;
   border-color: white !important;
+}
+
+.timestudy.diltimestudy:hover {
+  color: blue !important;
+  background-color: black !important;
+  border-color: green !important;
 }
 
 .timestudylocked,
