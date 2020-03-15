@@ -327,12 +327,6 @@ function canBuyStudy(name) {
     case 15:
     case 16:
     case 17:
-    case 24:
-    case 25:
-    case 26:
-    case 27:
-    case 28:
-    case 29:
       if (hasRow(row - 1)) return true;
       else return false;
       break;
@@ -385,7 +379,7 @@ function canBuyStudy(name) {
         player.timestudy.studies.includes(210 + Math.round(col / 2)) &&
         (name % 2 == 0
           ? !player.timestudy.studies.includes(name - 1)
-          : !player.timestudy.studies.includes(name + 1))
+          : !player.timestudy.studies.includes(name + 1)) || player.timestudy.studies.includes(291)
       )
         return true;
       else return false;
@@ -398,6 +392,16 @@ function canBuyStudy(name) {
         !player.timestudy.studies.includes(name % 2 == 0 ? name - 1 : name + 1)
       )
         return true;
+      else return false;
+      break;
+
+    case 24:
+    case 25:
+    case 26:
+    case 27:
+    case 28:
+    case 29:
+      if (hasRow(row - 1) && !hasRow(row) && player.dilation.studies.includes(1)) return true;
       else return false;
       break;
   }
