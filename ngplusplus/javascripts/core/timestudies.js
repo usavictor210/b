@@ -333,6 +333,9 @@ function canBuyStudy(name) {
     case 15:
     case 16:
     case 17:
+    case 24:
+    case 25:
+        
       if (hasRow(row - 1)) return true;
       else return false;
       break;
