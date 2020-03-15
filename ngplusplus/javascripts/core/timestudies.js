@@ -217,9 +217,9 @@ function buyTimeStudy(name, cost, check) {
       name == 233
     ) {
       document.getElementById(name).className = "timestudybought lightstudy";
-    } else {
-      document.getElementById("" + name).className = "timestudybought";
-    }
+    } else if (name == 241 || name == 242 || name == 251 || name == 252 || name == 261 || name == 262 || name == 271 || name == 271 || name == 281 || name == 282 || name == 283 || name == 291) {
+      document.getElementById(name).className = "timestudybought diltimestudy";
+    } else document.getElementById("" + name).className = "timestudybought"
     if (name == 131 && !player.achievements.includes("r143")) {
       if (player.replicanti.galaxybuyer)
         document.getElementById("replicantiresettoggle").textContent =
@@ -617,9 +617,9 @@ function updateTimeStudyButtons() {
           all[i] == 233
         ) {
           document.getElementById(all[i]).className = "timestudy lightstudy";
-        } else {
-          document.getElementById(all[i]).className = "timestudy";
-        }
+        } else if (all[i] == 241 || all[i] == 242 || all[i] == 251 || all[i] == 252 || all[i] == 261 || all[i] == 262 || all[i] == 271 || all[i] == 271 || all[i] == 281 || all[i] == 282 || all[i] == 283 || all[i] == 291) {
+          document.getElementById(all[i]).className = "timestudy diltimestudy";
+        } else document.getElementById(all[i]).className = "timestudy";
       } else {
         if (all[i] == 71 || all[i] == 81 || all[i] == 91 || all[i] == 101) {
           document.getElementById(all[i]).className =
@@ -649,9 +649,9 @@ function updateTimeStudyButtons() {
         } else if (all[i] == 123 || all[i] == 133 || all[i] == 143) {
           document.getElementById(all[i]).className =
             "timestudylocked idlestudylocked";
-        } else {
-          document.getElementById(all[i]).className = "timestudylocked";
-        }
+        } else if (all[i] == 241 || all[i] == 242 || all[i] == 251 || all[i] == 252 || all[i] == 261 || all[i] == 262 || all[i] == 271 || all[i] == 271 || all[i] == 281 || all[i] == 282 || all[i] == 283 || all[i] == 291) {
+          document.getElementById(all[i]).className = "timestudylocked diltimestudylocked";
+        } else document.getElementById(all[i]).className = "timestudylocked";
       }
     }
   }
