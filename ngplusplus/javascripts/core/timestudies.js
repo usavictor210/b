@@ -309,16 +309,10 @@ function canBuyStudy(name) {
     )
       return true;
     else return false;
-  if (name == 211)
+  if (name == 211 || name == 212)
     if (player.timestudy.studies.includes(191)) return true;
     else return false;
-  if (name == 212)
-    if (player.timestudy.studies.includes(191)) return true;
-    else return false;
-  if (name == 213)
-    if (player.timestudy.studies.includes(193)) return true;
-    else return false;
-  if (name == 214)
+  if (name == 213 || name == 214)
     if (player.timestudy.studies.includes(193)) return true;
     else return false;
   switch (row) {
@@ -335,7 +329,10 @@ function canBuyStudy(name) {
     case 17:
     case 24:
     case 25:
-        
+    case 26:
+    case 27:
+    case 28:
+    case 29:
       if (hasRow(row - 1)) return true;
       else return false;
       break;

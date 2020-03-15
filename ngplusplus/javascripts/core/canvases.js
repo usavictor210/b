@@ -95,7 +95,7 @@ function drawTreeBranch(num1, num2) {
         var name2 = parseInt(num2.split("y")[1]);
     } else if (num2.includes("diltime")) {
         var isDilTimeName = true;
-        var name2 = parseInt(num2.split("e")[2]) // i want to make this blue
+        var name2 = parseInt(num2.split("e")[1]) // i want to make this blue
     } else var name2 = parseInt(num2)
     var start = document.getElementById(num1).getBoundingClientRect();
     var end = document.getElementById(num2).getBoundingClientRect();
@@ -140,12 +140,11 @@ function drawTreeBranch(num1, num2) {
             ctx.strokeStyle="#403753";
         } else if (name2 == 123 || name2 == 133 || name2 == 143 || name1 == 143) {
             ctx.strokeStyle="#374553";
-        } else {
-            ctx.strokeStyle="#444";
-        }
+        } else if (name2 == 241 || name2 == 242 || name2 == 251 || name2 == 252 || name2 == 261 || name2 == 262 || name2 == 271 || name2 == 272 || name2 == 281 || name2 == 282 || name2 == 283 || name2 == 291 || name1 == 291) {
+            ctx.strokeStyle="#00fff9";
+        } else ctx.strokeStyle="#444";
     }
     if (num2 == "secretstudy") ctx.strokeStyle="#000000";
-    if (num2 == "diltime") ctx.strokeStyle="#00fff9"
     ctx.moveTo(x1, y1);
     ctx.lineTo(x2, y2);
     ctx.stroke();
