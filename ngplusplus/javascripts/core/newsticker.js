@@ -1211,9 +1211,9 @@ function updateNewsArray() {
       "respecced115"
     ],
     [
-      ""
-      
-      
+      "Florida man survived idol hell, but can never forget the past again. Everyone is relieved of the incident. ...well, not everyone, the only thing that might be very annoyed is the things in hell itself.",
+      'player.newsArray.includes("respecced33")',
+      "respcecced116"
     ]
   ];
   }
