@@ -1209,6 +1209,11 @@ function updateNewsArray() {
       "Hey there, Despacit here. What the FUCK HAVE YOU DONE?!?!?",
       "player.firstPow.eq(1) && player.quantums.gt(1)",
       "respecced115"
+    ],
+    [
+      ""
+      
+      
     ]
   ];
   }
