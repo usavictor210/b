@@ -642,7 +642,8 @@ function getInvestMultiplier(x) { // you have to decide a formula for each featu
         case 2: // time dimensions
             return new Decimal(player.quantum.investmentAmount[2]).pow(3).max(1)
         case 3: // replicantis
-            return new Decimal(player.quantum.investmentAmount[3]).pow(0.75).max(1)
+            let y = new Decimal(player.quantum.investmentAmount[3]).pow(0.75).max(1)
+            return y.gt(25) ? y.pow(0.675).max(25) : y
         case 4: // meta dimensions
             return new Decimal(player.quantum.investmentAmount[4]).times(2).max(1)
         case 5: // time dilation
