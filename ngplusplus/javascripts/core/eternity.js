@@ -1456,15 +1456,15 @@ function RGDisplayAmount() {
   if (player.timestudy.studies.includes(226))
     extraGals += Math.floor(player.replicanti.gal / 15);
   let extraText
-  if (extraGals !== 0) extraText = " (+" + extraGals + " extra)"
+  if (extraGals !== 0) extraText = " (+" + formatInfOrEter(extraGals) + " extra)"
   if (player.achievements.includes("r126")) {
     document.getElementById("replicantireset").innerHTML =
       "Divide replicanti by " + shortenDimensions(Number.MAX_VALUE) + " for a free galaxy.<br>" +
-      player.replicanti.galaxies + extraText +
+      formatInfOrEter(player.replicanti.galaxies) + extraText +
       " replicated galaxies created.";
   } else
     document.getElementById("replicantireset").innerHTML =
       "Reset replicanti amount for a free galaxy.<br>" +
-      player.replicanti.galaxies + extraText +
+      formatInfOrEter(player.replicanti.galaxies) + extraText +
       " replicated galaxies created.";
 }
