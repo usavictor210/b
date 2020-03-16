@@ -1383,7 +1383,7 @@ function updateECRewardText() {
     player.dimensionMultDecrease.toFixed(1) +
     "x ";
   document.getElementById("ec7reward").textContent =
-    "Reward: First Time Dimension produces Eighth Infinity Dimensions. Currently: " +
+    "Reward: The First Time Dimension produces Eighth Infinity Dimensions. Currently: " +
     shortenMoney(
       getTimeDimensionProduction(1)
         .pow(ECTimesCompleted("eterc7") * 0.2)
@@ -1477,6 +1477,11 @@ switch (x) {
   case 4: return player.infinityPoints
         .pow(0.003 + ECTimesCompleted("eterc4") * 0.002)
         .min(new Decimal("1e200"))
-  case 5: 
+  case 5: return ECTimesCompleted("eterc5") * 5
+  case 6: return
+  case 7:       getTimeDimensionProduction(1)
+        .pow(ECTimesCompleted("eterc7") * 0.2)
+        .minus(1)
+        .max(0)
   }
 }
