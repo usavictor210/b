@@ -43,7 +43,7 @@ function calculateDilationSeverity() {
 }
 
 function timeLeaperMult() { // for time leaper achievement
-  var x = Decimal.pow(player.totalTickGained/500, 30)
+  var x = Decimal.pow(player.totalTickGained/400, 30).max(1)
   if (!player.achievements.includes("r151")) return new Decimal(1)
   else return x
 }
