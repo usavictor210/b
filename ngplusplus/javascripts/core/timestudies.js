@@ -401,7 +401,7 @@ function canBuyStudy(name) {
     case 27:
     case 28:
     case 29:
-      if (hasRow(row - 1) && !hasRow(row) && player.dilation.studies.includes(1)) return true;
+      if (hasRow(row - 1) && player.dilation.studies.includes(1)) return true;
       else return false;
       break;
   }
