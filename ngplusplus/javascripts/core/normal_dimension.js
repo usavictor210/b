@@ -1,5 +1,4 @@
 function getDimensionFinalMultiplier(tier) {
-  //if (player.currentEternityChall == "eterc3" && tier > 4) return new Decimal(0)
   var name = TIER_NAMES[tier];
 
   let multiplier = new Decimal(player[name + 'Pow']);

@@ -483,7 +483,7 @@ function eternity(force, auto) {
       "</span> Infinity points.";
     if (player.eternities < 2)
       document.getElementById("break").textContent = "BREAK INFINITY";
-    RGDisplayAmount()
+    RGDisplayAmount();
     document.getElementById(
       "eternitybtn"
     ).style.display = player.infinityPoints.gte(player.eternityChallGoal)
@@ -895,7 +895,7 @@ function startEternityChallenge(name, startgoal, goalIncrease) {
       "</span> Infinity points.";
     if (player.eternities < 2)
       document.getElementById("break").textContent = "BREAK INFINITY";
-      RGDisplayAmount()
+    RGDisplayAmount();
     document.getElementById(
       "eternitybtn"
     ).style.display = player.infinityPoints.gte(player.eternityChallGoal)
@@ -1409,6 +1409,7 @@ function updateECRewardText() {
       player.timeShards
         .pow(ECTimesCompleted("eterc9") * 0.1)
         .min(new Decimal("1e400"))
+        .max(1)
     ) +
     "x ";
   document.getElementById("ec10reward").textContent =
@@ -1455,33 +1456,71 @@ function RGDisplayAmount() {
     extraGals += Math.floor(player.replicanti.amount.e / 1000);
   if (player.timestudy.studies.includes(226))
     extraGals += Math.floor(player.replicanti.gal / 15);
-  let extraText = ""
-  if (extraGals !== 0) extraText = " (+" + formatInfOrEter(extraGals) + " extra)"
+  let extraText = "";
+  if (extraGals !== 0)
+    extraText = " (+" + formatInfOrEter(extraGals) + " extra)";
   if (player.achievements.includes("r126")) {
     document.getElementById("replicantireset").innerHTML =
-      "Divide replicanti by " + shortenDimensions(Number.MAX_VALUE) + " for a free galaxy.<br>" +
-      formatInfOrEter(player.replicanti.galaxies) + extraText +
+      "Divide replicanti by " +
+      shortenDimensions(Number.MAX_VALUE) +
+      " for a free galaxy.<br>" +
+      formatInfOrEter(player.replicanti.galaxies) +
+      extraText +
       " replicated galaxies created.";
   } else
     document.getElementById("replicantireset").innerHTML =
       "Reset replicanti amount for a free galaxy.<br>" +
-      formatInfOrEter(player.replicanti.galaxies) + extraText +
+      formatInfOrEter(player.replicanti.galaxies) +
+      extraText +
       " replicated galaxies created.";
 }
 
 function eterChallReward(x) {
-switch (x) {
-  case 1: return timeMultUpg(4,1)
-  case 2: return player.infinityPower.pow(1.5 / (700 - ECTimesCompleted("eterc2") * 100).min(new Decimal("1e100")).max(1))
-  case 3: return ECTimesCompleted("eterc3") * 0.8
-  case 4: return player.infinityPoints
+  switch (x) {
+    case 1:
+      return timeMultUpg(4, 1);
+    case 2:
+      return new Decimal (player.infinityPower.pow(
+        1.5 /
+          (700 - (ECTimesCompleted("eterc2") * 100))).min(new Decimal("1e100")).max(1));
+    case 3:
+      return ECTimesCompleted("eterc3") * 0.8;
+    case 4:
+      return player.infinityPoints
         .pow(0.003 + ECTimesCompleted("eterc4") * 0.002)
-        .min(new Decimal("1e200"))
-  case 5: return ECTimesCompleted("eterc5") * 5
-  case 6: return
-  case 7:       getTimeDimensionProduction(1)
+        .min(new Decimal("1e200"));
+    case 5:
+      return ECTimesCompleted("eterc5") * 5;
+    case 6:
+      return;
+    case 7:
+      return getTimeDimensionProduction(1)
         .pow(ECTimesCompleted("eterc7") * 0.2)
         .minus(1)
-        .max(0)
+        .max(0);
+    case 8:
+      return (
+        Math.pow(
+          Math.log10(player.infinityPower.plus(1).log10() + 1),
+          0.03 * ECTimesCompleted("eterc8")
+        ) - 1
+      );
+    case 9:
+      return player.timeShards
+        .pow(ECTimesCompleted("eterc9") * 0.1)
+        .min(new Decimal("1e400"))
+        .max(1);
+    case 10:
+      return new Decimal(
+        Math.max(
+          Math.pow(getInfinitied(), 0.9) *
+            ECTimesCompleted("eterc10") *
+            0.000002 +
+            1,
+          1
+        )
+      ).pow(player.timestudy.studies.includes(31) ? 4 : 1);
+    case 11: return (player.tickSpeedMultDecrease - (0.07 * ECTimesCompleted("eterc11")))
+    case 12: return (1 - ECTimesCompleted("eterc12") * 0.008)
   }
 }
