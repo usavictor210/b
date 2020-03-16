@@ -389,7 +389,7 @@ function canBuyStudy(name) {
       if (
         (player.timestudy.studies.includes(220 + Math.floor(col * 2)) ||
           player.timestudy.studies.includes(220 + Math.floor(col * 2 - 1))) &&
-        !player.timestudy.studies.includes(name % 2 == 0 ? name - 1 : name + 1)
+        !player.timestudy.studies.includes(name % 2 == 0 ? name - 1 : name + 1) || player.timestudy.studies.includes(291)
       )
         return true;
       else return false;
