@@ -174,7 +174,7 @@ function hasInfinityMult(tier) {
 
         if (player.infinityUpgrades.includes('dimMult')) dimMult *= 1.1;
         if (player.achievements.includes("r58")) dimMult *= 1.01;
-        dimMult += ECTimesCompleted("eterc3") * 0.8
+        dimMult += eterChallReward(3)
         return dimMult;
     }
 

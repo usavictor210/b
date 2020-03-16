@@ -1455,7 +1455,7 @@ function RGDisplayAmount() {
     extraGals += Math.floor(player.replicanti.amount.e / 1000);
   if (player.timestudy.studies.includes(226))
     extraGals += Math.floor(player.replicanti.gal / 15);
-  let extraText
+  let extraText = ""
   if (extraGals !== 0) extraText = " (+" + formatInfOrEter(extraGals) + " extra)"
   if (player.achievements.includes("r126")) {
     document.getElementById("replicantireset").innerHTML =
@@ -1467,4 +1467,16 @@ function RGDisplayAmount() {
       "Reset replicanti amount for a free galaxy.<br>" +
       formatInfOrEter(player.replicanti.galaxies) + extraText +
       " replicated galaxies created.";
+}
+
+function eterChallReward(x) {
+switch (x) {
+  case 1: return timeMultUpg(4,1)
+  case 2: return player.infinityPower.pow(1.5 / (700 - ECTimesCompleted("eterc2") * 100).min(new Decimal("1e100")).max(1))
+  case 3: return ECTimesCompleted("eterc3") * 0.8
+  case 4: return player.infinityPoints
+        .pow(0.003 + ECTimesCompleted("eterc4") * 0.002)
+        .min(new Decimal("1e200"))
+  case 5: 
+  }
 }
