@@ -1464,7 +1464,7 @@ function eterChallReward(x) {
             1,
           1
         )
-      ).pow(player.timestudy.studies.includes(31) ? 4 : 1);
+      ).pow(player.timestudy.studies.includes(31) ? 4 : 1).max(1);
     case 11: return (2 - (0.07 * ECTimesCompleted("eterc11"))).toFixed(2)
     case 12: return (1 - ECTimesCompleted("eterc12") * 0.008)
     default: return 1
