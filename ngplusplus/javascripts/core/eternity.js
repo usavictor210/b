@@ -1487,12 +1487,12 @@ function eterChallReward(x) {
       return ECTimesCompleted("eterc3") * 0.8;
     case 4:
       return player.infinityPoints
-        .pow(0.003 + ECTimesCompleted("eterc4") * 0.002)
+        .pow(0.003 + player.eternityChalls.eterc4 * 0.002)
         .min(new Decimal("1e200"));
     case 5:
-      return ECTimesCompleted("eterc5") * 5;
+      return player.eternityChalls.eterc5 * 5;
     case 6:
-      return;
+      return (3 - (0.2*player.eternityChalls.eterc6)).toFixed(1)
     case 7:
       return getTimeDimensionProduction(1)
         .pow(ECTimesCompleted("eterc7") * 0.2)
@@ -1503,7 +1503,7 @@ function eterChallReward(x) {
         Math.pow(
           Math.log10(player.infinityPower.plus(1).log10() + 1),
           0.03 * ECTimesCompleted("eterc8")
-        ) - 1
+        )
       );
     case 9:
       return player.timeShards
@@ -1520,7 +1520,7 @@ function eterChallReward(x) {
           1
         )
       ).pow(player.timestudy.studies.includes(31) ? 4 : 1);
-    case 11: return (player.tickSpeedMultDecrease - (0.07 * ECTimesCompleted("eterc11")))
+    case 11: return (2 - (0.07 * ECTimesCompleted("eterc11"))).toFixed(2)
     case 12: return (1 - ECTimesCompleted("eterc12") * 0.008)
   }
 }
