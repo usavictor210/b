@@ -22,20 +22,8 @@ function eternity(force, auto) {
     }
     if (player.thisEternity < 2)
       giveAchievement("Eternities are the new infinity");
-    if (
-      player.currentEternityChall == "eterc6" &&
-      ECTimesCompleted("eterc6") < 5
-    )
-      player.dimensionMultDecrease = parseFloat(
-        (player.dimensionMultDecrease - 0.2).toFixed(1)
-      );
-    if (
-      player.currentEternityChall == "eterc11" &&
-      ECTimesCompleted("eterc11") < 5
-    )
-      player.tickSpeedMultDecrease = parseFloat(
-        (player.tickSpeedMultDecrease - 0.07).toFixed(2)
-      );
+      player.dimensionMultDecrease = parseFloat(eterChallReward(6))
+      player.tickspeedMultDecrease = parseFloat(eterChallReward(11))
     if (player.infinitied <= 10 && !force)
       giveAchievement("Do you really need a guide for this?");
     if (Decimal.round(player.replicanti.amount) == 9)
@@ -1355,84 +1343,46 @@ function updateECRewardText() {
     "x on all Time Dimensions (based on time spent this Eternity)";
   document.getElementById("ec2reward").textContent =
     "Reward: Infinity power gives a small multiplier to the 1st Infinity Dimension. Currently: " +
-    shortenMoney(
-      player.infinityPower
-        .pow(1.5 / (700 - ECTimesCompleted("eterc2") * 100))
-        .min(new Decimal("1e100"))
-        .max(1)
-    ) +
+    shortenMoney(eterChallReward(2)) +
     "x";
   document.getElementById("ec3reward").textContent =
-    "Reward: Increase the multiplier for buying 10 dimensions. Currently: " +
-    getDimensionPowerMultiplier().toFixed(2) +
-    "x";
+    "Reward: Increase the multiplier for buying 10 dimensions. Currently: +" +
+    eterChallReward(3).toFixed(2) + "x, total: " + getDimensionPowerMultiplier().toFixed(2) + "x";
   document.getElementById("ec4reward").textContent =
     "Reward: Infinity Dimensions gain a multiplier from unspent IP. Currently: " +
-    shortenMoney(
-      player.infinityPoints
-        .pow(0.003 + ECTimesCompleted("eterc4") * 0.002)
-        .min(new Decimal("1e200"))
-    ) +
+    shortenMoney(eterChallReward(4)) +
     "x";
   document.getElementById("ec5reward").textContent =
     "Reward: Galaxy cost scaling starts " +
-    ECTimesCompleted("eterc5") * 5 +
+    eterChallReward(5) +
     " galaxies later.";
   document.getElementById("ec6reward").textContent =
     "Reward: Further reduce the dimension cost multiplier increase. Currently: " +
-    player.dimensionMultDecrease.toFixed(1) +
-    "x ";
+    eterChallReward(6) +
+    "x";
   document.getElementById("ec7reward").textContent =
     "Reward: The First Time Dimension produces Eighth Infinity Dimensions. Currently: " +
-    shortenMoney(
-      getTimeDimensionProduction(1)
-        .pow(ECTimesCompleted("eterc7") * 0.2)
-        .minus(1)
-        .max(0)
-    ) +
+    shortenMoney(eterChallReward(7)) +
     " per second. ";
   document.getElementById("ec8reward").textContent =
     "Reward: Infinity power makes replicanti galaxies more powerful. Currently: " +
-    (
-      Math.max(
-        Math.pow(
-          Math.log10(player.infinityPower.plus(1).log10() + 1),
-          0.03 * ECTimesCompleted("eterc8")
-        ) - 1,
-        0
-      ) * 100
-    ).toFixed(2) +
+    ((eterChallReward(8) - 1) * 100).toFixed(2) +
     "%";
   document.getElementById("ec9reward").textContent =
     "Reward: Infinity Dimensions gain a multiplier based on time shards. Currently: " +
-    shortenMoney(
-      player.timeShards
-        .pow(ECTimesCompleted("eterc9") * 0.1)
-        .min(new Decimal("1e400"))
-        .max(1)
-    ) +
+    shortenMoney(eterChallReward(9)) +
     "x ";
   document.getElementById("ec10reward").textContent =
     "Reward: Time Dimensions gain a multiplier from infinitied stat. Currently: " +
-    shortenMoney(
-      new Decimal(
-        Math.max(
-          Math.pow(getInfinitied(), 0.9) *
-            ECTimesCompleted("eterc10") *
-            0.000002 +
-            1,
-          1
-        )
-      ).pow(player.timestudy.studies.includes(31) ? 4 : 1)
-    ) +
+    shortenMoney(eterChallReward(10)) +
     "x ";
   document.getElementById("ec11reward").textContent =
     "Reward: Further reduce the tickspeed cost multiplier increase. Currently: " +
-    player.tickSpeedMultDecrease.toFixed(2) +
+    eterChallReward(11) +
     "x ";
   document.getElementById("ec12reward").textContent =
     "Reward: Infinity Dimension cost multipliers are reduced. (x^" +
-    (1 - ECTimesCompleted("eterc12") * 0.008) +
+    eterChallReward(12) +
     ")";
 
   document.getElementById("ec10span").textContent =
@@ -1502,7 +1452,7 @@ function eterChallReward(x) {
       return (
         Math.pow(
           Math.log10(player.infinityPower.plus(1).log10() + 1),
-          0.03 * ECTimesCompleted("eterc8")
+          0.03 * ECTimesCompleted("eterc8").max(1)
         )
       );
     case 9:
@@ -1522,5 +1472,6 @@ function eterChallReward(x) {
       ).pow(player.timestudy.studies.includes(31) ? 4 : 1);
     case 11: return (2 - (0.07 * ECTimesCompleted("eterc11"))).toFixed(2)
     case 12: return (1 - ECTimesCompleted("eterc12") * 0.008)
+    default: return 1
   }
 }

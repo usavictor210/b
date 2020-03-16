@@ -5551,10 +5551,7 @@ function gameLoop(diff) {
     player.currentEternityChall !== "eterc12"
   )
     player.infinityDimension8.amount = player.infinityDimension8.amount.plus(
-      getTimeDimensionProduction(1)
-        .pow(ECTimesCompleted("eterc7") * 0.2)
-        .minus(1)
-        .times(diff / 10)
+      eterChallReward(7)
     );
 
   let gain;
