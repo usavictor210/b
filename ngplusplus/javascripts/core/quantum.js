@@ -455,10 +455,7 @@ function quantum(force, auto) {
       "</span> Infinity points.";
     if (player.eternities < 2)
       document.getElementById("break").textContent = "BREAK INFINITY";
-    document.getElementById("replicantireset").innerHTML =
-      "Reset replicanti amount for a free galaxy.<br>" +
-      player.replicanti.galaxies +
-      " replicated galaxies created.";
+      r126Check()
     document.getElementById(
       "eternitybtn"
     ).style.display = player.infinityPoints.gte(player.eternityChallGoal)

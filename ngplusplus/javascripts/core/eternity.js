@@ -494,7 +494,7 @@ function eternity(force, auto) {
       : "none";
     document.getElementById("eternityPoints2").style.display = "inline-block";
     document.getElementById("eternitystorebtn").style.display = "inline-block";
-    updateInfMult()
+    updateInfMult();
     updateEternityUpgrades();
     document.getElementById("totaltickgained").textContent =
       "You've gained " +
@@ -909,7 +909,7 @@ function startEternityChallenge(name, startgoal, goalIncrease) {
       : "none";
     document.getElementById("eternityPoints2").style.display = "inline-block";
     document.getElementById("eternitystorebtn").style.display = "inline-block";
-    updateInfMult()
+    updateInfMult();
     updateEternityUpgrades();
     document.getElementById("totaltickgained").textContent =
       "You've gained " +
@@ -973,13 +973,12 @@ function calculateEternitiedGain() {
       base *
       Math.floor(Decimal.pow(player.dilation.dilatedTime, 0.1).toNumber()); // If you have eternities and DT power up each other (x^0.1)
   if (player.achievements.includes("r155")) base = base * 100; // If you have Sub-atomic (x100 eternitied stat gain)
-  if (player.achievements.includes("r124"))
-    base = base * r124Mult() // If you have "Eternities are the new infinity"
+  if (player.achievements.includes("r124")) base = base * r124Mult(); // If you have "Eternities are the new infinity"
   return base; // grand total
 }
 
 function r124Mult() {
-return Decimal.min(Math.sqrt(player.thisEternity / 12.5), 30).max(1)
+  return Decimal.min(Math.sqrt(player.thisEternity / 12.5), 30).max(1);
 }
 
 function gainedEternityPoints() {
@@ -1184,9 +1183,11 @@ function updateDilationUpgradeButtons() {
     }
   }
   document.getElementById("dil3desc").textContent =
-    "Currently: " + shortenMoney(Decimal.pow(3, player.dilation.rebuyables[3])) + "x"
+    "Currently: " +
+    shortenMoney(Decimal.pow(3, player.dilation.rebuyables[3])) +
+    "x";
   document.getElementById("dil4desc").textContent =
-    "Currently: ^" + getDilExp() + " -> ^" + (getDilExp()+0.25)
+    "Currently: ^" + getDilExp() + " -> ^" + (getDilExp() + 0.25);
   document.getElementById("dil7desc").textContent =
     "Currently: " +
     shortenMoney(player.dilation.dilatedTime.pow(308).max(1)) +
@@ -1268,9 +1269,10 @@ function getDilExp() {
 
 function getDilGain() {
   // formula: log10(antimatter)/400^((1.5)+0.25(times bought formula upgrade))*(3^(times bought 3x TP upgrade))
-  return Decimal.pow(Decimal.log10(player.money) / (400-(0.75-getDilPunish())*10), getDilExp()).times(
-    Decimal.pow(3, player.dilation.rebuyables[3])
-  );
+  return Decimal.pow(
+    Decimal.log10(player.money) / (400 - (0.75 - getDilPunish()) * 10),
+    getDilExp()
+  ).times(Decimal.pow(3, player.dilation.rebuyables[3]));
 }
 
 function getDilReq() {
@@ -1309,38 +1311,47 @@ function getDilTimeGainPerSecond() {
     gain = gain.times(Math.pow(player.eternities, 0.1));
   if (player.dilation.upgrades.includes(16)) gain = gain.times(getDil16Bonus());
   if (player.dilation.upgrades.includes(18)) gain = gain.times(getDil18Bonus());
-  if (player.quantum.investmentAmount[5].gt(0)) gain = gain.times(getInvestMultiplier(5));
+  if (player.quantum.investmentAmount[5].gt(0))
+    gain = gain.times(getInvestMultiplier(5));
   return gain;
 }
 
 // DILATION UPGRADES (META DIMENSIONS)
 
-function getDil13Bonus () {
+function getDil13Bonus() {
   return 1 + Math.log10(1 - Math.min(0, player.tickspeed.log(10)));
 }
 
 function getDil14RealBonus() {
   if (player.dilation.upgrades.includes(14)) {
-    return getDil14Bonus()
+    return getDil14Bonus();
   } else {
     return 2;
   }
 }
 
-function getDil14Bonus () {
-  return Math.log(player.dilation.dilatedTime.max(1e10).min(1e100).log(10)) / Math.log(10) + 1;
+function getDil14Bonus() {
+  return (
+    Math.log(
+      player.dilation.dilatedTime
+        .max(1e10)
+        .min(1e100)
+        .log(10)
+    ) /
+      Math.log(10) +
+    1
+  );
 }
 
-function getDil16Bonus () {
-  return Math.pow((player.meta.bestAntimatter.log10())/2.5, .5);
+function getDil16Bonus() {
+  return Math.pow(player.meta.bestAntimatter.log10() / 2.5, 0.5);
 }
-
 
 function getDil18Bonus() {
-var x = new Decimal((Math.log10(player.dilation.tachyonParticles)/4))
-if (isNaN(x) || x.lt(1)) x = new Decimal(1)
-if (x.gt(12.5)) x = x.pow(.75).max(12.5)
-return x
+  var x = new Decimal(Math.log10(player.dilation.tachyonParticles) / 4);
+  if (isNaN(x) || x.lt(1)) x = new Decimal(1);
+  if (x.gt(12.5)) x = x.pow(0.75).max(12.5);
+  return x;
 }
 
 function updateECRewardText() {
@@ -1434,9 +1445,30 @@ function updateECRewardText() {
 }
 
 function r127Reward() {
-return new Decimal((Math.pow(((player.eternityPoints.e-308)+1), (5+(Decimal.log(player.eternityPoints.e, 20)))))+1).max(1)
+  return new Decimal(
+    Math.pow(
+      player.eternityPoints.e - 308 + 1,
+      5 + Decimal.log(player.eternityPoints.e, 20)
+    ) + 1
+  ).max(1);
 }
 
-function eterUpgrade(x) {
+function eterUpgrade(x) {}
 
+function r126Check() {
+  let extraGals = 0;
+  if (player.timestudy.studies.includes(225))
+    extraGals += Math.floor(player.replicanti.amount.e / 1000);
+  if (player.timestudy.studies.includes(226))
+    extraGals += Math.floor(player.replicanti.gal / 15);
+  if (player.achievements.includes("r126")) {
+    document.getElementById("replicantireset").innerHTML =
+      "Divide replicanti by 1.8e308 for a free galaxy.<br>" +
+      player.replicanti.galaxies + 
+      " replicated galaxies created.";
+  } else
+    document.getElementById("replicantireset").innerHTML =
+      "Reset replicanti amount, but get a free galaxy<br>" +
+      player.replicanti.galaxies +
+      " replicated galaxies created.";
 }

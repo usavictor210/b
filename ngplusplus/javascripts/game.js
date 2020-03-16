@@ -2064,11 +2064,6 @@ function updateInfCosts() {
     }
     document.getElementById("replicantiunlock").innerHTML =
       "Unlock Replicantis<br>Cost: " + shortenCosts(1e140) + " IP";
-    let extraGals = 0;
-    if (player.timestudy.studies.includes(225))
-      extraGals += Math.floor(player.replicanti.amount.e / 1000);
-    if (player.timestudy.studies.includes(226))
-      extraGals += Math.floor(player.replicanti.gal / 15);
     if (extraGals !== 0)
       document.getElementById("replicantireset").innerHTML =
         "Reset replicanti amount for a free galaxy.<br>" +
