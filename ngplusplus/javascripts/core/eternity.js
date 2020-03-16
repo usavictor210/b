@@ -1450,10 +1450,10 @@ function eterChallReward(x) {
         .max(0);
     case 8:
       return (
-        Math.pow(
+        Decimal.pow(
           Math.log10(player.infinityPower.plus(1).log10() + 1),
-          0.03 * ECTimesCompleted("eterc8").max(1)
-        )
+          0.03 * ECTimesCompleted("eterc8")
+        ).max(0)
       );
     case 9:
       return player.timeShards
