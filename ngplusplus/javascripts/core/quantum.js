@@ -455,7 +455,7 @@ function quantum(force, auto) {
       "</span> Infinity points.";
     if (player.eternities < 2)
       document.getElementById("break").textContent = "BREAK INFINITY";
-      r126Check()
+      RGDisplayAmount()
     document.getElementById(
       "eternitybtn"
     ).style.display = player.infinityPoints.gte(player.eternityChallGoal)

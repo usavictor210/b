@@ -1,4 +1,4 @@
- // ok, this code is absolutely very messy and we'll need to separate it into parts, and also simplify some parts of the code.
+// ok, this code is absolutely very messy and we'll need to separate it into parts, and also simplify some parts of the code.
 var gameLoopIntervalId;
 var Marathon = 0;
 var Marathon2 = 0;
@@ -931,7 +931,9 @@ function updateDimensions() {
       shortenMoney(player.totalmoney) +
       " antimatter.";
     document.getElementById("totalresets").textContent =
-      "You have performed " + formatInfOrEter(player.resets) + " dimensional boosts/shifts.";
+      "You have performed " +
+      formatInfOrEter(player.resets) +
+      " dimensional boosts/shifts.";
     document.getElementById("galaxies").textContent =
       "You have " + formatInfOrEter(player.galaxies) + " Antimatter Galaxies.";
     document.getElementById("totalTime").textContent =
@@ -1030,7 +1032,9 @@ function updateDimensions() {
         "x<br>Cost: " +
         shortenCosts(1e6) +
         " IP";
-      var postinfi12 = player.timestudy.studies.includes(31) ? Math.pow((Math.log10(getInfinitied() + 1) * 10), 4) : shortenMoney(1 + Math.log10(getInfinitied() + 1) * 10)
+      var postinfi12 = player.timestudy.studies.includes(31)
+        ? Math.pow(Math.log10(getInfinitied() + 1) * 10, 4)
+        : shortenMoney(1 + Math.log10(getInfinitied() + 1) * 10);
       document.getElementById("postinfi12").innerHTML =
         "Dimensions are more powerful based on your infinitied stat<br>Currently: " +
         shortenMoney(postinfi12) +
@@ -1050,14 +1054,15 @@ function updateDimensions() {
           "Decrease the dimension cost multiplier increase<br>Currently: " +
           player.dimensionMultDecrease.toFixed(1) +
           "x each per-10 purchase after Infinity";
-      } else document.getElementById("postinfi42").innerHTML =
-        "Decrease the dimension cost multiplier increase<br>Currently: " +
-        player.dimensionMultDecrease +
-        "x -> " +
-        (player.dimensionMultDecrease - 1) +
-        "x each per-10 purchase after Infinity<br>Cost: " +
-        shortenCosts(player.dimensionMultDecreaseCost) +
-        " IP";
+      } else
+        document.getElementById("postinfi42").innerHTML =
+          "Decrease the dimension cost multiplier increase<br>Currently: " +
+          player.dimensionMultDecrease +
+          "x -> " +
+          (player.dimensionMultDecrease - 1) +
+          "x each per-10 purchase after Infinity<br>Cost: " +
+          shortenCosts(player.dimensionMultDecreaseCost) +
+          " IP";
 
       document.getElementById("postinfi13").innerHTML =
         "You passively generate infinitied stat based on your fastest infinity.<br>1 Infinity every " +
@@ -1140,7 +1145,11 @@ function updateDimensions() {
       shortenCosts(1e40) +
       " EP";
     document.getElementById("eter6").innerHTML =
-      "Time Dimensions are more powerful based on time played<br>Currently: " + shortenDimensions(new Decimal(player.totalTimePlayed / (10*21600)).max(1).min(100)) + "x<br>Cost: " +
+      "Time Dimensions are more powerful based on time played<br>Currently: " +
+      shortenDimensions(
+        new Decimal(player.totalTimePlayed / (10 * 21600)).max(1).min(100)
+      ) +
+      "x<br>Cost: " +
       shortenCosts(1e50) +
       " EP";
     document.getElementById("eter7").innerHTML =
@@ -1999,7 +2008,7 @@ document.getElementById("offlineProd").onclick = function() {
 };
 
 function updateInfCosts() {
-  updateInfMult()
+  updateInfMult();
   if (
     document.getElementById("replicantis").style.display == "block" &&
     document.getElementById("infinity").style.display == "block"
@@ -2064,23 +2073,7 @@ function updateInfCosts() {
     }
     document.getElementById("replicantiunlock").innerHTML =
       "Unlock Replicantis<br>Cost: " + shortenCosts(1e140) + " IP";
-    if (extraGals !== 0)
-      document.getElementById("replicantireset").innerHTML =
-        "Reset replicanti amount for a free galaxy.<br>" +
-        player.replicanti.galaxies +
-        "+" +
-        extraGals +
-        " replicated galaxies created.";
-    else
-      document.getElementById("replicantireset").innerHTML =
-        player.replicanti.galaxies !== 1
-          ? "Reset replicanti amount for a free galaxy.<br>" +
-            player.replicanti.galaxies +
-            " replicated galaxies created."
-          : "Reset replicanti amount, but get a free galaxy<br>" +
-            player.replicanti.galaxies +
-            " replicated galaxy created.";
-
+    RGDisplayAmount();
     document.getElementById("replicantichance").className =
       player.infinityPoints.gte(player.replicanti.chanceCost) &&
       player.replicanti.chance < 1
@@ -4590,10 +4583,7 @@ function startChallenge(name, target) {
 
     if (player.infinitied >= 10) giveAchievement("That's a lot of infinites");
 
-    document.getElementById("replicantireset").innerHTML =
-      "Reset replicanti amount for a free galaxy.<br>" +
-      player.replicanti.galaxies +
-      " replicated galaxies created.";
+    RGDisplayAmount()
 
     resetInfDimensions();
     player.tickspeed = player.tickspeed.times(
@@ -5768,7 +5758,7 @@ function gameLoop(diff) {
     if (dif > 0) {
       player.infMult = player.infMult.times(Decimal.pow(2, dif));
       player.infMultCost = player.infMultCost.times(Decimal.pow(10, dif));
-      updateInfMult()
+      updateInfMult();
       player.infinityPoints = player.infinityPoints.minus(
         player.infMultCost.dividedBy(10)
       );
@@ -7452,7 +7442,7 @@ function init() {
   showDimTab("antimatterdimensions");
   showChallengesTab("challenges");
   showEternityTab("timestudies", true);
-  showQuantumTab("investment")
+  showQuantumTab("investment");
   load_game();
   updateTickSpeed();
   updateAutobuyers();

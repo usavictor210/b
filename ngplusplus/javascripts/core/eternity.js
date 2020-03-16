@@ -483,10 +483,7 @@ function eternity(force, auto) {
       "</span> Infinity points.";
     if (player.eternities < 2)
       document.getElementById("break").textContent = "BREAK INFINITY";
-    document.getElementById("replicantireset").innerHTML =
-      "Reset replicanti amount, but get a free galaxy<br>" +
-      player.replicanti.galaxies +
-      " replicated galaxies created.";
+    RGDisplayAmount()
     document.getElementById(
       "eternitybtn"
     ).style.display = player.infinityPoints.gte(player.eternityChallGoal)
@@ -898,10 +895,7 @@ function startEternityChallenge(name, startgoal, goalIncrease) {
       "</span> Infinity points.";
     if (player.eternities < 2)
       document.getElementById("break").textContent = "BREAK INFINITY";
-    document.getElementById("replicantireset").innerHTML =
-      "Reset replicanti amount, but get a free galaxy<br>" +
-      player.replicanti.galaxies +
-      " replicated galaxies created.";
+      RGDisplayAmount()
     document.getElementById(
       "eternitybtn"
     ).style.display = player.infinityPoints.gte(player.eternityChallGoal)
@@ -1455,20 +1449,22 @@ function r127Reward() {
 
 function eterUpgrade(x) {}
 
-function r126Check() {
+function RGDisplayAmount() {
   let extraGals = 0;
   if (player.timestudy.studies.includes(225))
     extraGals += Math.floor(player.replicanti.amount.e / 1000);
   if (player.timestudy.studies.includes(226))
     extraGals += Math.floor(player.replicanti.gal / 15);
+  let extraText
+  if (extraGals !== 0) extraText = " (+" + extraGals + " extra)"
   if (player.achievements.includes("r126")) {
     document.getElementById("replicantireset").innerHTML =
-      "Divide replicanti by 1.8e308 for a free galaxy.<br>" +
-      player.replicanti.galaxies + 
+      "Divide replicanti by " + shortenDimensions(Number.MAX_VALUE) + " for a free galaxy.<br>" +
+      player.replicanti.galaxies + extraText +
       " replicated galaxies created.";
   } else
     document.getElementById("replicantireset").innerHTML =
-      "Reset replicanti amount, but get a free galaxy<br>" +
-      player.replicanti.galaxies +
+      "Reset replicanti amount for a free galaxy.<br>" +
+      player.replicanti.galaxies + extraText +
       " replicated galaxies created.";
 }

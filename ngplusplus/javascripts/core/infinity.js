@@ -445,10 +445,7 @@ function infinity() {
       document.getElementById("matter").style.display = "block";
     else document.getElementById("matter").style.display = "none";
 
-    document.getElementById("replicantireset").innerHTML =
-      "Reset replicanti amount, but get a free galaxy<br>" +
-      player.replicanti.galaxies +
-      " replicated galaxies created.";
+    RGDisplayAmount()
 
     if (player.achievements.includes("r36"))
       player.tickspeed = player.tickspeed.times(0.98);
