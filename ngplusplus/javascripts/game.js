@@ -1675,12 +1675,7 @@ document.getElementById("infiMult").onclick = function() {
     player.infMult = player.infMult.times(2);
     player.autoIP = player.autoIP.times(2);
     player.infMultCost = player.infMultCost.times(10);
-    document.getElementById("infiMult").innerHTML =
-      "You get 2x more IP from all sources for every purchase.<br>Currently: " +
-      shorten(player.infMult) +
-      "x<br>Cost: " +
-      shortenCosts(player.infMultCost) +
-      " IP";
+    updateInfMult()
     if (
       player.autobuyers[11].priority !== undefined &&
       player.autobuyers[11].priority !== null &&
