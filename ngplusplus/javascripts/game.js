@@ -2461,6 +2461,7 @@ buyAutobuyer = function(id) {
     );
     if (player.autobuyers[id].interval > 120) player.autobuyers[id].cost *= 2; //if your last purchase wont be very strong, dont double the cost
   }
+  if (player.autobuyers[id].interval == 100 && id == 11) $.notify("You have unlocked Break Infinity!", "success")
   updateAutobuyers();
 };
 
