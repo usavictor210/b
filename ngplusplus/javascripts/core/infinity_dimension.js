@@ -112,9 +112,9 @@ function DimensionPower(tier) {
   if (ECTimesCompleted("eterc2") !== 0 && tier == 1) mult = mult.times(eterChallReward(2).plus(1))
   if (player.currentEternityChall == "eterc2") mult = mult.times(0)
 
-  if (ECTimesCompleted("eterc4") !== 0) mult = mult.times(player.infinityPoints.pow(0.003 + ECTimesCompleted("eterc4")*0.002).min(new Decimal("1e200")))
+  if (ECTimesCompleted("eterc4") !== 0) mult = mult.times(eterChallReward(4))
 
-  if (ECTimesCompleted("eterc9") !== 0) mult = mult.times(player.timeShards.pow(ECTimesCompleted("eterc9")*0.1).plus(1).min(new Decimal("1e400")))
+  if (ECTimesCompleted("eterc9") !== 0) mult = mult.times(eterChallReward(9))
 
   if (player.achievements.includes("r113")) mult = mult.times(timeMultUpg(4, 1).pow(10)) // long lasting relationship
 
