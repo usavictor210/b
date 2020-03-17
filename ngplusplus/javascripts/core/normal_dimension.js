@@ -167,13 +167,13 @@ function hasInfinityMult(tier) {
 
     function getDimensionPowerMultiplier(tier) {
         let dimMult = 2;
-
-
+      
         if (player.currentChallenge == "challenge9" || player.currentChallenge == "postc1") dimMult = Math.pow(10/0.30,Math.random())*0.30
 
         if (player.infinityUpgrades.includes('dimMult')) dimMult *= 1.1;
         if (player.achievements.includes("r58")) dimMult *= 1.01;
         dimMult += eterChallReward(3)
+        if (player.timestudy.studies.includes("242")) dimMult += Decimal.floor(player.replicanti.galaxies / 150).pow(0.6).max(0)
         return dimMult;
     }
 
