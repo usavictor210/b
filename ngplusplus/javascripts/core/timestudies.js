@@ -394,8 +394,6 @@ function canBuyStudy(name) {
         return true;
       else return false;
       break;
-
-    case 24:
     case 25:
     case 26:
     case 27:
@@ -1018,7 +1016,7 @@ function getTimeStudiesDescription() {
     (Math.pow(1 + player.galaxies / 1000, 0.2) * 100 - 100).toFixed(1) +
     "%";
   document.getElementById("241desc").textContent = "Currently: " + shortenMoney(Decimal.pow(player.dilation.tachyonParticles, 4).max(1)) + "x"
-  document.getElementById("242desc").textContent = "Currently: +" + shortenDimensions(Decimal.floor(player.replicanti.galaxies / 150).pow(0.6).max(0)) + "x"
+  document.getElementById("242desc").textContent = "Currently: +" + shortenMoney(Math.pow(player.replicanti.galaxies / 150, 0.6)) + "x"
   document.getElementById("251desc").textContent = "Currently: " + Math.floor(player.replicanti.galaxies / 40) + desc2
   document.getElementById("252desc").textContent = "Currently: " + Math.floor(player.dilation.freeGalaxies / 80) + desc3
   document.getElementById("unknownCost").textContent = shortenCosts( // the unknown time theorem isn't even coded yet, this is a placeholder

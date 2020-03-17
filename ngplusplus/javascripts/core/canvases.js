@@ -255,7 +255,9 @@ function drawStudyTree() {
     drawTreeBranch("272", "283")
     drawTreeBranch("281", "282")
     drawTreeBranch("283", "282")
+    drawTreeBranch("281", "291")
     drawTreeBranch("282", "291")
+    drawTreeBranch("283", "291")
     
     if (shiftDown && document.getElementById("eternitystore").style.display !== "none" && document.getElementById("timestudies").style.display !== "none") {
         for (i=0; i<all.length; i++) {

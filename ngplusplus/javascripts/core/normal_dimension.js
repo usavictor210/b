@@ -173,7 +173,7 @@ function hasInfinityMult(tier) {
         if (player.infinityUpgrades.includes('dimMult')) dimMult *= 1.1;
         if (player.achievements.includes("r58")) dimMult *= 1.01;
         dimMult += eterChallReward(3)
-        if (player.timestudy.studies.includes("242")) dimMult += Decimal.floor(player.replicanti.galaxies / 150).pow(0.6).max(0)
+        if (player.timestudy.studies.includes("242")) dimMult += Math.pow(player.replicanti.galaxies / 150, 0.6)
         return dimMult;
     }
 
