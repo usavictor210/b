@@ -664,13 +664,14 @@ function getGalaxyCostScalingStart() {
   if (player.timestudy.studies.includes(223)) n += 7;
   if (player.timestudy.studies.includes(224))
     n += Math.floor(player.resets / 2000);
-  if (player.timestudy.studies.includes(251)) n += Math.floor(player.replicanti.galaxies / 35)
+  if (player.timestudy.studies.includes(251)) n += Math.floor(player.replicanti.galaxies / 40);
   return n;
 }
 
 function getRemoteGalaxyStart() {
-  var n = 800
-  if (player.timestudy.studies.includes(252)) n += Math.floor(player.dilation.freeGalaxies / 80)
+  var n = 800;
+  if (player.timestudy.studies.includes(252)) n += Math.floor(player.dilation.freeGalaxies / 80);
+  return n;
 }
 
 function getGalaxyRequirement() {
@@ -690,7 +691,7 @@ function getGalaxyRequirement() {
   }
   let remoteScalingStart = getRemoteGalaxyStart()
   if (player.galaxies >= remoteScalingStart) {
-    amount = Math.floor(amount * Math.pow(1.002, player.galaxies - 799));
+    amount = Math.floor(amount * Math.pow(1.002, player.galaxies - (remoteScalingStart - 1)));
   }
 
   if (player.infinityUpgrades.includes("resetBoost")) amount -= 9;
