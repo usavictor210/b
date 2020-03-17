@@ -660,11 +660,17 @@ function getInfinitied() {
 }
 
 function getGalaxyCostScalingStart() {
-  var n = 100 + ECTimesCompleted("eterc5") * 5;
+  var n = 100 + eterChallReward(5);
   if (player.timestudy.studies.includes(223)) n += 7;
   if (player.timestudy.studies.includes(224))
     n += Math.floor(player.resets / 2000);
+  if (player.timestudy.studies.includes(251)) n += Math.floor(player.replicanti.galaxies / 35)
   return n;
+}
+
+function getRemoteGalaxyStart() {
+  var n = 800
+  if (player.timestudy.studies.includes(252)) n += Math.floor(player.dilation.freeGalaxies / 80)
 }
 
 function getGalaxyRequirement() {
@@ -682,7 +688,8 @@ function getGalaxyRequirement() {
       player.galaxies -
       (galaxyCostScalingStart - 1);
   }
-  if (player.galaxies >= 800) {
+  let remoteScalingStart = getRemoteGalaxyStart()
+  if (player.galaxies >= remoteScalingStart) {
     amount = Math.floor(amount * Math.pow(1.002, player.galaxies - 799));
   }
 
