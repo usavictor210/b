@@ -21,7 +21,7 @@ function DimensionDescription(tier) {
 
 
 function DimensionRateOfChange(tier) {
-  if (tier === 8) var toGain = getTimeDimensionProduction(1).pow(ECTimesCompleted("eterc7")*0.2).minus(1).max(0)
+  if (tier === 8) var toGain = eterChallReward(7)
   else var toGain = DimensionProduction(tier+1)
   var current = Decimal.max(player["infinityDimension"+tier].amount, 1);
   var change  = toGain.times(10).dividedBy(current);

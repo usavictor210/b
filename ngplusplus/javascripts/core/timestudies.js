@@ -997,6 +997,10 @@ function getTimeStudiesDescription() {
     "Currently: " + shortenMoney(Decimal.pow(1.0025, player.resets)) + "x";
   let desc1 =
     Math.floor(player.resets / 2000) == 1 ? " galaxy later" : " galaxies later"; //TS224
+  let desc2 =
+    Math.floor(player.replicanti.galaxies / 40) == 1 ? " galaxy later" : " galaxies later" //TS271
+  let desc3 =
+    Math.floor(player.dilation.freeGalaxies / 80) == 1 ? " galaxy later" : " galaxies later" //TS272
   document.getElementById("224desc").textContent = //ts224
     "Currently: " + Math.floor(player.resets / 2000) + desc1;
   document.getElementById("225desc").textContent = //ts225
@@ -1013,6 +1017,8 @@ function getTimeStudiesDescription() {
     "Currently: " +
     (Math.pow(1 + player.galaxies / 1000, 0.2) * 100 - 100).toFixed(1) +
     "%";
+  document.getElementById("251desc").textContent = "Currently: " + Math.floor(player.replicanti.galaxies / 40) + desc2
+  document.getElementById("252desc").textContent = "Currently: " + Math.floor(player.dilation.freeGalaxies / 80) + desc3
   document.getElementById("unknownCost").textContent = shortenCosts( // the unknown time theorem isn't even coded yet, this is a placeholder
     new Decimal.pow(10, Math.random() * 20 + 300)
   );

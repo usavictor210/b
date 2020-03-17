@@ -217,7 +217,6 @@ function hasInfinityMult(tier) {
         if (tier != 8) player.dimlife = false
         if (tier != 1) player.dead = false
 
-
     }
 
     function dimBought(tier) {

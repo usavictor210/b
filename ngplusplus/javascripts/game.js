@@ -5474,6 +5474,7 @@ function gameLoop(diff) {
       player["infinityDimension" + tier].amount = player[
         "infinityDimension" + tier
       ].amount.plus(DimensionProduction(tier + 1).times(diff / 100));
+    
     if (player.infDimensionsUnlocked[tier - 1]) {
       document.getElementById("infRow" + tier).style.display = "inline-block";
       document.getElementById("dimTabButtons").style.display = "inline-block";
