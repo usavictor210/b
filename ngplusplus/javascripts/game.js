@@ -6852,6 +6852,7 @@ function gameLoop(diff) {
       gainedInfinityPoints().times(diff / 1000)
     );
   if (player.dilation.upgrades.includes(17)) {
+    checkIfTTNaN()
     document.getElementById("theorembuyers").style.display = "none";
     player.timestudy.theorem += parseFloat(
       player.dilation.tachyonParticles
