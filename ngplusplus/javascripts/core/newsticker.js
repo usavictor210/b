@@ -1234,11 +1234,13 @@ function scrollNextMessage() {
   if (player.options.newsHidden) return false;
   updateNewsArray();
   //select a message at random
-
+  var randomNews
   try {
     do {
-      nextMsgIndex = Math.floor(Math.random() * newsArray.length);
-    } while (!eval(newsArray[nextMsgIndex][1]));
+      randomNews = 322
+      nextMsgIndex = randomNews
+      if (randomNews = 322) document.getElementById("news").innerHTML = "<a href ='https://www.youtube.com/watch?v=TN25ghkfgQA'>What if you pinged yourself?</a>"
+      } while (!eval(newsArray[nextMsgIndex][1]));
   } catch (e) {
     console.log("Newsarray doesn't work at idx " + nextMsgIndex);
   }
@@ -1253,7 +1255,6 @@ function scrollNextMessage() {
 
   //get the parent width so we can start the message beyond it
   let parentWidth = s.parentElement.clientWidth;
-
   //set the transition to blank so the move happens immediately
   s.style.transition = "";
   //move div_text to the right, beyond the edge of the div_container
