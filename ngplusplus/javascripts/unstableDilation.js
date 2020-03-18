@@ -53,7 +53,7 @@ function calculateTemporalPowerPerSec() {
   return x
 }
 
-function timeMultUpg(x, check) {
+function timeMultUpg(x, check) { // needs better organization.
   var y = 1 // multiplier
   var z = 1 // the "display" variable
   if (x === 1) { // affects ND multiplier based on time played
