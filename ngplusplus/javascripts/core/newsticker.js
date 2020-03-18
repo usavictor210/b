@@ -1237,9 +1237,8 @@ function scrollNextMessage() {
   var randomNews
   try {
     do {
-      randomNews = 322
+      randomNews =  Math.floor(Math.random() * newsArray.length);
       nextMsgIndex = randomNews
-      if (randomNews = 322) document.getElementById("news").innerHTML = "<a href ='https://www.youtube.com/watch?v=TN25ghkfgQA'>What if you pinged yourself?</a>"
       } while (!eval(newsArray[nextMsgIndex][1]));
   } catch (e) {
     console.log("Newsarray doesn't work at idx " + nextMsgIndex);
@@ -1251,7 +1250,8 @@ function scrollNextMessage() {
   scrollTimeouts = [];
 
   //set the text
-  s.textContent = newsArray[nextMsgIndex][0];
+  if (randomNews != 322) s.textContent = newsArray[nextMsgIndex][0];
+  if (randomNews = 322) document.getElementById("s").innerHTML = '<a href="https://www.youtube.com/watch?v=TN25ghkfgQA">What if you pinged yourself?</a>'
 
   //get the parent width so we can start the message beyond it
   let parentWidth = s.parentElement.clientWidth;
