@@ -5,7 +5,7 @@ var particles = {}
 var direction = 0;
 var velocityX = 0;
 var velocityY = 0;
-
+var bentStudy = [241, 242, 251, 252, 261, 262, 271, 272, 281, 282, 283, 284, 285, 291, 292, 293]
 var canvas = document.getElementById("studyTreeCanvas");
 var ctx = canvas.getContext("2d");
 var canvas3 = document.getElementById("dilationCanvas");
@@ -140,7 +140,7 @@ function drawTreeBranch(num1, num2) {
             ctx.strokeStyle="#403753";
         } else if (name2 == 123 || name2 == 133 || name2 == 143 || name1 == 143) {
             ctx.strokeStyle="#374553";
-        } else if (name2 == 241 || name2 == 242 || name2 == 251 || name2 == 252 || name2 == 261 || name2 == 262 || name2 == 271 || name2 == 272 || name2 == 281 || name2 == 282 || name2 == 283 || name2 == 284 || name2 == 285 || name2 == 291) {
+        } else if ( {
             ctx.strokeStyle="#006967";
         } else ctx.strokeStyle="#444";
     }
@@ -260,8 +260,9 @@ function drawStudyTree() {
     drawTreeBranch("272", "285")
     drawTreeBranch("282", "283")
     drawTreeBranch("283", "284")
-    drawTreeBranch("283", "291")
-    
+    drawTreeBranch("281", "291")
+    drawTreeBranch("285", "293")
+    drawTreeBranch("283", "292")
     if (shiftDown && document.getElementById("eternitystore").style.display !== "none" && document.getElementById("timestudies").style.display !== "none") {
         for (i=0; i<all.length; i++) {
             var start = document.getElementById(all[i]).getBoundingClientRect();
@@ -277,7 +278,7 @@ function drawStudyTree() {
                 //console.log(all[i]) we really don't need the console to say anything, do we?
                 if (all[i] == 222 || all[i] == 223 || all[i] == 226 || all[i] == 227 || all[i] == 232 || all[i] == 233) name = "dark"
                 else if (all[i] == 221 || all[i] == 224 || all[i] == 225 || all[i] == 228 || all[i] == 231 || all[i] == 234) name = "light"
-                else if (all[i] == 241 || all[i] == 242 || all[i] == 251 || all[i] == 252 || all[i] == 261 || all[i] == 262 || all[i] == 271 || all[i] == 272 || all[i] == 281 || all[i] == 282 || all[i] == 283 || all[i] == 284 || all[i] == 285 || all[i] == 291) name = "bent study"
+                else if (bentStudy.includes(all[i])) name = "bent study"
                 else if (tempName.includes("normaldimstudy")) name = "normal dims"
                 else if (tempName.includes("infdimstudy")) name = "infinity dims"
                 else if (tempName.includes("timedimstudy")) name = "time dims"
