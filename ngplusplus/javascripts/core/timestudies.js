@@ -1,5 +1,9 @@
 // Time studies
 
+function TTNaN() {
+if (isNaN(player.timestudy.theorem)) player.timestudy.theorem = 0
+}
+
 function buyWithAntimatter() {
   if (player.money.gte(player.timestudy.amcost)) {
     player.money = player.money.minus(player.timestudy.amcost);
@@ -217,7 +221,7 @@ function buyTimeStudy(name, cost, check) {
       name == 233
     ) {
       document.getElementById(name).className = "timestudybought lightstudy";
-    } else if (name == 241 || name == 242 || name == 251 || name == 252 || name == 261 || name == 262 || name == 271 || name == 271 || name == 281 || name == 282 || name == 283 || name == 291) {
+    } else if (name == 241 || name == 242 || name == 251 || name == 252 || name == 261 || name == 262 || name == 271 || name == 272 || name == 281 || name == 282 || name == 283 || name == 284 || name == 285 || name == 291) {
       document.getElementById(name).className = "timestudybought diltimestudy";
     } else document.getElementById("" + name).className = "timestudybought"
     if (name == 131 && !player.achievements.includes("r143")) {

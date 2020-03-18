@@ -140,7 +140,7 @@ function drawTreeBranch(num1, num2) {
             ctx.strokeStyle="#403753";
         } else if (name2 == 123 || name2 == 133 || name2 == 143 || name1 == 143) {
             ctx.strokeStyle="#374553";
-        } else if (name2 == 241 || name2 == 242 || name2 == 251 || name2 == 252 || name2 == 261 || name2 == 262 || name2 == 271 || name2 == 272 || name2 == 281 || name2 == 282 || name2 == 283 || name2 == 291 || name1 == 291) {
+        } else if (name2 == 241 || name2 == 242 || name2 == 251 || name2 == 252 || name2 == 261 || name2 == 262 || name2 == 271 || name2 == 272 || name2 == 281 || name2 == 282 || name2 == 283 || name2 == 284 || name2 == 285 || name2 == 291 || name1 == 291) {
             ctx.strokeStyle="#006967";
         } else ctx.strokeStyle="#444";
     }
@@ -255,12 +255,14 @@ function drawStudyTree() {
     drawTreeBranch("262", "272")
     drawTreeBranch("271", "272")
     drawTreeBranch("271", "281")
-    drawTreeBranch("272", "283")
-    drawTreeBranch("281", "282")
-    drawTreeBranch("283", "282")
-    drawTreeBranch("281", "291")
+    drawTreeBranch("271", "282")
+    drawTreeBranch("272", "284")
+    drawTreeBranch("272", "285")
+    drawTreeBranch("282", "283")
+    drawTreeBranch("283", "284")
     drawTreeBranch("282", "291")
     drawTreeBranch("283", "291")
+    drawTreeBranch("284", "291")
     
     if (shiftDown && document.getElementById("eternitystore").style.display !== "none" && document.getElementById("timestudies").style.display !== "none") {
         for (i=0; i<all.length; i++) {
