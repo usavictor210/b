@@ -1098,7 +1098,7 @@ function getTimeStudiesDescription() {
   document.getElementById("261desc").textContent =
     "Currently: -" + Decimal.pow(player.resets, 0.3).pow(0.2).floor() + " dimension" + desc4
   document.getElementById("262desc").textContent =
-    "Currently: " + shortenMoney(Math.max(Math.pow(calcTotalSacrificeBoost().log10(), (25 + (calcTotalSacrificeBoost().log(1000) / 4000))), 1)) + "x"
+    "Currently: " + shortenMoney(new Decimal(Math.max(Math.pow(calcTotalSacrificeBoost().log10(), (25 + (calcTotalSacrificeBoost().log(1000) / 4000))), 1))) + "x"
   document.getElementById("271desc").textContent =
     "Currently: " + shortenMoney(1e3 * (player.meta.resets + 1)) + "x"
   document.getElementById("283desc").textContent =
