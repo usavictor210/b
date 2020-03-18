@@ -670,7 +670,7 @@ function getGalaxyCostScalingStart() {
 
 function getRemoteGalaxyStart() {
   var n = 800;
-  if (player.timestudy.studies.includes(252)) n += Math.floor(player.dilation.freeGalaxies / 80);
+  if (player.timestudy.studies.includes(252)) n += Math.floor(player.dilation.freeGalaxies / 100);
   return n;
 }
 
