@@ -77,13 +77,15 @@ function eternity(force, auto) {
         getDilGain() - player.dilation.totalTachyonParticles,
         0
       );
+      if (!player.achievements.includes("r151")) {
       player.dilation.totalTachyonParticles = player.dilation.totalTachyonParticles.plus(
         tachyonGain
       );
       player.dilation.tachyonParticles = player.dilation.tachyonParticles.plus(
         tachyonGain
       );
-    }
+      }
+    } else player.dilation.totalTachyonParticles = player.dilation.tachyonParticles
     player.challenges = temp;
     player = {
       ngPlus: player.ngPlus,

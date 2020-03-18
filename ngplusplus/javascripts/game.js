@@ -6890,10 +6890,9 @@ function gameLoop(diff) {
     'You have <span class="IPAmount2">' +
     shortenDimensions(player.infinityPoints) +
     "</span> Infinity points.";
-  if (player.dilation.active && player.chieveemnts.includes("r151")) {
+  if (player.dilation.active && player.achievements.includes("r151")) {
     if (player.dilation.tachyonParticles.lte(getDilGain())) {
       player.dilation.tachyonParticles = getDilGain()
-      player.dilation.totalTachyonParticles = player.dialtion.tachyonParticles
     }
   }
   updateQuantum();
