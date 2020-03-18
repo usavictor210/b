@@ -5758,7 +5758,7 @@ function gameLoop(diff) {
   if (player.infMultBuyer) {
     var dif = player.infinityPoints.e - player.infMultCost.e + 1;
     if (dif > 0) {
-      player.infMult = player.infMult.times(Decimal.pow(2, dif));
+      player.infMult = player.infMult.times(Decimal.pow(getInfMult(), dif));
       player.infMultCost = player.infMultCost.times(Decimal.pow(10, dif));
       updateInfMult();
       player.infinityPoints = player.infinityPoints.minus(
@@ -5770,7 +5770,7 @@ function gameLoop(diff) {
         player.autoCrunchMode == "amount"
       )
         player.autobuyers[11].priority = player.autobuyers[11].priority.times(
-          Decimal.pow(2, dif)
+          Decimal.pow(getInfMult(), dif)
         );
       if (player.autoCrunchMode == "amount")
         document.getElementById("priority12").value =

@@ -933,7 +933,7 @@ function getTimeStudiesDescription() {
   if (player.timestudy.studies.includes(271)) TS32 = TS32 * (1e3 * (player.meta.resets + 1))
   document.getElementById("32desc").textContent =
     "You gain " +
-    shortenDimensions(Math.max(player.resets, 1)) +
+    shortenDimensions(TS32) +
     "x more infinitied stat (based on dimension boosts)";
   document.getElementById("51desc").textContent =
     "You gain " + shortenCosts(1e15) + "x more IP";

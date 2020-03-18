@@ -588,9 +588,15 @@ return antitables
 
 function updateInfMult() {
 document.getElementById("infiMult").innerHTML =
-    "You gain 2x more IP.<br>Currently: " +
+    "You gain " + getInfMult() + "x more IP.<br>Currently: " +
     shorten(player.infMult) +
     "x<br>Cost: " +
     shortenCosts(player.infMultCost) +
     " IP";
+}
+
+function getInfMult() {
+var infMult = 2
+if (player.timestudy.studies.includes(272)) infMult = 2.2
+return infMult
 }
