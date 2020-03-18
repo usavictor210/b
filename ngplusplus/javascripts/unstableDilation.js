@@ -5,7 +5,7 @@ var sacTPGain = player.dilation.unstable.sacrificedTP.add(player.dilation.tachyo
  if (confirm("Unstabilizing time dilation will result in harsher scaling, allowing you to get more TP, but dilation will reset in exchange for Unstable Shards and sacrificed TP. Are you prepared for this change?")) {
         eternity(true) // forced eternity
         player.dilation.unstable.sacrificedTP = sacTPGain
-        Decimal.add(player.dilation.unstable.shards, usGain)
+        player.dilation.unstable.shards = player.dilation.unstable.shards.add(usGain)
         player.dilation.studies = player.dilation.studies, // resetting dilation
         player.dilation.active = false,
         player.dilation.tachyonParticles = new Decimal(0),
