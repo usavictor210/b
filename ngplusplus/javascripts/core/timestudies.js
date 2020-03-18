@@ -1094,6 +1094,8 @@ function getTimeStudiesDescription() {
     "Currently: " + Math.floor(player.replicanti.galaxies / 40) + desc2;
   document.getElementById("252desc").textContent =
     "Currently: " + Math.floor(player.dilation.freeGalaxies / 100) + desc3;
+   document.getElementById("261desc").textContent =
+    "Currently: " + Decimal.pow(player.resets, 0.3).pow(0.2)+ "x"
   document.getElementById("unknownCost").textContent = shortenCosts(
     // the unknown time theorem isn't even coded yet, this is a placeholder
     new Decimal.pow(10, Math.random() * 20 + 300)
