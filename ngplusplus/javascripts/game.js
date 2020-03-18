@@ -6849,7 +6849,7 @@ function gameLoop(diff) {
   if (isNaN(player.totalmoney)) player.totalmoney = new Decimal(10);
   if (player.timestudy.studies.includes(181))
     player.infinityPoints = player.infinityPoints.plus(
-      gainedInfinityPoints().times(diff / 1000)
+      gainedInfinityPoints().times(diff / 1000).times(player.timestudy.studies.includes(282) ? 100 : 1)
     );
   if (player.dilation.upgrades.includes(17)) {
     checkIfTTNaN()
