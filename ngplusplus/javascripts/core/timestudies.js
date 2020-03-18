@@ -233,20 +233,7 @@ function buyTimeStudy(name, cost, check) {
     ) {
       document.getElementById(name).className = "timestudybought lightstudy";
     } else if (
-      name == 241 ||
-      name == 242 ||
-      name == 251 ||
-      name == 252 ||
-      name == 261 ||
-      name == 262 ||
-      name == 271 ||
-      name == 272 ||
-      name == 281 ||
-      name == 282 ||
-      name == 283 ||
-      name == 284 ||
-      name == 285 ||
-      name == 291
+      bentStudy.includes(name)
     ) {
       document.getElementById(name).className = "timestudybought diltimestudy";
     } else document.getElementById("" + name).className = "timestudybought";
@@ -426,7 +413,7 @@ function canBuyStudy(name) {
           (name % 2 == 0
             ? !player.timestudy.studies.includes(name - 1)
             : !player.timestudy.studies.includes(name + 1))) ||
-        player.timestudy.studies.includes(291)
+        player.timestudy.studies.includes(292)
       )
         return true;
       else return false;
@@ -439,7 +426,7 @@ function canBuyStudy(name) {
           !player.timestudy.studies.includes(
             name % 2 == 0 ? name - 1 : name + 1
           )) ||
-        player.timestudy.studies.includes(291)
+        player.timestudy.studies.includes(292)
       )
         return true;
       else return false;
@@ -539,21 +526,7 @@ var all = [
   231,
   232,
   233,
-  234,
-  241,
-  242,
-  251,
-  252,
-  261,
-  262,
-  271,
-  272,
-  281,
-  282,
-  283,
-  284,
-  285,
-  291
+  234
 ];
 var studyCosts = [
   // literally all the time studies's costs
@@ -614,7 +587,27 @@ var studyCosts = [
   500,
   500,
   500,
-  500,
+  500
+];
+var bentStudy = [
+  241,
+  242,
+  251,
+  252,
+  261,
+  262,
+  271,
+  272,
+  281,
+  282,
+  283,
+  284,
+  285,
+  291,
+  292,
+  293
+]
+var bentStudyCosts = [
   1e12,
   1e18,
   1e24,
@@ -623,12 +616,18 @@ var studyCosts = [
   1e50,
   1e60,
   1e75,
-  1e130,
-  1e120,
+  1e80,
+  1e85,
+  1e90,
+  1e85,
+  1e80,
   1e100,
-  1e120,
-  1e110
-];
+  1e100,
+  1e115
+]
+//these two lines below are adding the entries of bent studies and existing studies together since i need to refer to bent studies as they are for some functions.
+studyCosts = studyCosts.concat(bentStudyCosts)
+all = all.concat(bentStudy)
 function updateTimeStudyButtons() {
   for (var i = 0; i < all.length; i++) {
     if (!player.timestudy.studies.includes(all[i])) {
@@ -675,20 +674,7 @@ function updateTimeStudyButtons() {
         ) {
           document.getElementById(all[i]).className = "timestudy lightstudy";
         } else if (
-          all[i] == 241 ||
-          all[i] == 242 ||
-          all[i] == 251 ||
-          all[i] == 252 ||
-          all[i] == 261 ||
-          all[i] == 262 ||
-          all[i] == 271 ||
-          all[i] == 272 ||
-          all[i] == 281 ||
-          all[i] == 282 ||
-          all[i] == 283 ||
-          all[i] == 284 ||
-          all[i] == 285 ||
-          all[i] == 291
+          bentStudy.includes(all[i])
         ) {
           document.getElementById(all[i]).className = "timestudy diltimestudy";
         } else document.getElementById(all[i]).className = "timestudy";
@@ -722,20 +708,7 @@ function updateTimeStudyButtons() {
           document.getElementById(all[i]).className =
             "timestudylocked idlestudylocked";
         } else if (
-          all[i] == 241 ||
-          all[i] == 242 ||
-          all[i] == 251 ||
-          all[i] == 252 ||
-          all[i] == 261 ||
-          all[i] == 262 ||
-          all[i] == 271 ||
-          all[i] == 272 ||
-          all[i] == 281 ||
-          all[i] == 282 ||
-          all[i] == 283 ||
-          all[i] == 284 ||
-          all[i] == 285 ||
-          all[i] == 291
+          bentStudy.includes(all[i])
         ) {
           document.getElementById(all[i]).className =
             "timestudylocked diltimestudylocked";

@@ -122,7 +122,7 @@ function drawTreeBranch(num1, num2) {
             ctx.strokeStyle="#5E33B6";
         } else if (name2 == 123 || name2 == 133 || name2 == 143 || name1 == 143) {
             ctx.strokeStyle="#0080ff";
-        } else if (name2 == 241 || name2 == 242 || name2 == 251 || name2 == 252 || name2 == 261 || name2 == 262 || name2 == 271 || name2 == 272 || name2 == 281 || name2 == 282 || name2 == 283 || name2 == 284 || name2 == 285 || name2 == 291) {
+        } else if (bentStudy.includes(name2)) {
             ctx.strokeStyle="#00fff9";
         } else ctx.strokeStyle="#000000";
     } else {
@@ -140,7 +140,7 @@ function drawTreeBranch(num1, num2) {
             ctx.strokeStyle="#403753";
         } else if (name2 == 123 || name2 == 133 || name2 == 143 || name1 == 143) {
             ctx.strokeStyle="#374553";
-        } else if ( {
+        } else if (bentStudy.includes(name2)) {
             ctx.strokeStyle="#006967";
         } else ctx.strokeStyle="#444";
     }
