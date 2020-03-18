@@ -1,10 +1,16 @@
 // Time studies
 
-function TTNaN() {
-if (isNaN(player.timestudy.theorem)) player.timestudy.theorem = 0
+function checkIfTTNaN() {
+  if (isNaN(player.timestudy.theorem)) {
+    player.timestudy.theorem = 0;
+    player.timestudy.amcost = new Decimal("1e20000");
+    player.timestudy.ipcost = new Decimal("1e100");
+    player.timestudy.epcost = new Decimal(1);
+  }
 }
 
 function buyWithAntimatter() {
+  checkIfTTNaN();
   if (player.money.gte(player.timestudy.amcost)) {
     player.money = player.money.minus(player.timestudy.amcost);
     player.timestudy.amcost = player.timestudy.amcost.times(
@@ -18,6 +24,7 @@ function buyWithAntimatter() {
 }
 
 function buyWithIP() {
+  checkIfTTNaN();
   if (player.infinityPoints.gte(player.timestudy.ipcost)) {
     player.infinityPoints = player.infinityPoints.minus(
       player.timestudy.ipcost
@@ -31,6 +38,7 @@ function buyWithIP() {
 }
 
 function buyWithEP() {
+  checkIfTTNaN();
   if (player.eternityPoints.gte(player.timestudy.epcost)) {
     if (player.timeDimension1.bought < 1) {
       buyTimeDimension(1);
@@ -50,6 +58,7 @@ function buyWithEP() {
 }
 
 function maxTheorems() {
+  checkIfTTNaN();
   var AMowned = player.timestudy.amcost.e / 20000 - 1;
   if (player.money.gte(player.timestudy.amcost)) {
     player.timestudy.amcost.e = Math.floor(player.money.e / 20000 + 1) * 20000;
@@ -163,7 +172,9 @@ function updateTheoremButtons() {
       shortenCosts(player.timestudy.ipcost) +
       " IP";
     document.getElementById("theoremam").innerHTML =
-      "Buy Time Theorems <br>Cost: " + shortenCosts(player.timestudy.amcost) + " AM";
+      "Buy Time Theorems <br>Cost: " +
+      shortenCosts(player.timestudy.amcost) +
+      " AM";
     document.getElementById("theoremmax").innerHTML = "Buy max Theorems";
   }
   document.getElementById("timetheorems").innerHTML =
@@ -221,9 +232,24 @@ function buyTimeStudy(name, cost, check) {
       name == 233
     ) {
       document.getElementById(name).className = "timestudybought lightstudy";
-    } else if (name == 241 || name == 242 || name == 251 || name == 252 || name == 261 || name == 262 || name == 271 || name == 272 || name == 281 || name == 282 || name == 283 || name == 284 || name == 285 || name == 291) {
+    } else if (
+      name == 241 ||
+      name == 242 ||
+      name == 251 ||
+      name == 252 ||
+      name == 261 ||
+      name == 262 ||
+      name == 271 ||
+      name == 272 ||
+      name == 281 ||
+      name == 282 ||
+      name == 283 ||
+      name == 284 ||
+      name == 285 ||
+      name == 291
+    ) {
       document.getElementById(name).className = "timestudybought diltimestudy";
-    } else document.getElementById("" + name).className = "timestudybought"
+    } else document.getElementById("" + name).className = "timestudybought";
     if (name == 131 && !player.achievements.includes("r143")) {
       if (player.replicanti.galaxybuyer)
         document.getElementById("replicantiresettoggle").textContent =
@@ -319,10 +345,21 @@ function canBuyStudy(name) {
   if (name == 213 || name == 214)
     if (player.timestudy.studies.includes(193)) return true;
     else return false;
-  if (name == 281) if (player.timestudy.studies.includes(271)) return true;
-  else return false;
-  if (name == 285) if (player.timestudy.studies.includes(272)) return true;
-  else return false;
+  if (name == 281)
+    if (player.timestudy.studies.includes(271)) return true;
+    else return false;
+  if (name == 285)
+    if (player.timestudy.studies.includes(272)) return true;
+    else return false;
+  if (name == 282)
+    if ((!player.timestudy.studies.includes(283) && !player.timestudy.studies.includes(284)) && (player.timestudy.studies.includes(271) || player.timestudy.studies.includes(272))) return true;
+    else return false;
+  if (name == 283)
+    if ((player.timestudy.studies.includes(282) || player.timestudy.studies.includes(284))) return true;
+    else return false;
+  if (name == 284)
+    if ((!player.timestudy.studies.includes(282) && !player.timestudy.studies.includes(283)) && (player.timestudy.studies.includes(271) || player.timestudy.studies.includes(272))) return true;
+    else return false;
   switch (row) {
     case 1:
       return true;
@@ -385,10 +422,11 @@ function canBuyStudy(name) {
 
     case 22:
       if (
-        player.timestudy.studies.includes(210 + Math.round(col / 2)) &&
-        (name % 2 == 0
-          ? !player.timestudy.studies.includes(name - 1)
-          : !player.timestudy.studies.includes(name + 1)) || player.timestudy.studies.includes(291)
+        (player.timestudy.studies.includes(210 + Math.round(col / 2)) &&
+          (name % 2 == 0
+            ? !player.timestudy.studies.includes(name - 1)
+            : !player.timestudy.studies.includes(name + 1))) ||
+        player.timestudy.studies.includes(291)
       )
         return true;
       else return false;
@@ -396,20 +434,28 @@ function canBuyStudy(name) {
 
     case 23:
       if (
-        (player.timestudy.studies.includes(220 + Math.floor(col * 2)) ||
+        ((player.timestudy.studies.includes(220 + Math.floor(col * 2)) ||
           player.timestudy.studies.includes(220 + Math.floor(col * 2 - 1))) &&
-        !player.timestudy.studies.includes(name % 2 == 0 ? name - 1 : name + 1) || player.timestudy.studies.includes(291)
+          !player.timestudy.studies.includes(
+            name % 2 == 0 ? name - 1 : name + 1
+          )) ||
+        player.timestudy.studies.includes(291)
       )
         return true;
       else return false;
       break;
-      
+
     case 25:
     case 26:
     case 27:
     case 28:
     case 29:
-      if (hasRow(row - 1) && !hasRow(row) && player.dilation.studies.includes(1)) return true;
+      if (
+        hasRow(row - 1) &&
+        !hasRow(row) &&
+        player.dilation.studies.includes(1)
+      )
+        return true;
       else return false;
       break;
   }
@@ -628,7 +674,22 @@ function updateTimeStudyButtons() {
           all[i] == 233
         ) {
           document.getElementById(all[i]).className = "timestudy lightstudy";
-        } else if (all[i] == 241 || all[i] == 242 || all[i] == 251 || all[i] == 252 || all[i] == 261 || all[i] == 262 || all[i] == 271 || all[i] == 272 || all[i] == 281 || all[i] == 282 || all[i] == 283 || all[i] == 284 || all[i] == 285 || all[i] == 291) {
+        } else if (
+          all[i] == 241 ||
+          all[i] == 242 ||
+          all[i] == 251 ||
+          all[i] == 252 ||
+          all[i] == 261 ||
+          all[i] == 262 ||
+          all[i] == 271 ||
+          all[i] == 272 ||
+          all[i] == 281 ||
+          all[i] == 282 ||
+          all[i] == 283 ||
+          all[i] == 284 ||
+          all[i] == 285 ||
+          all[i] == 291
+        ) {
           document.getElementById(all[i]).className = "timestudy diltimestudy";
         } else document.getElementById(all[i]).className = "timestudy";
       } else {
@@ -660,8 +721,24 @@ function updateTimeStudyButtons() {
         } else if (all[i] == 123 || all[i] == 133 || all[i] == 143) {
           document.getElementById(all[i]).className =
             "timestudylocked idlestudylocked";
-        } else if (all[i] == 241 || all[i] == 242 || all[i] == 251 || all[i] == 252 || all[i] == 261 || all[i] == 262 || all[i] == 271 || all[i] == 272 || all[i] == 281 || all[i] == 282 || all[i] == 283 || all[i] == 284 || all[i] == 285 || all[i] == 291) {
-          document.getElementById(all[i]).className = "timestudylocked diltimestudylocked";
+        } else if (
+          all[i] == 241 ||
+          all[i] == 242 ||
+          all[i] == 251 ||
+          all[i] == 252 ||
+          all[i] == 261 ||
+          all[i] == 262 ||
+          all[i] == 271 ||
+          all[i] == 272 ||
+          all[i] == 281 ||
+          all[i] == 282 ||
+          all[i] == 283 ||
+          all[i] == 284 ||
+          all[i] == 285 ||
+          all[i] == 291
+        ) {
+          document.getElementById(all[i]).className =
+            "timestudylocked diltimestudylocked";
         } else document.getElementById(all[i]).className = "timestudylocked";
       }
     }
@@ -1009,9 +1086,13 @@ function getTimeStudiesDescription() {
   let desc1 =
     Math.floor(player.resets / 2000) == 1 ? " galaxy later" : " galaxies later"; //TS224
   let desc2 =
-    Math.floor(player.replicanti.galaxies / 40) == 1 ? " galaxy later" : " galaxies later" //TS271
+    Math.floor(player.replicanti.galaxies / 40) == 1
+      ? " galaxy later"
+      : " galaxies later"; //TS271
   let desc3 =
-    Math.floor(player.dilation.freeGalaxies / 80) == 1 ? " galaxy later" : " galaxies later" //TS272
+    Math.floor(player.dilation.freeGalaxies / 80) == 1
+      ? " galaxy later"
+      : " galaxies later"; //TS272
   document.getElementById("224desc").textContent = //ts224
     "Currently: " + Math.floor(player.resets / 2000) + desc1;
   document.getElementById("225desc").textContent = //ts225
@@ -1028,11 +1109,20 @@ function getTimeStudiesDescription() {
     "Currently: " +
     (Math.pow(1 + player.galaxies / 1000, 0.2) * 100 - 100).toFixed(1) +
     "%";
-  document.getElementById("241desc").textContent = "Currently: " + shortenMoney(Decimal.pow(player.dilation.tachyonParticles, 4).max(1)) + "x"
-  document.getElementById("242desc").textContent = "Currently: +" + shortenMoney(Math.pow(player.replicanti.galaxies / 200, 0.25)) + "x"
-  document.getElementById("251desc").textContent = "Currently: " + Math.floor(player.replicanti.galaxies / 40) + desc2
-  document.getElementById("252desc").textContent = "Currently: " + Math.floor(player.dilation.freeGalaxies / 80) + desc3
-  document.getElementById("unknownCost").textContent = shortenCosts( // the unknown time theorem isn't even coded yet, this is a placeholder
+  document.getElementById("241desc").textContent =
+    "Currently: " +
+    shortenMoney(Decimal.pow(player.dilation.tachyonParticles, 4).max(1)) +
+    "x";
+  document.getElementById("242desc").textContent =
+    "Currently: +" +
+    shortenMoney(Math.pow(player.replicanti.galaxies / 200, 0.25)) +
+    "x";
+  document.getElementById("251desc").textContent =
+    "Currently: " + Math.floor(player.replicanti.galaxies / 40) + desc2;
+  document.getElementById("252desc").textContent =
+    "Currently: " + Math.floor(player.dilation.freeGalaxies / 80) + desc3;
+  document.getElementById("unknownCost").textContent = shortenCosts(
+    // the unknown time theorem isn't even coded yet, this is a placeholder
     new Decimal.pow(10, Math.random() * 20 + 300)
   );
 }
