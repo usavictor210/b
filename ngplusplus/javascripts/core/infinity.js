@@ -600,3 +600,10 @@ var infMult = 2
 if (player.timestudy.studies.includes(272)) infMult = 2.2
 return infMult
 }
+
+function resetInfMult() {
+player.infMult = new Decimal (1)
+if (player.achievements.includes("r85")) player.infMult = player.infMult.times(4)
+if (player.achievements.includes("r93")) player.infMult = player.infMult.times(4)
+player.infMultCost = new Decimal (10)
+}

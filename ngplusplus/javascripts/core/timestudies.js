@@ -248,6 +248,7 @@ function buyTimeStudy(name, cost, check) {
     updateTheoremButtons();
     updateTimeStudyButtons();
     drawStudyTree();
+    if (name == 272) resetInfMult() // make it retroactive
   }
 }
 

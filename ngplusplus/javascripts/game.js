@@ -1680,8 +1680,8 @@ document.getElementById("infiMult").onclick = function() {
     player.infinityPoints.gte(player.infMultCost)
   ) {
     player.infinityPoints = player.infinityPoints.minus(player.infMultCost);
-    player.infMult = player.infMult.times(2);
-    player.autoIP = player.autoIP.times(2);
+    player.infMult = player.infMult.times(getInfMult());
+    player.autoIP = player.autoIP.times(getInfMult());
     player.infMultCost = player.infMultCost.times(10);
     updateInfMult()
     if (
