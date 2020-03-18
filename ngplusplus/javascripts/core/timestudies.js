@@ -1102,7 +1102,7 @@ function getTimeStudiesDescription() {
   document.getElementById("271desc").textContent =
     "Currently: " + shortenMoney(1e3 * (player.meta.resets + 1)) + "x"
   document.getElementById("283desc").textContent =
-    "Currently: " + shortenMoney(1e3 * (player.meta.resets + 1)) + "x"
+    "Currently: " + shortenMoney(player.dilation.unstable.shards.pow(0.05).max(1)) + "x"
   document.getElementById("unknownCost").textContent = shortenCosts(
     // the unknown time theorem isn't even coded yet, this is a placeholder
     new Decimal.pow(10, Math.random() * 20 + 300)
