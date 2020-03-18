@@ -929,6 +929,8 @@ function getTimeStudiesDescription() {
         .max(1)
     ) +
     "x";
+  let TS32 = Math.max(player.resets, 1)
+  if (player.timestudy.studies.includes(271)) TS32 = TS32 * (1e3 * (player.meta.resets + 1))
   document.getElementById("32desc").textContent =
     "You gain " +
     shortenDimensions(Math.max(player.resets, 1)) +
@@ -1094,11 +1096,11 @@ function getTimeStudiesDescription() {
     "Currently: " + Math.floor(player.replicanti.galaxies / 40) + desc2;
   document.getElementById("252desc").textContent =
     "Currently: " + Math.floor(player.dilation.freeGalaxies / 100) + desc3;
-  let desc4 = Decimal.pow(player.resets, 0.3).pow(0.2).floor().notEquals(1) ? "s" : ""
+  let desc4 = Math.floor(Math.pow(player.resets, 0.3)**0.12) != 1 ? "s" : ""
   document.getElementById("261desc").textContent =
-    "Currently: -" + Decimal.pow(player.resets, 0.3).pow(0.2).floor() + " dimension" + desc4
+    "Currently: -" + Math.floor(Math.pow(player.resets, 0.3)**0.12) + " dimension" + desc4
   document.getElementById("262desc").textContent =
-    "Currently: " + shortenMoney(new Decimal(Math.max(Math.pow(calcTotalSacrificeBoost().log10(), (25 + (calcTotalSacrificeBoost().log(1000) / 4000))), 1))) + "x"
+    "Currently: " + shortenMoney(new Decimal(Decimal.pow(calcTotalSacrificeBoost().log10(), (25 + (calcTotalSacrificeBoost().log(1000) / 10000))), 1).max(1)) + "x"
   document.getElementById("271desc").textContent =
     "Currently: " + shortenMoney(1e3 * (player.meta.resets + 1)) + "x"
   document.getElementById("283desc").textContent =
