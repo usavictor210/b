@@ -1250,8 +1250,7 @@ function scrollNextMessage() {
   scrollTimeouts = [];
 
   //set the text
-  if (randomNews != 322) s.textContent = newsArray[nextMsgIndex][0];
-  if (randomNews = 322) document.getElementById("s").innerHTML = '<a href="https://www.youtube.com/watch?v=TN25ghkfgQA">What if you pinged yourself?</a>'
+  s.textContent = newsArray[nextMsgIndex][0];
 
   //get the parent width so we can start the message beyond it
   let parentWidth = s.parentElement.clientWidth;
