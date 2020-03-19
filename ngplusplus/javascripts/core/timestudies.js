@@ -203,8 +203,14 @@ function toggleAutoTT() {
 }
 
 function autoTTCycle() {
-if (player.timestudy.autobuyer == undefined) player.timestudy.autobuyer = false
-if (player.achievements.includes("r155") && player.timestudy.autobuyer == true) maxTheorems()
+  if (player.timestudy.autobuyer == undefined)
+    player.timestudy.autobuyer = false;
+  if (
+    player.achievements.includes("r155") &&
+    player.timestudy.autobuyer == true &&
+    !player.dilation.upgrades.includes(17)
+  )
+    maxTheorems();
 }
 
 function buyTimeStudy(name, cost, check) {

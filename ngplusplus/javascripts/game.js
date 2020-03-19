@@ -7272,9 +7272,8 @@ function autoBuyerTick() {
 }
 
 setInterval(function() {
-  timer += player.infinityUpgrades.includes("autoBuyerUpgrade") ? 0.05 : 0.1;
-  if (!player.infinityUpgrades.includes("autoBuyerUpgrade")) autoBuyerTick();
-}, timer*1000);
+  autoBuyerTick();
+}, player.infinityUpgrades.includes("autoBuyerUpgrade") ? 50 : 100);
 
 //start scrolling
 scrollNextMessage();
