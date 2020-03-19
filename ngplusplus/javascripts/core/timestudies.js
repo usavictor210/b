@@ -186,6 +186,13 @@ function updateTheoremButtons() {
     (player.timestudy.theorem == 1 ? "." : "s.");
 }
 
+function toggleAutoTT() {
+	if (speedrunMilestonesReached < 2) maxTheorems()
+	else player.autoEterOptions.tt = !player.autoEterOptions.tt
+	document.getElementById("theoremmax").innerHTML = speedrunMilestonesReached > 2 ? ("Auto max: O"+(player.autoEterOptions.tt?"N":"FF")) : "Buy max Theorems"
+}
+
+
 function buyTimeStudy(name, cost, check) {
   //checks for if you can buy studies, can be changed for 201 eventually
   if (shiftDown && check === undefined) studiesUntil(name);
