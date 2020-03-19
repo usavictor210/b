@@ -314,9 +314,7 @@ function hasRow(row) {
 function canBuyStudy(name) {
   var row = Math.floor(name / 10);
   var col = name % 10;
-  if (name == 11) {
-    if (player.timeDimension1.amount.gte(1)) return true;
-  } else return false;
+  
   if (name == 33) {
     if (player.timestudy.studies.includes(21)) return true;
     else return false;
@@ -394,7 +392,8 @@ function canBuyStudy(name) {
     else return false;
   switch (row) {
     case 1:
-      return true;
+      if (player.timeDimension1.bought >= 1) return true;
+      else return false;
       break;
 
     case 2:
