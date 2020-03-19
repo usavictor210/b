@@ -6898,6 +6898,7 @@ function gameLoop(diff) {
   }
   updateQuantum();
   calculateDilationSeverity();
+  autoTTCycle()
   player.lastUpdate = thisUpdate;
 
 }
@@ -7271,13 +7272,9 @@ function autoBuyerTick() {
 }
 
 setInterval(function() {
-  timer += 0.05;
+  timer += player.infinityUpgrades.includes("autoBuyerUpgrade") ? 0.05 : 0.1;
   if (!player.infinityUpgrades.includes("autoBuyerUpgrade")) autoBuyerTick();
-}, 100);
-
-setInterval(function() {
-  if (player.infinityUpgrades.includes("autoBuyerUpgrade")) autoBuyerTick();
-}, 50);
+}, timer*1000);
 
 //start scrolling
 scrollNextMessage();

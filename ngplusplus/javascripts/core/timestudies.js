@@ -175,8 +175,12 @@ function updateTheoremButtons() {
       "Buy Time Theorems <br>Cost: " +
       shortenCosts(player.timestudy.amcost) +
       " AM";
-    document.getElementById("theoremmax").innerHTML = "Buy max Theorems";
   }
+  document.getElementById(
+    "theoremmax"
+  ).innerHTML = player.achievements.includes("r155")
+    ? "Auto buy theorems: O" + (player.timestudy.autobuyer ? "N" : "FF")
+    : "Buy max Theorems";
   document.getElementById("timetheorems").innerHTML =
     "You have <span style='display:inline' class=\"TheoremAmount\">" +
     (player.timestudy.theorem > 99999
@@ -186,14 +190,21 @@ function updateTheoremButtons() {
     (player.timestudy.theorem == 1 ? "." : "s.");
 }
 
-function toggleAutoTT() { // taken from aarex, but...
-  if (!player.dilation.upgrades.includes(17)) {
-	if (player.achievements.includes("r155") && player.timestudy.autobuyer != undefined) {
-    player.timestudy.autobuyer = !player.timestudy.autobuyer
-  } else if (player.timestudy.autobuyer == undefined) player.timestudy.autobuyer = false
-  else maxTheorems()
-	document.getElementById("theoremmax").innerHTML = player.achievements.includes("r155") ? ("Auto buy theorems: O"+(player.timestudy.autobuyer ? "N":"FF")) : "Buy max Theorems"
-  }
+function toggleAutoTT() {
+  // taken from aarex, but...
+  if (
+    player.achievements.includes("r155") &&
+    player.timestudy.autobuyer != undefined
+  ) {
+    player.timestudy.autobuyer = !player.timestudy.autobuyer;
+  } else if (player.timestudy.autobuyer == undefined)
+    player.timestudy.autobuyer = false;
+  else maxTheorems();
+}
+
+function autoTTCycle() {
+if (player.timestudy.autobuyer == undefined) player.timestudy.autobuyer = false
+if (player.achievements.includes("r155") && player.timestudy.autobuyer == true) maxTheorems()
 }
 
 function buyTimeStudy(name, cost, check) {
@@ -242,9 +253,7 @@ function buyTimeStudy(name, cost, check) {
       name == 233
     ) {
       document.getElementById(name).className = "timestudybought lightstudy";
-    } else if (
-      bentStudy.includes(name)
-    ) {
+    } else if (bentStudy.includes(name)) {
       document.getElementById(name).className = "timestudybought diltimestudy";
     } else document.getElementById("" + name).className = "timestudybought";
     if (name == 131 && !player.achievements.includes("r143")) {
@@ -258,7 +267,7 @@ function buyTimeStudy(name, cost, check) {
     updateTheoremButtons();
     updateTimeStudyButtons();
     drawStudyTree();
-    if (name == 272) resetInfMult() // make it retroactive
+    if (name == 272) resetInfMult(); // make it retroactive
   }
 }
 
@@ -350,13 +359,29 @@ function canBuyStudy(name) {
     if (player.timestudy.studies.includes(272)) return true;
     else return false;
   if (name == 282)
-    if ((!player.timestudy.studies.includes(283) && !player.timestudy.studies.includes(284)) && (player.timestudy.studies.includes(271) || player.timestudy.studies.includes(272))) return true;
+    if (
+      !player.timestudy.studies.includes(283) &&
+      !player.timestudy.studies.includes(284) &&
+      (player.timestudy.studies.includes(271) ||
+        player.timestudy.studies.includes(272))
+    )
+      return true;
     else return false;
   if (name == 283)
-    if ((player.timestudy.studies.includes(282) || player.timestudy.studies.includes(284))) return true;
+    if (
+      player.timestudy.studies.includes(282) ||
+      player.timestudy.studies.includes(284)
+    )
+      return true;
     else return false;
   if (name == 284)
-    if ((!player.timestudy.studies.includes(282) && !player.timestudy.studies.includes(283)) && (player.timestudy.studies.includes(271) || player.timestudy.studies.includes(272))) return true;
+    if (
+      !player.timestudy.studies.includes(282) &&
+      !player.timestudy.studies.includes(283) &&
+      (player.timestudy.studies.includes(271) ||
+        player.timestudy.studies.includes(272))
+    )
+      return true;
     else return false;
   switch (row) {
     case 1:
@@ -617,7 +642,7 @@ var bentStudy = [
   291,
   292,
   293
-]
+];
 var bentStudyCosts = [
   1e12,
   1e18,
@@ -635,10 +660,10 @@ var bentStudyCosts = [
   1e100,
   1e100,
   1e115
-]
+];
 //these two lines below are adding the entries of bent studies and existing studies together since i need to refer to bent studies as they are for some functions.
-studyCosts = studyCosts.concat(bentStudyCosts)
-all = all.concat(bentStudy)
+studyCosts = studyCosts.concat(bentStudyCosts);
+all = all.concat(bentStudy);
 function updateTimeStudyButtons() {
   for (var i = 0; i < all.length; i++) {
     if (!player.timestudy.studies.includes(all[i])) {
@@ -684,9 +709,7 @@ function updateTimeStudyButtons() {
           all[i] == 233
         ) {
           document.getElementById(all[i]).className = "timestudy lightstudy";
-        } else if (
-          bentStudy.includes(all[i])
-        ) {
+        } else if (bentStudy.includes(all[i])) {
           document.getElementById(all[i]).className = "timestudy diltimestudy";
         } else document.getElementById(all[i]).className = "timestudy";
       } else {
@@ -718,9 +741,7 @@ function updateTimeStudyButtons() {
         } else if (all[i] == 123 || all[i] == 133 || all[i] == 143) {
           document.getElementById(all[i]).className =
             "timestudylocked idlestudylocked";
-        } else if (
-          bentStudy.includes(all[i])
-        ) {
+        } else if (bentStudy.includes(all[i])) {
           document.getElementById(all[i]).className =
             "timestudylocked diltimestudylocked";
         } else document.getElementById(all[i]).className = "timestudylocked";
@@ -940,8 +961,9 @@ function getTimeStudiesDescription() {
         .max(1)
     ) +
     "x";
-  let TS32 = Math.max(player.resets, 1)
-  if (player.timestudy.studies.includes(271)) TS32 = TS32 * (1e3 * (player.meta.resets + 1))
+  let TS32 = Math.max(player.resets, 1);
+  if (player.timestudy.studies.includes(271))
+    TS32 = TS32 * (1e3 * (player.meta.resets + 1));
   document.getElementById("32desc").textContent =
     "You gain " +
     shortenDimensions(TS32) +
@@ -1107,15 +1129,30 @@ function getTimeStudiesDescription() {
     "Currently: " + Math.floor(player.replicanti.galaxies / 40) + desc2;
   document.getElementById("252desc").textContent =
     "Currently: " + Math.floor(player.dilation.freeGalaxies / 100) + desc3;
-  let desc4 = Math.floor(Math.pow(player.resets, 0.3)**0.12) != 1 ? "s" : ""
+  let desc4 = Math.floor(Math.pow(player.resets, 0.3) ** 0.12) != 1 ? "s" : "";
   document.getElementById("261desc").textContent =
-    "Currently: -" + Math.floor(Math.pow(player.resets, 0.3)**0.12) + " dimension" + desc4
+    "Currently: -" +
+    Math.floor(Math.pow(player.resets, 0.3) ** 0.12) +
+    " dimension" +
+    desc4;
   document.getElementById("262desc").textContent =
-    "Currently: " + shortenMoney(new Decimal(Decimal.pow(calcTotalSacrificeBoost().log10(), (25 + (calcTotalSacrificeBoost().log(1000) / 10000))), 1).max(1)) + "x"
+    "Currently: " +
+    shortenMoney(
+      new Decimal(
+        Decimal.pow(
+          calcTotalSacrificeBoost().log10(),
+          25 + calcTotalSacrificeBoost().log(1000) / 10000
+        ),
+        1
+      ).max(1)
+    ) +
+    "x";
   document.getElementById("271desc").textContent =
-    "Currently: " + shortenMoney(1e3 * (player.meta.resets + 1)) + "x"
+    "Currently: " + shortenMoney(1e3 * (player.meta.resets + 1)) + "x";
   document.getElementById("283desc").textContent =
-    "Currently: " + shortenMoney(player.dilation.unstable.shards.pow(0.05).max(1)) + "x"
+    "Currently: " +
+    shortenMoney(player.dilation.unstable.shards.pow(0.05).max(1)) +
+    "x";
   document.getElementById("unknownCost").textContent = shortenCosts(
     // the unknown time theorem isn't even coded yet, this is a placeholder
     new Decimal.pow(10, Math.random() * 20 + 300)
