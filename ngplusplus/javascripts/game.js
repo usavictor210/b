@@ -316,7 +316,8 @@ var player = {
     amcost: new Decimal("1e20000"),
     ipcost: new Decimal(1),
     epcost: new Decimal(1),
-    studies: []
+    studies: [],
+    autobuyer: false
   },
   eternityChalls: {},
   eternityChallGoal: new Decimal(Number.MAX_VALUE),

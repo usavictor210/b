@@ -186,12 +186,15 @@ function updateTheoremButtons() {
     (player.timestudy.theorem == 1 ? "." : "s.");
 }
 
-function toggleAutoTT() {
-	if (speedrunMilestonesReached < 2) maxTheorems()
-	else player.autoEterOptions.tt = !player.autoEterOptions.tt
-	document.getElementById("theoremmax").innerHTML = speedrunMilestonesReached > 2 ? ("Auto max: O"+(player.autoEterOptions.tt?"N":"FF")) : "Buy max Theorems"
+function toggleAutoTT() { // taken from aarex, but...
+  if (!player.dilation.upgrades.includes(17)) {
+	if (player.achievements.includes("r155") && player.timestudy.autobuyer != undefined) {
+    player.timestudy.autobuyer = !player.timestudy.autobuyer
+  } else if (player.timestudy.autobuyer == undefined) player.timestudy.autobuyer = false
+  else maxTheorems()
+	document.getElementById("theoremmax").innerHTML = player.achievements.includes("r155") ? ("Auto buy theorems: O"+(player.timestudy.autobuyer ? "N":"FF")) : "Buy max Theorems"
+  }
 }
-
 
 function buyTimeStudy(name, cost, check) {
   //checks for if you can buy studies, can be changed for 201 eventually
