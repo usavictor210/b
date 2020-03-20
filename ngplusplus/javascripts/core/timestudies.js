@@ -633,7 +633,7 @@ var studyCosts = [
   500,
   500
 ];
-var bentStudy = [
+var eternalStudy = [
   241,
   242,
   251,
@@ -651,7 +651,7 @@ var bentStudy = [
   292,
   293
 ];
-var bentStudyCosts = [
+var eternalStudyCosts = [
   1e12,
   1e18,
   1e24,
@@ -670,8 +670,8 @@ var bentStudyCosts = [
   1e115
 ];
 //these two lines below are adding the entries of bent studies and existing studies together since i need to refer to bent studies as they are for some functions.
-studyCosts = studyCosts.concat(bentStudyCosts);
-all = all.concat(bentStudy);
+studyCosts = studyCosts.concat(eternalStudyCosts);
+all = all.concat(eternalStudy);
 function updateTimeStudyButtons() {
   for (var i = 0; i < all.length; i++) {
     if (!player.timestudy.studies.includes(all[i])) {
@@ -717,7 +717,7 @@ function updateTimeStudyButtons() {
           all[i] == 233
         ) {
           document.getElementById(all[i]).className = "timestudy lightstudy";
-        } else if (bentStudy.includes(all[i])) {
+        } else if (eternalStudy.includes(all[i])) {
           document.getElementById(all[i]).className = "timestudy diltimestudy";
         } else document.getElementById(all[i]).className = "timestudy";
       } else {
@@ -749,7 +749,7 @@ function updateTimeStudyButtons() {
         } else if (all[i] == 123 || all[i] == 133 || all[i] == 143) {
           document.getElementById(all[i]).className =
             "timestudylocked idlestudylocked";
-        } else if (bentStudy.includes(all[i])) {
+        } else if (eternalStudy.includes(all[i])) {
           document.getElementById(all[i]).className =
             "timestudylocked diltimestudylocked";
         } else document.getElementById(all[i]).className = "timestudylocked";
