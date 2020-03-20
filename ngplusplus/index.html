@@ -86,11 +86,11 @@
         <div class="quantumtab" id="investment" style="font-size: 15px">
           <input type="text" id="investAmount" name="investAmount"><br>Amount to invest:
           <br>
-          <td><button class="investmentbtn" id="timestudyinvestment" onclick="investQuarks(1, 1)" style="font-size: 16px">Invest your quarks in Time Studies</button></td>
-          <td><button class="investmentbtn" id="tdinvestment" onclick="investQuarks(2, 1)" style="font-size: 16px">Invest your quarks in Time Dimensions</button></td>
-          <td><button class="investmentbtn" id="replicantiinvestment" onclick="investQuarks(3, 1)" style="font-size: 16px">Invest your quarks in Replicantis</button></td>
-          <td><button class="investmentbtn" id="mdinvestment" onclick="investQuarks(4, 1)" style="font-size: 16px">Invest your quarks in Meta Dimensions</button></td>
-          <td><button class="investmentbtn" id="timedilationinvestment" onclick="investQuarks(5, 1)" style="font-size: 16px">Invest your quarks in Time Dilation</button></td>
+          <td><button class="investmentbtn" id="timestudyinvestment" onclick="investQuarks(1, 1)" style="font-size: 16px">Invest your quarks in Time Studies<span id="amount1">(0)</span></button></td>
+          <td><button class="investmentbtn" id="tdinvestment" onclick="investQuarks(2, 1)" style="font-size: 16px">Invest your quarks in Time Dimensions<span id="amount2">(0)</span></button></td>
+          <td><button class="investmentbtn" id="replicantiinvestment" onclick="investQuarks(3, 1)" style="font-size: 16px">Invest your quarks in Replicantis<span id="amount3">(0)</span></button></td>
+          <td><button class="investmentbtn" id="mdinvestment" onclick="investQuarks(4, 1)" style="font-size: 16px">Invest your quarks in Meta Dimensions<span id="amount4">(0)</span></button></td>
+          <td><button class="investmentbtn" id="timedilationinvestment" onclick="investQuarks(5, 1)" style="font-size: 16px">Invest your quarks in Time Dilation<span id="amount5">(0)</span></button></td>
           <div id="totalInvest">You have invested a total of x quarks.</div>
         </div>
         <div class="quantumtab" id="gluons" style="font-size: 15px">
@@ -341,9 +341,9 @@
                 </table>
                 <table class="table" id="studytable28">
                     <tr>
-                      <td><button class="timestudy diltimestudy" id="291" onclick="buyTimeStudy(291, 1e130)">Make the EP formula better<span>Cost: 1e100 Time Theorems</span></button></td>
+                      <td><button class="timestudy diltimestudy" id="291" onclick="buyTimeStudy(291, 1e130)">Make the EP formula better.<span>Cost: 1e100 Time Theorems</span></button></td>
                       <td style="width:600px; text-align:center;"><button class="timestudy diltimestudy" id="292" onclick="buyTimeStudy(292, 1e130)">You can buy all light and dark time studies.<span>Cost: 1e100 Time Theorems</span></button></td>
-                      <td><button class="timestudy diltimestudy" id="293" onclick="buyTimeStudy(293, 1e130)">You gain more IP based on your meta-antimatter<span>Cost: 1e115 Time Theorems</span></button></td>
+                      <td><button class="timestudy diltimestudy" id="293" onclick="buyTimeStudy(293, 1e130)">You gain more IP based on your meta-antimatter.<span>Cost: 1e115 Time Theorems</span></button></td>
                     </tr>
                 </table>
                 <table class="table" id="studytable29">
@@ -418,7 +418,7 @@
                         <td class="milestoneText">2 Eternities:</td>
                     </tr>
                     <tr>
-                        <td><button class="milestonerewardlocked" id="reward0">Unlock IP multiplier autobuyer</button></td>
+                        <td><button class="milestonerewardlocked" id="reward0">Unlock the IP multiplier autobuyer</button></td>
                         <td><button class="milestonerewardlocked" id="reward1">You keep your autobuyers on Eternity</button></td>
                     </tr>
                     <tr>
@@ -426,7 +426,7 @@
                         <td class="milestoneText">4 Eternities:</td>
                     </tr>
                     <tr>
-                        <td><button class="milestonerewardlocked" id="reward2">Unlock replicanti galaxy autobuyer</button></td>
+                        <td><button class="milestonerewardlocked" id="reward2">Unlock the replicanti galaxy autobuyer</button></td>
                         <td><button class="milestonerewardlocked" id="reward3">You keep your infinity upgrades on Eternity</button></td>
                     </tr>
                     <tr>
@@ -482,7 +482,7 @@
                         <td class="milestoneText">25 Eternities:</td>
                     </tr>
                     <tr>
-                        <td><button class="milestonerewardlocked" id="reward16">You keep your Breaking infinity upgrades on Eternity</button></td>
+                        <td><button class="milestonerewardlocked" id="reward16">You keep your Break Infinity upgrades on Eternity</button></td>
                         <td><button class="milestonerewardlocked" id="reward17">You automatically unlock Infinity Dimensions upon reaching them</button></td>
                     </tr>
                     <tr>
@@ -490,8 +490,8 @@
                         <td class="milestoneText">40 Eternities:</td>
                     </tr>
                     <tr>
-                        <td><button class="milestonerewardlocked" id="reward18">Start with all normal dimensions available for purchase</button></td>
-                        <td><button class="milestonerewardlocked" id="reward19">Unlock autobuyer for replicanti chance upgrade</button></td>
+                        <td><button class="milestonerewardlocked" id="reward18">Start with all normal dimensions available on Eternity</button></td>
+                        <td><button class="milestonerewardlocked" id="reward19">Unlock the autobuyer for replicanti chance upgrade</button></td>
                     </tr>
                     <tr>
                         <td class="milestoneText">50 Eternities:</td>
@@ -499,15 +499,15 @@
                     </tr>
                     <tr>
                         <td><button class="milestonerewardlocked" id="reward20">You start with replicanti unlocked</button></td>
-                        <td><button class="milestonerewardlocked" id="reward21">Unlock autobuyer for replicanti interval upgrade</button></td>
+                        <td><button class="milestonerewardlocked" id="reward21">Unlock the autobuyer for replicanti interval upgrade</button></td>
                     </tr>
                     <tr>
                         <td class="milestoneText">80 Eternities:</td>
                         <td class="milestoneText">100 Eternities:</td>
                     </tr>
                     <tr>
-                        <td><button class="milestonerewardlocked" id="reward22">Unlock autobuyer for replicanti galaxy upgrade</button></td>
-                        <td><button class="milestonerewardlocked" id="reward23">Unlock autobuyer for Eternities</button></td>
+                        <td><button class="milestonerewardlocked" id="reward22">Unlock the autobuyer for replicanti galaxy upgrade</button></td>
+                        <td><button class="milestonerewardlocked" id="reward23">Unlock the autobuyer for Eternities</button></td>
                     </tr>
                 </table>
             </div>
