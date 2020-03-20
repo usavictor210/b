@@ -2293,20 +2293,20 @@ var milestoneRequirements = [
     14, //11
     15, //12
     16, //13
-    17, //1
-    18, //16
-    20, //17
-    25, //18
-    30, //19
-    40, //20
-    50, //21
-    60, //22
-    80, //23
-    100, //24
-    1e10, //25
-    1e11, //26
-    1e12, //27
-    1e13 //28
+    17, //14
+    18, //15
+    20, //16
+    25, //17
+    30, //18
+    40, //19
+    50, //20
+    60, //21
+    80, //22
+    100, //23
+    1e10, //24
+    1e11, //25
+    1e12, //26
+    1e13 //27
   ];
 if (player.eternities >= milestoneRequirements[x]) return true;
 else return false;
@@ -4912,16 +4912,16 @@ setInterval(function() {
     document.getElementById("tdautotoggle").style.display = "none";
   }
 
-  if (player.eternities > 0)
+  if (milestoneCheck(0))
     document.getElementById("infmultbuyer").style.display = "inline-block";
   else document.getElementById("infmultbuyer").style.display = "none";
-  if (player.eternities > 4)
+  if (milestoneCheck(4))
     document.getElementById("togglecrunchmode").style.display = "inline-block";
   else document.getElementById("togglecrunchmode").style.display = "none";
-  if (player.eternities > 8)
+  if (milestoneCheck(6))
     document.getElementById("galaxybulk").style.display = "inline-block";
   else document.getElementById("galaxybulk").style.display = "none";
-  if (player.eternities > 99)
+  if (milestoneCheck(23))
     document.getElementById("toggleautoetermode").style.display =
       "inline-block";
   else document.getElementById("toggleautoetermode").style.display = "none";
@@ -4958,13 +4958,13 @@ setInterval(function() {
   if (getTickSpeedMultiplier() < 0.001)
     giveAchievement("Do you even bend time bro?");
 
-  if (player.eternities > 9)
+  if (milestoneCheck(7))
     document.getElementById("bulklabel").textContent =
       "Buy max dimboosts every X seconds:";
   else
     document.getElementById("bulklabel").textContent = "Bulk DimBoost Amount:";
 
-  if (player.eternities > 10) {
+  if (milestoneCheck(8)) {
     for (var i = 1; i < player.eternities - 9 && i < 9; i++) {
       document.getElementById("infauto" + i).style.visibility = "visible";
     }
@@ -4979,16 +4979,16 @@ setInterval(function() {
   if (player.eternities !== 0)
     document.getElementById("eternityconf").style.display = "inline-block";
   else document.getElementById("eternityconf").style.display = "none";
-  if (milestoneCheck(20))
+  if (milestoneCheck(19))
     document.getElementById("replauto1").style.visibility = "visible";
   else document.getElementById("replauto1").style.visibility = "hidden";
-  if (milestoneCheck(21))
+  if (milestoneCheck(20))
     document.getElementById("replauto2").style.visibility = "visible";
   else document.getElementById("replauto2").style.visibility = "hidden";
-  if (milestoneCheck(22))
+  if (milestoneCheck(21))
     document.getElementById("replauto3").style.visibility = "visible";
   else document.getElementById("replauto3").style.visibility = "hidden";
-  if (milestoneCheck(23))
+  if (milestoneCheck(22))
     document.getElementById("autoBuyerEter").style.display = "inline-block";
 
   if (player.eternities == 0)
@@ -5009,7 +5009,7 @@ setInterval(function() {
       "inline-block";
   else document.getElementById("tachyonParticleAnimBtn").style.display = "none";
 
-  if (player.eternities > 10 && player.currentEternityChall !== "eterc8") {
+  if (milestoneCheck(8) && player.currentEternityChall !== "eterc8") {
     for (var i = 1; i < player.eternities - 9 && i < 9; i++) {
       if (player.infDimBuyers[i - 1]) {
         buyMaxInfDims(i);
@@ -5021,7 +5021,7 @@ setInterval(function() {
   dor147Stuff();
 
   if (
-    player.eternities >= 40 &&
+    milestoneCheck(19) &&
     player.replicanti.auto[0] &&
     player.currentEternityChall !== "eterc8"
   ) {
@@ -5034,7 +5034,7 @@ setInterval(function() {
   }
 
   if (
-    player.eternities >= 60 &&
+    milestoneCheck(20) &&
     player.replicanti.auto[1] &&
     player.currentEternityChall !== "eterc8"
   ) {
@@ -5049,7 +5049,7 @@ setInterval(function() {
   }
 
   if (
-    player.eternities >= 80 &&
+    milestoneCheck(21) &&
     player.replicanti.auto[2] &&
     player.currentEternityChall !== "eterc8"
   ) {
