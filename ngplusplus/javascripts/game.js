@@ -2279,36 +2279,37 @@ function updateMilestones() {
 
 function milestoneCheck(x) {
 var milestoneRequirements = [
-    1,
-    2,
-    3,
-    4,
-    5,
-    7,
-    9,
-    10,
-    11,
-    12,
-    13,
-    14,
-    15,
-    16,
-    17,
-    18,
-    20,
-    25,
-    30,
-    40,
-    50,
-    60,
-    80,
-    100,
-    1e10,
-    1e11,
-    1e12,
-    1e13
+    1, //reward 0
+    2, //1
+    3, //2
+    4, //3
+    5, //4
+    7, //5
+    9, //6
+    10, //7
+    11, //8
+    12, //9
+    13, //10
+    14, //11
+    15, //12
+    16, //13
+    17, //1
+    18, //16
+    20, //17
+    25, //18
+    30, //19
+    40, //20
+    50, //21
+    60, //22
+    80, //23
+    100, //24
+    1e10, //25
+    1e11, //26
+    1e12, //27
+    1e13 //28
   ];
-if (milestoneRequirements[x] >= player.eternities) return 
+if (player.eternities >= milestoneRequirements[x]) return true;
+else return false;
 }
 
 function replicantiGalaxyAutoToggle() {
@@ -4978,16 +4979,16 @@ setInterval(function() {
   if (player.eternities !== 0)
     document.getElementById("eternityconf").style.display = "inline-block";
   else document.getElementById("eternityconf").style.display = "none";
-  if (player.eternities >= 40)
+  if (milestoneCheck(20))
     document.getElementById("replauto1").style.visibility = "visible";
   else document.getElementById("replauto1").style.visibility = "hidden";
-  if (player.eternities >= 60)
+  if (milestoneCheck(21))
     document.getElementById("replauto2").style.visibility = "visible";
   else document.getElementById("replauto2").style.visibility = "hidden";
-  if (player.eternities >= 80)
+  if (milestoneCheck(22))
     document.getElementById("replauto3").style.visibility = "visible";
   else document.getElementById("replauto3").style.visibility = "hidden";
-  if (player.eternities >= 100)
+  if (milestoneCheck(23))
     document.getElementById("autoBuyerEter").style.display = "inline-block";
 
   if (player.eternities == 0)
