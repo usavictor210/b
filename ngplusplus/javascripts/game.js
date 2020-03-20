@@ -2277,6 +2277,40 @@ function updateMilestones() {
   }
 }
 
+function milestoneCheck(x) {
+var milestoneRequirements = [
+    1,
+    2,
+    3,
+    4,
+    5,
+    7,
+    9,
+    10,
+    11,
+    12,
+    13,
+    14,
+    15,
+    16,
+    17,
+    18,
+    20,
+    25,
+    30,
+    40,
+    50,
+    60,
+    80,
+    100,
+    1e10,
+    1e11,
+    1e12,
+    1e13
+  ];
+if (milestoneRequirements[x] >= player.eternities) return 
+}
+
 function replicantiGalaxyAutoToggle() {
   if (player.replicanti.galaxybuyer) {
     player.replicanti.galaxybuyer = false;
