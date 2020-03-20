@@ -259,7 +259,7 @@ function buyTimeStudy(name, cost, check) {
       name == 233
     ) {
       document.getElementById(name).className = "timestudybought lightstudy";
-    } else if (bentStudy.includes(name)) {
+    } else if (eternalStudy.includes(name)) {
       document.getElementById(name).className = "timestudybought diltimestudy";
     } else document.getElementById("" + name).className = "timestudybought";
     if (name == 131 && !player.achievements.includes("r143")) {

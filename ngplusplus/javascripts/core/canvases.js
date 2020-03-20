@@ -5,7 +5,7 @@ var particles = {}
 var direction = 0;
 var velocityX = 0;
 var velocityY = 0;
-var bentStudy = [241, 242, 251, 252, 261, 262, 271, 272, 281, 282, 283, 284, 285, 291, 292, 293]
+var eternalStudy = [241, 242, 251, 252, 261, 262, 271, 272, 281, 282, 283, 284, 285, 291, 292, 293]
 var canvas = document.getElementById("studyTreeCanvas");
 var ctx = canvas.getContext("2d");
 var canvas3 = document.getElementById("dilationCanvas");
@@ -122,7 +122,7 @@ function drawTreeBranch(num1, num2) {
             ctx.strokeStyle="#5E33B6";
         } else if (name2 == 123 || name2 == 133 || name2 == 143 || name1 == 143) {
             ctx.strokeStyle="#0080ff";
-        } else if (bentStudy.includes(name2)) {
+        } else if (eternalStudy.includes(name2)) {
             ctx.strokeStyle="#00fff9";
         } else ctx.strokeStyle="#000000";
     } else {
@@ -140,7 +140,7 @@ function drawTreeBranch(num1, num2) {
             ctx.strokeStyle="#403753";
         } else if (name2 == 123 || name2 == 133 || name2 == 143 || name1 == 143) {
             ctx.strokeStyle="#374553";
-        } else if (bentStudy.includes(name2)) {
+        } else if (eternalStudy.includes(name2)) {
             ctx.strokeStyle="#006967";
         } else ctx.strokeStyle="#444";
     }
@@ -278,7 +278,7 @@ function drawStudyTree() {
                 //console.log(all[i]) we really don't need the console to say anything, do we?
                 if (all[i] == 222 || all[i] == 223 || all[i] == 226 || all[i] == 227 || all[i] == 232 || all[i] == 233) name = "dark"
                 else if (all[i] == 221 || all[i] == 224 || all[i] == 225 || all[i] == 228 || all[i] == 231 || all[i] == 234) name = "light"
-                else if (bentStudy.includes(all[i])) name = "bent study"
+                else if (eternalStudy.includes(all[i])) name = "eternal study"
                 else if (tempName.includes("normaldimstudy")) name = "normal dims"
                 else if (tempName.includes("infdimstudy")) name = "infinity dims"
                 else if (tempName.includes("timedimstudy")) name = "time dims"
