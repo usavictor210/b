@@ -2225,7 +2225,7 @@ function replicantiGalaxy() {
         player.replicanti.galaxies = galLimit;
       } else {
         throw new Error("🌙🌙🌙 YOU WERE WARNED 🌙🌙🌙");
-        
+        player.replicanti.bulkmode = false
       }
     } else {
       player.replicanti.galaxies += 1;
@@ -2261,7 +2261,11 @@ function updateMilestones() {
     50,
     60,
     80,
-    100
+    100,
+    1e10,
+    1e11,
+    1e12,
+    1e13
   ];
   for (i = 0; i < milestoneRequirements.length; i++) {
     var name = "reward" + i;
