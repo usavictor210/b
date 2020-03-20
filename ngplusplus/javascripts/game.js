@@ -2225,6 +2225,7 @@ function replicantiGalaxy() {
         player.replicanti.galaxies = galLimit;
       } else {
         throw new Error("🌙🌙🌙 YOU WERE WARNED 🌙🌙🌙");
+        
       }
     } else {
       player.replicanti.galaxies += 1;
