@@ -314,7 +314,7 @@ function hasRow(row) {
 function canBuyStudy(name) {
   var row = Math.floor(name / 10);
   var col = name % 10;
-  
+
   if (name == 33) {
     if (player.timestudy.studies.includes(21)) return true;
     else return false;
@@ -1146,12 +1146,9 @@ function getTimeStudiesDescription() {
   document.getElementById("262desc").textContent =
     "Currently: " +
     shortenMoney(
-      new Decimal(
-        Decimal.pow(
-          calcTotalSacrificeBoost().log10(),
-          25 + calcTotalSacrificeBoost().log(1000) / 10000
-        ),
-        1
+      Decimal.pow(
+        calcTotalSacrificeBoost().log10(),
+        25 + calcTotalSacrificeBoost().log(1000) ** 0.75 / 10000
       ).max(1)
     ) +
     "x";

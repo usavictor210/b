@@ -1215,7 +1215,7 @@ function updateNewsArray() {
       'player.newsArray.includes("respecced33")',
       "respcecced116"
     ],
-    ["", true, "respecced117"]
+    ["The power of the eternal studies surpasses all others. They're mastery studies, but better.", 'player.timestudy.studies.includes(241) || player.timestudy.studies.includes(242)', "respecced117"]
   ];
   }
 var s = document.getElementById("news");
