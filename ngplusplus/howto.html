@@ -74,7 +74,7 @@
   <div style="text-align: left" id="div3" class="hidden">
   <b>Dimension Shift:</b> This resets your dimensions, but unlocks another dimension for your next run. Each one requires 20 (base) of your highest unlocked dimension.
   <br>
-  <b>Dimension Boost:</b> This acts like dimension shift, but you don't unlock a new dimension. Instead, it will only provide a boost to dimensions. This happens after 4 dimension shifts. Each one requires 20+(boosts*15) (base) eighth dimensions.
+  <b>Dimension Boost:</b> This acts like a dimension shift, but you don't unlock a new dimension. Instead, it will only provide a boost to dimensions. This happens after 4 dimension shifts. Each one requires 20+(boosts*15) (base) eighth dimensions, but will scale higher after a certain amount of them has been bought.
   <br>
   Each dimension shift and boost will provide a x2 (base) multiplier to first dimension, and each dimension after will have half (base) multiplier as the previous (min 1).
       <br>
@@ -96,7 +96,7 @@
   <hr id='div4hr'>
   <button onclick='changestate(5)' id='div5btn' class="storebtn">Dimensional Sacrifice</button>
   <div style="text-align: left" id='div5' class='hidden'>
-  You unlock Dimensional Sacrifice after your first dimensional boost.
+  You unlock Dimensional Sacrifice after your first dimension boost.
   <br>
   Sacrificing will immediately reduce the owned quantity of dimensions 1 through 7 to zero. This does not reduce the multiplier or the current cost. In return, it will multiply the Eighth Dimension Multiplier by the shown value. It will take time to get back to the production you previously had, but you will end up with a net increase.
   <br>
@@ -169,7 +169,7 @@
   <b>Sacrifice Autobuyer:</b> This autobuyer has a maxed timer from the start. You can set how much multiplier it waits for before sacrificing. It accepts e notation.
   <br>
   The double autobuyer tick speed upgrade will have all autobuyers buy twice as fast.<br>
-    <b>Toggle All Autobuyers:</b> This button will turn all of your autobuyers on or off. If some of them are turned on, they will be turned off, and if all of the autobuyers are turned on,  <!--say how it decides which?-->
+    <b>Toggle All Autobuyers:</b> This button will turn all of your autobuyers on or off. If some of them are turned on, they will be turned off, and if all of the autobuyers are turned off, they will be turned on. <!--say how it decides which?-->
       <br>
     <b>Hotkey: A</b> (for toggle all autobuyers)
   </div>
