@@ -1216,7 +1216,8 @@ function updateNewsArray() {
       "respcecced116"
     ],
     ["The power of the eternal studies surpasses all others. They're mastery studies, but better.", 'player.timestudy.studies.includes(241) || player.timestudy.studies.includes(242)', "respecced117"],
-    ["The glitch is glitching now. That's not good. Everything is falling apart!", true, "respecced118"]
+    ["The glitch is glitching now. That's not good. Everything is falling apart!", true, "respecced118"],
+    ["Wait, who's really behind the 9th dimension? Why are people talking so much about it?! I think it's why it caused so much inflation in the news ticker industry. I just have to go over and consult them.", 'player.newsArray.includes("respecced77")', "respecced119"]
   ];
   }
 var s = document.getElementById("news");
