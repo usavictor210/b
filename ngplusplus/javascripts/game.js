@@ -6938,7 +6938,8 @@ function gameLoop(diff) {
   }
   updateQuantum();
   calculateDilationSeverity();
-  autoTTCycle()
+  autoTTCycle();
+  updateInvestmentDisplay();
   player.lastUpdate = thisUpdate;
 
 }
