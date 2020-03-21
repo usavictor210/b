@@ -24,7 +24,7 @@
   <table style="margin: auto;">
     <tr>
       <td>
-          <button "onclick"='showspoilers()' class="storebtn" id="showspoilersbtn" style="margin-top: 5px;">View:<br>Avoid spoilers</button>
+          <button onclick="showspoilers()" class="storebtn" id="showspoilersbtn" style="margin-top: 5px;">View:<br>Avoid spoilers</button>
       </td>
       <td>
           <button class="storebtn" id="importbtn" style="margin-top: 5px;">Import your save</button>
@@ -32,8 +32,8 @@
     </tr>
   </table>
   <hr>
-  <button onclick='changestate(1)' id='div1btn'  class="storebtn">Dimensions</button>
-  <div style="text-align: left" id='div1' class='hidden'>
+  <button onclick="changestate(1)" id="div1btn"  class="storebtn">Dimensions</button>
+  <div style="text-align: left" id="div1" class="hidden">
   <b>Dimensions:</b>
   <br>
   Dimensions are your production units in the game. The first Dimension produces Antimatter, used to buy dimensions.  Each consecutive dimension produces the previous one, allowing you to have steady growth. There are eight dimensions total.
@@ -46,19 +46,19 @@
   <br>
   <b>Dimension Growth Percent:</b> This number represents the amount of growth that dimensions experiences per second. +100% means the dimension is doubling each second.  This allows you to judge overall growth.
   <br>
-  <b>Cost & until 10:</b> You can buy a single quantity of each dimension with antimatter when the cost button is highlighted.  Alternatively, if the Until 10 buttons is highlighted, you can buy whatever quantity gets you to that dimensions next dimension multiplier.
+  <b>Cost & until 10:</b> You can buy a single quantity of each dimension with antimatter when the cost button is clicked.  Alternatively, if the Until 10 buttons is clicked, you can buy whatever quantity gets you to that dimensions next dimension multiplier.
   <br>
   <b>Max all:</b> Max all will buy max tickspeed (see below), then will buy until 10 of 8th dimension until it can't anymore, then 7th, and so on.
   <br>
-  <b>Dimension base prices:</b> 10 (1e1), 100 (1e2), 10000 (1e4), 1e6, 1e9, 1e13, 1e18, 1e24
+  <b>Dimension base prices:</b> 10 (1e1), 100 (1e2), 10,000 (1e4), 1e6, 1e9, 1e13, 1e18, 1e24
   <br>
-  <b>Base per 10 bought dimension price increases:</b>1000 (1e3), 10000 (1e4), 1e5, 1e6, 1e8, 1e10, 1e12, 1e15
+  <b>Base per 10 bought dimension price increases:</b>1,000 (1e3), 10,000 (1e4), 1e5, 1e6, 1e8, 1e10, 1e12, 1e15
       <br>
-    <b>Hotkeys: 1, 2, 3, 4, 5, 6, 7, 8</b> for buy until 10 []th dimension, <b>M</b> for Max all.
+    <b>Hotkeys: 1, 2, 3, 4, 5, 6, 7, 8</b> for buy until 10 []th dimension ([] is the number you pressed), <b>M</b> for Max all.
   </div>
-  <hr id='div1hr'>
-  <button onclick='changestate(2)' id='div2btn' class="storebtn">Ticks</button>
-  <div style="text-align: left" id='div2' class='hidden'>
+  <hr id="div1hr">
+  <button onclick="changestate(2)" id="div2btn" class="storebtn">Ticks</button>
+  <div style="text-align: left" id="div2" class="hidden">
   <b>Tick:</b> Production in the game happens on each “tick”. When a "tick" happens, each dimension will produce resources.
   <br>
   <b>Interval:</b> The length of time between ticks. This is lowered by purchasing tick interval reductions.
@@ -69,8 +69,8 @@
   <br>
   Note that the actual tickspeed time is fake and the game always runs at 20 ticks per second. (based on your update rate)
   </div>
-  <hr id='div2hr'>
-  <button onclick='changestate(3)' id='div3btn' class="storebtn">Dimension Shift/Boost</button>
+  <hr id="div2hr">
+  <button onclick="'"changestate(3)"'" id='div3btn' class="storebtn">Dimension Shift/Boost</button>
   <div style="text-align: left" id='div3' class='hidden'>
   <b>Dimension Shift:</b> This resets your dimensions, but unlocks another dimension for your next run. Each one requires 20 (base) of your highest unlocked dimension.
   <br>
