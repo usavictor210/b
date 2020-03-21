@@ -98,7 +98,7 @@
   <div style="text-align: left" id='div5' class='hidden'>
   You unlock Dimensional Sacrifice after your first dimensional boost.
   <br>
-  Sacrificing will immediately reduce the owned quantity of dimensions 1 through 7 to zero. This does not reduce the multiplier or the current cost.  In return, it will multiply the Eighth Dimension Multiplier by the shown value. It will take time to get back to the production you previously had, but you will end up with a net increase.
+  Sacrificing will immediately reduce the owned quantity of dimensions 1 through 7 to zero. This does not reduce the multiplier or the current cost. In return, it will multiply the Eighth Dimension Multiplier by the shown value. It will take time to get back to the production you previously had, but you will end up with a net increase.
   <br>
   <b>When should I Sacrifice?</b> Depends on your percentages (+%/s), but if they are over ~2% and the multiplier is over 2x, I'd say it's worth it. The lower the percentage, the longer it takes to gain back your dimensions.
   <br>
@@ -130,7 +130,7 @@
   <hr id='div6hr'>
   <button onclick='changestate(7)' id='div7btn' class="storebtn">Achievements</button>
   <div style="text-align: left" id='div7' class='hidden'>
-  Each achievement has conditions that must be met before they are earned. Some are very simple, and some are significantly trickier.  You may have to infinity or start a challenge before attempting some of the harder ones.
+  Each achievement has conditions that must be met before they are earned. Some are very simple, and some are significantly trickier. You may have to infinity or start a challenge before attempting some of the harder ones.
   <br>
   You will recieve a x1.125 multiplier to all dimensions for each achievement. In addition, some achievements have their own rewards.
   </div>
@@ -154,22 +154,22 @@
   <br>
   <b>Autobuyer Speed:</b>The cooloff period before the autobuyer makes another puchase. This rounds up to the nearest 100ms, so 200ms and 101ms are the same speed.
   <br>
-  <b>Bulk Buy:</b> Once the Speed of an Autobuyer is maxed, all future upgrades will double the amount the autobuyer purchases per tick. This can be disabled.
+  <b>Bulk Buy:</b> Once the Speed of an Autobuyer is maxed, all future upgrades will double the amount the autobuyer purchases per tick. This can be disabled. Bulk buy is capped at 1e100x, however it doesn't do much to get bulk buy after you get a certain multiplier as the autobuyer can only buy so much that is available to them.
   <br>
   <b>Dimension Autobuyer Buy Quantity:</b> Autobuyers for dimensions can be set to buy a single, or until 10, on each cooldown. Bulk buy does not work when the autobuyer is set to singles.
   <br>
   <b>Tickspeed Autobuyer Buy Quantity:</b> The tickspeed autobuyer can be set to buy a single or the max available on each cooldown.
   <br>
-  <b>Automatic Dimboost Customization:</b> With the Dimboost autobuyer you can set the max amount of 8th dimensions to use for the autobuyer, the amount of galaxies before dimboosts are always autopurchased, and (when unlocked) the ability to buy dimboosts in bulk (at a fixed amount).
+  <b>Automatic Dimboost Customization:</b> With the Dimboost autobuyer you can set the max amount of 8th dimensions to use for the autobuyer, the amount of galaxies before dimboosts are always automatically purchased, and (when unlocked) the ability to buy dimboosts in bulk (at a fixed amount). The ability to buy dimboosts in bulk is improved after you get the 10 eternity milestone, allowing you to automatically buy all dimension boosts available.
   <br>
   <b>Max Galaxies:</b> The highest amount of galaxies the galaxies autobuyer will buy.
   <br>
-  <b>IP on crunch:</b> Once you break Infinity, you can set how many IP you would like to wait for before crunching. It accepts e notation (12.34e5 is 1234000).
+  <b>IP on crunch:</b> Once you break Infinity, you can set how many IP you would like to wait for before crunching. It accepts e notation (e.g. 12.34e5 is 1234000).
   <br>
   <b>Sacrifice Autobuyer:</b> This autobuyer has a maxed timer from the start. You can set how much multiplier it waits for before sacrificing. It accepts e notation.
   <br>
   The double autobuyer tick speed upgrade will have all autobuyers buy twice as fast.<br>
-    <b>Toggle All Autobuyers:</b> This button will turn all of your autobuyers on or off. <!--say how it decides which?-->
+    <b>Toggle All Autobuyers:</b> This button will turn all of your autobuyers on or off. If some of them are turned on, they will be turned off, and if all of the autobuyers are turned on,  <!--say how it decides which?-->
       <br>
     <b>Hotkey: A</b> (for toggle all autobuyers)
   </div>
@@ -219,7 +219,7 @@
   <hr id='div13hr'>
   <button onclick='changestate(14)' id='div14btn' class="storebtn">Eternity</button>
   <div style="text-align: left" id='div14' class='hidden'>
-  Upon reaching infinity Infinity Points, you can eternity. Eternities will reset everything before this point except challenge times, achievements, and total antimatter. You also unlock the Eternity tab.
+  Upon reaching infinity Infinity Points, you can eternity. Eternities will reset everything before this point except challenge times, achievements, and total antimatter. You also unlock the Eternity tab, and many more features.
   <br>
   You can pass infinity Infinity Points whenever you want. You will recieve more Eternity Points the more Infinity Points you had before going Eternal.
   <br>
@@ -232,14 +232,16 @@
     <br>
     For the buffs at the the start of an eternity, you will keep the relevant statistic on the run you unlock the milestone. (On 1 &gt; 2, you will keep your autobuyers.)
     <br>
-    The last milestone is at 100 eternities and allows full automation.
+    The last <i>big</i> milestone is at 100 eternities, and allows full automation. However, there are other milestones after 100 eternities that are rather QoL milestones.
     </div>
     <hr id='div15hr'>
     <button onclick='changestate(16)'id='div16btn' class="storebtn">Time Dimensions</button>
   <div style="text-align: left" id='div16' class='hidden'>
     After your first eternity, you unlock Time Dimensions. You buy them with EP and they provide time shards, which give free tickspeed upgrades (which don't increase the price). These free tickspeed upgrades stay on infinity (applying retroactively to your tickspeed mult through more galaxies).
     <br>
-    Similarly to the other dimensions, a Time Dimension 2 produces a Time Dimension 1 and so on.
+    Similarly to the other dimensions, a Time Dimension 2 produces a Time Dimension 1 and so on. However, you cannot buy a dimension shift/boost for them, nor buy galaxies for them.
+    <br>
+    You start with the first 4 time dimensions available, but later on, you will be able to access the rest of the Time Dimensions.
     <br>
     Each tick threshold takes 33% more time shards than the previous (25% with TS171).
     </div>
@@ -272,9 +274,11 @@ NG+2R has added 2 new upgrades (boost DT gain based on TP amount and boost TD mu
 <hr id='div18hr'>
 <button onclick='changestate(19)' id='div19btn' class="storebtn">Meta Dimensions</button> 
 <div style="text-align: left" id='div19' class="hidden"> 
-Meta Dimensions are dimensions that are similar to the original dimensions; however, they don't have tickspeed and are treated differently. Meta Dimensions provide a multiplier to dimension boosts 
+Meta Dimensions are dimensions that are similar to the original dimensions; however, they don't have tickspeed and are treated differently. Meta Dimensions provide a multiplier to dimension shifts/boosts based on meta-antimatter.
 <br>
-With NG++, there is another row of dilation upgrades after buying Meta Dimensions. 
+Once you get enough 8th Meta Dimensions, you can shift/boost, or buy a galaxy. Buying a galaxy improves the power of Meta Dimension Shifts/Boosts and gives a multiplier separately. (may need to double check)
+<br>
+In NG++, there is another row of dilation upgrades after buying Meta Dimensions. 
 </div>
 <hr id='div19hr'>
 <button onclick='changestate(20)' id='div20btn' class="storebtn">Quantum</button> 
@@ -282,7 +286,7 @@ With NG++, there is another row of dilation upgrades after buying Meta Dimension
 TBD 
 </div>
 <hr id='div20hr'> 
-    <a href="https://www.reddit.com/r/AntimatterDimensions/comments/73jhqe/patashus_antimatter_dimensions_guide/?utm_content=title&utm_medium=hot&utm_source=reddit&utm_name=AntimatterDimensions">Strategy Guide</a>
+    <a href="https://antimatter-dimensions.fandom.com/wiki/Guide">Wiki Guide (for vanilla game)</a>
   </body>
   <script src='javascripts/howto.js'></script>
   </html>
