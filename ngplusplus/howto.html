@@ -176,9 +176,9 @@
   <hr id='div9hr'>
   <button onclick='changestate(10)' id='div10btn' class="storebtn">Breaking Infinity</button>
   <div style="text-align: left" id='div10' class='hidden'>
-  Originally Antimatter Dimensions was restricted by "Infinity". Since a significant update, you can now "Break Infinity" once your Big Crunch autobuyer has been maxed. This opens up a selection of new upgrades as well as the ability to gain more than 1 infinity point per run.
+  Antimatter Dimensions was normally restricted to "Infinity" (2^1024), but in the "Break Infinity" update, you can now "Break Infinity" once your Big Crunch autobuyer has been maxed, allowing you to surpass 1.8e308 antimatter (and including other numbers to surpass 1.8e308). This opens up a selection of new upgrades, as well as the ability to gain more than 1 infinity point per run.
   <br>
-  <b>Fixing Infinity:</b>You can revert the breaking at anytime by clicking fix infinity.
+  <b>Fixing Infinity:</b>You can revert breaking infinity at anytime by clicking fix infinity (however, this is entirely useless as you can just set big crunch autobuyer's threshold to 0 IP if you want a fast infinity).
   <br>
   <b>IP Gain Formula:</b>10^(log(current antimatter)/n-0.75)*bonuses, where n is 308 at default, 307.8 with the achievement "This achievement doesn't exist II", or 290 with TS111.
   </div>
@@ -189,7 +189,7 @@
   <br>
   <b>Infinity Dimension Cost:</b>Infinity dimensions are only purchasable in sets of 10, and cost Infinity points.
   <br>
-  <b>Infinity Dimension Production:</b>Like the original dimensions, each infinity dimension produces the dimension above it. Dimension 3 produces Dimension 2, 2 produces 1. However, instead of antimatter, Infinity Dimension produces Infinity power, which translates to an overall multiplier on all normal dimensions, making them significantly more powerful.
+  <b>Infinity Dimension Production:</b>Like the original dimensions, each infinity dimension produces the dimension above it. e.g. Dimension 3 produces Dimension 2, 2 produces 1. However, instead of antimatter, Infinity Dimension produces Infinity power, which translates to an overall multiplier on all normal dimensions, making them significantly more powerful.
   Infinity Power gives a boost to all dimensions equal to (power^7).
   </div>
   <hr id='div11hr'>
@@ -197,23 +197,24 @@
   <div style="text-align: left" id='div12' class='hidden'>
   Infinity Challenges are like regular challenges, but they have higher end goals and are generally harder than regular challenges (but have a different kind of reward).
   <br>
-  They unlock at set amounts of antimatter - the ones unlocking later are (generally) more difficult.
+  They unlock at set amounts of antimatter, and the ones unlocking later are (generally) more difficult.
   </div>
   <hr id='div12hr'>
   <button onclick='changestate(13)' id='div13btn' class="storebtn">Replicanti</button>
   <div style="text-align: left" id='div13' class='hidden'>
-  Each replicanti has an upgradable chance to update every replicanti tick. You will gain a bonus to infinity dimensions based on much replicanti you have.
+  Each replicanti has an upgradable chance to update every replicanti tick. You will gain a bonus multiplier to Infinity Dimensions based on the amount of replicanti you have.
   <br>
-  When replicanti reach infinity, you can buy a galaxy. This will not increase the cost of normal galaxies. The amount of replicanti galaxies you can have is capped (upgradable). Once you reach infinity replicanti, they will not continue growing.
+  When replicanti reaches infinity, you can buy a galaxy. This will not increase the cost of normal galaxies, and this replicanti galaxy contributes to the tickspeed decrease. The amount of replicanti galaxies you can have is capped (upgradable). Once you reach infinity replicanti, they will not continue growing.
   <br>
   When offline, in an inactive tab, lagging, or a tickspeed under 50ms, replicanti get calculated with an approximation. This can cause wildly varying results, especially at extremely low numbers (1-5).
   <br>
   When at low values (100-1000) (when none of the conditions above are true), there may be some minor variances in the expected amount of replicanti gain.
   <br><b>Formulas:
-  <br>Infinity Dimension power increase:</b> log2(replicanti)^2, plus replicanti^0.032 if you have TS21, times 5^galaxies if you have TS102, and is increased to the power of 1.09 if you have "We could afford 9".
+  <br>Infinity Dimension power increase:</b> log2(replicanti)^2, plus replicanti^0.032 if you have TS21, times 5^galaxies if you have TS102, and is raised to the power of 1.09 if you have "We could afford 9".
   <br><b>Chance upgrade cost:</b>x(1e15) per upgrade, caps out at 100%.
   <br><b>Speed upgrade cost:</b>x(1e10) per upgrade, caps out at 50 ms, but can be reduced further to 1 ms with TS22, and can be decreased even further with TS62 (5x faster), TS213 (20x faster), and a dilation upgrade that decreased replicanti interval based on DT.
   <br><b>Galaxy upgrade cost:</b>1e(170+n*25+n^2*5)
+  <br>Once you get TS192, you can surpass 1.8e308 replicanti, but the interval will increase as your replicanti amount increases.
   </div>
   <hr id='div13hr'>
   <button onclick='changestate(14)' id='div14btn' class="storebtn">Eternity</button>
@@ -258,16 +259,22 @@
 <div style="text-align: left" id='div18' class="hidden"> 
 Time dilation is unlocked when you purchase the 5,000 TT time study after beating both EC11 and EC12 five times, and after acquiring a total of 13,000 TT. Dilating time will start a new eternity, and all of your Dimension/Infinity/Time Dimension multipliers’ exponents and tickspeed multipliers’ will be reduced to ^0.75.  
  <br>
-  If you can reach 1.79e308 IP and eternity within a dilated eternity, you are rewarded with Tachyon Particles upon the dilated eternity. You can dilate as many times as you want. 
+  If you can reach 1.79e308 IP and eternity within a dilated eternity, you are rewarded with Tachyon Particles upon the dilated eternity. You can dilate as many times as you want, but in order to gain more TP, you need to produce more antimatter than the last run that gave you TP.
 <br> 
-Tachyon Particles generate another currency, Dilated Time. Dilated time is translated into free galaxies by reaching a certain threshold. These galaxies are permanent except when you buy a certain Dilation Upgrade. 
+Tachyon Particles generate another currency, Dilated Time. Dilated time is translated into free galaxies by reaching a certain threshold. These galaxies are permanent except when you buy the second rebuyable dilation upgrade, resetting the amount of free galaxies and DT, but decreasing the threshold. 
 <br> 
-Dilation Upgrades are upgrades that are purchasable with Dilated Time. Some upgrades improve the amount of Dilated Time you gain or reset your free galaxies but decrease the threshold required to get to them. In addition, there is also a TT generator as one of the Dilation upgrades. The first row of dilation upgrades is purchasable as many times as possible, but the rest cannot. 
+Dilation Upgrades are upgrades that are purchasable with Dilated Time. Some upgrades improve the amount of Dilated Time you gain or reset your free galaxies, but decrease the threshold required to get to them. In addition, there is also a TT generator as one of the Dilation upgrades. The first row of dilation upgrades is purchasable as many times as possible, but the rest cannot.
+<br>
+NG+2 added a new rebuyable upgrade (formula improvement upgrade) that increases the exponent of the TP gain formula by 0.25, and another row of upgrades that are unlocked later.
+<br>
+NG+2R has added 2 new upgrades (boost DT gain based on TP amount and boost TD multiplier based on TP) to help alleviate most of dilation.
 </div> 
 <hr id='div18hr'>
 <button onclick='changestate(19)' id='div19btn' class="storebtn">Meta Dimensions</button> 
 <div style="text-align: left" id='div19' class="hidden"> 
-TBD 
+Meta Dimensions are dimensions that are similar to the original dimensions; however, they don't have tickspeed and are treated differently. Meta Dimensions provide a multiplier to dimension boosts 
+<br>
+With NG++, there is another row of dilation upgrades after buying Meta Dimensions. 
 </div>
 <hr id='div19hr'>
 <button onclick='changestate(20)' id='div20btn' class="storebtn">Quantum</button> 
