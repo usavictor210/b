@@ -942,7 +942,7 @@ function updateDimensions() {
     document.getElementById("totalresets").textContent =
       "You have performed " +
       formatInfOrEter(player.resets) +
-      " dimensional boosts/shifts.";
+      " dimension boosts/shifts.";
     document.getElementById("galaxies").textContent =
       "You have " + formatInfOrEter(player.galaxies) + " Antimatter Galaxies.";
     document.getElementById("totalTime").textContent =
@@ -6938,7 +6938,8 @@ function gameLoop(diff) {
   }
   updateQuantum();
   calculateDilationSeverity();
-  autoTTCycle()
+  autoTTCycle();
+  updateInvestmentDisplay();
   player.lastUpdate = thisUpdate;
 
 }
