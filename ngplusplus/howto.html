@@ -70,8 +70,8 @@
   Note that the actual tickspeed time is fake and the game always runs at 20 ticks per second. (based on your update rate)
   </div>
   <hr id="div2hr">
-  <button onclick="'"changestate(3)"'" id='div3btn' class="storebtn">Dimension Shift/Boost</button>
-  <div style="text-align: left" id='div3' class='hidden'>
+  <button onclick="changestate(3)" id="div3btn" class="storebtn">Dimension Shift/Boost</button>
+  <div style="text-align: left" id="div3" class="hidden">
   <b>Dimension Shift:</b> This resets your dimensions, but unlocks another dimension for your next run. Each one requires 20 (base) of your highest unlocked dimension.
   <br>
   <b>Dimension Boost:</b> This acts like dimension shift, but you don't unlock a new dimension. Instead, it will only provide a boost to dimensions. This happens after 4 dimension shifts. Each one requires 20+(boosts*15) (base) eighth dimensions.
@@ -80,16 +80,16 @@
       <br>
     <b>Hotkey: D</b>
   </div>
-  <hr id='div3hr'>
-  <button onclick='changestate(4)' id='div4btn' class="storebtn">Antimatter Galaxies</button>
-  <div style="text-align: left" id='div4' class='hidden'>
+  <hr id="div3hr">
+  <button onclick="changestate(4)" id="div4btn" class="storebtn">Antimatter Galaxies</button>
+  <div style="text-align: left" id="div4" class="hidden">
   Purchasing an Antimatter Galaxy will reset your game back to the point where only 4 Dimensions are available, but will increase the effect of your tickspeed interval reduction by 2%. This effect decreases as you get more galaxies.
   <br>
   Though it will have very little impact for the first few purchases, the increase is multiplicative and won’t take long to be visible. Soon, you will notice that you get even more than what you had before.
   <br>
   Your first galaxy will increase your tickspeed interval upgrade as if it were 11% originally, so you will have 13% after 1 galaxy.
   <br>
-  Galaxies require 80+(galaxies*60) (base) Eighth Dimensions. (80+galaxies*60+(galaxies-99)^2*2 when above 100 non-replicanti galaxies)
+  Galaxies require 80+(galaxies*60) (base) Eighth Dimensions. (80+galaxies*60+(galaxies-99)^2*2 when above 100 non-replicanti galaxies, and )
   <br>After a certain point (100 galaxies), galaxies will become distant and will have stricter scaling. After 800 galaxies, galaxies become remote and will have exponential scaling.
     <b>Hotkey: G</b>
   </div>
