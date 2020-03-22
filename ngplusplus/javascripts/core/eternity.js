@@ -382,7 +382,7 @@ function eternity(force, auto) {
     if (player.respec) respecTimeStudies();
     player.respec = false;
     giveAchievement("Time is relative");
-    if (player.eternities >= 100) giveAchievement("This mile took an Eternity");
+    if (milestoneCheck(23)) giveAchievement("This mile took an Eternity"); // 100 eternities
     if (player.eternities >= 1e12)
       giveAchievement("The cap is a million, not a trillion");
     if (player.replicanti.unl) player.replicanti.amount = new Decimal(1);
@@ -393,7 +393,7 @@ function eternity(force, auto) {
     if (player.achievements.includes("r45"))
       player.tickspeed = player.tickspeed.times(0.98);
 
-    if (player.eternities <= 30) {
+    if (!milestoneCheck(18)) {
       document.getElementById("secondRow").style.display = "none";
       document.getElementById("thirdRow").style.display = "none";
       document.getElementById("tickSpeed").style.visibility = "hidden";
@@ -456,12 +456,12 @@ function eternity(force, auto) {
         "inline-block";
     } else if (
       document.getElementById("replicantidiv").style.display === "none" &&
-      player.eternities >= 50
+      milestoneCheck(20)
     ) {
       document.getElementById("replicantidiv").style.display = "inline-block";
       document.getElementById("replicantiunlock").style.display = "none";
     }
-    if (player.eternities > 2 && player.replicanti.galaxybuyer === undefined)
+    if (milestoneCheck(3) && player.replicanti.galaxybuyer === undefined)
       player.replicanti.galaxybuyer = false;
     document.getElementById("infinityPoints1").innerHTML =
       'You have <span class="IPAmount1">' +

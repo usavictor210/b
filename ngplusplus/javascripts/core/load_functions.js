@@ -561,22 +561,22 @@ function onLoad() {
   }
   if (player.autobuyers[8].tier == 10) player.autobuyers[8].tier = 9;
 
-  if (player.thirdAmount !== 0 || player.eternities >= 30)
+  if (player.thirdAmount !== 0 || milestoneCheck(18))
     document.getElementById("fourthRow").style.display = "table-row";
-  if (player.fourthAmount !== 0 || player.eternities >= 30)
+  if (player.fourthAmount !== 0 || milestoneCheck(18))
     if (player.resets > 0)
       document.getElementById("fifthRow").style.display = "table-row";
-  if (player.fifthAmount !== 0 || player.eternities >= 30)
+  if (player.fifthAmount !== 0 || milestoneCheck(18))
     if (player.resets > 1)
       document.getElementById("sixthRow").style.display = "table-row";
-  if (player.sixthAmount !== 0 || player.eternities >= 30)
+  if (player.sixthAmount !== 0 || milestoneCheck(18))
     if (
       player.resets > 2 &&
       player.currentChallenge !== "challenge4" &&
       player.currentChallenge !== "postc1"
     )
       document.getElementById("seventhRow").style.display = "table-row";
-  if (player.seventhAmount !== 0 || player.eternities >= 30)
+  if (player.seventhAmount !== 0 || milestoneCheck(18))
     if (player.resets > 3 && player.currentChallenge !== "challenge4")
       document.getElementById("eightRow").style.display = "table-row";
 

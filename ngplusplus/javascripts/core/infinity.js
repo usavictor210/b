@@ -509,7 +509,7 @@ function infinity() {
     }
 
     if (
-      player.eternities >= 40 &&
+      milestoneCheck(19) &&
       player.replicanti.auto[0] &&
       player.currentEternityChall !== "eterc8"
     ) {
@@ -522,7 +522,7 @@ function infinity() {
     }
 
     if (
-      player.eternities >= 60 &&
+      milestoneCheck(21) &&
       player.replicanti.auto[1] &&
       player.currentEternityChall !== "eterc8"
     ) {
@@ -537,7 +537,7 @@ function infinity() {
     }
 
     if (
-      player.eternities >= 80 &&
+      milestoneCheck(22) &&
       player.replicanti.auto[2] &&
       player.currentEternityChall !== "eterc8"
     ) {
