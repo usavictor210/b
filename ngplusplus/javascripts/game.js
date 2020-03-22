@@ -7163,7 +7163,7 @@ function maxBuyDimBoosts(manual) {
 
 var timer = 0;
 function autoBuyerTick() {
-  if (player.eternities >= 100 && player.eternityBuyer.isOn) {
+  if (milestoneCheck(23) && player.eternityBuyer.isOn) {
     if (player.autoEterMode === "amount") {
       if (player.eternityBuyer.limit.lte(gainedEternityPoints())) {
         eternity(false, true);
