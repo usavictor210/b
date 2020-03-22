@@ -1008,7 +1008,13 @@ function getTimeStudiesDescription() {
   document.getElementById("82desc").textContent =
     "Currently: " +
     shortenMoney(
-      Decimal.pow(1.0000109, Math.pow(player.resets, 2)).min("1e80000")
+      Decimal.pow(1.000011, Math.pow(player.resets, 2)).min("1e80000")
+    ) +
+    "x";
+  document.getElementById("83desc").textContent =
+    "Currently: " +
+    shortenMoney(
+      Decimal.pow(1.000011, Math.pow(player.resets, 2)).min("1e80000")
     ) +
     "x";
   document.getElementById("91desc").textContent =
@@ -1022,6 +1028,12 @@ function getTimeStudiesDescription() {
   document.getElementById("93desc").textContent =
     "Currently: " +
     shortenMoney(Decimal.pow(player.totalTickGained, 0.25)) +
+    "x";
+  document.getElementById("102desc").textContent =
+    "Currently: " +
+    shortenMoney(
+      Decimal.pow(5, player.replicanit
+    ) +
     "x";
   document.getElementById("121desc").textContent =
     "Currently: " +
