@@ -1014,7 +1014,7 @@ function getTimeStudiesDescription() {
   document.getElementById("83desc").textContent =
     "Currently: " +
     shortenMoney(
-      Decimal.pow(1.000011, Math.pow(player.resets, 2)).min("1e80000")
+      Decimal.pow(1.0004, player.totalTickGained)
     ) +
     "x";
   document.getElementById("91desc").textContent =
@@ -1032,7 +1032,7 @@ function getTimeStudiesDescription() {
   document.getElementById("102desc").textContent =
     "Currently: " +
     shortenMoney(
-      Decimal.pow(5, player.replicanit
+      Decimal.pow(5, player.replicanti.galaxies)
     ) +
     "x";
   document.getElementById("121desc").textContent =
