@@ -63,10 +63,7 @@ function eternity(force, auto) {
       if (!player.challenges[i].includes("post") && player.eternities > 1)
         temp.push(player.challenges[i]);
     }
-    if (player.timestudy.studies.includes(191))
-      player.infinitiedBank += Math.floor(player.infinitied * 0.05);
-    if (player.achievements.includes("r131"))
-      player.infinitiedBank += Math.floor(player.infinitied * 0.05);
+    player.infinitied += getBankedInfinities()
     if (player.infinitiedBank > 5000000000)
       giveAchievement("No ethical consumption");
     if (
@@ -959,6 +956,13 @@ function calculateEternitiedGain() {
   if (player.achievements.includes("r155")) base = base * 100; // If you have Sub-atomic (x100 eternitied stat gain)
   if (player.achievements.includes("r124")) base = base * r124Mult(); // If you have "Eternities are the new infinity"
   return base; // grand total
+}
+
+function getBankedInfinities() {
+let bank = 0
+if (player.achievements.includes("r131")) bank += 0.05
+if (player.timestudy.studies.includes(191)) bank += 0.05
+return player.infinitied * bank
 }
 
 function r124Mult() {
