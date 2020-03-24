@@ -657,7 +657,7 @@ function updateCoinPerSec() {
 }
 
 function getInfinitied() {
-  return Math.max(player.infinitied.add(player.infinitiedBank), 0);
+  return Decimal.max(new Decimal(player.infinitied).add(player.infinitiedBank), 0);
 }
 
 function getGalaxyCostScalingStart() {
@@ -918,7 +918,7 @@ function updateDimensions() {
         shortenDimensions(player.infinityPoints) +
         "</span> Infinity points.";
     }
-    if (player.infinitied.eq(1))
+    if (new Decimal(player.infinitied).eq(1))
       document.getElementById("infinitied").textContent =
         "You have infinitied 1 time.";
     else
@@ -1042,8 +1042,8 @@ function updateDimensions() {
         shortenCosts(1e6) +
         " IP";
       var postinfi12 = player.timestudy.studies.includes(31)
-        ? Math.pow(Math.log10(getInfinitied() + 1) * 10, 4)
-        : 1 + Math.log10(getInfinitied() + 1) * 10
+        ? Decimal.pow(Decimal.log(getInfinitied(), 10) * 10, 4).max(1)
+        : Decimal.log(getInfinitied(), 10).times(10).max(1)
       document.getElementById("postinfi12").innerHTML =
         "Dimensions are more powerful based on your infinitied stat<br>Currently: " +
         shortenMoney(postinfi12) +

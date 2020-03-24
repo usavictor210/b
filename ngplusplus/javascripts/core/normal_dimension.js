@@ -957,8 +957,8 @@ function timeMult() {
 
 function dimMults() {
   if (player.timestudy.studies.includes(31))
-    return Decimal.pow(1 + getInfinitied() * 0.2, 4);
-  else return new Decimal(1 + getInfinitied() * 0.2);
+    return new Decimal (1).add(getInfinitied()).times(0.2).pow(4);
+  else return new Decimal(1).add(getInfinitied()).times(0.2);
 }
 
 function getDimensionProductionPerSecond(tier) {
