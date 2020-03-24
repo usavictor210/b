@@ -15,7 +15,7 @@ function getInfinitiedGain() {
         )
       )
     : (infGain = infGain);
- player.achievements.includes("r156")
+  player.achievements.includes("r156")
     ? infGain.times(
         Decimal.max(1, Decimal.floor(Decimal.log(player.eternities / 250), 10).pow(0.8))
       )
