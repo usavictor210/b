@@ -237,7 +237,7 @@ function infinity() {
 
     if (player.currentEternityChall == "eterc4") {
       infGain = 1;
-      if (player.infinitied >= 16 - ECTimesCompleted("eterc4") * 4) {
+      if (player.infinitied.gte(16 - (ECTimesCompleted("eterc4") * 4))) {
         document.getElementById("challfail").style.display = "block";
         setTimeout(exitChallenge, 500);
         giveAchievement("You're a mistake");
@@ -478,14 +478,14 @@ function infinity() {
     checkChallengeAchievements();
 
     giveAchievement("To infinity!");
-    if (player.infinitied >= 10) giveAchievement("That's a lot of infinites");
-    if (player.infinitied >= 1 && !player.challenges.includes("challenge1"))
+    if (player.infinitied.gt(10)) giveAchievement("That's a lot of infinites");
+    if (player.infinitied.gt(1) && !player.challenges.includes("challenge1"))
       player.challenges.push("challenge1");
 
     updateAutobuyers();
     player.money = getAntimatterOnReset();
     if (player.challenges.length >= 2) giveAchievement("Daredevil");
-    if (player.challenges.length == 12) giveAchievement("AntiChallenged");
+    if (player.challenges.length >= 12 && player.challenges.includes("postc1")) giveAchievement("AntiChallenged");
     resetInfDimensions();
     player.tickspeed = player.tickspeed.times(
       Decimal.pow(getTickSpeedMultiplier(), player.totalTickGained)
@@ -495,7 +495,7 @@ function infinity() {
     IPminpeak = new Decimal(0);
 
     if (
-      player.eternities > 10 &&
+      player.eternities.gt(10) &&
       player.currentEternityChall !== "eterc8" &&
       player.currentEternityChall !== "eterc2" &&
       player.currentEternityChall !== "eterc10"

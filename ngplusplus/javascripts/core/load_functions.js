@@ -124,7 +124,7 @@ function onLoad() {
     document.getElementById("secondRow").style.display = "table-row";
   if (player.challenges === undefined) player.challenges = [];
   if (player.currentChallenge === undefined) player.currentChallenge = "";
-  if (player.infinitied > 0 && !player.challenges.includes("challenge1"))
+  if (player.infinitied.gt(0) && !player.challenges.includes("challenge1"))
     player.challenges.push("challenge1");
   if (player.matter === undefined || player.matter === null || isNaN(player.matter)) player.matter = new Decimal(0);
   if (player.autobuyers === undefined)
@@ -818,7 +818,7 @@ function onLoad() {
     "Tachyon particles: " +
     (player.options.animations.tachyonParticles ? "ON" : "OFF");
 
-  if (player.infinitied == 0 && player.eternities == 0)
+  if (player.infinitied.eq(0) && player.eternities.eq(0))
     document.getElementById("infinityPoints2").style.display = "none";
 
   if (

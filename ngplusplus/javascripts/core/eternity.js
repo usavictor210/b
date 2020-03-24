@@ -166,7 +166,7 @@ function eternity(force, auto) {
       currentChallenge: "",
       infinityUpgrades: player.infinityUpgrades,
       infinityPoints: new Decimal(0),
-      infinitied: 0,
+      infinitied: new Decimal(0),
       infinitiedBank: player.infinitiedBank,
       totalTimePlayed: player.totalTimePlayed,
       bestInfinityTime: 9999999999,
@@ -405,7 +405,7 @@ function eternity(force, auto) {
     }
     document.getElementById("matter").style.display = "none";
     document.getElementById("quickReset").style.display = "none";
-    if (player.infinitied >= 1 && !player.challenges.includes("challenge1"))
+    if (player.infinitied.gte(1) && !player.challenges.includes("challenge1"))
       player.challenges.push("challenge1");
     var autobuyers = document.getElementsByClassName("autoBuyerDiv");
     if (player.eternities < 2) {
@@ -444,10 +444,10 @@ function eternity(force, auto) {
     dor147Stuff();
     updateMilestones();
     resetTimeDimensions();
-    if (player.eternities < 20) player.autobuyers[9].bulk = 1;
-    if (player.eternities < 20)
+    if (player.eternities.lt(20)) player.autobuyers[9].bulk = 1;
+    if (player.eternities.lt(20))
       document.getElementById("bulkDimboost").value = player.autobuyers[9].bulk;
-    if (player.eternities < 50) {
+    if (player.eternities.lt(50)) {
       document.getElementById("replicantidiv").style.display = "none";
       document.getElementById("replicantiunlock").style.display =
         "inline-block";
@@ -468,7 +468,7 @@ function eternity(force, auto) {
       'You have <span class="IPAmount2">' +
       shortenDimensions(player.infinityPoints) +
       "</span> Infinity points.";
-    if (player.eternities < 2)
+    if (player.eternities.lt(2))
       document.getElementById("break").textContent = "BREAK INFINITY";
     RGDisplayAmount();
     document.getElementById(
@@ -596,7 +596,7 @@ function startEternityChallenge(name, startgoal, goalIncrease) {
       currentChallenge: "",
       infinityUpgrades: player.infinityUpgrades,
       infinityPoints: new Decimal(0),
-      infinitied: 0,
+      infinitied: new Decimal(0),
       infinitiedBank: player.infinitiedBank,
       totalTimePlayed: player.totalTimePlayed,
       bestInfinityTime: 9999999999,
@@ -962,7 +962,7 @@ function getBankedInfinities() {
 let bank = 0
 if (player.achievements.includes("r131")) bank += 0.05
 if (player.timestudy.studies.includes(191)) bank += 0.05
-return player.infinitied * bank
+return player.infinitied.times(bank)
 }
 
 function r124Mult() {

@@ -657,7 +657,7 @@ function updateCoinPerSec() {
 }
 
 function getInfinitied() {
-  return Math.max(player.infinitied + player.infinitiedBank, 0);
+  return Math.max(player.infinitied.add(player.infinitiedBank), 0);
 }
 
 function getGalaxyCostScalingStart() {
@@ -918,13 +918,13 @@ function updateDimensions() {
         shortenDimensions(player.infinityPoints) +
         "</span> Infinity points.";
     }
-    if (player.infinitied == 1)
+    if (player.infinitied.eq(1))
       document.getElementById("infinitied").textContent =
         "You have infinitied 1 time.";
     else
       document.getElementById("infinitied").textContent =
         "You have infinitied " + formatInfOrEter(player.infinitied) + " times.";
-    if (player.infinitiedBank > 0)
+    if (player.eternities.gt(0))
       document.getElementById("infinitied").textContent =
         "You have infinitied " +
         formatInfOrEter(player.infinitied) +
@@ -948,7 +948,7 @@ function updateDimensions() {
     document.getElementById("totalTime").textContent =
       "You have played for " + timeDisplay(player.totalTimePlayed) + ".";
 
-    if (player.eternities == 0) {
+    if (player.eternities.eq(0)) {
       document.getElementById("eternitied").textContent = "";
       document.getElementById("besteternity").textContent = "";
       document.getElementById("thiseternity").textContent = "";
@@ -4843,9 +4843,9 @@ setInterval(function() {
   metaDimensionAchievement();
 
   if (
-    player.infinitied == 0 &&
+    player.infinitied.eq(0) &&
     player.infinityPoints.lt(new Decimal(1e50)) &&
-    player.eternities <= 0
+    player.eternities.lte(0)
   )
     document.getElementById("infinityPoints2").style.display = "none";
   else
