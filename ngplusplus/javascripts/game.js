@@ -1042,8 +1042,8 @@ function updateDimensions() {
         shortenCosts(1e6) +
         " IP";
       var postinfi12 = player.timestudy.studies.includes(31)
-        ? Decimal.pow(Decimal.log(getInfinitied(), 10) * 10, 4).max(1)
-        : Decimal.log(getInfinitied(), 10).times(10).max(1)
+        ? Decimal.pow(new Decimal(getInfinitied().log(10)), 4).max(1)
+        : new Decimal(getInfinitied().log(10)).max(1)
       document.getElementById("postinfi12").innerHTML =
         "Dimensions are more powerful based on your infinitied stat<br>Currently: " +
         shortenMoney(postinfi12) +
@@ -4843,7 +4843,7 @@ setInterval(function() {
   metaDimensionAchievement();
 
   if (
-    player.infinitied.eq(0) &&
+    new Decimal(player.infinitied).eq(0) &&
     player.infinityPoints.lt(new Decimal(1e50)) &&
     player.eternities.eq(0)
   )

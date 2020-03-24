@@ -1,13 +1,13 @@
 function getInfinitiedGain() {
-  let infGain = 1;
+  let infGain = new Decimal(1);
   if (player.thisInfinityTime > 50 && player.achievements.includes("r87")) {
-      infGain = 250;
+      infGain = new Decimal(250);
   }
   let TS32 = Math.max(player.resets, 1)
   if (player.timestudy.studies.includes(271)) TS32 = TS32 * (1e3 * (player.meta.resets + 1))
-  player.timestudy.studies.includes(32) ? infGain *= TS32 : infGain
-  player.achievements.includes("r133") ? infGain *= Math.max(1, Math.floor(player.dilation.dilatedTime.pow(0.25).toNumber())) : infGain = infGain
-  player.achievements.includes("r156") ? infGain *= Math.max(1, Math.floor(Math.log10(player.eternities/250)**0.8)) : infGain = infGain
+  player.timestudy.studies.includes(32) ? infGain.times(TS32) : infGain
+  player.achievements.includes("r133") ? infGain.times(Math.max(1, Math.floor(player.dilation.dilatedTime.pow(0.25).toNumber()))) : infGain = infGain
+  player.achievements.includes("r156") ? infGain.times(Math.max(1, Math.floor(Math.log10(player.eternities/250)**0.8))) : infGain = infGain
   return infGain
 }
 

@@ -811,7 +811,7 @@ function startEternityChallenge(name, startgoal, goalIncrease) {
       player.tickspeed = player.tickspeed.times(0.98);
     if (player.achievements.includes("r45"))
       player.tickspeed = player.tickspeed.times(0.98);
-    if (player.eternities < 30) {
+    if (player.eternities.lt(30)) {
       document.getElementById("secondRow").style.display = "none";
       document.getElementById("thirdRow").style.display = "none";
       document.getElementById("tickSpeed").style.visibility = "hidden";
@@ -827,7 +827,7 @@ function startEternityChallenge(name, startgoal, goalIncrease) {
     document.getElementById("matter").style.display = "none";
     document.getElementById("quickReset").style.display = "none";
     var autobuyers = document.getElementsByClassName("autoBuyerDiv");
-    if (player.eternities < 2) {
+    if (player.eternities.lt(2)) {
       for (var i = 0; i < autobuyers.length; i++)
         autobuyers.item(i).style.display = "none";
       document.getElementById("buyerBtnDimBoost").style.display =
