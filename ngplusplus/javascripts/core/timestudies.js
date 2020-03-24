@@ -937,6 +937,11 @@ function studyTreeSaveButton(num) {
 
 function getTimeStudiesDescription() {
   // update all the time study descriptions. to be honest, i could just get all the TS formulas and put it into one function and then grab those forumlas from that function to this function.
+  let desc1 = Math.floor(player.resets / 2000) == 1 ? " galaxy later" : " galaxies later"; //TS224 
+  let desc2 = Math.floor(player.replicanti.galaxies / 40) == 1 ? " galaxy later" : " galaxies later"; //TS271 
+  let desc3 = Math.floor(player.dilation.freeGalaxies / 80) == 1 ? " galaxy later" : " galaxies later"; //TS272
+  let desc4 = Math.floor(Math.pow(player.resets, 0.3) ** 0.12) != 1 ? "s" : ""; // for TS261
+  let desc5 = player.achievements.includes("r103") ? "307.8" : "308"
   document.getElementById("11desc").textContent =
     "Currently: " +
     shortenMoney(
@@ -1035,6 +1040,7 @@ function getTimeStudiesDescription() {
       Decimal.pow(5, player.replicanti.galaxies)
     ) +
     "x";
+  document.getElementById("111desc").textContent = "(/" + desc5 + " -> /285)"
   document.getElementById("121desc").textContent =
     "Currently: " +
     (
@@ -1111,16 +1117,6 @@ function getTimeStudiesDescription() {
     "x";
   document.getElementById("221desc").textContent =
     "Currently: " + shortenMoney(Decimal.pow(1.0025, player.resets)) + "x";
-  let desc1 =
-    Math.floor(player.resets / 2000) == 1 ? " galaxy later" : " galaxies later"; //TS224
-  let desc2 =
-    Math.floor(player.replicanti.galaxies / 40) == 1
-      ? " galaxy later"
-      : " galaxies later"; //TS271
-  let desc3 =
-    Math.floor(player.dilation.freeGalaxies / 80) == 1
-      ? " galaxy later"
-      : " galaxies later"; //TS272
   document.getElementById("224desc").textContent = //ts224
     "Currently: " + Math.floor(player.resets / 2000) + desc1;
   document.getElementById("225desc").textContent = //ts225
@@ -1149,7 +1145,6 @@ function getTimeStudiesDescription() {
     "Currently: " + Math.floor(player.replicanti.galaxies / 40) + desc2;
   document.getElementById("252desc").textContent =
     "Currently: " + Math.floor(player.dilation.freeGalaxies / 100) + desc3;
-  let desc4 = Math.floor(Math.pow(player.resets, 0.3) ** 0.12) != 1 ? "s" : "";
   document.getElementById("261desc").textContent =
     "Currently: -" +
     Math.floor(Math.pow(player.resets, 0.3) ** 0.12) +
