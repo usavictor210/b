@@ -314,7 +314,7 @@ function eternity(force, auto) {
       timeDimension7: player.timeDimension7,
       timeDimension8: player.timeDimension8,
       eternityPoints: player.eternityPoints,
-      eternities: Math.ceil(player.eternities + calculateEternitiedGain()),
+      eternities: player.eternities.add(calculateEternitiedGain()).ceil(),
       thisEternity: 0,
       bestEternity: player.bestEternity,
       eternityUpgrades: player.eternityUpgrades,
@@ -741,7 +741,7 @@ function startEternityChallenge(name, startgoal, goalIncrease) {
       timeDimension7: player.timeDimension7,
       timeDimension8: player.timeDimension8,
       eternityPoints: player.eternityPoints,
-      eternities: Math.ceil(player.eternities + calculateEternitiedGain()),
+      eternities: player.eternities.add(calculateEternitiedGain()).ceil(),
       thisEternity: 0,
       bestEternity: player.bestEternity,
       eternityUpgrades: player.eternityUpgrades,
@@ -950,13 +950,12 @@ function startDilatedEternity() {
 }
 
 function calculateEternitiedGain() {
-  let base = 1; //eterGain
+  let base = new Decimal(1); //eterGain
   if (player.dilation.upgrades.includes(12))
     base =
-      base *
-      Math.floor(Decimal.pow(player.dilation.dilatedTime, 0.1).toNumber()); // If you have eternities and DT power up each other (x^0.1)
-  if (player.achievements.includes("r155")) base = base * 100; // If you have Sub-atomic (x100 eternitied stat gain)
-  if (player.achievements.includes("r124")) base = base * r124Mult(); // If you have "Eternities are the new infinity"
+      base.times(new Decimal(Decimal.pow(player.dilation.dilatedTime, 0.1).toNumber()).floor()); // If you have eternities and DT power up each other (x^0.1)
+  if (player.achievements.includes("r155")) base = base.times(100); // If you have Sub-atomic (x100 eternitied stat gain)
+  if (player.achievements.includes("r124")) base = base.times(r124Mult()); // If you have "Eternities are the new infinity"
   return base; // grand total
 }
 
