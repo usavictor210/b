@@ -24,13 +24,13 @@ function eternity(force, auto) {
       giveAchievement("Eternities are the new infinity");
       player.dimensionMultDecrease = parseFloat(eterChallReward(6))
       player.tickspeedMultDecrease = parseFloat(eterChallReward(11))
-    if (player.infinitied <= 10 && !force)
+    if (player.infinitied.lte(10) && !force)
       giveAchievement("Do you really need a guide for this?");
     if (Decimal.round(player.replicanti.amount) == 9)
       giveAchievement("We could afford 9");
     if (player.dimlife && !force) giveAchievement("8 nobody got time for that");
     if (player.dead && !force) giveAchievement("You're already dead.");
-    if (player.infinitied <= 1 && !force)
+    if (player.infinitied.lte(1) && !force)
       giveAchievement("Do I really need to infinity");
     if (
       gainedEternityPoints().gte("1e600") &&
@@ -63,8 +63,8 @@ function eternity(force, auto) {
       if (!player.challenges[i].includes("post") && player.eternities > 1)
         temp.push(player.challenges[i]);
     }
-    player.infinitied += getBankedInfinities()
-    if (player.infinitiedBank > 5000000000)
+    player.infinitied = player.infinited.add(getBankedInfinities())
+    if (player.infinitiedBank.gte(5e9))
       giveAchievement("No ethical consumption");
     if (
       player.dilation.active &&
