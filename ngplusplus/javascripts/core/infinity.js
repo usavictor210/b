@@ -304,7 +304,7 @@ function infinity() {
       currentChallenge: player.currentChallenge,
       infinityUpgrades: player.infinityUpgrades,
       infinityPoints: player.infinityPoints,
-      infinitied: player.infinitied + getInfinitiedGain(),
+      infinitied: player.infinitied.add(getInfinitiedGain()),
       infinitiedBank: player.infinitiedBank,
       totalTimePlayed: player.totalTimePlayed,
       bestInfinityTime: Math.min(
