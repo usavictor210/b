@@ -63,7 +63,9 @@ function eternity(force, auto) {
       if (!player.challenges[i].includes("post") && player.eternities > 1)
         temp.push(player.challenges[i]);
     }
-    player.infinitied = player.infinited.add(getBankedInfinities())
+    
+    player.infinitiedBank = new Decimal(player.infinitedBank).plus(getBankedInfinities())
+    
     if (player.infinitiedBank.gte(5e9))
       giveAchievement("No ethical consumption");
     if (

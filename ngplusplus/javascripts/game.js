@@ -5417,13 +5417,13 @@ function gameLoop(diff) {
   )
     player.partInfinitied += diff / player.bestInfinityTime;
   if (player.partInfinitied >= 50) {
-    player.infinitied += Math.floor(player.partInfinitied / 5);
+    player.infinitied.add(Math.floor(player.partInfinitied / 5));
     player.partInfinitied = 0;
   }
 
   if (player.partInfinitied >= 5) {
     player.partInfinitied -= 5;
-    player.infinitied++;
+    player.infinitied = player.infinitied.add(1);
   }
 
   player.infinityPoints = player.infinityPoints.plus(
