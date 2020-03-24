@@ -1791,19 +1791,8 @@ function buyEPMult() {
       );
     }
     player.eternityPoints = player.eternityPoints.minus(player.epmultCost);
-    let count = player.epmult.ln() / Math.log(5);
-    if (player.epmultCost.gte(new Decimal("1e4000")))
-      player.epmultCost = Decimal.pow(
-        1000,
-        count + Math.pow(count - 1334, 1.2)
-      ).times(500);
-    else if (player.epmultCost.gte(new Decimal("1e1300")))
-      player.epmultCost = Decimal.pow(1000, count).times(500);
-    else if (player.epmultCost.gte(Number.MAX_VALUE))
-      player.epmultCost = Decimal.pow(500, count).times(500);
-    else if (player.epmultCost.gte(new Decimal("1e100")))
-      player.epmultCost = Decimal.pow(100, count).times(500);
-    else player.epmultCost = Decimal.pow(50, count).times(500);
+    let count = Math.round(player.epmult.ln() / Math.log(5));
+    player.epmultCost = calculateEPMultCost(count)
     document.getElementById("epmult").innerHTML =
       "You gain 5 times more EP<p>Currently: " +
       shortenDimensions(player.epmult) +
@@ -1815,9 +1804,25 @@ function buyEPMult() {
 }
 
 function buyMaxEPMult() {
-  while (player.eternityPoints.gte(player.epmultCost)) {
-    buyEPMult();
-  }
+  if (player.eternityPoints.lt(player.epmultCost)) return
+  var bought = Math.round(player.epmult.ln()/Math.log(5))
+}
+
+function calculateEPMultCost(x) {
+  let y = new Decimal (1);
+    if (y.gte(new Decimal("1e4000")))
+     y = Decimal.pow(
+        1000,
+        x + Math.pow(x - 1334, 1.2)
+      ).times(500);
+    else if (y.gte(new Decimal("1e1300")))
+      y = Decimal.pow(1000, x).times(500);
+    else if (y.gte(Number.MAX_VALUE))
+      y = Decimal.pow(500, x).times(500);
+    else if (y.gte(new Decimal("1e100")))
+      y = Decimal.pow(100, x).times(500);
+    else y = Decimal.pow(50, x).times(500);
+  return y
 }
 
 function playerInfinityUpgradesOnEternity() {
