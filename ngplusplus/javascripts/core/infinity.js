@@ -7,7 +7,7 @@ function getInfinitiedGain() {
   if (player.timestudy.studies.includes(271))
     TS32 = TS32 * (1e3 * (player.meta.resets + 1));
   player.timestudy.studies.includes(32) ? infGain.times(TS32) : infGain;
- /*player.achievements.includes("r133")
+  player.achievements.includes("r133")
     ? infGain.times(
         Math.max(
           1,
@@ -15,11 +15,11 @@ function getInfinitiedGain() {
         )
       )
     : (infGain = infGain);
- /*player.achievements.includes("r156")
+ player.achievements.includes("r156")
     ? infGain.times(
         Decimal.max(1, Decimal.floor(Decimal.log(player.eternities / 250), 10).pow(0.8))
       )
-    : (infGain = infGain);*/
+    : (infGain = infGain);
   return infGain;
 }
 
