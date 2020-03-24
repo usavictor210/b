@@ -181,7 +181,7 @@ var player = {
   postC4Tier: 0,
   postC3Reward: new Decimal(1),
   eternityPoints: new Decimal(0),
-  eternities: 0,
+  eternities: new Decimal(0),
   thisEternity: 0,
   bestEternity: 9999999999,
   eternityUpgrades: [],
@@ -4845,7 +4845,7 @@ setInterval(function() {
   if (
     player.infinitied.eq(0) &&
     player.infinityPoints.lt(new Decimal(1e50)) &&
-    player.eternities.lte(0)
+    player.eternities.eq(0)
   )
     document.getElementById("infinityPoints2").style.display = "none";
   else
