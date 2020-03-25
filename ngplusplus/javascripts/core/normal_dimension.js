@@ -115,7 +115,7 @@ function getDimensionFinalMultiplier(tier) {
     multiplier = multiplier.times(ec10bonus);
   if (player.timestudy.studies.includes(193))
     multiplier = multiplier.times(
-      Decimal.pow(1.03, player.eternities).min("1e13000")
+      new Decimal (Decimal.pow(1.03, player.eternities).min("1e13000"))
     );
   if (tier == 8 && player.timestudy.studies.includes(214))
     multiplier = multiplier.times(
