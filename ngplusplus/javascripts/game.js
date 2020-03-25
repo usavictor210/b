@@ -1163,23 +1163,19 @@ function updateDimensions() {
       " EP";
     document.getElementById("eter7").innerHTML =
       "Dilated time gain is boosted by antimatter<br>Currently: " +
-      (1 + Math.log10(Math.max(1, player.money.log(10))) / 30).toFixed(3) +
+      Decimal.log((player.money.e+1), 10).div(30).max(1).toFixed(3)
       "x<br>Cost: " +
       shortenCosts(new Decimal("1e1500")) +
       " EP";
     document.getElementById("eter8").innerHTML =
       "Dilated time gain is boosted by infinity points<br>Currently: " +
-      (1 + Math.log10(Math.max(1, player.infinityPoints.log(10))) / 16).toFixed(
-        3
-      ) +
+      Decimal.log(player.infinityPoints+1, 10).div(16).max(1).toFixed(3)+
       "x<br>Cost: " +
       shortenCosts(new Decimal("1e2000")) +
       " EP";
     document.getElementById("eter9").innerHTML =
       "Dilated time gain is boosted by eternity points<br>Currently: " +
-      (1 + Math.log10(Math.max(1, player.eternityPoints.log(10))) / 8).toFixed(
-        3
-      ) +
+      Decimal.log(player.eternityPoints+1, 10).div(8).max(1).toFixed(3)+
       "x<br>Cost: " +
       shortenCosts(new Decimal("1e2500")) +
       " EP";
