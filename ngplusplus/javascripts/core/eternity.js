@@ -382,7 +382,7 @@ function eternity(force, auto) {
     player.respec = false;
     giveAchievement("Time is relative");
     if (milestoneCheck(23)) giveAchievement("This mile took an Eternity"); // 100 eternities
-    if (player.eternities >= 1e12)
+    if (player.eternities.gte(1e12))
       giveAchievement("The cap is a million, not a trillion");
     if (player.replicanti.unl) player.replicanti.amount = new Decimal(1);
     player.replicanti.galaxies = 0;
@@ -494,7 +494,7 @@ function eternity(force, auto) {
       "</span> Eternity point" +
       (player.eternityPoints.eq(1) ? "." : "s.");
     updateEternityChallenges();
-    if (player.eternities <= 1) {
+    if (player.eternities.lte(1)) {
       showTab("dimensions");
       showDimTab("timedimensions");
       loadAutoBuyerSettings();

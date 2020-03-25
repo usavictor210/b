@@ -2313,7 +2313,7 @@ var milestoneRequirements = [
     1e12, //26
     1e13 //27
   ];
-if (player.eternities >= milestoneRequirements[x]) return true;
+if (player.eternities.gte(milestoneRequirements[x])) return true;
 else return false;
 }
 
