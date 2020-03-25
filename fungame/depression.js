@@ -129,7 +129,7 @@ function load() {
   for (var i=1; i<game.costs.length-5; i++) {
     var pbtn = document.createElement("button")
     var otherbtn = document.getElementById(i)
-    pbtn.innerHTML = "Reset to increase multiplier bonus to "+Math.max(game.costs.length-i-5, game.prestige[i-1])+"x boost."
+    pbtn.innerHTML = "Reset to increase the multiplier bonus for this producer to "+Math.max(game.costs.length-i-5, game.prestige[i-1])+"x boost."
     pbtn.id = i+"prestige"
     pbtn.className = "prestigebtn"
     pbtn.onclick = function() {prestige(parseInt(this.id));}
