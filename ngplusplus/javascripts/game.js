@@ -1169,13 +1169,13 @@ function updateDimensions() {
       " EP";
     document.getElementById("eter8").innerHTML =
       "Dilated time gain is boosted by infinity points<br>Currently: " +
-      (1 + Math.log10(Math.max(1, (player.infinityPoints.add(1)).log(16))) / 30).toFixed(3)
+      (1 + Math.log10(Math.max(1, (player.infinityPoints.add(1)).log(16))) / 30).toFixed(3) +
       "x<br>Cost: " +
       shortenCosts(new Decimal("1e2000")) +
       " EP";
     document.getElementById("eter9").innerHTML =
       "Dilated time gain is boosted by eternity points<br>Currently: " +
-      (1 + Math.log10(Math.max(1, (player.eternityPoints.add(1)).log(8))) / 30).toFixed(3)
+      (1 + Math.log10(Math.max(1, (player.eternityPoints.add(1)).log(8))) / 30).toFixed(3) +
       "x<br>Cost: " +
       shortenCosts(new Decimal("1e2500")) +
       " EP";
@@ -2869,7 +2869,7 @@ function galaxyReset() {
   );
   if (player.achievements.includes("r66"))
     player.tickspeed = player.tickspeed.times(0.98);
-  if (player.galaxies >= 540 && player.replicanti.galaxies == 0)
+  if (player.galaxies >= 700 && player.replicanti.galaxies == 0)
     giveAchievement("Unique snowflakes");
   if (canGiveUniversalHarmony()) giveAchievement("Universal harmony");
   updateTickSpeed();
@@ -3343,7 +3343,7 @@ function setAchieveTooltip() {
   infstuff.setAttribute(
     "ach-tooltip",
     "Reach " +
-      shortenCosts(new Decimal("1e140000")) +
+      shortenCosts(new Decimal("1e200000")) +
       " IP without buying IDs or IP multipliers. Reward: You start eternities with all Infinity Challenges unlocked and completed, and your infinity gain is multiplied by dilated time^(1/4)."
   );
   when.setAttribute(
@@ -5314,7 +5314,7 @@ setInterval(function() {
     player.infinityDimension7.baseAmount == 0 &&
     player.infinityDimension8.baseAmount == 0 &&
     player.infMultCost.equals(10) &&
-    player.infinityPoints.gt(new Decimal("1e140000"))
+    player.infinityPoints.gt(new Decimal("1e200000"))
   ) {
     giveAchievement("I never liked this infinity stuff anyway");
   }
