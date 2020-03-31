@@ -580,7 +580,7 @@ function updateNewsArray() {
     ],
     //basic (post-rep)
     [
-      "Thanos is gonna be super dissapointed when he shows up with a fully powered infinity gauntlet, and Hevi has a fully powered eternity gauntlet",
+      "Thanos is gonna be super disappointed when he shows up with a fully powered infinity gauntlet, and Hevi has a fully powered eternity gauntlet",
       "player.eternities > 0",
       "b23"
     ],
@@ -1099,7 +1099,7 @@ function updateNewsArray() {
       "respecced84"
     ],
     [
-      "PLEASE INSERT THE ANTIMATTER INTO THE PROPER SLOT. IF THERE IS NO MORE SLOT, THEN PLEASE TRY AGAIN.",
+      "PLEASE INSERT THE ANTIMATTER INTO THE PROPER SLOT. IF THERE ARE NO MORE SLOTS, THEN PLEASE TRY AGAIN WITH AN EMPTY SLOT.",
       true,
       "respecced85"
     ],
@@ -1218,7 +1218,8 @@ function updateNewsArray() {
     ["The power of the eternal studies surpasses all others. They're mastery studies, but better.", 'player.timestudy.studies.includes(241) || player.timestudy.studies.includes(242)', "respecced117"],
     ["The glitch is glitching now. That's not good. Everything is falling apart!", true, "respecced118"],
     ["Time goes over infinity? I thought we would've died from the heat death by then and never reached infinity seconds!", true, "respecced119"],
-    [""]
+    ["Thanos is going to be super disappointed when he has a full infinity gauntlet and Hevi has a full eternity gauntlet, but Hevi is going to be super disappointed too because he has a full eternity gauntlet and Aarex has a...  Wait, who is the owner of the quantum gauntlet? Usavictor? Despacit? Aarex? Who knows. Anyways, Hevi is upgrading his eternity gauntlet, named the Reality gauntlet, and it is expected to be stronger than the full power Quantum gauntlet.", 'player.quantum.times != 0 && player.newsArray.includes("b23")', "respecced120"],
+    ["If each dimension contains 1.79e308x the antimatter of the last dimension, how do we ever reach 1.05e2466 antimatter?", 'player.money.gt(new Decimal("1.05e2466"))', "respecced121"]
   ];
   }
 var s = document.getElementById("news");
