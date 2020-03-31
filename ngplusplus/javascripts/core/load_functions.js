@@ -1496,7 +1496,6 @@ function transformSaveToDecimal() {
   for (let i=1; i<6; i++) {
   player.quantum.investmentAmount[i] = new Decimal(player.quantum.investmentAmount[i])
   }
-  dev.fixSave()
 }
 
 function loadAutoBuyerSettings() {
