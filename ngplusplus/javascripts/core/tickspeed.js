@@ -21,7 +21,7 @@ function getGalaxies (broken) {
   if (player.challenges.includes("postc5")) galaxies *= 1.1;
   if (player.achievements.includes("r86")) galaxies *= 1.01;
   if (player.achievements.includes("r148")) galaxies *= 1.001;
-  if (player.timestudy.studies.includes(212)) galaxies *= Math.min(Math.pow(player.timeShards.max(2).log2(), 0.005), 1.1);
+  if (player.timestudy.studies.includes(212)) galaxies *= Math.min(Decimal.pow(player.timeShards.max(2).log2(), 0.005), 1.1);
   if (player.timestudy.studies.includes(232)) galaxies *= Math.pow(1+player.galaxies/1000, 0.2);
   return galaxies;
 }
