@@ -1,6 +1,8 @@
 ngplusplus-testing - NG++ Respecced TESTING
 
-read the changelog for very important update information!!!!!
+THIS IS THE TESTING VERSION, NOTHING IS PERMANENT. STUFF WILL BREAK!
+
+read the changelog for very important update information!
 
 http://ngplusplus-testing.glitch.me/ngplusplus/changelog/changelog.html
 
