@@ -137,7 +137,7 @@ function infinity() {
     if (
       player.bestInfinityTime > 600 &&
       !player.break &&
-      player.eternities === 0 &&
+      player.eternities.eq(0) &&
       implosionCheck === 0 &&
       player.options.animations.bigCrunch
     ) {

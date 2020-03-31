@@ -1003,7 +1003,7 @@ function updateEternityButton() {
   if (currentEPmin.gt(EPminpeak) && player.infinityPoints.gte(Number.MAX_VALUE))
     EPminpeak = currentEPmin;
   document.getElementById("eternitybtn").innerHTML =
-    player.eternities == 0
+    player.eternities.eq(0)
       ? "Other times await.. I need to become Eternal"
       : "<b>I need to become Eternal.</b><br>" +
         "Gain <b>" +

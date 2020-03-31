@@ -4992,7 +4992,7 @@ setInterval(function() {
   if (milestoneCheck(22))
     document.getElementById("autoBuyerEter").style.display = "inline-block";
 
-  if (player.eternities == 0)
+  if (player.eternities.neq(0))
     document.getElementById("pasteternities").style.display = "none";
   else document.getElementById("pasteternities").style.display = "inline-block";
   if (player.challenges.length > 1)
@@ -5632,7 +5632,7 @@ function gameLoop(diff) {
     updateTickSpeed();
   }
 
-  if (player.eternities == 0) {
+  if (player.eternities.eq(0)) {
     document.getElementById("eternityPoints2").style.display = "none";
     document.getElementById("eternitystorebtn").style.display = "none";
   } else {
@@ -6341,7 +6341,7 @@ function gameLoop(diff) {
         .setAttribute("ach-tooltip", "Percentage to Eternity Challenge goal");
     } else if (
       player.infinityPoints.lt(Number.MAX_VALUE) ||
-      player.eternities == 0
+      player.eternities.eq(0)
     ) {
       var percentage =
         Math.min(

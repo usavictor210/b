@@ -697,7 +697,7 @@ function onLoad() {
     };
   }
 
-  if (player.eternities == 0) {
+  if (player.eternities.eq(0)) {
     document.getElementById("eternityPoints2").style.display = "none";
     document.getElementById("eternitystorebtn").style.display = "none";
     document.getElementById("tdtabbtn").style.display = "none";
