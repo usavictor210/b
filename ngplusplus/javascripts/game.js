@@ -7700,5 +7700,4 @@ setInterval(function() {
 }, 100);
 setTimeout(drawAnimations, 100);
 setTimeout(onLoad, 100);
-dev.fixSave();
 showQuantumTab;
