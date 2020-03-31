@@ -1216,7 +1216,8 @@ function updateNewsArray() {
       "respcecced116"
     ],
     ["The power of the eternal studies surpasses all others. They're mastery studies, but better.", 'player.timestudy.studies.includes(241) || player.timestudy.studies.includes(242)', "respecced117"],
-    ["The glitch is glitching now. That's not good. Everything is falling apart!", true, "respecced118"]
+    ["The glitch is glitching now. That's not good. Everything is falling apart!", true, "respecced118"],
+    ["Time goes over infinity? I thought we would've died from the heat death by then and never reached infinity seconds!", true, "respecced119"],
     [""]
   ];
   }
