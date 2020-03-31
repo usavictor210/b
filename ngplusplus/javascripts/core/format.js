@@ -211,10 +211,10 @@ function timeDisplay(s) {
       timeFormat +
       (needComma ? "," : "") +
       (needAnd ? " and " : "") +
-      lastTimePart + "."
+      lastTimePart
     );
   } else {
-    return "an eternity.";
+    return "an eternity";
   }
 }
 
@@ -224,8 +224,8 @@ function preformat(int) {
 }
 
 function timeDisplayShort(time) {
-  if (time <= 100) return (time/10).toFixed(3) + " seconds"
-  if (time <= 600) return (time/10).toFixed(2) + " seconds"
+  if (time <= 100) return (time/10).toFixed(3) + " second" + time != 1 ? "s" : ""
+  if (time <= 600) return (time/10).toFixed(2) + " second" + time != 1 ? "s" : "" 
   time = Decimal.floor(time / 10)
   return preformat(Decimal.floor((time) / 3600)) + ":" + preformat(Decimal.floor((time % 3600) / 60)) + ":" + preformat(Decimal.floor(time % 60))
 }
