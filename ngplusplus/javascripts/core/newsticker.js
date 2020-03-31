@@ -516,7 +516,7 @@ function updateNewsArray() {
     ["What does the CTRL button do again?", "controlDown", "b27"],
     //9th dim
     [
-      "9th Dimension is a lie.",
+      "The 9th Dimension is a lie.",
       "player.resets >= 5 || player.galaxies > 0",
       "b6"
     ],
@@ -1103,7 +1103,7 @@ function updateNewsArray() {
       true,
       "respecced85"
     ],
-    ["https://safeyoutube.net/w/4nj1", true, "respecced86"],
+    ["https://safeyoutube.net/w/4nj1", true, "respecced86"], //rickroll
     ["John, I want a divorce.", true, "respecced87"],
     [
       "If the 9th dimension doesn't exist, then why can you obtain 9 antimatter galaxies?",
@@ -1217,6 +1217,7 @@ function updateNewsArray() {
     ],
     ["The power of the eternal studies surpasses all others. They're mastery studies, but better.", 'player.timestudy.studies.includes(241) || player.timestudy.studies.includes(242)', "respecced117"],
     ["The glitch is glitching now. That's not good. Everything is falling apart!", true, "respecced118"]
+    [""]
   ];
   }
 var s = document.getElementById("news");
