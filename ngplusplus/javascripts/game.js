@@ -5693,7 +5693,7 @@ function gameLoop(diff) {
       updateChallenges();
     }
   }
-  let interval = player.replicanti.interval;
+let interval = player.replicanti.interval;
   if (player.timestudy.studies.includes(62)) interval = interval / 5;
   if (
     (player.timestudy.studies.includes(133) &&
@@ -5775,6 +5775,7 @@ function gameLoop(diff) {
       replicantiTicks -= interval;
     }
   }
+  
   if (player.replicanti.amount !== 0)
     replicantiTicks += player.options.updateRate;
 
