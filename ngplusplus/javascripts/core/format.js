@@ -147,18 +147,67 @@ shortenMoney = function (money) {
 };
 
 
-function timeDisplay(time) {
-  if (time <= 100) return (time/10).toFixed(3) + " seconds"
-  time = Decimal.floor(time / 10)
-  if (time >= 31536000) {
-      return Decimal.floor(time / 31536000) + " years, " + Decimal.floor((time % 31536000) / 86400) + " days, " + Decimal.floor((time % 86400) / 3600) + " hours, " + Decimal.floor((time % 3600) / 60) + " minutes, and " + Decimal.floor(time % 60) + " seconds"
-  } else if (time >= 86400) {
-      return Decimal.floor(time / 86400) + " days, " + Decimal.floor((time % 86400) / 3600) + " hours, " + Decimal.floor((time % 3600) / 60) + " minutes, and " + Decimal.floor(time % 60) + " seconds"
-  } else if (time >= 3600) {
-      return Decimal.floor(time / 3600) + " hours, " + Decimal.floor((time % 3600) / 60) + " minutes, and " + Decimal.floor(time % 60) + " seconds"
-  } else if (time >= 60) {
-      return Decimal.floor(time / 60) + " minutes, and " + Decimal.floor(time % 60) + " seconds"
-  } else return Decimal.floor(time % 60) + " seconds"
+
+function timeDisplay(s) {
+  if (s < 1) {
+    if (s < 0.002) return "1 millisecond";
+    return Math.floor(s * 1000) + " milliseconds";
+  } else if (s < 59.5) {
+    if (s < 1.005) return "1 second";
+    return s.toPrecision(2) + " seconds";
+  } else if (s < Number.POSITIVE_INFINITY) {
+    var timeFormat = "";
+    var lastTimePart = "";
+    var needAnd = false;
+    var needComma = false;
+    for (id in timeframes) {
+      if (id == "second") {
+        s = Math.floor(s);
+        if (s > 0) {
+          if (lastTimePart != "") {
+            if (timeFormat == "") {
+              timeFormat = lastTimePart;
+              needAnd = true;
+            } else {
+              timeFormat = timeFormat + ", " + lastTimePart;
+              needComma = true;
+            }
+          }
+          lastTimePart = s + (s == 1 ? " second" : " seconds");
+        }
+      } else if (id == "year") {
+        var amount = Math.floor(s / 31556952);
+        if (amount > 0) {
+          s -= amount * 31556952;
+          lastTimePart =
+            format(amount, 2, 1) + (amount == 1 ? " year" : " years");
+        }
+      } else {
+        var amount = Math.floor(s / timeframes[id]);
+        if (amount > 0) {
+          s -= amount * timeframes[id];
+          if (lastTimePart != "") {
+            if (timeFormat == "") {
+              timeFormat = lastTimePart;
+              needAnd = true;
+            } else {
+              timeFormat = timeFormat + ", " + lastTimePart;
+              needComma = true;
+            }
+          }
+          lastTimePart = amount + " " + id + (amount == 1 ? "" : "s");
+        }
+      }
+    }
+    return (
+      timeFormat +
+      (needComma ? "," : "") +
+      (needAnd ? " and " : "") +
+      lastTimePart + "."
+    );
+  } else {
+    return "an eternity.";
+  }
 }
 
 function preformat(int) {
@@ -171,5 +220,4 @@ function timeDisplayShort(time) {
   if (time <= 600) return (time/10).toFixed(2) + " seconds"
   time = Decimal.floor(time / 10)
   return preformat(Decimal.floor((time) / 3600)) + ":" + preformat(Decimal.floor((time % 3600) / 60)) + ":" + preformat(Decimal.floor(time % 60))
-
-  }
+}
