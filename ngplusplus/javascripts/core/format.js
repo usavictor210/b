@@ -149,6 +149,14 @@ shortenMoney = function (money) {
 
 
 function timeDisplay(s) {
+  var timeframes = {
+  year: 31556952,
+  month: 2629746,
+  day: 86400,
+  hour: 3600,
+  minute: 60,
+  second: 1
+};
   if (s < 1) {
     if (s < 0.002) return "1 millisecond";
     return Math.floor(s * 1000) + " milliseconds";
@@ -180,7 +188,7 @@ function timeDisplay(s) {
         if (amount > 0) {
           s -= amount * 31556952;
           lastTimePart =
-            format(amount, 2, 1) + (amount == 1 ? " year" : " years");
+            shortenMoney(amount) + (amount == 1 ? " year" : " years");
         }
       } else {
         var amount = Math.floor(s / timeframes[id]);

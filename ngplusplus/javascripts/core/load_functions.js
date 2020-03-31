@@ -596,7 +596,7 @@ function onLoad() {
 
   if (player.options.sacrificeConfirmation == false)
     document.getElementById("confirmation").checked = "true";
-  if (player.version === undefined) {
+  if (player.version === undefined) { // this should never go undefined
     // value will need to be adjusted when update goes live
     for (var i = 0; i < player.autobuyers.length; i++) {
       if (player.autobuyers[i] % 1 !== 0)
@@ -696,7 +696,7 @@ function onLoad() {
       studies: []
     };
   }
-
+  player.eternities = new Decimal(player.eternities)
   if (player.eternities.eq(0)) {
     document.getElementById("eternityPoints2").style.display = "none";
     document.getElementById("eternitystorebtn").style.display = "none";
