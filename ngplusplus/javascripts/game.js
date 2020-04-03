@@ -1406,16 +1406,10 @@ function updateEternityChallenges() {
 }
 
 function toggleChallengeRetry() {
-  if (player.options.retryChallenge) {
-    player.options.retryChallenge = false;
     document.getElementById("retry").textContent =
-      "Automatically retry challenges OFF";
-  } else {
-    player.options.retryChallenge = true;
-    document.getElementById("retry").textContent =
-      "Automatically retry challenges ON";
+      "Automatically retry challenges O" + player.options.retryChallenge ? "N" : "FF"
   }
-}
+
 
 document.getElementById("news").onclick = function() {
   if (
@@ -1659,15 +1653,8 @@ document.getElementById("maxall").onclick = function() {
 };
 
 document.getElementById("challengeconfirmation").onclick = function() {
-  if (!player.options.challConf) {
-    player.options.challConf = true;
-    document.getElementById("challengeconfirmation").textContent =
-      "Challenge confirmation OFF";
-  } else {
-    player.options.challConf = false;
-    document.getElementById("challengeconfirmation").textContent =
-      "Challenge confirmation ON";
-  }
+player.options.challConf = !player.options.challConf
+document.getElementById("challengeconfirmation").textContent = "Challenge confirmation: O" + player.options.challConf ? "N" : "FF"
 };
 
 function buyInfinityUpgrade(name, cost) {

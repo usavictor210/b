@@ -1139,13 +1139,9 @@ function onLoad() {
   if (player.options.newsHidden) {
     document.getElementById("game").style.display = "none";
   }
-  if (player.options.challConf) {
     document.getElementById("challengeconfirmation").textContent =
-      "Challenge confirmation OFF";
-  } else {
-    document.getElementById("challengeconfirmation").textContent =
-      "Challenge confirmation ON";
-  }
+      "Challenge confirmation: O" + player.options.challCOnf ? "N" : "FF"
+  
 
   document.getElementById("chartDurationInput").value =
     player.options.chart.duration;
