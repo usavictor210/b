@@ -1139,8 +1139,9 @@ function onLoad() {
   if (player.options.newsHidden) {
     document.getElementById("game").style.display = "none";
   }
+  let chall = player.options.challConf ? "N" : "FF"
     document.getElementById("challengeconfirmation").textContent =
-      "Challenge confirmation: O" + player.options.challCOnf ? "N" : "FF"
+      "Challenge confirmation: O" + chall
   
 
   document.getElementById("chartDurationInput").value =

@@ -1406,8 +1406,10 @@ function updateEternityChallenges() {
 }
 
 function toggleChallengeRetry() {
+  player.options.retryChallenge = !player.options.retryChallenge
+  let retry = player.options.retryChallenge ? "N" : "FF"
     document.getElementById("retry").textContent =
-      "Automatically retry challenges O" + player.options.retryChallenge ? "N" : "FF"
+      "Automatically retry challenges: O" + retry
   }
 
 
@@ -1654,7 +1656,8 @@ document.getElementById("maxall").onclick = function() {
 
 document.getElementById("challengeconfirmation").onclick = function() {
 player.options.challConf = !player.options.challConf
-document.getElementById("challengeconfirmation").textContent = "Challenge confirmation: O" + player.options.challConf ? "N" : "FF"
+let x = player.options.challConf ? "N" : "FF"
+document.getElementById("challengeconfirmation").textContent = "Challenge confirmation: O" + x
 };
 
 function buyInfinityUpgrade(name, cost) {
@@ -3089,7 +3092,8 @@ document.getElementById("reset").onclick = function() {
     updateDimensions();
     updateChallenges();
     updateAutobuyers();
-  } else if (confirm("Do you really want to erase all your progress?")) {
+  } else if (confirm("Do you really want to erase all your progress? YOU WILL GAIN NOTHING FROM HARD RESETTING YOUR GAME. THIS CHANGE IS IRREVERSIBLE. Press OK if you really want to do this.")) {
+    if (confirm("This is your last warning. If you want to erase your progress, please press OK, otherwise press cancel now.")) {
     if (window.location.href.split("//")[1].length > 20)
       set_save("dimensionTestSave", currentSave, defaultStart);
     else set_save("dimensionSave", currentSave, defaultStart);
@@ -3115,6 +3119,7 @@ document.getElementById("reset").onclick = function() {
     updateDimensions();
     updateChallenges();
     updateAutobuyers();
+    }
   }
 };
 
