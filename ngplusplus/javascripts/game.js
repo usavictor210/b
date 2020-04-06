@@ -3216,19 +3216,19 @@ function setAchieveTooltip() {
     "ach-tooltip",
     "Get more than " +
       formatValue(player.options.notation, 1e29, 0, 0) +
-      " ticks per second. Reward: Reduce the starting tick interval by 2%."
+      " ticks per second. Reward: Reduce the initial tick interval by 2%."
   );
   potato2.setAttribute(
     "ach-tooltip",
     "Get more than " +
       formatValue(player.options.notation, 1e58, 0, 0) +
-      " ticks per second. Reward: Reduce the starting tick interval by 2%."
+      " ticks per second. Reward: Reduce the initial tick interval by 2%."
   );
   potato3.setAttribute(
     "ach-tooltip",
     "Get more than " +
       shortenCosts(new Decimal("1e8296262")) +
-      " ticks per second."
+      " ticks per second. Reward: Reduce the initial tick interval by 4%."
   );
   dimensional.setAttribute(
     "ach-tooltip",
@@ -3340,9 +3340,9 @@ function setAchieveTooltip() {
   );
   minaj.setAttribute(
     "ach-tooltip",
-    "Have 180 times more non-bonus replicanti galaxies than normal galaxies. Reward: Replicanti galaxies divide your replicanti by " +
+    "Have 180 times more non-bonus replicanti galaxies than normal galaxies. Reward: When creating replicanti galaxies, your replicanti is divided by " +
       shortenMoney(Number.MAX_VALUE) +
-      " instead of resetting them to 1."
+      " instead of being reset to 1."
   );
   infstuff.setAttribute(
     "ach-tooltip",
@@ -3354,15 +3354,14 @@ function setAchieveTooltip() {
     "ach-tooltip",
     "Reach " +
       shortenCosts(new Decimal("1e20000")) +
-      " replicanti. Reward: You gain replicanti 2 times faster when you have below " +
-      shortenMoney(Number.MAX_VALUE) +
-      " replicanti."
+      " replicanti. Reward: You gain replicanti 2 times faster when your replicanti amount is below " +
+      shortenMoney(Number.MAX_VALUE) + "."
   );
   thinking.setAttribute(
     "ach-tooltip",
     "Eternity for " +
       shortenCosts(new Decimal("1e600")) +
-      " EP in at most 1 minute while dilated."
+      " EP in at most 1 minute while dilated. Reward: NDs gain a multiplier post-dilation based on the "
   );
   thisis.setAttribute(
     "ach-tooltip",
