@@ -3391,13 +3391,13 @@ function setAchieveTooltip() {
     "ach-tooltip",
     "Get " +
       formatValue(player.options.notation, 1e6, 0, 0) +
-      " tickspeed upgrades from time dimensions. Reward: Unlock autobuyers for Max Time Dimensions and 5x EP."
+      " tickspeed upgrades from Time Dimensions. Reward: Unlock autobuyers for Max Time Dimensions and 5x EP."
   );
   nevermetadimension.setAttribute(
     "ach-tooltip",
     "Get at least " +
       formatValue(player.options.notation, 1e25, 0, 0) +
-      "x multiplier on all meta-dimensions. Reward: You can autobuy meta dimensions."
+      "x multiplier on all Meta Dimensions. Reward: You can autobuy meta dimensions."
   );
   sanctum.setAttribute(
     "ach-tooltip",
