@@ -3361,7 +3361,7 @@ function setAchieveTooltip() {
     "ach-tooltip",
     "Eternity for " +
       shortenCosts(new Decimal("1e600")) +
-      " EP in at most 1 minute while dilated. Reward: NDs gain a multiplier post-dilation based on the "
+      " EP in at most 1 minute while dilated. Reward: All dimensions are raised to the power of 1.01 in dilation."
   );
   thisis.setAttribute(
     "ach-tooltip",
