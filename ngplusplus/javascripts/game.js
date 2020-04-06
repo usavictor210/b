@@ -3228,7 +3228,7 @@ function setAchieveTooltip() {
     "ach-tooltip",
     "Get more than " +
       shortenCosts(new Decimal("1e8296262")) +
-      " ticks per second. Reward: Reduce the initial tick interval by 4%."
+      " ticks per second. Reward: Reduce the initial tick interval by 5%."
   );
   dimensional.setAttribute(
     "ach-tooltip",

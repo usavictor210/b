@@ -40,6 +40,9 @@ function getTimeDimensionPower(tier) {
     if (player.dilation.upgrades.includes(11)) {
       ret = Decimal.pow(10, Math.pow(ret.log10(), 1.05))
     }
+    if (player.achievements.includes("r137")) {
+      ret = Decimal.pow(10, Math.pow(ret.log10(), 1.01))
+    }
   }
 
   if (ret.lt(1)) {
@@ -55,6 +58,7 @@ function getTimeDimensionPower(tier) {
 function getInfiniteTimeReward() {
 return (player.tickspeed.div(1000).pow(0.000005))
 }
+
 function getTimeDimensionProduction(tier) {
   if (player.currentEternityChall == "eterc10") return new Decimal(0)
   var dim = player["timeDimension"+tier]

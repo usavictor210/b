@@ -991,6 +991,9 @@ function getDimensionProductionPerSecond(tier) {
     if (player.dilation.upgrades.includes(11)) {
       tick = Decimal.pow(10, Math.pow(Math.abs(tick.log10()), 1.05));
     }
+    if (player.achievements.includes("r137")) {
+      tick = Decimal.pow(10, Math.pow(Math.abs(tick.log10()), 1.01))
+    }
     tick = new Decimal(1).dividedBy(tick);
     ret = Decimal.floor(player[TIER_NAMES[tier] + "Amount"])
       .times(getDimensionFinalMultiplier(tier))
