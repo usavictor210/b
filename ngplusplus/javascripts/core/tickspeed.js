@@ -12,6 +12,7 @@ function getGalaxies (broken) {
     else if (player.achievements.includes('r143')) galaxies += player.replicanti.galaxies
     if (player.timestudy.studies.includes(132)) if (!player.achievements.includes('r143')) galaxies += player.replicanti.galaxies*0.4
     else if (player.achievements.includes('r143')) galaxies += player.replicanti.galaxies*0.5
+    if (player.achievements.includes("r132")) galaxies += player.replicanti.galaxies*0.0025
     if (player.timestudy.studies.includes(225)) galaxies += Math.floor(player.replicanti.amount.e / 1000)
     if (player.timestudy.studies.includes(226)) galaxies += Math.floor(player.replicanti.gal / 15)
     galaxies += Math.min(player.replicanti.galaxies, player.replicanti.gal) * Decimal.max(Decimal.pow(Math.log10(player.infinityPower.plus(1).log10()+1), 0.03 * ECTimesCompleted("eterc8")), 0)

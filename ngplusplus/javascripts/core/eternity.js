@@ -949,6 +949,11 @@ function startDilatedEternity() {
   }, 250);
 }
 
+function displayEterMilestoneButton() {
+if (milestoneCheck(26)) document.getElementById("reward26enable").style.display = "inline-block";
+  else document.getElementById("reward26enable").style.display = "none";
+}
+
 function calculateEternitiedGain() {
   let base = new Decimal(1); //eterGain
   if (player.dilation.upgrades.includes(12))

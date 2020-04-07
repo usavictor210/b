@@ -572,10 +572,11 @@ function getReplMult() {
     Decimal.log2(Decimal.max(player.replicanti.amount, 1)),
     2
   );
+  var r132 = player.achievements.includes("r132") ? Decimal.floor(player.galaxies/4) : 0
   if (player.timestudy.studies.includes(21))
     replmult = replmult.plus(Decimal.pow(player.replicanti.amount, 0.032));
   if (player.timestudy.studies.includes(102))
-    replmult = replmult.times(Decimal.pow(5, player.replicanti.galaxies, 150));
+    replmult = replmult.times(Decimal.pow(5, (player.replicanti.galaxies + r132), 150));
   if (player.achievements.includes("r108")) replmult = replmult.pow(1.09);
   if (player.quantum.investmentAmount[3].gt(0))
     replmult = replmult.pow(getInvestMultiplier(3));
