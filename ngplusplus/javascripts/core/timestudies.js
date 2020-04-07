@@ -1037,7 +1037,7 @@ function getTimeStudiesDescription() {
   document.getElementById("102desc").textContent =
     "Currently: " +
     shortenMoney(
-      Decimal.pow(5, player.replicanti.galaxies)
+      Decimal.pow(5, (player.replicanti.galaxies + player.achievements.includes("r132") ? Decimal.floor(player.galaxies/4) : 0))
     ) +
     "x";
   document.getElementById("111desc").textContent = "(/" + desc5 + " -> /285)"

@@ -950,8 +950,7 @@ function startDilatedEternity() {
 }
 
 function displayEterMilestoneButton() {
-if (milestoneCheck(26)) document.getElementById("reward26enable").style.display = "inline-block";
-  else document.getElementById("reward26enable").style.display = "none";
+document.getElementById("reward26enable").style.display = milestoneCheck(26) ? "inline-block" : "none";
 }
 
 function calculateEternitiedGain() {

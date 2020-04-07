@@ -5023,7 +5023,8 @@ setInterval(function() {
   }
 
   dor147Stuff();
-
+  displayEterMilestoneButton();
+  
   if (
     milestoneCheck(19) &&
     player.replicanti.auto[0] &&
@@ -6497,7 +6498,8 @@ let interval = player.replicanti.interval;
   if (player.money.gt(Decimal.pow(10, (3 * 86400 * 365.2425 * 79.3) / 10))) {
     var years = player.money.log10() / 3 / 86400 / 365.2425;
     if (years > 2019) {
-      eventBC = years - 2018;
+    var eventBC = years - 2018;
+    var since
       if (eventBC > 5.332e6) {
         since = "???";
         eventBC = 1 / 0 - eventBC;
