@@ -5711,7 +5711,7 @@ let interval = player.replicanti.interval;
   var est = (Math.log(player.replicanti.chance + 1) * 1000) / interval;
 
   var current = player.replicanti.amount.ln();
-  if (player.replicanti.amount.lt(1)) player.replicanti.amount = new Decimal(1);
+  if (player.replicanti.amount.lt(1) || isNaN(player.replicanti.amount)) player.replicanti.amount = new Decimal(1);
   if (
     player.replicanti.unl &&
     (diff > 5 || interval < 50 || player.timestudy.studies.includes(192))
@@ -5836,7 +5836,7 @@ let interval = player.replicanti.interval;
   document.getElementById("replicantiapprox").textContent =
     "Approximately " +
     timeDisplay(estimate * 10) +
-    " until infinite Replicanti";
+    " until infinite Replicanti.";
 
   document.getElementById("replicantiamount").textContent = shortenDimensions(
     player.replicanti.amount
