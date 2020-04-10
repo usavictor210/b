@@ -632,6 +632,6 @@ function resetInfMult() {
 function updateSacrificeMultText() {
 let ts227 = player.timestudy.studies.includes(227) ? "1st Dimension," : ""
 let text = "Sacrifice multiplier (affects " + ts227 + "8th Dimension): " + shortenDimensions(calcTotalSacrificeBoost().max(1)) + "x" 
-document.getElementById("sacMult").style.display = player.resets > 4 ? "inline-block" : "none"
+document.getElementById("sacMult").style.display = (player.resets > 4 || player.infinitied.gte(1) || player.eternitied.gte(1) || player.quantum.times > 1) ? "inline-block" : "none"
 document.getElementById("sacMult").textContent = text
 }
