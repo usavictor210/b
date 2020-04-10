@@ -741,7 +741,7 @@ function startEternityChallenge(name, startgoal, goalIncrease) {
       timeDimension7: player.timeDimension7,
       timeDimension8: player.timeDimension8,
       eternityPoints: player.eternityPoints,
-      eternities: Decimal.ceiling(player.eternities.add(getEternitiedGain())),
+      eternities: player.eternities.add(getEternitiedGain()),
       thisEternity: 0,
       bestEternity: player.bestEternity,
       eternityUpgrades: player.eternityUpgrades,
