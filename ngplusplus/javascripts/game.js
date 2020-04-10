@@ -1777,47 +1777,6 @@ function buyEternityUpgrade(name, cost) {
   }
 }
 
-function buyEPMult() {
-  if (player.eternityPoints.gte(player.epmultCost)) {
-    player.epmult = player.epmult.times(5);
-    if (player.autoEterMode === "amount") {
-      player.eternityBuyer.limit = player.eternityBuyer.limit.times(5);
-      document.getElementById("priority13").value = formatValue(
-        "Scientific",
-        player.eternityBuyer.limit,
-        2,
-        0
-      );
-    }
-    player.eternityPoints = player.eternityPoints.minus(player.epmultCost);
-    let count = Math.round(player.epmult.ln() / Math.log(5));
-    player.epmultCost = calculateEPMultCost(count);
-    document.getElementById("epmult").innerHTML =
-      "You gain 5 times more EP<p>Currently: " +
-      shortenDimensions(player.epmult) +
-      "x<p>Cost: " +
-      shortenDimensions(player.epmultCost) +
-      " EP";
-    updateEternityUpgrades();
-  }
-}
-
-function buyMaxEPMult() {
-  if (player.eternityPoints.lt(player.epmultCost)) return;
-  var bought = Math.round(player.epmult.ln() / Math.log(5));
-}
-
-function calculateEPMultCost(x) {
-  let y = new Decimal(1);
-  if (y.gte(new Decimal("1e4000")))
-    y = Decimal.pow(1000, x + Math.pow(x - 1334, 1.2)).times(500);
-  else if (y.gte(new Decimal("1e1300"))) y = Decimal.pow(1000, x).times(500);
-  else if (y.gte(Number.MAX_VALUE)) y = Decimal.pow(500, x).times(500);
-  else if (y.gte(new Decimal("1e100"))) y = Decimal.pow(100, x).times(500);
-  else y = Decimal.pow(50, x).times(500);
-  return y;
-}
-
 function playerInfinityUpgradesOnEternity() {
   if (player.eternities < 4) player.infinityUpgrades = [];
   else if (player.eternities < 20)

@@ -1409,6 +1409,58 @@ function r127Reward() {
   ).max(1);
 }
 
+
+function getEPCost(bought) {
+	if (player.galacticSacrifice !== undefined) return Decimal.pow(50,bought).times(500)
+	return Decimal.pow(bought>481?1e3:bought>153?500:bought>58?100:50, bought + Math.pow(Math.max(bought-1334, 0), 1.2)).times(500)	
+}
+
+function buyEPMult() {
+    if (player.eternityPoints.gte(player.epmultCost)) {
+        player.epmult = player.epmult.times(5)
+        if (player.autoEterMode === undefined || player.autoEterMode === 'amount') {
+            player.eternityBuyer.limit = Decimal.times(player.eternityBuyer.limit, 5);
+            document.getElementById("priority13").value = formatValue("Scientific", player.eternityBuyer.limit, 2, 0);
+        }
+        player.eternityPoints = player.eternityPoints.minus(player.epmultCost)
+        player.epmultCost = getEPCost(Math.round(player.epmult.ln()/Math.log(5)))
+        document.getElementById("epmult").innerHTML = "You gain 5 times more EP<p>Currently: "+shortenDimensions(player.epmult)+"x<p>Cost: "+shortenDimensions(player.epmultCost)+" EP"
+        updateEternityUpgrades()
+    }
+}
+
+function buyMaxEPMult() {
+	if (player.eternityPoints.lt(player.epmultCost)) return
+	var bought=Math.round(player.epmult.ln()/Math.log(5))
+	var increment=1
+	while (player.eternityPoints.gte(getEPCost(bought+increment*2-1))) {
+		increment*=2
+	}
+	var toBuy=increment
+	for (p=0;p<53;p++) {
+		increment/=2
+		if (increment<1) break
+		if (player.eternityPoints.gte(getEPCost(bought+toBuy+increment-1))) toBuy+=increment
+	}
+	var num=toBuy
+	var newEP=player.eternityPoints
+	while (num>0) {
+		var temp=newEP
+		var cost=getEPCost(bought+num-1)
+		if (newEP.lt(cost)) {
+			newEP=player.eternityPoints.sub(cost)
+			toBuy--
+		} else newEP=newEP.sub(cost)
+		if (newEP.eq(temp)||num>9007199254740992) break
+		num--
+	}
+	player.eternityPoints=newEP
+	if (isNaN(newEP.e)) player.eternityPoints = new Decimal(0)
+	player.epmult=player.epmult.times(Decimal.pow(5, toBuy))
+	player.epmultCost=getEPCost(bought+toBuy)
+	document.getElementById("epmult").innerHTML = "You gain 5 times more EP<p>Currently: "+shortenDimensions(player.epmult)+"x<p>Cost: "+shortenDimensions(player.epmultCost)+" EP"
+}
+
 function eterUpgrade(x) {}
 
 function RGDisplayAmount() {
