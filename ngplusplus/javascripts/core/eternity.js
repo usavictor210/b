@@ -64,7 +64,7 @@ function eternity(force, auto) {
         temp.push(player.challenges[i]);
     }
     
-    player.infinitiedBank = new Decimal(player.infinitedBank).plus(getBankedInfinities())
+    player.infinitiedBank = new Decimal(player.infinitiedBank).add(getBankedInfinities())
     
     if (player.infinitiedBank.gte(5e9))
       giveAchievement("No ethical consumption");
@@ -314,7 +314,7 @@ function eternity(force, auto) {
       timeDimension7: player.timeDimension7,
       timeDimension8: player.timeDimension8,
       eternityPoints: player.eternityPoints,
-      eternities: player.eternities.add(calculateEternitiedGain()).ceil(),
+      eternities: player.eternities.add(getEternitiedGain()),
       thisEternity: 0,
       bestEternity: player.bestEternity,
       eternityUpgrades: player.eternityUpgrades,
@@ -510,7 +510,7 @@ function startEternityChallenge(name, startgoal, goalIncrease) {
   )
     return;
   if (
-    player.options.challConf || name == ""
+    !player.options.challConf || name == ""
       ? true
       : confirm(
           "You will start over with just your time studies, eternity upgrades and achievements. You need to reach a certain amount of infinity points with special conditions."
@@ -741,7 +741,7 @@ function startEternityChallenge(name, startgoal, goalIncrease) {
       timeDimension7: player.timeDimension7,
       timeDimension8: player.timeDimension8,
       eternityPoints: player.eternityPoints,
-      eternities: player.eternities.add(calculateEternitiedGain()).ceil(),
+      eternities: Decimal.ceiling(player.eternities.add(getEternitiedGain())),
       thisEternity: 0,
       bestEternity: player.bestEternity,
       eternityUpgrades: player.eternityUpgrades,
@@ -953,21 +953,21 @@ function displayEterMilestoneButton() {
 document.getElementById("reward26enable").style.display = milestoneCheck(26) ? "inline-block" : "none";
 }
 
-function calculateEternitiedGain() {
+function getEternitiedGain() {
   let base = new Decimal(1); //eterGain
   if (player.dilation.upgrades.includes(12))
     base =
       base.times(new Decimal(Decimal.pow(player.dilation.dilatedTime, 0.1).toNumber()).floor()); // If you have eternities and DT power up each other (x^0.1)
   if (player.achievements.includes("r155")) base = base.times(100); // If you have Sub-atomic (x100 eternitied stat gain)
   if (player.achievements.includes("r124")) base = base.times(r124Mult()); // If you have "Eternities are the new infinity"
-  return base; // grand total
+  return Decimal.floor(base); // grand total
 }
 
 function getBankedInfinities() {
 let bank = 0
 if (player.achievements.includes("r131")) bank += 0.05
 if (player.timestudy.studies.includes(191)) bank += 0.05
-return player.infinitied.times(bank)
+return Decimal.floor(player.infinitied.times(bank))
 }
 
 function r124Mult() {
@@ -1035,7 +1035,7 @@ function updateEternityButton() {
       shortenDimensions(gainedEternityPoints()) +
       "</b> Eternity points.<br>" +
       "+" +
-      shortenDimensions(calculateEternitiedGain()) +
+      shortenDimensions(getEternitiedGain()) +
       " eternities";
   }
   if (player.dilation.active)
@@ -1281,7 +1281,7 @@ function getDilReq() {
 
 function getDilPunish() {
   let x = 0.75;
-  x = x ** (calculateDilationSeverity() ** 0.25);
+  x = x ** (getDilationSeverity() ** 0.25);
   return x;
 }
 

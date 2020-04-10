@@ -4339,7 +4339,7 @@ function exitChallenge() {
 
 function startChallenge(name, target) {
   if (
-    player.options.challConf || name == ""
+    !player.options.challConf || name == ""
       ? true
       : name.includes("post")
       ? confirm(
@@ -6910,7 +6910,7 @@ let interval = player.replicanti.interval;
     }
   }
   updateQuantum();
-  calculateDilationSeverity();
+  getDilationSeverity();
   autoTTCycle();
   updateInvestmentDisplay();
   updateSacrificeMultText();
