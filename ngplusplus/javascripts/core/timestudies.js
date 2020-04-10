@@ -1179,7 +1179,7 @@ function getTimeStudiesDescription() {
     "x";
   document.getElementById("unknownCost").textContent = shortenCosts(
     // the unknown time theorem isn't even coded yet, this is a placeholder
-    new Decimal.pow(10, Math.random() * 20 + 300)
+    new Decimal(10).pow(Math.random() * 20 + 300)
   );
 }
 function getECStudyDescription() {
