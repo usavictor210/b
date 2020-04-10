@@ -5717,7 +5717,7 @@ let interval = player.replicanti.interval;
     (diff > 5 || interval < 50 || player.timestudy.studies.includes(192))
   ) {
     var gained = Decimal.pow(Math.E, current + (diff * est) / 10);
-    let c = Math.log10(getReplSpeed()) / 308;
+    let c = Decimal.log(getReplSpeed(), 10) / 308;
     if (player.timestudy.studies.includes(192)) {
       gained = Decimal.pow(
         Math.E,
