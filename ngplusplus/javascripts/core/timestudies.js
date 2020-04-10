@@ -943,9 +943,9 @@ function getTimeStudiesDescription() {
   let desc4 = Math.floor(Math.pow(player.resets, 0.3) ** 0.12) != 1 ? "s" : ""; // for TS261
   let desc5 = player.achievements.includes("r103") ? "307.8" : "308"
   let desc102a = player.achievements.includes("r132") ? Decimal.floor(player.galaxies/4) : 0
-  let desc102b = player.achievements.includes("r132") ? "and normal galaxies (floor(galaxies/4))" : ""
+  let desc102b = player.achievements.includes("r132") ? "and normal galaxies " : ""
   let desc103a = player.achievements.includes("r132") ? Decimal.floor(player.galaxies/4) : 0
-  let desc103b = player.achievements.includes("r132") ? "and normal galaxies (floor(galaxies/4))" : ""
+  let desc103b = player.achievements.includes("r132") ? "and normal galaxies " : ""
   document.getElementById("11desc").textContent =
     "Currently: " +
     shortenMoney(

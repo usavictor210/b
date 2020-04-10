@@ -1162,9 +1162,7 @@ function updateDimensions() {
       " EP";
     document.getElementById("eter6").innerHTML =
       "Time Dimensions are more powerful based on time played<br>Currently: " +
-      shortenDimensions(
-        new Decimal(player.totalTimePlayed / (10 * 21600)).max(1).min(100)
-      ) +
+      new Decimal(player.totalTimePlayed / (10 * 21600)).max(1).min(100).toFixed(2) +
       "x<br>Cost: " +
       shortenCosts(1e50) +
       " EP";
