@@ -942,10 +942,11 @@ function getTimeStudiesDescription() {
   let desc3 = Math.floor(player.dilation.freeGalaxies / 80) == 1 ? " galaxy later" : " galaxies later"; //TS272
   let desc4 = Math.floor(Math.pow(player.resets, 0.3) ** 0.12) != 1 ? "s" : ""; // for TS261
   let desc5 = player.achievements.includes("r103") ? "307.8" : "308"
-  let desc102a = player.achievements.includes("r132") ? Decimal.floor(player.galaxies/4) : 0
+  let r132 = Decimal.floor(player.galaxies/4)
+  let desc102a = player.achievements.includes("r132") ? r132 : 0
   let desc102b = player.achievements.includes("r132") ? "and normal galaxies " : ""
-  let desc103a = player.achievements.includes("r132") ? Decimal.floor(player.galaxies/4) : 0
-  let desc103b = player.achievements.includes("r132") ? "and normal galaxies " : ""
+  let desc103a = player.achievements.includes("r132") ? r132 : 0
+  let desc103b = player.achievements.includes("r132") ? "and normal galaxy " : ""
   document.getElementById("11desc").textContent =
     "Currently: " +
     shortenMoney(
@@ -1042,14 +1043,14 @@ function getTimeStudiesDescription() {
   document.getElementById("102desc").textContent =
     "Currently: " +
     shortenMoney(
-      Decimal.pow(5, (player.replicanti.galaxies + desc102a))
+      Decimal.pow(5, Decimal.max((new Decimal (player.replicanti.galaxies).add(r132)), 1))
     ) +
     "x";
   document.getElementById("103startdesc").textContent = "Time Dimensions are stronger based on your replicanti galaxy " + desc103b + "amount." 
   document.getElementById("103desc").textContent =
     "Currently: " +
     shortenMoney(
-      Decimal.max((player.replicanti.galaxies + desc103a), 1)
+      Decimal.max(Decimal.max((new Decimal (player.replicanti.galaxies).add(r132)), 1))
     ) +
     "x";
   document.getElementById("111desc").textContent = "(/" + desc5 + " -> /285)"

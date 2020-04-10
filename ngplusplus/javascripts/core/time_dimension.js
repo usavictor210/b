@@ -12,7 +12,7 @@ function getTimeDimensionPower(tier) {
   if (player.eternityUpgrades.includes(6)) ret = ret.times(player.totalTimePlayed / (10*21600)).max(1)
   if (player.timestudy.studies.includes(73) && tier == 3) ret = ret.times(calcTotalSacrificeBoost().pow(0.005).min(new Decimal("1e1300")))
   if (player.timestudy.studies.includes(93)) ret = ret.times(Decimal.pow(player.totalTickGained, 0.25).max(1))
-  if (player.timestudy.studies.includes(103)) ret = ret.times(Math.max((player.replicanti.galaxies + r132), 1))
+  if (player.timestudy.studies.includes(103)) ret = ret.times(Decimal.max((new Decimal (player.replicanti.galaxies).add(r132)), 1))
   if (player.timestudy.studies.includes(151)) ret = ret.times(1e4)
   if (player.timestudy.studies.includes(221)) ret = ret.times(Decimal.pow(1.0025, player.resets))
   if (player.timestudy.studies.includes(227) && tier == 4) ret = ret.times(Math.max(Math.pow(calcTotalSacrificeBoost().log10(), 10), 1))
