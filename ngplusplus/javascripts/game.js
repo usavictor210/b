@@ -6915,6 +6915,7 @@ let interval = player.replicanti.interval;
   calculateDilationSeverity();
   autoTTCycle();
   updateInvestmentDisplay();
+  updateSacrificeMultText();
   player.lastUpdate = thisUpdate;
 }
 

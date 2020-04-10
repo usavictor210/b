@@ -628,3 +628,8 @@ function resetInfMult() {
     player.infMult = player.infMult.times(4);
   player.infMultCost = new Decimal(10);
 }
+
+function updateSacrificeMultText() {
+document.getElementById("sacMult").style.display = player.resets > 4 ? "inline-block" : "none"
+document.getElementById("sacMult").textContent = "Sacrifice multiplier: " + shortenDimensions(calcTotalSacrificeBoost().max(1)) + "x"
+}
