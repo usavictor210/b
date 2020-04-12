@@ -1177,6 +1177,9 @@ function updateDilationUpgradeButtons() {
           : "dilationupg";
     }
   }
+   document.getElementById("dil2desc").textContent =
+    "Currently: " +
+    (1.35 + 3.65 * Math.pow(0.8, player.dilation.rebuyables[2])).toFixed(3) + " -> " + (1.35 + 3.65 * Math.pow(0.8, player.dilation.rebuyables[2]+1)).toFixed(3);
   document.getElementById("dil3desc").textContent =
     "Currently: " +
     shortenMoney(Decimal.pow(3, player.dilation.rebuyables[3])) +
@@ -1339,7 +1342,7 @@ function getDil14Bonus() {
 }
 
 function getDil16Bonus() {
-  return Math.pow(player.meta.bestAntimatter.log10() / 2.5, 0.5);
+  return Decimal.max(Math.pow(player.meta.bestAntimatter.log10() / 2.5, 0.5), 1);
 }
 
 function getDil18Bonus() {
