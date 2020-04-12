@@ -1135,9 +1135,9 @@ function buyDilationUpgrade(id, costInc) {
     );
     // consistency
     player.dilation.upgrades.push(id);
-    if (id == 5) if (player.dilation.freeGalaxies*2 < 1100) {
+    if (id == 5) if (player.dilation.freeGalaxies*2 < 1200) {
     player.dilation.freeGalaxies *= 2; // Double the current galaxies
-    } else player.dilation.freeGalaxies += 550 // If over 1,100 galaxies (550 galaxies), only "double" up to 550 galaxies
+    } else player.dilation.freeGalaxies += 600 // If over 1,100 galaxies (550 galaxies), only "double" up to 550 galaxies
   } else {
     // Is rebuyable
     let realCost = getDilRebuyableUpgCost(id);
