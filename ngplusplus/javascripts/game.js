@@ -3310,9 +3310,9 @@ function setAchieveTooltip() {
   when.setAttribute(
     "ach-tooltip",
     "Reach " +
-      shortenCosts(new Decimal("1e20000")) +
+      shortenCosts(new Decimal("1e17500")) +
       " replicanti. Reward: You gain replicanti 2 times faster when your replicanti amount is below " +
-      shortenMoney(Number.MAX_VALUE) + "."
+      shortenMoney(Number.MAX_VALUE) + ", and replicanti chance ."
   );
   thinking.setAttribute(
     "ach-tooltip",
@@ -4773,7 +4773,7 @@ setInterval(function() {
 var nextAt = [
   //ic unlock requirements
   new Decimal("1e2000"),
-  new Decimal("1e5000"),
+  new Decimal("1e10000"),
   new Decimal("1e12000"),
   new Decimal("1e14000"),
   new Decimal("1e18000"),
@@ -5280,7 +5280,7 @@ setInterval(function() {
     giveAchievement("I never liked this infinity stuff anyway");
   }
 
-  if (player.replicanti.amount.gt(new Decimal("1e20000")))
+  if (player.replicanti.amount.gt(new Decimal("1e17500")))
     giveAchievement("When will it be enough?");
   if (player.replicanti.amount.gt(new Decimal("1e100000")))
     giveAchievement("It will never be enough");
