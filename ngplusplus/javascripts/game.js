@@ -3312,7 +3312,7 @@ function setAchieveTooltip() {
     "Reach " +
       shortenCosts(new Decimal("1e17500")) +
       " replicanti. Reward: You gain replicanti 2 times faster when your replicanti amount is below " +
-      shortenMoney(Number.MAX_VALUE) + ", and replicanti chance ."
+      shortenMoney(Number.MAX_VALUE) + ", and replicanti chance slightly increases based on your replicanti galaxies."
   );
   thinking.setAttribute(
     "ach-tooltip",
