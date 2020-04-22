@@ -3543,7 +3543,7 @@ function sacrifice(auto = false) {
 }
 
 document.getElementById("sacrifice").onclick = function() {
-  if (!document.getElementById("confirmation").checked) {
+  if (!document.getElementById("confirmation").checked && sacrifice() == !false) {
     if (
       !confirm(
         "Dimensional Sacrifice will remove all of your first to seventh dimensions (with the cost and multiplier unchanged) for a boost to the Eighth Dimension. It will take time to regain production."

@@ -1223,7 +1223,7 @@ function getECStudyDescription() {
     document.getElementById("ec5unl").innerHTML =
       "Eternity Challenge 5<span>Requirement: " +
       (160 + ECTimesCompleted("eterc5") * 14) +
-      " galaxies<span>Cost: 130 Time Theorems";
+      " normal galaxies<span>Cost: 130 Time Theorems";
   else
     document.getElementById("ec5unl").innerHTML =
       "Eternity Challenge 5<span>Cost: 130 Time Theorems";
@@ -1285,9 +1285,9 @@ function getECStudyDescription() {
       "Eternity Challenge 10<span>Cost: 550 Time Theorems";
 
   document.getElementById("ec11unl").innerHTML =
-    "Eternity Challenge 11<span>Requirement: Use only the Normal Dimension path<span>Cost: 1 Time Theorem";
+    "Eternity Challenge 11<span>Requirement: Use only the Normal Dimension path.<span>Cost: 1 Time Theorem";
   document.getElementById("ec12unl").innerHTML =
-    "Eternity Challenge 12<span>Requirement: Use only the Time Dimension path<span>Cost: 1 Time Theorem";
+    "Eternity Challenge 12<span>Requirement: Use only the Time Dimension path.<span>Cost: 1 Time Theorem";
 
   if (player.dilation.studies.includes(1))
     document.getElementById("dilstudy1").innerHTML =
