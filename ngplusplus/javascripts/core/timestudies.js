@@ -112,18 +112,18 @@ function updatePenalty() {
   document.getElementById(
     "131penalty"
   ).innerHTML = player.achievements.includes("r143")
-    ? "You can get 50% more replicanti galaxies"
-    : "Automatic replicanti galaxies are disabled, but you can get 50% more";
+    ? "You can get 50% more replicanti galaxies."
+    : "Automatic replicanti galaxies are disabled, but you can get 50% more.";
   document.getElementById(
     "132penalty"
   ).innerHTML = player.achievements.includes("r143")
-    ? "Replicanti galaxies are 50% stronger"
-    : "Replicanti galaxies are 40% stronger";
+    ? "Replicanti galaxies are 50% stronger."
+    : "Replicanti galaxies are 40% stronger.";
   document.getElementById(
     "133penalty"
   ).innerHTML = player.achievements.includes("r143")
-    ? "Replicanti galaxies are 50% stronger"
-    : "Replicanti interval is 10x slower until infinity, but RGs are 50% stronger";
+    ? "Replicanti galaxies are 50% stronger."
+    : "Replicanti interval is 10x slower until Infinity, but RGs are 50% stronger.";
 }
 function updateTheoremButtons() {
   if (player.dilation.upgrades.includes(17)) {
@@ -494,7 +494,7 @@ function canBuyStudy(name) {
 
 function canBuyDilationStudy(name) {
   if (
-    name == 1 && //buying Time Dilation for 5000 TT
+    name == 1 && // buying Time Dilation for 5000 TT
     ECTimesCompleted("eterc11") >= 5 &&
     ECTimesCompleted("eterc12") >= 5 &&
     player.timestudy.amcost.log10() / 20000 +
@@ -669,7 +669,7 @@ var eternalStudyCosts = [
   1e100,
   1e115
 ];
-//these two lines below are adding the entries of bent studies and existing studies together since i need to refer to bent studies as they are for some functions.
+//these two lines below are adding the entries of eternal studies and existing studies together since i need to refer to eternal studies as they are for some functions.
 studyCosts = studyCosts.concat(eternalStudyCosts);
 all = all.concat(eternalStudy);
 function updateTimeStudyButtons() {
