@@ -164,10 +164,3 @@ function preformat(int) {
   if (int.toString().length == 1) return "0"+int
   else return int
 }
-
-function timeDisplayShort(time) {
-  if (time <= 100) return (time/10).toFixed(3) + " second" + time != 1 ? "s" : ""
-  if (time <= 600) return (time/10).toFixed(2) + " second" + time != 1 ? "s" : "" 
-  time = Decimal.floor(time / 10)
-  return preformat(Decimal.floor((time) / 3600)) + ":" + preformat(Decimal.floor((time % 3600) / 60)) + ":" + preformat(Decimal.floor(time % 60))
-}
