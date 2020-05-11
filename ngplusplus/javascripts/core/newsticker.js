@@ -1201,7 +1201,7 @@ function updateNewsArray() {
       "respecced109"
     ],
     ["The 9th Dimension isn't real, but it will be real 5 hours from now. ...But, maybe... maybe it might just be you.", "player.resets > 4", "respecced110"],
-    ["\"But now is " + (1970 + Math.floor((Date.now()/1000)/3.154e+7)) + "!\" - C16946986", true, "respecced111"],
+    ["\"But now it's " + (1970 + Math.floor((Date.now()/1000)/3.154e+7)) + "!\" - C16946986", true, "respecced111"],
     ["<a href ='https://www.youtube.com/watch?v=TN25ghkfgQA'>\"What if you pinged yourself?\"</a>", true, "respecced112"],
     ["\"plz make this an entry to the news ticker\" ~ Diamboy, 2020", true, "respecced113"],
     /*["I used to rule the world, antimatter came when I gave the word. Now in the night, I dared to sleep, in the projects that were to be. I developed a game, that would exceed past infinity. ", true, "respecced114"]*/// viva la vida parody, probably a very dumb idea to make.
