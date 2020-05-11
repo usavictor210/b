@@ -1224,7 +1224,7 @@ function updateNewsArray() {
     ["Hey Scott, all here", true, "respecced123"],
     ["OK, fine, Time Leaper is from that impossible game, but there's no such manual to actually leap over time in the first place.", 'player.newsArray.includes("respecced43")', "respecced124"],
     ["BREAKING NEWS: News reporter recently broke 'news ticker' after an incident in the facility broke the machine that was running it. He was promptly fired.", 'player.newsArray.includes("respecced68")', "respecced125"],
-    ["one day in"]
+    [""]
   ];
   }
 var s = document.getElementById("news");
