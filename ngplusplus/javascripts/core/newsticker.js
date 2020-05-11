@@ -885,7 +885,7 @@ function updateNewsArray() {
       "respecced37"
     ],
     [
-      "An infinite clock has been detected. It seems it just repeats the time over and over again.",
+      "An infinite clock has been found near the end of universe #6,210,322. It seems it just repeats the time over and over again, however that works.",
       true,
       "respecced38"
     ],
@@ -1074,7 +1074,7 @@ function updateNewsArray() {
     //news tickers from randomtuba
     ["Just wait six hours and your package will arrive", true, "respecced79"],
     [
-      "Anti-Jake from StateFarm says that he is not on your side.",
+      "Anti-Jake from State Farm says that he is not on your side.",
       true,
       "respecced80"
     ],
@@ -1084,7 +1084,7 @@ function updateNewsArray() {
       "respecced81"
     ],
     [
-      "If there's no triple exponentiational growth in this game I will stop playing",
+      "If there's no triple exponentiational growth in this game I will stop playing.",
       true,
       "respecced82"
     ],
@@ -1094,7 +1094,7 @@ function updateNewsArray() {
       "respecced83"
     ],
     [
-      "Did antimatter cause the Local58 incidents? If it did, boy were they wrong",
+      "Did antimatter cause the Local58 incidents? If it did, boy were they wrong.",
       true,
       "respecced84"
     ],
@@ -1127,7 +1127,7 @@ function updateNewsArray() {
       "player.dilation.unstable.times >= 1",
       "respecced93"
     ],
-    ["Don't add way too many prestige layers", true, "respecced94"],
+    ["Don't add way too many prestige layers.", true, "respecced94"],
     //pass the mic back
     [
       "It cries above mount Everest, and antimatter from the raindrops of the antimatter galaxies made by Hevi Pelle who smote slabdrill and mighty aarex and produced too much antimatter and the forbidden matter from Slabdrill.",
@@ -1194,14 +1194,14 @@ function updateNewsArray() {
       true,
       "respecced107"
     ],
-    ["This is a news ticker. It just is.", true, "respecced108"],
+    ["This is a news ticker. It just is, don't question it.", true, "respecced108"],
     [
-      "Hmm, what if there is an alternative universe, where 9th Dimensions are [REDACTED]?",
+      "Hmm, what if there is an alternative universe, where 9th Dimensions are [REDACTED]? Meh, bad idea.",
       "player.resets > 4",
       "respecced109"
     ],
     ["The 9th Dimension isn't real, but it will be real 5 hours from now. ...But, maybe... maybe it might just be you.", "player.resets > 4", "respecced110"],
-    ["\"But now is 2020!\" - C16946986", true, "respecced111"],
+    ["\"But now is " + (1970 + Math.floor((Date.now()/1000)/3.154e+7)) + "!\" - C16946986", true, "respecced111"],
     ["<a href ='https://www.youtube.com/watch?v=TN25ghkfgQA'>\"What if you pinged yourself?\"</a>", true, "respecced112"],
     ["\"plz make this an entry to the news ticker\" ~ Diamboy, 2020", true, "respecced113"],
     /*["I used to rule the world, antimatter came when I gave the word. Now in the night, I dared to sleep, in the projects that were to be. I developed a game, that would exceed past infinity. ", true, "respecced114"]*/// viva la vida parody, probably a very dumb idea to make.
@@ -1209,21 +1209,22 @@ function updateNewsArray() {
       "Hey there, Despacit here. What the FUCK HAVE YOU DONE?!?!?",
       "player.firstPow.eq(1) && player.quantums.gt(1)",
       "respecced115"
-    ],
+    ], // happens if quantums somehow break something
     [
       "Florida man survived idol hell, but can never forget the past again. Everyone is relieved of the incident. ...well, not everyone, the only thing that might be very annoyed is the things in hell itself.",
       'player.newsArray.includes("respecced33")',
       "respcecced116"
     ],
-    ["The power of the eternal studies surpasses all others. They're mastery studies, but better.", 'player.timestudy.studies.includes(241) || player.timestudy.studies.includes(242)', "respecced117"],
+    ["The power of the eternal studies surpasses all others. They're mastery studies, but better, as far as we know.", 'player.timestudy.studies.includes(241) || player.timestudy.studies.includes(242)', "respecced117"],
     ["The glitch is glitching now. That's not good. Everything is falling apart!", true, "respecced118"],
-    ["Time goes over infinity? I thought we would've died from the heat death by then and never reached infinity seconds!", true, "respecced119"],
+    ["Time goes over infinity? I thought we would've died from the heat death by then and never reached infinity seconds! Eh, whatever, who tracks the time anyway...", true, "respecced119"],
     ["Thanos is going to be super disappointed when he has a full infinity gauntlet and Hevi has a full eternity gauntlet, but Hevi is going to be super disappointed too because he has a full eternity gauntlet and Aarex has a...  Wait, who is the owner of the quantum gauntlet? Usavictor? Despacit? Aarex? Who knows. Anyways, Hevi is upgrading his eternity gauntlet, named the Reality gauntlet, and it is expected to be stronger than the full power Quantum gauntlet. It is unknown who will have the upper hand. Will it be the man who creates the meaning of reality, or the man who is elaborate in the cosmos?", 'player.quantum.times != 0 && player.newsArray.includes("b23")', "respecced120"],
     ["If each dimension contains 1.79e308x the antimatter of the last dimension, how do we ever reach 1.05e2466 antimatter?", 'player.money.gt(new Decimal("1.05e2466"))', "respecced121"],
-    ["In another universe, Challenge 8 is much more painful and manual.", true, "respecced122"], // New tickers in Alpha 0.2.1
+    ["In another universe, Challenge 8 is much more painful and involves manual labor.", true, "respecced122"], // New tickers in Alpha 0.2.1
     ["Hey Scott, all here", true, "respecced123"],
-    ["", true, "respecced124"],
-    ["", true, "respecced125"]
+    ["OK, fine, Time Leaper is from that impossible game, but there's no such manual to actually leap over time in the first place.", 'player.newsArray.includes("respecced43")', "respecced124"],
+    ["BREAKING NEWS: News reporter recently broke 'news ticker' after an incident in the facility broke the machine that was running it. He was promptly fired.", 'player.newsArray.includes("respecced68")', "respecced125"],
+    ["one day in"]
   ];
   }
 var s = document.getElementById("news");
