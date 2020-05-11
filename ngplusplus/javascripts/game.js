@@ -7603,7 +7603,34 @@ Mousetrap.bind("1", function() {
   if (shiftDown) buyOneDimension(1);
 else buyManyDimension(1);
 });
-
+Mousetrap.bind("2", function() {
+  if (shiftDown) buyOneDimension(2);
+else buyManyDimension(2);
+});
+Mousetrap.bind("3", function() {
+  if (shiftDown) buyOneDimension(3);
+else buyManyDimension(3);
+});
+Mousetrap.bind("4", function() {
+  if (shiftDown) buyOneDimension(4);
+else buyManyDimension(4);
+});
+Mousetrap.bind("5", function() {
+  if (shiftDown) buyOneDimension(5);
+else buyManyDimension(5);
+});
+Mousetrap.bind("6", function() {
+  if (shiftDown) buyOneDimension(6);
+else buyManyDimension(6);
+});
+Mousetrap.bind("7", function() {
+  if (shiftDown) buyOneDimension(7);
+else buyManyDimension(7);
+});
+Mousetrap.bind("8", function() {
+  if (shiftDown) buyOneDimension(8);
+else buyManyDimension(8);
+});
 Mousetrap.bind("a", function() {
   toggleAutoBuyers();
 });
