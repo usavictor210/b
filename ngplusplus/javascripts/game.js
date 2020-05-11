@@ -1162,7 +1162,10 @@ function updateDimensions() {
       " EP";
     document.getElementById("eter6").innerHTML =
       "Time Dimensions are more powerful based on time played<br>Currently: " +
-      new Decimal(player.totalTimePlayed / (10 * 21600)).max(1).min(100).toFixed(2) +
+      new Decimal(player.totalTimePlayed / (10 * 21600))
+        .max(1)
+        .min(100)
+        .toFixed(2) +
       "x<br>Cost: " +
       shortenCosts(1e50) +
       " EP";
@@ -1404,12 +1407,11 @@ function updateEternityChallenges() {
 }
 
 function toggleChallengeRetry() {
-  player.options.retryChallenge = !player.options.retryChallenge
-  let retry = player.options.retryChallenge ? "N" : "FF"
-    document.getElementById("retry").textContent =
-      "Automatically retry challenges: O" + retry
-  }
-
+  player.options.retryChallenge = !player.options.retryChallenge;
+  let retry = player.options.retryChallenge ? "N" : "FF";
+  document.getElementById("retry").textContent =
+    "Automatically retry challenges: O" + retry;
+}
 
 document.getElementById("news").onclick = function() {
   if (
@@ -1653,9 +1655,10 @@ document.getElementById("maxall").onclick = function() {
 };
 
 document.getElementById("challengeconfirmation").onclick = function() {
-player.options.challConf = !player.options.challConf
-let x = player.options.challConf ? "N" : "FF"
-document.getElementById("challengeconfirmation").textContent = "Challenge confirmation: O" + x
+  player.options.challConf = !player.options.challConf;
+  let x = player.options.challConf ? "N" : "FF";
+  document.getElementById("challengeconfirmation").textContent =
+    "Challenge confirmation: O" + x;
 };
 
 function buyInfinityUpgrade(name, cost) {
@@ -3049,33 +3052,41 @@ document.getElementById("reset").onclick = function() {
     updateDimensions();
     updateChallenges();
     updateAutobuyers();
-  } else if (confirm("Do you really want to erase all your progress? YOU WILL GAIN NOTHING FROM HARD RESETTING YOUR GAME. THIS CHANGE IS IRREVERSIBLE. Press OK if you really want to do this.")) {
-    if (confirm("This is your last warning. If you want to erase your progress, please press OK, otherwise press cancel now.")) {
-    if (window.location.href.split("//")[1].length > 20)
-      set_save("dimensionTestSave", currentSave, defaultStart);
-    else set_save("dimensionSave", currentSave, defaultStart);
-    player = defaultStart;
-    infDimPow = 1;
-    save_game();
-    load_game();
-    updateCosts();
+  } else if (
+    confirm(
+      "Do you really want to erase all your progress? YOU WILL GAIN NOTHING FROM HARD RESETTING YOUR GAME. THIS CHANGE IS IRREVERSIBLE. Press OK if you really want to do this."
+    )
+  ) {
+    if (
+      confirm(
+        "This is your last warning. If you want to erase your progress, please press OK, otherwise press cancel now."
+      )
+    ) {
+      if (window.location.href.split("//")[1].length > 20)
+        set_save("dimensionTestSave", currentSave, defaultStart);
+      else set_save("dimensionSave", currentSave, defaultStart);
+      player = defaultStart;
+      infDimPow = 1;
+      save_game();
+      load_game();
+      updateCosts();
 
-    document.getElementById("secondRow").style.display = "none";
-    document.getElementById("thirdRow").style.display = "none";
-    document.getElementById("tickSpeed").style.visibility = "hidden";
-    document.getElementById("tickSpeedMax").style.visibility = "hidden";
-    document.getElementById("tickLabel").style.visibility = "hidden";
-    document.getElementById("tickSpeedAmount").style.visibility = "hidden";
-    document.getElementById("fourthRow").style.display = "none";
-    document.getElementById("fifthRow").style.display = "none";
-    document.getElementById("sixthRow").style.display = "none";
-    document.getElementById("seventhRow").style.display = "none";
-    document.getElementById("eightRow").style.display = "none";
-    showDimTab("antimatterdimensions");
-    updateTickSpeed();
-    updateDimensions();
-    updateChallenges();
-    updateAutobuyers();
+      document.getElementById("secondRow").style.display = "none";
+      document.getElementById("thirdRow").style.display = "none";
+      document.getElementById("tickSpeed").style.visibility = "hidden";
+      document.getElementById("tickSpeedMax").style.visibility = "hidden";
+      document.getElementById("tickLabel").style.visibility = "hidden";
+      document.getElementById("tickSpeedAmount").style.visibility = "hidden";
+      document.getElementById("fourthRow").style.display = "none";
+      document.getElementById("fifthRow").style.display = "none";
+      document.getElementById("sixthRow").style.display = "none";
+      document.getElementById("seventhRow").style.display = "none";
+      document.getElementById("eightRow").style.display = "none";
+      showDimTab("antimatterdimensions");
+      updateTickSpeed();
+      updateDimensions();
+      updateChallenges();
+      updateAutobuyers();
     }
   }
 };
@@ -3312,7 +3323,8 @@ function setAchieveTooltip() {
     "Reach " +
       shortenCosts(new Decimal("1e17500")) +
       " replicanti. Reward: You gain replicanti 2 times faster when your replicanti amount is below " +
-      shortenMoney(Number.MAX_VALUE) + ", and replicanti chance slightly increases based on your replicanti galaxies."
+      shortenMoney(Number.MAX_VALUE) +
+      ", and replicanti chance slightly increases based on your replicanti galaxies."
   );
   thinking.setAttribute(
     "ach-tooltip",
@@ -3543,7 +3555,10 @@ function sacrifice(auto = false) {
 }
 
 document.getElementById("sacrifice").onclick = function() {
-  if (!document.getElementById("confirmation").checked && sacrifice() == !false) {
+  if (
+    !document.getElementById("confirmation").checked &&
+    sacrifice() == !false
+  ) {
     if (
       !confirm(
         "Dimensional Sacrifice will remove all of your first to seventh dimensions (with the cost and multiplier unchanged) for a boost to the Eighth Dimension. It will take time to regain production."
@@ -4178,7 +4193,9 @@ function updateChallengeTimes() {
     temp += player.infchallengeTimes[i];
   }
   document.getElementById("infchallengetimesum").textContent =
-    "The sum of your Infinity Challenge time records is " + timeDisplayShort(temp) + ".";
+    "The sum of your Infinity Challenge time records is " +
+    timeDisplayShort(temp) +
+    ".";
   updateWorstChallengeTime();
 }
 
@@ -4202,7 +4219,7 @@ function updateLastTenRuns() {
     );
     if (ippm.gt(tempBest)) tempBest = ippm;
     var tempstring = "(" + shorten(ippm) + " IP/min)";
-    if (ippm < 1) tempstring = "(" +  shorten(ippm * 60) + " IP/hour";
+    if (ippm < 1) tempstring = "(" + shorten(ippm * 60) + " IP/hour";
     var plural = i == 0 ? " infinity" : " infinities";
     document.getElementById("run" + (i + 1)).textContent =
       "The infinity " +
@@ -4979,7 +4996,7 @@ setInterval(function() {
 
   dor147Stuff();
   displayEterMilestoneButton();
-  
+
   if (
     milestoneCheck(19) &&
     player.replicanti.auto[0] &&
@@ -5640,7 +5657,7 @@ function gameLoop(diff) {
       updateChallenges();
     }
   }
-let interval = player.replicanti.interval;
+  let interval = player.replicanti.interval;
   if (player.timestudy.studies.includes(62)) interval = interval / 5;
   if (
     (player.timestudy.studies.includes(133) &&
@@ -5666,7 +5683,8 @@ let interval = player.replicanti.interval;
   var est = (Math.log(player.replicanti.chance + 1) * 1000) / interval;
 
   var current = player.replicanti.amount.ln();
-  if (player.replicanti.amount.lt(1) || isNaN(player.replicanti.amount)) player.replicanti.amount = new Decimal(1);
+  if (player.replicanti.amount.lt(1) || isNaN(player.replicanti.amount))
+    player.replicanti.amount = new Decimal(1);
   if (
     player.replicanti.unl &&
     (diff > 5 || interval < 50 || player.timestudy.studies.includes(192))
@@ -5722,7 +5740,7 @@ let interval = player.replicanti.interval;
       replicantiTicks -= interval;
     }
   }
-  
+
   if (player.replicanti.amount !== 0)
     replicantiTicks += player.options.updateRate;
 
@@ -5935,9 +5953,12 @@ let interval = player.replicanti.interval;
       Decimal.pow(thresholdMult, newGalaxies)
     );
     player.dilation.freeGalaxies += newGalaxies;
-    if (player.dilation.upgrades.includes(5) && player.dilation.freeGalaxies*2 < 1200) {
+    if (
+      player.dilation.upgrades.includes(5) &&
+      player.dilation.freeGalaxies * 2 < 1200
+    ) {
       player.dilation.freeGalaxies += newGalaxies;
-    } else player.dilation.freeGalaxies += 600
+    } else player.dilation.freeGalaxies += 600;
     if (canGiveUniversalHarmony()) {
       giveAchievement("Universal harmony");
     }
@@ -6454,8 +6475,8 @@ let interval = player.replicanti.interval;
   if (player.money.gt(Decimal.pow(10, (3 * 86400 * 365.2425 * 79.3) / 10))) {
     var years = player.money.log10() / 3 / 86400 / 365.2425;
     if (years > 2019) {
-    var eventBC = years - 2018;
-    var since
+      var eventBC = years - 2018;
+      var since;
       if (eventBC > 5.332e6) {
         since = "???";
         eventBC = 1 / 0 - eventBC;
@@ -6806,7 +6827,9 @@ let interval = player.replicanti.interval;
   else document.getElementById("chall3Pow").style.display = "none";
 
   document.getElementById("chall2Pow").textContent =
-    "(Production of all dimensions: " + (player.chall2Pow * 100).toFixed(2) + "%)";
+    "(Production of all dimensions: " +
+    (player.chall2Pow * 100).toFixed(2) +
+    "%)";
   document.getElementById("chall3Pow").textContent =
     "(1st Dimension multiplier: " + shorten(player.chall3Pow * 100) + "%)";
 
@@ -7556,41 +7579,61 @@ window.onfocus = function() {
   drawStudyTree();
 };
 
-window.addEventListener(
-  "keydown",
-  function(event) {
-    if (
-      !player.options.hotkeys ||
-      controlDown === true ||
-      document.activeElement.type === "text"
-    )
-      return false;
-    const tmp = event.keyCode;
-    if (tmp >= 49 && tmp <= 56) {
-      if (shiftDown) buyOneDimension(tmp - 48);
-      else buyManyDimension(tmp - 48);
-      return false;
-    } else if (tmp >= 97 && tmp <= 104) {
-      if (shiftDown) buyOneDimension(tmp - 96);
-      else buyManyDimension(tmp - 96);
-      return false;
-    }
+window.addEventListener("keydown", function(event) {
+  if (
+    !player.options.hotkeys ||
+    controlDown === true ||
+    document.activeElement.type === "text"
+  )
+    return false;
+  const tmp = event.keyCode;
+  if (tmp >= 49 && tmp <= 56) {
+    if (shiftDown) buyOneDimension(tmp - 48);
+    else buyManyDimension(tmp - 48);
+    return false;
+  } else if (tmp >= 97 && tmp <= 104) {
+    if (shiftDown) buyOneDimension(tmp - 96);
+    else buyManyDimension(tmp - 96);
+    return false;
   }
-)
+});
 
-Mousetrap.bind('A', toggleAutoBuyers());
-Mousetrap.bind('D', document.getElementById("softReset").onclick());
-Mousetrap.bind('G', document.getElementById("secondSoftReset").onclick());
-Mousetrap.bind('M', function() {
-      if (player.dilation.studies.includes(6))
-          document.getElementById("metaMaxAll").onclick();
-        else document.getElementById("maxall").onclick();
-      });
-      Mousetrap.bind('S', document.getElementById("sacrifice").onclick());
-      Mousetrap.bind('T', buyMaxTickSpeed());
-      Mousetrap.bind('T ?', buyTickSpeed());
-      Mousetrap.bind('R', replicantiGalaxy());
-
+Mousetrap.bind("a", function() {
+  toggleAutoBuyers();
+});
+Mousetrap.bind("d", function() {
+  document.getElementById("softReset").onclick();
+});
+Mousetrap.bind("g", function() {
+  document.getElementById("secondSoftReset").onclick();
+});
+Mousetrap.bind("m", function() {
+  if (player.dilation.studies.includes(6))
+    document.getElementById("metaMaxAll").onclick();
+  else document.getElementById("maxall").onclick();
+});
+Mousetrap.bind("s", function() {
+  document.getElementById("sacrifice").onclick();
+});
+Mousetrap.bind("t", function() {
+  buyMaxTickSpeed();
+});
+Mousetrap.bind("t ?", function() {
+  buyTickSpeed();
+});
+Mousetrap.bind("r", function() {
+  replicantiGalaxy();
+});
+Mousetrap.bind("c", function() {
+  document.getElementById("bigcrunch").onclick();
+});
+Mousetrap.bind("e", function() {
+  document.getElementById("eternitybtn").onclick();
+});
+Mousetrap.bind("f", function() {
+  $.notify("Paying respects", "info");
+  giveAchievement("It pays to have respect");
+});
 window.addEventListener(
   "keyup",
   function(event) {
@@ -7604,18 +7647,7 @@ window.addEventListener(
       document.activeElement.type === "text"
     )
       return false;
-    switch (event.keyCode) {
-      case 67: // C
-        document.getElementById("bigcrunch").onclick();
-        break;
-
-      case 69: // E
-        document.getElementById("eternitybtn").onclick();
-        break;
-    }
-  },
-  false
-);
+    
 
 init();
 var totalMult = 1;
