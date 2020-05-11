@@ -874,13 +874,13 @@ function updateNewsArray() {
     ],
     [
       "This is a test of our new creative works software. Your random number is: " +
-        Math.random() * 1000 +
-        ".     ...did it work? We hope it did.",
+        Math.floor(Math.random() * 1000) +
+        ".   Hey, did it work? We hope it did.",
       true,
       "respecced36"
     ],
     [
-      "We've heard that dilation seems very boring. Our scientists are changing that. It might turn too unstable soon, so watch out for that.",
+      "We've heard that dilation seems very boring. Our scientists are changing that. It might turn too unstable soon, so watch out for some weird quirks.",
       'player.eternityPoints.gte(new Decimal("1e1300"))',
       "respecced37"
     ],
@@ -1219,7 +1219,11 @@ function updateNewsArray() {
     ["The glitch is glitching now. That's not good. Everything is falling apart!", true, "respecced118"],
     ["Time goes over infinity? I thought we would've died from the heat death by then and never reached infinity seconds!", true, "respecced119"],
     ["Thanos is going to be super disappointed when he has a full infinity gauntlet and Hevi has a full eternity gauntlet, but Hevi is going to be super disappointed too because he has a full eternity gauntlet and Aarex has a...  Wait, who is the owner of the quantum gauntlet? Usavictor? Despacit? Aarex? Who knows. Anyways, Hevi is upgrading his eternity gauntlet, named the Reality gauntlet, and it is expected to be stronger than the full power Quantum gauntlet. It is unknown who will have the upper hand. Will it be the man who creates the meaning of reality, or the man who is elaborate in the cosmos?", 'player.quantum.times != 0 && player.newsArray.includes("b23")', "respecced120"],
-    ["If each dimension contains 1.79e308x the antimatter of the last dimension, how do we ever reach 1.05e2466 antimatter?", 'player.money.gt(new Decimal("1.05e2466"))', "respecced121"]
+    ["If each dimension contains 1.79e308x the antimatter of the last dimension, how do we ever reach 1.05e2466 antimatter?", 'player.money.gt(new Decimal("1.05e2466"))', "respecced121"],
+    ["In another universe, Challenge 8 is much more painful and manual.", true, "respecced122"], // New tickers in Alpha 0.2.1
+    ["Hey Scott, all here", true, "respecced123"],
+    ["", true, "respecced124"],
+    ["", true, "respecced125"]
   ];
   }
 var s = document.getElementById("news");
