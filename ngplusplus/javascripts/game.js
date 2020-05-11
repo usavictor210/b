@@ -6806,9 +6806,9 @@ let interval = player.replicanti.interval;
   else document.getElementById("chall3Pow").style.display = "none";
 
   document.getElementById("chall2Pow").textContent =
-    (player.chall2Pow * 100).toFixed(2) + "%";
+    "(Production of all dimensions: " + (player.chall2Pow * 100).toFixed(2) + "%)";
   document.getElementById("chall3Pow").textContent =
-    shorten(player.chall3Pow * 100) + "%";
+    "(1st Dimension multiplier: " + shorten(player.chall3Pow * 100) + "%)";
 
   if (
     player.infDimensionsUnlocked[7] == false &&
