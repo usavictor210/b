@@ -4015,7 +4015,7 @@ function updatePriorities() {
       fromValue(document.getElementById("priority13").value).toString()
     ) === 69
   )
-    giveAchievement("Nice.");
+    giveAchievement("Nice."); // if any of these values are 69, give secret achievement "Nice."
   player.autobuyers[9].priority = parseInt(
     document.getElementById("priority10").value
   );
@@ -4166,8 +4166,7 @@ function updateChallengeTimes() {
     temp += player.challengeTimes[i];
   }
   document.getElementById("challengetimesum").textContent =
-    "The sum of challenge time records is " + timeDisplayShort(temp);
-  +".";
+    "The sum of your challenge time records is " + timeDisplayShort(temp) + ".";
 
   temp = 0;
   for (var i = 0; i < 8; i++) {
@@ -4179,8 +4178,7 @@ function updateChallengeTimes() {
     temp += player.infchallengeTimes[i];
   }
   document.getElementById("infchallengetimesum").textContent =
-    "The sum of infinity challenge time records is " + timeDisplayShort(temp);
-  +".";
+    "The sum of your Infinity Challenge time records is " + timeDisplayShort(temp) + ".";
   updateWorstChallengeTime();
 }
 
@@ -4203,8 +4201,8 @@ function updateLastTenRuns() {
       player.lastTenRuns[i][0] / 600
     );
     if (ippm.gt(tempBest)) tempBest = ippm;
-    var tempstring = shorten(ippm) + " IP/min";
-    if (ippm < 1) tempstring = shorten(ippm * 60) + " IP/hour";
+    var tempstring = "(" + shorten(ippm) + " IP/min)";
+    if (ippm < 1) tempstring = "(" +  shorten(ippm * 60) + " IP/hour";
     var plural = i == 0 ? " infinity" : " infinities";
     document.getElementById("run" + (i + 1)).textContent =
       "The infinity " +
@@ -4219,10 +4217,10 @@ function updateLastTenRuns() {
   }
 
   var ippm = tempIP.dividedBy(tempTime / 600);
-  var tempstring = shorten(ippm) + " IP/min";
-  if (ippm < 1) tempstring = shorten(ippm * 60) + " IP/hour";
+  var tempstring = "(" + shorten(ippm) + " IP/min)";
+  if (ippm < 1) tempstring = "(" + shorten(ippm * 60) + " IP/hour)";
   document.getElementById("averagerun").textContent =
-    "Last 10 infinities average time: " +
+    "Average time of the last 10 infinities: " +
     timeDisplayShort(tempTime) +
     " | Average IP gain: " +
     shortenDimensions(tempIP) +
@@ -4251,8 +4249,8 @@ function updateLastTenEternities() {
       player.lastTenEternities[i][0] / 600
     );
     if (eppm.gt(tempBest)) tempBest = eppm;
-    var tempstring = shorten(eppm) + " EP/min";
-    if (eppm < 1) tempstring = shorten(eppm * 60) + " EP/hour";
+    var tempstring = "(" + shorten(eppm) + " EP/min)";
+    if (eppm < 1) tempstring = "(" + shorten(eppm * 60) + " EP/hour)";
     var plural = i == 0 ? " eternity" : " eternities";
     document.getElementById("eternityrun" + (i + 1)).textContent =
       "The Eternity " +
@@ -4267,11 +4265,11 @@ function updateLastTenEternities() {
   }
 
   var eppm = tempEP.dividedBy(tempTime / 600);
-  var tempstring = shorten(eppm) + " EP/min";
+  var tempstring = "(" + shorten(eppm) + " EP/min)";
   averageEp = tempEP;
-  if (eppm < 1) tempstring = shorten(eppm * 60) + " EP/hour";
+  if (eppm < 1) tempstring = "(" + shorten(eppm * 60) + " EP/hour)";
   document.getElementById("averageEternityRun").textContent =
-    "Last 10 eternities average time: " +
+    "Average time of the last 10 eternities: " +
     timeDisplayShort(tempTime) +
     " | Average EP gain: " +
     shortenDimensions(tempEP) +
