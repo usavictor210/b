@@ -1223,8 +1223,8 @@ function updateNewsArray() {
     ["In another universe, Challenge 8 is much more painful and involves manual labor.", true, "respecced122"], // New tickers in Alpha 0.2.1
     ["Hey Scott, all here", true, "respecced123"],
     ["OK, fine, Time Leaper is from that impossible game, but there's no such manual to actually leap over time in the first place.", 'player.newsArray.includes("respecced43")', "respecced124"],
-    ["BREAKING NEWS: News reporter recently broke 'news ticker' after an incident in the facility broke the machine that was running it. He was promptly fired.", 'player.newsArray.includes("respecced68")', "respecced125"],
-    [""]
+    ["BREAKING NEWS: News reporter recently broke the 'news ticker' after an incident in the facility broke the machine that was running it. He was promptly fired.", 'player.newsArray.includes("respecced68")', "respecced125"],
+    ["what's the deal with investment", 'player.quantum.times > 0', "respecced126"]
   ];
   }
 var s = document.getElementById("news");

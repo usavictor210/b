@@ -7575,41 +7575,21 @@ window.addEventListener(
       else buyManyDimension(tmp - 96);
       return false;
     }
-    switch (event.keyCode) {
-      case 65: // A
-        toggleAutoBuyers();
-        break;
+  }
+)
 
-      case 68: // D
-        document.getElementById("softReset").onclick();
-        break;
-
-      case 71: // G
-        document.getElementById("secondSoftReset").onclick();
-        break;
-
-      case 77: // M
-        if (player.dilation.studies.includes(6))
+Mousetrap.bind('A', toggleAutoBuyers());
+Mousetrap.bind('D', document.getElementById("softReset").onclick());
+Mousetrap.bind('G', document.getElementById("secondSoftReset").onclick());
+Mousetrap.bind('M', function() {
+      if (player.dilation.studies.includes(6))
           document.getElementById("metaMaxAll").onclick();
         else document.getElementById("maxall").onclick();
-        break;
-
-      case 83: // S
-        document.getElementById("sacrifice").onclick();
-        break;
-
-      case 84: // T
-        if (shiftDown) buyTickSpeed();
-        else buyMaxTickSpeed();
-        break;
-
-      case 82: //R
-        replicantiGalaxy();
-        break;
-    }
-  },
-  false
-);
+      });
+      Mousetrap.bind('S', document.getElementById("sacrifice").onclick());
+      Mousetrap.bind('T', buyMaxTickSpeed());
+      Mousetrap.bind('T ?', buyTickSpeed());
+      Mousetrap.bind('R', replicantiGalaxy());
 
 window.addEventListener(
   "keyup",
