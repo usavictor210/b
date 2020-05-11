@@ -7523,7 +7523,7 @@ window.addEventListener(
     if (event.keyCode == 17) controlDown = true;
     if (event.keyCode == 16) {
       shiftDown = true;
-      document.getElementById("studytreeloadsavetext").textContent = "save:";
+      document.getElementById("studytreeloadsavetext").textContent = "Save:";
       drawStudyTree();
     }
     if (
@@ -7544,7 +7544,7 @@ window.addEventListener(
     if (event.keyCode == 17) controlDown = false;
     if (event.keyCode == 16) {
       shiftDown = false;
-      document.getElementById("studytreeloadsavetext").textContent = "load:";
+      document.getElementById("studytreeloadsavetext").textContent = "Load:";
       drawStudyTree();
     }
   },
@@ -7554,7 +7554,7 @@ window.addEventListener(
 window.onfocus = function() {
   controlDown = false;
   shiftDown = false;
-  document.getElementById("studytreeloadsavetext").textContent = "load:";
+  document.getElementById("studytreeloadsavetext").textContent = "Load:";
   drawStudyTree();
 };
 
