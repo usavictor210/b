@@ -7598,6 +7598,12 @@ window.addEventListener("keydown", function(event) {
   }
 });
 
+
+Mousetrap.bind("1", function() {
+  if (shiftDown) buyOneDimension(1);
+else buyManyDimension(1);
+});
+
 Mousetrap.bind("a", function() {
   toggleAutoBuyers();
 });
@@ -7633,13 +7639,12 @@ Mousetrap.bind("e", function() {
 Mousetrap.bind("f", function() {
   $.notify("Paying respects", "info");
   giveAchievement("It pays to have respect");
-});
+}, "keyup");
+
 window.addEventListener(
   "keyup",
   function(event) {
     if (event.keyCode === 70) {
-      $.notify("Paying respects", "info");
-      giveAchievement("It pays to have respect");
     }
     if (
       !player.options.hotkeys ||
@@ -7647,7 +7652,7 @@ window.addEventListener(
       document.activeElement.type === "text"
     )
       return false;
-    
+  })
 
 init();
 var totalMult = 1;
