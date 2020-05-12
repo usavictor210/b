@@ -7592,7 +7592,7 @@ window.addEventListener("keydown", function(event) {
 });
 
 Mousetrap.bind({
-    "1, 2, 3, 4, 5, 6, 7, 8": function() { console.log('a'); },
+    "": function() { console.log('a'); },
     "2": function() { console.log('b'); }
 });
 
