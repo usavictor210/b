@@ -1225,7 +1225,8 @@ function updateNewsArray() {
     ["OK, fine, Time Leaper is from that impossible game, but there's no such manual to actually leap over time in the first place.", 'player.newsArray.includes("respecced43")', "respecced124"],
     ["BREAKING NEWS: News reporter recently broke the 'news ticker' after an incident in the facility broke the machine that was running it. He was promptly fired.", 'player.newsArray.includes("respecced68")', "respecced125"],
     ["what's the deal with investment", 'player.quantum.times > 0', "respecced126"],
-    ["In AD 2101, war was beginning. ", 'player.quantum.times > 0', "respecced126"],
+    ["In AD 2101, war was beginning. *explosion* What happen? Someone set up us the bomb. We get signal. What! Main screen turn on. It's you!! How are you gentlemen!! All your antimatter are belong to us. You are on the way to destruction. What you say!! You have no chance to survive make your time. Ha ha ha ha... Captain!! Take off every \"dimension\"! You know what you doing. Move \"dimensions\". For great justice.", 'player.newsArray.length > 250', "respecced127"],
+    ["happy birthday despacit", 'player.quantum.times > 0', "respecced128"],
   ];
   }
 var s = document.getElementById("news");
