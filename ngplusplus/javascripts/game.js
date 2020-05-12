@@ -7515,6 +7515,7 @@ document.getElementById("hiddenheader").style.display = "none";
 }),
   1000;
 
+
 window.addEventListener(
   "keydown",
   function(event) {
@@ -7586,19 +7587,13 @@ window.addEventListener("keydown", function(event) {
     document.activeElement.type === "text"
   )
     return false;
-  const tmp = event.keyCode;
-  if (tmp >= 49 && tmp <= 56) {
-    if (shiftDown) buyOneDimension(tmp - 48);
-    else buyManyDimension(tmp - 48);
-    return false;
-  } else if (tmp >= 97 && tmp <= 104) {
-    if (shiftDown) buyOneDimension(tmp - 96);
-    else buyManyDimension(tmp - 96);
-    return false;
-  }
+  
+  
 });
-
-
+Mousetrap.bind({
+    "1, 2, 3, 4, 5, 6, 7, 8": function() { console.log('a'); },
+    "2": function() { console.log('b'); }
+});
 Mousetrap.bind("1", function() {
   if (shiftDown) buyOneDimension(1);
 else buyManyDimension(1);
@@ -7651,7 +7646,7 @@ Mousetrap.bind("s", function() {
 Mousetrap.bind("t", function() {
   buyMaxTickSpeed();
 });
-Mousetrap.bind("t ?", function() {
+Mousetrap.bind("shift+t", function() {
   buyTickSpeed();
 });
 Mousetrap.bind("r", function() {
@@ -7667,19 +7662,6 @@ Mousetrap.bind("f", function() {
   $.notify("Paying respects", "info");
   giveAchievement("It pays to have respect");
 }, "keyup");
-
-window.addEventListener(
-  "keyup",
-  function(event) {
-    if (event.keyCode === 70) {
-    }
-    if (
-      !player.options.hotkeys ||
-      controlDown === true ||
-      document.activeElement.type === "text"
-    )
-      return false;
-  })
 
 init();
 var totalMult = 1;
