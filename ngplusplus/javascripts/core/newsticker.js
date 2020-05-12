@@ -1221,12 +1221,13 @@ function updateNewsArray() {
     ["Thanos is going to be super disappointed when he has a full infinity gauntlet and Hevi has a full eternity gauntlet, but Hevi is going to be super disappointed too because he has a full eternity gauntlet and Aarex has a...  Wait, who is the owner of the quantum gauntlet? Usavictor? Despacit? Aarex? Who knows. Anyways, Hevi is upgrading his eternity gauntlet, named the Reality gauntlet, and it is expected to be stronger than the full power Quantum gauntlet. It is unknown who will have the upper hand. Will it be the man who creates the meaning of reality, or the man who is elaborate in the cosmos?", 'player.quantum.times != 0 && player.newsArray.includes("b23")', "respecced120"],
     ["If each dimension contains 1.79e308x the antimatter of the last dimension, how do we ever reach 1.05e2466 antimatter?", 'player.money.gt(new Decimal("1.05e2466"))', "respecced121"],
     ["In another universe, Challenge 8 is much more painful and involves manual labor.", true, "respecced122"], // New tickers in Alpha 0.2.1
-    ["Hey Scott, all here", true, "respecced123"],
+    ["Hey Scott, all here", true, "respecced123"], // Breakout - 3D Dot Game Heroes
     ["OK, fine, Time Leaper is from that impossible game, but there's no such manual to actually leap over time in the first place.", 'player.newsArray.includes("respecced43")', "respecced124"],
     ["BREAKING NEWS: News reporter recently broke the 'news ticker' after an incident in the facility broke the machine that was running it. He was promptly fired.", 'player.newsArray.includes("respecced68")', "respecced125"],
     ["what's the deal with investment", 'player.quantum.times > 0', "respecced126"],
     ["In AD 2101, war was beginning. *explosion* What happen? Someone set up us the bomb. We get signal. What! Main screen turn on. It's you!! How are you gentlemen!! All your antimatter are belong to us. You are on the way to destruction. What you say!! You have no chance to survive make your time. Ha ha ha ha... Captain!! Take off every \"dimension\"! You know what you doing. Move \"dimensions\". For great justice.", 'player.newsArray.length > 250', "respecced127"],
-    ["happy birthday despacit", 'player.quantum.times > 0', "respecced128"],
+    ["happy birthday despacit", '(new Date().getMonth() == 5 && new Date().getDate() == 12)', "respecced128"],
+    ["", 'player.quantum.times > 0', "respecced126"],
   ];
   }
 var s = document.getElementById("news");
