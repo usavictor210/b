@@ -1215,7 +1215,7 @@ function updateNewsArray() {
       'player.newsArray.includes("respecced33")',
       "respcecced116"
     ],
-    ["The power of the eternal studies surpasses all others. They're mastery studies, but better, as far as we know.", 'player.timestudy.studies.includes(241) || player.timestudy.studies.includes(242)', "respecced117"],
+    ["The power of the eternal studies surpasses all others. They're mastery studies, but they're better, as far as we know.", 'player.timestudy.studies.includes(241) || player.timestudy.studies.includes(242)', "respecced117"],
     ["The glitch is glitching now. That's not good. Everything is falling apart!", true, "respecced118"],
     ["Time goes over infinity? I thought we would've died from the heat death by then and never reached infinity seconds! Eh, whatever, who tracks the time anyway...", true, "respecced119"],
     ["Thanos is going to be super disappointed when he has a full infinity gauntlet and Hevi has a full eternity gauntlet, but Hevi is going to be super disappointed too because he has a full eternity gauntlet and Aarex has a...  Wait, who is the owner of the quantum gauntlet? Usavictor? Despacit? Aarex? Who knows. Anyways, Hevi is upgrading his eternity gauntlet, named the Reality gauntlet, and it is expected to be stronger than the full power Quantum gauntlet. It is unknown who will have the upper hand. Will it be the man who creates the meaning of reality, or the man who is elaborate in the cosmos?", 'player.quantum.times != 0 && player.newsArray.includes("b23")', "respecced120"],
@@ -1229,11 +1229,11 @@ function updateNewsArray() {
     ["happy birthday despacit", '(new Date().getMonth() == 5 && new Date().getDate() == 12)', "respecced128"],
     ["Pounding into straw Pounding into straw Pounding into straw five-inch, five-inch, five-inch nails!", 'player.break == false', "respecced129"],
     ["Antimatter is known to create annoying bullet patterns and ruin people's 1cc attempts.", true, "respecced130"],
-    ["Aren't you bored or something", 'player.totalTimePlayed >= 600*3000', "respecced131"], // 50 hours
+    ["Aren't you bored or something?", 'player.totalTimePlayed >= 600*3000', "respecced131"], // 50 hours
     ["Kirby begins to devour the universe and turn into Hypernova Kirby.", "player.newsArray.includes('r134')", "respecced132"],
-    ["If the big bang happened 13.8 billion years ago and should've produced matter, where does the antimatter come from?", "player.money.gte('1e200000000')", "respecced133"],
+    ["If the big bang happened 13.8 billion years ago and should've produced matter, where does the antimatter come from?", "player.money.gt('1e200000000')", "respecced133"],
     ["To be fair, you have to have a very high IQ to understand Antimatter Dimensions.", true, "respecced134"],
-    ["", true, "respecced135"]
+    ["2 + 2 = 5, I have been lied to.", 'player.quantum.times > 0', "respecced135"]
     ]
   }
 var s = document.getElementById("news");
