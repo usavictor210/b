@@ -7591,10 +7591,6 @@ window.addEventListener("keydown", function(event) {
   
 });
 
-Mousetrap.bind({
-    "": function() { console.log('a'); },
-    "2": function() { console.log('b'); }
-});
 
 Mousetrap.bind("1", function() {
   if (shiftDown) buyOneDimension(1);

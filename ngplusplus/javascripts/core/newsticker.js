@@ -1233,7 +1233,9 @@ function updateNewsArray() {
     ["Kirby begins to devour the universe and turn into Hypernova Kirby.", "player.newsArray.includes('r134')", "respecced132"],
     ["If the big bang happened 13.8 billion years ago and should've produced matter, where does the antimatter come from?", "player.money.gt('1e200000000')", "respecced133"],
     ["To be fair, you have to have a very high IQ to understand Antimatter Dimensions.", true, "respecced134"],
-    ["2 + 2 = 5, I have been lied to.", 'player.quantum.times > 0', "respecced135"]
+    ["2 + 2 = 5, I have been lied to.", 'player.quantum.times > 0', "respecced135"],
+    ["The Return of Killer Bean", true, "respecced136"],
+    ["But before we start this video, you have to check out Antimatter Dimensions™️. It's got over 100,000 downloads, and it's completely redefined what a mobile game can do for me. It's got great mechanics, 4 prestige layers, 32 unique and original challenges, a deep skill tree, and the largest numbers I've ever seen. Like, seriously, look at them. And the best part is, it's free! Yes, that's right. Free. And if you use the link in the description, you'll start the game with 10 septillion antimatter. Yes, that's right, 10 septillion. So what are you waiting for, click the link in the description and start playing Antimatter Dimensions™️ today!", true, "respecced137"] // weee50's dank maymay
     ]
   }
 var s = document.getElementById("news");
