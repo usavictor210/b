@@ -687,7 +687,7 @@ function updateNewsArray() {
       "player.eternities > 1e12",
       "c14"
     ], // respeccedx+2
-    //luck
+    //luck, these are actually way more missable than you think they are.
     [
       "Technically, these luck messages are even rarer than we thought. This is considering the fact that you only have one chance to get the lucky news tickers for every news ticker out of the many news tickers in the news array, and even then, Math.random() is very random.",
       "Math.random() < 0.01",
@@ -739,7 +739,7 @@ function updateNewsArray() {
     ],
     [
       "Legend says the ninth dimension is supposed to be found here, but I don't see anything.",
-      "player.money.e >= 4190000 && player.dilation.active && player.galaxies == 1 && player.resets == 4 && player.thirdAmount == new Decimal(0)", // reminder to make this a achievement
+      "player.money.e >= 4190000 && player.dilation.active && player.galaxies == 1 && player.resets == 4 && player.thirdAmount == new Decimal(0)", // reminder to make this a achievement...?
       "s2"
     ], // requirement changed to e4,190,000 antimatter, 1 galaxy, 4 resets and only up to 2nd dimensions
     ["Person with money likes to support this game.", true, "s3"],
@@ -1227,7 +1227,10 @@ function updateNewsArray() {
     ["what's the deal with investment", 'player.quantum.times > 0', "respecced126"],
     ["In AD 2101, war was beginning. *explosion* What happen? Someone set up us the bomb. We get signal. What! Main screen turn on. It's you!! How are you gentlemen!! All your antimatter are belong to us. You are on the way to destruction. What you say!! You have no chance to survive make your time. Ha ha ha ha... Captain!! Take off every \"dimension\"! You know what you doing. Move \"dimensions\". For great justice.", 'player.newsArray.length > 250', "respecced127"],
     ["happy birthday despacit", '(new Date().getMonth() == 5 && new Date().getDate() == 12)', "respecced128"],
-    ["", 'player.quantum.times > 0', "respecced126"],
+    ["Pounding into straw Pounding into straw Pounding into straw five-inch, five-inch, five-inch nails!", 'player.break == false', "respecced129"],
+    ["Antimatter is known to create annoying bullet patterns and ruin people's 1cc attempts.", true, "respecced130"],
+    ["Aren't you bored or something", 'player.totalTimePlayed >= 600*3000', "respecced131"], // 50 hours
+    
   ];
   }
 var s = document.getElementById("news");
