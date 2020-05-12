@@ -1230,8 +1230,11 @@ function updateNewsArray() {
     ["Pounding into straw Pounding into straw Pounding into straw five-inch, five-inch, five-inch nails!", 'player.break == false', "respecced129"],
     ["Antimatter is known to create annoying bullet patterns and ruin people's 1cc attempts.", true, "respecced130"],
     ["Aren't you bored or something", 'player.totalTimePlayed >= 600*3000', "respecced131"], // 50 hours
-    
-  ];
+    ["Kirby begins to devour the universe and turn into Hypernova Kirby.", "player.newsArray.includes('r134')", "respecced132"],
+    ["If the big bang happened 13.8 billion years ago and should've produced matter, where does the antimatter come from?", "player.money.gte('1e200000000')", "respecced133"],
+    ["To be fair, you have to have a very high IQ to understand Antimatter Dimensions.", true, "respecced134"],
+    ["", true, "respecced135"]
+    ]
   }
 var s = document.getElementById("news");
 document.addEventListener(
