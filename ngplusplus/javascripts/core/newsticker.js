@@ -569,7 +569,7 @@ function updateNewsArray() {
       "b19"
     ],
     [
-      "Florida man attempts to get Zero Deaths on first run, is stopped by heat death of the universe.",
+      "Florida man attempts to get Zero Deaths on first run, is stopped by the heat death of the universe.",
       'player.achievements.includes("r43")',
       "b16"
     ],
@@ -1116,7 +1116,7 @@ function updateNewsArray() {
       true,
       "respecced89"
     ],
-    ["var 9thDimensions = NaN;", true, "respecced90"],
+    ["var 9thDimensions = NaN; | Uncaught TypeError", true, "respecced90"],
     ["NG+3 Respecced is the bane of my existence", true, "respecced91"],
     [
       "SCP-AD --- Object Class: Keter --- Special Containment Procedures: SCP-AD must be contained in a 5x5 meter cell with no matter by it, or else it will be destroyed due to annhilation. Security cameras have a chance to shut down at a 5-hour interval. --- Description: SCP-AD is a computer screen that has an odd game on it. It is a game where you collect 'antimatter' with 'dimensions'. The computer has a mouse, a keyboard, and a [REDACTED] by it. The keyboard does not have QWERTY format. The arrangement of keys are [REDACTED]. --- Experiment AD-1: D-6969 was asked to play the game on SCP-AD. 5 hours later, security footage malfunctioned. When observing the containment area, D-6969 had disappeared without a trace. On the screen, it showed a '[REDACTED]' had unlocked. --- Experiment AD-3: D-8826 was asked to play the game on SCP-AD in 'Cancer' Notation. 5 hours later, D-8826 exploded from the inside. Later, all remains of the corpse had been absorbed inside the containment chamber.",
@@ -1228,7 +1228,7 @@ function updateNewsArray() {
     ["what's the deal with investment", 'player.quantum.times > 0', "respecced126"],
     ["In AD 2101, war was beginning. *explosion* What happen? Someone set up us the bomb. We get signal. What! Main screen turn on. It's you!! How are you gentlemen!! All your antimatter are belong to us. You are on the way to destruction. What you say!! You have no chance to survive make your time. Ha ha ha ha... Captain!! Take off every \"dimension\"! You know what you doing. Move \"dimensions\". For great justice.", 'player.newsArray.length > 250', "respecced127"],
     ["happy birthday despacit", '(new Date().getMonth() == 5 && new Date().getDate() == 12)', "respecced128"],
-    ["Pounding into straw Pounding into straw Pounding into straw five-inch, five-inch, five-inch nails!", 'player.break == false', "respecced129"],
+    ["Pounding into straw Pounding into straw Pounding into straw five-inch, five-inch, five-inch nails!", '!player.break', "respecced129"],
     ["Antimatter is known to create annoying bullet patterns and ruin people's 1cc attempts.", true, "respecced130"],
     ["Aren't you bored or something?", 'player.totalTimePlayed >= 600*3000', "respecced131"], // 50 hours
     ["Kirby begins to devour the universe and turn into Hypernova Kirby.", "player.newsArray.includes('r134')", "respecced132"],
@@ -1241,6 +1241,7 @@ function updateNewsArray() {
     ["If 3 is the root of all evil, what's √3 supposed to be then?", "player.newsArray.includes('b24')", "respeccced139"],
     ["There is deep lore within Antimatter Dimensions, you just have to reach Reality first, where'll you find the meaning of your existence.", "(player.newsArray.includes('a101') && player.eternityPoints.gte('1e4000')) || player.quantum.times > 0", "respeccced140"],
     ["Antimatter power plants have been proven to become unstable, as there has been an increase in power in the past few days. It has been reported that people have gotten large power bills. The scientists believe the power cells will break eventually, and they cannot create a new one immediately, leading to the blackouts in the city. Citizens have caused an uproar, and have resorted to using regular remote batteries. Stay tuned for more details.", "player.newsArray.includes('a3')", "respeccced141"],
+    ["Antimatter can now transport people between multiple timelines, making it easier to move across time and space, as long as you have some antimatter on you.", 'player.newsArray.includes("a99")', "respecced142"]
     ]
   }
 var s = document.getElementById("news");
