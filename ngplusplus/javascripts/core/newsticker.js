@@ -189,7 +189,7 @@ function updateNewsArray() {
     ],
     ["And nothing Antimatters", true, "a65"],
     [
-      "School starting up strikes fear in students universe-wide, as schools are no longer segregated between Matter and antimatter. Annihilation is prominent.",
+      "School starting up strikes fear in students universe-wide, as schools are no longer segregated between Matter and Antimatter. Annihilation is prominent.",
       true,
       "a66"
     ],
@@ -453,7 +453,7 @@ function updateNewsArray() {
       "a136"
     ],
     [
-      "The Holy trinity of Hevipelle, Antimatter, Infinity Points, and Eternity Points. These 3 resources let us access Hevi’s gift, Time Theorems. And with these Time Theorems, we reach out to Hevi, and call, “Hevi, bless us on this fine day!” And Hevi does. He give us the blessing of Time Studies. These Time Studies were blessings so powerful, Hevi restricted their power. He said, “I will give you a choice of three paths.” and then humanity chose. The short, cheap route of Normal Dimensions, giving instant gratification, the powerful choice of Infinity Dimensions, which were a fast, middle ground path, or Time Dimensions, the long wait, and struggle, of humanity. Then, as humanity chose, a crack broke the earth. A serpent snaked out and sneered to humanity, “I will offer the powerful choice of a ninth dimension! I am Slabdrill, lord of all Unhevi.” Humanity rose and said, “Begone Slabdrill! We want none of your foul Heresy!” And Hevi rose as well, and smote Slabdrill with his godlike power. As Slabdrill’s corpse fell into the earth, he cried, “This will not be the last of me! Hevi will betr-“ and he fell in the Abyss of matter. Hevi gifted humanity with Eternity upgrades, which boosted Infinity Dimensions and Time Dimensions, and Hevi gave humanity his greatest gift. EP multipliers. He said, “These will multiply all EP gained by 5, but their cost will increase 25 times. Use them wisely.” ...and Humanity journeyed off with their new power, as Slabdrill’s words echoed in their heads.",
+      "The Holy Trinity of Hevipelle, Antimatter, Infinity Points, and Eternity Points. These 3 resources let us access Hevi’s gift, Time Theorems. And with these Time Theorems, we reach out to Hevi, and call, “Hevi, bless us on this fine day!” And Hevi does. He give us the blessing of Time Studies. These Time Studies were blessings so powerful, Hevi restricted their power. He said, “I will give you a choice of three paths.” and then humanity chose. The short, cheap route of Normal Dimensions, giving instant gratification, the powerful choice of Infinity Dimensions, which were a fast, middle ground path, or Time Dimensions, the long wait, and struggle, of humanity. Then, as humanity chose, a crack broke the earth. A serpent snaked out and sneered to humanity, “I will offer the powerful choice of a ninth dimension! I am Slabdrill, lord of all Unhevi.” Humanity rose and said, “Begone Slabdrill! We want none of your foul Heresy!” And Hevi rose as well, and smote Slabdrill with his godlike power. As Slabdrill’s corpse fell into the earth, he cried, “This will not be the last of me! Hevi will betr-” and he fell in the Abyss of matter. Hevi gifted humanity with Eternity upgrades, which boosted Infinity Dimensions and Time Dimensions, and Hevi gave humanity his greatest gift. EP multipliers. He said, “These will multiply all EP gained by 5, but their cost will increase 25 times. Use them wisely.” ...and Humanity journeyed off with their new power, as Slabdrill’s words echoed in their heads.",
       "player.eternities.gt(0)",
       "a137"
     ],
@@ -465,7 +465,7 @@ function updateNewsArray() {
     //basic (pre-inf)
     [
       "You just made your 1,000,000,000,000,000 antimatter. This one tastes like chicken",
-      "player.money.e == 15",
+      "player.money.e >= 15",
       "b1"
     ],
     [
@@ -575,7 +575,7 @@ function updateNewsArray() {
     ],
     [
       "Having done half the achievements isn't much of an achievement -Boo",
-      " player.achievements.length >= 40",
+      "player.achievements.length >= 40",
       "b20"
     ],
     //basic (post-rep)
@@ -585,7 +585,7 @@ function updateNewsArray() {
       "b23"
     ],
     [
-      "New strange material was been found. It seems to grow exponentially, but only helps with antimatter production.",
+      "A new strange material has been found. It seems to grow exponentially, but it only helps with antimatter production. We'll call this thing \"replicanti\", whatever that means.",
       "player.replicanti.unl && player.replicanti.chance == 0.01",
       "b25"
     ],
@@ -612,9 +612,10 @@ function updateNewsArray() {
     ],
     ["Need more quotes! -hevipelle", "player.newsArray.length >= 135", "n2"],
     ["You're almost there!", "player.newsArray.length >= 160", "n11"],
-    ["You can stop now", "player.newsArray.length >= 165", "n9"],
+    ["You can stop now", "player.newsArray.length >= 175", "n9"],
     ["fucking hacker", "player.newsArray.length >= 200", "n10"],
     ["You are a pure being of chaos", "player.newsArray.length >= 250", "n12"],
+    ["You should've stopped these quotes from coming long ago", "player.newsArray.length >= 333", "n13"],
     [
       "Asian man trys to steal the trophy of fastest infinty of -1 seconds, AND HE DOES IT!",
       'player.newsArray.includes("c1")',
@@ -1238,7 +1239,8 @@ function updateNewsArray() {
     ["But before we start this video, you have to check out Antimatter Dimensions™️. It's got over 100,000 downloads, and it's completely redefined what a mobile game can do for me. It's got great mechanics, 4 prestige layers, 32 unique and original challenges, a deep skill tree, and the largest numbers I've ever seen. Like, seriously, look at them. And the best part is, it's free! Yes, that's right. Free. And if you use the link in the description, you'll start the game with 10 septillion antimatter. Yes, that's right, 10 septillion. So what are you waiting for, click the link in the description and start playing Antimatter Dimensions™️ today!", true, "respecced137"], // weee50's dank maymay
     ["With the power of the Chaos Emeralds, now we're going at hypersanic speed. Nothing else can go beyond that.", false, "respecced138"],
     ["If 3 is the root of all evil, what's √3 supposed to be then?", "player.newsArray.includes('b24')", "respeccced139"],
-    ["There is deep lore within Antimatter Dimensions, you just have to reach Reality first.", "player.newsArray.includes('a101')", "respeccced140"],
+    ["There is deep lore within Antimatter Dimensions, you just have to reach Reality first, where'll you find the meaning of your existence.", "(player.newsArray.includes('a101') && player.eternityPoints.gte('1e4000')) || player.quantum.times > 0", "respeccced140"],
+    ["Antimatter power plants have been proven to become unstable, as there has been an increase in power in the past few days. It has been reported that people have gotten large power bills. The scientists believe the power cells will break eventually, and they cannot create a new one immediately, leading to the blackouts in the city. Citizens have caused an uproar, and have resorted to using regular remote batteries. Stay tuned for more details.", "player.newsArray.includes('a3')", "respeccced141"],
     ]
   }
 var s = document.getElementById("news");
