@@ -5360,7 +5360,7 @@ function gameLoop(diff) {
       player.currentChallenge == "postc1")
   ) {
     if (player.resets > 0) player.resets--;
-    $.notify("Your " + format(player.money) + " units of antimatter were annihilated by " + format(player.matter) + " units of matter.", "warn")
+    $.notify("Your " + shortenMoney(player.money) + " units of antimatter were annihilated by " + shortenMoney(player.matter) + " units of matter.", "error")
     softReset(0);
   }
 
