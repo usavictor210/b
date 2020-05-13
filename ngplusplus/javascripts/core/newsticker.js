@@ -1236,7 +1236,9 @@ function updateNewsArray() {
     ["2 + 2 = 5, I have been lied to, the universe is no more.", 'player.quantum.times > 0', "respecced135"],
     ["The Return of Killer Bean", true, "respecced136"],
     ["But before we start this video, you have to check out Antimatter Dimensions™️. It's got over 100,000 downloads, and it's completely redefined what a mobile game can do for me. It's got great mechanics, 4 prestige layers, 32 unique and original challenges, a deep skill tree, and the largest numbers I've ever seen. Like, seriously, look at them. And the best part is, it's free! Yes, that's right. Free. And if you use the link in the description, you'll start the game with 10 septillion antimatter. Yes, that's right, 10 septillion. So what are you waiting for, click the link in the description and start playing Antimatter Dimensions™️ today!", true, "respecced137"], // weee50's dank maymay
-    ["I went to the doctor's office, they said "]
+    ["With the power of the Chaos Emeralds, now we're going at hypersanic speed. Nothing else can go beyond that.", false, "respecced138"],
+    ["If 3 is the root of all evil, what's √3 supposed to be then?", "player.newsArray.includes('b24')", "respeccced139"],
+    ["There is deep lore within Antimatter Dimensions, you just have to reach Reality first.", "player.newsArray.includes('a101')", "respeccced140"],
     ]
   }
 var s = document.getElementById("news");
