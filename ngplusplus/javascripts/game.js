@@ -3292,18 +3292,17 @@ function setAchieveTooltip() {
       shortenDimensions(timeMultUpg(4, 1).pow(10)) +
       "x"
   );
-  var layer2 = player.quantum.times > 0 ? "something not broken" : "???"
   layer.setAttribute(
     "ach-tooltip",
     "Reach " +
       shortenMoney(Number.MAX_VALUE) +
-      " EP. Reward:" + layer2
+      " EP. "
   );
   fkoff.setAttribute(
     "ach-tooltip",
     "Reach " +
       shortenCosts(new Decimal("1e22000")) +
-      " IP without any time studies. Reward: Time Dimension multipliers are more powerful based on the number of time studies you have bought."
+      " IP without any time studies. Reward: Time Dimensions are more powerful based on the number of time studies you have bought."
   );
   minaj.setAttribute(
     "ach-tooltip",
@@ -3322,8 +3321,7 @@ function setAchieveTooltip() {
     "Reach " +
       shortenCosts(new Decimal("1e17500")) +
       " replicanti. Reward: You gain replicanti 2 times faster when your replicanti amount is below " +
-      shortenMoney(Number.MAX_VALUE) +
-      ", and replicanti chance slightly increases based on your replicanti galaxies."
+      shortenMoney(Number.MAX_VALUE) + "."
   );
   thinking.setAttribute(
     "ach-tooltip",
