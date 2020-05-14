@@ -3292,13 +3292,12 @@ function setAchieveTooltip() {
       shortenDimensions(timeMultUpg(4, 1).pow(10)) +
       "x"
   );
+  var layer2 = player.quantum.times > 0 ? "something not broken" : "???"
   layer.setAttribute(
     "ach-tooltip",
     "Reach " +
       shortenMoney(Number.MAX_VALUE) +
-      " EP. Reward: Time Dimensions gain a multiplier based on EP. Currently: " +
-      shortenMoney(r127Reward()) +
-      "x"
+      " EP. Reward:" + layer2
   );
   fkoff.setAttribute(
     "ach-tooltip",

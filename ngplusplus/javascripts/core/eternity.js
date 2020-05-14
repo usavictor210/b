@@ -1431,15 +1431,6 @@ function updateECRewardText() {
     shortenMoney(ec10bonus) + "x";
 }
 
-function r127Reward() {
-  return new Decimal(
-    Decimal.pow(
-      player.eternityPoints.e - 308.25 + 1,
-      5 + Decimal.log(player.eternityPoints.e - 308.25, 20)
-    ) + 1
-  ).max(1);
-}
-
 function getEPCost(bought) {
   if (player.galacticSacrifice !== undefined)
     return Decimal.pow(50, bought).times(500);
