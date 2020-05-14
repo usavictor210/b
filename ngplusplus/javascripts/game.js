@@ -3282,7 +3282,7 @@ function setAchieveTooltip() {
   );
   eternitiesareinfinity.setAttribute(
     "ach-tooltip",
-    "Eternity in under 200ms. Reward: Longer eternities give more eternitied stat, up to 30x eternity stat multiplier. Currently: " +
+    "Eternity in under 200ms. Reward: The longer an eternity is, it gives more eternities (stat), up to 30x eternity stat multiplier. Currently: " +
       r124Mult().toFixed(2) +
       "x more eternities"
   );
@@ -3357,13 +3357,13 @@ function setAchieveTooltip() {
     "ach-tooltip",
     "Get " +
       formatValue(player.options.notation, 1e6, 0, 0) +
-      " tickspeed upgrades from Time Dimensions. Reward: Unlock autobuyers for Max Time Dimensions and 5x EP."
+      " tickspeed upgrades from Time Dimensions. Reward: Unlock autobuyers for max Time Dimensions and 5x EP."
   );
   nevermetadimension.setAttribute(
     "ach-tooltip",
     "Get at least " +
       formatValue(player.options.notation, 1e25, 0, 0) +
-      "x multiplier on all Meta Dimensions. Reward: You can autobuy meta dimensions."
+      "x multiplier on all Meta Dimensions. Reward: Unlock the meta-dimension autobuyers."
   );
   sanctum.setAttribute(
     "ach-tooltip",
