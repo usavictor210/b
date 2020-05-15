@@ -61,7 +61,7 @@ function updateChartValues() {
     document.getElementById("chartDurationInput").value = player.options.chart.duration;
     player.options.chart.updateRate = Math.min(Math.max(parseInt(document.getElementById("chartUpdateRateInput").value), 50), 10000);
     document.getElementById("chartUpdateRateInput").value = player.options.chart.updateRate;
-    if (Number.isInteger(player.options.chart.updateRate) === false) {
+    if (!Number.isInteger(player.options.chart.updateRate)) {
         player.options.chart.updateRate = 1000;
     }
     if ((player.options.chart.updateRate <= 200 && player.options.chart.duration >= 30) && player.options.chart.warning === 0) {
