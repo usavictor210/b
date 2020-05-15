@@ -5507,7 +5507,7 @@ function gameLoop(diff) {
       document.getElementById("infRow" + tier).style.display = "none";
       document.getElementById("idtabbtn").style.display = "none";
     }
-    if (idtabshown === true || player.eternities >= 1) {
+    if (idtabshown || player.eternities >= 1) {
       document.getElementById("idtabbtn").style.display = "inline-block";
     }
 
@@ -7020,7 +7020,7 @@ function enableChart() {
     player.options.chart.on = true;
     if (player.options.chart.warning < 1)
       alert(
-        "Warning: the chart can cause performance issues. Please disable it if you're experiencing lag."
+        "Warning: Using the chart can cause performance issues. Please disable it if you're experiencing lag."
       );
   } else {
     player.options.chart.on = false;
@@ -7037,9 +7037,9 @@ function enableChartDips() {
 
 function updateChart(first) {
   if (
-    first !== true &&
+    !first &&
     (player.infinitied >= 1 || player.eternities >= 1) &&
-    player.options.chart.on === true
+    player.options.chart.on
   ) {
     if (
       player.currentChallenge == "challenge3" ||
@@ -7581,7 +7581,7 @@ window.onfocus = function() {
 window.addEventListener("keydown", function(event) {
   if (
     !player.options.hotkeys ||
-    controlDown === true ||
+    controlDown ||
     document.activeElement.type === "text"
   )
     return false;

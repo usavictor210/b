@@ -6,7 +6,7 @@ function eternity(force, auto) {
         confirm(
           "Eternity will reset everything up to Infinity, except achievements and challenge records. You will also gain eternity points and unlock various upgrades."
         ))) ||
-    force === true
+    force
   ) {
     if (force) player.currentEternityChall = "";
     if (

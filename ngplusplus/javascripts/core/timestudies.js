@@ -207,7 +207,7 @@ function autoTTCycle() {
     player.timestudy.autobuyer = false;
   if (
     player.achievements.includes("r155") &&
-    player.timestudy.autobuyer == true &&
+    player.timestudy.autobuyer &&
     !player.dilation.upgrades.includes(17)
   )
     maxTheorems();

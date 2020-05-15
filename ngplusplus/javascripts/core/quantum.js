@@ -6,7 +6,7 @@ function quantum(force, auto) {
         confirm(
           "Quantum will reset everything eternity resets, including dilation, and meta-dimensions, in exchange for a quark and unlock various upgrades. Are you sure you want to do this?"
         ))) ||
-    force === true
+    force
   ) {
     player.quantum.quarks = player.quantum.quarks.plus(quarkGain());
     player.quantum.gluons = 0;

@@ -79,7 +79,7 @@ function onLoad() {
     };
   }
   if (player.ngPlus === undefined) player.ngPlus = 0;
-  if (player.options.invert === true) player.options.theme = "Inverted";
+  if (player.options.invert) player.options.theme = "Inverted";
   player.options.invert = undefined;
   if (player.options.notation === undefined)
     player.options.notation = "Standard";
@@ -785,7 +785,7 @@ function onLoad() {
 
   updateInfCosts();
 
-  if (player.replicanti.unl == true) {
+  if (player.replicanti.unl) {
     document.getElementById("replicantidiv").style.display = "inline-block";
     document.getElementById("replicantiunlock").style.display = "none";
   } else {
@@ -806,7 +806,7 @@ function onLoad() {
     document.getElementById("quickReset").style.display = "inline-block";
   else document.getElementById("quickReset").style.display = "none";
 
-  if (player.break == true)
+  if (player.break)
     document.getElementById("break").textContent = "FIX INFINITY";
   updateInfMult()
   document.getElementById("notation").textContent =
