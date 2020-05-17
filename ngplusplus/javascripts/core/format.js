@@ -346,3 +346,323 @@ function calculateProgressBar() {
       }
     }
   }
+
+  // aarex's information code
+  function updateStatisticsText() {
+  if (player.money.gt(Decimal.pow(10, (3 * 86400 * 365.2425 * 79.3) / 10))) {
+    var years = player.money.log10() / 3 / 86400 / 365.2425;
+    if (years > 2019) {
+      var eventBC = years - 2018;
+      var since;
+      if (eventBC > 5.332e6) {
+        since = "???";
+        eventBC = 1 / 0 - eventBC;
+      } else if (eventBC > 3.5e6) {
+        since = "end of the Pliocene epoch";
+        eventBC = 5.332e6 - eventBC;
+      } else if (eventBC > 2.58e6) {
+        since = "birthdate of Lucy (typical Australopithicus afarensis female)";
+        eventBC = 3.5e6 - eventBC;
+      } else if (eventBC > 7.81e5) {
+        since = "the end of the Quaternary period";
+        eventBC = 258e4 - eventBC;
+      } else if (eventBC > 3.15e5) {
+        since = "the end of the Calabrian age";
+        eventBC = 7.81e5 - eventBC;
+      } else if (eventBC > 2.5e5) {
+        since = "emergence of Homo sapiens";
+        eventBC = 3.15e5 - eventBC;
+      } else if (eventBC > 1.95e5) {
+        since = "emergence of Homo neanderthalensis";
+        eventBC = 25e4 - eventBC;
+      } else if (eventBC > 1.6e4) {
+        since = "emergence of anatomically modern humans";
+        eventBC = 195e3 - eventBC;
+      } else if (eventBC > 125e3) {
+        since = "emergence of Homo sapiens idaltu";
+        eventBC = 16e4 - eventBC;
+      } else if (eventBC > 7e4) {
+        since = "peak of the Eemian interglacial period";
+        eventBC = 125e3 - eventBC;
+      } else if (eventBC > 67e3) {
+        since = "earliest abstract/symbolic art";
+        eventBC = 7e4 - eventBC;
+      } else if (eventBC > 5e4) {
+        since = "Upper Paleolithic/Old Stone Age";
+        eventBC = 67e3 - eventBC;
+      } else if (eventBC > 45e3) {
+        since = "Late Stone Age";
+        eventBC = 5e4 - eventBC;
+      } else if (eventBC > 4e4) {
+        since = "European early modern humans";
+        eventBC = 45e3 - eventBC;
+      } else if (eventBC > 4e4) {
+        since = "European early modern humans";
+        eventBC = 45e3 - eventBC;
+      } else if (eventBC > 35e3) {
+        since = "first human settlement";
+        eventBC = 4e4 - eventBC;
+      } else if (eventBC > 33e3) {
+        since = "oldest known figurative art";
+        eventBC = 35e3 - eventBC;
+      } else if (eventBC > 31e3) {
+        since = "oldest known domesticated dog";
+        eventBC = 33e3 - eventBC;
+      } else if (eventBC > 29e3) {
+        since = "Last Glacial Maximum";
+        eventBC = 31e3 - eventBC;
+      } else if (eventBC > 28e3) {
+        since = "oldest ovens";
+        eventBC = 29e3 - eventBC;
+      } else if (eventBC > 25e3) {
+        since = "oldest known twisted rope";
+        eventBC = 28e3 - eventBC;
+      } else if (eventBC > 2e4) {
+        since =
+          "oldest human permanent settlement (hamlet considering to be built of rocks and of mammoth bones)";
+        eventBC = 25e3 - eventBC;
+      } else if (eventBC > 16e3) {
+        since = "rise of Kerberan culture";
+        eventBC = 2e4 - eventBC;
+      } else if (eventBC > 15e3) {
+        since = "colonization of North America";
+        eventBC = 16e3 - eventBC;
+      } else if (eventBC > 14e3) {
+        since = "domestication of the pig";
+        eventBC = 15e3 - eventBC;
+      } else if (eventBC > 11600) {
+        since = "prehistoric warfare";
+        eventBC = 14e3 - eventBC;
+      } else if (eventBC > 1e4) {
+        since = "end of the Holocene epoch";
+        eventBC = 11600 - eventBC;
+      } else if (eventBC > 8e3) {
+        since = "death of other human breeds";
+        eventBC = 1e4 - eventBC;
+      } else if (eventBC > 6e3) {
+        since = "agricultural revolution";
+        eventBC = 8e3 - eventBC;
+      } else if (eventBC > 5e3) {
+        since = "farmers arrived in Europe";
+        eventBC = 6e3 - eventBC;
+      } else if (eventBC > 4e3) {
+        since = "first metal tools";
+        eventBC = 5e3 - eventBC;
+      } else if (eventBC > 3200) {
+        since = "first horse";
+        eventBC = 4e3 - eventBC;
+      } else if (eventBC > 3e3) {
+        since = "Sumerian cuneiform writing system";
+        eventBC = 3200 - eventBC;
+      } else if (eventBC > 2600) {
+        since = "union of Egypt";
+        eventBC = 3e3 - eventBC;
+      } else if (eventBC > 2500) {
+        since = "rise of Maya";
+        eventBC = 2600 - eventBC;
+      } else if (eventBC > 2300) {
+        since = "extinction of mammoths";
+        eventBC = 2500 - eventBC;
+      } else if (eventBC > 1800) {
+        since = "rise of the Akkadian Empire";
+        eventBC = 2300 - eventBC;
+      } else if (eventBC > 1175) {
+        since = "first alphabetic writing";
+        eventBC = 1800 - eventBC;
+      } else if (eventBC > 1400) {
+        since = "rise of the Olmec civilization";
+        eventBC = 1400 - eventBC;
+      } else if (eventBC > 800) {
+        since = "end of the Bronze Age";
+        eventBC = 1175 - eventBC;
+      } else if (eventBC > 753) {
+        since = "rise of Greek city-states";
+        eventBC = 800 - eventBC;
+      } else if (eventBC > 653) {
+        since = "rise of Rome";
+        eventBC = 753 - eventBC;
+      } else if (eventBC > 539) {
+        since = "rise of the Persian Empire";
+        eventBC = 653 - eventBC;
+      } else if (eventBC > 356) {
+        since = "fall of Babylonian Empire";
+        eventBC = 539 - eventBC;
+      } else if (eventBC > 200) {
+        since = "birth of Alexander the Great";
+        eventBC = 356 - eventBC;
+      } else if (eventBC > 4) {
+        since = "invention of paper";
+        eventBC = 200 - eventBC;
+      } else {
+        since = "birth of Jesus Christ";
+        eventBC = 4 - eventBC;
+      }
+      var message =
+        "<br>If you ended the non-stop writing of your full antimatter amount with 3 digits per second right now, it would have started in " +
+        formatInfOrEter(Math.floor(years - 2018)) +
+        " BC." +
+        (since == "???"
+          ? ""
+          : "<br>(around " +
+            formatInfOrEter(Math.ceil(eventBC)) +
+            " years since the " +
+            since +
+            ")");
+    } else {
+      var message =
+        "<br>If you started writing 3 digits of your full antimatter amount a second down when you were an American baby,<br> it would ";
+      if (years > 79.3)
+        message +=
+          "take up " +
+          (((years - 79.3) / years) * 100).toFixed(3) +
+          "% of the average lifespan (of another life).";
+      else
+        message +=
+          "take up " +
+          (years / 0.793).toFixed(3) +
+          "% of the average lifespan. (79.3 years as of 2018)";
+    }
+    document.getElementById("infoScale").innerHTML = message;
+  } else if (player.money.gt(new Decimal("1e100000")))
+    document.getElementById("infoScale").innerHTML =
+      "<br>If you wrote 3 digits of your antimatter amount every second (with no breaks), it would take you <br>" +
+      timeDisplay((player.money.log10() * 10) / 3) +
+      "<br> to write down your antimatter amount.";
+  else {
+    var scale1 = [
+      2.82e-45,
+      1e-42,
+      7.23e-30,
+      5e-21,
+      9e-17,
+      6.2e-11,
+      5e-8,
+      3.555e-6,
+      7.5e-4,
+      1,
+      2.5e3,
+      2.6006e6,
+      3.3e8,
+      5e12,
+      4.5e17,
+      1.08e21,
+      1.53e24,
+      1.41e27,
+      5e32,
+      8e36,
+      1.7e45,
+      1.7e48,
+      3.3e55,
+      3.3e61,
+      5e68,
+      1e73,
+      3.4e80,
+      1e113,
+      Number.MAX_VALUE,
+      new Decimal("1e65000")
+    ];
+    var scale2 = [
+      " protons.",
+      " nucleui.",
+      " Hydrogen atoms.",
+      " viruses.",
+      " red blood cells.",
+      " grains of sand.",
+      " grains of rice.",
+      " teaspoons.",
+      " wine bottles.",
+      " fridge-freezers.",
+      " Olympic-sized swimming pools.",
+      " Great Pyramids of Giza.",
+      " Great Walls of China.",
+      " large asteroids.",
+      " dwarf planets.",
+      " Earths.",
+      " Jupiters.",
+      " Suns.",
+      " red giants.",
+      " hypergiant stars.",
+      " nebulas.",
+      " Oort clouds.",
+      " Local Bubbles.",
+      " galaxies.",
+      " Local Groups.",
+      " Sculptor Voids.",
+      " observable universes.",
+      " Dimensions.",
+      " Infinity Dimensions.",
+      " Time Dimensions."
+    ];
+    var id = 0;
+    if (player.money.times(4.22419e-105).gt(2.82e-45)) {
+      if (player.money.times(4.22419e-105).gt(scale1[scale1.length - 1]))
+        id = scale1.length - 1;
+      else {
+        while (player.money.times(4.22419e-105).gt(scale1[id])) id++;
+        if (id > 0) id--;
+      }
+      if (id >= 7 && id < 11)
+        document.getElementById("infoScale").textContent =
+          "If every unit of antimatter were a planck volume, you would have enough to fill " +
+          formatValue(
+            player.options.notation,
+            (player.money * 4.22419e-105) / scale1[id],
+            2,
+            1
+          ) +
+          scale2[id];
+      else
+        document.getElementById("infoScale").textContent =
+          "If every unit of antimatter were a planck volume, you would have enough to make " +
+          formatValue(
+            player.options.notation,
+            player.money.times(4.22419e-105).dividedBy(scale1[id]),
+            2,
+            1
+          ) +
+          scale2[id];
+    } else {
+      //does this part work correctly? i doubt it does
+      if (player.money.times(1e-54) < 2.82e-45)
+        document.getElementById("infoScale").textContent =
+          "If every unit of antimatter were " +
+          formatValue(
+            player.options.notation,
+            2.82e-45 / 1e-54 / player.money,
+            2,
+            1
+          ) +
+          " attometers cubed, you would have enough to make a proton.";
+      else if (player.money * 1e-63 < 2.82e-45)
+        document.getElementById("infoScale").textContent =
+          "If every unit of antimatter were " +
+          formatValue(
+            player.options.notation,
+            2.82e-45 / 1e-63 / player.money,
+            2,
+            1
+          ) +
+          " zeptometers cubed, you would have enough to make a proton.";
+      else if (player.money * 1e-72 < 2.82e-45)
+        document.getElementById("infoScale").textContent =
+          "If every unit of antimatter were " +
+          formatValue(
+            player.options.notation,
+            2.82e-45 / 1e-72 / player.money,
+            2,
+            1
+          ) +
+          " yoctometers cubed, you would have enough to make a proton.";
+      else
+        document.getElementById("infoScale").textContent =
+          "If every unit of antimatter were " +
+          formatValue(
+            player.options.notation,
+            2.82e-45 / 4.22419e-105 / player.money,
+            2,
+            1
+          ) +
+          " planck volumes, you would have enough to make a proton.";
+      }
+    }
+  }

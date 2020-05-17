@@ -688,10 +688,6 @@ function doQuantumProgress() {
       .setAttribute("ach-tooltip", "Percentage to Quantum");
   }
 }
-if (player.eternities > 0) {
-  document.getElementById("infinitybtn").style.display = "inline-block";
-  document.getElementById("challengesbtn").style.display = "inline-block";
-}
 
 // Retired in Alpha 0.3
 function updateInvestmentDisplay() {
