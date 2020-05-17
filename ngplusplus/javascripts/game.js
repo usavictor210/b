@@ -5952,12 +5952,9 @@ function gameLoop(diff) {
     );
     player.dilation.freeGalaxies += newGalaxies;
     
-    
-    if (
-      player.dilation.upgrades.includes(5) &&
-      player.dilation.freeGalaxies < 1200
-    )
-      player.dilation.freeGalaxies += newGalaxies;
+    let doubleFree = player.dilation.upgrades.includes(5) * newGalaxies;
+    if (doubleFree > 600) doubleFree = 600
+    if (player.dilation.upgrades.includes(5)) player.dilation.freeGalaxies += doubleFree;
     if (canGiveUniversalHarmony()) {
       giveAchievement("Universal harmony");
     }
