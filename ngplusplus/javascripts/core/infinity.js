@@ -26,7 +26,7 @@ function getInfinitiedGain() {
 
 function getAntimatterOnReset() {
   let tier = 0;
-  let antimatter = [10, 100, 1000, 2e5, 1e10, 1e25];
+  let antimatter = [10, 100, 1000, 2e5, 1e10, 2e25];
   if (player.challenges.includes("challenge1")) tier = 1;
   if (player.achievements.includes("r37")) tier = 2;
   if (player.achievements.includes("r54")) tier = 3;

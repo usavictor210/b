@@ -3218,9 +3218,9 @@ function setAchieveTooltip() {
   );
   blink.setAttribute(
     "ach-tooltip",
-    "Get to Infinity in under 200 milliseconds. Reward: Start with " +
-      formatValue(player.options.notation, 1e25, 0, 0) +
-      " antimatter and all dimensions are stronger in the first 300 milliseconds of an Infinity."
+    "Get to Infinity in under 200 milliseconds. Reward: You start with " +
+      formatValue(player.options.notation, 2e25, 0, 0) +
+      " antimatter on reset, and all dimensions are stronger in the first 300 milliseconds of an Infinity."
   );
   oneforeach.setAttribute(
     "ach-tooltip",

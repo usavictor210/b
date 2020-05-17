@@ -8,7 +8,7 @@ var saves = {
 function ngplus() {
   if (player.ngPlus === 0) {
     player.money = new Decimal(1e25);
-      player.infinitiedBank = new Decimal(player.infinitiedBank)
+    player.infinitiedBank = new Decimal(player.infinitiedBank)
     if (player.infinitiedBank.lt(1e12)) player.infinitiedBank = new Decimal(1e12);
     if (!player.infinityUpgrades.includes("skipReset1"))
       player.infinityUpgrades = [
