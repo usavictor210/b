@@ -4,23 +4,24 @@ function getInfinitiedGain() {
     infGain = new Decimal(250);
   }
   let TS32 = Math.max(player.resets, 1);
-  if (player.timestudy.studies.includes(271))
+  /*if (player.timestudy.studies.includes(271)) // Eternal studies will be retired.
     TS32 = TS32 * (1e3 * (player.meta.resets + 1));
-  player.timestudy.studies.includes(32) ? infGain.times(TS32) : infGain;
+  */
+  player.timestudy.studies.includes(32) ? infGain = infGain.times(TS32) : infGain = infGain;
   player.achievements.includes("r133")
-    ? infGain.times(
+    ? infGain = infGain.times(
         Math.max(
           1,
           Math.floor(player.dilation.dilatedTime.pow(0.25).toNumber())
         )
       )
-    : (infGain = infGain);
+    : infGain = infGain;
   player.achievements.includes("r156")
-    ? infGain.times(
+    ? infGain = infGain.times(
         Decimal.max(1, Decimal.floor(Decimal.log(player.eternities / 250), 10).pow(0.8))
       )
-    : (infGain = infGain);
-  return infGain;
+    : infGain
+  return infGain = infGain;
 }
 
 function getAntimatterOnReset() {
