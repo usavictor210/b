@@ -172,3 +172,177 @@ function timeDisplayShort(time) {
   time = Decimal.floor(time / 10)
   return preformat(Decimal.floor((time) / 3600)) + ":" + preformat(Decimal.floor((time % 3600) / 60)) + ":" + preformat(Decimal.floor(time % 60))
 }
+
+function calculateProgressBar() {
+    //even more aarex code...
+    document.getElementById("progressbar").className = "";
+    if (document.getElementById("metadimensions").style.display == "block")
+      doQuantumProgress();
+    else if (player.currentChallenge !== "") {
+      var percentage =
+        Math.min(
+          (Decimal.log10(player.money.plus(1)) /
+            Decimal.log10(player.challengeTarget)) *
+            100,
+          100
+        ).toFixed(2) + "%";
+      document.getElementById("progressbar").style.width = percentage;
+      document.getElementById("progresspercent").textContent = percentage;
+      document
+        .getElementById("progresspercent")
+        .setAttribute("ach-tooltip", "Percentage to challenge goal");
+    } else if (!player.break) {
+      var percentage =
+        Math.min(
+          (Decimal.log10(player.money.plus(1)) /
+            Decimal.log10(Number.MAX_VALUE)) *
+            100,
+          100
+        ).toFixed(2) + "%";
+      document.getElementById("progressbar").style.width = percentage;
+      document.getElementById("progresspercent").textContent = percentage;
+      document
+        .getElementById("progresspercent")
+        .setAttribute("ach-tooltip", "Percentage to Infinity");
+    } else if (player.infDimensionsUnlocked.includes(false)) {
+      var percentage =
+        Math.min(
+          (player.money.e / Decimal.log10(getNewInfReq())) * 100,
+          100
+        ).toFixed(2) + "%";
+      document.getElementById("progressbar").style.width = percentage;
+      document.getElementById("progresspercent").textContent = percentage;
+      document
+        .getElementById("progresspercent")
+        .setAttribute("ach-tooltip", "Percentage to the next dimension unlock");
+    } else if (
+      player.currentEternityChall !== "" &&
+      player.infinityPoints.lt(player.eternityChallGoal.pow(2))
+    ) {
+      var percentage =
+        Math.min(
+          (Decimal.log10(player.infinityPoints.plus(1)) /
+            player.eternityChallGoal.log10()) *
+            100,
+          100
+        ).toFixed(2) + "%";
+      document.getElementById("progressbar").style.width = percentage;
+      document.getElementById("progresspercent").textContent = percentage;
+      document
+        .getElementById("progresspercent")
+        .setAttribute("ach-tooltip", "Percentage to Eternity Challenge goal");
+    } else if (
+      player.infinityPoints.lt(Number.MAX_VALUE) ||
+      player.eternities.eq(0)
+    ) {
+      var percentage =
+        Math.min(
+          (Decimal.log10(player.infinityPoints.plus(1)) /
+            Decimal.log10(Number.MAX_VALUE)) *
+            100,
+          100
+        ).toFixed(2) + "%";
+      document.getElementById("progressbar").style.width = percentage;
+      document.getElementById("progresspercent").textContent = percentage;
+      document
+        .getElementById("progresspercent")
+        .setAttribute("ach-tooltip", "Percentage to Eternity");
+    } else if (
+      player.achievements.includes("r127") &&
+      !player.achievements.includes("r128") &&
+      player.timestudy.studies.length == 0
+    ) {
+      var percentage =
+        (Decimal.log10(player.infinityPoints.plus(1)) / 220).toFixed(2) + "%";
+      document.getElementById("progressbar").style.width = percentage;
+      document.getElementById("progresspercent").textContent = percentage;
+      document
+        .getElementById("progresspercent")
+        .setAttribute(
+          "ach-tooltip",
+          'Percentage to "What do I have to do to get rid of you"'
+        );
+    } else if (
+      player.dilation.studies.includes(5) &&
+      player.dilation.active &&
+      !player.achievements.includes("r138") &&
+      player.timestudy.studies.length == 0
+    ) {
+      var percentage =
+        Math.min(
+          Decimal.log10(player.infinityPoints.plus(1)) / 200,
+          100
+        ).toFixed(2) + "%";
+      document.getElementById("progressbar").style.width = percentage;
+      document.getElementById("progresspercent").textContent = percentage;
+      document
+        .getElementById("progresspercent")
+        .setAttribute(
+          "ach-tooltip",
+          'Percentage to "This is what I have to do to get rid of you."'
+        );
+    } else if (
+      player.dilation.active &&
+      player.dilation.totalTachyonParticles.gte(getDilGain())
+    ) {
+      var percentage =
+        (
+          getDilGain().log10() / player.dilation.totalTachyonParticles.log10()
+        ).toFixed(2) + "%";
+      document.getElementById("progressbar").style.width = percentage;
+      document.getElementById("progresspercent").textContent = percentage;
+      document
+        .getElementById("progresspercent")
+        .setAttribute(
+          "ach-tooltip",
+          "Percentage to the requirement for tachyon particle gain"
+        );
+    } else if (
+      gainedEternityPoints().gte(Decimal.pow(2, 1048576)) &&
+      document.getElementById("metadimensions").style.display == "block"
+    )
+      doQuantumProgress();
+    else {
+      var gepLog = gainedEternityPoints().log2();
+      var goal = Math.pow(2, Math.ceil(Math.log10(gepLog) / Math.log10(2)));
+      if (
+        goal > 131072 &&
+        player.meta &&
+        !player.achievements.includes("r143")
+      ) {
+        goal = Decimal.sub("1e40000", player.eternityPoints).log2();
+        var percentage = Math.min((gepLog / goal) * 100, 100).toFixed(2) + "%";
+        document.getElementById("progressbar").style.width = percentage;
+        document.getElementById("progresspercent").textContent = percentage;
+        document
+          .getElementById("progresspercent")
+          .setAttribute(
+            "ach-tooltip",
+            'Percentage to "In the grim darkness of the far endgame"'
+          );
+      } else if (goal > 512 && !player.achievements.includes("r127")) {
+        goal = Decimal.sub(Number.MAX_VALUE, player.eternityPoints).log2();
+        var percentage = Math.min((gepLog / goal) * 100, 100).toFixed(2) + "%";
+        document.getElementById("progressbar").style.width = percentage;
+        document.getElementById("progresspercent").textContent = percentage;
+        document
+          .getElementById("progresspercent")
+          .setAttribute(
+            "ach-tooltip",
+            'Percentage to "But I wanted another prestige layer..."'
+          );
+      } else {
+        var percentage = Math.min((gepLog / goal) * 100, 100).toFixed(2) + "%";
+        document.getElementById("progressbar").style.width = percentage;
+        document.getElementById("progresspercent").textContent = percentage;
+        document
+          .getElementById("progresspercent")
+          .setAttribute(
+            "ach-tooltip",
+            "Percentage to gaining" +
+              shortenDimensions(Decimal.pow(2, goal)) +
+              " EP"
+          );
+      }
+    }
+  }
