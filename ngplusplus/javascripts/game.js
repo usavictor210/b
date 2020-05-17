@@ -6439,32 +6439,7 @@ function gameLoop(diff) {
       }
     }
   }
-
-  function doQuantumProgress() {
-    id = 1;
-    var className = id > 4 ? "idekProgress" : "quantumProgress";
-    if (document.getElementById("progressbar").className != className)
-      document.getElementById("progressbar").className = className;
-    if (id == 1) {
-      var percentage =
-        Math.min(
-          (player.meta.antimatter.max(1).log10() /
-            Decimal.log10(Number.MAX_VALUE)) *
-            100,
-          100
-        ).toFixed(2) + "%";
-      document.getElementById("progressbar").style.width = percentage;
-      document.getElementById("progresspercent").textContent = percentage;
-      document
-        .getElementById("progresspercent")
-        .setAttribute("ach-tooltip", "Percentage to Quantum");
-    }
-  }
-  if (player.eternities > 0) {
-    document.getElementById("infinitybtn").style.display = "inline-block";
-    document.getElementById("challengesbtn").style.display = "inline-block";
-  }
-
+  doQuantumProgress();
   updateECRewardText();
 
   // aarex's information code
