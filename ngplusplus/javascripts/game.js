@@ -868,7 +868,6 @@ function updateDimensions() {
   }
 
   updateMetaDimensions();
-  postc3
   
   if (canBuyTickSpeed() || player.currentEternityChall == "eterc9") {
     var infchall3 = ""
