@@ -868,13 +868,15 @@ function updateDimensions() {
   }
 
   updateMetaDimensions();
-
+  postc3
+  
   if (canBuyTickSpeed() || player.currentEternityChall == "eterc9") {
+    var infchall3 = ""
     var tickmult = getTickSpeedMultiplier();
     if (tickmult < 1e-9)
       document.getElementById("tickLabel").textContent =
         "Divide the tick interval by " +
-        shortenDimensions(Decimal.recip(tickmult)) +
+        shortenDimensions(Decimal.recip(tickmult)) + infchall3 +
         ".";
     else {
       var places = 0;
@@ -882,7 +884,7 @@ function updateDimensions() {
         places = Math.floor(Math.log10(Math.round(1 / tickmult)));
       document.getElementById("tickLabel").textContent =
         "Reduce the tick interval by " +
-        ((1 - tickmult) * 100).toFixed(places) +
+        ((1 - tickmult) * 100).toFixed(places) + infchall3 +
         "%.";
     }
 
