@@ -1242,7 +1242,9 @@ function updateNewsArray() {
     ["There is deep lore within Antimatter Dimensions, you just have to reach Reality first, where'll you find the meaning of your existence.", "(player.newsArray.includes('a101') && player.eternityPoints.gte('1e4000')) || player.quantum.times > 0", "respeccced140"],
     ["Antimatter power plants have been proven to become unstable, as there has been an increase in power in the past few days. It has been reported that people have gotten large power bills. The scientists believe the power cells will break eventually, and they cannot create a new one immediately, leading to the blackouts in the city. Citizens have caused an uproar, and have resorted to using regular remote batteries. Stay tuned for more details.", "player.newsArray.includes('a3')", "respeccced141"],
     ["Antimatter can now transport people between multiple timelines, making it easier to move across time and space, as long as you have some antimatter on you.", 'player.newsArray.includes("a99")', "respecced142"],
-    ["The Hitchhiker's Guide to the Antimatter Galaxy", 'player.galaxies > 0', "respecced143"]
+    ["The Hitchhiker's Guide to the Antimatter Galaxy", 'player.galaxies > 0', "respecced143"],
+    ["\"...And then, once you get to level 9,000, you can ascend. Not really sure why you'd want to do that, it just resets all of your hard earned xp for some small buffs, mechanics like this will never catch on.\" - Someone in 2012", "player.quantum.times > 0", "respecced144"], //mobile news ticker #1030
+    ["\ ...\" - Someone in 2012", "player.quantum.times > 0", "respecced144"], 
     ]
   }
 var s = document.getElementById("news");
