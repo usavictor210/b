@@ -1244,7 +1244,7 @@ function updateNewsArray() {
     ["Antimatter can now transport people between multiple timelines, making it easier to move across time and space, as long as you have some antimatter on you.", 'player.newsArray.includes("a99")', "respecced142"],
     ["The Hitchhiker's Guide to the Antimatter Galaxy", 'player.galaxies > 0', "respecced143"],
     ["\"...And then, once you get to level 9,000, you can ascend. Not really sure why you'd want to do that, it just resets all of your hard earned xp for some small buffs, mechanics like this will never catch on.\" - Someone in 2012", "player.quantum.times > 0", "respecced144"], //mobile news ticker #1030
-    ["\ ...\" - Someone in 2012", "player.quantum.times > 0", "respecced144"], 
+    ["Obtaining unobtainium shouldn't be possible, but if obtained through reasonable actions, it's definitely obtainium.", "player.quantum.times > 0", "respecced145"], 
     ]
   }
 var s = document.getElementById("news");
