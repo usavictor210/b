@@ -613,7 +613,7 @@ function updateNewsArray() {
     ["Need more quotes! -hevipelle", "player.newsArray.length >= 135", "n2"],
     ["You're almost there!", "player.newsArray.length >= 160", "n11"],
     ["You can stop now", "player.newsArray.length >= 175", "n9"],
-    ["fucking hacker", "player.newsArray.length >= 200", "n10"],
+    ["fricking hacker, ok how do i turn off news", "player.newsArray.length >= 200", "n10"],
     ["You are a pure being of chaos", "player.newsArray.length >= 250", "n12"],
     ["You should've stopped these quotes from coming long ago", "player.newsArray.length >= 333", "n13"],
     [
@@ -1247,7 +1247,8 @@ function updateNewsArray() {
     ["Obtaining unobtainium shouldn't be possible, but if obtained through reasonable actions, it's definitely obtainium.", "player.quantum.times > 0", "respecced145"],
     ["Every 18000 seconds in the Antimatter Universe, 5 hours pass. Together we can stop this.", true, "respecced146"], //mobile news ticker #445
     ["Why, back in my day, we considered a million to be a huge number! Kids these days with their ol'" + shortenMoney(player.money) + "numbers...", "player.money.gte(1e6)", "respecced147"], //mobile news ticker #282 made by multivberse
-    ["Buy the paperclip emojis now at https://aarextiaokhiao.github.io/blob/master/docs/en.json", true, "respecced148"] //mobile ai news ticker #-137
+    ["Buy the paperclip emojis now at https://aarextiaokhiao.github.io/blob/master/docs/en.json", true, "respecced148"], //mobile ai news ticker #-137
+    ["With recent scientific discovery, scientists found out how to reach Infinity in 0.000 seconds. They have announced we are one step closer to breaking the world record of -1 second. Now "]
     ]
   }
 var s = document.getElementById("news");
