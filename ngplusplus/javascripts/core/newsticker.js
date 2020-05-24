@@ -1245,8 +1245,9 @@ function updateNewsArray() {
     ["The Hitchhiker's Guide to the Antimatter Galaxy", 'player.galaxies > 0', "respecced143"],
     ["\"...And then, once you get to level 9,000, you can ascend. Not really sure why you'd want to do that, it just resets all of your hard earned xp for some small buffs, mechanics like this will never catch on.\" - Someone in 2012", "player.quantum.times > 0", "respecced144"], //mobile news ticker #1030
     ["Obtaining unobtainium shouldn't be possible, but if obtained through reasonable actions, it's definitely obtainium.", "player.quantum.times > 0", "respecced145"],
-    ["Every 18000 seconds in the Antimatter Universe, 5 hours pass. Together we can stop this.", true, "respecced146"],
-    ["Why, back in my day, we considered a million to be a huge number! Kids these days with their ol'" + shortenMoney(player.money) + "numbers...", "player.money.gte(1e6)", "respecced147"]
+    ["Every 18000 seconds in the Antimatter Universe, 5 hours pass. Together we can stop this.", true, "respecced146"], //mobile news ticker #445
+    ["Why, back in my day, we considered a million to be a huge number! Kids these days with their ol'" + shortenMoney(player.money) + "numbers...", "player.money.gte(1e6)", "respecced147"], //mobile news ticker #282 made by multivberse
+    ["Buy the paperclip emojis now at https://aarextiaokhiao.github.io/blob/master/docs/en.json", true, "respecced148"] //mobile ai news ticker #-137
     ]
   }
 var s = document.getElementById("news");
