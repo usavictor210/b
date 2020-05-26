@@ -1116,7 +1116,7 @@ function updateNewsArray() {
       true,
       "respecced89"
     ],
-    ["var 9thDimensions = NaN; | Uncaught TypeError", true, "respecced90"],
+    ["var 9thDimensions = NaN; | Uncaught SyntaxError: Invalid or unexpected token", true, "respecced90"],
     ["NG+3 Respecced is the bane of my existence", true, "respecced91"],
     [
       "SCP-AD --- Object Class: Keter --- Special Containment Procedures: SCP-AD must be contained in a 5x5 meter cell with no matter by it, or else it will be destroyed due to annhilation. Security cameras have a chance to shut down at a 5-hour interval. --- Description: SCP-AD is a computer screen that has an odd game on it. It is a game where you collect 'antimatter' with 'dimensions'. The computer has a mouse, a keyboard, and a [REDACTED] by it. The keyboard does not have QWERTY format. The arrangement of keys are [REDACTED]. --- Experiment AD-1: D-6969 was asked to play the game on SCP-AD. 5 hours later, security footage malfunctioned. When observing the containment area, D-6969 had disappeared without a trace. On the screen, it showed a '[REDACTED]' had unlocked. --- Experiment AD-3: D-8826 was asked to play the game on SCP-AD in 'Cancer' Notation. 5 hours later, D-8826 exploded from the inside. Later, all remains of the corpse had been absorbed inside the containment chamber.",
