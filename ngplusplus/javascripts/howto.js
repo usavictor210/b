@@ -2,7 +2,7 @@ var player = {};
 
 function changestate(n) {
     var classes = document.getElementById('div'+n).classList
-    if(classes.contains('hidden')){
+    if (classes.contains('hidden')){
 		classes.remove('hidden');
 	    classes.add('shown');
 	}
@@ -36,13 +36,9 @@ function load_game() {
 }
 
 function showspoilers() {
-	if (spoilers === 0) {
-		spoilers = 1;
-		document.getElementById("showspoilersbtn").innerHTML= "View: <br> Show spoilers"
-	} else {
-		spoilers = 0;
-		document.getElementById("showspoilersbtn").innerHTML = "View: <br> Avoid spoilers"
-	}
+	spoilers = !spoilers
+  let text = spoilers ? "View: <br> Show spoilers" : "View: <br> Avoid spoilers"
+	document.getElementById("showspoilersbtn").innerHTML = text
 	save()
 	updateSpoilers();
 }
@@ -119,9 +115,9 @@ document.getElementById("importbtn").onclick = function () {
 		return;
 	}
 	player = save_data;
-	updateSpoilers()
+	updateSpoilers();
 };
 
 load_game();
-save()
-updateSpoilers()
+save();
+updateSpoilers();

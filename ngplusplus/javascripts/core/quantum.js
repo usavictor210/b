@@ -690,13 +690,6 @@ function doQuantumProgress() {
 }
 
 // Retired in Alpha 0.3
-function updateInvestmentDisplay() {
-  for (i = 1; i < 6; i++) {
-    document.getElementById("amount" + i).textContent =
-      "(" + player.quantum.investmentAmount[i] + ")";
-  }
-}
-
 function getInvestMultiplier(x) {
   // you have to decide a formula for each feature.
   switch (x) {

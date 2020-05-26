@@ -6327,7 +6327,6 @@ function gameLoop(diff) {
   updateQuantum();
   getDilationSeverity();
   autoTTCycle();
-  updateInvestmentDisplay();
   updateSacrificeMultText();
   player.lastUpdate = thisUpdate;
 }
