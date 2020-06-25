@@ -4,7 +4,7 @@ function eternity(force, auto) {
       (!player.options.eternityconfirm ||
         auto ||
         confirm(
-          "Eternity will reset everything up to Infinity, except achievements and challenge records. You will also gain eternity points and unlock various upgrades."
+          "Eternity will reset all content up to and including Infinity, except for your achievements and challenge records. You will gain Eternity points, and unlock various upgrades."
         ))) ||
     force
   ) {

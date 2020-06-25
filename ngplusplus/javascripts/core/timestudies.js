@@ -1101,7 +1101,7 @@ function getTimeStudiesDescription() {
   document.getElementById("161desc").textContent =
     "Give a " +
     shortenCosts(new Decimal("1e616")) +
-    "x multiplier to all Normal Dimensions";
+    "x multiplier to all Antimatter Dimensions";
   document.getElementById("162desc").textContent =
     "Give a " + shortenCosts(1e11) + "x multiplier to all Infinity Dimensions";
   document.getElementById("192desc").textContent =

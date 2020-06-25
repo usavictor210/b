@@ -5,7 +5,7 @@ function quantum(force, auto) {
       (!player.options.quantumconfirm ||
         auto ||
         confirm(
-          "Quantum will reset everything eternity resets, including dilation, and meta-dimensions, in exchange for a quark and unlock various upgrades. Are you sure you want to do this?"
+          "Quantum will reset everything Eternity resets, including Time Dilation and Meta-Dimensions, in exchange for a quark and unlock various upgrades. Are you sure you want to do this?"
         ))) ||
     force
   ) {
@@ -498,7 +498,7 @@ function quantum(force, auto) {
     updateTheoremButtons();
     updateTimeStudyButtons();
     drawStudyTree();
-    //updateLastTenQuantums(); this is too buggy right now, either we could pull a NG^^ or actually fix it
+    //updateLastTenQuantums(); this is too buggy right now, either we could pull a NG^^ (by not showing it), or actually fix it.
     Marathon2 = 0;
     player.quantum.times++;
     document.getElementById("mdtabbtn").style.display = "none";

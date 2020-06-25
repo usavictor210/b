@@ -975,7 +975,7 @@ function updateDimensions() {
   if (document.getElementById("infinity").style.display == "block") {
     if (document.getElementById("preinf").style.display == "block") {
       document.getElementById("infi11").innerHTML =
-        "Normal Dimensions gain a multiplier based on time played.<br>Currently: " +
+        "Antimatter Dimensions gain a multiplier based on time played.<br>Currently: " +
         timeMultUpg(1, 2) +
         "x<br>Cost: 1 IP";
       document.getElementById("infi12").innerHTML =
@@ -995,11 +995,11 @@ function updateDimensions() {
         formatValue(player.options.notation, dimMults(), 1, 1) +
         "x<br>Cost: 1 IP";
       document.getElementById("infi31").innerHTML =
-        "Normal Dimensions gain a multiplier based on time spent in the current infinity.<br>Currently: " +
+        "Antimatter Dimensions gain a multiplier based on the time spent in this Infinity.<br>Currently: " +
         timeMultUpg(2, 2) +
         "x<br>Cost: 3 IP";
       document.getElementById("infi32").innerHTML =
-        "1st Dimension is stronger based on your unspent Infinity Points.<br>Currently: " +
+        "The 1st Dimension is stronger based on your unspent Infinity Points.<br>Currently: " +
         formatValue(
           player.options.notation,
           player.infinityPoints
@@ -3225,7 +3225,7 @@ function setAchieveTooltip() {
   );
   oneforeach.setAttribute(
     "ach-tooltip",
-    "Play for 8 days. Reward: Gain an extremely small time multiplier to all Normal Dimensions. Currently: " +
+    "Play for 8 days. Reward: Gain a time multiplier to all Antimatter Dimensions. Currently: " +
       shortenMoney(new Decimal(timeMultUpg(3, 2))) +
       "x"
   );
@@ -4612,7 +4612,7 @@ function updateTimeShards() {
       document.getElementById("timeShardsPerSec").textContent =
         "You are getting " +
         shortenDimensions(getTimeDimensionProduction(1)) +
-        " time shards per second.";
+        " Time Shards per second.";
   }
 }
 
@@ -6366,7 +6366,7 @@ function simulateTime(seconds, real) {
       " orders of magnitude";
   if (player.timeShards.gt(playerStart.timeShards))
     popupString +=
-      ",<br> your time shards increased by " +
+      ",<br> your Time Shards increased by " +
       shortenMoney(
         player.timeShards.log10() -
           Decimal.max(playerStart.timeShards, 1).log10()
