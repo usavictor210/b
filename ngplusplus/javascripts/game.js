@@ -6353,33 +6353,21 @@ function simulateTime(seconds, real) {
   var popupString = "While you were away";
   if (player.money.gt(playerStart.money))
     popupString +=
-      ",<br> your antimatter increased by " +
-      shortenMoney(player.money.log10() - playerStart.money.log10()) +
-      " orders of magnitude";
+      ",<br> your antimatter increased from " +
+      shortenMoney(playerStart.money) +
+      " to " + shortenMoney(player.money);
   if (player.infinityPower.gt(playerStart.infinityPower))
     popupString +=
-      ",<br> your infinity power increased by " +
-      shortenMoney(
-        player.infinityPower.log10() -
-          Decimal.max(playerStart.infinityPower, 1).log10()
-      ) +
-      " orders of magnitude";
+      ",<br> your Infinity Power increased from " +
+      shortenMoney(Decimal.max(playerStart.infinityPower, 1)) + " to " + shortenMoney(player.infinityPower);
   if (player.timeShards.gt(playerStart.timeShards))
     popupString +=
-      ",<br> your Time Shards increased by " +
-      shortenMoney(
-        player.timeShards.log10() -
-          Decimal.max(playerStart.timeShards, 1).log10()
-      ) +
-      " orders of magnitude";
+      ",<br> your Time Shards increased from " +
+      shortenMoney(playerStart.timeShards) + " to " + shortenMoney(player.timeShards);
   if (player.meta.antimatter.gt(startingMetaAntimatter))
     popupString +=
-      ",<br> your meta-antimatter increased by " +
-      shortenMoney(
-        player.meta.antimatter.log10() -
-          Decimal.max(startingMetaAntimatter, 1).log10()
-      ) +
-      " orders of magnitude";
+      ",<br> your meta-antimatter increased from " +
+      shortenMoney(Decimal.max(startingMetaAntimatter, 1)) + " to " + shortenMoney(player.meta.antimatter);
   if (
     player.infinitied > playerStart.infinitied ||
     player.eternities > playerStart.eternities
