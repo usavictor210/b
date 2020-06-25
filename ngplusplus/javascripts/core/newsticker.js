@@ -1249,7 +1249,8 @@ function updateNewsArray() {
     ["Why, back in my day, we considered a million to be a huge number! Kids these days with their ol'" + shortenMoney(player.money) + "numbers...", "player.money.gte(1e6)", "respecced147"], //mobile news ticker #282 made by multivberse
     ["Buy the paperclip emojis now at https://aarextiaokhiao.github.io/blob/master/docs/en.json", true, "respecced148"], //mobile ai news ticker #-137
     ["With recent scientific discovery, scientists found out how to reach Infinity in 0.000 seconds. They have announced we are one step closer to breaking the world record of -1 second by that Asian man, but replicating such a task is inconceivable. One day, it will be possible.", "player.eternityChalls.eterc12 > 0", "respecced149"],
-    ["If the second installment of Sound Voltex is subtitled \"Infinite Infection\", why isn't the third installment subtitled \"Eternity Wars\"?", true, "respecced150"] //mobile news ticker #388
+    ["If the second installment of Sound Voltex is subtitled \"Infinite Infection\", why isn't the third installment subtitled \"Eternity Wars\"?", true, "respecced150"], //mobile news ticker #388
+    ["It's been a while. Watch out, world, ", true, "respecced151"]
     ]
   }
 var s = document.getElementById("news");
