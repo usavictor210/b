@@ -339,7 +339,7 @@ function calculateProgressBar() {
           .getElementById("progresspercent")
           .setAttribute(
             "ach-tooltip",
-            "Percentage to gaining" +
+            "Percentage to gaining " +
               shortenDimensions(Decimal.pow(2, goal)) +
               " EP"
           );
