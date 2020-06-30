@@ -1,5 +1,5 @@
 var newsArray;
-// how to make a proper news ticker: ["x", 'y', "z"] (x is the news ticker itself, y is the condition to show it, and z is the "code")
+// how to make a proper news ticker: ["x", 'y', "z"] (x is the news ticker itself, y is the condition to show it, and z is the "id")
 function updateNewsArray() {
   newsArray = [
     //always true
