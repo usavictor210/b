@@ -6370,8 +6370,8 @@ function simulateTime(seconds, real) {
       ",<br> your meta-antimatter increased from " +
       shortenMoney(Decimal.max(startingMetaAntimatter, 1)) + " to " + shortenMoney(player.meta.antimatter);
   if (
-    player.infinitied > playerStart.infinitied ||
-    player.eternities > playerStart.eternities
+    player.infinitied.gte(playerStart.infinitied) ||
+    player.eternities.gte(playerStart.eternities)
   )
     popupString += ",";
   else popupString += ".";
