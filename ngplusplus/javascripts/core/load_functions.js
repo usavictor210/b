@@ -35,9 +35,10 @@ function ngplus() {
     if (player.eternityChalls.eterc4 != 5) player.eternityChalls.eterc4 = 1;
     if (player.eternityChalls.eterc10 != 5) player.eternityChalls.eterc10 = 1;
     for (ec = 1; ec < 13; ec++) {
-    if (ec != 1 || ec != 4 || ec != 10) {
-      player.eternityChalls["eterc" + ec] = 5;
-      } else if (player.eternityChalls["eterc"+ec] != 5) player.eternityChalls["eterc" + ec] = 1;
+      if (ec != 1 || ec != 4 || ec != 10) {
+        player.eternityChalls["eterc" + ec] = 5;
+      } else if (player.eternityChalls["eterc" + ec] != 5)
+        player.eternityChalls["eterc" + ec] = 1;
     }
     if (!player.dilation.studies.includes(1)) player.dilation.studies = [1];
     player.achievements.push("r77");
@@ -51,7 +52,10 @@ function ngplus() {
     player.achievements.push("r22");
     player.achievements.push("r35");
     player.achievements.push("r76");
-    if (!player.achievements.includes("r133") && !player.challenges.includes("challenge1")) {
+    if (
+      !player.achievements.includes("r133") &&
+      !player.challenges.includes("challenge1")
+    ) {
       player.challenges = [
         "challenge1",
         "challenge2",
@@ -64,16 +68,15 @@ function ngplus() {
         "challenge9",
         "challenge10",
         "challenge11",
-        "challenge12",     
+        "challenge12"
       ];
     }
     player.ngPlus = 1;
   }
 }
 
-
 function onLoad() {
-  if (player.ngPlus === undefined) player.ngPlus = 0
+  if (player.ngPlus === undefined) player.ngPlus = 0;
   if (player.totalmoney === undefined || isNaN(player.totalmoney))
     player.totalmoney = player.money;
   if (player.options === undefined) {
@@ -105,7 +108,8 @@ function onLoad() {
     player.options.dilationconfirm = true;
   if (player.options.quantumconfirm === undefined)
     player.options.quantumconfirm = true;
-  if (player.options.ngPlusConfirm === undefined) player.options.ngPlusConfirm = 0
+  if (player.options.ngPlusConfirm === undefined)
+    player.options.ngPlusConfirm = 0;
   if (player.options.themes === undefined) player.options.themes = "Normal";
   if (player.options.secretThemeKey === undefined)
     player.options.secretThemeKey = 0;
@@ -130,10 +134,15 @@ function onLoad() {
     document.getElementById("secondRow").style.display = "table-row";
   if (player.challenges === undefined) player.challenges = [];
   if (player.currentChallenge === undefined) player.currentChallenge = "";
-    player.infinitied = new Decimal(player.infinitied)
+  player.infinitied = new Decimal(player.infinitied);
   if (player.infinitied.gt(0) && !player.challenges.includes("challenge1"))
     player.challenges.push("challenge1");
-  if (player.matter === undefined || player.matter === null || isNaN(player.matter)) player.matter = new Decimal(0);
+  if (
+    player.matter === undefined ||
+    player.matter === null ||
+    isNaN(player.matter)
+  )
+    player.matter = new Decimal(0);
   if (player.autobuyers === undefined)
     player.autobuyers = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12];
   if (player.costMultipliers === undefined)
@@ -250,7 +259,8 @@ function onLoad() {
   if (player.options.updateRate === undefined) player.options.updateRate = 50;
   if (player.eterc8ids === undefined) player.eterc8ids = 50;
   if (player.eterc8repl === undefined) player.eterc8repl = 40;
-  if (player.infinitiedBank === undefined) player.infinitiedBank = new Decimal(0);
+  if (player.infinitiedBank === undefined)
+    player.infinitiedBank = new Decimal(0);
   if (player.dimlife === undefined) player.dimlife = false;
   if (player.dead === undefined) player.dead = false;
   if (player.dilation === undefined) player.dilation = {};
@@ -280,8 +290,10 @@ function onLoad() {
       upgrades: [], //layers of dilation stacked
       sacrificedTP: new Decimal(0)
     };
-  if (player.dilation.unstable.sacrificedTP === undefined) player.dilation.unstable.sacrificedTP = new Decimal(0)
-  if (player.dilation.unstable.shards === undefined) player.dilation.unstable.shards = new Decimal(0) 
+  if (player.dilation.unstable.sacrificedTP === undefined)
+    player.dilation.unstable.sacrificedTP = new Decimal(0);
+  if (player.dilation.unstable.shards === undefined)
+    player.dilation.unstable.shards = new Decimal(0);
   if (player.dilation.timeRift === undefined)
     player.dilation.timeRift = {
       seconds: 0,
@@ -289,7 +301,7 @@ function onLoad() {
       upgrades: []
     };
   if (player.dilation.autobuy === undefined) {
-    player.dilation.autobuy = false
+    player.dilation.autobuy = false;
   }
   if (player.timeDimension5 === undefined)
     player.timeDimension5 = {
@@ -384,43 +396,61 @@ function onLoad() {
   if (player.meta.galaxy === undefined) player.meta.galaxy = 0;
   if (player.quantum === undefined) {
     player.quantum = {
-    times: 0,
-    quarks: new Decimal(0),
-    thisQuantum: 0,
-    bestQuantum: 9999999999,
-    producedGluons: 0,
-    realGluons: 0,
-    bosons: {
-      "w+": 0,
-      "w-": 0,
-      z0: 0
-    },
-    neutronstar: {
+      times: 0,
       quarks: new Decimal(0),
-      metaAntimatter: new Decimal(0),
-      dilatedTime: new Decimal(0)
-    },
-    rebuyables: {
-      1: 0,
-      2: 0
-    },
-    investmentAmount: [null, new Decimal(0), new Decimal(0), new Decimal(0), new Decimal(0), new Decimal(0)],
-    upgrades: [],
-    lastTenQuantums: [
-    [600 * 60 * 24 * 31, 1],
-    [600 * 60 * 24 * 31, 1],
-    [600 * 60 * 24 * 31, 1],
-    [600 * 60 * 24 * 31, 1],
-    [600 * 60 * 24 * 31, 1],
-    [600 * 60 * 24 * 31, 1],
-    [600 * 60 * 24 * 31, 1],
-    [600 * 60 * 24 * 31, 1],
-    [600 * 60 * 24 * 31, 1],
-    [600 * 60 * 24 * 31, 1]
-    ],
-    }
+      thisQuantum: 0,
+      bestQuantum: 9999999999,
+      producedGluons: 0,
+      realGluons: 0,
+      bosons: {
+        "w+": 0,
+        "w-": 0,
+        z0: 0
+      },
+      neutronstar: {
+        quarks: new Decimal(0),
+        metaAntimatter: new Decimal(0),
+        dilatedTime: new Decimal(0)
+      },
+      rebuyables: {
+        1: 0,
+        2: 0
+      },
+      investmentAmount: [
+        null,
+        new Decimal(0),
+        new Decimal(0),
+        new Decimal(0),
+        new Decimal(0),
+        new Decimal(0)
+      ],
+      upgrades: [],
+      lastTenQuantums: [
+        [600 * 60 * 24 * 31, 1],
+        [600 * 60 * 24 * 31, 1],
+        [600 * 60 * 24 * 31, 1],
+        [600 * 60 * 24 * 31, 1],
+        [600 * 60 * 24 * 31, 1],
+        [600 * 60 * 24 * 31, 1],
+        [600 * 60 * 24 * 31, 1],
+        [600 * 60 * 24 * 31, 1],
+        [600 * 60 * 24 * 31, 1],
+        [600 * 60 * 24 * 31, 1]
+      ]
+    };
   }
-  if (player.quantum.investmentAmount === undefined || player.quantum.investmentAmount.length != 6) player.quantum.investmentAmount = [null, new Decimal(0), new Decimal(0), new Decimal(0), new Decimal(0), new Decimal(0)]
+  if (
+    player.quantum.investmentAmount === undefined ||
+    player.quantum.investmentAmount.length != 6
+  )
+    player.quantum.investmentAmount = [
+      null,
+      new Decimal(0),
+      new Decimal(0),
+      new Decimal(0),
+      new Decimal(0),
+      new Decimal(0)
+    ];
   if (player.why === undefined) player.why = 0;
   if (player.options.animations === undefined)
     player.options.animations = {
@@ -601,7 +631,8 @@ function onLoad() {
 
   if (player.options.sacrificeConfirmation == false)
     document.getElementById("confirmation").checked = "true";
-  if (player.version === undefined) { // this should never go undefined
+  if (player.version === undefined) {
+    // this should never go undefined
     // value will need to be adjusted when update goes live
     for (var i = 0; i < player.autobuyers.length; i++) {
       if (player.autobuyers[i] % 1 !== 0)
@@ -701,7 +732,7 @@ function onLoad() {
       studies: []
     };
   }
-  player.eternities = new Decimal(player.eternities)
+  player.eternities = new Decimal(player.eternities);
   if (player.eternities.eq(0)) {
     document.getElementById("eternityPoints2").style.display = "none";
     document.getElementById("eternitystorebtn").style.display = "none";
@@ -740,10 +771,10 @@ function onLoad() {
     player.quantum.bestQuantum = 9999999999;
     player.quantum.thisQuantum = player.totalTimePlayed;
     if (player.bestQuantum != undefined) {
-    player.quantum.bestQuantum = player.bestQuantum
-    player.quantum.thisQuantum = player.quantum.bestQuantum
-    delete player.thisQuantum
-    delete player.bestQuantum
+      player.quantum.bestQuantum = player.bestQuantum;
+      player.quantum.thisQuantum = player.quantum.bestQuantum;
+      delete player.thisQuantum;
+      delete player.bestQuantum;
     }
   }
 
@@ -813,7 +844,7 @@ function onLoad() {
 
   if (player.break)
     document.getElementById("break").textContent = "FIX INFINITY";
-  updateInfMult()
+  updateInfMult();
   document.getElementById("notation").textContent =
     "Notation: " + player.options.notation;
 
@@ -1021,49 +1052,51 @@ function onLoad() {
         player.dilation.upgrades[i] = 19;
       }
     }
-    if (player.quantum === undefined) player.quantum = { // migrate save to ng+2 respecced
-    times: 0,
-    quarks: new Decimal(0),
-    thisQuantum: 0,
-    bestQuantum: 9999999999,
-    producedGluons: 0,
-    realGluons: 0,
-    bosons: {
-      "w+": 0,
-      "w-": 0,
-      z0: 0
-    },
-    neutronstar: {
-      quarks: new Decimal(0),
-      metaAntimatter: new Decimal(0),
-      dilatedTime: new Decimal(0)
-    },
-    rebuyables: {
-      1: 0,
-      2: 0
-    },
-    investmentAmount: [
-      null,
-      new Decimal(0),
-      new Decimal(0),
-      new Decimal(0),
-      new Decimal(0),
-      new Decimal(0)
-    ],
-    upgrades: [],
-    lastTenQuantums: [
-      [600 * 60 * 24 * 31, 1],
-      [600 * 60 * 24 * 31, 1],
-      [600 * 60 * 24 * 31, 1],
-      [600 * 60 * 24 * 31, 1],
-      [600 * 60 * 24 * 31, 1],
-      [600 * 60 * 24 * 31, 1],
-      [600 * 60 * 24 * 31, 1],
-      [600 * 60 * 24 * 31, 1],
-      [600 * 60 * 24 * 31, 1],
-      [600 * 60 * 24 * 31, 1]
-    ]
-    }
+    if (player.quantum === undefined)
+      player.quantum = {
+        // migrate save to ng+2 respecced
+        times: 0,
+        quarks: new Decimal(0),
+        thisQuantum: 0,
+        bestQuantum: 9999999999,
+        producedGluons: 0,
+        realGluons: 0,
+        bosons: {
+          "w+": 0,
+          "w-": 0,
+          z0: 0
+        },
+        neutronstar: {
+          quarks: new Decimal(0),
+          metaAntimatter: new Decimal(0),
+          dilatedTime: new Decimal(0)
+        },
+        rebuyables: {
+          1: 0,
+          2: 0
+        },
+        investmentAmount: [
+          null,
+          new Decimal(0),
+          new Decimal(0),
+          new Decimal(0),
+          new Decimal(0),
+          new Decimal(0)
+        ],
+        upgrades: [],
+        lastTenQuantums: [
+          [600 * 60 * 24 * 31, 1],
+          [600 * 60 * 24 * 31, 1],
+          [600 * 60 * 24 * 31, 1],
+          [600 * 60 * 24 * 31, 1],
+          [600 * 60 * 24 * 31, 1],
+          [600 * 60 * 24 * 31, 1],
+          [600 * 60 * 24 * 31, 1],
+          [600 * 60 * 24 * 31, 1],
+          [600 * 60 * 24 * 31, 1],
+          [600 * 60 * 24 * 31, 1]
+        ]
+      };
   }
   if (player.version < 15.1) {
     player.version = 15.1;
@@ -1102,35 +1135,44 @@ function onLoad() {
   }
 
   if (player.version < 15.6) {
-    player.version = 15.6
-  if (player.dilation.unstable.upgrades === undefined)
-    player.dilation.unstable = {
-      times: player.dilation.unstable.times,
-      shards: player.dilation.unstable.shards,
-      severity: player.dilation.unstable.severity,
-      upgrades: []
-    };
-  if (player.dilation.timeRift.upgrades === undefined)
-    player.dilation.timeRift = {
-      seconds: player.dilation.timeRift.seconds,
-      temporalPower: player.dilation.timeRift.temporalPower,
-      upgrades: []
-    };
+    player.version = 15.6;
+    if (player.dilation.unstable.upgrades === undefined)
+      player.dilation.unstable = {
+        times: player.dilation.unstable.times,
+        shards: player.dilation.unstable.shards,
+        severity: player.dilation.unstable.severity,
+        upgrades: []
+      };
+    if (player.dilation.timeRift.upgrades === undefined)
+      player.dilation.timeRift = {
+        seconds: player.dilation.timeRift.seconds,
+        temporalPower: player.dilation.timeRift.temporalPower,
+        upgrades: []
+      };
   }
 
   if (player.version < 15.7) {
-    player.version = 15.7
-    if (player.quantum.investmentAmount === undefined) player.quantum.investmentAmount = [null, new Decimal(0), new Decimal(0), new Decimal(0), new Decimal(0), new Decimal(0)]
+    player.version = 15.7;
+    if (player.quantum.investmentAmount === undefined)
+      player.quantum.investmentAmount = [
+        null,
+        new Decimal(0),
+        new Decimal(0),
+        new Decimal(0),
+        new Decimal(0),
+        new Decimal(0)
+      ];
   }
 
   if (player.version < 15.8) {
-    player.version = 15.8
-    if (player.ngPlusConfirm) player.ngPlusConfirm = player.options.ngPlusConfirm
-    delete player.ngPlusConfirm
+    player.version = 15.8;
+    if (player.ngPlusConfirm)
+      player.ngPlusConfirm = player.options.ngPlusConfirm;
+    delete player.ngPlusConfirm;
   }
-  
-  if (player.meta.autoMaxAll === undefined) player.meta.autoMaxAll = false
-  
+
+  if (player.meta.autoMaxAll === undefined) player.meta.autoMaxAll = false;
+
   // player.version is currently 12.3
   if (player.options.notation == "Default") {
     player.options.notation = "Brackets";
@@ -1148,10 +1190,9 @@ function onLoad() {
   if (player.options.newsHidden) {
     document.getElementById("game").style.display = "none";
   }
-  let chall = player.options.challConf ? "N" : "FF"
-    document.getElementById("challengeconfirmation").textContent =
-      "Challenge confirmation: O" + chall
-  
+  let chall = player.options.challConf ? "N" : "FF";
+  document.getElementById("challengeconfirmation").textContent =
+    "Challenge confirmation: O" + chall;
 
   document.getElementById("chartDurationInput").value =
     player.options.chart.duration;
@@ -1196,8 +1237,9 @@ function onLoad() {
   if (!player.options.hotkeys)
     document.getElementById("hotkeys").textContent = "Enable hotkeys";
   if (!player.options.dilationconfirm)
-    document.getElementById("dilationconf").textContent = "Dilation confirmation OFF";
-  
+    document.getElementById("dilationconf").textContent =
+      "Dilation confirmation OFF";
+
   updateAutobuyers();
   setAchieveTooltip();
   updatePriorities();
@@ -1224,6 +1266,7 @@ function onLoad() {
   checkChallengeAchievements();
   updateEternityChallenges();
   updateDilationUpgradeCosts();
+  ngplusConfirmation();
   let diff = new Date().getTime() - player.lastUpdate;
   if (diff > 1000 * 1000) {
     simulateTime(diff / 1000);
@@ -1271,7 +1314,7 @@ function load_game(root) {
   if (saves[currentSave]) player = saves[currentSave];
   onLoad();
   ngplus();
-  transformSaveToDecimal()
+  transformSaveToDecimal();
 }
 
 function save_game(changed, silent) {
@@ -1310,12 +1353,12 @@ function change_save(saveId) {
   showStatsTab("stats");
   showChallengesTab("challenges");
   showEternityTab("timestudies", true);
-  showQuantumTab("investment")
+  showQuantumTab("investment");
 }
 
 function transformSaveToDecimal() {
   player.infinityPoints = new Decimal(player.infinityPoints);
-  player.eternities = new Decimal(player.eternities)
+  player.eternities = new Decimal(player.eternities);
   document.getElementById("eternitybtn").style.display =
     player.infinityPoints.gte(Number.MAX_VALUE) || player.eternities.gt(0)
       ? "inline-block"
@@ -1389,7 +1432,7 @@ function transformSaveToDecimal() {
   player.infinityDimension8.amount = new Decimal(
     player.infinityDimension8.amount
   );
-  player.infinitied = new Decimal(player.infinitied)
+  player.infinitied = new Decimal(player.infinitied);
   player.timeDimension1.amount = new Decimal(player.timeDimension1.amount);
   player.timeDimension2.amount = new Decimal(player.timeDimension2.amount);
   player.timeDimension3.amount = new Decimal(player.timeDimension3.amount);
@@ -1498,9 +1541,13 @@ function transformSaveToDecimal() {
   player.dilation.timeRift.temporalPower = new Decimal(
     player.dilation.timeRift.temporalPower
   );
-  player.dilation.unstable.sacrificedTP = new Decimal (player.dilation.unstable.sacrificedTP)
-  for (let i=1; i<6; i++) {
-  player.quantum.investmentAmount[i] = new Decimal(player.quantum.investmentAmount[i])
+  player.dilation.unstable.sacrificedTP = new Decimal(
+    player.dilation.unstable.sacrificedTP
+  );
+  for (let i = 1; i < 6; i++) {
+    player.quantum.investmentAmount[i] = new Decimal(
+      player.quantum.investmentAmount[i]
+    );
   }
 }
 
@@ -1548,7 +1595,10 @@ function get_save(name) {
       return v === Infinity ? "Infinity" : v;
     });
   } catch (e) {
-    console.log("An error happened while attempting to get the save (your save is probably wiped):", e);
+    console.log(
+      "An error happened while attempting to get the save (your save is probably wiped):",
+      e
+    );
   }
 }
 
@@ -1559,10 +1609,17 @@ function getRootSaveObject() {
   };
 }
 
-function ngplusConfirmation() { // confirm ng+
-if (player.options.ngPlusConfirm == 0 && confirm("Enable NG+ features on this save? This will unlock and give some content to speed up the early game.")) {
-  ngplus()
-  player.options.ngPlusConfirm = 1 // enabled
-  console.log("enabled ng+")
-  } else player.options.ngPlusConfirm = 2 // disabled, won't ask again
+function ngplusConfirmation() {
+if (player.options.ngPlusConfirm != 0) return
+  // confirm ng+
+  if (
+    player.options.ngPlusConfirm == 0 &&
+    confirm(
+      "Enable NG+ features on this save? This will unlock and give some content to speed up the early game."
+    )
+  ) {
+    ngplus();
+    player.options.ngPlusConfirm = 1; // enabled
+    console.log("enabled ng+");
+  } else player.options.ngPlusConfirm = 2; // disabled, won't ask again
 }

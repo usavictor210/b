@@ -123,7 +123,7 @@ function updatePenalty() {
     "133penalty"
   ).innerHTML = player.achievements.includes("r143")
     ? "Replicanti galaxies are 50% stronger."
-    : "Replicanti interval is 10x slower if , but RGs are 50% stronger.";
+    : "Replicanti interval is 10x slower if replicanti is less than " + shortenMoney(Number.MAX_VALUE) + ", but RGs are 50% stronger.";
 }
 function updateTheoremButtons() {
   if (player.dilation.upgrades.includes(17)) {
