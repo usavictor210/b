@@ -4874,7 +4874,7 @@ setInterval(function() {
   if (milestoneCheck(22))
     document.getElementById("autoBuyerEter").style.display = "inline-block";
 
-  if (player.eternities.neq(0))
+  if (player.eternities.eq(0))
     document.getElementById("pasteternities").style.display = "none";
   else document.getElementById("pasteternities").style.display = "inline-block";
   if (player.challenges.length > 1)
