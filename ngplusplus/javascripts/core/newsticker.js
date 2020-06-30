@@ -995,7 +995,7 @@ function updateNewsArray() {
       "respecced60"
     ],
     [
-      "Whenever I try to give Aarex a antimatter onion, the onion vanishes. Does this mean Aarex is made of matter?",
+      "Whenever I try to give Aarex an antimatter onion, the onion vanishes. Does this mean Aarex is made of matter?",
       true,
       "respecced61"
     ],
