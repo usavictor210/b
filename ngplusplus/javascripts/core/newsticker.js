@@ -1229,7 +1229,7 @@ function updateNewsArray() {
     ["In AD 2101, war was beginning. *explosion* What happen? Someone set up us the bomb. We get signal. What! Main screen turn on. It's you!! How are you gentlemen!! All your antimatter are belong to us. You are on the way to destruction. What you say!! You have no chance to survive make your time. Ha ha ha ha... Captain!! Take off every \"dimension\"! You know what you doing. Move \"dimensions\". For great justice.", 'player.newsArray.length > 250', "respecced127"],
     ["happy birthday despacit", '(new Date().getMonth() == 5 && new Date().getDate() == 12)', "respecced128"],
     ["Pounding into straw Pounding into straw Pounding into straw five-inch, five-inch, five-inch nails!", '!player.break', "respecced129"],
-    ["Antimatter is known to create annoying bullet patterns and ruin people's 1cc attempts, violating the rules of spell cards.", true, "respecced130"],
+    ["Antimatter is known to create annoying bullet patterns and ruin people's 1cc attempts, violating the rules of spell cards.", 'player.newsArray.includes("respecced132")', "respecced130"],
     ["Aren't you bored or something?", 'player.totalTimePlayed >= 600*3000', "respecced131"], // 50 hours
     ["Kirby begins to devour the universe and turn into Hypernova Kirby.", "player.newsArray.includes('r134')", "respecced132"],
     ["If the big bang happened 13.8 billion years ago and should've produced matter, where does the antimatter come from?", "player.money.gt('1e200000000')", "respecced133"],
@@ -1237,7 +1237,7 @@ function updateNewsArray() {
     ["2 + 2 = 5, I have been lied to, the universe is no more.", 'player.quantum.times > 0', "respecced135"],
     ["The Return of Killer Bean", true, "respecced136"],
     ["But before we start this video, you have to check out Antimatter Dimensions™️. It's got over 100,000 downloads, and it's completely redefined what a mobile game can do for me. It's got great mechanics, 4 prestige layers, 32 unique and original challenges, a deep skill tree, and the largest numbers I've ever seen. Like, seriously, look at them. And the best part is, it's free! Yes, that's right. Free. And if you use the link in the description, you'll start the game with 10 septillion antimatter. Yes, that's right, 10 septillion. So what are you waiting for, click the link in the description and start playing Antimatter Dimensions™️ today!", true, "respecced137"], // weee50's dank maymay
-    ["With the power of the Chaos Emeralds, now we're going at hypersanic speed. Nothing else can go beyond that.", false, "respecced138"],
+    ["With the power of the Chaos Emeralds, we're able to move at hypersanic speed. Nothing else can go beyond that.", false, "respecced138"],
     ["If 3 is the root of all evil, what's √3 supposed to be then?", "player.newsArray.includes('b24')", "respeccced139"],
     ["There is deep lore within Antimatter Dimensions, you just have to reach Reality first, where'll you find the meaning of your existence.", "(player.newsArray.includes('a101') && player.eternityPoints.gte('1e4000')) || player.quantum.times > 0", "respeccced140"],
     ["Antimatter power plants have been proven to become unstable, as there has been an increase in power in the past few days. It has been reported that people have gotten large power bills. The scientists believe the power cells will break eventually, and they cannot create a new one immediately, leading to the blackouts in the city. Citizens have caused an uproar, and have resorted to using regular remote batteries. Stay tuned for more details.", "player.newsArray.includes('a3')", "respeccced141"],
@@ -1245,12 +1245,16 @@ function updateNewsArray() {
     ["The Hitchhiker's Guide to the Antimatter Galaxy", 'player.galaxies > 0', "respecced143"],
     ["\"...And then, once you get to level 9,000, you can ascend. Not really sure why you'd want to do that, it just resets all of your hard earned xp for some small buffs, mechanics like this will never catch on.\" - Someone in 2012", "player.quantum.times > 0", "respecced144"], //mobile news ticker #1030
     ["Obtaining unobtainium shouldn't be possible, but if obtained through reasonable actions, it's definitely obtainium.", "player.quantum.times > 0", "respecced145"],
-    ["Every 18000 seconds in the Antimatter Universe, 5 hours pass. Together we can stop this.", true, "respecced146"], //mobile news ticker #445
+    ["Every 18,000 seconds in the Antimatter Universe, 5 hours pass. Together we can stop this.", true, "respecced146"], //mobile news ticker #445
     ["Why, back in my day, we considered a million to be a huge number! Kids these days with their ol'" + shortenMoney(player.money) + "numbers...", "player.money.gte(1e6)", "respecced147"], //mobile news ticker #282 made by multivberse
     ["Buy the paperclip emojis now at https://aarextiaokhiao.github.io/blob/master/docs/en.json", true, "respecced148"], //mobile ai news ticker #-137
-    ["With recent scientific discovery, scientists found out how to reach Infinity in 0.000 seconds. They have announced we are one step closer to breaking the world record of -1 second by that Asian man, but replicating such a task is inconceivable. One day, it will be possible.", "player.eternityChalls.eterc12 > 0", "respecced149"],
+    ["With a new recent scientific discovery, scientists found out how to reach Infinity in 0.000 seconds. They have announced we are one step closer to breaking the world record of -1 second by that Asian man, but replicating such a task is inconceivable. One day, it will be possible.", "player.eternityChalls.eterc12 > 0 && player.newsArray.includes('n4')", "respecced149"],
     ["If the second installment of Sound Voltex is subtitled \"Infinite Infection\", why isn't the third installment subtitled \"Eternity Wars\"?", true, "respecced150"], //mobile news ticker #388
-    ["It's been a while. Watch out, world, ", true, "respecced151"]
+    ["It's been a while. Watch out, world, I'm going quantum.", true, "respecced151"],
+    ["Is it me, or am I hearing something in these space walls? Nothing's come around here for a while...", true, "respecced152"],
+    ["usavictor please stop making news tickers and get back to work", true, "respecced153"],
+    ["too much snow, please, no more snow, no more halating", "player.newsArray.includes('respecced98')", "respecced154"],
+    ["The news ticker machine has currently over", true, "respecced155"]
     ]
   }
 var s = document.getElementById("news");
