@@ -495,7 +495,8 @@ var player = {
       bigCrunch: true,
       eternity: true,
       tachyonParticles: true
-    }
+    },
+    ngPlusConfirm: 0
   }
 };
 

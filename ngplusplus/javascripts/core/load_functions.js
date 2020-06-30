@@ -6,10 +6,9 @@ var saves = {
 };
 
 function ngplus() {
-  if (player.ngPlus === 0) {
+  if (player.ngPlus == 0 && player.options.ngPlusConfirm == 0) {
     player.money = new Decimal(1e25);
-    player.infinitiedBank = new Decimal(player.infinitiedBank)
-    if (player.infinitiedBank.lt(1e12)) player.infinitiedBank = new Decimal(1e12);
+    if (player.infinitiedBank < 1e12) player.infinitiedBank = 1e12;
     if (!player.infinityUpgrades.includes("skipReset1"))
       player.infinityUpgrades = [
         "timeMult",
@@ -32,10 +31,14 @@ function ngplus() {
     if (player.eternities < 1012680) player.eternities = 1012680;
     player.replicanti.unl = true;
     player.replicanti.amount = new Decimal(1);
-    for (ec = 1; ec < 13; ec++) player.eternityChalls["eterc" + ec] = 5;
     if (player.eternityChalls.eterc1 != 5) player.eternityChalls.eterc1 = 1;
     if (player.eternityChalls.eterc4 != 5) player.eternityChalls.eterc4 = 1;
     if (player.eternityChalls.eterc10 != 5) player.eternityChalls.eterc10 = 1;
+    for (ec = 1; ec < 13; ec++) {
+    if (ec != 1 || ec != 4 || ec != 10) {
+      player.eternityChalls["eterc" + ec] = 5;
+      } else if (player.eternityChalls["eterc"+ec] != 5) player.eternityChalls["eterc" + ec] = 1;
+    }
     if (!player.dilation.studies.includes(1)) player.dilation.studies = [1];
     player.achievements.push("r77");
     player.achievements.push("r78");
@@ -67,6 +70,7 @@ function ngplus() {
     player.ngPlus = 1;
   }
 }
+
 
 function onLoad() {
   if (player.ngPlus === undefined) player.ngPlus = 0
@@ -101,6 +105,7 @@ function onLoad() {
     player.options.dilationconfirm = true;
   if (player.options.quantumconfirm === undefined)
     player.options.quantumconfirm = true;
+  if (player.options.ngPlusConfirm === undefined) player.options.ngPlusConfirm = 0
   if (player.options.themes === undefined) player.options.themes = "Normal";
   if (player.options.secretThemeKey === undefined)
     player.options.secretThemeKey = 0;
@@ -1116,9 +1121,13 @@ function onLoad() {
   if (player.version < 15.7) {
     player.version = 15.7
     if (player.quantum.investmentAmount === undefined) player.quantum.investmentAmount = [null, new Decimal(0), new Decimal(0), new Decimal(0), new Decimal(0), new Decimal(0)]
-    
   }
 
+  if (player.version < 15.8) {
+    player.version = 15.8
+    if (player.ngPlusConfirm) player.ngPlusConfirm = player.options.ngPlusConfirm
+    delete player.ngPlusConfirm
+  }
   
   if (player.meta.autoMaxAll === undefined) player.meta.autoMaxAll = false
   
@@ -1548,4 +1557,12 @@ function getRootSaveObject() {
     current: currentSave,
     saves: saves
   };
+}
+
+function ngplusConfirmation() { // confirm ng+
+if (player.options.ngPlusConfirm == 0 && confirm("Enable NG+ features on this save? This will unlock and give some content to speed up the early game.")) {
+  ngplus()
+  player.options.ngPlusConfirm = 1 // enabled
+  console.log("enabled ng+")
+  } else player.options.ngPlusConfirm = 2 // disabled, won't ask again
 }
