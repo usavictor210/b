@@ -1246,15 +1246,16 @@ function updateNewsArray() {
     ["\"...And then, once you get to level 9,000, you can ascend. Not really sure why you'd want to do that, it just resets all of your hard earned xp for some small buffs, mechanics like this will never catch on.\" - Someone in 2012", "player.quantum.times > 0", "respecced144"], //mobile news ticker #1030
     ["Obtaining unobtainium shouldn't be possible, but if obtained through reasonable actions, it's definitely obtainium.", "player.quantum.times > 0", "respecced145"],
     ["Every 18,000 seconds in the Antimatter Universe, 5 hours pass. Together we can stop this.", true, "respecced146"], //mobile news ticker #445
-    ["Why, back in my day, we considered a million to be a huge number! Kids these days with their ol'" + shortenMoney(player.money) + "numbers...", "player.money.gte(1e6)", "respecced147"], //mobile news ticker #282 made by multivberse
+    ["Why, back in my day, we considered a million to be a huge number! Kids these days with their ol' " + shortenMoney(player.money) + " numbers...", "player.money.gte(1e6)", "respecced147"], //mobile news ticker #282 made by multivberse
     ["Buy the paperclip emojis now at https://aarextiaokhiao.github.io/blob/master/docs/en.json", true, "respecced148"], //mobile ai news ticker #-137
     ["With a new recent scientific discovery, scientists found out how to reach Infinity in 0.000 seconds. They have announced we are one step closer to breaking the world record of -1 second by that Asian man, but replicating such a task is inconceivable. One day, it will be possible.", "player.eternityChalls.eterc12 > 0 && player.newsArray.includes('n4')", "respecced149"],
     ["If the second installment of Sound Voltex is subtitled \"Infinite Infection\", why isn't the third installment subtitled \"Eternity Wars\"?", true, "respecced150"], //mobile news ticker #388
     ["It's been a while. Watch out, world, I'm going quantum.", true, "respecced151"],
     ["Is it me, or am I hearing something in these space walls? Nothing's come around here for a while...", true, "respecced152"],
     ["usavictor please stop making news tickers and get back to work", true, "respecced153"],
-    ["too much snow, please, no more snow, no more halating", "player.newsArray.includes('respecced98')", "respecced154"],
-    ["The news ticker machine has currently over", true, "respecced155"]
+    ["\"too much snow, please, no more snow, no more halating\" ~ Anti-Mikey", "player.newsArray.includes('respecced98')", "respecced154"],
+    ["The news ticker machine is currently overheating and cannot take any more requests right now. Please try again later.", true, "respecced155"],
+    ["\"Sorry usavictor, no procrastination for you today. Go work on Antimatter Dimensions NG+2 Respecced Now!\" ~ Pylon", true, "respecced156"] // exclusive to testing
     ]
   }
 var s = document.getElementById("news");
