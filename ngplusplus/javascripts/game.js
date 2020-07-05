@@ -6351,7 +6351,7 @@ function simulateTime(seconds, real) {
     autoBuyerTick();
     if (real) console.log(ticksDone);
   }
-  var popupString = "While you were away";
+  var popupString = "Offline ticks processed: " + ticks*bonusDiff + "<br>While you were away";
   if (player.money.gt(playerStart.money))
     popupString +=
       ",<br> your antimatter increased from " +
@@ -6369,12 +6369,9 @@ function simulateTime(seconds, real) {
     popupString +=
       ",<br> your meta-antimatter increased from " +
       shortenMoney(Decimal.max(startingMetaAntimatter, 1)) + " to " + shortenMoney(player.meta.antimatter);
-  if (
-    player.infinitied.gte(playerStart.infinitied) ||
-    player.eternities.gte(playerStart.eternities)
-  )
+  if (player.infinitied.gt(playerStart.infinitied) || player.eternities.gt(playerStart.eternities)) {
     popupString += ",";
-  else popupString += ".";
+  } else popupString += ".";
   if (player.infinitied > playerStart.infinitied)
     popupString +=
       "<br>you infinitied " +
