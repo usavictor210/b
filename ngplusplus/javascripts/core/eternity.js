@@ -413,8 +413,8 @@ function eternity(force, auto) {
       document.getElementById("seventhRow").style.display = "none";
       document.getElementById("eightRow").style.display = "none";
     }
-    document.getElementById("matter").style.display = "none";
-    document.getElementById("quickReset").style.display = "none";
+    matterDisplay()
+    quickResetDisplay()
     if (player.infinitied.gte(1) && !player.challenges.includes("challenge1"))
       player.challenges.push("challenge1");
     var autobuyers = document.getElementsByClassName("autoBuyerDiv");
@@ -521,7 +521,7 @@ function startEternityChallenge(name, startgoal, goalIncrease) {
     !player.options.challConf || name == ""
       ? true
       : confirm(
-          "You will start over with just your time studies, eternity upgrades and achievements. You need to reach a certain amount of infinity points with special conditions."
+          "You will start over with your time studies, eternity upgrades and achievements. You need to reach a certain amount of Infinity Points with special conditions."
         )
   ) {
     player = {
@@ -839,8 +839,8 @@ function startEternityChallenge(name, startgoal, goalIncrease) {
     document.getElementById("sixthRow").style.display = "none";
     document.getElementById("seventhRow").style.display = "none";
     document.getElementById("eightRow").style.display = "none";
-    document.getElementById("matter").style.display = "none";
-    document.getElementById("quickReset").style.display = "none";
+    matterDisplay()
+    quickResetDisplay()
     var autobuyers = document.getElementsByClassName("autoBuyerDiv");
     if (player.eternities.lt(2)) {
       for (var i = 0; i < autobuyers.length; i++)
