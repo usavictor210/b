@@ -50,7 +50,8 @@ var newsArray = ["TODO: consider removing news", "9 = 3^2, so the third dimensio
 "I tried to break infinity and was able to eternity in roughly three infinities. Thus, I conclude that breaking infinity is broken.",
 "The news array has only 49 messages and FAKE NEWS requires 50. I wonder how I'll fix this?",
 "Press F to pay antimatter for 15th dimension",
-"Now featuring Iroha notation! Learn hiragana (or else be confused)!"];
+"Now featuring Iroha notation! Learn hiragana (or else be confused)!",
+"Hey all, usavictor here. I don't care about the FAKE NEWS achievement requirement, and I'm not forcing you to use the news ticker for that long, so I will keep it at 10 news tickers. Have fun."];
 
 var specialNews = {
   'challenge_messages': [
@@ -65,6 +66,6 @@ var specialNews = {
     "I'm trying to get the ninth challenge to work. My goal is to make it fair and square.",
     "I'm trying to get the tenth challenge to work. My goals are so far away.",
     "I'm trying to get the eleventh challenge to work. There's only a certain amount I can do, though.",
-    "I'm trying to get the dozenth challenge to work. I'm making sure the decth dimension is the highest you can go."
+    "I'm trying to get the dozen- twelfth challenge to work. I'm making sure the decth dimension is the highest you can go."
   ]
 };
