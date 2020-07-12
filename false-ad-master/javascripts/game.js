@@ -3926,7 +3926,7 @@ function bigCrunch() {
         if (challFullName !== "" && player.challengeTimes[challFullName] > player.thisInfinityTime) {
           player.challengeTimes[challFullName] = player.thisInfinityTime;
         }
-        if (!player.achievements.includes("r33") {
+        if (!player.bestInfinityTime > 600) {
 	  showTab("dimensions");
     	}
         if (challFullName !== "" && !player.challenges.includes(challFullName)) {
@@ -4848,7 +4848,7 @@ function startInterval() {
 
         if (player.money.gte(player.challengeTarget) && !infinityBrokenInCurrentChallenge()) {
             document.getElementById("bigcrunch").style.display = 'inline-block';
-            if (!player.achievements.includes("r33")) {
+            if (!player.bestInfinityTime > 600) {
 	    	      showTab('emptiness');
             }
 	} else document.getElementById("bigcrunch").style.display = 'none';
@@ -5055,8 +5055,8 @@ function startInterval() {
         document.getElementById("chall2Pow").innerHTML = (player.chall2Pow*100).toFixed(2) + "%"
         document.getElementById("chall3Pow").innerHTML = shorten(player.chall3Pow*100) + "%"
 
-        if (player.dimPow[0] >= 10e30) giveAchievement("I forgot to nerf that")
-        if (player.money >= 10e79) giveAchievement("Antimatter Apocalypse")
+        if (player.dimPow[0] >= 1e31) giveAchievement("I forgot to nerf that")
+        if (player.money >= 1e80) giveAchievement("Antimatter Apocalypse")
         if (player.totalTimePlayed >= 10 * 60 * 60 * 12) giveAchievement("One for each dimension")
         if (canGetMultidimensional()) {
           giveAchievement("Multidimensional");
@@ -5409,7 +5409,7 @@ var achBonus = function () {
 }
 
 var lnLnInfinitied = function () {
-  return Math.log(Math.log(player.infinitied));
+  return Decimal.max(Math.log(Math.log(player.infinitied)), 2);
 }
 
 var infInterpolDict = {
