@@ -3813,7 +3813,9 @@ function addEternityTime(time, ep) {
 }
 
 
-document.getElementById("postInfinityButton").onclick = function() {document.getElementById("bigcrunch").click()}
+document.getElementById("postInfinityButton").onclick = function() {
+bigCrunch();
+}
 
 function addTime(time, ip) {
     for (var i=player.lastTenRuns.length-1; i>0; i--) {
@@ -3876,7 +3878,7 @@ function setAchInitialMoney() {
   }
 }
 
-document.getElementById("bigcrunch").onclick = function () {
+function bigCrunch() {
     if (inChallenge(player.currentChallenge, 'challenge-16') && player.challengeTarget.lt(getRealChallengeTarget().div(1.01))) {
       player.challengeTarget = Decimal.pow(player.challengeTarget, 2);
       resetResets();
@@ -4083,7 +4085,7 @@ document.getElementById("bigcrunch").onclick = function () {
         clearInterval(player.interval);
         //updateInterval();
         for (var i = 2; i <= MAX_DIMENSION; i++) {
-          document.getElementById(getDimName(i).toLowerCase() + "Row").style.display = "none";
+          bgetDimName(i).toLowerCase() + "Row").style.display = "none";
         }
         document.getElementById("tickSpeed").style.visibility = "hidden";
         document.getElementById("tickSpeedMax").style.visibility = "hidden";
@@ -4849,10 +4851,8 @@ function startInterval() {
             document.getElementById("bigcrunch").style.display = 'inline-block';
             if (!player.achievements.includes("r33")) {
 	    	      showTab('emptiness');
-            } else {
-          document.getElementById("bigcrunch").style.display = 'none';
-          }
-        }
+            }
+	} else document.getElementById("bigcrunch").style.display = 'none';
 
         if (infinityBrokenInCurrentChallenge()) {
             document.getElementById("postInfinityButton").style.display = "inline-block"
@@ -5103,17 +5103,17 @@ function autoBuyerTick () {
           if (player.autoCrunchMode == "amount") {
             if (!player.break || player.currentChallenge.name !== "" || crunch.ip.lt(gainedInfinityPoints())) {
               autoS = false;
-              document.getElementById("bigcrunch").click()
+              bigCrunch();
             }
           } else if (player.autoCrunchMode == "time"){
             if (!player.break || player.currentChallenge.name !== "" || crunch.ip.lt(player.thisInfinityTime/10)) {
               autoS = false;
-              document.getElementById("bigcrunch").click()
+              bigCrunch();
             }
           } else {
             if (!player.break || player.currentChallenge.name != "" || gainedInfinityPoints().gte(player.lastTenRuns[0][1].times(crunch.ip))) {
               autoS = false;
-              document.getElementById("bigcrunch").click()
+              bigCrunch();
             }
           }
           crunch.ticks = 1;
@@ -5674,12 +5674,16 @@ setup();
 window.addEventListener('keydown', function(event) {
   if (!player.options.hotkeys) return false
   switch (event.keyCode) {
-      // Toggling autobuyers has been removed. Do it like a normal person by using the autobuyers tab.
+      // Toggling autobuyers has been removed. Do it like a normal person by using the autobuyers ta- NO, I'M NOT LETTING YOU DO THAT. This dumb softlock has caused me and many others problems. It's time you revert to your old ways.
 
       // What the hell does g even do? REMOVING IT.
       // Looks like it buys galaxies, which is now USELESS.
       case 72: // H
           toggleAutoBuyers();
+      break;
+		  
+      case 73: // I
+          bigCrunch();
       break;
 		 
       case 76: // L, lever max
