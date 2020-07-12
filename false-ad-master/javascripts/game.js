@@ -3926,7 +3926,9 @@ function bigCrunch() {
         if (challFullName !== "" && player.challengeTimes[challFullName] > player.thisInfinityTime) {
           player.challengeTimes[challFullName] = player.thisInfinityTime;
         }
-        showTab("dimensions");
+        if (!player.achievements.includes("r33") {
+	  showTab("dimensions");
+    	}
         if (challFullName !== "" && !player.challenges.includes(challFullName)) {
             player.challenges.push(challFullName);
         }
