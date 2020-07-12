@@ -38,7 +38,7 @@ const AchievementsText = [
     {'text': 'Antimatter Apocalypse', 'tooltip': 'Get over 10 QtVg (1e80) antimatter.'},
     {'text': "There's no point in doing that", 'tooltip': 'Buy a single First Dimension when you have over 1e150 of them. Reward: First Dimensions are 10% stronger.'},
     {'text': 'I forgot to nerf that', 'tooltip': 'Get any Dimension multiplier over 10 No (10e30). Reward: First Dimensions are 5% stronger.'},
-    {'text': "That's a lot of infinities", 'tooltip': 'Get 10 infinities. Reward: Exceeding 1.79e308 antimatter will no longer cover the entire screen with the Big Crunch text, you stay on your current tab after a Big Crunch, and Infinity upgrades  '}
+    {'text': "That's a lot of infinities", 'tooltip': 'Get 10 infinities. Reward: Infinity upgrades with multipliers to dimensions based on infinities are 10% stronger.'}
   ], [
     {'text': "You didn't need it anyway", 'tooltip': 'Big Crunch without having any 12th Dimensions. Reward: Dimensions 1-11 are 2% stronger.'},
     {'text': 'One for each dimension', 'tooltip': 'Play for 12 hours. Reward: Dimensions gain an extremely small time multiplier.'},
