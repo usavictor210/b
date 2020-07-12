@@ -13,7 +13,7 @@
     <link rel="stylesheet" type="text/css" href="stylesheets/styles.css?2">
 </head>
 <body id="body" style="height: 95vh; ">
-    <div id="loading"><br><br>Loading game...</div>
+    <div id="loading"><br><br>Loading game...<br>If this text doesn't disappear after some time, there is an error in the console.<br>Please check it by pressing F12 -> Console and report it to usavictor#4761 on Discord.</div>
     <div id="container" class="container" style="color:#4F5957; font-family: Typewriter; text-align:center; font-size: 11px; display:none">
         <div id='game'>
             <div id='news'>.</div>
@@ -26,7 +26,7 @@
         </div>
 
         <div style="position: relative">
-            <button id="postInfinityButton" class="postinfcrunch">Big Crunch for x Infinity Points</button>
+            <button id="postInfinityButton" class="postinfcrunch" onclick="bigCrunch()">Big Crunch for x Infinity Points</button>
             <button id="eternitybtn" class="eternitybtn" onclick="eternity()">Other times await.. I need to become Eternal</button>
         </div>
         <div id="coinsPerSec">You are getting 0 antimatter per second.</div>
@@ -39,7 +39,7 @@
         </tr>
         <p></p>
         <div style="position:absolute; left: 0; right: 0; margin-left: auto; margin-right: auto; width: 360px; top: 95px">
-            <button id="bigcrunch" style="font-family: Typewriter; font-size: 50px; width: 360px; height: 100px;" class="tabbtn">Big Crunch</button>
+            <button id="bigcrunch" style="font-family: Typewriter; font-size: 50px; width: 360px; height: 100px;" class="tabbtn" onclick="bigCrunch()">Big Crunch</button>
         </div>
         <div>
             <button id="dimensionsbtn" style="font-family: Typewriter; font-size: 20px" class="tabbtn">Dimensions</button>
@@ -624,7 +624,7 @@
                         </td>
                         <td>
                             <div class= "challengediv">
-                                <span style="font-size: 110%">Buying anything halts your production, gradually coming back over 3 minutes.</span>
+                                <span style="font-size: 110%">Buying anything halts your production, which gradually returns over the span of 3 minutes as long as it is uninterrupted.</span>
                                 <br>
                                 <br>
 
@@ -640,7 +640,7 @@
                     <tr>
                         <td>
                             <div class= "challengediv">
-                                <span style="font-size: 110%">First dimension is heavily weakened but gets an exponentially increasing bonus that resets on reset.</span>
+                                <span style="font-size: 110%">The First Dimension multiplier is drastically decreased, but gets an exponentially increasing bonus that resets on Dimension Shifts.</span>
                                 <br>
                                 <br>
 
@@ -654,7 +654,7 @@
                         </td>
                         <td>
                             <div class= "challengediv">
-                                <span style="font-size: 110%">Buying a dimension automatically erases all lower tier dimensions.</span>
+                                <span style="font-size: 110%">Buying a dimension automatically erases all lower tier dimensions, acting like a sacrifice without the boost.</span>
                                 <br>
                                 <br>
 
@@ -684,7 +684,7 @@
                         </td>
                         <td>
                             <div class= "challengediv">
-                                <span style="font-size: 110%">Each dimension costs the dimension 2 before it, with modified prices.</span>
+                                <span style="font-size: 110%">Each dimension costs the dimension 2 tiers before it, with modified prices.</span>
                                 <br>
                                 <br>
 
@@ -700,7 +700,7 @@
                     <tr>
                         <td>
                             <div class= "challengediv">
-                                <span style="font-size: 110%">Multiplier per 10 dimensions is random from 0.30 and 10 (the distribution of multipliers is log-uniform).</span>
+                                <span style="font-size: 110%">The multiplier per 10 dimensions is random for each per-10 purchase varying from 0.30x to 10x. The distribution of multipliers is log-uniform.</span>
                                 <br>
                                 <br>
 
@@ -744,7 +744,7 @@
                         </td>
                         <td>
                             <div class= "challengediv">
-                                <span style="font-size: 110%">To get a Dimension Shift, instead of 20 of a dimension, you need 100.</span>
+                                <span style="font-size: 110%">Dimension Shifts cost 100 of a dimension instead of 20.</span>
                                 <br>
                                 <br>
 
@@ -774,7 +774,7 @@
                         </td>
                         <td>
                             <div class= "challengediv">
-                                <span style="font-size: 110%">Twelve is used instead of ten, ten is used instead of twelve.</span>
+                                <span style="font-size: 110%">Twelve is used instead of ten, ten is used instead of twelve, affecting the goal to be 2^2^12 and you can only have 10 dimensions.</span>
                                 <br>
                                 <br>
 
@@ -790,7 +790,7 @@
                     <tr>
                         <td>
                             <div class= "challengediv">
-                                <span style="font-size: 110%">Every minute on average, the game resets (keeping Dimension Shifts).</span>
+                                <span style="font-size: 110%">Every minute on average, the game resets, but you keep Dimension Shifts.</span>
                                 <br>
                                 <br>
 
@@ -804,7 +804,7 @@
                         </td>
                         <td>
                             <div class= "challengediv">
-                                <span style="font-size: 110%">Every 10 minutes on average, the game resets (losing all Dimension Shifts).</span>
+                                <span style="font-size: 110%">Every 10 minutes on average, the game resets, but you lose all Dimension Shifts.</span>
                                 <br>
                                 <br>
 
@@ -820,7 +820,7 @@
                     <tr>
                         <td>
                             <div class= "challengediv">
-                                <span style="font-size: 110%">There's normal matter which rises. If it exceeds your antimatter, it will reset (keeping Dimension Shifts).</span>
+                                <span style="font-size: 110%">There's normal matter which rises. If it exceeds your antimatter, it will reset, but you keep your Dimension Shifts.</span>
                                 <br>
                                 <br>
 
@@ -834,7 +834,7 @@
                         </td>
                         <td>
                             <div class= "challengediv">
-                                <span style="font-size: 110%">Every amount of antimatter of the form 2^(2^n) with integer n from 0 to 9 is a fake infinity at which the game must be reset (losing all Dimension Shifts).</span>
+                                <span style="font-size: 110%">Every amount of antimatter of the form 2^(2^n) with integer n from 0 to 9 is a fake infinity at which the game must be reset, losing all Dimension Shifts.</span>
                                 <br>
                                 <br>
 
@@ -850,7 +850,7 @@
                     <tr>
                         <td>
                             <div class= "challengediv">
-                                <span style="font-size: 110%">Whenever you buy 10 of a dimension or buy a tickspeed, everything else of equal cost will increase to its next cost step.</span>
+                                <span style="font-size: 110%">Whenever you buy 10 of a dimension or a tickspeed upgrade, everything else of equal cost will increase to its next cost step.</span>
                                 <br>
                                 <br>
 
@@ -880,7 +880,7 @@
                     <tr>
                         <td>
                             <div class= "challengediv">
-                                <span style="font-size: 110%">There are 16 dimensions from the start, but each dimension produces the dimension 2 below it, and first dimensions produce half the usual antimatter.</span>
+                                <span style="font-size: 110%">There are 16 dimensions from the start, but each dimension produces the dimension 2 tiers below it, and First Dimensions are 50% weaker.</span>
                                 <br>
                                 <br>
 
@@ -894,7 +894,7 @@
                         </td>
                         <td>
                             <div class= "challengediv">
-                                <span style="font-size: 110%">You first must do 9 challenges of your choice together (other than the first one and this one), and then must do the other 9 together.</span>
+                                <span style="font-size: 110%">You first must do 9 challenges of your choice together (except for the first and hyper challenge), and then must do the other 9 together.</span>
                                 <br>
                                 <br>
 
@@ -1054,7 +1054,7 @@
         </div>
         <div id="postinf" class="inftab" align="center">
             <br>
-            <div id="abletobreak">You need to complete all challenges and get Automated Big Crunch interval to 0.1 to be able to break infinity</div>
+            <div id="abletobreak">You need to complete all challenges, and get the Automated Big Crunch interval to 0.1 to be able to break infinity</div>
                 <button  id="break" class="infinistorebtn2" onclick="breakInfinity()" ach-tooltip="Your power multipliers will eventually start increasing more slowly, but infinity point gain will be greater">BREAK INFINITY</button>
                 <div>
                     <table id="footer">
