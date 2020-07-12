@@ -4847,10 +4847,11 @@ function startInterval() {
 
         if (player.money.gte(player.challengeTarget) && !infinityBrokenInCurrentChallenge()) {
             document.getElementById("bigcrunch").style.display = 'inline-block';
-        if (!player.achievements.includes("r33") {
-	    	showTab('emptiness');
-        } else {
+            if (!player.achievements.includes("r33")) {
+	    	      showTab('emptiness');
+            } else {
           document.getElementById("bigcrunch").style.display = 'none';
+          }
         }
 
         if (infinityBrokenInCurrentChallenge()) {
