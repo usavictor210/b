@@ -38,7 +38,7 @@ const AchievementsText = [
     {'text': 'Antimatter Apocalypse', 'tooltip': 'Get over 10 QtVg (1e80) antimatter.'},
     {'text': "There's no point in doing that", 'tooltip': 'Buy a single First Dimension when you have over 1e150 of them. Reward: First Dimensions are 10% stronger.'},
     {'text': 'I forgot to nerf that', 'tooltip': 'Get any Dimension multiplier over 10 No (10e30). Reward: First Dimensions are 5% stronger.'},
-    {'text': "That's a lot of infinities", 'tooltip': 'Get 10 infinities.'}
+    {'text': "That's a lot of infinities", 'tooltip': 'Get 10 infinities. Reward: Exceeding 1.79e308 antimatter will no longer cover the entire screen with the Big Crunch text, you stay on your current tab after a Big Crunch, and Infinity upgrades  '}
   ], [
     {'text': "You didn't need it anyway", 'tooltip': 'Big Crunch without having any 12th Dimensions. Reward: Dimensions 1-11 are 2% stronger.'},
     {'text': 'One for each dimension', 'tooltip': 'Play for 12 hours. Reward: Dimensions gain an extremely small time multiplier.'},
@@ -131,183 +131,183 @@ const challNameDict = {
 const infinityUpgrades = [
   [
     {
-      "text": "Production increase over time<br>currently: {timeProdIncrease}<br>Cost: 1 IP",
+      "text": "Dimensions gain a multiplier based on time played in this save file.<br>Currently: {timeProdIncrease}x<br>Cost: 1 IP",
       "name": "prodIncrease",
       "cost": 1
     },
     {
-      "text": "Multiplier for 10 Dimensions <br>2x -> 2.2x<br>Cost: 1 IP",
+      "text": "Increase the multiplier for buying 10 Dimensions <br>2x -> 2.2x<br>Cost: 1 IP",
       "name": "multIncrease",
       "cost": 1
     },
     {
-      "text": "Production increase over time in current infinity<br>currently: {currProdIncrease}<br>Cost: 3 IP",
+      "text": "Dimensions gain a multiplier based on the time spent in this Infinity.<br>Currently: {currProdIncrease}x<br>Cost: 3 IP",
       "name": "currProdIncrease",
       "cost": 3
     },
     {
-      "text": "You start with 5th dimension<br>Cost: 20 IP",
+      "text": "You start with the 5th Dimension<br>Cost: 20 IP",
       "name": "5dim",
       "cost": 20
     }
   ],
   [
     {
-      "text": "First and Eighth Dimension power based on infinitied stat<br>{infinitied}x<br>Cost: 1 IP",
+      "text": "The First and Eighth Dimensions gain a multiplier based on your infinities.<br>Currently: {infinitied}x<br>Cost: 1 IP",
       "name": "1infStat",
       "cost": 1
     },
     {
-      "text": "Second and Seventh Dimension power based on infinitied stat<br>{infinitied}x<br>Cost: 1 IP",
+      "text": "The Second and Seventh Dimensions gain a multiplier based on your infinities.<br>Currently: {infinitied}x<br>Cost: 1 IP",
       "name": "2infStat",
       "cost": 1
     },
     {
-      "text": "Bonus for unspent Infinity Points on 1st Dimension<br>currently: {unspentBonus}<br>Cost: 5 IP",
+      "text": "The 1st Dimension is stronger based on your unspent IP.<br>Currently: {unspentBonus}x<br>Cost: 5 IP",
       "name": "1dimBonus",
       "cost": 5
     },
     {
-      "text": "You start with 6th dimension<br>Cost: 40 IP",
+      "text": "You start with the 6th Dimension<br>Cost: 40 IP",
       "name": "6dim",
       "cost": 40
     }
   ],
   [
     {
-      "text": "Third and Sixth Dimension power based on infinitied stat<br>{infinitied}x<br>Cost: 1 IP",
+      "text": "The Third and Sixth Dimensions gain a multiplier based on your infinities.<br>Currently: {infinitied}x<br>Cost: 1 IP",
       "name": "3infStat",
       "cost": 1
     },
     {
-      "text": "Fourth and Fifth Dimension power based on infinitied stat<br>{infinitied}x<br>Cost: 1 IP",
+      "text": "The Fourth and Fifth Dimensions gain a multiplier based on your infinities.<br>Currently: {infinitied}x<br>Cost: 1 IP",
       "name": "4infStat",
       "cost": 1
     },
     {
-      "text": "Dimension Shift power increases by .5<br>{dimShiftPower} -> {newDimShiftPower}<br>Cost: 7 IP",
+      "text": "The multiplier from Dimension Shifts to your Dimensions increases by 0.5<br>({dimShiftPower} -> {newDimShiftPower})<br>Cost: 7 IP",
       "name": "dimShiftInc1",
       "cost": 7
     },
     {
-      "text": "You start with 7th dimension<br>Cost: 80 IP",
+      "text": "You start with the 7th Dimension<br>Cost: 80 IP",
       "name": "7dim",
       "cost": 80
     }
   ],
   [
     {
-      "text": "Decrease the number of Dimensions needed for reset by 9<br>Cost: 1 IP",
+      "text": "Decrease the number of Dimensions needed for a Dimension Shift by 9<br>Cost: 1 IP",
       "name": "dimResetDecrease1",
       "cost": 1
     },
     {
-      "text": "Tickspeed Boosts are twice as effective<br>{tickspeedBoostPower} -> {twiceTickspeedBoostPower}<br>Cost: 2 IP",
+      "text": "Tickspeed Boosts are twice as effective<br>({tickspeedBoostPower} -> {twiceTickspeedBoostPower})<br>Cost: 2 IP",
       "name": "tickspeedBoostInc1",
       "cost": 2
     },
     {
-      "text": "Infinity Point generation (1 every 10 times fastest infinity)<br>currently: {tenTimesFastest}<br>Cost: 10 IP",
+      "text": "You generate IP based on your fastest infinity time*10 (1 IP/10 times as your current fastest infinity time)<br>Currently: {tenTimesFastest}<br>Cost: 10 IP",
       "name": "infAuto1",
       "cost": 10
     },
     {
-      "text": "You start with 8th dimension<br>Cost: 160 IP",
+      "text": "You start with the 8th Dimension<br>Cost: 160 IP",
       "name": "8dim",
       "cost": 160
     }
   ],
   [
     {
-      "text": "Ninth and 16th Dimension power based on infinitied stat<br>{infinitied}x<br>Cost: 12 IP",
+      "text": "The Ninth and 16th Dimensions gains a multiplier based on your infinities<br>Currently: {infinitied}x<br>Cost: 12 IP",
       "name": "9infStat",
       "cost": 12
     },
     {
-      "text": "Tenth and 15th Dimension power based on infinitied stat<br>{infinitied}x<br>Cost: 12 IP",
+      "text": "The Tenth and 15th Dimensions gain a multiplier based on your infinities.<br>Currently: {infinitied}x<br>Cost: 12 IP",
       "name": "10infStat",
       "cost": 12
     },
     {
-      "text": "1.1x bonus to all dimensions per completed challenge<br>currently: {challengeBonus}<br>Cost: 200 IP",
+      "text": "All dimensions are 1.1x more powerful for every completed challenge.<br>Currently: {challengeBonus}x<br>Cost: 200 IP",
       "name": "challengeBonus",
       "cost": 200
     },
     {
-      "text": "You start with 9th dimension<br>Cost: 320 IP",
+      "text": "You start with the 9th Dimension<br>Cost: 320 IP",
       "name": "9dim",
       "cost": 320
     }
   ],
   [
     {
-      "text": "Eleventh and 14th Dimension power power based on infinitied stat<br>{infinitied}x<br>Cost: 12 IP",
+      "text": "The Eleventh and 14th Dimensions gain a multiplier based on your infinities.<br>Currently: {infinitied}x<br>Cost: 12 IP",
       "name": "11infStat",
       "cost": 12
     },
     {
-      "text": "Twelfth and 13th Dimension power power based on infinitied stat<br>{infinitied}x<br>Cost: 12 IP",
+      "text": "The Twelfth and 13th Dimensions gain a multiplier based on your infinities.<br>Currently: {infinitied}x<br>Cost: 12 IP",
       "name": "12infStat",
       "cost": 12
     },
     {
-      "text": "Dimension Shift power increases by .5<br>{dimShiftPower} -> {newDimShiftPower}<br>Cost: 500 IP",
+      "text": "The multiplier from Dimension Shifts to your Dimensions increases by another 0.5<br>({dimShiftPower} -> {newDimShiftPower})<br>Cost: 500 IP",
       "name": "dimShiftInc2",
       "cost": 500
     },
     {
-      "text": "You start with 10th dimension<br>Cost: 640 IP",
+      "text": "You start with the 10th Dimension<br>Cost: 640 IP",
       "name": "10dim",
       "cost": 640
     }
   ],
   [
     {
-      "text": "Production increases over time consider time twice as long<br>Cost: 1K IP",
+      "text": "The 1st Infinity upgrade is more effective in terms of time (time is counted twice as long).<br>Cost: 1K IP",
       "name": "timeLonger",
       "cost": 1000
     },
     {
-      "text": "Multiplier for 10 dimensions is at least ln(ln(infinitied))<br>currently: {lnLnInfinitied}<br>Cost: 10K IP",
+      "text": "The multiplier for 10 dimensions is at least ln(ln(infinitied))<br>Currently: {lnLnInfinitied}<br>Cost: 10K IP",
       "name": "mulLn",
       "cost": 10000
     },
     {
-      "text": "1.1x bonus to all dimensions per completed achievement (in addition to other achievement bonuses)<br>currently: {achBonus}<br>Cost: 2K IP",
+      "text": "All dimensions gain a 1.1x multiplier for every completed achievement (in addition to other achievement bonuses)<br>Currently: {achBonus}x<br>Cost: 2K IP",
       "name": "achBonus",
       "cost": 2000
     },
     {
-      "text": "You start with 11th dimension<br>Cost: 1280 IP",
+      "text": "You start with the 11th Dimension<br>Cost: 1280 IP",
       "name": "11dim",
       "cost": 1280
     }
   ],
   [
     {
-      "text": "Decrease the number of Dimensions needed for reset by 1<br>Cost: 10K IP",
+      "text": "Further decrease the number of Dimensions needed for Dimension Shifts by 1<br>Cost: 10K IP",
       "name": "dimResetDecrease2",
       "cost": 10000
     },
     {
-      "text": "Tickspeed Boosts are twice as effective<br>{tickspeedBoostPower} -> {twiceTickspeedBoostPower}<br>Cost: 20K IP",
+      "text": "Tickspeed Boosts are twice as effective<br>({tickspeedBoostPower} -> {twiceTickspeedBoostPower})<br>Cost: 20K IP",
       "name": "tickspeedBoostInc2",
       "cost": 20000
     },
     {
-      "text": "Infinity Point generation (1 every fastest infinity)<br>currently: {fastest}<br>Cost: 50K IP",
+      "text": "You generate IP based on your fastest infinity time (1 every fastest infinity)<br>Currently: {fastest}<br>Cost: 50K IP",
       "name": "infAuto2",
       "cost": 50000
     },
     {
-      "text": "You start with 12th dimension<br>Cost: 2560 IP",
+      "text": "You start with the 12th Dimension<br>Cost: 2560 IP",
       "name": "12dim",
       "cost": 2560
     }
   ],
   [
     {
-      "text": "Percentages in challenges 2 and 3 are multiplied by 100<br>Cost: 100K IP",
+      "text": "Percentages in Challenges 2 and 3 are multiplied by 100<br>Cost: 100K IP",
       "name": "percentMultiply",
       "cost": 100000
     },
@@ -317,12 +317,12 @@ const infinityUpgrades = [
       "cost": 100000
     },
     {
-      "text": "If infinity is broken, it's also broken in challenges<br>Cost: 1M IP",
+      "text": "Infinity can also be broken in challenges.<br>Cost: 1M IP",
       "name": "challengeBreak",
       "cost": 1000000
     },
     {
-      "text": "Gain the ability to unlock new dimensions (up to 16th dimension)<br>Cost: 1M IP",
+      "text": "Gain the ability to unlock new dimensions (up to the 16th dimension) (NOT WORKING)<br>Cost: 1M IP",
       "name": "newDimensions",
       "cost": 1000000
     }
