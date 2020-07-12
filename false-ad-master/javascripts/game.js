@@ -1729,9 +1729,9 @@ function updateDimensions() {
 
     document.getElementById("32").innerHTML = "You gain x"+Math.max(totalResets(), 1)+" more infinitied stat (based on soft resets)<p>Cost: 2 Time Theorems"
 
-    document.getElementById("eter1").innerHTML = "Infinity Dimensions multiplier based on unspent EP (x+1)^3<br>Currently: "+shortenMoney(player.eternityPoints.plus(1).pow(3))+"x<br>Cost: 5 EP"
-    document.getElementById("eter2").innerHTML = "Infinity Dimension multiplier based on eternities (x^log4(2x))<br>Currently: "+shortenMoney(Decimal.pow(player.eternities, Math.log(player.eternities*2)/Math.log(4)))+"x<br>Cost: 10 EP"
-    document.getElementById("eter3").innerHTML = "Infinity Dimensions multiplier based on sum of Infinity Challenge times<br>Currently: "+shortenMoney(Decimal.pow(2,300/Math.max(infchallengeTimes, 7.5)))+"x<br>Cost: "+shortenCosts(50e3)+" EP"
+    document.getElementById("eter1").innerHTML = "COMING SOON<br>Cost: Infinite EP"
+    document.getElementById("eter2").innerHTML = "COMING SOON<br>Cost: Infinite EP"
+    document.getElementById("eter3").innerHTML = "COMING SOON<br>Cost: Infinite EP"
 
     document.getElementById("82").innerHTML = "Dimension shifts affect Infinity Dimensions <span>Currently "+shortenMoney(Decimal.pow(1.0000109, Decimal.pow(totalResets(), 2)))+"x<span>Cost: 6 Time Theorems"
     document.getElementById("91").innerHTML = "Normal dimensions gain a multiplier based on time spent this eternity<span>Currently: "+shortenMoney(Decimal.pow(10, Math.min(player.thisEternity, 18000)/60))+"x<span>Cost: 4 Time Theorems"
@@ -2966,7 +2966,7 @@ document.getElementById("infiMult").onclick = function() {
         player.infMult = player.infMult.times(2);
         player.autoIP = player.autoIP.times(2);
         player.infMultCost = player.infMultCost.times(10)
-        document.getElementById("infiMult").innerHTML = "Multiply infinity points from all sources by 2 <br>currently: "+shorten(player.infMult) +"x<br>Cost: "+shortenCosts(player.infMultCost)+" IP";
+        document.getElementById("infiMult").innerHTML = "You get 2x more IP.<br>Currently: "+shorten(player.infMult) +"x<br>Cost: "+shortenCosts(player.infMultCost)+" IP";
         if (multiplyCrunchIp()) {
           player.autobuyers['bigcrunch'].ip = player.autobuyers['bigcrunch'].ip.times(2);
           document.getElementById("ip-bigcrunch").value = player.autobuyers['bigcrunch'].ip;
@@ -2992,13 +2992,15 @@ function updateEternityUpgrades() {
 
 
 function buyEternityUpgrade(name, cost) {
+return false
+/*
     if (player.eternityPoints.gte(cost) && !player.eternityUpgrades.includes(name)) {
         player.eternityUpgrades.push(name)
         player.eternityPoints = player.eternityPoints.minus(cost)
         updateEternityUpgrades()
     }
+*/
 }
-
 
 function buyEPMult() {
     if (player.eternityPoints.gte(player.epmultCost)) {
@@ -3006,7 +3008,7 @@ function buyEPMult() {
         player.eternityPoints = player.eternityPoints.minus(player.epmultCost)
         let count = Math.log(player.epmult)/Math.log(5)
         player.epmultCost = new Decimal(500).times(Decimal.pow(50, count))
-        document.getElementById("epmult").innerHTML = "You gain 5 times more EP<p>Currently: "+shortenDimensions(player.epmult)+"x<p>Cost: "+shortenDimensions(player.epmultCost)+" EP"
+        document.getElementById("epmult").innerHTML = "You gain 5 times more EP.<p>Currently: "+shortenDimensions(player.epmult)+"x<p>Cost: "+shortenDimensions(player.epmultCost)+" EP"
         updateEternityUpgrades()
     }
 }
@@ -3090,7 +3092,7 @@ function updateInfCosts() {
     document.getElementById("151").innerHTML = shortenCosts(1e4)+"x multiplier on all Time dimensions<span>Cost: 8 Time Theorems"
 
 
-    document.getElementById("infiMult").innerHTML = "Multiply infinity points from all sources by 2 <br>currently: "+shorten(player.infMult) +"x<br>Cost: "+shortenCosts(player.infMultCost)+" IP";
+    document.getElementById("infiMult").innerHTML = "You get 2x more IP.<br>Currently: "+shorten(player.infMult) +"x<br>Cost: "+shortenCosts(player.infMultCost)+" IP";
     document.getElementById("tickspeedBoost").innerHTML = "Get a Tickspeed Boost (persists between infinities) <br>currently: " + player.infTickspeedBoosts + "<br>Cost: " +shortenCosts(player.tickspeedBoostCost)+ " IP";
 }
 
@@ -3366,13 +3368,13 @@ function setAchieveTooltip() {
     var dimensional = document.getElementById("Multidimensional")
     var IPBelongs = document.getElementById("All your IP are belong to us")
 
-    apocAchieve.setAttribute('ach-tooltip', "Get over " + formatValue(player.options.notation, 1e80, 0, 0) + " antimatter");
-    noPointAchieve.setAttribute('ach-tooltip', "Buy a single First Dimension when you have over " + formatValue(player.options.notation, 1e150, 0, 0) + " of them. Reward: First Dimensions are 10% stronger");
-    forgotAchieve.setAttribute('ach-tooltip', "Get any Dimension multiplier over " + formatValue(player.options.notation, 1e31, 0, 0)) + ". Reward: First Dimensions are 5% stronger";
-    sanic.setAttribute('ach-tooltip', "Have antimatter/sec exceed your current antimatter above " + formatValue(player.options.notation, 1e63, 0, 0));
-    potato.setAttribute('ach-tooltip', "Get more than " + formatValue(player.options.notation, 1e26, 0, 0) + " ticks per second. Reward: Reduces starting tick interval by 2%");
-    dimensional.setAttribute('ach-tooltip', "Reach " + formatValue(player.options.notation, 1e12, 0, 0) + " of all dimensions except 16th");
-    IPBelongs.setAttribute('ach-tooltip', "Big Crunch for "+shortenCosts(1e150)+" IP. Reward: Additional 4x multiplier to IP")
+    apocAchieve.setAttribute('ach-tooltip', "Get over " + formatValue(player.options.notation, 1e80, 0, 0) + " antimatter.");
+    noPointAchieve.setAttribute('ach-tooltip', "Buy a single First Dimension when you have over " + formatValue(player.options.notation, 1e150, 0, 0) + " of them. Reward: First Dimensions are 10% stronger.");
+    forgotAchieve.setAttribute('ach-tooltip', "Get any Dimension multiplier over " + formatValue(player.options.notation, 1e31, 0, 0) + ". Reward: First Dimensions are 5% stronger.");
+    sanic.setAttribute('ach-tooltip', "Get over " + formatValue(player.options.notation, 1e63, 0, 0) + " antimatter.");
+    potato.setAttribute('ach-tooltip', "Get more than " + formatValue(player.options.notation, 1e26, 0, 0) + " ticks per second. Reward: Reduce the starting tick interval by 2%.");
+    dimensional.setAttribute('ach-tooltip', "Get at least " + formatValue(player.options.notation, 1e12, 0, 0) + " of all dimensions, except for the 16th.");
+    IPBelongs.setAttribute('ach-tooltip', "Big Crunch for "+shortenCosts(1e150)+" IP. Reward: Gain an additional 4x multiplier to IP.")
 }
 
 document.getElementById("notation").onclick = function () {
@@ -4351,7 +4353,7 @@ function eternity() {
         document.getElementById("eternitybtn").style.display = player.infinityPoints.gte(normal_infinity) ? "inline-block" : "none"
         document.getElementById("eternityPoints2").style.display = "inline-block"
         document.getElementById("eternitystorebtn").style.display = "inline-block"
-        document.getElementById("infiMult").innerHTML = "Multiply infinity points from all sources by 2 <br>currently: "+shorten(player.infMult) +"x<br>Cost: "+shortenCosts(player.infMultCost)+" IP"
+        document.getElementById("infiMult").innerHTML = "You get 2x more IP.<br>Currently: "+shorten(player.infMult) +"x<br>Cost: "+shortenCosts(player.infMultCost)+" IP"
         document.getElementById("tickspeedBoost").innerHTML = "Get a Tickspeed Boost (persists between infinities) <br>currently: " + player.infTickspeedBoosts + "<br>Cost: " +shortenCosts(player.tickspeedBoostCost)+ " IP";
         updateEternityUpgrades()
 
@@ -4870,7 +4872,7 @@ function startInterval() {
             if (diff > 0) {
                 player.infMult = player.infMult.times(Decimal.pow(2, diff))
                 player.infMultCost = player.infMultCost.times(Decimal.pow(10, diff))
-                document.getElementById("infiMult").innerHTML = "Multiply infinity points from all sources by 2 <br>currently: "+shorten(player.infMult) +"x<br>Cost: "+shortenCosts(player.infMultCost)+" IP";
+                document.getElementById("infiMult").innerHTML = "You get 2x more IP.<br>Currently: "+shorten(player.infMult) +"x<br>Cost: "+shortenCosts(player.infMultCost)+" IP";
                 // No tickspeed boost needed here.
                 player.infinityPoints = player.infinityPoints.minus(player.infMultCost.dividedBy(10))
                 if (multiplyCrunchIp()) {
