@@ -20,6 +20,7 @@ function getChallId (chall) {
   } else {
     return our_part;
   }
+
 }
 
 function getChallName (chall) {
@@ -27,7 +28,7 @@ function getChallName (chall) {
   if (typeof id === 'number') {
     return 'Challenge ' + id;
   } else if (!(id in challNameDict)) {
-    throw new Error('Weird challenge!');
+    throw new Error('Unexpected challenge ID!');
   } else {
     return challNameDict[id];
   }
@@ -4846,7 +4847,8 @@ function startInterval() {
 
         if (player.money.gte(player.challengeTarget) && !infinityBrokenInCurrentChallenge()) {
             document.getElementById("bigcrunch").style.display = 'inline-block';
-            showTab('emptiness');
+        if (!player.achievements.includes("r33") {
+	    	showTab('emptiness');
         } else {
           document.getElementById("bigcrunch").style.display = 'none';
         }
@@ -5571,6 +5573,19 @@ function reportBoughtOne(i) {
   }
 }
 
+function toggleAutoBuyers() {
+    var bool = player.autobuyers[0].isOn
+    for (var i = 0; i<12; i++) {
+        if (player.autobuyers[i]%1 !== 0) {
+            player.autobuyers[i].isOn = !bool
+        }
+    }
+    player.autoSacrifice.isOn = !bool
+    player.eternityBuyer.isOn = !bool
+    updateCheckBoxes()
+    updateAutobuyers()
+}
+
 function addDimension (i) {
   var d_name_title = getDimName(i);
   var d_name = d_name_title.toLowerCase();
@@ -5662,6 +5677,10 @@ window.addEventListener('keydown', function(event) {
 
       // What the hell does g even do? REMOVING IT.
       // Looks like it buys galaxies, which is now USELESS.
+      case 72: // H
+          toggleAutoBuyers();
+      break;
+		 
       case 76: // L, lever max
           negateLeverClick();
       break;
