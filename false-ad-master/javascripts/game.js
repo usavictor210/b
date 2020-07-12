@@ -4085,7 +4085,7 @@ function bigCrunch() {
         clearInterval(player.interval);
         //updateInterval();
         for (var i = 2; i <= MAX_DIMENSION; i++) {
-          bgetDimName(i).toLowerCase() + "Row").style.display = "none";
+          document.getElementById(getDimName(i).toLowerCase() + "Row").style.display = "none";
         }
         document.getElementById("tickSpeed").style.visibility = "hidden";
         document.getElementById("tickSpeedMax").style.visibility = "hidden";
