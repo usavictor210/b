@@ -3812,11 +3812,6 @@ function addEternityTime(time, ep) {
     player.lastTenEternities[0] = [time, ep]
 }
 
-
-document.getElementById("postInfinityButton").onclick = function() {
-bigCrunch();
-}
-
 function addTime(time, ip) {
     for (var i=player.lastTenRuns.length-1; i>0; i--) {
         player.lastTenRuns[i] = player.lastTenRuns[i-1]
