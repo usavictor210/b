@@ -4976,8 +4976,7 @@ function startInterval() {
         document.getElementById("infinitybtn").style.display = "none";
         document.getElementById("challengesbtn").style.display = "none";
 
-        if (player.money.gte(player.challengeTarget) &&
-        (player.bestInfinityTime > 600 || ((!player.currentChallenge.name == "") && !infinityBrokenInCurrentChallenge())) {
+        if (player.money.gte(player.challengeTarget) && (player.bestInfinityTime > 600 || ((!player.currentChallenge.name == "") && !infinityBrokenInCurrentChallenge()))) {
             document.getElementById("dimensionsbtn").style.display = "none";
             document.getElementById("optionsbtn").style.display = "none";
             document.getElementById("statisticsbtn").style.display = "none";
