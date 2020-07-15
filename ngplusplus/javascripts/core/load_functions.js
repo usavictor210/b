@@ -1170,6 +1170,10 @@ function onLoad() {
       player.ngPlusConfirm = player.options.ngPlusConfirm;
     delete player.ngPlusConfirm;
   }
+  
+  if (player.version < 15.9) {
+    player.version = 15.9;
+  }
 
   if (player.meta.autoMaxAll === undefined) player.meta.autoMaxAll = false;
 

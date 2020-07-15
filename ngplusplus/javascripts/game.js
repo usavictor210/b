@@ -164,7 +164,7 @@ var player = {
   dimensionMultDecrease: 10,
   dimensionMultDecreaseCost: 1e8,
   overXGalaxies: 10,
-  version: 15.7,
+  version: 15.9,
   infDimensionsUnlocked: [
     false,
     false,
