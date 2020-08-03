@@ -869,14 +869,15 @@ function updateDimensions() {
   }
 
   updateMetaDimensions();
-  
+
   if (canBuyTickSpeed() || player.currentEternityChall == "eterc9") {
-    var infchall3 = ""
+    var infchall3 = "";
     var tickmult = getTickSpeedMultiplier();
     if (tickmult < 1e-9)
       document.getElementById("tickLabel").textContent =
         "Divide the tick interval by " +
-        shortenDimensions(Decimal.recip(tickmult)) + infchall3 +
+        shortenDimensions(Decimal.recip(tickmult)) +
+        infchall3 +
         ".";
     else {
       var places = 0;
@@ -884,7 +885,8 @@ function updateDimensions() {
         places = Math.floor(Math.log10(Math.round(1 / tickmult)));
       document.getElementById("tickLabel").textContent =
         "Reduce the tick interval by " +
-        ((1 - tickmult) * 100).toFixed(places) + infchall3 +
+        ((1 - tickmult) * 100).toFixed(places) +
+        infchall3 +
         "%.";
     }
 
@@ -1226,45 +1228,48 @@ function updateDimensions() {
 
 function updateCosts() {
   document.getElementById("first").textContent =
-    "Cost: " + shortenCosts(player.firstCost);
+    (player.quantum.times < 0 ? "Cost: " : "") + shortenCosts(player.firstCost);
   document.getElementById("second").textContent =
-    "Cost: " + shortenCosts(player.secondCost);
+    (player.quantum.times < 0 ? "Cost: " : "") +
+    shortenCosts(player.secondCost);
   document.getElementById("third").textContent =
-    "Cost: " + shortenCosts(player.thirdCost);
+    (player.quantum.times < 0 ? "Cost: " : "") + shortenCosts(player.thirdCost);
   document.getElementById("fourth").textContent =
-    "Cost: " + shortenCosts(player.fourthCost);
+    (player.quantum.times < 0 ? "Cost: " : "") +
+    shortenCosts(player.fourthCost);
   document.getElementById("fifth").textContent =
-    "Cost: " + shortenCosts(player.fifthCost);
+    (player.quantum.times < 0 ? "Cost: " : "") + shortenCosts(player.fifthCost);
   document.getElementById("sixth").textContent =
-    "Cost: " + shortenCosts(player.sixthCost);
+    (player.quantum.times < 0 ? "Cost: " : "") + shortenCosts(player.sixthCost);
   document.getElementById("seventh").textContent =
-    "Cost: " + shortenCosts(player.seventhCost);
+    (player.quantum.times < 0 ? "Cost: " : "") +
+    shortenCosts(player.seventhCost);
   document.getElementById("eight").textContent =
-    "Cost: " + shortenCosts(player.eightCost);
+    (player.quantum.times < 0 ? "Cost: " : "") + shortenCosts(player.eightCost);
 
   document.getElementById("firstMax").textContent =
-    "Until 10, Cost: " +
+    (player.quantum.times < 0 ? "Until 10, Cost: " : "") +
     shortenCosts(player.firstCost.times(10 - dimBought(1)));
   document.getElementById("secondMax").textContent =
-    "Until 10, Cost: " +
+    (player.quantum.times < 0 ? "Until 10, Cost: " : "") +
     shortenCosts(player.secondCost.times(10 - dimBought(2)));
   document.getElementById("thirdMax").textContent =
-    "Until 10, Cost: " +
+    (player.quantum.times < 0 ? "Until 10, Cost: " : "") +
     shortenCosts(player.thirdCost.times(10 - dimBought(3)));
   document.getElementById("fourthMax").textContent =
-    "Until 10, Cost: " +
+    (player.quantum.times < 0 ? "Until 10, Cost: " : "") +
     shortenCosts(player.fourthCost.times(10 - dimBought(4)));
   document.getElementById("fifthMax").textContent =
-    "Until 10, Cost: " +
+    (player.quantum.times < 0 ? "Until 10, Cost: " : "") +
     shortenCosts(player.fifthCost.times(10 - dimBought(5)));
   document.getElementById("sixthMax").textContent =
-    "Until 10, Cost: " +
+    (player.quantum.times < 0 ? "Until 10, Cost: " : "") +
     shortenCosts(player.sixthCost.times(10 - dimBought(6)));
   document.getElementById("seventhMax").textContent =
-    "Until 10, Cost: " +
+    (player.quantum.times < 0 ? "Until 10, Cost: " : "") +
     shortenCosts(player.seventhCost.times(10 - dimBought(7)));
   document.getElementById("eightMax").textContent =
-    "Until 10, Cost: " +
+    (player.quantum.times < 0 ? "Until 10, Cost: " : "") +
     shortenCosts(player.eightCost.times(10 - dimBought(8)));
 
   document.getElementById("tickSpeed").textContent = canBuyTickSpeed()
@@ -3296,9 +3301,7 @@ function setAchieveTooltip() {
   );
   layer.setAttribute(
     "ach-tooltip",
-    "Reach " +
-      shortenMoney(Number.MAX_VALUE) +
-      " EP. "
+    "Reach " + shortenMoney(Number.MAX_VALUE) + " EP. "
   );
   fkoff.setAttribute(
     "ach-tooltip",
@@ -3323,7 +3326,8 @@ function setAchieveTooltip() {
     "Reach " +
       shortenCosts(new Decimal("1e17500")) +
       " replicanti. Reward: You gain replicanti 2 times faster when your replicanti amount is below " +
-      shortenMoney(Number.MAX_VALUE) + "."
+      shortenMoney(Number.MAX_VALUE) +
+      "."
   );
   thinking.setAttribute(
     "ach-tooltip",
@@ -4483,10 +4487,10 @@ function startChallenge(name, target) {
     document.getElementById("sixthRow").style.display = "none";
     document.getElementById("seventhRow").style.display = "none";
     document.getElementById("eightRow").style.display = "none";
-    
-    matterDisplay()
-    quickResetDisplay()
-    
+
+    matterDisplay();
+    quickResetDisplay();
+
     showTab("dimensions");
     updateChallenges();
     player.money = getAntimatterOnReset();
@@ -5250,7 +5254,14 @@ function gameLoop(diff) {
       player.currentChallenge == "postc1")
   ) {
     if (player.resets > 0) player.resets--;
-    $.notify("Your " + shortenMoney(player.money) + " units of antimatter were annihilated by " + shortenMoney(player.matter) + " units of matter.", "error")
+    $.notify(
+      "Your " +
+        shortenMoney(player.money) +
+        " units of antimatter were annihilated by " +
+        shortenMoney(player.matter) +
+        " units of matter.",
+      "error"
+    );
     softReset(0);
   }
 
@@ -5844,10 +5855,11 @@ function gameLoop(diff) {
       Decimal.pow(thresholdMult, newGalaxies)
     );
     player.dilation.freeGalaxies += newGalaxies;
-    
+
     let doubleFree = player.dilation.upgrades.includes(5) * newGalaxies;
-    if (doubleFree > 600) doubleFree = 600
-    if (player.dilation.upgrades.includes(5)) player.dilation.freeGalaxies += doubleFree;
+    if (doubleFree > 600) doubleFree = 600;
+    if (player.dilation.upgrades.includes(5))
+      player.dilation.freeGalaxies += doubleFree;
     if (canGiveUniversalHarmony()) {
       giveAchievement("Universal harmony");
     }
@@ -6164,7 +6176,7 @@ function gameLoop(diff) {
 
   calculateProgressBar();
   updateECRewardText();
-  updateStatisticsText()
+  updateStatisticsText();
 
   var shiftRequirement = getShiftRequirement(0);
 
@@ -6334,25 +6346,36 @@ function simulateTime(seconds, real) {
     autoBuyerTick();
     if (real) console.log(ticksDone);
   }
-  var popupString = "Offline ticks processed: " + ticks*bonusDiff + "<br>While you were away";
+  var popupString =
+    "Offline ticks processed: " + ticks * bonusDiff + "<br>While you were away";
   if (player.money.gt(playerStart.money))
     popupString +=
       ",<br> your antimatter increased from " +
       shortenMoney(playerStart.money) +
-      " to " + shortenMoney(player.money);
+      " to " +
+      shortenMoney(player.money);
   if (player.infinityPower.gt(playerStart.infinityPower))
     popupString +=
       ",<br> your Infinity Power increased from " +
-      shortenMoney(Decimal.max(playerStart.infinityPower, 1)) + " to " + shortenMoney(player.infinityPower);
+      shortenMoney(Decimal.max(playerStart.infinityPower, 1)) +
+      " to " +
+      shortenMoney(player.infinityPower);
   if (player.timeShards.gt(playerStart.timeShards))
     popupString +=
       ",<br> your Time Shards increased from " +
-      shortenMoney(playerStart.timeShards) + " to " + shortenMoney(player.timeShards);
+      shortenMoney(playerStart.timeShards) +
+      " to " +
+      shortenMoney(player.timeShards);
   if (player.meta.antimatter.gt(startingMetaAntimatter))
     popupString +=
       ",<br> your meta-antimatter increased from " +
-      shortenMoney(Decimal.max(startingMetaAntimatter, 1)) + " to " + shortenMoney(player.meta.antimatter);
-  if (player.infinitied.gt(playerStart.infinitied) || player.eternities.gt(playerStart.eternities)) {
+      shortenMoney(Decimal.max(startingMetaAntimatter, 1)) +
+      " to " +
+      shortenMoney(player.meta.antimatter);
+  if (
+    player.infinitied.gt(playerStart.infinitied) ||
+    player.eternities.gt(playerStart.eternities)
+  ) {
     popupString += ",";
   } else popupString += ".";
   if (player.infinitied > playerStart.infinitied)
@@ -6876,7 +6899,6 @@ document.getElementById("hiddenheader").style.display = "none";
 }),
   1000;
 
-
 window.addEventListener(
   "keydown",
   function(event) {
@@ -6948,42 +6970,39 @@ window.addEventListener("keydown", function(event) {
     document.activeElement.type === "text"
   )
     return false;
-  
-  
 });
-
 
 Mousetrap.bind("1", function() {
   if (shiftDown) buyOneDimension(1);
-else buyManyDimension(1);
+  else buyManyDimension(1);
 });
 Mousetrap.bind("2", function() {
   if (shiftDown) buyOneDimension(2);
-else buyManyDimension(2);
+  else buyManyDimension(2);
 });
 Mousetrap.bind("3", function() {
   if (shiftDown) buyOneDimension(3);
-else buyManyDimension(3);
+  else buyManyDimension(3);
 });
 Mousetrap.bind("4", function() {
   if (shiftDown) buyOneDimension(4);
-else buyManyDimension(4);
+  else buyManyDimension(4);
 });
 Mousetrap.bind("5", function() {
   if (shiftDown) buyOneDimension(5);
-else buyManyDimension(5);
+  else buyManyDimension(5);
 });
 Mousetrap.bind("6", function() {
   if (shiftDown) buyOneDimension(6);
-else buyManyDimension(6);
+  else buyManyDimension(6);
 });
 Mousetrap.bind("7", function() {
   if (shiftDown) buyOneDimension(7);
-else buyManyDimension(7);
+  else buyManyDimension(7);
 });
 Mousetrap.bind("8", function() {
   if (shiftDown) buyOneDimension(8);
-else buyManyDimension(8);
+  else buyManyDimension(8);
 });
 Mousetrap.bind("a", function() {
   toggleAutoBuyers();
@@ -7017,10 +7036,14 @@ Mousetrap.bind("c", function() {
 Mousetrap.bind("e", function() {
   document.getElementById("eternitybtn").onclick();
 });
-Mousetrap.bind("f", function() {
-  $.notify("Paying respects", "info");
-  giveAchievement("It pays to have respect");
-}, "keyup");
+Mousetrap.bind(
+  "f",
+  function() {
+    $.notify("Paying respects", "info");
+    giveAchievement("It pays to have respect");
+  },
+  "keyup"
+);
 
 init();
 var totalMult = 1;
