@@ -854,6 +854,13 @@ function onLoad() {
 		player.newsArray = []
 		player.version = 5
     }
+	
+	if (player.version < 9.1) {
+		player.peaks.gp = {
+			perMin: new Decimal(0),
+			total: new Decimal(0)
+		}
+	}
 
     if (player.infinityDimension5 === undefined) {
         player.infDimensionsUnlocked.push(false)
@@ -2836,7 +2843,7 @@ function setAntigalaxyBulk () {
 }
 
 function updateAntigalaxyBulk () {
-    document.getElementById("bulkantigalaxies").value = player.intergalactic.galacticstudy.bulk;
+    //document.getElementById("bulkantigalaxies").value = player.intergalactic.galacticstudy.bulk;
 }
 
 function buyChosenGalacticStudies () {
@@ -7059,7 +7066,7 @@ function intergalaxy(force) {
                 bought: 0
             },
             timeDimBuyers: player.timeDimBuyers,
-            eternityPoints: 0,
+            eternityPoints: new Decimal(0),
             eternities: player.eternities,
             thisEternity: 0,
             bestEternity: 999999999,
@@ -7094,7 +7101,7 @@ function intergalaxy(force) {
                 limit: player.replicanti.newLimit,
                 newLimit: player.replicanti.newLimit
             },
-            timestudy: initTimeStudy(),
+            timestudy: initTimestudy(),
             autoIP: new Decimal(0),
             autoTime: 1e300,
             infMultBuyer: hasEternityMilestones ? player.infMultBuyer: false,
@@ -8164,7 +8171,7 @@ function startInterval() {
             document.getElementById("tickSpeedMax").className = 'unavailablebtn';
         }
 
-        if (player.infinitied > 0 || player.eternities > 0) {
+        if (player.infinitied > 0 || player.eternities > 0 || player.intergalactic.intergalaxies > 0) {
             document.getElementById("infinitybtn").style.display = "block";
             document.getElementById("challengesbtn").style.display = "block";
             if (player.infinityPoints.gte(1)) document.getElementById("infi11").className = "infinistorebtn1"
