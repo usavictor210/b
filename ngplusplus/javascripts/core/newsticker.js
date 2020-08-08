@@ -81,7 +81,7 @@ function updateNewsArray() {
       "a29"
     ],
     [
-      "Rate 5 on Kongregate so more people can experience this 5 star Rating",
+      "Rate 5 on Kongregate so more people can experience this 5 star Rating. Wait, it died. Nevermind, send it to your friends.",
       true,
       "a30"
     ],
@@ -90,7 +90,7 @@ function updateNewsArray() {
     ["I hate myself. -Boo-chan", true, "a33"],
     ["Gee golly -Xandawesome", true, "a34"],
     ["Above us, there is nothing above, But the stars, above.", true, "a35"],
-    ["If black lives matter, do white lives antimatter?", true, "a36"],
+    ["'Insert quote' - quoter", true, "a36"],
     ["Somebody wasn't nice, he got an antimatter-storm.", true, "a37"],
     [
       "You are living, you occupy space, you have a mass, you matter... unless you antimatter.",
@@ -270,7 +270,7 @@ function updateNewsArray() {
       true,
       "a91"
     ],
-    ["#DimensionLivesAntimatter", true, "a92"],
+    ["This news ticker has been replaced by an elephant", true, "a92"],
     [
       "Do antimatter people with suicidal thoughts get depressants?",
       true,
