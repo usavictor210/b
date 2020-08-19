@@ -3,11 +3,11 @@
 <html>
 
 <head>
-    <title>Antimatter Dimensions</title>
+    <title>AD: Eternity Respecced</title>
     <link rel="icon" type="image/png" href="icon.png">
-    <meta name="Antimatter Dimensions" content="A game about huge numbers and watching them go up." />
-    <h1 id="hiddenheader" style="display: none">Antimatter Dimensions</h1>
-    <script type="text/javascript" src="javascripts/jquery-3.2.1.min.js"></script>
+    <meta name="AD: Eternity Respecced" content="A game about huge numbers and watching them go up." />
+    <h1 id="hiddenheader" style="display: none">AD: Eternity Respecced</h1>
+    <script type="text/javascript" src="javascripts/jquery-3.5.1.min.js"></script>
     <script type="text/javascript" src="javascripts/notify.js"></script>
     <link rel="stylesheet" type="text/css" href="stylesheets/styles.css?2">
     <script>
@@ -83,11 +83,14 @@
         <div id="cheat" class="tab" style="font-size: 15px" >
             <div align="center">
                 <br>
-                <button class="storebtn" style="color:black; height: 35px; font-size: 10px; width: 225px" onclick="skipTime(60)">Get one minute of offline production.</button>
+                <p>This is the cheat menu. You somehow got access to it, so you might as well use it.</p>
+                <p>Note that the cheat menu doesn't do everything for you. More complicated operations will require the Javascript console.</p>
                 <br>
-                <button class="storebtn" style="color:black; height: 35px; font-size: 10px; width: 225px" onclick="skipTime(3600)">Get one hour of offline production.</button>
+                <button class="storebtn" style="color:black; height: 35px; font-size: 10px; width: 225px" onclick="skipTime(60)">Get one minute of production.</button>
                 <br>
-                <button class="storebtn" style="color:black; height: 35px; font-size: 10px; width: 225px" onclick="skipTime(21600)">Get 6 hours of offline production.</button>
+                <button class="storebtn" style="color:black; height: 35px; font-size: 10px; width: 225px" onclick="skipTime(3600)">Get one hour of production.</button>
+                <br>
+                <button class="storebtn" style="color:black; height: 35px; font-size: 10px; width: 225px" onclick="skipTime(21600)">Get 6 hours of production.</button>
                 <br>
                 <button class="storebtn" style="color:black; height: 35px; font-size: 10px; width: 225px" onclick="skipOneRG()">Wait until end of replicanti galaxy.</button>
                 <br>
@@ -499,7 +502,7 @@
             </div>
             <div id="infinitydimensions" class="dimtab">
                 <div>
-                    <p>You have <span id="infPowAmount" style="font-size:35px; color: black">0</span> infinity power. translated to <span id="infDimMultAmount" style="font-size:35px; color: black">0</span>x multiplier on all <span id="infDimMultDimType">normal</span> dimensions</p>
+                    <p>You have <span id="infPowAmount" style="font-size:35px; color: black">0</span> Infinity Power, which is translated to <span id="infDimMultAmount" style="font-size:35px; color: black">0</span>x multiplier on all <span id="infDimMultDimType">Normal</span> Dimensions.</p>
                 </div>
 
                 <div id="infPowPerSec">You are getting 0 antimatter per second.</div>
@@ -623,10 +626,10 @@
             <div id="timedimensions" class="dimtab">
                     <div>
                         <p id="totaltickgained">You've gained 0 tickspeed upgrades.</p>
-                            <p>You have <span id="timeShardAmount" style="font-size:35px; color: black">0</span> time shards. Next tickspeed upgrade at <span id="tickThreshold" style="font-size:35px; color: black">0</span></p>
+                            <p>You have <span id="timeShardAmount" style="font-size:35px; color: black">0</span> Time Shards. The next tickspeed upgrade is at <span id="tickThreshold" style="font-size:35px; color: black">0</span>.</p>
                         </div>
 
-                        <div id="timeShardsPerSec">You are getting 0 Timeshards per second.</div>
+                        <div id="timeShardsPerSec">You are getting 0 Time Shards per second.</div>
                         <button id="maxTimeDimensions" class="storebtn" style="font-size: 12px" onclick="buyMaxTimeDimensions()">Max all</Button>
                         <table class="table" >
                             <tr style="font-size: 17px" id="timeRow1">
@@ -2430,14 +2433,8 @@
     <div style="display: none;"><textarea id="exportOutput" style="color:black; width: 200px; height: 55px;"></textarea></div>
 </body>
 <script type="text/javascript" src="javascripts/autobuyer.js"></script>
-<!-- script type="text/javascript" src="javascripts/decimal.js"></script> -->
 <script type="text/javascript" src="javascripts/breakinfinity.js"></script>
 <script type="text/javascript" src="javascripts/game.js?82"></script>
 <script type="text/javascript" src="javascripts/sha512.js"></script>
 <script type="text/javascript" src="javascripts/eter_player.js"></script>
-<script type="text/javascript" src="javascripts/lz-string.js"></script>
-
-
-
-
 </html>
