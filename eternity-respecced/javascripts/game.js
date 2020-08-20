@@ -1794,7 +1794,7 @@ function updateDimensions() {
           document.getElementById("tickLabel").textContent = "Divide the tick interval by " + shortenDimensions(tickmult.pow(-1)) + '.'
         } else {
           var places = 0;
-          if (tickmult < 0.2) places = Math.floor(Math.log10(Math.round(1/tickmult)));
+          if (tickmult < 0.2) places = Math.floor(Math.log10(Math.round(1 / tickmult)));
           document.getElementById("tickLabel").innerHTML = 'Reduce the tick interval by ' + ((1 - tickmult) * 100).toFixed(places) + '%.';
         }
 
@@ -1806,9 +1806,9 @@ function updateDimensions() {
 
     var shiftRequirement = getShiftRequirement(0);
     if (player.currentChallenge == "challenge4" ? shiftRequirement.tier < 6 : shiftRequirement.tier < 8) {
-        document.getElementById("resetLabel").innerHTML = 'Dimension Shift (' + player.resets + '): requires ' + shiftRequirement.amount + " " + DISPLAY_NAMES[shiftRequirement.tier] + " Dimensions";
+        document.getElementById("resetLabel").innerHTML = 'Dimension Shift (' + player.resets + '): Requires ' + shiftRequirement.amount + " " + DISPLAY_NAMES[shiftRequirement.tier] + " Dimensions";
     } else {
-      document.getElementById("resetLabel").innerHTML = 'Dimension Boost (' + player.resets + '): requires ' + shiftRequirement.amount + " " + DISPLAY_NAMES[shiftRequirement.tier] + " Dimensions";
+      document.getElementById("resetLabel").innerHTML = 'Dimension Boost (' + player.resets + '): Requires ' + shiftRequirement.amount + " " + DISPLAY_NAMES[shiftRequirement.tier] + " Dimensions";
     }
 
     if (player.currentChallenge == "challenge4" ? player.resets > 1 : player.resets > 3) {
@@ -1821,7 +1821,7 @@ function updateDimensions() {
     if (player.currentChallenge === "challenge4") {
       dimType = 'Sixth';
     } else {
-      dimType = 'Eighth'
+      dimType = 'Eighth';
     }
     let galCount;
     if (player.replicanti.galaxies > 0) {
@@ -1829,7 +1829,7 @@ function updateDimensions() {
     } else {
       galCount = player.galaxies;
     }
-    document.getElementById("secondResetLabel").innerHTML = 'Antimatter Galaxies (' + galCount + '): requires ' + getGalaxyRequirement() + ' ' + dimType + ' Dimensions';
+    document.getElementById("secondResetLabel").innerHTML = 'Antimatter Galaxies (' + galCount + '): Requires ' + getGalaxyRequirement() + ' ' + dimType + ' Dimensions';
     document.getElementById("totalmoney").innerHTML = 'You have made a total of ' + shortenMoney(player.totalmoney) + ' antimatter.';
     document.getElementById("totalresets").innerHTML = 'You have done ' + player.resets + ' Dimension Shifts/Boosts.';
     document.getElementById("galaxies").innerHTML = 'You have ' + Math.round(player.galaxies) + ' Antimatter Galaxies.';
@@ -1868,7 +1868,7 @@ function updateDimensions() {
         document.getElementById("thiseternity").innerHTML = "Your fastest Eternity is in "+timeDisplay(player.bestEternity)+".";
     }
 
-    document.getElementById("infi11").innerHTML = "Normal Dimensions gain a multiplier based on time played<br>Currently: " + (Math.pow(0.5 * player.totalTimePlayed / 600, 0.15)).toFixed(2) + "x<br>Cost: 1 IP"
+    document.getElementById("infi11").innerHTML = "Normal Dimensions gain a multiplier based on time spent in this save file<br>Currently: " + (Math.pow(0.5 * player.totalTimePlayed / 600, 0.15)).toFixed(2) + "x<br>Cost: 1 IP"
     document.getElementById("infi12").innerHTML = "First and Eighth Dimensions gain a multiplier based on your infinities<br>Currently: " + formatValue(player.options.notation, dimMults(), 1, 1) + "x<br>Cost: 1 IP"
     document.getElementById("infi13").innerHTML = "Third and Sixth Dimensions gain a multiplier based on your infinities<br>Currently: " + formatValue(player.options.notation, dimMults(), 1, 1) + "x<br>Cost: 1 IP"
     document.getElementById("infi22").innerHTML = "Second and Seventh Dimensions gain a multiplier based on your infinities<br>Currently: " + formatValue(player.options.notation, dimMults(), 1, 1) + "x<br>Cost: 1 IP"
@@ -1891,13 +1891,13 @@ function updateDimensions() {
     document.getElementById("postinfi33").innerHTML = "Autobuyers work twice as fast<br>Cost: "+ shortenCosts(1e15)+" IP"
     if (player.dimensionMultDecrease == 3) document.getElementById("postinfi42").innerHTML = "Decrease the dimension cost multiplier increase post-e308<br>Currently: "+player.dimensionMultDecrease+"x"
 
-    document.getElementById("offlineProd").innerHTML = "Generates "+player.offlineProd+"% > "+Math.max(Math.max(5, player.offlineProd + 5), Math.min(50, player.offlineProd + 5))+"% of your best IP/min from last 10 infinities, works offline<br>Currently: "+shortenMoney(bestRunIppm.times(player.offlineProd/100)) +"IP/min<br> Cost: "+shortenCosts(player.offlineProdCost)+" IP"
-    if (player.offlineProd == 50) document.getElementById("offlineProd").innerHTML = "Generates "+player.offlineProd+"% of your best IP/min from last 10 infinities, works offline<br>Currently: "+shortenMoney(bestRunIppm.times(player.offlineProd/100)) +" IP/min"
+    document.getElementById("offlineProd").innerHTML = "Generate "+player.offlineProd+"% > "+Math.max(Math.max(5, player.offlineProd + 5), Math.min(50, player.offlineProd + 5))+"% of your best IP/min from last 10 infinities, works offline<br>Currently: "+shortenMoney(bestRunIppm.times(player.offlineProd/100)) +"IP/min<br> Cost: "+shortenCosts(player.offlineProdCost)+" IP"
+    if (player.offlineProd == 50) document.getElementById("offlineProd").innerHTML = "Generate "+player.offlineProd+"% of your best IP/min from last 10 infinities, works offline<br>Currently: "+shortenMoney(bestRunIppm.times(player.offlineProd/100)) +" IP/min"
 
-    document.getElementById("eter1").innerHTML = "Infinity Dimension multiplier based on unspent EP (x+1)<br>Currently: "+shortenMoney(player.eternityPoints.plus(1))+"x<br>Cost: 5 EP";
-    document.getElementById("eter2").innerHTML = "Infinity Dimension multiplier based on eternities (x^log4(2x))<br>Currently: "+shortenMoney(Decimal.pow(player.eternities, Math.log(player.eternities*2)/Math.log(4)))+"x<br>Cost: 10 EP";
-    document.getElementById("eter3").innerHTML = "Infinity Dimension multiplier based on timeshards (x/"+shortenCosts(player.options.notation, 1e12)+"+1)<br>Currently: "+shortenMoney(player.timeShards.div(1e12).plus(1))+"x<br>Cost: "+shortenCosts(1e4)+" EP"
-    document.getElementById("eter4").innerHTML = "Eternity production is boosted by unspent EP (floor(1+log10(EP)/4))<br>Currently: "+(Math.floor(1 + player.eternityPoints.max(1).log(10) / 4))+"x<br>Cost: "+shortenCosts(1e6)+" EP";
+    document.getElementById("eter1").innerHTML = "Infinity Dimensions gain a multiplier based on unspent EP (x+1)<br>Currently: "+shortenMoney(player.eternityPoints.plus(1))+"x<br>Cost: 5 EP";
+    document.getElementById("eter2").innerHTML = "Infinity Dimensions gain a multiplier based on your Eternities (x^log4(2x))<br>Currently: "+shortenMoney(Decimal.pow(player.eternities, Math.log(player.eternities*2)/Math.log(4)))+"x<br>Cost: 10 EP";
+    document.getElementById("eter3").innerHTML = "Infinity Dimensions gain a multiplier based on timeshards (x/"+shortenCosts(player.options.notation, 1e12)+"+1)<br>Currently: "+shortenMoney(player.timeShards.div(1e12).plus(1))+"x<br>Cost: "+shortenCosts(1e4)+" EP"
+    document.getElementById("eter4").innerHTML = "Eternity gain is boosted by unspent EP (floor(1+log10(EP)/4))<br>Currently: "+(Math.floor(1 + player.eternityPoints.max(1).log(10) / 4))+"x<br>Cost: "+shortenCosts(1e6)+" EP";
     document.getElementById("eter5").innerHTML = "Timeshard production is boosted by eternities (1+eternities)<br>Currently: "+shortenMoney(1 + player.eternities)+"x<br>Cost: "+shortenCosts(1e9)+" EP";
     document.getElementById("eter6").innerHTML = "EP production is boosted by timeshards (1+log10(timeshards)^0.3)<br>Currently: "+shortenMoney(1 + Math.pow(Math.max(player.timeShards.log(10), 0), 0.3))+"x<br>Cost: "+shortenCosts(1e12)+" EP"
     document.getElementById("eter7").innerHTML = "Infinity power exponent is boosted by infinities<br>(7 + min(0.1, log10(log10(x / "+shortenCosts(2e7)+" + 9)) / 2))<br>Currently: x^"+shorten(eter7Upg())+"<br>Cost: "+shortenCosts(new Decimal('1e1000'))+" EP"
@@ -2690,7 +2690,7 @@ function updateTheoremButtons() {
         document.getElementById("nextstudy").innerHTML = "You've unlocked all the time studies.";
     }
     else {
-        document.getElementById("nextstudy").innerHTML = "Next time studies unlock at " + nextStudiesAt[player.timestudy.studyGroupsUnlocked] + " total Time Theorems.";
+        document.getElementById("nextstudy").innerHTML = "The next set of time studies unlock at " + nextStudiesAt[player.timestudy.studyGroupsUnlocked] + " total Time Theorems.";
         if (getTotalTT() >= nextStudiesAt[player.timestudy.studyGroupsUnlocked]) {
             player.timestudy.studyGroupsUnlocked += 1
             if (player.timestudy.studyGroupsUnlocked === nextStudiesAt.length) {
@@ -2859,8 +2859,8 @@ function updateGalacticTheoremButtons() {
     document.getElementById("gtheoremone").innerHTML = 'Get 1 antigalaxy and ' + per + ' galactic theorem' + ((per === 1) ? '' : 's') + '.';
     document.getElementById("gtheoremchosen").innerHTML = 'Get ' + b + ' antigalax' + ((b === 1) ? 'y' : 'ies') + ' and ' + (b * per) + ' galactic theorem' + ((b * per === 1) ? '' : 's') + '.';
     document.getElementById("gtheoremmax").innerHTML = 'Get ' + g + ' antigalax' + ((g === 1) ? 'y' : 'ies') + ' and ' + (g * per) + ' galactic theorem' + ((g * per === 1) ? '' : 's') + '.';
-    document.getElementById("galactictheorems").innerHTML = "You have <span style='display:inline' class=\"GalacticTheoremAmount\">"+player.intergalactic.galacticstudy.theorem+"</span> unspent Time "+ (player.intergalactic.galacticstudy.theorem === 1 ? "Theorem." : "Theorems.")
-    document.getElementById("galactictheorems").innerHTML = "You have <span style='display:inline' class=\"GalacticTheoremAmount\">"+getTotalGT()+"</span> total Time "+ (getTotalGT() === 1 ? "Theorem." : "Theorems.");
+    document.getElementById("galactictheorems").innerHTML = "You have <span style='display:inline' class=\"GalacticTheoremAmount\">"+player.intergalactic.galacticstudy.theorem+"</span> unspent Galactic "+ (player.intergalactic.galacticstudy.theorem === 1 ? "Theorem." : "Theorems.")
+    document.getElementById("galactictheorems").innerHTML = "You have <span style='display:inline' class=\"GalacticTheoremAmount\">"+getTotalGT()+"</span> total Galactic "+ (getTotalGT() === 1 ? "Theorem." : "Theorems.");
 }
 
 // Soft reset (or dimboost).
@@ -2870,21 +2870,15 @@ function getDimensionBoostPower(num) {
         num = player.timestudy.studies[4];
     }
     if (player.currentChallenge == "challenge11" || player.currentChallenge == "postc1") return 1;
-
     var ret = 2
     if (player.infinityUpgrades.includes("resetMult")) ret = 2.5
     if (player.challenges.includes("postc7")) ret = 4
     if (player.currentChallenge == "postc7") ret = 10
-
     // Be nice to the player; multiply before adding rather than vice versa.
-
     ret += num;
-
-    
     // EC11 reward handled
     ret = Math.pow(ret, ecNumReward(11));
     
-
     return ret
 }
 
@@ -2913,6 +2907,9 @@ function hideDims () {
 
 
 function softReset(bulk, reallyZero) {
+    if (!player.break && player.money.gt(Number.MAX_VALUE)) {
+      return
+    }
     if (bulk < 1 && !reallyZero) bulk = 1
     player.resets += bulk;
     if (bulk >= 750) giveAchievement("Costco sells Dimboosts now");
@@ -3053,16 +3050,10 @@ function softReset(bulk, reallyZero) {
         player.eightBought = 1;
     }
 
-
     if (player.achievements.includes("r36")) player.tickspeed = player.tickspeed.times(0.98);
     if (player.achievements.includes("r45")) player.tickspeed = player.tickspeed.times(0.98);
     if (player.achievements.includes("r66")) player.tickspeed = player.tickspeed.times(0.98);
     if (player.achievements.includes("r83")) player.tickspeed = player.tickspeed.times(Decimal.pow(0.95, player.galaxies));
-
-
-
-
-
 
     clearInterval(player.interval);
     //updateInterval();
@@ -3084,7 +3075,7 @@ function updateInitialMoney () {
   if (player.achievements.includes("r37")) player.money = player.money.max(1000);
   if (player.achievements.includes("r54")) player.money = player.money.max(2e5);
   if (player.achievements.includes("r55")) player.money = player.money.max(1e10);
-  if (player.achievements.includes("r78")) player.money = player.money.max(1e25);
+  if (player.achievements.includes("r78")) player.money = player.money.max(2e25);
 }
 
 MoneyFormat = ['K', 'M', 'B', 'T', 'Qd', 'Qt', 'Sx', 'Sp', 'Oc', 'No', 'Dc', 'UDc', 'DDc', 'TDc', 'QdDc', 'QtDc', 'SxDc', 'SpDc', 'ODc', 'NDc', 'Vg', 'UVg', 'DVg', 'TVg', 'QdVg', 'QtVg', 'SxVg', 'SpVg', 'OVg', 'NVg', 'Tg', 'UTg', 'DTg', 'TTg', 'QdTg', 'QtTg', 'SxTg', 'SpTg', 'OTg', 'NTg', 'Qa', 'UQa', 'DQa', 'TQa', 'QdQa', 'QtQa', 'SxQa', 'SpQa', 'OQa', 'NQa', 'Qi', 'UQi', 'DQi', 'TQi', 'QaQi', 'QtQi', 'SxQi', 'SpQi', 'OQi', 'NQi', 'Se', 'USe', 'DSe', 'TSe', 'QaSe', 'QtSe', 'SxSe', 'SpSe', 'OSe', 'NSe', 'St', 'USt', 'DSt', 'TSt', 'QaSt', 'QtSt', 'SxSt', 'SpSt', 'OSt', 'NSt', 'Og', 'UOg', 'DOg', 'TOg', 'QdOg', 'QtOg', 'SxOg', 'SpOg', 'OOg', 'NOg', 'Nn', 'UNn', 'DNn', 'TNn', 'QdNn', 'QtNn', 'SxNn', 'SpNn', 'ONn', 'NNn', 'Ce', 'UCe'];
@@ -3213,8 +3204,6 @@ document.getElementById("tickSpeed").onclick = function () {
 function timeDisplay(time) {
     if (time <= 100) return (time/10).toFixed(2) + " seconds"
     time = Decimal.floor(time / 10)
-
-
 
     if (time >= 31536000) {
         return Decimal.floor(time / 31536000) + " years, " + Decimal.floor((time % 31536000) / 86400) + " days, " + Decimal.floor((time % 86400) / 3600) + " hours, " + Decimal.floor((time % 3600) / 60) + " minutes and " + Decimal.floor(time % 60) + " seconds"
@@ -3511,7 +3500,8 @@ function canBuyDimension(tier) {
 
 // This is for buying a dimension.
 // tier is ignored
-function getDimensionPowerMultiplier (tier) {
+// If that is the case, then is the tier value really necessary?
+function getDimensionPowerMultiplier() {
     let dimMult = 2;
 
     if (player.currentChallenge == "challenge9" || player.currentChallenge == "postc1") {
@@ -3880,13 +3870,11 @@ document.getElementById("eightMax").onclick = function () {
 };
 
 document.getElementById("softReset").onclick = function () {
-  auto = false;
   var name = TIER_NAMES[getShiftRequirement(0).tier]
-  if (player[name + "Amount"] >= getShiftRequirement(0).amount) {
-    if (player.eternities < 10 || !player.infinityUpgrades.includes('bulkBoost')) {
-      softReset(1)
-    } else maxBuyDimBoosts()
-  }
+  if ((!player.break && player.money.gt(Number.MAX_VALUE)) || player[name + "Amount"] < getShiftRequirement(0).amount) return;
+  auto = false;
+  if (player.infinityUpgrades.includes("bulkBoost")) maxBuyDimBoosts();
+  else softReset(1)
 };
 
 document.getElementById("maxall").onclick = function () {
@@ -6028,14 +6016,14 @@ function updateLastTenIntergalaxies() {
         if (gppm.gt(tempBest)) tempBest = gppm
         var tempstring = shorten(gppm) + " GP/min"
         if (gppm<1) tempstring = shorten(gppm*60) + " GP/hour"
-        document.getElementById("intergalaxyrun"+(i+1)).innerHTML = "The Intergalaxy "+(i+1)+" intergalaxies ago took " + timeDisplayShort(player.lastTenIntergalaxies[i][0]) + " and gave " + shortenDimensions(player.lastTenIntergalaxies[i][1]) +" GP. "+ tempstring
+        document.getElementById("intergalaxyrun"+(i+1)).innerHTML = "The Intergalaxy " + (i + 1) + " intergalaxies ago took " + timeDisplayShort(player.lastTenIntergalaxies[i][0]) + " and gave " + shortenDimensions(player.lastTenIntergalaxies[i][1]) +" GP. "+ tempstring
     }
 
     var gppm = tempGP.dividedBy(tempTime/600)
     var tempstring = shorten(gppm) + " IP/min"
     averageGp = tempGP
     if (gppm<1) tempstring = shorten(gppm*60) + " IP/hour"
-    document.getElementById("averageIntergalaxyRun").innerHTML = "Last 10 intergalaxies average time: "+ timeDisplayShort(tempTime)+" Average GP gain: "+shortenDimensions(tempGP)+" GP. "+tempstring
+    document.getElementById("averageIntergalaxyRun").innerHTML = "Average time of the last 10 intergalaxies: " + timeDisplayShort(tempTime) + " Average GP gain: " + shortenDimensions(tempGP) + " GP. " + tempstring
 }
 
 function addIntergalacticTime(time, gp) {
@@ -8359,7 +8347,7 @@ function maxBuyDimBoosts() {
         r++;
     }
     if (r >= 750) giveAchievement("Costco sells dimboosts now")
-    softReset(0, true);
+    if (r > 0) softReset(0, true);
 }
 
 var timer = 0
