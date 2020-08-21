@@ -390,7 +390,7 @@
                     </tr>
                     <tr>
                         <td><button class="milestonerewardlocked" id="reward6">You can automatically buy max Galaxies</button></td>
-                        <td><button class="milestonerewardlocked" id="reward7">You can automatically buy max Dimensional Boosts</button></td>
+                        <td><button class="milestonerewardlocked" id="reward7">You can automatically buy max Dimension Boosts</button></td>
                     </tr>
                     <tr>
                         <td class="milestoneText">11 Eternities:</td>
@@ -616,9 +616,9 @@
                 <div>
                     <p>You have <span id="infPowAmount" style="font-size:35px; color: black">0</span> Infinity Power, which is translated to <span id="infDimMultAmount" style="font-size:35px; color: black">0</span>x multiplier on all <span id="infDimMultDimType">Normal</span> Dimensions.</p>
                 </div>
-
                 <div id="infPowPerSec">You are getting 0 antimatter per second.</div>
-                <table class="table" >
+                <button id="infDimMax" class="storebtn" style="font-size: 12px" onclick="maxAllIDs()">Max all</button>
+                <table class="table">
                     <tr style="font-size: 16px" id="infRow1">
                         <td id="infD1" width="41%">
                             First Infinity Dimension x1
@@ -903,12 +903,13 @@
 
 
             </table>
-
             <div style="text-align:center">
+                <p>Import "I can pause this game" to pause the game, or "offline is offline" to toggle offline progress, without the quotes.</p>
                 <a href="howto.html">How to play  </a> |
                 <a href="about.html">About   </a> |
                 <a href="changelog.html">Changelog   </a> |
-                <a href="https://discord.gg/ST9NaXa">Discord</a> |
+                <a href="https://discord.gg/ST9NaXa">Discord (Antimatter Dimensions)</a> |
+                <a href="https://discord.gg/ST9NaXa">Discord (NG-- Dev))</a> |
                 <a href="https://www.reddit.com/r/AntimatterDimensions/">Subreddit</a> |
                 <a href="tt_spec.html">TT spec helper</a>
             </div>
@@ -1302,7 +1303,7 @@
                             <div id="Do I really need to infinity?" class="achievement achievementlocked" style="background-image: url(images/78.png)" ach-tooltip="Eternity with at most 1 infinity. Reward: Stronger multiplier to IP based on infinities."><br></div>
                         </td>
                         <td>
-                            <div id="I thought it would be harder..." class="achievement achievementlocked" style="background-image: url(images/79.png)" ach-tooltip="Get 2000 eternities. Reward: Stronger multiplier to time dimensions based on eternities."><br></div>
+                            <div id="I thought it would be harder..." class="achievement achievementlocked" style="background-image: url(images/79.png)" ach-tooltip="Get 2,000 eternities. Reward: Stronger multiplier to time dimensions based on eternities."><br></div>
                         </td>
                         <td>
                             <div id="IT'S OVER 9000" class="achievement achievementlocked" style="background-image: url(images/80.png)" ach-tooltip="Get a total sacrifice multiplier of 1e9000. Reward: Sacrifice doesn't reset your dimensions."><br></div>
@@ -1636,7 +1637,7 @@
                                     <button id="postc2" class="challengesbtn" onclick="startChallenge('postc2', new Decimal('1e10500'))">Start</button>
                                     <br>
                                     <span id="postc2goal" >Goal: 1e10500</span><br>
-                                    <span>Reward: Sacrifice autobuyer and more powerful sacrifice</span>
+                                    <span>Reward: Get the Sacrifice autobuyer, and Sacrifice is more powerful</span>
                                 </div>
                             </div>
                         </td>
@@ -1645,27 +1646,27 @@
                     <tr>
                         <td>
                             <div class="infchallengediv" id="postc3div" style="height: 140px; display: none">
-                                <span>Tickspeed interval decrease is always at 0%, but every tickspeed purchase you get a static multiplier on all dimensions (increases with galaxies).</span>
+                                <span>The Tickspeed interval decrease is always at 0%, but for every tickspeed purchase, you get a static multiplier on all Normal Dimensions that increases with galaxies.</span>
                                 <br>
                                 <br>
                                 <div class="outer">
                                     <button id="postc3" class="challengesbtn" onclick="startChallenge('postc3', new Decimal('1e5000'))">Start</button>
                                     <br>
                                     <span id="postc3goal" >Goal: 1e5000</span><br>
-                                    <span>Reward: Static multiplier on each tickspeed purchase</span>
+                                    <span>Reward: Gain a static multiplier on each tickspeed purchase to your Normal Dimensions.</span>
                                 </div>
                             </div>
                         </td>
                         <td>
                             <div class="infchallengediv" id="postc4div" style="height: 140px; display: none">
-                                <span>Only latest bought dimension production is normal, all other dimensions produce less.</span>
+                                <span>Only the latest bought dimension's production is normal, all other dimensions produce less.</span>
                                 <br>
                                 <br>
                                 <div class="outer">
                                     <button id="postc4" class="challengesbtn" onclick="startChallenge('postc4', new Decimal('1e13000'))">Start</button>
                                     <br>
                                     <span id="postc4goal" >Goal: 1e13000</span><br>
-                                    <span>Reward: All normal dimension multipliers become multiplier^1.05</span>
+                                    <span>Reward: All normal dimension multipliers are raised to the power of ^1.05.</span>
                                 </div>
                             </div>
                         </td>
@@ -1673,14 +1674,14 @@
                     <tr>
                         <td>
                             <div class="infchallengediv" id="postc5div" style="height: 140px; display: none">
-                                <span>When buying dimensions 1-4, everything with costs smaller or equal increases. When buying dimensions 5-8, everything with costs bigger or equal increases. When buying tickspeed, everything with the same cost increases.</span>
+                                <span>When buying Dimensions 1-4, everything with costs smaller or equal increases. When buying Dimensions 5-8, everything with costs bigger or equal increases. When buying tickspeed, everything with the same cost increases.</span>
                                 <br>
                                 <br>
                                 <div class="outer">
                                     <button id="postc5" class="challengesbtn" onclick="startChallenge('postc5', new Decimal('1e11111'))">Start</button>
                                     <br>
                                     <span id="postc5goal" >Goal: 1e11111</span><br>
-                                    <span>Reward: Galaxies are 10% more powerful and reduce the requirements for them and dimensional boosts by 1</span>
+                                    <span>Reward: Galaxies are 10% more powerful, and reduce the requirements for Galaxies and Dimension Boosts by 1.</span>
                                 </div>
                             </div>
                         </td>
@@ -1693,7 +1694,7 @@
                                     <button id="postc6" class="challengesbtn" onclick="startChallenge('postc6', new Decimal('2e22222'))">Start</button>
                                     <br>
                                     <span id="postc6goal" >Goal: 2e22222</span><br>
-                                    <span>Reward: Tickspeed affects Infinity Dimensions with reduced effect</span>
+                                    <span>Reward: Tickspeed affects Infinity Dimensions with reduced effect.</span>
                                 </div>
                             </div>
                         </td>
@@ -1701,14 +1702,14 @@
                     <tr>
                             <td>
                                 <div class="infchallengediv" id="postc7div" style="height: 140px; display: none">
-                                    <span>You can't get Antimatter Galaxies, but dimensional boost multiplier 2.5x -> 10x</span>
+                                    <span>You can't get Antimatter Galaxies, but the Dimension Boost multiplier is increased to 10x.</span>
                                     <br>
                                     <br>
                                     <div class="outer">
                                         <button id="postc7" class="challengesbtn" onclick="startChallenge('postc7', new Decimal('1e10000'))">Start</button>
                                         <br>
                                         <span id="postc7goal" >Goal: 1e10000</span><br>
-                                        <span>Reward: Dimensional boost multiplier 2.5x -> 4x</span>
+                                        <span>Reward: The Dimension Boost multiplier is increased to 4x.</span>
                                     </div>
                                 </div>
                             </td>
@@ -1721,7 +1722,7 @@
                                         <button id="postc8" class="challengesbtn" onclick="startChallenge('postc8', new Decimal('1e27000'))">Start</button>
                                         <br>
                                         <span id="postc8goal" >Goal: 1e30000</span><br>
-                                        <span>Reward: You get a multiplier to dimensions 2-7 based on 1st and 8th dimension multipliers.</span>
+                                        <span>Reward: You get a multiplier to Normal Dimensions 2-7 based on the 1st and 8th Normal Dimension multipliers.</span>
                                     </div>
                                 </div>
                             </td>
@@ -1730,7 +1731,7 @@
 
             </div>
             <div id="eterchallenges" class="challengeTab">
-                <div id="ecCompleteDescription">Complete Eternity Challenges again for a bigger reward, to a maximum of 5 times.</div>
+                <div id="ecCompleteDescription">Complete Eternity Challenges again for a bigger reward, up to a maximum of 5 times.</div>
                 <table class="table" style="margin: 0 auto">
                     <tr>
                         <td>
