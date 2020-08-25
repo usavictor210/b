@@ -8038,17 +8038,35 @@ function startInterval() {
         let epPlural = gainedEternityPoints().eq(1) ? '' : 's';
         document.getElementById("eternitybtn").innerHTML = eterButtonStart + "<b>Gain " + shortenDimensions(gainedEternityPoints()) + " Eternity Point" + epPlural + ".</b>" + eterButtonEnd;
 
+        let intergalacticButtonStart = (player.intergalactic.intergalaxies === 0) ? "<b>The stars are too bright... I need to go Intergalactic.</b><br/>" : "<b>I need to go Intergalactic.</b><br/>";
+        if (gainedIntergalacticPoints().gte(1e3)) {
+          intergalacticButtonStart = '';
+        }
+        let intergalacticButtonEnd = "<br>" + shortenDimensions(getPerMin(gainedIntergalacticPoints(), player.thisEternity)) + "GP/min<br>Peaked at " + shortenDimensions(player.peaks.ep.perMin) + " EP/min";
+        if (player.intergalactic.intergalaxies === 0) {
+          intergalacticButtonEnd = '';
+        }
+        let gpPlural = gainedIntergalacticPoints().eq(1) ? '' : 's';
+        document.getElementById("intergalacticbtn").innerHTML = eterButtonStart + "<b>Gain " + shortenDimensions(gainedIntergalacticPoints()) + " Intergalactic Point" + gpPlural + ".</b>" + intergalacticButtonEnd;
+
+
         updateMoney();
         updateCoinPerSec();
 
         // here we add infinitypoints2 and eternitypoints2
-        if (player.infinitied > 0 || player.eternities > 0) {
+        if (player.infinitied > 0 || player.eternities > 0 || player.intergalactic.intergalaxies > 0) {
           let ipPlural = player.infinityPoints.equals(1) ? '' : 's';
           document.getElementById("infinityPoints2").innerHTML = "You have <span class=\"IPAmount2\">"+shortenDimensions(player.infinityPoints)+"</span> Infinity Point" + ipPlural + ".";
         }
-        if (player.eternities > 0) {
+        
+        if (player.eternities > 0 || player.intergalactic.intergalaxies > 0) {
           let epPlural = player.eternityPoints.equals(1) ? '' : 's';
           document.getElementById("eternityPoints2").innerHTML = "You have <span class=\"EPAmount2\">"+shortenDimensions(player.eternityPoints)+"</span> Eternity Point" + epPlural + ".";
+        }
+
+        if (player.intergalactic.intergalaxies > 0) {
+          let gpPlural = gainedIntergalacticPoints().equals(1) ? '' : 's';
+          document.getElementById("gpPoints2").innerHTML = "You have <span class=\"GPAmount2\">"+shortenDimensions(player.intergalactic.points)+"</span> Intergalactic Point" + gpPlural + ".";
         }
 
         updateInfinityDimensions();
