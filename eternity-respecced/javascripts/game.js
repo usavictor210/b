@@ -1146,9 +1146,6 @@ function save_game() {
 
 function transformSaveToDecimal() {
 
-    player.infinityPoints = new Decimal(player.infinityPoints)
-    document.getElementById("eternitybtn").style.display = player.infinityPoints.gte(currentEternityRequirement()) ? "inline-block" : "none"
-
     player.money = new Decimal(player.money)
     player.tickSpeedCost = new Decimal(player.tickSpeedCost)
     player.tickspeed = new Decimal(player.tickspeed)
@@ -1185,6 +1182,7 @@ function transformSaveToDecimal() {
     player.infinityPower = new Decimal(player.infinityPower)
     player.timeShards = new Decimal(player.timeShards)
     player.epmult = new Decimal(player.epmult)
+    player.infinityPoints = new Decimal(player.infinityPoints)
     player.eternityPoints = new Decimal(player.eternityPoints)
     player.tickThreshold = new Decimal(player.tickThreshold)
     player.postC3Reward = new Decimal(player.postC3Reward)
@@ -1262,6 +1260,8 @@ function transformSaveToDecimal() {
     player.peaks.gp.total = new Decimal(player.peaks.gp.total);
 
     player.chall11Pow = new Decimal(player.chall11Pow)
+    document.getElementById("eternitybtn").style.display = player.infinityPoints.gte(currentEternityRequirement()) ? "inline-block" : "none"
+    document.getElementById("intergalacticbtn").style.display = getTickSpeedMultiplier().lte(currentIntergalacticRequirement()) ? "inline-block" : "none"
 }
 
 function loadAutoBuyerSettings() {
@@ -1630,7 +1630,7 @@ function getDimensionFinalMultiplier(tier) {
     if (player.achievements.includes("r65") && player.currentChallenge != "" && player.thisInfinityTime < 1800) multiplier = multiplier.times(Math.max(2400/(player.thisInfinityTime+600), 1))
     if (player.achievements.includes("r91") && player.thisInfinityTime < 50) multiplier = multiplier.times(Math.max(301-player.thisInfinityTime*6, 1))
     if (player.achievements.includes("r92") && player.thisInfinityTime < 600) multiplier = multiplier.times(Math.max(101-player.thisInfinityTime/6, 1));
-    if (player.achievements.includes("r96")) multiplier = multiplier.times(Decimal.pow(2, Decimal.div(player.thisEternity, 10).pow(0.5)).min((Decimal.times(1e33, Decimal.pow(1.25, player.eternities*5))).min(1e100))) // this is supposed to be a buff to carry you through early eternity, but not for the whole eternity.
+    if (player.achievements.includes("r96")) multiplier = multiplier.times(Decimal.pow((2+(Decimal.times(player.eternities, 0.004).min(2))), Decimal.div(player.thisEternity, 10).pow(0.5)).min((Decimal.times(1e33, Decimal.pow(1.25, player.eternities*5))).min(1e100))) // this is supposed to be a buff to carry you through early eternity, but not for the whole eternity.
     if (player.achievements.includes("r98")) multiplier = multiplier.times(player.infinityDimension8.amount.max(1));
     if (player.achievements.includes("r84")) multiplier = multiplier.times(player.money.pow(0.00004).plus(1));
     else if (player.achievements.includes("r73")) multiplier = multiplier.times(player.money.pow(0.00002).plus(1));
@@ -4195,7 +4195,7 @@ let getNewReplicantiInterval = function () {
 
 function updateReplicantiInterval (places) {
   if (player.replicanti.interval !== 1 || player.achievements.includes('r106')) {
-    document.getElementById("replicantiinterval").innerHTML = "Interval: "+getReplicantiInterval().toFixed(places)+"ms<br>-> "+getNewReplicantiInterval().toFixed(places)+" Costs: "+shortenCosts(player.replicanti.intervalCost)+" IP";
+    document.getElementById("replicantiinterval").innerHTML = "Interval: "+getReplicantiInterval().toFixed(places)+"ms<br>-> "+getNewReplicantiInterval().toFixed(places)+" Cost: "+shortenCosts(player.replicanti.intervalCost)+" IP";
   } else {
     document.getElementById("replicantiinterval").innerHTML = "Interval: "+getReplicantiInterval().toFixed(places)+"ms";
   }
@@ -4203,20 +4203,18 @@ function updateReplicantiInterval (places) {
 
 function updateInfCosts() {
     var places = Math.floor(Math.log10(getReplicantiInterval()/1000)) * (-1);
-    if (player.replicanti.chance < 1 || player.achievements.includes('r106')) document.getElementById("replicantichance").innerHTML = "Replicate chance: "+Math.round(player.replicanti.chance*100)+"%<br>+"+1+"% Costs: "+shortenCosts(player.replicanti.chanceCost)+" IP"
+    if (player.replicanti.chance < 1 || player.achievements.includes('r106')) document.getElementById("replicantichance").innerHTML = "Replicate chance: "+Math.round(player.replicanti.chance*100)+"%<br>(+"+(1)+"%) Cost: "+shortenCosts(player.replicanti.chanceCost)+" IP"
     else document.getElementById("replicantichance").innerHTML = "Replicate chance: "+Math.round(player.replicanti.chance*100)+"%"
     updateReplicantiInterval(places);
-    document.getElementById("replicantimax").innerHTML = "Max Replicanti galaxies: "+player.replicanti.gal+"<br>+1 Costs: "+shortenCosts(player.replicanti.galCost)+" IP"
+    document.getElementById("replicantimax").innerHTML = "Max Replicanti galaxies: "+player.replicanti.gal+"<br>(+1) Cost: "+shortenCosts(player.replicanti.galCost)+" IP"
     document.getElementById("replicantiunlock").innerHTML = "Unlock Replicantis<br>Cost: "+shortenCosts(1e140)+" IP"
     document.getElementById("replicantireset").innerHTML = "Reset replicanti amount, but get a free galaxy<br>"+player.replicanti.galaxies + " replicated galaxies created."
-
 
     document.getElementById("replicantichance").className = canGetReplChance() ? "storebtn" : "unavailablebtn"
     document.getElementById("replicantiinterval").className = canGetReplInterval() ? "storebtn" : "unavailablebtn"
     document.getElementById("replicantimax").className = canGetReplGal() ? "storebtn" : "unavailablebtn"
     document.getElementById("replicantireset").className = (player.replicanti.galaxies < player.replicanti.gal && player.replicanti.amount.gte(player.replicanti.limit)) ? "storebtn" : "unavailablebtn"
     document.getElementById("replicantiunlock").className = (player.infinityPoints.gte(1e140)) ? "storebtn" : "unavailablebtn"
-
 
     document.getElementById("infiMult").innerHTML = "You get 2x more IP.<br>Currently: "+shorten(getIPMult()) +"x<br>Cost: "+shortenCosts(player.infMultCost)+" IP"
 }
@@ -5361,7 +5359,8 @@ function gainedInfinityPoints() {
 }
 
 function gainedEternityPoints() {
-    let ret = Decimal.floor(Decimal.pow(5, player.infinityPoints.e/308 -0.7).times(player.epmult));
+  let infinityPoints = Decimal.max(player.infinityPoints.e, Decimal.log10(gainedInfinityPoints()))
+    let ret = Decimal.floor(Decimal.pow(5, infinityPoints / 308 - 0.7).times(player.epmult));
     if (player.eternityUpgrades.includes(6)) {
       ret = ret.times(1 + Math.pow(Math.max(player.timeShards.log(10), 0), 0.3));
     }
@@ -5961,24 +5960,24 @@ function updateLastTenRuns() {
     let tempBest = 0
     var tempTime = new Decimal(0)
     var tempIP = new Decimal(0)
-    for (var i=0; i<10;i++) {
+    for (var i = 0; i < 10; i++) {
         tempTime = tempTime.plus(player.lastTenRuns[i][0])
         tempIP = tempIP.plus(player.lastTenRuns[i][1])
     }
     tempTime = tempTime.dividedBy(10)
     tempIP = tempIP.dividedBy(10)
-    for (var i=0; i<10; i++) {
-        var ippm = player.lastTenRuns[i][1].dividedBy(player.lastTenRuns[i][0]/600)
+    for (var i = 0; i < 10; i++) {
+        var ippm = player.lastTenRuns[i][1].dividedBy(player.lastTenRuns[i][0] / 600)
         if (ippm.gt(tempBest)) tempBest = ippm
-        var tempstring = shorten(ippm) + " IP/min"
-        if (ippm<1) tempstring = shorten(ippm*60) + " IP/hour"
-        document.getElementById("run"+(i+1)).innerHTML = "The infinity "+(i+1)+" infinities ago took " + timeDisplayShort(player.lastTenRuns[i][0]) + " and gave " + shortenDimensions(player.lastTenRuns[i][1]) +" IP. "+ tempstring
+        var tempstring = "(" + shorten(ippm) + " IP/min)"
+        if (ippm<1) tempstring = "(" + shorten(ippm * 60) + " IP/hour)"
+        document.getElementById("run" + (i + 1)).innerHTML = "The Infinity " + (i + 1) + " infinities ago took " + timeDisplayShort(player.lastTenRuns[i][0]) + ", and gave " + shortenDimensions(player.lastTenRuns[i][1]) + " IP. " + tempstring
     }
 
-    var ippm = tempIP.dividedBy(tempTime/600)
-    var tempstring = shorten(ippm) + " IP/min"
-    if (ippm<1) tempstring = shorten(ippm*60) + " IP/hour"
-    document.getElementById("averagerun").innerHTML = "Last 10 infinities average time: "+ timeDisplayShort(tempTime)+" Average IP gain: "+shortenDimensions(tempIP)+" IP. "+tempstring
+    var ippm = tempIP.dividedBy(tempTime / 600)
+    var tempstring = "(" + shorten(ippm) + " IP/min)"
+    if (ippm<1) tempstring = "(" + shorten(ippm * 60) + " IP/hour)"
+    document.getElementById("averagerun").innerHTML = "Average time of the last 10 Infinities: " + timeDisplayShort(tempTime) + " | Average IP gain: "+shortenDimensions(tempIP)+" IP " + tempstring
 
     if (tempBest.gte(1e8)) giveAchievement("Oh hey, you're still here");
     if (tempBest.gte(1e300)) giveAchievement("MAXIMUM OVERDRIVE");
@@ -5991,29 +5990,29 @@ function updateLastTenEternities() {
     let tempBest = 0
     var tempTime = new Decimal(0)
     var tempEP = new Decimal(0)
-    for (var i=0; i<10;i++) {
+    for (var i = 0; i < 10; i++) {
         tempTime = tempTime.plus(player.lastTenEternities[i][0])
         tempEP = tempEP.plus(player.lastTenEternities[i][1])
     }
     tempTime = tempTime.dividedBy(10)
     tempEP = tempEP.dividedBy(10)
-    for (var i=0; i<10; i++) {
-        var eppm = player.lastTenEternities[i][1].dividedBy(player.lastTenEternities[i][0]/600)
+    for (var i = 0; i < 10; i++) {
+        var eppm = player.lastTenEternities[i][1].dividedBy(player.lastTenEternities[i][0] / 600)
         if (eppm.gt(tempBest)) tempBest = eppm
-        var tempstring = shorten(eppm) + " EP/min"
-        if (eppm<1) tempstring = shorten(eppm*60) + " EP/hour"
-        document.getElementById("eternityrun"+(i+1)).innerHTML = "The Eternity "+(i+1)+" eternities ago took " + timeDisplayShort(player.lastTenEternities[i][0]) + " and gave " + shortenDimensions(player.lastTenEternities[i][1]) +" EP. "+ tempstring
+        var tempstring = "(" + shorten(eppm) + " EP/min)"
+        if (eppm<1) tempstring = "(" + shorten(eppm * 60) + " EP/hour)"
+        document.getElementById("eternityrun" + (i + 1)).innerHTML = "The Eternity " + (i + 1) + " eternities ago took " + timeDisplayShort(player.lastTenEternities[i][0]) + ", and gave " + shortenDimensions(player.lastTenEternities[i][1]) + " EP. " + tempstring
     }
 
-    var eppm = tempEP.dividedBy(tempTime/600)
-    var tempstring = shorten(eppm) + " EP/min"
+    var eppm = tempEP.dividedBy(tempTime / 600)
+    var tempstring = "(" + shorten(eppm) + " EP/min)"
     averageEp = tempEP
-    if (eppm<1) tempstring = shorten(eppm*60) + " EP/hour"
-    document.getElementById("averageEternityRun").innerHTML = "Last 10 eternities average time: "+ timeDisplayShort(tempTime)+" Average EP gain: "+shortenDimensions(tempEP)+" EP. "+tempstring
+    if (eppm<1) tempstring = "(" + shorten(eppm * 60) + " EP/hour)"
+    document.getElementById("averageEternityRun").innerHTML = "Average time of the last 10 Eternities: " + timeDisplayShort(tempTime) + " | Average EP gain: "+shortenDimensions(tempEP)+" EP " + tempstring
 }
 
 function addEternityTime(time, ep) {
-    for (var i=player.lastTenEternities.length-1; i>0; i--) {
+    for (var i=player.lastTenEternities.length - 1; i > 0; i--) {
         player.lastTenEternities[i] = player.lastTenEternities[i-1]
     }
     player.lastTenEternities[0] = [time, ep]
@@ -6030,24 +6029,24 @@ function updateLastTenIntergalaxies() {
     }
     tempTime = tempTime.dividedBy(10)
     tempGP = tempGP.dividedBy(10)
-    for (var i=0; i<10; i++) {
-        var gppm = player.lastTenIntergalaxies[i][1].dividedBy(player.lastTenIntergalaxies[i][0]/600)
+    for (var i = 0; i < 10; i++) {
+        var gppm = player.lastTenIntergalaxies[i][1].dividedBy(player.lastTenIntergalaxies[i][0] / 600)
         if (gppm.gt(tempBest)) tempBest = gppm
-        var tempstring = shorten(gppm) + " GP/min"
-        if (gppm<1) tempstring = shorten(gppm*60) + " GP/hour"
-        document.getElementById("intergalaxyrun"+(i+1)).innerHTML = "The Intergalaxy " + (i + 1) + " intergalaxies ago took " + timeDisplayShort(player.lastTenIntergalaxies[i][0]) + " and gave " + shortenDimensions(player.lastTenIntergalaxies[i][1]) +" GP. "+ tempstring
+        var tempstring = "(" + shorten(gppm) + " GP/min)"
+        if (gppm<1) tempstring = "(" + shorten(gppm * 60) + " GP/hour)"
+        document.getElementById("intergalaxyrun"+(i+1)).innerHTML = "The Intergalaxy " + (i + 1) + " intergalaxies ago took " + timeDisplayShort(player.lastTenIntergalaxies[i][0]) + ", and gave " + shortenDimensions(player.lastTenIntergalaxies[i][1]) +" GP. " + tempstring
     }
 
-    var gppm = tempGP.dividedBy(tempTime/600)
-    var tempstring = shorten(gppm) + " IP/min"
+    var gppm = tempGP.dividedBy(tempTime / 600)
+    var tempstring = "(" + shorten(gppm) + " GP/min)"
     averageGp = tempGP
-    if (gppm<1) tempstring = shorten(gppm*60) + " IP/hour"
-    document.getElementById("averageIntergalaxyRun").innerHTML = "Average time of the last 10 intergalaxies: " + timeDisplayShort(tempTime) + " Average GP gain: " + shortenDimensions(tempGP) + " GP. " + tempstring
+    if (gppm<1) tempstring = "(" + shorten(gppm * 60) + " GP/hour)"
+    document.getElementById("averageIntergalaxyRun").innerHTML = "Average time of the last 10 Intergalaxies: " + timeDisplayShort(tempTime) + " | Average GP gain: " + shortenDimensions(tempGP) + " GP " + tempstring
 }
 
 function addIntergalacticTime(time, gp) {
-    for (var i=player.lastTenIntergalaxies.length-1; i>0; i--) {
-        player.lastTenIntergalaxies[i] = player.lastTenIntergalaxies[i-1]
+    for (var i=player.lastTenIntergalaxies.length - 1; i > 0; i--) {
+        player.lastTenIntergalaxies[i] = player.lastTenIntergalaxies[i - 1]
     }
     player.lastTenIntergalaxies[0] = [time, gp]
 }
@@ -6399,8 +6398,8 @@ function getEternityGain () {
 function eternity(force, enteringChallenge) {
     if (force || (player.infinityPoints.gte(currentEternityRequirement()) &&
     (!player.options.eternityconfirm ||
-      confirm("Eternity will reset everything except achievements " +
-      "and challenge records. You will also gain an Eternity Point " +
+      confirm("Eternity will reset everything up to this point, except your achievements " +
+      "and Challenge records. You will also gain an Eternity Point " +
       "and unlock various upgrades.")))) {
         if (!force) {
           if (player.thisEternity < player.bestEternity) {
@@ -6417,6 +6416,7 @@ function eternity(force, enteringChallenge) {
           // This .toFixed(0) is, it seems, just what is done in display.
           // the lt 100 is for avoiding memory issues.
           if (player.replicanti.amount.lt(100) && player.replicanti.amount.toFixed(0) === '9') giveAchievement("We could afford 9");
+          player.infinityPoints = player.infinityPoints.add(gainedInfinityPoints())
           player.eternityPoints = player.eternityPoints.plus(gainedEternityPoints())
           addEternityTime(player.thisEternity, gainedEternityPoints())
         }
@@ -6744,8 +6744,12 @@ function eternity(force, enteringChallenge) {
         playerInfinityUpgradesOnEternity()
         // give the player resets if they have the upgrade needed
         giveInfPurchaseResets()
+        document.getElementById("gpAmount2").style.display = "inline-block"
+        document.getElementById("intergalacticstorebtn").style.display = "inline-block"
         let epPlural = player.eternityPoints.equals(1) ? '' : 's';
         document.getElementById("eternityPoints2").innerHTML = "You have <span class=\"EPAmount2\">"+shortenDimensions(player.eternityPoints)+"</span> Eternity Point" + epPlural + "."
+        let gpPlural = player.intergalactic.points.equals(1) ? '' : 's';
+        document.getElementById("gpAmount2").innerHTML = "You have <span class=\"GPAmount2\">" + shortenDimensions(player.intergalactic.points) + "</span> Intergalactic Point" + gpPlural + "."
     }
 }
 
@@ -6765,15 +6769,20 @@ function gainedIntergalacticPoints() {
 function intergalaxy(force) {
     if (force || (getTickSpeedMultiplier().pow(-1).gte(Number.MAX_VALUE) &&
     (!player.options.intergalaxyconfirm ||
-      confirm("Going intergalactic will reset everything except achievements " +
-      "and challenge records. You will also gain an Intergalactic Point " +
-      "and unlock various upgrades.")))) {
+      confirm("Going intergalactic will reset everything up to this point, except for your achievements " +
+      "and Challenge records. You will gain an Intergalactic Point " +
+      "and unlock even more upgrades. Since Intergalactic is based on tickspeed multiplier, it will take a while for you to recover.")))) {
         if (!force) {
           if (player.intergalactic.thisIntergalaxy < player.intergalactic.bestIntergalaxy) {
               player.intergalactic.bestIntergalaxy = player.intergalactic.thisIntergalaxy;
           }
-          // maybe add some new achievements here later
-          // Yes, you should
+          // Achievements
+          if (player.eternityUpgrades.length == 0) giveAchievement("Work harder.")
+          if (player.eternityChallenges.current == 5) giveAchievement("The supervoid")
+          if (player.replicanti.galaxies == 9) giveAchievement("We could really afford 9.")
+          if (player.intergalactic.thisIntergalaxy < 600) giveAchievement("Superluminal")
+          if (player.intergalactic.antigalaxies >= 50) giveAchievement("YOU CAN GET -50 GALAXIES!??")
+          
           player.intergalactic.points = player.intergalactic.points.plus(gainedIntergalacticPoints())
           addIntergalacticTime(player.intergalactic.thisIntergalaxy, gainedIntergalacticPoints())
         }
@@ -7132,6 +7141,10 @@ function intergalaxy(force) {
         let epPlural = player.eternityPoints.equals(1) ? '' : 's';
         document.getElementById("eternityPoints2").innerHTML = "You have <span class=\"EPAmount2\">"+shortenDimensions(player.eternityPoints)+"</span> Eternity Point" + epPlural + "."
     }
+}
+
+function currentIntergalacticRequirement() {
+  return new Decimal(Number.MAX_VALUE).pow(-1)
 }
 
 function exitChallenge() {
@@ -7536,11 +7549,13 @@ setInterval(function() {
     updateDimensions();
 }, 50)
 
-function setInfAndEterPointDisplay () {
+function setPrestigePointDisplay () {
   if (player.infinitied == 0 && player.eternities === 0) document.getElementById("infinityPoints2").style.display = "none"
   else document.getElementById("infinityPoints2").style.display = "inline-block"
   if (player.eternities == 0) document.getElementById("eternityPoints2").style.display = "none"
   else document.getElementById("eternityPoints2").style.display = "inline-block"
+  if (player.intergalactic.intergalaxies == 0) document.getElementById("intergalacticPoints2").style.display = "none"
+  else document.getElementById("intergalacticPoints2").style.display = "inline-block"
 }
 
 var nextAt = [new Decimal("1e2000"), new Decimal("1e5000"), new Decimal("1e12000"), new Decimal("1e14000"), new Decimal("1e18000"), new Decimal("1e20000"), new Decimal("1e23000"), new Decimal("1e28000")]
@@ -7582,7 +7597,7 @@ setInterval(function() {
     }
 
     // here we actually want infinitied, so not banked
-    setInfAndEterPointDisplay();
+    setPrestigePointDisplay();
 
     if (blink && !player.achievements.includes("r78")) {
         document.getElementById("Blink of an eye").style.display = "none"
@@ -7605,7 +7620,7 @@ setInterval(function() {
     }
 
     let temp = 1
-    for (var i=0; i < player.challenges.length; i++) {
+    for (var i = 0; i < player.challenges.length; i++) {
         if (player.challenges[i].includes("post")) {
             temp *= 1.3
             document.getElementById("infchallengesbtn").style.display = "inline-block"
@@ -7626,6 +7641,7 @@ setInterval(function() {
     if (player.eternities !== 0) {
       document.getElementById("eternitystorebtn").style.display = "inline-block"
     }
+
     for (var i=1; i <=8; i++) {
         document.getElementById("postc"+i+"goal").innerHTML = "Goal: "+shortenCosts(goals[i-1])
     }
@@ -7669,6 +7685,15 @@ setInterval(function() {
     if (player.intergalactic.intergalaxies == 0) document.getElementById("pastintergalaxies").style.display = "none"
     else document.getElementById("pastintergalaxies").style.display = "inline-block"
 
+    if (player.intergalactic.intergalaxies !== 0) {
+      document.getElementById("intergalacticstorebtn").style.display = "inline-block"
+    }
+
+    let gpPlural = player.intergalactic.points.equals(1) ? '' : 's';
+    document.getElementById("gpAmount2").innerHTML = "You have <span class=\"GPAmount2\">"+shortenDimensions(player.intergalactic.points)+"</span> Intergalactic Points" + gpPlural + "."
+
+    document.getElementById("intergalacticbtn").style.display = getTickSpeedMultiplier().lte(currentIntergalacticRequirement()) ? "inline-block" : "none"
+
     if (player.eternities > 10) {
         for (var i=1;i<player.eternities-9 && i < 9; i++) {
             if (player.infDimBuyers[i-1]) {
@@ -7689,6 +7714,7 @@ setInterval(function() {
     if (player.eternities >= 80 && player.replicanti.auto[2]) {
         while (canGetReplGal()) upgradeReplicantiGalaxy()
     }
+    
 }, 1000)
 
 
@@ -7841,9 +7867,9 @@ function startInterval() {
         player.thisEternity += diff
         player.intergalactic.thisIntergalaxy += diff
         // We're adding time in the eternity.
-        player.peaks.ip.perMin = getPerMin(gainedInfinityPoints(), player.thisInfinityTime)
-        player.peaks.ep.perMin = getPerMin(gainedEternityPoints(), player.thisEternity)
-        player.peaks.gp.perMin = getPerMin(gainedIntergalacticPoints(), player.thisIntergalaxy).max(getPerMin(gainedIntergalacticPoints(), player.thisIntergalaxy))
+        player.peaks.ip.perMin = player.peaks.ip.perMin.max(getPerMin(gainedInfinityPoints(), player.thisInfinityTime))
+        player.peaks.ep.perMin = player.peaks.ep.perMin.max(getPerMin(gainedEternityPoints(), player.thisEternity))
+        player.peaks.gp.perMin = player.peaks.gp.perMin.max(getPerMin(gainedIntergalacticPoints(), player.thisIntergalaxy))
         if (player.eternityChallenges.current === 12) {
           checkForEternityChallengeFailure();
         }
@@ -7981,10 +8007,10 @@ function startInterval() {
             let newGalGain = Math.min(currentGalGain + 1, maxGalGain);
             let estimate = getReplicantiETA(player.replicanti.amount, player.replicanti.limit.pow(newGalGain * 5));
             let galGainDisplay = (newGalGain === maxGalGain) ? 'maximum' : newGalGain;
-            document.getElementById("replicantiapprox").innerHTML = "Approximately " + timeDisplay(estimate) + " until gain of " + galGainDisplay + ' replicanti galaxies';
+            document.getElementById("replicantiapprox").innerHTML = "Approximately " + timeDisplay(estimate) + " until you get " + galGainDisplay + ' replicanti galaxies.';
         } else {
             let estimate = getReplicantiETA();
-            document.getElementById("replicantiapprox").innerHTML = "Approximately " + timeDisplay(estimate) + " until Infinite replicanti"
+            document.getElementById("replicantiapprox").innerHTML = "Approximately " + timeDisplay(estimate) + " until you get Infinite replicanti."
         }
 
         document.getElementById("replicantiamount").innerHTML = shortenDimensions(player.replicanti.amount)

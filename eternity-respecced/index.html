@@ -609,12 +609,12 @@
                     </tr>
                 </table>
                 <button id="quickReset" style="color:black; width: 200px; height: 50px; font-size: 12px; display: none" class="storebtn">Lose a reset, returning to the start of the reset</button>
-				<span id="IGP">You have <span id="intergalacticPoint2"><b>0</b></span> intergalactic points.</span><br><br>
+				<span class="IGP" id="intergalacticPoints2">You have <span id="gpAmount2"><b>0</b></span> intergalactic points.</span><br><br>
 				<button id="intergalacticbtn" class="intergalacticbtn" onclick="intergalaxy()">The stars are too bright... I need to go intergalactic.</button>
             </div>
             <div id="infinitydimensions" class="dimtab">
                 <div>
-                    <p>You have <span id="infPowAmount" style="font-size:35px; color: black">0</span> Infinity Power, which is translated to <span id="infDimMultAmount" style="font-size:35px; color: black">0</span>x multiplier on all <span id="infDimMultDimType">Normal</span> Dimensions.</p>
+                    <p>You have <span id="infPowAmount" style="font-size:35px; color: black">0</span> Infinity Power, translating to <span id="infDimMultAmount" style="font-size:35px; color: black">0</span>x multiplier on all <span id="infDimMultDimType">Normal</span> Dimensions.</p>
                 </div>
                 <div id="infPowPerSec">You are getting 0 antimatter per second.</div>
                 <button id="infDimMax" class="storebtn" style="font-size: 12px" onclick="maxAllIDs()">Max all</button>
@@ -929,15 +929,19 @@
             <div id="totalmoney">You have made x antimatter.</div>
             <div id="totalresets">You have made x soft resets.</div>
             <div id="galaxies">You have made x Antimatter galaxies.</div>
+            <br>
+            <div id="intergalaxy">You have gone intergalactic x times.</div>
+            <div id="thisintergalaxy">You have spent x in this intergalaxy</div>
+            <div id="bestintergalaxy">Your fastest intergalaxy is in x.</div>
+            <br>
             <div id="eternitied">You have eternitied x times.</div>
             <div id="thiseternity">You have spent x in this eternity</div>
             <div id="besteternity">Your fastest eternity is in x.</div>
-			<div id="intergalaxy">You have gone intergalactic x times.</div>
-            <div id="thisintergalaxy">You have spent x in this intergalaxy</div>
-            <div id="bestintergalaxy">Your fastest intergalaxy is in x.</div>
+            <br>
             <div id="bankedInfinities">You have x banked infinities.</div>
             <div id="infinitied">You have infinitied x times.</div>
             <div id="bestInfinity">Your fastest infinity is in x.</div>
+            <br>
             <div id="thisInfinity">You have spent x in this Infinity.</div>
             <div id="totalTime">You have played for </div>
             <div id="infoScale">If every antimatter were a planck volume, you would have enough to </div>
@@ -955,6 +959,7 @@
                 <div id="challengetime10"></div>
                 <div id="challengetime11"></div>
                 <div id="challengetime12"></div>
+                <br>
                 <div id="challengetimetotal"></div>
                 <br>
             </div>
@@ -968,6 +973,7 @@
                     <div id="infchallengetime6"></div>
                     <div id="infchallengetime7"></div>
                     <div id="infchallengetime8"></div>
+                    <br>
                     <div id="infchallengetimetotal"></div>
                     <br>
                 </div>
@@ -1245,7 +1251,7 @@
                             <div id="4.33 minutes of Infinity" class="achievement achievementlocked" style="background-image: url(images/60.png)" ach-tooltip="Reach 1e260 infinity power. Reward: Double infinity power gain."><br></div>
                         </td>
                         <td>
-                            <div id="Is this safe?" class="achievement achievementlocked" style="background-image: url(images/61.png)" ach-tooltip="Gain Infinite replicanti in 30 minutes. Reward: Infinity doesn't reset your replicanti amount"><br></div>
+                            <div id="Is this safe?" class="achievement achievementlocked" style="background-image: url(images/61.png)" ach-tooltip="Gain Infinite replicanti in 30 minutes. Reward: Replicanti doesn't reset on Infinity."><br></div>
                         </td>
                         <td>
                             <div id="Time is relative" class="achievement achievementlocked" style="background-image: url(images/62.png)" ach-tooltip="Go Eternal. Reward: Normal Dimensions are stronger based on time spent in this Eternity."><br></div>
@@ -1254,56 +1260,56 @@
                             <div id="Yes. This is hell." class="achievement achievementlocked" style="background-image: url(images/63.png)" ach-tooltip="Get the sum of Infinity Challenge times under 5 seconds. Reward: Sacrifice is again slightly stronger."><br></div>
                         </td>
                         <td>
-                            <div id="0 degrees from infinity" class="achievement achievementlocked" style="background-image: url(images/64.png)" ach-tooltip="Unlock the 8th Infinity Dimension. Reward: Normal dimensions are multiplied by number of 8th Infinity Dimensions you have."><br></div>
+                            <div id="0 degrees from infinity" class="achievement achievementlocked" style="background-image: url(images/64.png)" ach-tooltip="Unlock the 8th Infinity Dimension. Reward: Normal Dimensions gain a multiplier based on the amount of 8th Infinity Dimensions you have."><br></div>
                         </td>
                     </tr>
                     <tr id="achRow10">
                         <td>
-                            <div id="Costco sells dimboosts now" class="achievement achievementlocked" style="background-image: url(images/65.png)" ach-tooltip="Bulk buy 750 dimension boosts at once. Reward: Dimension boosts are cheaper based on EP."><br></div>
+                            <div id="Costco sells dimboosts now" class="achievement achievementlocked" style="background-image: url(images/65.png)" ach-tooltip="Bulk buy 750 dimension boosts at once. Reward: Dimension Boosts require less dimensions based on EP."><br></div>
                         </td>
                         <td>
-                            <div id="This mile took an eternity" class="achievement achievementlocked" style="background-image: url(images/66.png)" ach-tooltip="Get all eternity milestones. Reward: Gain a small bonus to time dimensions based on eternities."><br></div>
+                            <div id="This mile took an eternity" class="achievement achievementlocked" style="background-image: url(images/66.png)" ach-tooltip="Get all eternity milestones. Reward: Gain a small bonus to Time Dimensions based on your Eternities."><br></div>
                         </td>
                         <td>
-                            <div id="This achievement doesn't exist II" class="achievement achievementlocked" style="background-image: url(images/67.png)" ach-tooltip="Reach 9.99999e999 IP. Reward: Gain more IP based on amount of antimatter you had when crunching."><br></div>
+                            <div id="This achievement doesn't exist II" class="achievement achievementlocked" style="background-image: url(images/67.png)" ach-tooltip="Reach 9.99999e999 IP. Reward: Gain more IP based on the amount of antimatter you had when crunching."><br></div>
                         </td>
                         <td>
-                            <div id="That wasn't an eternity" class="achievement achievementlocked" style="background-image: url(images/68.png)" ach-tooltip="Eternity in under 30 seconds. Reward: Start eternities with 2e25 IP."><br></div>
+                            <div id="That wasn't an eternity" class="achievement achievementlocked" style="background-image: url(images/68.png)" ach-tooltip="Eternity in under 30 seconds. Reward: Start Eternities with 2e25 IP."><br></div>
                         </td>
                         <td>
-                            <div id="8 nobody got time for that" class="achievement achievementlocked" style="background-image: url(images/69.png)" ach-tooltip="Eternity without buying dimensions 1-7. Reward: Time dimensions are multiplied by eighth root of eighth dimensions."><br></div>
+                            <div id="8 nobody got time for that" class="achievement achievementlocked" style="background-image: url(images/69.png)" ach-tooltip="Eternity without buying dimensions 1-7. Reward: Time Dimensions gain a multiplier based on the eighth root of Eighth Normal Dimensions."><br></div>
                         </td>
                         <td>
-                            <div id="The swarm" class="achievement achievementlocked" style="background-image: url(images/70.png)" ach-tooltip="Get 10 replicanti galaxies in 15 seconds. Reward: Unlock replicanti galaxy power control and uncap replicanti chance and interval."><br></div>
+                            <div id="The swarm" class="achievement achievementlocked" style="background-image: url(images/70.png)" ach-tooltip="Get 10 replicanti galaxies in 15 seconds. Reward: Unlock replicanti galaxy power control, and uncap replicanti chance and interval."><br></div>
                         </td>
                         <td>
                             <div id="1e(1 million) is a lot" class="achievement achievementlocked" style="background-image: url(images/71.png)" ach-tooltip="Reach 1e1,000,000 replicanti. Reward: Replicanti increase faster the more you have."><br></div>
                         </td>
                         <td>
-                            <div id="We could afford 9" class="achievement achievementlocked" style="background-image: url(images/72.png)" ach-tooltip="Eternity with exactly 9 replicanti. Reward: Replicanti multiplier to ID is 9% stronger (after time studies)."><br></div>
+                            <div id="We could afford 9" class="achievement achievementlocked" style="background-image: url(images/72.png)" ach-tooltip="Eternity with exactly 9 replicanti. Reward: The replicanti multiplier to ID is 9% stronger, after time studies."><br></div>
                         </td>
                     </tr>
                     <tr id="achRow11">
                         <td>
-                            <div id="Yo dawg, I heard you liked infinities..." class="achievement achievementlocked" style="background-image: url(images/73.png)" ach-tooltip="Have each infinity be at least 1.79e308 times higher IP than the previous one within your past 10 infinities. Reward: Your antimatter doesn't reset on dimension boost or galaxy, and your infinity gain is boosted by your unspent IP."><br></div>
+                            <div id="Yo dawg, I heard you liked infinities..." class="achievement achievementlocked" style="background-image: url(images/73.png)" ach-tooltip="Have each Infinity have at least gained 1.79e308 times higher IP than the previous one within your past 10 infinities. Reward: Your antimatter doesn't reset on Dimension Boost or Galaxy, and your Infinity gain is boosted by your unspent IP."><br></div>
                         </td>
                         <td>
-                            <div id="Infinite time" class="achievement achievementlocked" style="background-image: url(images/74.png)" ach-tooltip="Get 308 tickspeed upgrades. Reward: Time dimensions are very slightly affected by tickspeed."><br></div>
+                            <div id="Infinite time" class="achievement achievementlocked" style="background-image: url(images/74.png)" ach-tooltip="Get 308 tickspeed upgrades. Reward: Time Dimensions are very slightly affected by tickspeed."><br></div>
                         </td>
                         <td>
-                            <div id="Do you really need a guide for this?" class="achievement achievementlocked" style="background-image: url(images/75.png)" ach-tooltip="Eternity with at most 10 infinities. Reward: Multiplier to IP based on infinities."><br></div>
+                            <div id="Do you really need a guide for this?" class="achievement achievementlocked" style="background-image: url(images/75.png)" ach-tooltip="Eternity with at most 10 infinities. Reward: Gain a multiplier to IP based on your Infinities."><br></div>
                         </td>
                         <td>
-                            <div id="You're a mistake" class="achievement achievementlocked" style="background-image: url(images/76.png)" ach-tooltip="Fail an Eternity challenge. Reward: A fading sense of accomplishment, and a multiplier to ID and TD based on failable challenge tiers completed."><br></div>
+                            <div id="You're a mistake" class="achievement achievementlocked" style="background-image: url(images/76.png)" ach-tooltip="Fail an Eternity challenge. Reward: A fading sense of accomplishment, and get a multiplier to Infinity and Time Dimensions based on the amount of failable Eternity Challenge tiers completed."><br></div>
                         </td>
                         <td>
-                            <div id="I wish I had gotten 7 eternities" class="achievement achievementlocked" style="background-image: url(images/77.png)" ach-tooltip="Start an Infinity challenge inside an Eternity challenge. Reward: Multiplier to infinity dimensions based on eternity challenge tiers completed."><br></div>
+                            <div id="I wish I had gotten 7 eternities" class="achievement achievementlocked" style="background-image: url(images/77.png)" ach-tooltip="Start an Infinity challenge inside an Eternity challenge. Reward: Gain a multiplier to Infinity Dimensions based on the amount of Eternity Challenge tiers completed."><br></div>
                         </td>
                         <td>
-                            <div id="Do I really need to infinity?" class="achievement achievementlocked" style="background-image: url(images/78.png)" ach-tooltip="Eternity with at most 1 infinity. Reward: Stronger multiplier to IP based on infinities."><br></div>
+                            <div id="Do I really need to infinity?" class="achievement achievementlocked" style="background-image: url(images/78.png)" ach-tooltip="Eternity with at most 1 infinity. Reward: Gain a stronger multiplier to IP based on your Infinities."><br></div>
                         </td>
                         <td>
-                            <div id="I thought it would be harder..." class="achievement achievementlocked" style="background-image: url(images/79.png)" ach-tooltip="Get 2,000 eternities. Reward: Stronger multiplier to time dimensions based on eternities."><br></div>
+                            <div id="I thought it would be harder..." class="achievement achievementlocked" style="background-image: url(images/79.png)" ach-tooltip="Get 2,000 eternities. Reward: Gain a stronger multiplier to Time Dimensions based on your Eternities."><br></div>
                         </td>
                         <td>
                             <div id="IT'S OVER 9000" class="achievement achievementlocked" style="background-image: url(images/80.png)" ach-tooltip="Get a total sacrifice multiplier of 1e9000. Reward: Sacrifice doesn't reset your dimensions."><br></div>
@@ -1323,13 +1329,13 @@
                             <div id="Eternities are the new infinity" class="achievement achievementlocked" style="background-image: url(images/84.png)" ach-tooltip="Eternity in under 200ms."><br></div>
                         </td>
                         <td>
-                            <div id="Like feasting on a behind" class="achievement achievementlocked" style="background-image: url(images/85.png)" ach-tooltip="Eternity without buying dimensions 1-8. Reward: Multiplier to dimensions 1-8 based on eternities."><br></div>
+                            <div id="Like feasting on a behind" class="achievement achievementlocked" style="background-image: url(images/85.png)" ach-tooltip="Eternity without buying Normal Dimensions 1-8. Reward: Gain a multiplier to Normal Dimensions 1-8 based on eternities."><br></div>
                         </td>
                         <td>
                             <div id="Popular music" class="achievement achievementlocked" style="background-image: url(images/86.png)" ach-tooltip="Have at least 180 times as many replicanti galaxies as normal galaxies (with at least 1 of each). Reward: Replicanti can increase beyond the amount needed for a replicanti galaxy."><br></div>
                         </td>
                         <td>
-                            <div id="But I wanted another prestige layer..." class="achievement achievementlocked" style="background-image: url(images/87.png)" ach-tooltip="Reach 1.79e308 EP. Reward: Time dimensions get a multiplier based on EP."><br></div>
+                            <div id="But I wanted another prestige layer..." class="achievement achievementlocked" style="background-image: url(images/87.png)" ach-tooltip="Reach 1.79e308 EP. Reward: Time Dimensions get a multiplier based on EP."><br></div>
                         </td>
                         <td>
                             <div id="What do I have to do to get rid of you" class="achievement achievementlocked" style="background-image: url(images/88.png)" ach-tooltip="Reach 1e66600 IP without any time studies. Reward: Time dimensions are multiplied by the total number of time theorems you have."><br></div>
@@ -1337,7 +1343,7 @@
                     </tr>
 					<tr id="achRow13">
                         <td>
-                            <div id="I decided to grind" class="achievement achievementlocked" style="background-image: url(images/89.png)" ach-tooltip="Get at least 20 million of both infinities and eternities. Reward: Unlock a third eternity upgrade row."><br></div>
+                            <div id="I decided to grind" class="achievement achievementlocked" style="background-image: url(images/89.png)" ach-tooltip="Get at least 20 million of both infinities and eternities. Reward: Unlock the third eternity upgrade row."><br></div>
                         </td>
                         <td>
                             <div id="Unique snowflakes" class="achievement achievementlocked" style="background-image: url(images/90.png)" ach-tooltip="Have 2000 galaxies without having any replicanti galaxies. Reward: Normal galaxies are 0.2% stronger."><br></div>
@@ -1355,7 +1361,7 @@
                             <div id="I am speed" class="achievement achievementlocked" style="background-image: url(images/94.png)" ach-tooltip="Get 1e2000 EP in under 20 seconds in an eternity. Reward: Your EP gain is multiplied by the number of seconds spent in this current Eternity."><br></div>
                         </td>
                         <td>
-                            <div id="This thing all things devours" class="achievement achievementlocked" style="background-image: url(images/95.png)" ach-tooltip="Get 1e10000 ticks per second without buying any dimensions in the current eternity. Reward: Time dimensions gain a multiplier based on eighth dimensions."><br></div>
+                            <div id="This thing all things devours" class="achievement achievementlocked" style="background-image: url(images/95.png)" ach-tooltip="Get 1e10000 ticks per second without buying any dimensions in the current eternity. Reward: Time dimensions gain a multiplier based on your Eighth Normal Dimensions."><br></div>
                         </td>
                         <td>
                             <div id="The void" class="achievement achievementlocked" style="background-image: url(images/96.png)" ach-tooltip="Go intergalactic."><br></div>
@@ -1392,10 +1398,10 @@
                             <div id="The supervoid" class="achievement achievementlocked" style="background-image: url(images/105.png)" ach-tooltip="Go intergalactic in Eternity Challenge 5."><br></div>
                         </td>
                         <td>
-                            <div id="Work harder." class="achievement achievementlocked" style="background-image: url(images/106.png)" ach-tooltip="Go intergalactic without buying eternity upgrades. Reward: The first two rows of eternity upgrades are 10% stronger."><br></div>
+                            <div id="Work harder." class="achievement achievementlocked" style="background-image: url(images/106.png)" ach-tooltip="Go intergalactic without buying Eternity Upgrades. Reward: The first two rows of Eternity Upgrades are 10% stronger."><br></div>
                         </td>
                         <td>
-                            <div id="24 dimensions and none of them ninth..." class="achievement achievementlocked" style="background-image: url(images/107.png)" ach-tooltip="Buy the fourth galactic dimension."><br></div>
+                            <div id="24 dimensions and none of them ninth..." class="achievement achievementlocked" style="background-image: url(images/107.png)" ach-tooltip="Buy the Fourth Galactic Dimension."><br></div>
                         </td>
                         <td>
                             <div id="The cap is a million, not a trillion" class="achievement achievementlocked" style="background-image: url(images/108.png)" ach-tooltip="Get 1e12 eternities. Reward: Eternity Upgrade 2 is much stronger."><br></div>
@@ -2514,7 +2520,7 @@
             <button class="storebtn" id="replicantiunlock" onclick="unlockReplicantis()" style="width:200px; height: 80px">Unlock Replicantis<br>Cost: 1e140 IP</button>
             <div id="replicantidiv" style="display: none">
                 <div id="eterc8repl" style="display: none;">You have <span id="eterc8replleft">50</span> replicanti purchases left.</div>
-                <p style="font-size: 15px">You have <span id="replicantiamount" style="font-size:23px; color: black">0</span> replicanti, translated to <span id="replicantimult" style="font-size:23px; color: black">0</span>x multiplier on all Infinity Dimensions.</p>
+                <p style="font-size: 15px">You have <span id="replicantiamount" style="font-size:23px; color: black">0</span> replicanti, translating to <span id="replicantimult" style="font-size:23px; color: black">0</span>x multiplier on all Infinity Dimensions.</p>
                 <br>
                 <button class="storebtn" id="replicantichance" onclick="upgradeReplicantiChance()" style="width:180px; height: 50px; font-size: 10px">Replicate chance: 1%<br>+1% Costs: 1e6969 IP</button>
                 <button class="storebtn" id="replicantiinterval" onclick="upgradeReplicantiInterval()" style="width:180px; height: 50px; font-size: 10px">Interval: 1000ms<br>-> 900 Costs: 1e6969 IP</button>
