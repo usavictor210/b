@@ -6744,12 +6744,8 @@ function eternity(force, enteringChallenge) {
         playerInfinityUpgradesOnEternity()
         // give the player resets if they have the upgrade needed
         giveInfPurchaseResets()
-        document.getElementById("gpAmount2").style.display = "inline-block"
-        document.getElementById("intergalacticstorebtn").style.display = "inline-block"
         let epPlural = player.eternityPoints.equals(1) ? '' : 's';
         document.getElementById("eternityPoints2").innerHTML = "You have <span class=\"EPAmount2\">"+shortenDimensions(player.eternityPoints)+"</span> Eternity Point" + epPlural + "."
-        let gpPlural = player.intergalactic.points.equals(1) ? '' : 's';
-        document.getElementById("gpAmount2").innerHTML = "You have <span class=\"GPAmount2\">" + shortenDimensions(player.intergalactic.points) + "</span> Intergalactic Point" + gpPlural + "."
     }
 }
 
@@ -7140,6 +7136,10 @@ function intergalaxy(force) {
         giveInfPurchaseResets()
         let epPlural = player.eternityPoints.equals(1) ? '' : 's';
         document.getElementById("eternityPoints2").innerHTML = "You have <span class=\"EPAmount2\">"+shortenDimensions(player.eternityPoints)+"</span> Eternity Point" + epPlural + "."
+        document.getElementById("gpAmount2").style.display = "inline-block"
+        document.getElementById("intergalacticstorebtn").style.display = "inline-block"
+        let gpPlural = player.intergalactic.points.equals(1) ? '' : 's';
+        document.getElementById("gpAmount2").innerHTML = "You have <span class=\"GPAmount2\">" + shortenDimensions(player.intergalactic.points) + "</span> Intergalactic Point" + gpPlural + "."
     }
 }
 
@@ -7687,7 +7687,7 @@ setInterval(function() {
 
     if (player.intergalactic.intergalaxies !== 0) {
       document.getElementById("intergalacticstorebtn").style.display = "inline-block"
-    }
+    } else document.getElementById("intergalacticstorebtn").style.display = "none"
 
     let gpPlural = player.intergalactic.points.equals(1) ? '' : 's';
     document.getElementById("gpAmount2").innerHTML = "You have <span class=\"GPAmount2\">"+shortenDimensions(player.intergalactic.points)+"</span> Intergalactic Points" + gpPlural + "."
