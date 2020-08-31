@@ -8011,7 +8011,7 @@ function startInterval() {
         var places = Math.floor(Math.log10(getReplicantiInterval()/1000)) * (-1);
         updateReplicantiInterval(places);
 
-        document.getElementById("currentRGPower").textContent = "Current Replicanti Galaxy power: " + getReplicantiGalaxyPower(new Decimal(player.replicanti.limit))
+        document.getElementById("currentRGPower").innerHTML = `Current Replicanti Galaxy power: <b>${getReplicantiGalaxyPower(new Decimal(player.replicanti.limit))}</b> | Replicanti required for a Galaxy: <b>${shortenDimensions(player.replicanti.limit)}</b>`
 
         if (player.infinityPoints.gte(currentEternityRequirement())) {
           updatePeaks(player.peaks.ep, gainedEternityPoints(), player.thisEternity);
@@ -8563,7 +8563,7 @@ var newsArray = ["You just made your 1,000,000,000,000,000 antimatter. This one 
 "Nobody once told me the anti-world wasn’t gonna roll me", "Antimatter is like internet. If you're reading this, you can't have enough of it.",
 "Antimatter has made time travel possible and I'm here to make the past great again. - 2nd President of the World",
 "The Heavenly Pelle has generated too much antimatter and needed to create another galaxy. This one can be seen in the southwestern sky.",
-"Please insert Disc -1 to continue playing  Antimatter Dimensions ™.", "I broke the 8th wall, there is only chaos, Slabdrill is ritually sacrificing antimatter to the 9th dimension. This will be my last entry, may Hevipelle have mercy on our souls, we didn't listen, We should have listened.",
+"Please insert Disc -1 to continue playing Antimatter Dimensions ™.", "I broke the 8th wall, there is only chaos, Slabdrill is ritually sacrificing antimatter to the 9th dimension. This will be my last entry, may Hevipelle have mercy on our souls, we didn't listen, We should have listened.",
 "Lore - coming soon ™", "I thought the update was 5 hours away... -new players after more than 5 hours of gameplay",
 "I was a part of antimatter like you once. But then I got matter in my knee.", "Antimatter... antimatter never changes... until you get to quantum physics of antimatter, but we don't have enough tachyon particles for that.",
 "Conditions must be met for Hevipelle to sleep. First, it needs to be a blue moon. Second, a specific town in the arctic must have not seen light for a month. Third, he needs to release an AD update. And finally, no one on the discord can be on dimension 9. Only then can he rest, for up to 6 hours, before waking up forcefully to avoid getting the offline achievement.",
@@ -8577,7 +8577,7 @@ var newsArray = ["You just made your 1,000,000,000,000,000 antimatter. This one 
 "Technically speaking, your intergalactic galaxies are actually just lonely galaxies. An intergalactic galaxy is still a contradiction in terms, but \"lonely galaxy\" sounds like there was a cost increase or something so I couldn't use it.",
 "The hardest part of the intergalactic update was finding somewhere to put the \"Go intergalactic\" button. Not to say that the rest was easy, but that was the hardest part.",
 "If you haven't unlocked antipichus yet, you're playing the game wrong. How in the world are you supposed to finish this two-hour long game in any reasonable amount of time without figuring out antipichus? I guess it might be possible if you're the type of crazy person willing to spend weeks or even months on the game, but I doubt it.",
-"These jokes are getting old, what are antipichus even for", "Some of this game's code is ridiculously outdated", "It's about time we should port this to Aarex's site", "The early Eternity era should be better to get through in the update, if not, it's a lack of something something I don't know", ""]
+"These jokes are getting old, what are antipichus even for", "Some of this game's code is ridiculously outdated", "It's about time we should port this to Aarex's site", "The early Eternity era should be better to get through in the update, if not, it's a lack of something something I don't know", "Hey, you're still here?"]
 
 
 var conditionalNewsArray = ["Our universe is falling apart. We are all evacuating. This is the last news cast", "THIS NEWS STATION HAS SHUT DOWN DUE TO COLLAPSING UNIVERSE",
@@ -8832,11 +8832,11 @@ function init() {
 // begin cheats (not purchases)
 
 function skipTime (seconds) {
-  if (seconds <= 21600) {
+  if (!isNaN(seconds + 0)) {
     player.lastUpdate -= seconds * 1000;
     return seconds;
   } else {
-    alert('The skipper cannot skip farther than 6 hours, but if you would like to do so, use the advanced skipper.');
+    alert('Invalid skip duration.');
     return false;
   }
 }
