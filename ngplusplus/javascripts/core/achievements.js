@@ -189,17 +189,11 @@ function clearOldAchieves(){
 }
 
 function giveAchievement(name) {
-
     if (player.achievements.includes(name)){ clearOldAchieves(); }
-
     if (player.achievements.includes(allAchievementNums[name])) return false
-
     $.notify(name, "success");
     player.achievements.push(allAchievementNums[name]);
     document.getElementById(name).className = "achievementunlocked"
-    try {
-        kongregate.stats.submit('Achievements', player.achievements.length);
-    } catch (err) {console.log("Couldn't load Kongregate API")}
     if (name == "All your IP are belong to us" || name == "MAXIMUM OVERDRIVE") {
         player.infMult = player.infMult.times(4);
         player.autoIP = player.autoIP.times(4);
