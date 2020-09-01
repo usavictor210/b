@@ -107,7 +107,7 @@
                         <td class="milestoneText">6 Intergalaxies:</td>
                     </tr>
                     <tr> 
-                        <td><button class="milestonerewardlocked" id="rewardi5" style="font-size: 12px">Unlock more eternity autobuyer options (just like current infinity autobuyer).</button></td>
+                        <td><button class="milestonerewardlocked" id="rewardi5" style="font-size: 12px">Unlock more eternity autobuyer options (just like the big crunch autobuyer).</button></td>
                         <td><button class="milestonerewardlocked" id="rewardi6" style="font-size: 10px">Keep your banked Infinities across Intergalaxies.</button></td>
                     </tr>
                     <tr>
@@ -1027,7 +1027,7 @@
 
         <div id="achievements" class="tab">
             <br>
-            <div id="achmultlabel" style="font-size: 140%">Current achievement multiplier on each Dimension: 1x</div>
+            <div id="achlabel" style="font-size: 140%">Current achievement multiplier on each Dimension: 1x</div>
            <table style="margin: auto">
                 <tr id="achRow1">
                     <td>
@@ -1825,12 +1825,12 @@
                               </div>
                               <button id="eterc3unlockbtn" class="challengesbtn" onclick="attemptEterChallUnlock(3)">Unlock</button>
                               <div id="eterc3conditionsdiv" style="display: none;">
-                                <span>Dimensions 5-8 don't produce anything. Dimensional sacrifice is disabled.</span>
+                                <span>Dimensions 5-8 don't produce anything. Dimensional Sacrifice is disabled.</span>
                               </div>
                               <button id="eterc3" class="challengesbtn" onclick="startEternityChallenge(3)">Start</button>
                               <div id="eterc3goaldiv" style="display: none;">
                                 <span id="ec3goal">Goal: z</span><br>
-                                <span>Reward: There's an extra multiplier for buying 10 dimensions based on eternities. Currently: <span id="ec3reward">reward</span>.</span>
+                                <span>Reward: Gain an extra multiplier to your multiplier per-10 Dimensions based on your Eternities. Currently: <span id="ec3reward">reward</span>.</span>
                               </div>
                             </div>
                         </td>
@@ -1847,7 +1847,7 @@
                               </div>
                               <button id="eterc4unlockbtn" class="challengesbtn" onclick="attemptEterChallUnlock(4)">Unlock</button>
                               <div id="eterc4conditionsdiv" style="display: none;">
-                                <span>All generators and multipliers of infinitied stat are disabled.</span>
+                                <span>All generators and multipliers of infinitied stat are disabled, however you are limited to how many times you can Big Crunch. If your Infinities exceed the constraint, you fail the challenge.</span>
                               </div>
                               <button id="eterc4" class="challengesbtn" onclick="startEternityChallenge(4)">Start</button>
                               <div id="eterc4goaldiv" style="display: none;">
@@ -1918,7 +1918,7 @@
                               </div>
                               <button id="eterc7unlockbtn" class="challengesbtn" onclick="attemptEterChallUnlock(7)">Unlock</button>
                               <div id="eterc7conditionsdiv" style="display: none;">
-                                <span>There's an exponentially increasing dark matter dividing multipliers on Normal, Infinity, and Time Dimensions.</span>
+                                <span>There's an exponentially increasing dark matter, which divides multipliers on Normal, Infinity, and Time Dimensions.</span>
                               </div>
                               <button id="eterc7" class="challengesbtn" onclick="startEternityChallenge(7)">Start</button>
                               <div id="eterc7goaldiv" style="display: none;">
@@ -2010,7 +2010,7 @@
                               </div>
                               <button id="eterc11unlockbtn" class="challengesbtn" onclick="attemptEterChallUnlock(11)">Unlock</button>
                               <div id="eterc11conditionsdiv" style="display: none;">
-                                <span>The only dimension multipliers are from Dimension Boosts and Infinity Power on normal dimensions.</span>
+                                <span>The only dimension multipliers are from Dimension Boosts and Infinity Power on Normal Dimensions.</span>
                               </div>
                               <button id="eterc11" class="challengesbtn" onclick="startEternityChallenge(11)">Start</button>
                               <div id="eterc11goaldiv" style="display: none;">
@@ -2032,7 +2032,7 @@
                               </div>
                               <button id="eterc12unlockbtn" class="challengesbtn" onclick="attemptEterChallUnlock(12)">Unlock</button>
                               <div id="eterc12conditionsdiv" style="display: none;">
-                                <span>The game runs 1,000x slower.</span>
+                                <span>The game runs 1,000x slower, however you must beat the challenge within a certain time limit.</span>
                               </div>
                               <button id="eterc12" class="challengesbtn" onclick="startEternityChallenge(12)">Start</button>
                               <div id="eterc12goaldiv" style="display: none;">
@@ -2564,7 +2564,8 @@
                   <br>
                   <p id="currentRGPower"></p>
                   <p>On the next Eternity:</p>
-                  Set Replicanti Galaxy strength: <input type="text" onchange="setReplicantiNewGalaxyStrength()" id="galStrength"></input>
+                  <span id="rgPowInfo" style="font-size: 11px">You can edit any of these values to change Replicanti Galaxy strength. Effect begins to get reduced around 4 RG strength. Amount required cannot ever pass x.</span>
+                  Replicanti Galaxy strength: <input type="text" onchange="setReplicantiNewGalaxyStrength()" id="galStrength"></input>
                   <br>
                   Replicanti needed to get a galaxy: <input type="text" onchange="setReplicantiNewLimit()" id="replLimit"></input>
                 </div>

@@ -1005,7 +1005,7 @@ function onLoad() {
     fixTimeDimensions();
     updateCosts();
     updateTickSpeed();
-    updateAchPow();
+    updateAch();
     updateChallenges();
     initAllECs();
     updateCheckBoxes();
@@ -1091,11 +1091,8 @@ function onLoad() {
     if (player.options.newsHidden) {
         document.getElementById("game").style.display = "none";
     }
-    if (player.options.challConf) {
-        document.getElementById("challengeconfirmation").innerHTML = "Challenge confirmation off"
-    } else {
-        document.getElementById("challengeconfirmation").innerHTML = "Challenge confirmation on"
-    }
+
+    document.getElementById("challengeconfirmation").innerHTML = `Challenge confirmation: O${player.options.challConf ? "N":"FF"}`
 
     if (!player.options.hotkeys) document.getElementById("hotkeys").innerHTML = "Enable hotkeys"
     updateAutobuyers();
@@ -3430,7 +3427,7 @@ function giveAchievement(name) {
     if (name === "I decided to grind") {
         document.getElementById("eterrow3").style.display = "";
     }
-    updateAchPow();
+    updateAch();
 }
 
 var TIER_NAMES = [ null, "first", "second", "third", "fourth", "fifth", "sixth", "seventh", "eight" ];
@@ -3757,29 +3754,10 @@ function buyMaxTickSpeed() {
     return true;
 }
 
-
-
-
-
-
-
-
-
-
-
-
 function toggleChallengeRetry() {
-    if (player.options.retryChallenge) {
-        player.options.retryChallenge = false
-        document.getElementById("retry").innerHTML = "Automatically retry challenges OFF"
-    } else {
-        player.options.retryChallenge = true
-        document.getElementById("retry").innerHTML = "Automatically retry challenges ON"
-    }
+  player.options.retryChallenge = !player.options.retryChallenge
+  document.getElementById("retry").innerHTML = `Automatically retry challenges: O${player.options.retryChallenge ? "N" : "FF"}`
 }
-
-
-
 
 document.getElementById("first").onclick = function () {
     if (buyOneDimension(1)) {
@@ -3790,8 +3768,6 @@ document.getElementById("first").onclick = function () {
         if ((player.currentChallenge == "challenge12" || player.currentChallenge == "postc1") && player.matter.equals(0)) player.matter = new Decimal(1);
     }
 };
-
-
 
 function glowText(id) {
   var text = document.getElementById(id);
@@ -3883,13 +3859,8 @@ document.getElementById("maxall").onclick = function () {
 }
 
 document.getElementById("challengeconfirmation").onclick = function () {
-    if (!player.options.challConf) {
-        player.options.challConf = true;
-        document.getElementById("challengeconfirmation").innerHTML = "Challenge confirmation off"
-    } else {
-        player.options.challConf = false;
-        document.getElementById("challengeconfirmation").innerHTML = "Challenge confirmation on"
-    }
+        player.options.challConf = !player.options.challConf;
+        document.getElementById("challengeconfirmation").innerHTML = `Challenge confirmation: O${player.options.challConf ? "N" : "FF"}`
 }
 
 
@@ -3978,23 +3949,23 @@ function buyMaxEPMult() {
 
 
 
-function updateAchPow() {
+function updateAch() {
     var amount = 0;
-    for (let i = 1; i <= 15; i++) {
+    var ach = 0;
+    for (let i = 1; i <= 16; i++) {
       let rowCompleted = true;
       for (let j = 1; j <= 8; j++) {
         if (!player.achievements.includes(("r" + i) + j)) {
           rowCompleted = false;
         } else amount++
+        ach++
       }
       if (rowCompleted) {
         document.getElementById("achRow" + i).className = "completedrow"
       }
     }
-
     player.achPow = Decimal.pow(1.07, amount)
-
-    document.getElementById("achmultlabel").innerHTML = "Current achievement multiplier on each Dimension: " + player.achPow.toFixed(1) + "x"
+    document.getElementById("achlabel").innerHTML = `Achievements: ${amount} / ${ach}<br>Current achievement multiplier on each Dimension: ${player.achPow.toFixed(1)}x`
 }
 
 
@@ -4807,13 +4778,8 @@ function toggleCrunchMode() {
 }
 
 function toggleEternityConf() {
-    if (player.options.eternityconfirm) {
-        player.options.eternityconfirm = false
-        document.getElementById("eternityconf").innerHTML = "Eternity confimation: OFF"
-    } else {
-        player.options.eternityconfirm = true
-        document.getElementById("eternityconf").innerHTML = "Eternity confimation: ON"
-    }
+  player.options.eternityconfirm = !player.options.eternityconfirm
+  document.getElementById("eternityconf").innerHTML = `Eternity confimation: O${player.options.eternityconfirm ? "N" : "FF"}`
 }
 
 function toggleIntergalaxyConf() {
@@ -4855,22 +4821,12 @@ function toggleReplAuto(i) {
     }
 }
 
-
-
-
 function toggleCommas() {
     player.options.commas = !player.options.commas
-
-    if (player.options.commas) document.getElementById("commas").innerHTML = "Commas on large exponents: ON"
-    else document.getElementById("commas").innerHTML = "Commas on large exponents: OFF"
+    document.getElementById("commas").innerHTML = `Commas on large exponents: O${player.options.commas ? "N" : "FF"}`
 }
 
-
-
-
-
-
-buyAutobuyer = function(id) {
+function buyAutobuyer(id) {
     if (player.infinityPoints.lt(player.autobuyers[id].cost) || player.autobuyers[id].bulk > 1e10) return false; // you don't need to buy any ridiculous amount of bulk buy
     player.infinityPoints = player.infinityPoints.minus(player.autobuyers[id].cost);
     if (player.autobuyers[id].interval <= 100) { // if interval is maxed out
@@ -5560,7 +5516,7 @@ function sacrifice() {
 
 document.getElementById("sacrifice").onclick = function () {
     if (!document.getElementById("confirmation").checked) {
-        if (!confirm("Dimensional Sacrifice will remove all of your first to seventh dimensions (with the cost and multiplier unchanged) for a boost to Eighth Dimension. It will take time to regain production.")) {
+        if (!confirm("Dimensional Sacrifice will remove all of your First to Seventh Dimensions (with the cost and multiplier unchanged) for a boost to the Eighth Dimension. It will take time to regain production.")) {
             return false;
         }
     }
@@ -7998,10 +7954,14 @@ function startInterval() {
             let newGalGain = Math.min(currentGalGain + 1, maxGalGain);
             let estimate = getReplicantiETA(player.replicanti.amount, player.replicanti.limit.pow(newGalGain * 5));
             let galGainDisplay = (newGalGain === maxGalGain) ? 'maximum' : newGalGain;
-            document.getElementById("replicantiapprox").innerHTML = "Approximately " + timeDisplay(estimate) + " until you get " + galGainDisplay + ' replicanti galaxies.';
+            let beforeETA = new Date().getTime() + estimate
+            beforeETA = new Date(beforeETA)
+            document.getElementById("replicantiapprox").innerHTML = `It will take approximately ${timeDisplay(estimate)} until you get ${galGainDisplay} replicanti galaxies.<br>(${beforeETA})`;
         } else {
             let estimate = getReplicantiETA();
-            document.getElementById("replicantiapprox").innerHTML = "Approximately " + timeDisplay(estimate) + " until you get Infinite replicanti."
+            let beforeETA = new Date(new Date().getTime() + estimate*100)
+            let limit = (player.replicanti.limit.eq(Number.MAX_VALUE)) ? "Infinite" : formatValue(player.options.notation, player.replicanti.limit, 3, 2)
+            document.getElementById("replicantiapprox").innerHTML = `It will take approximately ${timeDisplay(estimate)} until you get ${limit} replicanti. <br>(${beforeETA})`
         }
 
         document.getElementById("replicantiamount").innerHTML = player.replicanti.amount.lt(10) ? player.replicanti.amount.toFixed(2) : shortenDimensions(player.replicanti.amount)
@@ -8011,8 +7971,8 @@ function startInterval() {
         var places = Math.floor(Math.log10(getReplicantiInterval()/1000)) * (-1);
         updateReplicantiInterval(places);
 
-        document.getElementById("currentRGPower").innerHTML = `Current Replicanti Galaxy power: <b>${getReplicantiGalaxyPower(new Decimal(player.replicanti.limit))}</b> | Replicanti required for a Galaxy: <b>${shortenDimensions(player.replicanti.limit)}</b>`
-
+        document.getElementById("currentRGPower").innerHTML = `Current Replicanti Galaxy strength: <b>${getReplicantiGalaxyPower(new Decimal(player.replicanti.limit)).toFixed(3)}</b> | Replicanti required for a Galaxy: <b>${formatValue(player.options.notation, player.replicanti.limit, 3, 2)}</b>`
+        document.getElementById("rgPowInfo").innerHTML = `You can edit any of these values to change Replicanti Galaxy strength.<br>Amount required cannot ever pass ${shortenMoney(new Decimal("1e9000000000000"))} replicanti.<br>`
         if (player.infinityPoints.gte(currentEternityRequirement())) {
           updatePeaks(player.peaks.ep, gainedEternityPoints(), player.thisEternity);
         }
@@ -8353,8 +8313,9 @@ function startInterval() {
         document.getElementById("chall3Pow").innerHTML = shorten(player.chall3Pow*100) + "%"
 
 
-        if (player.infDimensionsUnlocked.includes(false) && player.break && player.infinityPoints.lt(currentEternityRequirement())) {
+        if (player.infDimensionsUnlocked.includes(false) && player.break && player.infinityPoints.lt(currentEternityRequirement()) && player.eternities < 25) {
             document.getElementById("newDimensionButton").style.display = "inline-block"
+            document.getElementById("newDimensionButton").innerHTML = "Get " + shortenCosts(getNewInfReq()) + " antimatter to unlock a new Dimension."
         } else document.getElementById("newDimensionButton").style.display = "none"
 
         if (player.money.gte(getNewInfReq())) document.getElementById("newDimensionButton").className = "newdim"
@@ -8362,9 +8323,7 @@ function startInterval() {
 
         while (player.eternities > 24 && !player.infDimensionsUnlocked[7] && getNewInfReq().lt(player.money)) newDimension()
 
-        document.getElementById("newDimensionButton").innerHTML = "Get " + shortenCosts(getNewInfReq()) + " antimatter to unlock a new Dimension."
-
-        document.getElementById("sacrifice").setAttribute('ach-tooltip', "Boosts 8th Dimension by " + formatValue(player.options.notation, calcSacrificeBoost(), 2, 2) + "x");
+        document.getElementById("sacrifice").setAttribute('ach-tooltip', "Boost the 8th Dimension by " + formatValue(player.options.notation, calcSacrificeBoost(), 2, 2) + "x");
 
         document.getElementById("sacrifice").innerHTML = "Dimensional Sacrifice ("+formatValue(player.options.notation, calcSacrificeBoost(), 2, 2)+"x)";
 
@@ -8417,8 +8376,8 @@ var timer = 0
 function autoBuyerTick() {
     if (player.eternities >= 100 && player.eternityBuyer.isOn && gainedEternityPoints().gte(player.eternityBuyer.limit)) eternity()
 
-    if (player.autobuyers[11]%1 !== 0) {
-    if (player.autobuyers[11].ticks*100 >= player.autobuyers[11].interval && player.money.gte(Number.MAX_VALUE)) {
+    if (player.autobuyers[11] % 1 !== 0) {
+    if (player.autobuyers[11].ticks * 100 >= player.autobuyers[11].interval && player.money.gte(Number.MAX_VALUE)) {
         if (player.autobuyers[11].isOn && (!player.autobuyers[11].requireIPPeak || gainedInfinityPoints().gte(player.peaks.ip.total))) {
             if (player.autoCrunchMode === "amount") {
                 if (!player.break || player.currentChallenge != "" || player.autobuyers[11].priority.lt(gainedInfinityPoints())) {
@@ -8581,9 +8540,10 @@ var newsArray = ["You just made your 1,000,000,000,000,000 antimatter. This one 
 
 
 var conditionalNewsArray = ["Our universe is falling apart. We are all evacuating. This is the last news cast", "THIS NEWS STATION HAS SHUT DOWN DUE TO COLLAPSING UNIVERSE",
-"Researchers have confirmed that there is another dimension to this world. However, only antimatter beings can interact with it",
+"Researchers have confirmed that there is another dimension to this world. However, only antimatter beings can interact with it.",
 "Studies show a massive problem with the time-space continuum. In other words, a large amount of antimatter has dissapeared from the cosmos",
-"Should we call antimatter Matter now? There seems to be more of it."]
+"Should we call antimatter Matter now? There seems to be more of it.", "Oh no. The news is now accessing more weird and probably lame news tickers! It's really dumb, who designed this?",
+"I would really like to make a matter joke here but the last 100 or so came off bland.", "Dang it, I'm probably seeing things...", "Remind usavictor to update the news tickers"]
 
 var cheatCodeNewsArray = [
   "-2: All kinds of points are less than 1e100. If not, you or I made a mistake.",
@@ -8618,6 +8578,9 @@ function scrollNextMessage() {
   if (Math.random() < .01) {
     idx = Math.floor(Math.random() * cheatCodeNewsArray.length);
     msg = {msg: cheatCodeNewsArray[idx], index: idx};
+  } else if (Math.random() < .05) {
+    idx = Math.floor(Math.random() * conditionalNewsArray.length);
+    msg = {msg: conditionalNewsArray[idx], index: idx};
   } else {
     idx = Math.floor(Math.random() * newsArray.length)
     msg = {msg: newsArray[idx], index: idx};
@@ -8647,7 +8610,7 @@ function scrollNextMessage() {
 
     if (!player.options.newsHidden) {
         if (!player.newsArray.includes(msg.index)) player.newsArray.push(msg.index);
-        if (player.newsArray.length>=50 && !player.achievements.includes("r41")) giveAchievement("Fake News")
+        if (player.newsArray.length >= 50 && !player.achievements.includes("r41")) giveAchievement("Fake News")
     }
 
     if (player.achievements.includes("r41")) player.newsArray = []
