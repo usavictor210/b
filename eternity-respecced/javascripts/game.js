@@ -2255,7 +2255,7 @@ function buyMaxInfDims(tier) {
 }
 
 function maxAllIDs() {
-  for (dim = 1; dim < 9; dim++) {
+  for (dim = 8; dim > 0; dim--) {
     buyMaxInfDims(dim)
   }
 }
@@ -2405,7 +2405,7 @@ function buyTimeDimension(tier) {
 }
 
 function buyMaxTimeDimensions () {
-  for (var tier = 1; tier <= 4; tier++) {
+  for (var tier = 4; tier >= 1; tier--) {
     var dim = player["timeDimension"+tier];
     let buy = makePurchase(player.eternityPoints, dim.cost, timeDimCostMults[tier])
     if (buy.amount === 0) continue;
@@ -3852,8 +3852,7 @@ document.getElementById("softReset").onclick = function () {
 
 document.getElementById("maxall").onclick = function () {
     buyMaxTickSpeed();
-
-    for (var tier=1; tier<9;tier++) {
+    for (var tier = 8; tier > 0; tier--) {
         buyManyDimensionAuto(tier, Infinity)
     }
 }
@@ -5355,7 +5354,7 @@ function setAchieveTooltip() {
     overdrive.setAttribute('ach-tooltip', "Big Crunch with " + shortenCosts(1e300) + " IP/min. Reward: Gain an additional 4x multiplier to IP.")
     relative.setAttribute('ach-tooltip', `Go Eternal. Reward: Start Eternities with a small buff to Normal Dimensions based on time spent in this Eternity, which gets stronger based on your Eternities (up to a hardcap of ${shortenDimensions(1e100)}x). Current max: ${shortenDimensions(Decimal.times(1e33, Decimal.pow(1.25, player.eternities*5)).min(1e100))}x.`);
     minute.setAttribute('ach-tooltip', "Reach " + shortenCosts(1e260) + " infinity power. Reward: Double infinity power gain.")
-    aLot.setAttribute('ach-tooltip', "Reach " + shortenCosts(new Decimal('1e1000000')) + " replicanti. Reward: Replicanti increases faster the more you have.")
+    aLot.setAttribute('ach-tooltip', `Reach ${shortenCosts(new Decimal('1e1000000'))} replicanti. Reward: Replicanti increases faster the more you have beyond ${shortenDimensions(new Decimal(Number.MAX_VALUE))}.`)
     infiniteIP.setAttribute('ach-tooltip', "Reach "+shortenCosts(new Decimal("1e30008"))+" IP.")
     over9000.setAttribute('ach-tooltip', "Get a total sacrifice multiplier of "+shortenCosts(new Decimal("1e9000"))+". Reward: Sacrifice doesn't reset your dimensions.")
     dawg.setAttribute('ach-tooltip', "Have each infinity be at least "+shortenMoney(Number.MAX_VALUE)+" times higher IP than the previous one within your past 10 infinities. Reward: Your antimatter doesn't reset on dimension boost or galaxy, and your infinity gain is boosted by your unspent IP.")
@@ -5660,13 +5659,12 @@ function updateAutobuyers() {
     var maxedAutobuy = 0;
     for (let tier = 1; tier <= 8; ++tier) {
         document.getElementById("toggleBtn" + tier).style.display = "inline-block";
-        if (player.autobuyers[tier - 1].bulk >= 1e10) {
+        if (player.autobuyers[tier - 1].bulk < 1e10) {
           if (player.autobuyers[tier - 1].interval <= 100) {
-              document.getElementById(`buyerBtn${tier}`).innerHTML = shortenDimensions(player.autobuyers[tier - 1].bulk) + "x -> " + shortenDimensions(player.autobuyers[tier - 1].bulk*2)+"x bulk purchase<br>Cost: " + shortenDimensions(player.autobuyers[tier-1].cost) + " IP"
+              document.getElementById(`buyerBtn${tier}`).innerHTML = shortenDimensions(player.autobuyers[tier - 1].bulk) + "x -> " + shortenDimensions(new Decimal (player.autobuyers[tier - 1].bulk * 2).min(1e10))+"x bulk purchase<br>Cost: " + shortenDimensions(player.autobuyers[tier-1].cost) + " IP"
               maxedAutobuy++;
-          } else document.getElementById(`buyerBtn${tier}`).innerHTMl = `${shortenDimensions(player.autobuyers[tier - 1].bulk)}x bulk purchase (maxed out)`
-        } else document.getElementById(`buyerBtn${tier}`).innerHTML = "40% smaller interval <br>Cost: " + shortenDimensions(player.autobuyers[tier-1].cost) + " IP"
-
+          } else document.getElementById(`buyerBtn${tier}`).innerHTML = "40% smaller interval <br>Cost: " + shortenDimensions(player.autobuyers[tier-1].cost) + " IP"
+        } else document.getElementById(`buyerBtn${tier}`).innerHTML = `${shortenDimensions(player.autobuyers[tier - 1].bulk)}x bulk purchase (maxed out)`
     }
 
     if (player.autobuyers[8].interval <= 100) {
@@ -7954,14 +7952,21 @@ function startInterval() {
             let newGalGain = Math.min(currentGalGain + 1, maxGalGain);
             let estimate = getReplicantiETA(player.replicanti.amount, player.replicanti.limit.pow(newGalGain * 5));
             let galGainDisplay = (newGalGain === maxGalGain) ? 'maximum' : newGalGain;
-            let beforeETA = new Date().getTime() + estimate
-            beforeETA = new Date(beforeETA)
-            document.getElementById("replicantiapprox").innerHTML = `It will take approximately ${timeDisplay(estimate)} until you get ${galGainDisplay} replicanti galaxies.<br>(${beforeETA})`;
+            let beforeETA = 0
+            let overallETA = 0
+            if (maxGalGain !== currentGalGain) {
+              beforeETA = new Date(new Date().getTime() + estimate * 100)
+              overallETA = new Date(new Date().getTime() + ((estimate * maxGalGain) * 100))
+            } else document.getElementById("replicantiapprox").innerHTML = `You have reached your replicanti galaxy limit.`
+            document.getElementById("replicantiapprox").innerHTML = `It will take approximately ${timeDisplay(estimate)} until you get ${galGainDisplay} replicanti galaxies.<br>(${beforeETA})<br>Time when maxed: ${overallETA} (${player.replicanti.galaxies} / ${player.replicanti.gal} RGs)`;
         } else {
             let estimate = getReplicantiETA();
-            let beforeETA = new Date(new Date().getTime() + estimate*100)
+            let beforeETA = new Date(new Date().getTime() + estimate * 100)
+            let overallETA = new Date(new Date().getTime() + ((getReplicantiETA(new Decimal(1)) * (player.replicanti.gal - player.replicanti.galaxies))) * 100)
             let limit = (player.replicanti.limit.eq(Number.MAX_VALUE)) ? "Infinite" : formatValue(player.options.notation, player.replicanti.limit, 3, 2)
-            document.getElementById("replicantiapprox").innerHTML = `It will take approximately ${timeDisplay(estimate)} until you get ${limit} replicanti. <br>(${beforeETA})`
+            if (player.replicanti.galaxies != player.replicanti.gal) {
+            document.getElementById("replicantiapprox").innerHTML = `It will take approximately ${timeDisplay(estimate)} until you get ${limit} replicanti. <br>(${beforeETA}) <br>Time when maxed: ${overallETA} (${player.replicanti.galaxies} / ${player.replicanti.gal} RGs)`
+            } else document.getElementById("replicantiapprox").innerHTML = `You have reached your replicanti galaxy limit.`
         }
 
         document.getElementById("replicantiamount").innerHTML = player.replicanti.amount.lt(10) ? player.replicanti.amount.toFixed(2) : shortenDimensions(player.replicanti.amount)
@@ -7972,7 +7977,7 @@ function startInterval() {
         updateReplicantiInterval(places);
 
         document.getElementById("currentRGPower").innerHTML = `Current Replicanti Galaxy strength: <b>${getReplicantiGalaxyPower(new Decimal(player.replicanti.limit)).toFixed(3)}</b> | Replicanti required for a Galaxy: <b>${formatValue(player.options.notation, player.replicanti.limit, 3, 2)}</b>`
-        document.getElementById("rgPowInfo").innerHTML = `You can edit any of these values to change Replicanti Galaxy strength.<br>Amount required cannot ever pass ${shortenMoney(new Decimal("1e9000000000000"))} replicanti.<br>`
+        document.getElementById("rgPowInfo").innerHTML = `You can edit any of these values to change Replicanti Galaxy strength.<br>Amount required cannot ever pass ${shortenMoney(new Decimal("1e8999999999999999"))} replicanti.<br>`
         if (player.infinityPoints.gte(currentEternityRequirement())) {
           updatePeaks(player.peaks.ep, gainedEternityPoints(), player.thisEternity);
         }
@@ -8237,7 +8242,6 @@ function startInterval() {
         if (player.dimensionMultDecrease == 3) document.getElementById("postinfi42").className = "infinistorebtnbought"
         if (player.offlineProd == 50) document.getElementById("offlineProd").className = "infinistorebtnbought"
 
-
         if (player.infinityUpgrades.includes("infinitiedGeneration")) document.getElementById("postinfi13").className = "infinistorebtnbought"
         if (player.infinityUpgrades.includes("bulkBoost")) document.getElementById("postinfi23").className = "infinistorebtnbought"
         if (player.infinityUpgrades.includes("autoBuyerUpgrade")) document.getElementById("postinfi33").className = "infinistorebtnbought"
@@ -8257,11 +8261,12 @@ function startInterval() {
         } else {
             document.getElementById("progressbar").style.width = Decimal.min(Decimal.log10(player.infinityPoints.plus(1)) / Decimal.log10(currentEternityRequirement())  * 100, 100).toFixed(2) + "%"
             document.getElementById("progressbar").innerHTML = Decimal.min(Decimal.log10(player.infinityPoints.plus(1)) / Decimal.log10(currentEternityRequirement())  * 100, 100).toFixed(2) + "%"
-            if (player.eternityChallenges.current === null) {
+            if (player.eternityChallenges.current === null && player.infinityPoints.lte(Number.MAX_VALUE)) {
               document.getElementById("progress").setAttribute('ach-tooltip', "Percentage to Eternity")
-            } else {
-              document.getElementById("progress").setAttribute('ach-tooltip', "Percentage to Eternity Challenge completion")
-            }
+            } else if (player.infinityPoints.gte(Number.MAX_VALUE)) {
+              let factor = new Decimal.pow(2, (gainedEternityPoints()).log(2)).floor()
+              document.getElementById("progress").setAttribute('ach-tooltip', `Percentage to ${Decimal.pow(2, factor)} EP gain`)
+            } else document.getElementById("progress").setAttribute('ach-tooltip', "Percentage to Eternity Challenge completion")
         }
 
         var scale1 = [2.82e-45,1e-42,7.23e-30,5e-21,9e-17,6.2e-11,5e-8,3.555e-6,7.5e-4,1,2.5e3,2.6006e6,3.3e8,5e12,4.5e17,1.08e21,1.53e24,1.41e27,5e32,8e36,1.7e45,1.7e48,3.3e55,3.3e61,5e68,1e73,3.4e80,1e113,Number.MAX_VALUE];
@@ -8547,7 +8552,7 @@ var conditionalNewsArray = ["Our universe is falling apart. We are all evacuatin
 
 var cheatCodeNewsArray = [
   "-2: All kinds of points are less than 1e100. If not, you or I made a mistake.",
-  "-1: I initially understood letter notation incorrectly, but I don't want to fix it, so I'm instead putting in this disclaimer. For the purposes of these messages about points, all numbers in letter notation are 1000 times what they are in the regular game (so 1a is a million, not a thousand). // However, if usavictor is to fix this, you should disregard this entirely.",
+  "-1: I initially understood letter notation incorrectly, but I don't want to fix it, so I'm instead putting in this disclaimer. For the purposes of these messages about points, all numbers in letter notation are 1,000 times what they are in the regular game (so 1a is a million, not a thousand). // However, if usavictor is to fix the notation, you should still count the 1,000 times part anyway.",
   "0: The numbered messages about the sixteen different types of points can give a cheat code when considered correctly. However, the same thing could be accomplished with a console.",
   "1: Your alternative points are your exponential points or your logarithmic points, whichever is greater.",
   "2: Your binary points are 2^bits rounded to the nearest power of 10. The formula for bits is 2^8 - greatest number of dragons you ever had - 2 * log10(overflow points)",

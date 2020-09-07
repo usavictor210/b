@@ -224,10 +224,42 @@
             <table class="table" align="center" style="margin: auto">
                 <tr>
                     <td><button class="secondarytabbtn" onclick="showEternityTab('timestudies')">Time studies</button><td>
+                    <td><button class="secondarytabbtn" onclick="showEternityTab('tthelper')">TT layout helper</button><td></td>
                     <td><button class="secondarytabbtn" onclick="showEternityTab('eternityupgrades')">Eternity upgrades</button><td>
-                        <td><button class="secondarytabbtn" onclick="showEternityTab('milestones')">Eternity milestones</button><td>
+                    <td><button class="secondarytabbtn" onclick="showEternityTab('milestones')">Eternity milestones</button><td>
                 </tr>
             </table>
+            <div class="eternitytab" id="tthelper" style="font-size: 15px">
+                <table class="table" style="margin: 0 auto;">
+                    <tr>
+                        <br>
+                        TT layout helper, version 2
+                        <br><br>
+                        Input numbers below in the text boxes to calculate an optimal Time Study layout.<br>When ready, press "Calculate!" and it will calculate and give the Time Study layout for you in the result.<br>Please do not attempt to break this, you may end up freezing or crashing the page with very large numbers.
+                        <br><br>
+                        <button id="ttSpecButton" class="storebtn" onclick="calculateTTSpec()">Calculate!</button>
+                        <br><br>
+                        <div id="ttSpecResult">Result: N/A</div>
+                        <br>
+                        <td>
+                        <div>Exponent of IP</div>
+                        <textarea id="ttIP" placeholder="Type in an exponent, not a number" rows="5" cols="25" style="resize: none;"></textarea>
+                        <div>Exponent of Time Shards</div>
+                        <textarea id="ttTimeShards" placeholder="Type in an exponent, not a number" rows="5" cols="25" style="resize: none;"></textarea>
+                        <div>Time Theorems</div>
+                        <textarea id="ttTimeTheorems" placeholder="It is recommended to put in your current time theorem amount" rows="5" cols="25" style="resize: none;"></textarea>
+                        </td>
+                        <td>
+                        <div>Time Studies unlocked</div>
+                        <textarea id="ttTimeStudies" placeholder="This will end up being restricted to 4, 6, and 8 time studies" rows="5" cols="25" style="resize: none;"></textarea>
+                        <div>RG power</div>
+                        <textarea id="ttRGPower" placeholder="Enter your RG power" rows="5" cols="25" style="resize: none;"></textarea>
+                        <div>Seconds in Infinity</div>
+                        <textarea id="ttInfTime" placeholder="Enter expected time in the next Infinity" rows="5" cols="25" style="resize: none;"></textarea>
+                        </td>
+                    </tr>
+                </table>
+            </div>
             <div class="eternitytab" id="timestudies" style="font-size: 15px">
                 <table class="table" style="margin: 0 auto;">
                   <tr>
@@ -2582,6 +2614,7 @@
 </body>
 <script type="text/javascript" src="javascripts/autobuyer.js"></script>
 <script type="text/javascript" src="javascripts/breakinfinity.js"></script>
+<script type="text/javascript" src="javascripts/ttspec.js?82"></script>
 <script type="text/javascript" src="javascripts/game.js?82"></script>
 <script type="text/javascript" src="javascripts/sha512.js"></script>
 <script type="text/javascript" src="javascripts/eter_player.js"></script>

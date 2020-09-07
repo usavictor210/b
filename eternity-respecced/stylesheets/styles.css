@@ -684,7 +684,7 @@
     display: none;
 }
 
-#footercontainer{
+#footercontainer {
     bottom: 0;
     position: fixed;
     width: 100%;
@@ -717,130 +717,6 @@
     font-size: 16px;
     border-radius: 5px;
     transition-duration: 0.1s;
-}
-
-.greedbtn {
-    height: 40px;
-    width: 100px;
-    background-color: #f2d729;
-    border: 1px solid red;
-    border-radius: 5px;
-    font-family: TypeWriter;
-    transition-duration: 0.2s;
-}
-
-.greedbtn:hover {
-    cursor: pointer;
-    background-color: #9E913A;
-
-}
-
-.timestudy {
-    color: #b341e0;
-    background: black;
-    border: 1px solid #b341e0;
-    font-weight: bold;
-    font-family: Typewriter;
-    width: 170px;
-    height: 80px;
-    transition-duration: 0.2s;
-    cursor: pointer;
-    border-radius: 4px;
-    font-size: 0.65rem;
-    vertical-align: top;
-    margin:7px;
-    animation: studyGlowIn 7s infinite;
-}
-
-.timestudy.normaldimstudy {
-    color: #22aa48 !important;
-    border: 1px solid #198036 !important;
-    animation: normalDimStudyGlowIn 7s infinite;
-}
-
-.timestudy.infdimstudy {
-    color: #B67F33 !important;
-    border: 1px solid #8b6227 !important;
-    animation: infDimStudyGlowIn 7s infinite;
-}
-
-.timestudy.timedimstudy {
-    color: #B241E3 !important;
-    border: 1px solid #951ec8 !important;
-    animation: timeDimStudyGlowIn 7s infinite;
-}
-
-.timestudy.activestudy {
-    color: #FF0100 !important;
-    border: 1px solid #cc0000 !important;
-    animation: activeStudyGlowIn 7s infinite;
-}
-
-.timestudy.passivestudy {
-    color: #5E33B6 !important;
-    border: 1px solid #4b288f !important;
-    animation: passiveStudyGlowIn 7s infinite;
-}
-
-.timestudy.idlestudy {
-    color: #0080ff !important;
-    border: 1px solid #0066cc !important;
-    animation: idleStudyGlowIn 7s infinite;
-}
-
-.timestudy:hover {
-    color: #DADADA;
-    background: #3A0A57;
-}
-
-.timestudy.normaldimstudy:hover {
-    color: #EEEEEE !important;
-    background: #22aa48 !important;
-}
-
-.timestudy.infdimstudy:hover {
-    color: #EEEEEE !important;
-    background: #B67F33 !important;
-}
-
-.timestudy.timedimstudy:hover {
-    color: #EEEEEE !important;
-    background: #B241E3 !important;
-}
-
-.timestudy.activestudy:hover {
-    color: #EEEEEE !important;
-    background: #FF0100 !important;
-}
-
-.timestudy.passivestudy:hover {
-    color: #EEEEEE !important;
-    background: #5E33B6 !important;
-}
-
-.timestudy.idlestudy:hover {
-    color: #EEEEEE !important;
-    background: #0080ff !important;
-}
-
-.timestudylocked {
-    color: #181818;
-    background: #5F5F5F;
-    font-weight: bold;
-    font-family: Typewriter;
-    border: 1px solid #691fa5;
-    width: 170px;
-    height: 80px;
-    transition-duration: 0.2s;
-    border-radius: 4px;
-    font-size: 0.65rem;
-    vertical-align: top;
-    margin:7px;
-}
-
-.timestudylocked:hover {
-    color: #1D1D1D;
-    background: #660000;
 }
 
 .timestudybought {
@@ -896,13 +772,6 @@
 
 .timetheorembtnlocked:hover {
     background: #652F2F;
-}
-
-#treeimage {
-    padding-top: 160px;
-    position: absolute;
-    padding-left: 70px;
-    z-index: -999;
 }
 
 #loading {
@@ -1064,11 +933,11 @@
 [ach-tooltip]:before {
     position: absolute;
     bottom: 100%;
-    left: 50%;
     margin-bottom: 5px;
-    margin-left: -80px;
-    padding: 7px;
-    width: 160px;
+    margin-left: -60px;
+    padding: 10px;
+    width: 200px;
+    left: 0;
     -webkit-border-radius: 3px;
     -moz-border-radius: 3px;
     border-radius: 3px;
@@ -1390,46 +1259,4 @@ screen and (max-width: 480px) {
         font-size: 12pt;
         color: #444;
     }
-}
-
-@keyframes studyGlowIn {
-    0%  {box-shadow: inset 0px 0px 3px 0px #b341e0;}
-    50% {box-shadow: inset 0px 0px 15px 0px #b341e0;}
-    100%  {box-shadow: inset 0px 0px 3px 0px #b341e0;}
-}
-
-@keyframes normalDimStudyGlowIn {
-    0%  {box-shadow: inset 0px 0px 3px 0px #22aa48;}
-    50% {box-shadow: inset 0px 0px 20px 0px #22aa48;}
-    100%  {box-shadow: inset 0px 0px 3px 0px #22aa48;}
-}
-
-@keyframes infDimStudyGlowIn {
-    0%  {box-shadow: inset 0px 0px 3px 0px #B67F33;}
-    50% {box-shadow: inset 0px 0px 20px 0px #B67F33;}
-    100%  {box-shadow: inset 0px 0px 3px 0px #B67F33;}
-}
-
-@keyframes timeDimStudyGlowIn {
-    0%  {box-shadow: inset 0px 0px 3px 0px #B241E3;}
-    50% {box-shadow: inset 0px 0px 20px 0px #B241E3;}
-    100%  {box-shadow: inset 0px 0px 3px 0px #B241E3;}
-}
-
-@keyframes activeStudyGlowIn {
-    0%  {box-shadow: inset 0px 0px 3px 0px #FF0100;}
-    50% {box-shadow: inset 0px 0px 20px 0px #FF0100;}
-    100%  {box-shadow: inset 0px 0px 3px 0px #FF0100;}
-}
-
-@keyframes passiveStudyGlowIn {
-    0%  {box-shadow: inset 0px 0px 3px 0px #5E33B6;}
-    50% {box-shadow: inset 0px 0px 20px 0px #5E33B6;}
-    100%  {box-shadow: inset 0px 0px 3px 0px #5E33B6;}
-}
-
-@keyframes idleStudyGlowIn {
-    0%  {box-shadow: inset 0px 0px 3px 0px #0080ff;}
-    50% {box-shadow: inset 0px 0px 20px 0px #0080ff;}
-    100%  {box-shadow: inset 0px 0px 3px 0px #0080ff;}
 }
