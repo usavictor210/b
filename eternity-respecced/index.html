@@ -235,7 +235,7 @@
                         <br>
                         TT layout helper, version 2
                         <br><br>
-                        Input numbers below in the text boxes to calculate an optimal Time Study layout.<br>When ready, press "Calculate!" and it will calculate and give the Time Study layout for you in the result.<br>Please do not attempt to break this, you may end up freezing or crashing the page with very large numbers.
+                        Input numbers below in the text boxes to calculate an optimal Time Study layout.<br>When you're ready, press "Calculate!" and it will calculate and give the Time Study layout for you in the result.<br>Please do not attempt to break this, as you may end up freezing or crashing the page with very large numbers.
                         <br><br>
                         <button id="ttSpecButton" class="storebtn" onclick="calculateTTSpec()">Calculate!</button>
                         <br><br>
@@ -243,19 +243,19 @@
                         <br>
                         <td>
                         <div>Exponent of IP</div>
-                        <textarea id="ttIP" placeholder="Type in an exponent, not a number" rows="5" cols="25" style="resize: none;"></textarea>
+                        <textarea id="ttIP" placeholder="Type in an exponent, not a big number." rows="5" cols="25" style="resize: none;"></textarea>
                         <div>Exponent of Time Shards</div>
-                        <textarea id="ttTimeShards" placeholder="Type in an exponent, not a number" rows="5" cols="25" style="resize: none;"></textarea>
+                        <textarea id="ttTimeShards" placeholder="Type in an exponent, not a big number." rows="5" cols="25" style="resize: none;"></textarea>
                         <div>Time Theorems</div>
-                        <textarea id="ttTimeTheorems" placeholder="It is recommended to put in your current time theorem amount" rows="5" cols="25" style="resize: none;"></textarea>
+                        <textarea id="ttTimeTheorems" placeholder="It is recommended to put in your current time theorem amount. For ECs, type in the difference of your TT and the TT cost." rows="5" cols="25" style="resize: none;"></textarea>
                         </td>
                         <td>
                         <div>Time Studies unlocked</div>
-                        <textarea id="ttTimeStudies" placeholder="This will end up being restricted to 4, 6, and 8 time studies" rows="5" cols="25" style="resize: none;"></textarea>
+                        <textarea id="ttTimeStudies" placeholder="This will end up being restricted to 4, 6, and 8 time studies." rows="5" cols="25" style="resize: none;"></textarea>
                         <div>RG power</div>
-                        <textarea id="ttRGPower" placeholder="Enter your RG power" rows="5" cols="25" style="resize: none;"></textarea>
+                        <textarea id="ttRGPower" placeholder="Enter your RG power." rows="5" cols="25" style="resize: none;"></textarea>
                         <div>Seconds in Infinity</div>
-                        <textarea id="ttInfTime" placeholder="Enter expected time in the next Infinity" rows="5" cols="25" style="resize: none;"></textarea>
+                        <textarea id="ttInfTime" placeholder="Enter expected time in the next Infinity." rows="5" cols="25" style="resize: none;"></textarea>
                         </td>
                     </tr>
                 </table>
@@ -325,7 +325,7 @@
                             <button id="ts5" class="eternityttbtn" onclick="buyTimeStudy(5)"><span class="btnspan">Decreasing multiplier to IP (1e5 / seconds in infinity)<br/>Bought: <span id="ts5bought">x</span><br/>Cost: <span id="ts5cost">x</span> TT<br/><span id='ts5desc'></span></span></button>
                         </td>
                         <td>
-                            <button id="ts6" class="eternityttbtn" onclick="buyTimeStudy(6)"><span class="btnspan">Increasing multiplier to IP (seconds in infinity)<br/>Bought: <span id="ts6bought">x</span><br/>Cost: <span id="ts6cost">x</span> TT<br/><span id='ts6desc'></span></span></button>
+                            <button id="ts6" class="eternityttbtn" onclick="buyTimeStudy(6)"><span class="btnspan">Increasing multiplier to IP (seconds in infinity ^ bought amount)<br/>Bought: <span id="ts6bought">x</span><br/>Cost: <span id="ts6cost">x</span> TT<br/><span id='ts6desc'></span></span></button>
                         </td>
                     </tr>
                 </table>
@@ -356,7 +356,7 @@
                     </tr>
                     <tr>
                         <td>
-                            <button id="eter4" class="eternityupbtn" onclick="buyEternityUpgrade(4, 1e6)">Eternity production is boosted by unspent EP (floor(1+log10(EP)/4))<br>Currently: x<br>Cost: x EP</button>
+                            <button id="eter4" class="eternityupbtn" onclick="buyEternityUpgrade(4, 1e6)">Eternity production is boosted by unspent EP (floor(1 + log10(EP) / 4))<br>Currently: x<br>Cost: x EP</button>
                         </td>
                         <td>
                             <button id="eter5" class="eternityupbtn" onclick="buyEternityUpgrade(5, 1e9)">Timeshard production is boosted by eternities (1+eternities)<br>Currently: x<br>Cost: x EP</button>
@@ -1811,7 +1811,7 @@
                                 </div>
                                 <button id="eterc1unlockbtn" class="challengesbtn" onclick="attemptEterChallUnlock(1)">Unlock</button>
                                 <div id="eterc1conditionsdiv" style="display: none;">
-                                  <span>Time dimensions are disabled.</span>
+                                  <span>Time Dimensions are disabled.</span>
                                 </div>
                                 <button id="eterc1" class="challengesbtn" onclick="startEternityChallenge(1)">Start</button>
                                 <div id="eterc1goaldiv" style="display: none;">
@@ -1827,7 +1827,7 @@
                               <span id="ec2completions">Completed x times.</span>
                               <br/>
                               <div id="eterc2costdiv">
-                                <span>Requires <span id="ec2cost">y</span> tickspeed upgrades from time dimensions.</span>
+                                <span>Requires <span id="ec2cost">y</span> free tickspeed upgrades from Time Dimensions.</span>
                                 <br/>
                                 <span>Costs 40 time theorems.</span>
                               </div>
@@ -1838,7 +1838,7 @@
                               <button id="eterc2" class="challengesbtn" onclick="startEternityChallenge(2)">Start</button>
                               <div id="eterc2goaldiv" style="display: none;">
                                 <span id="ec2goal">Goal: z</span><br>
-                                <span>Reward: Infinity power affects time dimensions. Currently: <span id="ec2reward">reward</span>.</span>
+                                <span>Reward: Infinity power affects Time Dimensions. Currently: <span id="ec2reward">reward</span>.</span>
                               </div>
                             </div>
                         </td>
@@ -1851,13 +1851,13 @@
                               <span id="ec3completions">Completed x times.</span>
                               <br/>
                               <div id="eterc3costdiv">
-                                <span>Requires <span id="ec3cost">y</span> eighth dimensions.</span>
+                                <span>Requires <span id="ec3cost">y</span> Eighth Normal Dimensions.</span>
                                 <br/>
                                 <span>Costs 50 time theorems.</span>
                               </div>
                               <button id="eterc3unlockbtn" class="challengesbtn" onclick="attemptEterChallUnlock(3)">Unlock</button>
                               <div id="eterc3conditionsdiv" style="display: none;">
-                                <span>Dimensions 5-8 don't produce anything. Dimensional Sacrifice is disabled.</span>
+                                <span>Normal Dimensions 5-8 don't produce anything. Dimensional Sacrifice is disabled.</span>
                               </div>
                               <button id="eterc3" class="challengesbtn" onclick="startEternityChallenge(3)">Start</button>
                               <div id="eterc3goaldiv" style="display: none;">
@@ -1873,7 +1873,7 @@
                               <span id="ec4completions">Completed x times.</span>
                               <br/>
                               <div id="eterc4costdiv">
-                                <span>Requires <span id="ec4cost">y</span> infinities.</span>
+                                <span>Requires <span id="ec4cost">y</span> Infinities.</span>
                                 <br/>
                                 <span>Costs 60 time theorems.</span>
                               </div>
@@ -1905,12 +1905,12 @@
                               </div>
                               <button id="eterc5unlockbtn" class="challengesbtn" onclick="attemptEterChallUnlock(5)">Unlock</button>
                               <div id="eterc5conditionsdiv" style="display: none;">
-                                <span>Galaxy costs are quadratic in eighth dimensions, rather than linear.</span>
+                                <span>Galaxy costs are quadratic in Eighth Normal Dimensions, rather than linear.</span>
                               </div>
                               <button id="eterc5" class="challengesbtn" onclick="startEternityChallenge(5)">Start</button>
                               <div id="eterc5goaldiv" style="display: none;">
                                 <span id="ec5goal">Goal: z</span><br>
-                                <span>Reward: Tickspeed upgrades are stronger based on galaxies. Currently: <span id="ec5reward">reward</span>.</span>
+                                <span>Reward: Tickspeed upgrades are stronger based on your galaxies. Currently: <span id="ec5reward">reward</span>.</span>
                               </div>
                         </td>
                         <td>
@@ -1966,7 +1966,7 @@
                               <span id="ec8completions">Completed x times.</span>
                               <br/>
                               <div id="eterc8costdiv">
-                                <span>Requires <span id="ec8cost">y</span> infinity points.</span>
+                                <span>Requires <span id="ec8cost">y</span> Infinity points.</span>
                                 <br/>
                                 <span>Costs 1500 time theorems.</span>
                               </div>
@@ -1990,7 +1990,7 @@
                               <span id="ec9completions">Completed x times.</span>
                               <br/>
                               <div id="eterc9costdiv">
-                                <span>Requires <span id="ec9cost">y</span> infinity power.</span>
+                                <span>Requires <span id="ec9cost">y</span> Infinity Power.</span>
                                 <br/>
                                 <span>Costs 200 time theorems.</span>
                               </div>
@@ -2012,7 +2012,7 @@
                               <span id="ec10completions">Completed x times.</span>
                               <br/>
                               <div id="eterc10costdiv">
-                                <span>Requires <span id="ec10cost">y</span> eternity points.</span>
+                                <span>Requires <span id="ec10cost">y</span> Eternity points.</span>
                                 <br/>
                                 <span>Costs 240 time theorems.</span>
                               </div>
@@ -2023,7 +2023,7 @@
                               <button id="eterc10" class="challengesbtn" onclick="startEternityChallenge(10)">Start</button>
                               <div id="eterc10goaldiv" style="display: none;">
                                 <span id="ec10goal">Goal: z</span><br>
-                                <span>Reward: Normal Dimensions gain a multiplier based on your infinities. Currently: <span id="ec10reward">reward<span>.</span>
+                                <span>Reward: Normal Dimensions gain a multiplier based on your Infinities. Currently: <span id="ec10reward">reward<span>.</span>
                               </div>
                             </div>
                         </td>
@@ -2036,7 +2036,7 @@
                               <span id="ec11completions">Completed x times.</span>
                               <br/>
                               <div id="eterc11costdiv">
-                                <span>Requires <span id="ec11cost">y</span> first dimension multiplier.</span>
+                                <span>Requires <span id="ec11cost">y</span>x First Normal Dimension multiplier.</span>
                                 <br/>
                                 <span>Costs 300 time theorems.</span>
                               </div>
@@ -2058,7 +2058,7 @@
                               <span id="ec12completions">Completed x times.</span>
                               <br/>
                               <div id="eterc12costdiv">
-                                <span>Requires <span id="ec12cost">y</span> timeshards.</span>
+                                <span>Requires <span id="ec12cost">y</span> Time Shards.</span>
                                 <br/>
                                 <span>Costs 400 time theorems.</span>
                               </div>
