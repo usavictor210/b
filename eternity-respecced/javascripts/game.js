@@ -869,8 +869,16 @@ function onLoad() {
 		player.peaks.gp = {
 			perMin: new Decimal(0),
 			total: new Decimal(0)
-		}
-	}
+    }
+    if (player.eternityChallenges.ec8 === undefined) {
+      player.eternityChallenges.ec8 = {
+        purchases: {
+          id: 0,
+          repl: 0
+        }
+      }
+    }
+  }
 
     if (player.infinityDimension5 === undefined) {
         player.infDimensionsUnlocked.push(false)
@@ -6917,7 +6925,7 @@ function intergalaxy(force) {
             },
             timeDimBuyers: player.timeDimBuyers,
             eternityPoints: new Decimal(0),
-            eternities: player.eternities,
+            eternities: 1,
             thisEternity: 0,
             bestEternity: 999999999,
             eternityUpgrades: [],
