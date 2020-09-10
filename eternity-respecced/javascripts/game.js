@@ -2583,6 +2583,7 @@ function buyWithAntimatter() {
         player.timestudy.theorem += 1
         updateTheoremButtons()
         updateTimeStudyButtons()
+        updateTTAchievements()
         return true;
     } else {
         return false;
@@ -2596,6 +2597,7 @@ function buyWithIP() {
         player.timestudy.theorem += 1
         updateTheoremButtons()
         updateTimeStudyButtons()
+        updateTTAchievements()
         return true;
     } else {
         return false;
@@ -2627,6 +2629,7 @@ function buyWithEP() {
         player.timestudy.theorem += 1
         updateTheoremButtons()
         updateTimeStudyButtons()
+        updateTTAchievements()
         return true;
     } else {
         return false;
@@ -2641,6 +2644,7 @@ function buyMaxWithAntimatter () {
         player.timestudy.theorem += buy.amount;
         updateTheoremButtons()
         updateTimeStudyButtons()
+        updateTTAchievements()
         return true;
     } else {
         return false;
@@ -2655,6 +2659,7 @@ function buyMaxWithIP () {
         player.timestudy.theorem += buy.amount;
         updateTheoremButtons()
         updateTimeStudyButtons()
+        updateTTAchievements()
         return true;
     } else {
         return false;
@@ -2672,6 +2677,7 @@ function buyMaxWithEP () {
         player.timestudy.theorem += buy.amount;
         updateTheoremButtons()
         updateTimeStudyButtons()
+        updateTTAchievements()
         return true;
     } else {
         return false;
@@ -2710,6 +2716,13 @@ function updateTheoremButtons() {
             }
         }
     }
+}
+
+function updateTTAchievements () {
+  // "Now actually go study" is already handled.
+  if (getTotalTT() >= 30008) {
+      giveAchievement("Can you get infinite TT?");
+  }
 }
 
 function buyTimeStudy(num) {
@@ -3389,10 +3402,6 @@ function clearOldAchieves(){
     for (var i = 0; i < toRemove.length; i++) {
       player.achievements.splice(toRemove[i], 1);
     }
-
-
-
-
 }
 
 function setReplicantiNewGalaxyStrength () {
@@ -5340,6 +5349,8 @@ function setAchieveTooltip() {
     let layer = document.getElementById("But I wanted another prestige layer...")
     let infstuff = document.getElementById("I never liked this infinity stuff anyway")
     let fkoff = document.getElementById("What do I have to do to get rid of you")
+    let speed3 = document.getElementById("At the speed of light")
+    let riddle = document.getElementById("This thing all things devours")
     let decimal = document.getElementById("I forgot to make it Decimal")
     let goaway = document.getElementById("This is what I have to do to get rid of you.")
     let bendtime = document.getElementById("Yeah you definitely bend time")
@@ -5369,6 +5380,8 @@ function setAchieveTooltip() {
     layer.setAttribute('ach-tooltip', "Reach "+shortenMoney(Number.MAX_VALUE)+" EP. Reward: Time Dimensions gain a multiplier based on EP.")
     infstuff.setAttribute('ach-tooltip', "Reach "+shortenCosts(new Decimal("1e14000"))+" IP without buying IDs or IP multipliers. Reward: Gain a multiplier to IP based on Infinity Power.")
     fkoff.setAttribute('ach-tooltip', "Reach "+shortenCosts(new Decimal("1e66600"))+" IP without any time studies. Reward: Time Dimensions gain a multiplier based on the total number of Time Theorems bought.")
+    speed3.setAttribute('ach-tooltip', "Get "+shortenCosts(new Decimal("1e2000"))+" EP in under 20 seconds in an eternity. Reward: Your EP gain is multiplied by the number of seconds spent in this Eternity.")
+    riddle.setAttribute('ach-tooltip', "Get "+shortenCosts(new Decimal("1e10000"))+" ticks per second without buying any dimensions in the current eternity. Reward: Time Dimensions gain a multiplier based on your Eighth Dimension amount.")
     decimal.setAttribute('ach-tooltip', `Get ${shortenCosts(new Decimal.pow(2, 2074))} tickspeed decrease per upgrade. Reward: Tickspeed decrease per upgrade is doubled.`)
     bendtime.setAttribute('ach-tooltip', `Get ${shortenCosts(new Decimal("1e1000"))} tickspeed decrease per upgrade. Reward: Tickspeed decrease per upgrade is stronger based on tickspeed.`)
     goaway.setAttribute('ach-tooltip', "Reach "+shortenCosts(new Decimal.pow(2, Decimal.pow(2, 48)))+" IP without any time studies, galactic studies, or eternity challenge completions. Reward: Time Dimensions gain a multiplier based on the total number of Galactic Theorems bought. (NOT POSSIBLE YET)")
@@ -6368,6 +6381,8 @@ function eternity(force, enteringChallenge) {
           // This .toFixed(0) is, it seems, just what is done in display.
           // the lt 100 is for avoiding memory issues.
           if (player.replicanti.amount.lt(100) && player.replicanti.amount.toFixed(0) === '9') giveAchievement("We could afford 9");
+          if (gainedEternityPoints().gte(new Decimal("1e2000")) && player.thisEternity <= 200) giveAchievement("At the speed of light")
+          
           player.infinityPoints = player.infinityPoints.add(gainedInfinityPoints())
           player.eternityPoints = player.eternityPoints.plus(gainedEternityPoints())
           addEternityTime(player.thisEternity, gainedEternityPoints())
@@ -7009,6 +7024,7 @@ function intergalaxy(force) {
         if (player.respec) respecTimeStudies()
         player.respec = false
         if (!force) {
+          if (player)
           giveAchievement("The void")
         }
         if (player.replicanti.unl) player.replicanti.amount = new Decimal(1);
@@ -7547,6 +7563,8 @@ setInterval(function() {
         player.infinityPoints.gte(new Decimal("1e14000"))) {
         giveAchievement("I never liked this infinity stuff anyway")
     }
+
+    updateTTAchievements() // despite it being called in the time theorem purchase buttons i need to make it reward achievements anyway.
 
     // here we actually want infinitied, so not banked
     setPrestigePointDisplay();
