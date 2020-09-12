@@ -8827,6 +8827,9 @@ function init() {
     document.getElementById("eternitystorebtn").onclick = function () {
         showTab('eternitystore')
     }
+    document.getElementById("intergalacticstorebtn").onclick = function () {
+      showTab('intergalacticstore')
+  }
     document.getElementById("cheatbtn").onclick = function () {
         showTab('cheat')
     }
