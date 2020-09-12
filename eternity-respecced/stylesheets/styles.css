@@ -911,6 +911,55 @@
     font-size: 20px;
 }
 
+.galacticupbtn {
+    color: #e0be00d6;
+    background: black;
+    font-weight: bold;
+    font-size: 10px;
+    border: 1px solid #e0be00d6;
+    width: 210px;
+    height: 100px;
+    transition-duration: 0.2s;
+    cursor: pointer;
+    border-radius: 4px;
+    font-family: Typewriter;
+}
+
+.galacticupbtn:hover {
+    color: #511568;
+    background: white;
+}
+
+.galacticupbtnlocked {
+    color: #181818;
+    background: #5F5F5F;
+    font-weight: bold;
+    font-size: 10px;
+    border: 1px solid #e0be00d6;
+    width: 210px;
+    height: 100px;
+    transition-duration: 0.2s;
+    border-radius: 4px;
+    font-family: Typewriter;
+}
+
+.galacticupbtnlocked:hover {
+    background: #737373;
+}
+
+.galacticupbtnbought {
+    color: #511568;
+    background: #5AC467;
+    font-weight: bold;
+    font-size: 10px;
+    border: 1px solid #e0be00d6;
+    width: 210px;
+    height: 100px;
+    transition-duration: 0.2s;
+    border-radius: 4px;
+    font-family: Typewriter;
+}
+
 @keyframes glow {
     20% { text-shadow: 0 0 10px green; }
     100% { text-shadow: 0 0 10px white; }

@@ -1834,13 +1834,8 @@ function updateDimensions() {
     } else {
       dimType = 'Eighth';
     }
-    let galCount;
-    if (player.replicanti.galaxies > 0) {
-      galCount = player.galaxies + ' + ' + player.replicanti.galaxies;
-    } else {
-      galCount = player.galaxies;
-    }
-    document.getElementById("secondResetLabel").innerHTML = 'Antimatter Galaxies (' + galCount + '): Requires ' + getGalaxyRequirement() + ' ' + dimType + ' Dimensions';
+
+    document.getElementById("secondResetLabel").innerHTML = 'Antimatter Galaxies (' + getGalCount() + '): Requires ' + getGalaxyRequirement() + ' ' + dimType + ' Dimensions';
     document.getElementById("totalmoney").innerHTML = 'You have made a total of ' + shortenMoney(player.totalmoney) + ' antimatter.';
     document.getElementById("totalresets").innerHTML = 'You have performed ' + player.resets + ' Dimension Shifts/Boosts.';
     document.getElementById("galaxies").innerHTML = 'You have ' + Math.round(player.galaxies) + ' Antimatter Galaxies.';
@@ -1924,6 +1919,24 @@ function updateDimensions() {
     checkAllECUnlockStatuses();
 }
 
+function getGalCount() {
+  let galCount;
+  let rgCount = player.replicanti.galaxies
+  let igCount = player.intergalactic.galaxies
+
+  galCount = player.galaxies 
+  
+  if (rgCount > 0) {
+    galCount += " + " + rgCount
+  }
+
+  if (igCount > 0) {
+    galCount += " + " + igCount
+  }
+
+  return galCount
+}
+
 function updateCosts() {
     document.getElementById("first").innerHTML = 'Cost: ' + shortenCosts(player.firstCost);
     document.getElementById("second").innerHTML = 'Cost: ' + shortenCosts(player.secondCost);
@@ -1951,9 +1964,12 @@ function updateCosts() {
     }
 
     for (var i=1; i<=4; i++) {
-
         document.getElementById("timeMax"+i).innerHTML = "Cost: " + shortenDimensions(player["timeDimension"+i].cost) + " EP"
     }
+
+    for (var i=1; i<=4; i++) {
+      document.getElementById("galacticMax"+i).innerHTML = "Cost: " + shortenDimensions(player["intergalactic"]["galacticDimension"+i].cost) + " GP"
+  }
 }
 
 function updateTickSpeed() {
@@ -7104,10 +7120,10 @@ function intergalaxy(force) {
         giveInfPurchaseResets()
         let epPlural = player.eternityPoints.equals(1) ? '' : 's';
         document.getElementById("eternityPoints2").innerHTML = "You have <span class=\"EPAmount2\">"+shortenDimensions(player.eternityPoints)+"</span> Eternity Point" + epPlural + "."
-        document.getElementById("gpAmount2").style.display = "inline-block"
+        document.getElementById("intergalacticPoints2").style.display = "inline-block"
         document.getElementById("intergalacticstorebtn").style.display = "inline-block"
         let gpPlural = player.intergalactic.points.equals(1) ? '' : 's';
-        document.getElementById("gpAmount2").innerHTML = "You have <span class=\"GPAmount2\">" + shortenDimensions(player.intergalactic.points) + "</span> Intergalactic Point" + gpPlural + "."
+        document.getElementById("intergalacticPoints2").innerHTML = "You have <span class=\"GPAmount2\">" + shortenDimensions(player.intergalactic.points) + "</span> Intergalactic Point" + gpPlural + "."
     }
 }
 
@@ -7660,7 +7676,7 @@ setInterval(function() {
     } else document.getElementById("intergalacticstorebtn").style.display = "none"
 
     let gpPlural = player.intergalactic.points.equals(1) ? '' : 's';
-    document.getElementById("gpAmount2").innerHTML = "You have <span class=\"GPAmount2\">"+shortenDimensions(player.intergalactic.points)+"</span> Intergalactic Points" + gpPlural + "."
+    document.getElementById("intergalacticPoints2").innerHTML = "You have <span class=\"GPAmount2\">"+shortenDimensions(player.intergalactic.points)+"</span> Intergalactic Points" + gpPlural + "."
 
     document.getElementById("intergalacticbtn").style.display = getTickSpeedMultiplier().lte(currentIntergalacticRequirement()) ? "inline-block" : "none"
 
@@ -7846,6 +7862,8 @@ function startInterval() {
 
         if (player.eternities > 0) document.getElementById("tdtabbtn").style.display = "inline-block"
 
+        if (player.intergalactic.intergalaxies > 0) document.getElementById("gdtabbtn").style.display = "inline-block"
+
         for (let tier = 1; tier < 9; tier++) {
             if (tier != 8 && player.infDimensionsUnlocked[tier - 1]) player["infinityDimension" + tier].amount = player["infinityDimension" + tier].amount.plus(DimensionProduction(tier + 1).times(diff / 100))
             if (player.infDimensionsUnlocked[tier - 1]) {
@@ -7984,7 +8002,7 @@ function startInterval() {
               beforeETA = new Date(new Date().getTime() + estimate * 100)
               overallETA = new Date(new Date().getTime() + ((estimate * maxGalGain) * 100))
             } else document.getElementById("replicantiapprox").innerHTML = `You have reached your replicanti galaxy limit.`
-            document.getElementById("replicantiapprox").innerHTML = `It will take approximately ${timeDisplay(estimate)} until you get ${galGainDisplay} replicanti galaxies.<br>(${beforeETA})<br>Time when maxed: ${overallETA} (${player.replicanti.galaxies} / ${player.replicanti.gal} RGs)`;
+            document.getElementById("replicantiapprox").innerHTML = `It will take approximately ${timeDisplay(estimate)} until you get ${galGainDisplay} replicanti galaxies.<br>(${beforeETA})<br>Time when maxed: ${overallETA} (${player.replicanti.galaxies} + ${currentGalGain} / ${player.replicanti.gal} RGs)`;
         } else {
             let estimate = getReplicantiETA();
             let beforeETA = new Date(new Date().getTime() + estimate * 100)
@@ -8031,7 +8049,7 @@ function startInterval() {
           intergalacticButtonEnd = '';
         }
         let gpPlural = gainedIntergalacticPoints().eq(1) ? '' : 's';
-        document.getElementById("intergalacticbtn").innerHTML = eterButtonStart + "<b>Gain " + shortenDimensions(gainedIntergalacticPoints()) + " Intergalactic Point" + gpPlural + ".</b>" + intergalacticButtonEnd;
+        document.getElementById("intergalacticbtn").innerHTML = intergalacticButtonStart + "<b>Gain " + shortenDimensions(gainedIntergalacticPoints()) + " Intergalactic Point" + gpPlural + ".</b>" + intergalacticButtonEnd;
 
 
         updateMoney();
@@ -8050,14 +8068,16 @@ function startInterval() {
 
         if (player.intergalactic.intergalaxies > 0) {
           let gpPlural = gainedIntergalacticPoints().equals(1) ? '' : 's';
-          document.getElementById("gpPoints2").innerHTML = "You have <span class=\"GPAmount2\">"+shortenDimensions(player.intergalactic.points)+"</span> Intergalactic Point" + gpPlural + ".";
+          document.getElementById("intergalacticPoints2").innerHTML = "You have <span class=\"GPAmount2\">"+shortenDimensions(player.intergalactic.points)+"</span> Intergalactic Point" + gpPlural + ".";
         }
 
         updateInfinityDimensions();
         updateInfPower();
         updateTSDescs();
         updateTimeDimensions()
+        updateGalacticDimensions()
         updateTimeShards()
+        updateIntergalacticGalaxies()
         if (getAntimatterPerSecond().gt(player.money)) {
           if (player.money.gt(Math.pow(10,63)) && !player.achievements.includes("r42")) {
             giveAchievement("Supersanic");
@@ -8095,8 +8115,10 @@ function startInterval() {
             else document.getElementById("timeMax"+tier).className = "unavailablebtn"
         }
 
-
-
+        for (var tier = 1; tier < 5; tier++) {
+          if (player.eternityPoints.gte(player["intergalactic"]["galacticDimension"+tier].cost)) document.getElementById("galacticMax"+tier).className = "storebtn"
+          else document.getElementById("galacticMax"+tier).className = "unavailablebtn"
+      }
 
         if (canAfford(player.tickSpeedCost)) {
             document.getElementById("tickSpeed").className = 'storebtn';

@@ -496,7 +496,8 @@
                 <tr>
                     <td><button class="secondarytabbtn" onclick="showDimTab('antimatterdimensions')">Dimensions</button><td>
                     <td><button class="secondarytabbtn" onclick="showDimTab('infinitydimensions')">Infinity Dimensions</button><td>
-                    <td><button id="tdtabbtn"class="secondarytabbtn"  style="display: none" onclick="showDimTab('timedimensions')">Time Dimensions</button><td>
+                    <td><button id="tdtabbtn" class="secondarytabbtn" style="display: none" onclick="showDimTab('timedimensions')">Time Dimensions</button><td>
+                    <td><button id="gdtabbtn" class="secondarytabbtn" style="display: none" onclick="showDimTab('galacticdimensions')">Galactic Dimensions</button><td></td>
                 </tr>
             </table>
             <div id="antimatterdimensions" class="dimtab">
@@ -641,7 +642,7 @@
                     </tr>
                 </table>
                 <button id="quickReset" style="color:black; width: 200px; height: 50px; font-size: 12px; display: none" class="storebtn">Lose a reset, returning to the start of the reset</button>
-				<span class="IGP" id="intergalacticPoints2">You have <span id="gpAmount2"><b>0</b></span> intergalactic points.</span><br><br>
+				<span class="IGP" id="intergalacticPoints2"><span class="gpAmount2"><b>0</b></span></span><br><br>
 				<button id="intergalacticbtn" class="intergalacticbtn" onclick="intergalaxy()">The stars are too bright... I need to go intergalactic.</button>
             </div>
             <div id="infinitydimensions" class="dimtab">
@@ -824,7 +825,7 @@
             <div id="galacticdimensions" class="dimtab">
                     <div>
                         <p id="totalgalaxiesgained">You've gained 0 intergalactic galaxies.</p>
-                            <p>You have <span id="galacticPowerAmount" style="font-size:35px; color: black">0</span> intergalactic galaxies. Next intergalactic galaxy at <span id="galaxyThreshold" style="font-size:35px; color: black">0</span></p>
+                            <p>You have <span id="galacticPowerAmount" style="font-size:35px; color: black">0</span> Galactic Power. The next intergalactic galaxy is at <span id="galaxyThreshold" style="font-size:35px; color: black">0</span>.</p>
                         </div>
 
                         <div id="galacticPowerPerSec">You are getting 0 Galactic Power per second.</div>
