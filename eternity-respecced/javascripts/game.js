@@ -8378,9 +8378,9 @@ function startInterval() {
 
         document.getElementById("sacrifice").setAttribute('ach-tooltip', "Boost the 8th Dimension by " + formatValue(player.options.notation, calcSacrificeBoost(), 2, 2) + "x");
 
-        document.getElementById("sacrifice").innerHTML = "Dimensional Sacrifice ("+formatValue(player.options.notation, calcSacrificeBoost(), 2, 2)+"x)";
+        document.getElementById("sacrifice").innerHTML = "Dimensional Sacrifice (" + formatValue(player.options.notation, calcSacrificeBoost(), 2, 2) + "x)";
 
-        player.infinityPoints = player.infinityPoints.plus(gainedInfinityPoints().times(diff/1000).times(getTSBenefit(7, player.timestudy.studies[7])))
+        player.infinityPoints = player.infinityPoints.plus(gainedInfinityPoints().times(diff / 1000).times(getTSBenefit(7, player.timestudy.studies[7])))
 
         if (player.firstPow >= 10e30) giveAchievement("I forgot to nerf that")
         if (player.money >= 10e79) giveAchievement("Antimatter Apocalypse")
@@ -8589,13 +8589,16 @@ var newsArray = ["You just made your 1,000,000,000,000,000 antimatter. This one 
 "Technically speaking, your intergalactic galaxies are actually just lonely galaxies. An intergalactic galaxy is still a contradiction in terms, but \"lonely galaxy\" sounds like there was a cost increase or something so I couldn't use it.",
 "The hardest part of the intergalactic update was finding somewhere to put the \"Go intergalactic\" button. Not to say that the rest was easy, but that was the hardest part.",
 "If you haven't unlocked antipichus yet, you're playing the game wrong. How in the world are you supposed to finish this two-hour long game in any reasonable amount of time without figuring out antipichus? I guess it might be possible if you're the type of crazy person willing to spend weeks or even months on the game, but I doubt it.",
-"These jokes are getting old, what are antipichus even for", "Some of this game's code is ridiculously outdated", "It's about time we should port this to Aarex's site", "The early Eternity era should be better to get through in the update, if not, it's a lack of something something I don't know", "Hey, you're still here?"]
+"These jokes are getting old, what are antipichus even for", "Some of this game's code is ridiculously outdated", "It's about time we should port this to Aarex's site", "The early Eternity era should be better to get through in the update, if not, it's a lack of something something I don't know", "Hey, you're still here?", "This is you from the future, say hi for me later",
+"Hundreds of thousands of news tickers later, there aren't anything left to look at and understand. We've seen it all.", "dan-simon would be proud", "Please insert 5 antimatter", "Wait, if the Reality update changes the tick interval display completely, doesn't that mess with the Intergalactic requirement?",
+"You are antimatter. You are matter. You are red matter. You are blue matter. You are yellow matter. You are rainbow matter. You are you. You just happen to be matter. Matter.", "This is stupid, I'm going home",
+"Aarex this is not Prestige Tree", "Imagine playing on True Blind, we got Custom Notation", "If after all this time you are still reading this, geez, do something else please."]
 
 
 var conditionalNewsArray = ["Our universe is falling apart. We are all evacuating. This is the last news cast", "THIS NEWS STATION HAS SHUT DOWN DUE TO COLLAPSING UNIVERSE",
 "Researchers have confirmed that there is another dimension to this world. However, only antimatter beings can interact with it.",
 "Studies show a massive problem with the time-space continuum. In other words, a large amount of antimatter has dissapeared from the cosmos",
-"Should we call antimatter Matter now? There seems to be more of it.", "Oh no. The news is now accessing more weird and probably lame news tickers! It's really dumb, who designed this?",
+"Should we call antimatter Matter now? There seems to be more of it.", "Oh no. The news is now accessing more weird and lame news tickers! It's really dumb, who designed this?",
 "I would really like to make a matter joke here but the last 100 or so came off bland.", "Dang it, I'm probably seeing things...", "Remind usavictor to update the news tickers"]
 
 var cheatCodeNewsArray = [
