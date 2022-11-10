@@ -748,7 +748,7 @@ function updateNewsArray() {
     ["Whale complains that the game broke.", true, "s5"],
     ["Whale complains that their buying isn't doing anything.", true, "s6"],
     
-    // respecced news tickers, but they're better...
+    // respecced news tickers - i am attempting to change this now
     ["You exist. I exist.", true, "respecced1"],
     [
       "In another alternate universe, NG+2 Respecced is the most popular mod, but I think that's just me daydreaming.",
@@ -882,7 +882,7 @@ function updateNewsArray() {
       "respecced36"
     ],
     [
-      "This ticker will be replaced in a future update",
+      "This ticker will be replaced in a future update. I don't know what to do with it.",
       'player.eternityPoints.gte(new Decimal("1e1300"))',
       "respecced37"
     ],
@@ -931,7 +931,7 @@ function updateNewsArray() {
       "respecced47"
     ],
     [
-      "",
+      "The metaverse ain't got anything on these dimensions",
       "player.dilation.studies.includes(6)",
       "respecced48"
     ],
@@ -1026,12 +1026,12 @@ function updateNewsArray() {
       "respecced66"
     ],
     [
-      "Tree of Decay isn't a upgrade tree, I have been lied to.",
+      "Tree of Decay isn't a upgrade tree. I have been lied to.",
       "player.dilation.studies.includes(6)",
       "respecced67"
     ],
     ["Who keeps breaking the news tickers?!?", true, "respecced68"],
-    ["Noice.", true, "respecced69"], // Nic- dang it this is getting old...
+    ["Noice.", true, "respecced69"], // Nice, I guess.
     [
       '"I think he became depressed after he realized that Antimatter Dimensions is real." ~ Aarex, 2020',
       'player.newsArray.includes("respecced56")',
@@ -1113,7 +1113,7 @@ function updateNewsArray() {
       "respecced88"
     ],
     [
-      "Aarex is gonna be mad because we're making another mod of NG+2, but who fucking cares",
+      "Aarex is gonna be mad because we're making another mod of NG+2, but who fucking cares", // he probably won't care honestly...
       true,
       "respecced89"
     ],
@@ -1124,6 +1124,7 @@ function updateNewsArray() {
       true,
       "respecced92"
     ],
+    // unstable dilation may no longer exist
     [
       "Don't worry, we'll unlock Ultra Dilation in -6 minutes",
       "player.dilation.unstable.times >= 1",
@@ -1162,7 +1163,7 @@ function updateNewsArray() {
       "respecced100"
     ],
     [
-      "This message's contents will only be viewable if you buy the News Ticker DLC. Sorry!",
+      "This message's contents will only be viewable if you buy the News Ticker DLC for only $39.99. Sorry!",
       true,
       "respecced101"
     ],
@@ -1214,10 +1215,10 @@ function updateNewsArray() {
     ], // happens if quantums somehow break something
     [
       "Florida man survived idol hell, but can never forget the past again. Everyone is relieved of the incident. ...well, not everyone, the only thing that might be very annoyed is the things in hell itself.",
-      'player.newsArray.includes("respecced33")',
+      false,
       "respcecced116"
     ],
-    ["The power of the eternal studies surpasses all others. They're mastery studies, but they're better, as far as we know.", 'player.timestudy.studies.includes(241) || player.timestudy.studies.includes(242)', "respecced117"],
+    ["Eternal studies are lackluster to be honest. I don't think I want them anymore.", 'player.timestudy.studies.includes(241) || player.timestudy.studies.includes(242)', "respecced117"],
     ["The glitch is glitching now. That's not good. Everything is falling apart!", true, "respecced118"],
     ["Time goes over infinity? I thought we would've died from the heat death by then and never reached infinity seconds! Eh, whatever, who tracks the time anyway...", true, "respecced119"],
     ["Thanos is going to be super disappointed when he has a full infinity gauntlet and Hevi has a full eternity gauntlet, but Hevi is going to be super disappointed too because he has a full eternity gauntlet and Aarex has a...  Wait, who is the owner of the quantum gauntlet? Usavictor? Despacit? Aarex? Who knows. Anyways, Hevi is upgrading his eternity gauntlet, named the Reality gauntlet, and it is expected to be stronger than the full power Quantum gauntlet. It is unknown who will have the upper hand. Will it be the man who creates the meaning of reality, or the man who is elaborate in the cosmos?", 'player.quantum.times != 0 && player.newsArray.includes("b23")', "respecced120"],
@@ -1229,7 +1230,7 @@ function updateNewsArray() {
     ["what's the deal with investment", 'player.quantum.times > 0', "respecced126"],
     ["In AD 2101, war was beginning. *explosion* What happen? Someone set up us the bomb. We get signal. What! Main screen turn on. It's you!! How are you gentlemen!! All your antimatter are belong to us. You are on the way to destruction. What you say!! You have no chance to survive make your time. Ha ha ha ha... Captain!! Take off every \"dimension\"! You know what you doing. Move \"dimensions\". For great justice.", 'player.newsArray.length > 250', "respecced127"],
     ["happy birthday despacit", '(new Date().getMonth() == 5 && new Date().getDate() == 12)', "respecced128"],
-    ["Pounding into straw Pounding into straw Pounding into straw five-inch, five-inch, five-inch nails!", '!player.break', "respecced129"],
+    ["Pounding into straw Pounding into straw Pounding into straw five-inch, five-inch, five-inch nails!", '!player.break', "respecced129"], // the heck is this and why does this exist
     ["Antimatter is known to create annoying bullet patterns and ruin people's 1cc attempts, violating the rules of spell cards.", 'player.newsArray.includes("respecced132")', "respecced130"],
     ["Aren't you bored or something?", 'player.totalTimePlayed >= 600*3000', "respecced131"], // 50 hours
     ["Kirby begins to devour the universe and turn into Hypernova Kirby.", "player.newsArray.includes('r134')", "respecced132"],
