@@ -235,7 +235,7 @@ function updateNewsArray() {
       true,
       "a80"
     ],
-    ["Chaos isnt a pit, chaos is a matter", true, "a81"],
+    ["Chaos isn't a pit, chaos is a matter", true, "a81"],
     [
       "That's because I'm a good game developer and pushed some code that totally works -hevipelle",
       true,
