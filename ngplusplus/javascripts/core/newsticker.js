@@ -747,16 +747,17 @@ function updateNewsArray() {
     ["Whale is bad at making smart purchases.", true, "s4"],
     ["Whale complains that the game broke.", true, "s5"],
     ["Whale complains that their buying isn't doing anything.", true, "s6"],
-    // respecced news tickers
+    
+    // respecced news tickers, but they're better...
     ["You exist. I exist.", true, "respecced1"],
     [
-      "In another alternate universe, NG+2 Respecced is the most popular mod",
+      "In another alternate universe, NG+2 Respecced is the most popular mod, but I think that's just me daydreaming.",
       true,
       "respecced2"
     ],
     ["Who am I? Oh wait, I'm just the news ticker.", true, "respecced3"],
     [
-      "Something's wrong here, the place is devoid of onions",
+      "Something's wrong here, the place is devoid of onions. Who dun it? Find out on tonight's blockbuster!",
       true,
       "respecced4"
     ],
@@ -786,7 +787,7 @@ function updateNewsArray() {
       "respecced13"
     ],
     [
-      "Quantum doesn't exist yet... wait, people are already going quantum? What?",
+      "Quantum exists. We just haven't finished it yet.",
       true,
       "respecced14"
     ],
@@ -800,7 +801,7 @@ function updateNewsArray() {
       "player.totalmoney.e > 1e9",
       "respecced16"
     ],
-    ["You cannot halate snow.", true, "respecced17"],
+    ["The writers have a feeling they've become too self-aware when they wrote these tickers.", true, "respecced17"],
     [
       "A news ticker has just been declared dead! It doesn't provide any purpose.",
       true,
@@ -824,7 +825,7 @@ function updateNewsArray() {
     ["I'm so meta", true, "respecced22"],
     ["I'm blue, da ba dee", true, "respecced23"],
     [
-      "From the mountains rises a new type of hill, called THE HILL. It's my hill. Uh... somebody just showed up and said they're going to live here. I guess it's their hill now... or is it?",
+      "Tonight on the Evening News: Civil war has broke out on the hill. People say it's just petty fighting... but who is behind it?",
       true,
       "respecced24"
     ],
@@ -834,19 +835,19 @@ function updateNewsArray() {
       "respecced25"
     ],
     [
-      "One small step for antimatter, one giant leap for antimatterkind",
+      "One small step for antimatter, one giant leap for antimatterkind.",
       "player.quantum.times > 0",
       "respecced26"
     ],
-    ["How it feels to chew 5 Gum", "player.dilation.active", "respecced27"],
+    ["This is how it feels to chew 5 Gum. Maybe.", "player.dilation.active", "respecced27"],
     [
       "A man has fallen into the 9th dimension in Antimatter City! Start the new big crunch! Hey! Build the big crunch and off to the rescue. Prepare the crunch, wipe the 9th dimension and make the rescue. The new big crunch collection from Antimatter Dimensions",
       "player.infinitied.gt(0)",
       "respecced28"
     ],
-    ["5 hours left till the next UA:RP update", true, "respecced29"],
+    ["UA:RP? No, you must be mistaken.", true, "respecced29"],
     [
-      "No, no it isn't AD with 10 dimensions! Shut up, stop it-",
+      "No, no! It isn't AD with 10 dimensions! Shut up, stop it-",
       true,
       "respecced30"
     ],
@@ -857,7 +858,7 @@ function updateNewsArray() {
       "respeccced32"
     ],
     [
-      "Florida man goes to idol hell, is never heard of again",
+      "Florida man has been spotted stealing the secret formula.",
       true,
       "respecced33"
     ],
@@ -881,12 +882,12 @@ function updateNewsArray() {
       "respecced36"
     ],
     [
-      "We've heard that dilation seems very boring. Our scientists are changing that. It might turn too unstable soon, so watch out for some weird quirks.",
+      "This ticker will be replaced in a future update",
       'player.eternityPoints.gte(new Decimal("1e1300"))',
       "respecced37"
     ],
     [
-      "An infinite clock has been found near the end of universe #6,210,322. It seems it just repeats the time over and over again, however that works.",
+      "An infinite clock has been found near the end of universe #6,210,322. It often makes figure eights with its hands. Weird.",
       true,
       "respecced38"
     ],
@@ -911,7 +912,7 @@ function updateNewsArray() {
       true,
       "respecced43"
     ],
-    ["Qqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqq", true, "respecced44"],
+    ["Qqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqq", true, "respecced44"], // fun fact: this is probably
     // and now a sponsor from our old friend AD redux
     [
       "Zoinks, scoobs! The antimatter is heading straight towards us!",
@@ -925,12 +926,12 @@ function updateNewsArray() {
     ],
     // oh wait, nevermind. RESPECCED PART 2
     [
-      "Are meta dimensions really that meta?",
+      "Are meta dimensions really that meta? Do we just make up these new terms just to sound smart?",
       "player.dilation.studies.includes(6)",
       "respecced47"
     ],
     [
-      "blah blah blah meta dimensions blah blah blah",
+      "",
       "player.dilation.studies.includes(6)",
       "respecced48"
     ],
@@ -985,7 +986,7 @@ function updateNewsArray() {
       "respecced58"
     ],
     [
-      "Breaking news: Hevipelle has stopped accepting new news. Suggest all news tickers to usavictor instead",
+      "Breaking news: Hevipelle has stopped accepting new news. Suggest all news tickers to usavictor instead. (Actually, I don't know anymore)",
       true,
       "respecced59"
     ],
@@ -1015,7 +1016,7 @@ function updateNewsArray() {
       "respecced64"
     ],
     [
-      "Someone keeps sacrificing my replicants to the void. DAMN IT NOT AGAIN.",
+      "Someone keeps sacrificing my replicants to the void... DAMN IT, NOT AGAIN!",
       "player.dilation.studies.includes(6)",
       "respecced65"
     ],
