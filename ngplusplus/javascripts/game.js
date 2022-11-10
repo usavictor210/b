@@ -5206,6 +5206,7 @@ setInterval(function() {
     player.dilation.active &&
     player.galaxies == 1 &&
     player.dilation.rebuyables[2] == 0 &&
+    !(player.timestudy.studies.includes(241) || player.timestudy.studies.includes(242)) &&
     player.replicanti.galaxies == 0
   )
     giveAchievement("Deeper Sanctum");
