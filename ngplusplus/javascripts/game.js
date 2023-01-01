@@ -657,13 +657,6 @@ function updateCoinPerSec() {
   }
 }
 
-function getInfinitied() {
-  return Decimal.max(
-    new Decimal(player.infinitied).add(player.infinitiedBank),
-    0
-  );
-}
-
 function getGalaxyCostScalingStart() {
   var n = 100 + eterChallReward(5);
   if (player.timestudy.studies.includes(223)) n += 7;
@@ -1174,13 +1167,13 @@ function updateDimensions() {
       shortenCosts(1e50) +
       " EP";
     document.getElementById("eter7").innerHTML =
-      "Dilated time gain is boosted by antimatter<br>Currently: " +
+      "Dilated Time gain is boosted by Antimatter.<br>Currently: " +
       (1 + Math.log10(Math.max(1, player.money.log(10))) / 30).toFixed(3) +
       "x<br>Cost: " +
       shortenCosts(new Decimal("1e1500")) +
       " EP";
     document.getElementById("eter8").innerHTML =
-      "Dilated time gain is boosted by infinity points<br>Currently: " +
+      "Dilated Time gain is boosted by Infinity Points.<br>Currently: " +
       (
         1 +
         Math.log10(Math.max(1, player.infinityPoints.add(1).log(16))) / 30
@@ -1189,7 +1182,7 @@ function updateDimensions() {
       shortenCosts(new Decimal("1e2000")) +
       " EP";
     document.getElementById("eter9").innerHTML =
-      "Dilated time gain is boosted by eternity points<br>Currently: " +
+      "Dilated Time gain is boosted by Eternity Points.<br>Currently: " +
       (
         1 +
         Math.log10(Math.max(1, player.eternityPoints.add(1).log(8))) / 30
@@ -1277,8 +1270,7 @@ function updateCosts() {
     : "Disabled";
   // see how much simple this is? I wonder why this wasn't done for the normal dimensions...
   for (var i = 1; i <= 8; i++) {
-    document.getElementById("infMax" + i).textContent =
-      "Cost: " + shortenCosts(player["infinityDimension" + i].cost) + " IP";
+    document.getElementById("infMax" + i).textContent = canBuyInfDim(i) ? "Cost: " + shortenCosts(player["infinityDimension" + i].cost) + " IP" : "Maxed out"
   }
 
   for (var i = 1; i <= 8; i++) {
@@ -1666,314 +1658,6 @@ document.getElementById("challengeconfirmation").onclick = function() {
   let x = player.options.challConf ? "N" : "FF";
   document.getElementById("challengeconfirmation").textContent =
     "Challenge confirmation: O" + x;
-};
-
-function buyInfinityUpgrade(name, cost) {
-  if (
-    player.infinityPoints.gte(cost) &&
-    !player.infinityUpgrades.includes(name)
-  ) {
-    player.infinityUpgrades.push(name);
-    player.infinityPoints = player.infinityPoints.minus(cost);
-    return true;
-  } else return false;
-}
-
-document.getElementById("infiMult").onclick = function() {
-  if (
-    player.infinityUpgrades.includes("skipResetGalaxy") &&
-    player.infinityUpgrades.includes("passiveGen") &&
-    player.infinityUpgrades.includes("galaxyBoost") &&
-    player.infinityUpgrades.includes("resetBoost") &&
-    player.infinityPoints.gte(player.infMultCost)
-  ) {
-    player.infinityPoints = player.infinityPoints.minus(player.infMultCost);
-    player.infMult = player.infMult.times(getInfMult());
-    player.autoIP = player.autoIP.times(getInfMult());
-    player.infMultCost = player.infMultCost.times(10);
-    updateInfMult();
-    if (
-      player.autobuyers[11].priority !== undefined &&
-      player.autobuyers[11].priority !== null &&
-      player.autoCrunchMode == "amount"
-    )
-      player.autobuyers[11].priority = player.autobuyers[11].priority.times(2);
-    if (player.autoCrunchMode == "amount")
-      document.getElementById("priority12").value = formatValue(
-        "Scientific",
-        player.autobuyers[11].priority,
-        2,
-        0
-      );
-  }
-};
-
-function updateEternityUpgrades() {
-  document.getElementById("eter1").className = player.eternityUpgrades.includes(
-    1
-  )
-    ? "eternityupbtnbought"
-    : player.eternityPoints.gte(5)
-    ? "eternityupbtn"
-    : "eternityupbtnlocked";
-  document.getElementById("eter2").className = player.eternityUpgrades.includes(
-    2
-  )
-    ? "eternityupbtnbought"
-    : player.eternityPoints.gte(10)
-    ? "eternityupbtn"
-    : "eternityupbtnlocked";
-  document.getElementById("eter3").className = player.eternityUpgrades.includes(
-    3
-  )
-    ? "eternityupbtnbought"
-    : player.eternityPoints.gte(50e3)
-    ? "eternityupbtn"
-    : "eternityupbtnlocked";
-  document.getElementById("eter4").className = player.eternityUpgrades.includes(
-    4
-  )
-    ? "eternityupbtnbought"
-    : player.eternityPoints.gte(1e16)
-    ? "eternityupbtn"
-    : "eternityupbtnlocked";
-  document.getElementById("eter5").className = player.eternityUpgrades.includes(
-    5
-  )
-    ? "eternityupbtnbought"
-    : player.eternityPoints.gte(1e40)
-    ? "eternityupbtn"
-    : "eternityupbtnlocked";
-  document.getElementById("eter6").className = player.eternityUpgrades.includes(
-    6
-  )
-    ? "eternityupbtnbought"
-    : player.eternityPoints.gte(1e50)
-    ? "eternityupbtn"
-    : "eternityupbtnlocked";
-  document.getElementById("eter7").className = player.eternityUpgrades.includes(
-    7
-  )
-    ? "eternityupbtnbought"
-    : player.eternityPoints.gte(new Decimal("1e1500"))
-    ? "eternityupbtn"
-    : "eternityupbtnlocked";
-  document.getElementById("eter8").className = player.eternityUpgrades.includes(
-    8
-  )
-    ? "eternityupbtnbought"
-    : player.eternityPoints.gte(new Decimal("1e2000"))
-    ? "eternityupbtn"
-    : "eternityupbtnlocked";
-  document.getElementById("eter9").className = player.eternityUpgrades.includes(
-    9
-  )
-    ? "eternityupbtnbought"
-    : player.eternityPoints.gte(new Decimal("1e2500"))
-    ? "eternityupbtn"
-    : "eternityupbtnlocked";
-}
-
-function buyEternityUpgrade(name, cost) {
-  if (
-    player.eternityPoints.gte(cost) &&
-    !player.eternityUpgrades.includes(name)
-  ) {
-    player.eternityUpgrades.push(name);
-    player.eternityPoints = player.eternityPoints.minus(cost);
-    updateEternityUpgrades();
-  }
-}
-
-function playerInfinityUpgradesOnEternity() {
-  if (player.eternities < 4) player.infinityUpgrades = [];
-  else if (player.eternities < 20)
-    player.infinityUpgrades = [
-      "timeMult",
-      "dimMult",
-      "timeMult2",
-      "skipReset1",
-      "skipReset2",
-      "unspentBonus",
-      "27Mult",
-      "18Mult",
-      "36Mult",
-      "resetMult",
-      "skipReset3",
-      "passiveGen",
-      "45Mult",
-      "resetBoost",
-      "galaxyBoost",
-      "skipResetGalaxy"
-    ];
-}
-
-document.getElementById("infi11").onclick = function() {
-  buyInfinityUpgrade("timeMult", 1);
-};
-
-document.getElementById("infi21").onclick = function() {
-  buyInfinityUpgrade("dimMult", 1);
-};
-
-document.getElementById("infi12").onclick = function() {
-  if (player.infinityUpgrades.includes("timeMult"))
-    buyInfinityUpgrade("18Mult", 1);
-};
-
-document.getElementById("infi22").onclick = function() {
-  if (player.infinityUpgrades.includes("dimMult"))
-    buyInfinityUpgrade("27Mult", 1);
-};
-
-document.getElementById("infi13").onclick = function() {
-  if (player.infinityUpgrades.includes("18Mult"))
-    buyInfinityUpgrade("36Mult", 1);
-};
-document.getElementById("infi23").onclick = function() {
-  if (player.infinityUpgrades.includes("27Mult"))
-    buyInfinityUpgrade("45Mult", 1);
-};
-
-document.getElementById("infi14").onclick = function() {
-  if (player.infinityUpgrades.includes("36Mult"))
-    buyInfinityUpgrade("resetBoost", 1);
-};
-
-document.getElementById("infi24").onclick = function() {
-  if (player.infinityUpgrades.includes("45Mult"))
-    buyInfinityUpgrade("galaxyBoost", 2);
-};
-
-document.getElementById("infi31").onclick = function() {
-  buyInfinityUpgrade("timeMult2", 3);
-};
-
-document.getElementById("infi32").onclick = function() {
-  if (player.infinityUpgrades.includes("timeMult2"))
-    buyInfinityUpgrade("unspentBonus", 5);
-};
-
-document.getElementById("infi33").onclick = function() {
-  if (player.infinityUpgrades.includes("unspentBonus"))
-    buyInfinityUpgrade("resetMult", 7);
-};
-
-document.getElementById("infi34").onclick = function() {
-  if (player.infinityUpgrades.includes("resetMult"))
-    buyInfinityUpgrade("passiveGen", 10);
-};
-
-document.getElementById("infi41").onclick = function() {
-  buyInfinityUpgrade("skipReset1", 20);
-};
-
-document.getElementById("infi42").onclick = function() {
-  if (player.infinityUpgrades.includes("skipReset1"))
-    buyInfinityUpgrade("skipReset2", 40);
-};
-
-document.getElementById("infi43").onclick = function() {
-  if (player.infinityUpgrades.includes("skipReset2"))
-    buyInfinityUpgrade("skipReset3", 80);
-};
-
-document.getElementById("infi44").onclick = function() {
-  if (player.infinityUpgrades.includes("skipReset3"))
-    buyInfinityUpgrade("skipResetGalaxy", 500);
-};
-
-document.getElementById("postinfi11").onclick = function() {
-  buyInfinityUpgrade("totalMult", 1e4);
-};
-
-document.getElementById("postinfi21").onclick = function() {
-  buyInfinityUpgrade("currentMult", 5e4);
-};
-
-document.getElementById("postinfi31").onclick = function() {
-  if (
-    player.infinityPoints.gte(player.tickSpeedMultDecreaseCost) &&
-    player.tickSpeedMultDecrease > 2
-  ) {
-    player.infinityPoints = player.infinityPoints.minus(
-      player.tickSpeedMultDecreaseCost
-    );
-    player.tickSpeedMultDecreaseCost *= 5;
-    player.tickSpeedMultDecrease--;
-    if (player.tickSpeedMultDecrease === 2) {
-      player.tickSpeedMultDecrease = 1.65;
-    }
-    document.getElementById("postinfi31").innerHTML =
-      "Tickspeed cost multiplier increase <br>" +
-      player.tickSpeedMultDecrease +
-      "x -> " +
-      (player.tickSpeedMultDecrease - 1) +
-      "x<br>Cost: " +
-      shortenCosts(player.tickSpeedMultDecreaseCost) +
-      " IP";
-    if (player.tickSpeedMultDecrease <= 2)
-      document.getElementById("postinfi31").innerHTML =
-        "Tickspeed cost multiplier increase <br>" +
-        player.tickSpeedMultDecrease +
-        "x";
-  }
-};
-
-document.getElementById("postinfi41").onclick = function() {
-  buyInfinityUpgrade("postGalaxy", 5e11);
-};
-
-document.getElementById("postinfi12").onclick = function() {
-  buyInfinityUpgrade("infinitiedMult", 1e5);
-};
-
-document.getElementById("postinfi22").onclick = function() {
-  buyInfinityUpgrade("achievementMult", 1e6);
-};
-
-document.getElementById("postinfi32").onclick = function() {
-  buyInfinityUpgrade("challengeMult", 1e7);
-};
-
-document.getElementById("postinfi42").onclick = function() {
-  if (
-    player.infinityPoints.gte(player.dimensionMultDecreaseCost) &&
-    player.dimensionMultDecrease > 3
-  ) {
-    player.infinityPoints = player.infinityPoints.minus(
-      player.dimensionMultDecreaseCost
-    );
-    player.dimensionMultDecreaseCost *= 5000;
-    player.dimensionMultDecrease--;
-    if (player.dimensionMultDecrease === 3) {
-      player.dimensionMultDecrease = 2;
-    }
-    document.getElementById("postinfi42").innerHTML =
-      "Dimension cost multiplier increase <br>" +
-      player.dimensionMultDecrease +
-      "x -> " +
-      (player.dimensionMultDecrease - 1) +
-      "x<br>Cost: " +
-      shortenCosts(player.dimensionMultDecreaseCost) +
-      " IP";
-    if (player.dimensionMultDecrease <= 3)
-      document.getElementById("postinfi42").innerHTML =
-        "Dimension cost multiplier increase <br>" +
-        player.dimensionMultDecrease.toFixed(1) +
-        "x";
-  }
-};
-
-document.getElementById("offlineProd").onclick = function() {
-  if (
-    player.infinityPoints.gte(player.offlineProdCost) &&
-    player.offlineProd < 50
-  ) {
-    player.infinityPoints = player.infinityPoints.minus(player.offlineProdCost);
-    player.offlineProdCost *= 10;
-    player.offlineProd += 5;
-  }
 };
 
 function updateInfCosts() {
@@ -2470,9 +2154,9 @@ buyAutobuyer = function(id) {
   if (
     player.autobuyers[id].interval == 100 &&
     id == 11 &&
-    player.break == false
+    player.break ==  false
   )
-    $.notify("You can break infinity now.", "success");
+    $.notify("You can Break Infinity now.", "success");
   updateAutobuyers();
 };
 
@@ -2872,7 +2556,7 @@ document.getElementById("exportbtn").onclick = function() {
 
   try {
     if (document.execCommand("copy")) {
-      $.notify("exported to clipboard", "info");
+      $.notify("Exported to clipboard.", "info");
       output.blur();
     }
   } catch (ex) {
@@ -3061,7 +2745,7 @@ document.getElementById("reset").onclick = function() {
     updateAutobuyers();
   } else if (
     confirm(
-      "Do you really want to erase all your progress? YOU WILL GAIN NOTHING FROM HARD RESETTING YOUR GAME. THIS CHANGE IS IRREVERSIBLE. Press OK if you really want to do this."
+      "Do you really want to erase all your progress? THERE IS NO REWARD FOR HARD RESETTING! Press OK if you really want to do this."
     )
   ) {
     if (
@@ -3159,9 +2843,11 @@ function setAchieveTooltip() {
   let neverenough = document.getElementById("It will never be enough");
   let iamspeed = document.getElementById("GAS GAS GAS");
   let nevermetadimension = document.getElementById(
-    "I never meta-dimension I didn't like"
+    "I've never meta-dimension I didn't like"
   );
-  let sanctum = document.getElementById("Deeper Sanctum");
+  let table = document.getElementById("The whole table");
+  let takyon = document.getElementById("Takyon (Death Yon)");
+  let theory = document.getElementById("Theory of Everything");
 
   apocAchieve.setAttribute(
     "ach-tooltip",
@@ -3203,7 +2889,7 @@ function setAchieveTooltip() {
     "ach-tooltip",
     "Get more than " +
       shortenCosts(new Decimal("1e8296262")) +
-      " ticks per second. Reward: Reduce the initial tick interval by 5%."
+      " ticks per second. Reward: Tickspeed slightly affects replicanti interval."
   );
   dimensional.setAttribute(
     "ach-tooltip",
@@ -3319,7 +3005,7 @@ function setAchieveTooltip() {
     "ach-tooltip",
     "Reach " +
       shortenCosts(new Decimal("1e200000")) +
-      " IP without buying IDs or IP multipliers. Reward: You start eternities with all Infinity Challenges unlocked and completed, and your infinity gain is multiplied by dilated time^(1/4)."
+      " IP without buying IDs or IP multipliers. Reward: You start Eternities with all Infinity Challenges unlocked and completed, and your infinity gain is multiplied by dilated time^(1/4)."
   );
   when.setAttribute(
     "ach-tooltip",
@@ -3333,7 +3019,7 @@ function setAchieveTooltip() {
     "ach-tooltip",
     "Eternity for " +
       shortenCosts(new Decimal("1e600")) +
-      " EP in at most 1 minute while dilated. Reward: All dimensions are raised to the power of 1.01 in dilation."
+      " EP in at most 1 minute while dilated. Reward: All Dimension multipliers are raised to the power of 1.01 in dilation."
   );
   thisis.setAttribute(
     "ach-tooltip",
@@ -3368,14 +3054,24 @@ function setAchieveTooltip() {
   nevermetadimension.setAttribute(
     "ach-tooltip",
     "Get at least " +
-      formatValue(player.options.notation, 1e25, 0, 0) +
+      formatValue(player.options.notation, 1e30, 0, 0) +
       "x multiplier on all Meta Dimensions. Reward: Unlock the meta-dimension autobuyers."
   );
-  sanctum.setAttribute(
+  takyon.setAttribute(
     "ach-tooltip",
     "Get " +
-      shortenCosts(new Decimal("1e70000")) +
-      " IP with only 1 normal galaxy and your free galaxies in dilation. Reward: Galaxies (including meta galaxies) are 0.05% stronger."
+      shortenCosts(new Decimal(2 ** 512)) +
+      " dilated time. Reward: You keep your Dilation upgrades and Tachyon Particles on Quantum."
+  );
+  table.setAttribute(
+    "ach-tooltip",
+    "Get 51930 quarks. Reward: Get a multiplier on meta-dimensions and dilated time production based on total quark amount. Currently: 1x"
+  );
+  theory.setAttribute(
+    "ach-tooltip",
+    "Get " +
+      shortenCosts(new Decimal("1e60")) +
+      " TT. Reward: You keep your Time Theorems and Time Studies on Quantum."
   );
 }
 
@@ -3421,12 +3117,7 @@ document.getElementById("notation").onclick = function() {
   setAchieveTooltip();
   updateCosts();
   updateDilationUpgradeCosts();
-  document.getElementById("epmult").innerHTML =
-    "You gain 5 times more EP<p>Currently: " +
-    shortenDimensions(player.epmult) +
-    "x<p>Cost: " +
-    shortenDimensions(player.epmultCost) +
-    " EP";
+  updateEPMult();
 };
 
 document.getElementById("newsbtn").onclick = function() {
@@ -5137,9 +4828,9 @@ setInterval(function() {
     giveAchievement("This achievement doesn't exist");
   if (player.money.gte("1e35000")) giveAchievement("I got a few to spare");
   if (player.infinityPower.gt(1)) giveAchievement("A new beginning.");
-  if (player.infinityPower.gt(1e6)) giveAchievement("1 million is a lot"); //TBD
+  if (player.infinityPower.gt(1e6)) giveAchievement("1 million is a lot");
   if (player.infinityPower.gt(1e260))
-    giveAchievement("4.3333 minutes of Infinity"); //TBD
+    giveAchievement("4.3333 minutes of Infinity");
   if (player.totalTickGained >= 308) giveAchievement("Infinite time");
   if (player.totalTickGained >= 1e6) giveAchievement("GAS GAS GAS");
   if (player.firstPow >= 1e31) giveAchievement("I forgot to nerf that");
@@ -5202,13 +4893,13 @@ setInterval(function() {
   )
     giveAchievement("This is what I have to do to get rid of you.");
   if (
-    player.money(new Decimal("1e1000000")) &&
+    player.money.gte(new Decimal("1e1000000")) &&
     player.dilation.active &&
     player.galaxies == 1 &&
     player.dilation.rebuyables[2] == 0 &&
     player.replicanti.galaxies == 0
   )
-    giveAchievement("Deeper Sanctum");
+    giveAchievement("Life and death at every tick");
   if (player.why >= 1e6)
     giveAchievement("Should we tell them about buy max...");
 }, 1000);
@@ -5490,27 +5181,19 @@ function gameLoop(diff) {
   let gain;
   if (player.timeShards.gt(0)) {
     if (player.timestudy.studies.includes(171))
-      gain = Math.ceil(
-        new Decimal(player.timeShards).dividedBy(player.tickThreshold).log10() /
-          Math.log10(1.25)
-      );
-    else
-      gain = Math.ceil(
-        new Decimal(player.timeShards).dividedBy(player.tickThreshold).log10() /
-          Math.log10(1.33)
-      );
+      gain = Math.ceil( new Decimal(player.timeShards).dividedBy(player.tickThreshold).log10() / Math.log10(1.25));
+    else gain = Math.ceil( new Decimal(player.timeShards).dividedBy(player.tickThreshold).log10() / Math.log10(1.33));
     player.totalTickGained += gain;
     player.tickspeed = player.tickspeed.times(
       Decimal.pow(getTickSpeedMultiplier(), gain)
     );
     if (player.timestudy.studies.includes(171))
-      player.tickThreshold = new Decimal(1)
-        .times(1.25)
-        .pow(player.totalTickGained);
-    else
-      player.tickThreshold = new Decimal(1)
-        .times(1.33)
-        .pow(player.totalTickGained);
+      player.tickThreshold = new Decimal(1).times(1.25).pow(Math.min(player.totalTickGained, 1e6));
+    else player.tickThreshold = new Decimal(1).times(1.33).pow(Math.min(player.totalTickGained, 1e6));
+
+    if (player.totalTickGained > getHyperTickspeedScalingStart()) {
+      player.tickThreshold = player.tickThreshold.times(new Decimal(1).times(1.5).pow(Decimal.max((player.totalTickGained - 1e6), 1)))
+    }
     document.getElementById("totaltickgained").textContent =
       "You've gained " +
       player.totalTickGained.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") +
@@ -5557,6 +5240,7 @@ function gameLoop(diff) {
       if (player.postChallUnlocked != 8) player.postChallUnlocked += 1;
       if (player.eternities > 6)
         player.challenges.push("postc" + player.postChallUnlocked);
+        $.notify("Infinity Challenge " + player.postChallUnlocked + " unlocked", "info")
       updateChallenges();
     }
   }
@@ -5808,7 +5492,7 @@ function gameLoop(diff) {
     document.getElementById("first").className = "storebtn";
 
   for (var tier = 1; tier < 9; tier++) {
-    if (player.infinityPoints.gte(player["infinityDimension" + tier].cost))
+    if (player.infinityPoints.gte(player["infinityDimension" + tier].cost) && canBuyInfDim(tier))
       document.getElementById("infMax" + tier).className = "storebtn";
     else document.getElementById("infMax" + tier).className = "unavailablebtn";
   }
@@ -6325,6 +6009,7 @@ function gameLoop(diff) {
   getDilationSeverity();
   autoTTCycle();
   updateSacrificeMultText();
+  updatePer10Multiplier();
   player.lastUpdate = thisUpdate;
 }
 
@@ -6859,7 +6544,7 @@ function init() {
   document.getElementById("infinitybtn").onclick = function() {
     showTab("infinity");
   };
-  document.getElementById("quantumbtn").onclick = function() {
+  document.getElementById("quantumstorebtn").onclick = function() {
     showTab("quantum");
   };
   document.getElementById("eternitystorebtn").onclick = function() {
@@ -7049,7 +6734,7 @@ Mousetrap.bind(
 init();
 var totalMult = 1;
 var currentMult = 1;
-var infinitiedMult = 1;
+var infinitiedMult = new Decimal(1);
 var achievementMult = 1;
 var challengeMult = 1;
 var unspentBonus = 1;
@@ -7060,8 +6745,8 @@ setInterval(function() {
   totalMult = Math.pow(player.totalmoney.e + 1, 0.5);
   currentMult = Math.pow(player.money.e + 1, 0.5);
   if (player.timestudy.studies.includes(31))
-    infinitiedMult = 1 + Math.pow(Math.log10(getInfinitied() + 1) * 10, 4);
-  else infinitiedMult = 1 + Math.log10(getInfinitied() + 1) * 10;
+    infinitiedMult = new Decimal(1).add(Decimal.pow(Decimal.log10(getInfinitied() + 1) * 10, 4));
+  else infinitiedMult = new Decimal(1).add(Decimal.log10(getInfinitied() + 1) * 10);
   achievementMult = Math.max(
     Math.pow(player.achievements.length - 30 - getSecretAchAmount(), 3) / 40,
     1

@@ -176,9 +176,9 @@ function timeDisplayShort(time) {
 function calculateProgressBar() {
     //even more aarex code...
     document.getElementById("progressbar").className = "";
-    if (document.getElementById("metadimensions").style.display == "block")
+    if (document.getElementById("mdtabbtn").style.display == "inline-block") {
       doQuantumProgress();
-    else if (player.currentChallenge !== "") {
+    } else if (player.currentChallenge !== "") {
       var percentage =
         Math.min(
           (Decimal.log10(player.money.plus(1)) /
@@ -295,18 +295,18 @@ function calculateProgressBar() {
         .getElementById("progresspercent")
         .setAttribute(
           "ach-tooltip",
-          "Percentage to the requirement for tachyon particle gain"
+          "Percentage to the requirement for Tachyon Particle gain"
         );
     } else if (
-      gainedEternityPoints().gte(Decimal.pow(2, 1048576)) &&
-      document.getElementById("metadimensions").style.display == "block"
+      player.eternityPoints.gte(Decimal.pow(2, 262144)) && // 2^262144 = 1.6e78913 EP
+      document.getElementById("mdtabbtn").style.display == "block"
     )
       doQuantumProgress();
     else {
       var gepLog = gainedEternityPoints().log2();
       var goal = Math.pow(2, Math.ceil(Math.log10(gepLog) / Math.log10(2)));
       if (
-        goal > 131072 &&
+        goal > 262144 &&
         player.meta &&
         !player.achievements.includes("r143")
       ) {
@@ -351,8 +351,8 @@ function calculateProgressBar() {
   function updateStatisticsText() {
   if (player.money.gt(Decimal.pow(10, (3 * 86400 * 365.2425 * 79.3) / 10))) {
     var years = player.money.log10() / 3 / 86400 / 365.2425;
-    if (years > 2019) {
-      var eventBC = years - 2018;
+    if (years > 2022) {
+      var eventBC = years - 2021;
       var since;
       if (eventBC > 5.332e6) {
         since = "???";
@@ -375,46 +375,43 @@ function calculateProgressBar() {
       } else if (eventBC > 1.95e5) {
         since = "emergence of Homo neanderthalensis";
         eventBC = 25e4 - eventBC;
-      } else if (eventBC > 1.6e4) {
+      } else if (eventBC > 1.6e5) {
         since = "emergence of anatomically modern humans";
         eventBC = 195e3 - eventBC;
-      } else if (eventBC > 125e3) {
+      } else if (eventBC > 1.25e5) {
         since = "emergence of Homo sapiens idaltu";
         eventBC = 16e4 - eventBC;
       } else if (eventBC > 7e4) {
         since = "peak of the Eemian interglacial period";
         eventBC = 125e3 - eventBC;
-      } else if (eventBC > 67e3) {
+      } else if (eventBC > 6.7e4) {
         since = "earliest abstract/symbolic art";
         eventBC = 7e4 - eventBC;
       } else if (eventBC > 5e4) {
         since = "Upper Paleolithic/Old Stone Age";
         eventBC = 67e3 - eventBC;
-      } else if (eventBC > 45e3) {
+      } else if (eventBC > 4.5e4) {
         since = "Late Stone Age";
         eventBC = 5e4 - eventBC;
       } else if (eventBC > 4e4) {
         since = "European early modern humans";
         eventBC = 45e3 - eventBC;
-      } else if (eventBC > 4e4) {
-        since = "European early modern humans";
-        eventBC = 45e3 - eventBC;
-      } else if (eventBC > 35e3) {
+      } else if (eventBC > 3.5e4) {
         since = "first human settlement";
         eventBC = 4e4 - eventBC;
-      } else if (eventBC > 33e3) {
+      } else if (eventBC > 3.3e4) {
         since = "oldest known figurative art";
         eventBC = 35e3 - eventBC;
-      } else if (eventBC > 31e3) {
+      } else if (eventBC > 3.1e4) {
         since = "oldest known domesticated dog";
         eventBC = 33e3 - eventBC;
-      } else if (eventBC > 29e3) {
+      } else if (eventBC > 2.9e4) {
         since = "Last Glacial Maximum";
         eventBC = 31e3 - eventBC;
-      } else if (eventBC > 28e3) {
+      } else if (eventBC > 2.8e4) {
         since = "oldest ovens";
         eventBC = 29e3 - eventBC;
-      } else if (eventBC > 25e3) {
+      } else if (eventBC > 2.5e4) {
         since = "oldest known twisted rope";
         eventBC = 28e3 - eventBC;
       } else if (eventBC > 2e4) {
@@ -431,13 +428,13 @@ function calculateProgressBar() {
         since = "domestication of the pig";
         eventBC = 15e3 - eventBC;
       } else if (eventBC > 11600) {
-        since = "prehistoric warfare";
+        since = "earliest signs of prehistoric warfare";
         eventBC = 14e3 - eventBC;
       } else if (eventBC > 1e4) {
         since = "end of the Holocene epoch";
         eventBC = 11600 - eventBC;
       } else if (eventBC > 8e3) {
-        since = "death of other human breeds";
+        since = "death of other human species";
         eventBC = 1e4 - eventBC;
       } else if (eventBC > 6e3) {
         since = "agricultural revolution";
@@ -446,10 +443,10 @@ function calculateProgressBar() {
         since = "farmers arrived in Europe";
         eventBC = 6e3 - eventBC;
       } else if (eventBC > 4e3) {
-        since = "first metal tools";
+        since = "first metal tools (of lead and copper)";
         eventBC = 5e3 - eventBC;
       } else if (eventBC > 3200) {
-        since = "first horse";
+        since = "first domesticated horse";
         eventBC = 4e3 - eventBC;
       } else if (eventBC > 3e3) {
         since = "Sumerian cuneiform writing system";
@@ -485,7 +482,7 @@ function calculateProgressBar() {
         since = "rise of the Persian Empire";
         eventBC = 653 - eventBC;
       } else if (eventBC > 356) {
-        since = "fall of Babylonian Empire";
+        since = "fall of the Babylonian Empire";
         eventBC = 539 - eventBC;
       } else if (eventBC > 200) {
         since = "birth of Alexander the Great";
@@ -499,7 +496,7 @@ function calculateProgressBar() {
       }
       var message =
         "<br>If you ended the non-stop writing of your full antimatter amount with 3 digits per second right now, it would have started in " +
-        formatInfOrEter(Math.floor(years - 2018)) +
+        formatInfOrEter(Math.floor(years - 2022)) +
         " BC." +
         (since == "???"
           ? ""

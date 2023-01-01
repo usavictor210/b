@@ -1,18 +1,22 @@
 function quantum(force, auto) {
   if (
-    (player.meta.antimatter.gte(quantRequirement()) &&
+    (player.meta.bestAntimatter.gte(quantRequirement()) &&
       player.dilation.dilatedTime.gte(1e100) &&
       (!player.options.quantumconfirm ||
         auto ||
         confirm(
-          "Quantum will reset everything Eternity resets, including Time Dilation and Meta-Dimensions, in exchange for a quark and unlock various upgrades. Are you sure you want to do this?"
+          "Quantum will reset everything Eternity resets, including Time Studies, Time Dilation, and Meta-Dimensions, in exchange for a quark and unlock various upgrades. Are you sure you want to do this?"
         ))) ||
     force
   ) {
-    player.quantum.quarks = player.quantum.quarks.plus(quarkGain());
-    player.quantum.gluons = 0;
-    if (player.thisQuantum < player.bestQuantum && !force) {
-      player.bestQuantum = player.thisQuantum;
+    if (!force) { // forced reset doesn't give you any credit.
+      player.quantum.times++;
+      giveAchievement("Quantum Leap");
+      player.quantum.quarks = player.quantum.quarks.plus(quarkGain());
+      player.quantum.gluons = 0;
+      if (player.thisQuantum < player.bestQuantum) {
+        player.bestQuantum = player.thisQuantum;
+      }
     }
     player.thisQuantum = 0;
     player = {
@@ -248,7 +252,7 @@ function quantum(force, auto) {
         bought: 0
       },
       eternityPoints: new Decimal(0),
-      eternities: 1012680,
+      eternities: new Decimal(1012680),
       thisEternity: 0,
       bestEternity: 9999999999,
       eternityUpgrades: [],
@@ -480,6 +484,12 @@ function quantum(force, auto) {
       shortenDimensions(player.eternityPoints) +
       "</span> Eternity point" +
       (player.eternityPoints.eq(1) ? "." : "s.");
+
+    document.getElementById("quarkDisplay").innerHTML =
+      'You have <span class="QK">' +
+      shortenDimensions(player.quantum.quarks) +
+      "</span> quark" +
+      (player.quantum.quarks.eq(1) ? "." : "s.");
     if (player.lastTenQuantums === undefined) {
       player.lastTenQuantums = [
         [600 * 60 * 24 * 31, 1],
@@ -498,19 +508,23 @@ function quantum(force, auto) {
     updateTheoremButtons();
     updateTimeStudyButtons();
     drawStudyTree();
-    //updateLastTenQuantums(); this is too buggy right now, either we could pull a NG^^ (by not showing it), or actually fix it.
+    //updateLastTenQuantums(); //this is too buggy right now, either we could pull a NG^^ (by not showing it), or actually fix it.
     Marathon2 = 0;
-    player.quantum.times++;
     document.getElementById("mdtabbtn").style.display = "none";
     showDimTab("antimatterdimensions");
-    giveAchievement("Sub-atomic");
+
+    if (player.quantum.times == 1) {
+      setTimeout(function() {
+        $.notify("The council has felt a disturbance in the space-time continuum...", "lore");
+      }, 2500)
+    }
   }
 }
 
 let quarkGain = function() {
   return Decimal.pow(
     10,
-    player.meta.antimatter.log(10) / Decimal.log10(quantRequirement()) - 1
+    player.meta.bestAntimatter.log(10) / Decimal.log10(quantRequirement()) - 1
   )
     .times(quarkMult())
     .floor();
@@ -556,7 +570,7 @@ function updateQuantum() {
   let plural = player.quantum.times != 1 ? "s" : "";
   if (player.quantum.times != 0) {
     document.getElementById("pastquantums").style.display = "inline-block";
-    document.getElementById("quantumbtn").style.display = "inline-block";
+    document.getElementById("quantumstorebtn").style.display = "inline-block";
     document.getElementById("quantumed").textContent =
       "You have gone quantum " + player.quantum.times + " time" + plural + ".";
     document.getElementById("thisquantum").textContent =
@@ -568,18 +582,19 @@ function updateQuantum() {
       timeDisplay(player.quantum.bestQuantum) +
       ".";
   } else {
-    document.getElementById("quantumbtn").style.display = "none";
+    document.getElementById("quantumstorebtn").style.display = "none";
     document.getElementById("quantumed").textContent = "";
     document.getElementById("thisquantum").textContent = "";
     document.getElementById("bestquantum").textContent = "";
     document.getElementById("pastquantums").style.display = "none";
   }
   let plural2 = player.quantum.quarks != 1 ? "s" : "";
-  let plural3 = getTotalInvestmentAmount().notEquals(1) ? "s" : "";
-  document.getElementById("quarkAmount").textContent =
-    `You have ${shortenDimensions(player.quantum.quarks)} quark` +
+  //let plural3 = getTotalInvestmentAmount().notEquals(1) ? "s" : "";
+  document.getElementById("quarkDisplay").innerHTML =
+    'You have <span style="font-weight: bold;">' + shortenDimensions(player.quantum.quarks) + '</span> quark' +
     plural2 +
-    `.`;
+    ".";
+  /*
   document.getElementById("unstableShardAmount").textContent =
     player.dilation.unstable.shards;
   document.getElementById("totalInvest").textContent =
@@ -588,10 +603,14 @@ function updateQuantum() {
     )} quark` +
     plural3 +
     `.`;
+  */
   document.getElementById("dilationseverity").textContent =
     "Dilation's penalty on all dimensions is x^" +
     getDilPunish().toFixed(3) +
     ".";
+
+  showQuarkDisplay()
+  updateQuantumButton()
 }
 
 function updateLastTenQuantums() {
@@ -634,9 +653,66 @@ function updateLastTenQuantums() {
     "Last 10 quantums average time: " +
     timeDisplayShort(tempTime) +
     " Average QK gain: " +
-    shortenDimensions(tempQK) +
+    shortenDimensions(averageQK) +
     " QK. " +
     tempstring;
+}
+
+function updateQuantumButton() {
+  //updates the quantum button based on your quantum times and EP gained on eternity
+  var currentQKmin = quarkGain().dividedBy(
+    player.quantum.thisQuantum / 600
+  );
+  var QKminpeak = new Decimal(0);
+  if (currentQKmin.gt(QKminpeak) && player.meta.bestAntimatter.gte(Number.MAX_VALUE))
+    QKminpeak = currentQKmin;
+
+  // save some processing and don't show anything if you haven't reached the requirement yet.
+  if (player.meta.bestAntimatter.lte(quantRequirement())) {
+    document.getElementById("quantumbtn").innerHTML = "Reach " + shortenDimensions(player.meta.bestAntimatter) + "/" + shortenDimensions(quantRequirement()) + " meta-antimatter to go Quantum."
+    document.getElementById("quantumbtn").style.class = "quantumbtnlocked"
+    return false;
+  }
+  document.getElementById("quantumbtn").style.class = "quantumbtn"
+  document.getElementById("quantumbtn").innerHTML = player.quantum.times == 0
+    ? "The flow of space time oscillates... I need to go Quantum."
+    : "<b>Go Quantum.</b><br>" +
+      "Gain <b>" +
+      shortenDimensions(quarkGain()) +
+      "</b> quarks.<br>" +
+      shortenDimensions(currentQKmin) +
+      " QK/min<br>Peaked at " +
+      shortenDimensions(QKminpeak) +
+      " QK/min";
+  if (
+    quarkGain().gte(1e6) &&
+    quarkGain().lte(new Decimal("1e1000"))
+  ) {
+    document.getElementById("quantumbtn").innerHTML =
+      "Gain <b>" +
+      shortenDimensions(quarkGain()) +
+      "</b> quarks.<br>" +
+      shortenDimensions(currentQKmin) +
+      " QK/min<br>Peaked at " +
+      shortenDimensions(QKminpeak) +
+      " QK/min";
+  } else if (quarkGain().gte(new Decimal("1e1000"))) {
+    document.getElementById("quantumbtn").innerHTML =
+      "Gain <b>" +
+      shortenDimensions(quarkGain()) +
+      "</b> quarks.<br>"
+  }
+  //if (player.quantum.currentChallenge !== "")
+  //document.getElementById("quantumbtn").textContent = "Conclude the proposed theory and end the challenge.";
+}
+
+function showQuarkDisplay() {
+  if (player.quantum.times == 0) {
+    document.getElementById("quantumstorebtn").style.display = "none";
+    document.getElementById("quarkDisplay").style.display = "none";
+  } else {
+    document.getElementById("quarkDisplay").style.display = "inline-block";
+  }
 }
 
 function investQuarks(feature, amount) {
@@ -676,7 +752,7 @@ function doQuantumProgress() {
   if (id == 1) {
     var percentage =
       Math.min(
-        (player.meta.antimatter.max(1).log10() /
+        (player.meta.bestAntimatter.max(1).log10() /
           Decimal.log10(Number.MAX_VALUE)) *
           100,
         100

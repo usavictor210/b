@@ -19,7 +19,7 @@ if (spoilers === 0) document.getElementById("showspoilersbtn").innerHTML = "View
 else document.getElementById("showspoilersbtn").innerHTML= "View: <br> Show spoilers"
 
 function save() {
-	localStorage.setItem("howToSpoilers", spoilers)
+	localStorage.setItem("howToSpoilersNG2R", spoilers)
 }
 
 function get_save(name) {
@@ -43,6 +43,7 @@ function showspoilers() {
 	updateSpoilers();
 }
 
+// to do: fix!!!
 function updateSpoilers() {
 	var displayed = 0;
 	if (spoilers === 0) {

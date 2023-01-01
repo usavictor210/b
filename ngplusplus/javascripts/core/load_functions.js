@@ -1249,6 +1249,7 @@ function onLoad() {
   updatePriorities();
   updateTheoremButtons();
   updateTimeStudyButtons();
+  // these should really be in break infinity formula functions
   totalMult = Math.pow(player.totalmoney.e + 1, 0.5);
   currentMult = Math.pow(player.money.e + 1, 0.5);
   infinitiedMult = 1 + Math.log10(getInfinitied() + 1) * 10;
@@ -1270,6 +1271,7 @@ function onLoad() {
   checkChallengeAchievements();
   updateEternityChallenges();
   updateDilationUpgradeCosts();
+  updateQuantumButton();
   ngplusConfirmation();
   let diff = new Date().getTime() - player.lastUpdate;
   if (diff > 1000 * 1000) {
@@ -1353,6 +1355,10 @@ function change_save(saveId) {
   load_game();
   updateChallenges();
   transformSaveToDecimal();
+  if ((player.money.plus(1)).eq(Infinity)) {
+    $.notify("I don't know what just happened but your save was bugged so a forced quantum reset was made. Sorry!", "error");
+    quantum(true)
+  }
   showDimTab("antimatterdimensions");
   showStatsTab("stats");
   showChallengesTab("challenges");

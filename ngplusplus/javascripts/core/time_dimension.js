@@ -92,6 +92,7 @@ function getTimeDimensionDescription(tier) {
 }
 
 function updateTimeDimensions() {
+  updateTimeDimPurchaseLimit() 
   if (document.getElementById("timedimensions").style.display == "block" && document.getElementById("dimensions").style.display == "block") {
     for (let tier = 1; tier <= 4; ++tier) {
       document.getElementById("timeD"+tier).textContent = DISPLAY_NAMES[tier] + " Time Dimension x" + shortenMoney(getTimeDimensionPower(tier));
@@ -199,4 +200,32 @@ function buyMaxTimeDimensions() {
     // if we can buy more than 1 now we definitely clearly could have bought 1.
     buyTimeDimension(i);
   }
+}
+
+function getHyperTickspeedScalingStart() {
+  return 1e6; // start at 1,000,000 tickspeed upgrades
+}
+
+function getHyperTickspeedScalingEffect() {
+  return Math.max((player.totalTickGained - getHyperTickspeedScalingStart()) / 100000, 0); // max is necessary to prevent any unnecessary issues
+}
+
+function updateTimeDimPurchaseLimit() {
+  document.getElementById("tdRestriction").innerHTML = "The Time Dimension costs jump after " + shortenDimensions(new Decimal("1.8e308")) + " EP, " + shortenDimensions(new Decimal("1e1300")) + " EP, <br>and the cost increase is superexponential after " + shortenDimensions(new Decimal("1e4000")) + " EP.<br>Tickspeed upgrades scale much faster after " + formatInfOrEter(getHyperTickspeedScalingStart()) + " tickspeed upgrades."
+}
+
+function getTickThreshold(num) {
+  // determine the tick shards needed for the next free tickspeed upgrade
+  // ts171 decreases the requirement from 33% to 25%
+  var ts171 = player.timestudy.studies.includes(171) ? 1.25 : 1.33
+  var total = new Decimal(1).times(ts171).pow(Math.min(num, 1e6))
+
+  // after 1 million tickspeed upgrades, the requirement scales a lot faster
+  if (num > 1e6) {
+      // welcome to hyperscaling
+      total = total.times(1.5).pow(Math.max((num - 1e6), 1))
+  }
+
+  // return in decimal
+  return total
 }

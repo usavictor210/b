@@ -1,3 +1,5 @@
+// Obsoleted
+
 function unstableDilation() { // begins a reset for unstable dilation
 var usGain = new Decimal(((player.dilation.tachyonParticles.log(10)/15))).max(1).floor() // formula
 var sacTPGain = player.dilation.unstable.sacrificedTP.add(player.dilation.tachyonParticles.pow(0.025)).floor()

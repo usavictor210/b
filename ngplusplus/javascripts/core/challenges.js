@@ -1,4 +1,4 @@
-function matterDisplay() {
+function matterDisplay(name) {
   if (
     name == "challenge12" ||
     player.currentChallenge == "postc1" ||
@@ -8,7 +8,7 @@ function matterDisplay() {
   else document.getElementById("matter").style.display = "none";
 }
 
-function quickResetDisplay() {
+function quickResetDisplay(name) {
   if (
     name == "challenge12" ||
     name == "challenge9" ||
