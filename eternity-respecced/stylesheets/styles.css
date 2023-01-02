@@ -960,6 +960,20 @@
     font-family: Typewriter;
 }
 
+.igmilestonereward {
+    width: 250px;
+    height: 60px;
+    color: black;
+    background: #e0be00d6 !important;
+    font-weight: bold;
+    font-family: Typewriter;
+    border: 1px solid #dcc70bb8 !important;
+    transition-duration: 0.2s;
+    border-radius: 4px;
+    vertical-align: top;
+    font-size: 12px;
+}
+
 @keyframes glow {
     20% { text-shadow: 0 0 10px green; }
     100% { text-shadow: 0 0 10px white; }
