@@ -1,9 +1,9 @@
-6/12/2020: As part of the paradigm shift of the development of NG+3.1, it is likely ER will be finished with Intergalactic.
-All credits go to dan-simon for making the original Intergalactic content.
+I cleaned this part up so people reading this file would be better informed about what this was.
+This was dan-simon's old /b repository before he decided to delete it. Ever since he deleted his repositories back when he was still developing Eternity Respecced, it turned out that the ownership had been given to me because of how GitHub chooses [one fork at random to be the main repository](https://docs.github.com/en/pull-requests/collaborating-with-pull-requests/working-with-forks/what-happens-to-forks-when-a-repository-is-deleted-or-changes-visibility).
 
-12/30/2018: The intergalactic update is coming. Soon.
+Since then, I have tried (and failed) to work on the various projects in here, most notably Eternity Respecced. One day, Intergalactic might see the light.
 
-usavictor, 11/3/18: I now own /b, originally owned by dan-simon until he deleted the original repository. Since I had one of the only forks, by randomness, ownership was transferred to me. THIS MEANS ETERNITY RESPECCED IS NOW OWNED BY ME (well basically everything in here is maintained by me now)
+For ng-update, Aarex had forked the repository right before the original repository was deleted, so it exists [here](https://aarextiaokhiao.github.io/b/ng-update/).
 
 Original description:
 
